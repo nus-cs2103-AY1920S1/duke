@@ -17,6 +17,8 @@ import java.util.stream.Collectors;
 public class DefaultTaskRepo implements ITaskRepo {
     private Storage storage;
 
+    private static final String INVALID_INDEX_MESSAGE = "Please enter a valid index";
+
     public DefaultTaskRepo(Storage storage) {
         this.storage = storage;
     }
@@ -76,7 +78,7 @@ public class DefaultTaskRepo implements ITaskRepo {
         try {
             return tasks.get(index);
         } catch (IndexOutOfBoundsException e) {
-            throw new TaskRepoException("Index entered is invalid.");
+            throw new TaskRepoException(INVALID_INDEX_MESSAGE);
         }
     }
 
@@ -97,7 +99,7 @@ public class DefaultTaskRepo implements ITaskRepo {
         try {
             tasks.remove(index);
         } catch (IndexOutOfBoundsException e) {
-            throw new TaskRepoException("Index entered is invalid.");
+            throw new TaskRepoException(INVALID_INDEX_MESSAGE);
         }
 
         this.setNewTasks(tasks);
@@ -111,6 +113,19 @@ public class DefaultTaskRepo implements ITaskRepo {
 
             List<Task> tasks = this.getCurrentTasks();
             tasks.add(taskToAdd);
+            this.setNewTasks(tasks);
+        } catch (CloneNotSupportedException e) {
+            throw new TaskRepoException("Failed to add new task");
+        }
+    }
+
+    @Override
+    public void addTaskToIndex(int index, Task task) throws TaskRepoException {
+        try {
+            Task taskToAdd = task.clone();
+
+            List<Task> tasks = this.getCurrentTasks();
+            tasks.add(index, taskToAdd);
             this.setNewTasks(tasks);
         } catch (CloneNotSupportedException e) {
             throw new TaskRepoException("Failed to add new task");
@@ -135,7 +150,7 @@ public class DefaultTaskRepo implements ITaskRepo {
         } catch (CloneNotSupportedException e) {
             throw new TaskRepoException("Failed to update task");
         } catch (IndexOutOfBoundsException e) {
-            throw new TaskRepoException("Index entered is invalid.");
+            throw new TaskRepoException(INVALID_INDEX_MESSAGE);
         }
     }
 

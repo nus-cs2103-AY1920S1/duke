@@ -1,15 +1,16 @@
 package duke.task;
 
-import duke.command.entities.TaskSorts;
-import duke.task.tasks.TasksControllerFeedback;
+import duke.command.sort.TaskSorts;
 import error.task.TaskRepoException;
 import error.ui.UiException;
 import ui.UiOutputAccessor;
-import util.ErrorMessageFormatter;
+import util.strings.ErrorMessageFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Controller task to help mediate the execution of commands that require the retrieval and update of data from the
@@ -50,6 +51,10 @@ public class TasksController {
         this.displayFeedback(ErrorMessageFormatter.formatErrorMessage(e.getMessage()));
     }
 
+    private void displayError(String e) throws UiException {
+        this.displayFeedback(ErrorMessageFormatter.formatErrorMessage(e));
+    }
+
     /**
      * Displays a lists all of the user's tasks in the TasksModel in each of the registered Uis.
      */
@@ -67,13 +72,14 @@ public class TasksController {
      * Adds tasks and displays corresponding feedback in each of the registered Uis.
      *
      * @param task the task to be added.
+     * @return true if the task was added successfully.
      */
-    public void addTask(Task task) throws UiException {
+    public boolean addTask(Task task) throws UiException {
         try {
             tasksRepo.addTask(task);
         } catch (TaskRepoException e) {
             this.displayError(e);
-            return;
+            return false;
         }
 
         // Try to get number of tasks after adding the task to the model
@@ -87,19 +93,63 @@ public class TasksController {
         // Display feedback
         String feedback = this.feedbackFormatter.displayTaskAdded(task, numTasks);
         this.displayFeedback(feedback);
+        return true;
+    }
+
+    public boolean addTaskToIndex(int index, Task task) throws UiException {
+        try {
+            tasksRepo.addTask(task);
+        } catch (TaskRepoException e) {
+            this.displayError(e);
+            return false;
+        }
+
+        // Try to get number of tasks after adding the task to the model
+        Optional<Integer> numTasks;
+        try {
+            numTasks = Optional.of(tasksRepo.getCurrentTasksCount());
+        } catch (TaskRepoException e) {
+            numTasks = Optional.empty();
+        }
+
+        // Display feedback
+        String feedback = this.feedbackFormatter.displayTaskAdded(task, numTasks);
+        this.displayFeedback(feedback);
+        return true;
     }
 
     /**
-     * Sets a task to done and prints corresponding feedback in each of the registered Uis..
+     * Sets a new list of tasks as the user's current tasks. The old task information will be lost.
+     *
+     * @param tasks the new list of tasks.
+     * @return true if the new tasks were successfully set.
+     * @throws UiException if the ui fails unexpectedly.
+     */
+    public boolean setNewTasks(List<Task> tasks) throws UiException {
+        try {
+            tasksRepo.setNewTasks(tasks);
+        } catch (TaskRepoException e) {
+            this.displayError(e);
+            return false;
+        }
+
+        String feedback = this.feedbackFormatter.displayAllTasks(tasks);
+        this.displayFeedback(feedback);
+        return true;
+    }
+
+    /**
+     * Sets a task to done and prints corresponding feedback in each of the registered Uis.
      *
      * @param index index of task to be set to done.
+     * @return true if the task was modified successfully.
      */
-    public void setTaskToDone(int index) throws UiException {
+    public boolean setTaskToDone(int index) throws UiException {
         try {
             tasksRepo.updateTaskDoneStatus(index, true);
         } catch (TaskRepoException e) {
             this.displayError(e);
-            return;
+            return false;
         }
 
         // Try to get modified task
@@ -112,14 +162,44 @@ public class TasksController {
         // Prints corresponding feedback
         String feedback = this.feedbackFormatter.displayTaskSetToDone(modifiedTask);
         this.displayFeedback(feedback);
+        return true;
+    }
+
+    /**
+     * Sets a task to undone and prints corresponding feedback in each of the registered Uis.
+     *
+     * @param index index of task to be set to done.
+     * @return true if the task was modified successfully.
+     */
+    public boolean setTaskToUndone(int index) throws UiException {
+        try {
+            tasksRepo.updateTaskDoneStatus(index, false);
+        } catch (TaskRepoException e) {
+            this.displayError(e);
+            return false;
+        }
+
+        // Try to get modified task
+        Optional<Task> modifiedTask;
+        try {
+            modifiedTask = Optional.of(tasksRepo.getTaskFromListIndex(index));
+        } catch (TaskRepoException e) {
+            modifiedTask = Optional.empty();
+        }
+
+        // Prints corresponding feedback
+        String feedback = this.feedbackFormatter.displayTaskSetToUndone(modifiedTask);
+        this.displayFeedback(feedback);
+        return true;
     }
 
     /**
      * Deletes a task and displays the corresponding feedback in each of the registered Uis.
      *
      * @param index index of task to be deleted.
+     * @return the deleted task or null if it fails to be deleted.
      */
-    public void deleteTask(int index) throws UiException {
+    public Task deleteTask(int index) throws UiException {
         Task taskToBeDeleted;
 
         // Try accessing and deleting task
@@ -128,7 +208,7 @@ public class TasksController {
             tasksRepo.deleteTask(index);
         } catch (TaskRepoException e) {
             this.displayError(e);
-            return;
+            return null;
         }
 
         // Try getting size of new list
@@ -141,6 +221,7 @@ public class TasksController {
 
         String feedback = this.feedbackFormatter.displayTaskDeleted(taskToBeDeleted, numTasks);
         this.displayFeedback(feedback);
+        return taskToBeDeleted;
     }
 
     /**
@@ -161,36 +242,119 @@ public class TasksController {
 
     /**
      * Sorts tasks according to the specified sorting method.
+     *
      * @param sortingMethod method with which to sort the user's tasks.
+     * @return old tasks if successful or null if sort was unsuccessful
      * @throws UiException if the ui fails unexpectedly
      */
-    public void sortTasks(TaskSorts sortingMethod) throws UiException {
+    public List<Task> sortTasks(TaskSorts sortingMethod) throws UiException {
         // Try to sort tasks and print corresponding feedback
         try {
-            List<Task> tasks = tasksRepo.getCurrentTasks();
-            tasks.sort(sortingMethod.comparator);
-            tasksRepo.setNewTasks(tasks);
+            List<Task> oldTasks = tasksRepo.getCurrentTasks();
+
+            List<Task> sortedTasks = tasksRepo.getCurrentTasks();
+            sortedTasks.sort(sortingMethod.comparator);
+            this.setNewTasks(sortedTasks);
 
             String feedback = this.feedbackFormatter.displayTasksSorted(sortingMethod);
             this.displayFeedback(feedback);
+
+            return oldTasks;
         } catch (TaskRepoException e) {
             this.displayError(e);
+            return null;
         }
     }
 
     /**
      * Delete all of the user's task data.
+     *
+     * @return the previous lists of tasks or null if it fails to delete.
      * @throws UiException if the ui fails unexpectedly.
      */
-    public void deleteAllTasks() throws UiException {
+    public List<Task> deleteAllTasks() throws UiException {
         //Try to delete tasks and print corresponding feedback
         try {
+            List<Task> oldTasks = tasksRepo.getCurrentTasks();
+
             tasksRepo.deleteAllTasks();
 
             String feedback = this.feedbackFormatter.displayAllTasksDeleted();
             this.displayFeedback(feedback);
+            return oldTasks;
         } catch (TaskRepoException e) {
             this.displayError(e);
+            return null;
         }
+    }
+
+    /**
+     * Delete a particular task by its uuid.
+     *
+     * @param uuid the uuid of the task to be deleted.
+     * @return the deleted task or null if it fails to be deleted..
+     * @throws UiException if the ui fails unexpectedly.
+     */
+    public Task deleteTaskByUuid(UUID uuid) throws UiException {
+        Task taskToBeDeleted;
+
+        // Try accessing and deleting task
+        try {
+            Optional<Task> optionalTask = tasksRepo.getCurrentTasks().stream()
+                    .filter(task -> task.getUuid().equals(uuid)).findFirst();
+
+            if (optionalTask.isEmpty()) {
+                this.displayError("Task is not found.");
+                return null;
+            }
+
+            taskToBeDeleted = optionalTask.get();
+
+            List<Task> newTasks = tasksRepo.getCurrentTasks().stream()
+                    .filter(task -> !task.getUuid().equals(uuid))
+                    .collect(Collectors.toList());
+
+            this.tasksRepo.setNewTasks(newTasks);
+
+        } catch (TaskRepoException e) {
+            this.displayError(e);
+            return null;
+        }
+
+        // Try getting size of new list
+        Optional<Integer> numTasks;
+        try {
+            numTasks = Optional.of(tasksRepo.getCurrentTasksCount());
+        } catch (TaskRepoException e) {
+            numTasks = Optional.empty();
+        }
+
+        String feedback = this.feedbackFormatter.displayTaskDeleted(taskToBeDeleted, numTasks);
+        this.displayFeedback(feedback);
+        return taskToBeDeleted;
+    }
+
+    /**
+     * Replaces the task at a particular index with a new task.
+     * @param index the index of the task to be replaced.
+     * @param newTask the task to be replaced with.
+     * @return the old task if successful or null if not.
+     */
+    public Task setTask(int index, Task newTask) throws UiException {
+        Task taskToBeReplaced;
+
+        try {
+            taskToBeReplaced = this.tasksRepo.getTaskFromListIndex(index);
+
+            this.tasksRepo.updateTask(index, newTask);
+        } catch (TaskRepoException e) {
+            this.displayError("Unable to update task details.");
+            return null;
+        }
+
+        String feedback = this.feedbackFormatter.displayTaskReplaced(newTask);
+        this.displayFeedback(feedback);
+
+        return taskToBeReplaced;
     }
 }

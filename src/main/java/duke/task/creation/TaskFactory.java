@@ -1,6 +1,8 @@
 package duke.task.creation;
 
 import duke.task.Task;
+import error.datetime.UnknownDateTimeException;
+import error.task.TaskArgumentsException;
 import error.task.TaskCreationException;
 
 import java.util.Arrays;
@@ -18,7 +20,7 @@ public class TaskFactory {
      * @return Optional of task if it is a valid keyword.
      * @throws TaskCreationException if arguments are invalid.
      */
-    public static Optional<Task> getTask(String keyword, String arguments) throws TaskCreationException {
+    public Optional<Task> getTask(String keyword, String arguments) throws TaskCreationException {
         // scans task types to find corresponding keyword
         Optional<TaskType> taskTypeOptional = Arrays.stream(TaskType.values())
                 .filter(t -> t.keyword.equals(keyword))
@@ -28,6 +30,14 @@ public class TaskFactory {
             return Optional.empty();
         }
 
-        return Optional.of(TaskBuilder.buildTask(taskTypeOptional.get(), arguments));
+        try {
+            TaskArguments taskArguments = new TaskArgumentsParser(arguments, taskTypeOptional.get().numDates).parse();
+            return Optional.of(TaskBuilder.buildTask(taskTypeOptional.get(), taskArguments));
+
+        } catch (TaskArgumentsException e) {
+            throw new TaskCreationException("Something unexpected happened.");
+        } catch (UnknownDateTimeException e) {
+            throw new TaskCreationException("Please enter a valid date and time.");
+        }
     }
 }

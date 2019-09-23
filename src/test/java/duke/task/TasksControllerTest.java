@@ -1,9 +1,8 @@
 package duke.task;
 
-import duke.command.entities.TaskSorts;
+import duke.command.sort.TaskSorts;
 import duke.task.tasks.Deadline;
 import duke.task.tasks.Event;
-import duke.task.tasks.TasksControllerFeedback;
 import duke.task.tasks.ToDo;
 import error.task.TaskCreationException;
 import error.task.TaskRepoException;
@@ -152,5 +151,46 @@ class TasksControllerTest {
         this.controller.deleteAllTasks();
 
         Assertions.assertEquals(this.repo.getCurrentTasks().size(), 0);
+    }
+
+    @Test
+    void deleteTaskByUuid() throws TaskCreationException, TaskRepoException, UiInitializationException, UiException {
+        this.generateMocks();
+
+        List<Task> tasks = this.generateMockTasks();
+        this.repo.setNewTasks(tasks);
+
+        Task taskToBeDeleted = tasks.get(1);
+        this.controller.deleteTaskByUuid(taskToBeDeleted.getUuid());
+
+        Assertions.assertFalse(this.repo.getCurrentTasks().stream()
+                .anyMatch(task -> task.getUuid().equals(taskToBeDeleted.getUuid())));
+    }
+
+    @Test
+    void setNewTasks() throws UiInitializationException, TaskCreationException, UiException, TaskRepoException {
+        this.generateMocks();
+
+        List<Task> tasks = this.generateMockTasks();
+        this.controller.setNewTasks(tasks);
+
+        List<Task> storedTasks = this.repo.getCurrentTasks();
+
+        for (int i = 0; i < tasks.size(); i ++) {
+            Assertions.assertEquals(tasks.get(i), storedTasks.get(i));
+        }
+    }
+
+    @Test
+    void setTask() throws TaskCreationException, TaskRepoException, UiInitializationException, UiException {
+        this.generateMocks();
+
+        List<Task> tasks = this.generateMockTasks();
+        this.repo.setNewTasks(tasks);
+
+        Task mockTaskA = new ToDo("Lubababadubdub");
+        this.controller.setTask(0, mockTaskA);
+        Assertions.assertEquals(this.repo.getCurrentTasks().size(), tasks.size());
+        Assertions.assertEquals(this.repo.getTaskFromListIndex(0), mockTaskA);
     }
 }

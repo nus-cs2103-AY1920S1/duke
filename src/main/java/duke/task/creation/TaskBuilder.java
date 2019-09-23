@@ -1,7 +1,6 @@
 package duke.task.creation;
 
 import duke.task.Task;
-import error.datetime.UnknownDateTimeException;
 import error.task.TaskCreationException;
 
 import java.lang.reflect.Constructor;
@@ -21,26 +20,21 @@ class TaskBuilder {
      * @return a task instance matching the TaskType.
      * @throws TaskCreationException if task fails to be created.
      */
-    static Task buildTask(TaskType type, String arguments) throws TaskCreationException {
+    static Task buildTask(TaskType type, TaskArguments arguments) throws TaskCreationException {
         // get constructor and parameters type of particular task
         Class<?> task = type.task;
         Constructor<?> constructor = task.getConstructors()[0];
         Class<?>[] parameters = constructor.getParameterTypes();
 
         // get arguments array
-        Object[] argumentArray = getArgumentArray(arguments, type.numDates);
+        Object[] argumentArray = getArgumentArray(arguments);
 
         return invokeTaskConstructor(constructor, argumentArray);
     }
 
-    private static Object[] getArgumentArray(String arguments, int numDateTime) throws TaskCreationException {
-        TaskArgumentsParser parser = new TaskArgumentsParser(arguments, numDateTime);
-        TaskArguments taskArguments;
-
-        try {
-            taskArguments = parser.parse();
-        } catch (UnknownDateTimeException e) {
-            throw new TaskCreationException("Unable to read date time arguments.");
+    private static Object[] getArgumentArray(TaskArguments taskArguments) throws TaskCreationException {
+        if (taskArguments.getDetails().equals("")) {
+            throw new TaskCreationException("Please enter some task details.");
         }
 
         List<Object> argsList = new ArrayList<>();

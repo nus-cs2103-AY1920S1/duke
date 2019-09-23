@@ -4,6 +4,7 @@ import error.task.TaskCreationException;
 import error.task.TaskModificationException;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * Serializable abstract class to represent a task that is to be completed by the user. Its base attributes includes
@@ -21,6 +22,7 @@ public abstract class Task implements Serializable, Cloneable {
     private static String TASK_IS_DONE_ICON = "✓";
     private static String TASK_NOT_DONE_ICON = "✘";
 
+    private final UUID uuid;
     private final char uniqueCharCode;
     private String details;
     private TimeFrame timeFrame;
@@ -31,10 +33,15 @@ public abstract class Task implements Serializable, Cloneable {
             throw new TaskCreationException("The given time frame is not compatible.");
         }
 
+        this.uuid = UUID.randomUUID();
         this.uniqueCharCode = uniqueCharCode;
         this.details = details;
         this.timeFrame = timeFrame;
         this.isDone = false;
+    }
+
+    public final UUID getUuid() {
+        return this.uuid;
     }
 
     public final char getUniqueCharCode() {
@@ -92,7 +99,7 @@ public abstract class Task implements Serializable, Cloneable {
     }
 
     /**
-     * Returns true as long as two tasks have the same UUID.
+     * Returns true if both tasks have all of the same fields..
      * @param o object to be compared to the Task instance.
      * @return true if the two tasks are the same.
      */

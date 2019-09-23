@@ -1,7 +1,8 @@
 package duke.task.creation;
 
 import error.datetime.UnknownDateTimeException;
-import util.DateTime;
+import error.task.TaskArgumentsException;
+import util.time.DateTime;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -31,16 +32,18 @@ class TaskArgumentsParser {
 
     /**
      * Parses the arguments into a friendly TaskArgument class that contains the necessary fields required for Task
-     * creation.
+     * creation. The last instances of found matching DateTime String patterns is returned as the DateTime arguments
+     * while the String before that is returned as the task details. Any input following the DateTime arguments will
+     * be discarded.
      * @return a TaskArguments instance
      * @throws UnknownDateTimeException if unable to extract the necessary DateTimes.
      */
-    TaskArguments parse() throws UnknownDateTimeException {
+    TaskArguments parse() throws UnknownDateTimeException, TaskArgumentsException {
         List<LocalDateTime> extractedLocalDateTimes = this.extractLocalDateTime();
         return new TaskArguments(arguments, extractedLocalDateTimes);
     }
 
-    private List<LocalDateTime> extractLocalDateTime() throws UnknownDateTimeException {
+    private List<LocalDateTime> extractLocalDateTime() throws UnknownDateTimeException, TaskArgumentsException {
         List<LocalDateTime> foundDateTimes = new ArrayList<>();
         List<String> foundPatterns = new ArrayList<>();
 
@@ -51,17 +54,32 @@ class TaskArgumentsParser {
         if (numDates == 1) {
             foundPatterns = findMatchingPatterns(arguments, dateTimeRegex);
 
+            if (foundPatterns.size() == 0) {
+                throw new UnknownDateTimeException();
+            }
+
             // chooses last matching datetime as the datetime argument
             String lastDateTimePattern = foundPatterns.get(foundPatterns.size() - 1);
             foundDateTimes.add(DateTime.parse(lastDateTimePattern));
-        } else {
+        }
+
+        if (numDates == 2) {
             String doubleDateTimeRegex = "(" + dateTimeRegexWithToSeparator + "|" + dateTimeRegexWithSpaceSeparator + ")";
 
             foundPatterns = findMatchingPatterns(arguments, doubleDateTimeRegex);
+
+            if (foundPatterns.size() == 0) {
+                throw new UnknownDateTimeException();
+            }
+
             String lastDateTimePattern = foundPatterns.get(foundPatterns.size() - 1);
             for (String dateTimePattern : this.splitDoubleDateTimePattern(lastDateTimePattern)) {
                 foundDateTimes.add(DateTime.parse(dateTimePattern));
             }
+        }
+
+        if (numDates > 2) {
+            throw new TaskArgumentsException("A task cannot have more than 2 date time arguments.");
         }
 
         arguments = trimFromMatchOnwards(arguments, foundPatterns.get(foundPatterns.size() - 1));

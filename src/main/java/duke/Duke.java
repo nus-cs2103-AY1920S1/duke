@@ -1,15 +1,26 @@
 package duke;
 
 import duke.command.Command;
-import duke.command.factory.CommandFactory;
+import duke.command.bye.ByeCommandProducer;
+import duke.command.creation.AddCommandFactory;
+import duke.command.creation.MainCommandFactory;
+import duke.command.creation.UndoCommandFactory;
+import duke.command.delete.DeleteCommandProducer;
+import duke.command.done.DoneCommandProducer;
+import duke.command.find.FindCommandProducer;
+import duke.command.list.ListCommandProducer;
+import duke.command.sort.SortCommandProducer;
 import duke.task.DefaultTaskRepo;
 import duke.task.TasksController;
 import duke.task.ITaskRepo;
+import error.command.CommandCreationException;
+import error.command.CommandProducerRegisterException;
 import error.ui.UiException;
 import error.ui.UiInitializationException;
 import storage.Storage;
 import ui.Ui;
 import ui.UiDriver;
+import util.strings.ErrorMessageFormatter;
 
 import java.util.Optional;
 
@@ -19,7 +30,9 @@ import java.util.Optional;
 
 public class Duke implements UiDriver {
     private Ui ui;
-    private CommandFactory commandFactory;
+    private MainCommandFactory mainCommandFactory;
+    private TasksController tasksController;
+    private CommandExecutor commandExecutor;
 
     /**
      * Program entry point.
@@ -79,39 +92,69 @@ public class Duke implements UiDriver {
         // Initialize tasks and storage
         Storage storage = options.getStorage();
         ITaskRepo model = new DefaultTaskRepo(storage);
-        TasksController tasksController = new TasksController(model);
-        tasksController.registerUi(this.ui.getUiOutputAccessor());
+        this.tasksController = new TasksController(model);
+        this.tasksController.registerUi(this.ui.getUiOutputAccessor());
+        this.commandExecutor = new CommandExecutor();
 
         // Initialize command factory
-        commandFactory = intializeCommandFactory();
+        this.mainCommandFactory = intializeCommandFactory();
     }
 
 
     @Override
     public void receiveUserInput(String input) {
-//        try {
-//            // Get command and execute
-//            Optional<Command> command = commandFactory.parse(input);
-//            if (command.isPresent()) {
-//                command.get().execute();
-//            }
-//
-//        } catch (UiException e) {
-//            System.out.println("FATAL: Ui stopped working.");
-//            System.exit(1);
-//        }
+        try {
+            // Get command and execute
+            Optional<Command> command = this.mainCommandFactory.getCommandFromUserInput(input);
+            if (command.isPresent()) {
+                this.commandExecutor.executeCommand(command.get());
+            } else {
+                ui.displayOutput(ErrorMessageFormatter.formatErrorMessage("Please enter a valid command."));
+            }
+
+        } catch (CommandCreationException e) {
+            this.handleCommandCreationExceptions(e);
+        } catch (UiException e) {
+            System.out.println("FATAL: Ui stopped working.");
+            System.exit(1);
+        }
     }
 
-    private CommandFactory intializeCommandFactory() {
-        CommandFactory factory = new CommandFactory();
+    private void handleCommandCreationExceptions(CommandCreationException error) {
+        try {
+            this.ui.displayOutput(ErrorMessageFormatter.formatErrorMessage(error.getMessage()));
+        } catch (UiException e) {
+            System.out.println("FATAL: Ui stopped working.");
+            System.exit(1);
+        }
+    }
 
-        // create dependencies for command producers
+    private MainCommandFactory intializeCommandFactory() {
+        MainCommandFactory mainFactory = new MainCommandFactory();
 
         // register CommandProducers
-//        factory.registerCommandProducer();
-//        factory.registerCommandProducer();
-//        factory.registerCommandProducer();
+        try {
 
-        return factory;
+            mainFactory.registerCommandProducer(new ByeCommandProducer(this.ui));
+            mainFactory.registerCommandProducer(new DeleteCommandProducer(this.tasksController));
+            mainFactory.registerCommandProducer(new ListCommandProducer(this.tasksController));
+            mainFactory.registerCommandProducer(new SortCommandProducer(this.tasksController));
+            mainFactory.registerCommandProducer(new DoneCommandProducer(this.tasksController));
+            mainFactory.registerCommandProducer(new FindCommandProducer(this.tasksController));
+
+        } catch (CommandProducerRegisterException e) {
+            System.out.println("FATAL: Unable to register command producer.");
+            System.exit(1);
+        }
+
+        // create factories
+        AddCommandFactory addCommandFactory = new AddCommandFactory(this.tasksController);
+        UndoCommandFactory undoCommandFactory = new UndoCommandFactory(this.commandExecutor, this.ui);
+
+        // register factories
+        mainFactory.registerCommandFactory(addCommandFactory);
+        mainFactory.registerCommandFactory(undoCommandFactory);
+
+        return mainFactory;
     }
 }

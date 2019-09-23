@@ -64,6 +64,16 @@ public interface ITaskRepo {
     public void addTask(Task task) throws TaskRepoException;
 
     /**
+     * Method used by the program to add a new Task to the user's existing Tasks at a particular index. The index
+     * corresponds to the the index in the list of tasks returned by the getCurrentTasks() method. The Task being added
+     * SHOULD NOT be modified in anyway before it is added.
+     * @param index the index at which the new taks is to be added.
+     * @param task the task to be added.
+     * @throws TaskRepoException if the task is unable to be added.
+     */
+    public void addTaskToIndex(int index, Task task) throws TaskRepoException;
+
+    /**
      * Method used by the program to update a currently existing task's details field. The task to be updated is
      * identified by its index in the list of tasks returned by the getCurrentTasks() method. The model should only
      * update the task that corresponds to the task found at the specified index. The task to be updated SHOULD be of

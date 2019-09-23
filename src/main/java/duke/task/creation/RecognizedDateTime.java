@@ -1,5 +1,8 @@
 package duke.task.creation;
 
+/**
+ * Container class for the regex used by the program to identify valid DateTime arguments in the user's input.
+ */
 class RecognizedDateTime {
     static final String DATE_TIME_REGEX = "(" +
             "(" +

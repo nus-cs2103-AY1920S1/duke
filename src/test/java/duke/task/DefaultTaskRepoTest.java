@@ -7,6 +7,7 @@ import duke.task.tasks.ToDo;
 import error.storage.StorageException;
 import error.task.TaskCreationException;
 import error.task.TaskRepoException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import storage.InMemStorage;
 
@@ -184,5 +185,18 @@ class DefaultTaskRepoTest {
         assertTrue(repo.getTaskFromListIndex(0).isTaskDone());
 
         assertThrows(TaskRepoException.class, () -> repo.updateTaskDoneStatus(0, true));
+    }
+
+    @Test
+    void addTaskToIndex() throws TaskCreationException, TaskRepoException {
+        InMemStorage storage = new InMemStorage();
+        DefaultTaskRepo repo = new DefaultTaskRepo(storage);
+        List<Task> mockTasks = this.generateMockTasks();
+
+        Task mockTaskA = new Event("b", LocalDateTime.now());
+        repo.addTaskToIndex(0, mockTaskA);
+
+        Task taskA = repo.getCurrentTasks().get(0);
+        Assertions.assertEquals(mockTaskA, taskA);
     }
 }

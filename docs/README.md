@@ -69,9 +69,11 @@ Double click the jar file to run
 ## Commands
 
 A task in Duke can be classified into three main categories: `todo`, `deadline`, `event `
-
+<br />
+<br />
+<br />
 ### <img id="todo" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/todo.png" width="500">
-
+***
 A `todo` task is a task item that only has a task description. A todo task does not contain a date field.
 
 `todo <taskDescription>` : creates a new todo task
@@ -80,11 +82,11 @@ Example of usage: <br />
 `todo borrow books`
 
 Expected Outcome:
-### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/todoDemo.png">
+<img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/todoDemo.png">
 
 
 ### <img id="deadline" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/deadline.png" width="500">
-
+***
 A `deadline` task is a task item that has a task description and a task date. The task date indicates when the 
 `deadline` task is due by. The task date must follow a specified `dd/MM/yy HH:mm` format.
 
@@ -94,7 +96,7 @@ Example of usage: <br />
 `deadline homework /by 30/09/2019 1200`
 
 Expected Outcome:
-### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/deadlineDemo.png">
+<img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/deadlineDemo.png">
 
 
 Possible Error: <br />
@@ -103,7 +105,7 @@ If either the `<taskDescription>` or `<task date>` is empty or the `taskDate` is
 format
 
 ### <img id="event" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/event.png" width="500">
-
+***
 A `event` task is a task item that has a task description and a task date. The task date indicates when the 
 `event` task is happening at. The task date must follow a specified `dd/MM/yy HH:mm` format.
 
@@ -113,7 +115,7 @@ Example of usage: <br />
 `event meeting /at 30/09/2019 1200`
 
 Expected Outcome:
-### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/eventDemo.png">
+<img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/eventDemo.png">
 
 
 Possible Error: <br />
@@ -123,7 +125,7 @@ format
 
 ### <img id="list" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/list.png" width="500">
 
-
+***
 Displays all task items in `list` view. The items are displayed in the order they are entered
 
 `list` : view all task items in list view
@@ -132,11 +134,11 @@ Example of usage: <br />
 `list`
 
 Expected Outcome:
-### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/listDemo.png">
+<img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/listDemo.png">
 
 
 ### <img id="done" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/done.png" width="500">
-
+***
 Each task item can be marked as `done`. It marks the task at the specified index in `list` view as done.
 
 `done <index>`: marks a specified task item as done
@@ -145,7 +147,7 @@ Example of usage: <br />
 `done 1`
 
 Expected Outcome:
-### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/doneDemo.png">
+<img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/doneDemo.png">
 
 
 Possible Error: <br />
@@ -153,7 +155,7 @@ Possible Error: <br />
 If the specified `<index>` is not valid
 
 ### <img id="delete" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/delete.png" width="500">
-
+***
 Each task item can be deleted. It deletes a task item at the specified index in `list` view.
 
 `delete <index>`: delete a task item
@@ -162,14 +164,14 @@ Example of usage: <br />
 `delete 1`
 
 Expected Outcome:
-### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/deleteDemo.png">
+<img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/deleteDemo.png">
 
 Possible Error: <br />
 `InvalidParameters  `: <br />
 If the specified `<index>` is not valid
 
 ### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/find.png" width="500">
-
+***
 Find the task with a matching keyword entered by the user
 
 `find <keyword>`: find task item with matching keyword
@@ -178,11 +180,11 @@ Example of usage: <br />
 `find books`
 
 Expected Outcome:
-### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/findDemo.png">
+<img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/findDemo.png">
 
 
 ### <img id="remind" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/remind.png" width="500">
-
+***
 Sets a reminder for a specified task. The reminder is set for the task with the specified index in the list view. The
 date set for the reminder must follow the `dd/MM/yy HH:mm` format.  To change the date for a reminder that has been set,
 simply enter a new remind command and the date will be automatically overwritten.
@@ -193,13 +195,13 @@ Example of usage: <br />
 `remind 2 01/09/2019 0000`
 
 Expected Outcome:
-### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/reminderDemo.png">
+<img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/reminderDemo.png">
 
 `InvalidParameters  `: <br />
 If the specified `<index>` is not valid or `<reminderDate>` is not in the correct date format
 
 ### <img id="schedule" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/schedule.png" width="500">
-
+***
 See all tasks in `schedule` view. The `schedule` view is sorted by date order. 
 
 `schedule`: see all task in schedule view
@@ -213,14 +215,24 @@ Example of usage: <br />
 
 Expected Outcome:
 
-### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/scheduleDemo.png">
+<img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/scheduleDemo.png">
 
-### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/scheduleDateDemo.png">
+<img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/scheduleDateDemo.png">
+
+### <img id="bye" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/bye.png" width="500">
+***
+Exits duke and displays the exit message.
+
+Example of usage: <br/>
+`bye`: exits duke and displays the exit message
+
+Expected Outcome:
+
+<img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/byeDemo.png">
 
 
 
-`InvalidParameters  `: <br />
-If the specified `<index>` is not valid or `<reminderDate>` is not in the correct date format
+
 
 ## FAQ
 **Where does duke store its task?** <br/>

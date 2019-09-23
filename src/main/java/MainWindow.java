@@ -8,10 +8,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 
 import javafx.scene.paint.Color;
@@ -46,16 +48,16 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         Background bg = getBackgroundImage();
         dialogContainer.setBackground(bg);
+        userInput.setStyle("-fx-text-inner-color: white;");
+        userInput.setBackground(new Background(
+                new BackgroundFill(Color.BLACK, CornerRadii.EMPTY,
+                        new Insets(0, 0, 0, 0))));
         greet();
     }
 
     private Background getBackgroundImage() {
-        BackgroundRepeat backgroundRepeat = BackgroundRepeat.REPEAT;
-        BackgroundPosition backgroundPosition = BackgroundPosition.DEFAULT;
-        BackgroundSize backgroundSize = BackgroundSize.DEFAULT;
-        BackgroundImage bgImage = new BackgroundImage(
-                backgroundImage, backgroundRepeat, backgroundRepeat, backgroundPosition, backgroundSize);
-        return new Background(bgImage);
+        return new Background(new BackgroundFill(
+                Color.BLACK, CornerRadii.EMPTY, new Insets(0, 0, 0, 0)));
     }
 
     public void setDuke(Duke d) {

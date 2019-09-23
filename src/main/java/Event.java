@@ -22,7 +22,7 @@ public class Event extends Task {
         super(description);
         this.at = dateAndTime;
         try {
-            dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
             dateFormat.setLenient(false);
             this.dateAndTime = dateFormat.parse(dateAndTime);
         } catch (ParseException e) {
@@ -52,7 +52,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", getDescription(), dateFormat.format(dateAndTime));
+        return String.format("[E]%s (at: %s)", super.toString(), dateFormat.format(dateAndTime));
     }
 
     /*public static Event outputAsEvent(String lineToRead) {

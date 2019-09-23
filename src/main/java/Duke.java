@@ -11,11 +11,14 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.Scanner;
+
 /**
  * Represents the main class of Duke.
  */
 public class Duke extends Application {
 
+    private Scanner sc;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -140,7 +143,8 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String command) {
-        return "hello";
+        Parser parse = new Parser(storage, tasks);
+        return parse.read(command);
     }
 
     /**

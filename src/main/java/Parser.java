@@ -9,7 +9,9 @@ public class Parser {
 
     private Storage storage;
     private TaskList tasks;
+    private String input;
     private String command;
+    private String laterInput;
 
     /**
      * Constructor of Parser.
@@ -23,49 +25,66 @@ public class Parser {
 
     /**
      * Checks if command is done and marks task as done.
-     * @param sc Scanner object.
+     * @param laterInput is the number to be marked as done.
+     * @return string representation of task done.
      */
-    public void checkDone (Scanner sc) {
+    public String checkDone (String laterInput) {
         try {
-            int taskNum = sc.nextInt();
+            laterInput = laterInput.trim();
+            int taskNum = Integer.parseInt(laterInput);
             assert (taskNum != 0);
             tasks.taskDone(taskNum-1);
-            System.out.println("IsDone?" + tasks.getList().get(taskNum-1).getIsDone());
+            String toOutput = "Nice! I've marked this task as done: " + "\n"
+                        + tasks.taskPrint(taskNum-1) + "\n"
+                            + "Nice! I've marked this task as done: ";
+            /*System.out.println("IsDone?" + tasks.getList().get(taskNum-1).getIsDone());
             System.out.println("Nice! I've marked this task as done: \n" + tasks.taskPrint(taskNum-1));
+            StringBuilder sb = new StringBuilder("Nice! I've marked this task as done: \n");
+            sb.append(tasks.taskPrint(taskNum-1).toString());
+             */
             storage.update(tasks.getList());
+            return toOutput;
         } catch (Exception e) {
-            System.out.println("Error, you have entered an invalid number");
+            return "Error, you have entered an invalid number";
+            //System.out.println("Error, you have entered an invalid number");
         }
     }
 
     /**
      * Checks if command is delete and removes task from TaskList.
-     * @param sc Scanner object.
+     * @param laterInput is the number representing task to be deleted.
+     * @return string representation of task to be deleted.
      */
-    public void checkDelete (Scanner sc) {
+    public String checkDelete (String laterInput) {
         try {
-            int numToDelete = sc.nextInt();
+            laterInput = laterInput.trim();
+            int numToDelete = Integer.parseInt(laterInput);
             assert (numToDelete != 0);
-            System.out.println("Noted. I've removed this task: ");
+            String toOutput = "Noted. I've removed this task: " + " \n"
+                    + tasks.taskPrint(numToDelete -1).toString() + "\n"
+                        + "Now you have " + (tasks.size() -1) + " tasks in the list. \n";
+            /*System.out.println("Noted. I've removed this task: ");
             System.out.println(tasks.taskPrint(numToDelete -1));
             System.out.println("Now you have " + (tasks.size() -1) + " tasks in the list. ");
+             */
             tasks.remove(numToDelete-1);
             storage.update(tasks.getList());
+            return toOutput;
         } catch (Exception e) {
-            System.out.println("Error, you have entered an invalid number");
+            return "Error, you have entered an invalid number";
+            //System.out.println("Error, you have entered an invalid number");
         }
     }
 
     /**
-     * Checks if command is Todo and creates a todo Object.
-     * @param sc Scanner object.
+     * Checks if command is todo and creates a Todo object.
+     * @param description description of todo.
      * @throws Exception if description is empty.
      */
-    public void checkToDo (Scanner sc) throws Exception {
-        String fullDescription = sc.nextLine();
-        assert !fullDescription.isEmpty();
-        if (!fullDescription.isEmpty()) {
-            tasks.add(new Todo(fullDescription));
+    public void checkToDo (String description) throws Exception {
+        assert !description.isEmpty();
+        if (!description.isEmpty()) {
+            tasks.add(new Todo(description));
             storage.append(tasks.getLast());
         } else {
             throw new Exception();
@@ -74,20 +93,22 @@ public class Parser {
 
     /**
      * Checks if command is deadline and creates a Deadline object.
-     * @param sc Scanner object.
+     * @param description description of deadline task.
      * @throws Exception if description is empty.
      */
-    public void checkDeadline (Scanner sc) throws Exception {
-        String fullDescription = sc.nextLine();
-        assert !(fullDescription == null);
-        if (!fullDescription.isEmpty()) {
-            String[] descriptionAndDate = fullDescription.split(" /by ");
-            String description = descriptionAndDate[0];
-            String by = descriptionAndDate[1];
-            assert !(description == null);
+    public void checkDeadline (String description) throws Exception {
+        description = description.trim();
+        assert !(description == null);
+        if (!description.isEmpty()) {
+            String[] fullDescription = description.split(" /by ");
+            String taskDescription = fullDescription[0];
+            String by = fullDescription[1];
+            assert !(taskDescription == null);
             assert !(by == null);
+            tasks.add(new Deadline(taskDescription, by));
+            storage.append(tasks.getLast());
             if(noClash(by)) {
-                tasks.add(new Deadline(description, by)); //checks for no clash with another task in the list, if true then add Deadline to the TaskList
+                tasks.add(new Deadline(taskDescription, by)); //checks for no clash with another task in the list, if true then add Deadline to the TaskList
                 storage.append(tasks.getLast());
             }
         } else {
@@ -97,25 +118,48 @@ public class Parser {
 
     /**
      * Checks if command is event and creates a Deadline object.
-     * @param sc Scanner object.
+     * @param description description of event object.
      * @throws Exception if description is empty.
      */
-    public void checkEvent (Scanner sc) throws Exception {
-        String fullDescription = sc.nextLine();
-        assert !(fullDescription == null);
-        if (!fullDescription.isEmpty()) {
-            String[] descriptionAndAt = fullDescription.split(" /at ");
-            String description = descriptionAndAt[0];
-            String at = descriptionAndAt[1];
-            assert !(description == null);
+    public void checkEvent (String description) throws Exception {
+        description = description.trim();
+        assert !(description == null);
+        if (!description.isEmpty()) {
+            String[] fullDescription = description.split(" /at ");
+            String taskDescription = fullDescription[0];
+            String at = fullDescription[1];
+            assert !(taskDescription == null);
             assert !(at == null);
+            tasks.add(new Event(taskDescription, at));
+            storage.append(tasks.getLast());
             if(noClash(at)) {
-                tasks.add(new Event(description, at)); //check for no clash with another task in the list, if true then add Event to the TaskList
+                tasks.add(new Event(taskDescription, at)); //check for no clash with another task in the list, if true then add Event to the TaskList
                 storage.append(tasks.getLast());
             }
         } else {
             throw new Exception();
         }
+    }
+
+    /**
+     * Finds the tasks with the command
+     * @param itemToFind finds for tasks with the command.
+     * @return String representation of task.
+     */
+    public String checkFind (String itemToFind) {
+        String output = "";
+        if(!itemToFind.isEmpty()) {
+            TaskList tasksFound = tasks.findByKeyword(itemToFind);
+            if(tasksFound == null) {
+                output = "Sorry no tasks found with the keyword: " + itemToFind;
+                //System.out.println("Sorry no tasks found with the keyword: " + itemToFind);
+            } else {
+                //StringBuilder output = new StringBuilder();
+                //output.append("Here are the matching tasks in your list:\n");
+                output = "Here are the matching tasks in your list:" + "\n" + tasksFound.printForListString();
+            }
+        }
+        return output;
     }
 
     /**
@@ -141,46 +185,70 @@ public class Parser {
 
     /**
      * Checks if command is todo, deadline or event.
-     * @param sc Scanner object.
-     * @param command type of task.
+     * @param command todo or deadline or event.
+     * @param laterInput description of the task.
+     * @return string representation of task.
      */
-    public void checkTask (Scanner sc, String command) {
+    public String checkTask (String command, String laterInput) {
         try {
             if(command.equals("todo")) {
-                checkToDo(sc);
+                checkToDo(laterInput);
             } else if (command.equals("deadline")) {
-                checkDeadline(sc);
+                checkDeadline(laterInput);
             } else if (command.equals("event")) {
-                checkEvent(sc);
+                checkEvent(laterInput);
             } else {
                 throw new IllegalArgumentException();
             }
-            System.out.println("Got it. I've added this task: ");
+            String output = "Got it. I've added this task: " + "\n"
+                    + " " + tasks.printLatest().toString() + "\n"
+                        + "Now you have " + tasks.size() + " tasks in the list.";
+            return output;
+            /*System.out.println("Got it. I've added this task: ");
             System.out.println(" " + tasks.printLatest());
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-        } catch(IllegalArgumentException e) {
-            System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(\n" + "Enter <help> for a list of commands\n");
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");*/
         } catch(Exception e) {
-            System.out.println(command);
-            System.out.println("OOPS!!! The description of a todo cannot be empty.");
+            return(command + e.getMessage());
         }
     }
 
     /**
      * Parser reads in command from user.
-     * @param command commands like done, delete, list
-     * @param sc
+     * @param input commands like done, delete, list.
      */
-    public void read (String command, Scanner sc) {
-        this.command = command;
-        if (command.equals("done")) {
-            checkDone(sc);
+    public String read (String input) {
+        this.input = input;
+        processCommand(input);
+
+        if(input.equals("hello")) {
+            return "Hello! I'm Duke. " + "\n" + "What can I do for you?";
+        } else if (input.equals("bye")) {
+            return "Bye. Hope to see you again soon!" + "\n" + "Bye. Hope to see you again soon!";
+        } else if (command.equals("done")) {
+            return checkDone(laterInput);
         } else if(command.equals("delete")) {
-            checkDelete(sc);
+            return checkDelete(laterInput);
         } else if(command.equals("list")) {
-            tasks.printForList();
+            if(tasks.printForListString().equals("")) {
+                return "Empty List";
+            } else {
+                return tasks.printForListString();
+            }
+        } else if(command.equals("find")) {
+            return checkFind(laterInput);
         } else {
-            checkTask(sc, this.command);
+            return checkTask(command, laterInput);
+        }
+    }
+
+    public void processCommand(String input) {
+        this.input = input;
+        if(input.equals("list")) {
+            command = "list";
+        } else {
+            String[] wordSeparator = input.split(" ", 2);
+            this.command = wordSeparator[0];
+            this.laterInput = wordSeparator[1];
         }
     }
 }

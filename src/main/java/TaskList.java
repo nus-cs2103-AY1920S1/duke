@@ -31,6 +31,15 @@ public class TaskList {
         }
     }
 
+    public String printForListString() {
+        String output = "";
+        for(int i = 1; i <= list.size(); i++) {
+            output += i + "." + list.get(i-1).toString();
+            output += "\n";
+        }
+        return output;
+    }
+
     /**
      * Marks the task as done.
      * @param x task number.
@@ -94,6 +103,16 @@ public class TaskList {
      */
     public ArrayList<Task> getList() {
         return list;
+    }
+
+    public TaskList findByKeyword(String itemToFind) {
+        ArrayList<Task> output = new ArrayList<>();
+        for(Task task : this.list) {
+            if(task.getDescription().contains(itemToFind)) {
+                output.add(task);
+            }
+        }
+        return new TaskList(output);
     }
 
 }

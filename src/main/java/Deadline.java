@@ -58,7 +58,7 @@ public class Deadline extends Task {
 
     /*public Date getDate() {
         return date;
-    }*/
+    }/*
 
     /**
      * Formats the the deadline object.
@@ -66,10 +66,10 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.getDescription(), dateFormat.format(date));
+        return String.format("[D]%s (by: %s)", super.toString(), dateFormat.format(date));
     }
 
-    /*public Deadline(String description, String by) {
+    /*public Deadline (String description, String by) {
         super(description);
         this.by = by.trim();
         //SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
@@ -81,10 +81,10 @@ public class Deadline extends Task {
         hour = time / 100;
         min = time % 100;
         if(hour >= 13) {
-            amOrpm = "pm";
+            amOrPm = "pm";
             hour -= 12;
         } else {
-            amOrpm = "am";
+            amOrPm = "am";
         }
         if(min == 0) {
             formattedTime = hour + amOrPm + "";

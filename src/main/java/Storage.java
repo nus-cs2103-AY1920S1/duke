@@ -13,7 +13,7 @@ public class Storage {
      * Storage class deals with loading tasks from the file and saving tasks in the file.
      */
     public Storage() {
-        this.filename = "../../../data/tasks.txt";
+        this.filename = "/Users/karthika/Desktop/duke/data/tasks.txt";
     }
 
     /**
@@ -29,17 +29,23 @@ public class Storage {
         ArrayList<Task> list = new ArrayList<>();
         Scanner sc = new Scanner(file);
         while(sc.hasNextLine()) {
-            String[] task = sc.nextLine().replaceAll(", ", ",").split(",");
-            if(task[0].equals("T")) {
-                Task newTask = new Todo(task[2]);
-                list.add(newTask);
-            } else if (task[0].equals("D")) {
-                Task newTask = new Deadline(task[2], task[3]);
-                list.add(newTask);
-            } else if(task[0].equals("E")) {
-                Task newTask = new Event(task[2], task[3]);
-                list.add(newTask);
+            try {
+                String[] task = sc.nextLine().replaceAll(", ", ",").split(",");
+
+                if (task[0].equals("T")) {
+                    Task newTask = new Todo(task[2]);
+                    list.add(newTask);
+                } else if (task[0].equals("D")) {
+                    Task newTask = new Deadline(task[2], task[3]);
+                    list.add(newTask);
+                } else if (task[0].equals("E")) {
+                    Task newTask = new Event(task[2], task[3]);
+                    list.add(newTask);
+                }
+            } catch (ParseException e) {
+                System.out.println("Parse Exception");
             }
+
         }
         return list;
     }
@@ -49,7 +55,7 @@ public class Storage {
      * @param task task to add to txt file.
      * @throws Exception if there is error in file handling.
      */
-    public void append(Task task) throws Exception {
+    public void append(Task task) throws IOException {
         FileWriter writer = new FileWriter(filename, true);
         String status = task.getIsDone() ? "1" : "0";
         try {
@@ -60,7 +66,7 @@ public class Storage {
             } else if (task instanceof Event) {
                 writer.write("E, " + status + ", " + task.getDescription() + ", " + ((Event) task).getAt() +  "\n");
             }
-        } catch(Exception ex) {
+        } catch(IOException ex) {
             System.out.println("Error in file handling");
         }
         writer.close();

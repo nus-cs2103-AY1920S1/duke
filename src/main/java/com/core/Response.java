@@ -2,6 +2,7 @@ package com.core;
 
 import com.core.savedata.SaveFile;
 import com.util.datetime.DateTime;
+import com.util.datetime.DateTimeParse;
 import java.util.stream.IntStream;
 
 import com.util.Printer;
@@ -25,7 +26,7 @@ public enum Response {
     LIST_SCHEDULE("(?i)^l(ist)? \\d{1,2}/\\d{1,2}/\\d{1,4}$", (i, s) -> {
         DateTime time = DateTime.parseString(i.split(" ")[1] + " 0000");
         DateTime time2 = time.clone();
-        time2.add(DateTime.parseString("1/0/0 0000"));
+        time2.add(new DateTimeParse("1/0/0 0000"));
         String finalString = listIndexStreamToString(IntStream.range(0,
                 s.list.size()).boxed().filter((ti) -> {
                     DoableTask t = s.list.get(ti);
@@ -55,7 +56,8 @@ public enum Response {
         if (checkValidIndex(index, s)) {
             DoableTask t = s.list.get(index);
             String[] parts = i.split(" ");
-            DateTime time = DateTime.parseString(parts[2] + " " + parts[3]);
+            DateTimeParse time = new DateTimeParse(parts[2] + " " + parts[3]);
+            System.out.println(time.toString());
             if (t instanceof Deadline) {
                 ((Deadline)t).deadline.add(time);
                 Printer.printString("Deadline has been postponed\n " + t.toString());

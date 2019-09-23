@@ -23,32 +23,20 @@ public class DateTime extends GregorianCalendar {
      * @return      DateTime object
      */
     public static DateTime parseString(String str) {
-        String[] dateTimeStrings = str.trim().split(" ");
-        String[] dateStrings = dateTimeStrings[0].split("/");
-        int day = Integer.parseInt(dateStrings[0]);
-        int month = Integer.parseInt(dateStrings[1]);
-        int year = Integer.parseInt(dateStrings[2]);
-        int hour = Integer.parseInt(dateTimeStrings[1].substring(0, 2));
-        String minStr = dateTimeStrings[1].substring(2);
-        if (minStr.charAt(0) == ':') {
-            minStr = minStr.substring(1);
-        }
-        int min = Integer.parseInt(minStr);
-        return new DateTime(year, month, day, hour, min);
+        DateTimeParse obj = new DateTimeParse(str);
+        return new DateTime(obj.year, obj.month, obj.day, obj.hour, obj.min);
     }
 
     /**
      * Adds argument datetime to this datetime.
      * @param c2    argument datetime
      */
-    public void add(DateTime c2) {
-        add(Calendar.YEAR, c2.get(Calendar.YEAR));
-        add(Calendar.MONTH, c2.get(Calendar.MONTH) + 1); // Zero-based months
-        add(Calendar.DATE, c2.get(Calendar.DATE));
-        add(Calendar.HOUR_OF_DAY, c2.get(Calendar.HOUR_OF_DAY));
-        add(Calendar.MINUTE, c2.get(Calendar.MINUTE));
-        add(Calendar.SECOND, c2.get(Calendar.SECOND));
-        add(Calendar.MILLISECOND, c2.get(Calendar.MILLISECOND));
+    public void add(DateTimeParse c2) {
+        add(Calendar.YEAR, c2.year);
+        add(Calendar.MONTH, c2.month);
+        add(Calendar.DATE, c2.day);
+        add(Calendar.HOUR_OF_DAY, c2.hour);
+        add(Calendar.MINUTE, c2.min);
     }
 
     /**

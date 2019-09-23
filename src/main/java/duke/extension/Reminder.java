@@ -1,8 +1,8 @@
 package duke.extension;
 
-import duke.task.Task;
 
 import java.util.Date;
+import java.util.Optional;
 import java.util.Timer;
 
 /**
@@ -11,33 +11,54 @@ import java.util.Timer;
  */
 public class Reminder {
 
+    private Optional<Date> reminderDate = Optional.empty();
+
+    private String taskInfo;
     /**
      * This is the timer for the reminder. It will run when the specified date time is reached.
      */
     private Timer timer;
 
-    /**
-     * This is the date time for the reminder to be triggered.
-     */
-    private Date dateToRemind;
 
     /**
      * Constructs a new reminder for the task for the specified task with the specified date to be be reminded.
-     * @param task the task whose reminder has been set
-     * @param dateToRemind the date to trigger the reminder
+     * @param taskInfo the task whose reminder has been set
      */
-    public Reminder(Task task, Date dateToRemind) {
-        this.dateToRemind = dateToRemind;
+    public Reminder(String taskInfo) {
+        this.taskInfo = taskInfo;
         this.timer = new Timer();
-        this.timer.schedule(new NotificationAlert(task), dateToRemind);
     }
 
     /**
-     * Gets the date of the reminder.
-     * @return the date specified for the reminder
+     * Sets a timer for the reminder at the specified date by overwriting the previous timer.
+     * @param dateToRemind the date to display the reminder
      */
-    public Date getDate() {
-        return dateToRemind;
+    public void setTimer(Date dateToRemind) {
+        timer.cancel();
+        timer = new Timer();
+        timer.schedule(new NotificationAlert(taskInfo), dateToRemind);
+        reminderDate = Optional.ofNullable(dateToRemind);
+    }
+
+    /**
+     * Clears the optional date value if it is overdue.
+     */
+    public void clearOptionalDateIfOverdue() {
+        if (reminderDate.isPresent()) {
+            if (reminderDate.get().compareTo(new Date()) < 0) {
+                reminderDate = Optional.empty();
+            }
+        }
+    }
+
+    /**
+     * Gets the optional date of the reminder. A date for the reminder will be present if the timer for the reminder
+     * has been set
+     * @return the date set for the timer if present
+     */
+    public Optional<Date> getOptionalDate() {
+        clearOptionalDateIfOverdue();
+        return reminderDate;
     }
 
     /**
@@ -46,7 +67,12 @@ public class Reminder {
      */
     @Override
     public String toString() {
-        return "⏰ " + dateToRemind.toString() + " ⏰";
+        clearOptionalDateIfOverdue();
+        if (reminderDate.isPresent()) {
+            return "Reminder set to: " + reminderDate.get().toString();
+        } else {
+            return "";
+        }
     }
 
 }

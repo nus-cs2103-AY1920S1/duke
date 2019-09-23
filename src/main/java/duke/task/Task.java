@@ -24,10 +24,9 @@ public class Task {
      */
     protected Optional<Date> taskDate = Optional.empty();
     /**
-     * This is the container for the date field of the reminder set for the task. The container may be empty if a
-     * reminder is not set for the task.
+     * This is the reminder set for the task.
      */
-    protected Optional<Date> reminderDate = Optional.empty();
+    protected Reminder reminder;
 
 
     /**
@@ -41,6 +40,8 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
+        //reminder is created with no timer set
+        this.reminder = new Reminder(this.toString());
     }
 
     /**
@@ -51,6 +52,8 @@ public class Task {
     public Task(String description, Date taskDate) {
         this.description = description;
         this.taskDate = Optional.ofNullable(taskDate);
+        //reminder is created with no timer set
+        this.reminder = new Reminder(this.toString());
     }
 
     /**
@@ -69,15 +72,11 @@ public class Task {
     }
 
     /**
-     * Displays the reminder as a string representation if present.
-     * @return a string representation of the reminder and a empty string otherwise
+     * Displays a string representation of the reminder.
+     * @return a string representation of the reminder
      */
     public String displayReminderIfPresent() {
-        if (reminderDate.isPresent()) {
-            return "Reminder set to: " + reminderDate.get().toString();
-        } else {
-            return "";
-        }
+        return reminder.toString();
     }
 
     /**
@@ -86,15 +85,7 @@ public class Task {
      */
     public void setReminder(Date date) {
         assert (date != null);
-        reminderDate = Optional.ofNullable(date);
-        new Reminder(this, date);
-    }
-
-    /**
-     * Clears the reminder set for the task.
-     */
-    public void clearReminder() {
-        reminderDate = Optional.empty();
+        reminder.setTimer(date);
     }
 
     /**
@@ -147,7 +138,7 @@ public class Task {
     public String encode() {
         StringBuilder outputBuilder = new StringBuilder("" + isDone);
         outputBuilder.append(',');
-        outputBuilder.append(encodeOptionalDate(reminderDate));
+        outputBuilder.append(encodeOptionalDate(reminder.getOptionalDate()));
         outputBuilder.append(',');
         outputBuilder.append(description);
         outputBuilder.append(',');
@@ -205,8 +196,7 @@ public class Task {
         boolean isPresent = !reminderDate.equals("null");
         if (isPresent) {
             Date date = DateParser.parse(reminderDate);
-            this.reminderDate = Optional.of(date);
-            new Reminder(this, date);
+            reminder.setTimer(date);
         }
     }
 

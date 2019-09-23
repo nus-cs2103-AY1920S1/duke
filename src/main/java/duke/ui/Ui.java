@@ -211,15 +211,15 @@ public class Ui implements UserInterface {
     /**
      * Shows a message that says that the reminder has been set.
      * @param task the task whose reminder has been set
-     * @param dateToRemind the date of the reminder set
+     * @param reminderDate the date of the reminder set
      * @return a string representation of the task whose reminder that has been set
      */
-    public String showSetReminder(String task, String dateToRemind) {
+    public String showSetReminder(String task, String reminderDate) {
         StringBuilder outputBuilder = new StringBuilder();
         outputBuilder.append("    ------------------------------------------------------------\n");
         outputBuilder.append("    Acknowledged. I've set the reminder for this task:\n");
         outputBuilder.append("    ⏰ " + task + "\n");
-        outputBuilder.append("    Reminder has been set to: " + dateToRemind + "\n");
+        outputBuilder.append("    Reminder set to: " + reminderDate + "\n");
         outputBuilder.append("    ------------------------------------------------------------\n");
         String output = outputBuilder.toString();
         return output;

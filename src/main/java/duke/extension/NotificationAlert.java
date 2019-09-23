@@ -1,6 +1,5 @@
 package duke.extension;
 
-import duke.task.Task;
 import duke.view.AlertWindow;
 import javafx.application.Platform;
 import java.util.TimerTask;
@@ -9,14 +8,14 @@ import java.util.TimerTask;
  * This is the notification alert that will pop up when the timer runs out.
  */
 public class NotificationAlert extends TimerTask {
-    public Task task;
+    public String taskInfo;
 
     /**
-     * Creates a new notification alert for the specified task.
-     * @param task the task to create the notification alert for
+     * Creates a new notification alert with the task information.
+     * @param taskInfo the task information showed during a notification alert
      */
-    public NotificationAlert(Task task) {
-        this.task = task;
+    public NotificationAlert(String taskInfo) {
+        this.taskInfo = taskInfo;
     }
 
     /**
@@ -25,7 +24,6 @@ public class NotificationAlert extends TimerTask {
     public void run() {
         Platform.runLater(() -> {
             createAlertWindow();
-            task.clearReminder();
         });
     }
 
@@ -35,7 +33,7 @@ public class NotificationAlert extends TimerTask {
     private void createAlertWindow() {
         AlertWindow alertWindow = new AlertWindow();
         alertWindow.setTitle("Reminder");
-        alertWindow.setContent(task.toString());
+        alertWindow.setContent(taskInfo.toString());
         alertWindow.addImage("/images/duke.png");
         alertWindow.style("/style/stylesheet.css", "alertPane");
         alertWindow.display();

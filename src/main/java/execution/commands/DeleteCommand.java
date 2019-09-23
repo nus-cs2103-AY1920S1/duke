@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
      * @param taskList of current tasks.
      * @param ui to set a response from duke.
      * @param storage to store any changes in the storage.
-     * @throws DukeException
+     * @throws DukeException if the description is empty.
      */
     @Override
     public void execute(TaskList taskList, UI ui, Storage storage) throws DukeException {

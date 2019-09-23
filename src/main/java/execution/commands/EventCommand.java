@@ -55,7 +55,7 @@ public class EventCommand extends Command {
             newEvent.markAsPriority();
             taskList.addPriorityTask(newEvent);
         } else {
-            newEvent = new Event(this.descriptionOfTask, date);
+            newEvent = new Event(description, date);
             taskList.addTask(newEvent);
         }
         ui.displayAddingOfTask(newEvent, taskList.getSize());

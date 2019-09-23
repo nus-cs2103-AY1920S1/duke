@@ -61,6 +61,9 @@ public class Parser {
             case "find":
                 return new FindCommand(rest);
 
+            case "deleteAll":
+                return new MassDeleteCommand(rest);
+
             default:
                 System.out.println("ERROR: " + rest);
                 throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

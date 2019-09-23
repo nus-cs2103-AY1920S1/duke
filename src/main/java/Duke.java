@@ -1,10 +1,6 @@
 public class Duke {
     private static TaskList taskList;
 
-//    public static void main(String[] args) throws DukeException {
-//        run();
-//    }
-
     /**
      * the body of the main method, where Tasklist is initialised and the code runs.
      */
@@ -21,6 +17,9 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
+        if (input.equals("bye")) {
+            System.exit(0);
+        }
         String output = run(input);
         return output;
     }

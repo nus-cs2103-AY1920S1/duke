@@ -63,7 +63,7 @@ public class TaskList {
             temporarySearchList = null;
         }
 
-        return ("Nice! I've marked this task as done:\n" + taskListToUse.get(taskNumber - 1));
+        return ("Nice! I've marked this task as done:\n\n" + taskListToUse.get(taskNumber - 1));
     }
 
     private void handleTaskAlreadyMarkedDoneError(int taskNumber, ArrayList<Task> taskListToUse) throws DukeException {

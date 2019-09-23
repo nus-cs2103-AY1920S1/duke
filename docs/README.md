@@ -8,7 +8,7 @@ Duke remembers your tasks, so that you don't have to.
 
 ## Setting Up
 1. Ensure you have Java 11 or above installed on your computer. 
-1. Download the jar executable from this <a href="">link</a>.
+1. Download the jar executable from this <a href="https://github.com/jxofficial/duke/releases/tag/A-Release">link</a>.
 1. In the same directory as the jar file you downloaded, create a folder named data. The project structure should look as such:<br/>
 |__ data <br/>
 |__ duke-v0.2.jar <br/>

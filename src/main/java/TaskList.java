@@ -1,7 +1,5 @@
-import Task.Task;
-import Task.Event;
-
-import java.time.Duration;
+import tasks.Task;
+import tasks.Event;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,7 +21,7 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the TaskList
+     * Adds a task to the TaskList.
      *
      * @param task Task to be added
      */
@@ -31,6 +29,11 @@ public class TaskList {
         list.add(task);
     }
 
+    /**
+     * Deletes the task in the specified index.
+     * @param position index of task in task list.
+     * @return The deleted task.
+     */
     public Task deleteTask(String position) {
         int index = Integer.parseInt(position) - 1;
         assert index >= 0 : "index should not be negative";
@@ -54,6 +57,10 @@ public class TaskList {
         return currTask;
     }
 
+    /**
+     * Gets a list of dates that are already filled up.
+     * @return ArrayList of dates that are unavailable.
+     */
     public ArrayList<Date> getFilledTimeSlots() {
         ArrayList<Date> timeSlots = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
@@ -66,6 +73,12 @@ public class TaskList {
         return timeSlots;
     }
 
+    /**
+     * Finds the next available date and time that has a
+     * time slot of the specified duration.
+     * @param duration Duration of time slot needed.
+     * @return Date of next available time slot.
+     */
     public Date findFreeTime(int duration) {
         ArrayList<Date> timeSlots = this.getFilledTimeSlots();
         Date currentTime = new Date();
@@ -88,6 +101,12 @@ public class TaskList {
         return currentTime;
     }
 
+    /**
+     * Adds the number of specified hours to a give date.
+     * @param currentDate Given date.
+     * @param hours Number of hours to be added.
+     * @return Date with hours added.
+     */
     public static Date addHours(Date currentDate, int hours) {
         Calendar cal = Calendar.getInstance(); // creates calendar
         cal.setTime(currentDate); // sets calendar time/date

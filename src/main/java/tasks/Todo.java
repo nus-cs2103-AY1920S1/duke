@@ -1,6 +1,6 @@
-package Task;
+package tasks;
 
-public class Todo extends Task{
+public class Todo extends Task {
     private String by;
 
     public Todo(String description) {

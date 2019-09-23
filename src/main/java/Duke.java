@@ -3,6 +3,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke object.
+     * @param filePath path of .txt file storing the tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         try {

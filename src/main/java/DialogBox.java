@@ -56,12 +56,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Generates and returns a DialogBox with the input text and image.
+     * @param text User's input.
+     * @param img User's picture.
+     * @return DialogBox representing user's speech.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
         return db;
     }
 
+    /**
+     * Generates and returns a DialogBox with the Duke's reply and image.
+     * @param text Duke's reply.
+     * @param img Duke's picture.
+     * @return DialogBox representing Duke's speech.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setBackground(new Background(new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY)));

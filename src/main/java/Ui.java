@@ -1,4 +1,4 @@
-import Task.Task;
+import tasks.Task;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,13 +10,13 @@ public class Ui {
     }
 
     public String taskDone(Task task) {
-        return "Nice! I've marked this task as done: \n " +
-                task.toString() + "\n";
+        return "Nice! I've marked this task as done: \n "
+                + task.toString() + "\n";
     }
 
     public String taskDeleted(Task task) {
-        return "Noted. I've removed this task:  \n " +
-                task.toString();
+        return "Noted. I've removed this task:  \n "
+                + task.toString();
     }
 
     public String showNumberOfTasks(ArrayList<Task> list) {
@@ -32,12 +32,16 @@ public class Ui {
         return "Bye. Hope to see you again soon!";
     }
 
+    /**
+     * Lists the current tasks in the given list.
+     * @param list List of tasks.
+     * @return String of current tasks.
+     */
     public String list(ArrayList<Task> list) {
         String result = "Here are the tasks in your list: \n";
         for (int i = 0; i < list.size(); i++) {
             Task currTask = list.get(i);
-//                    System.out.println(currTask.getClass());
-            result += (i+1) + ". " + currTask.toString() + "\n";
+            result += (i + 1) + ". " + currTask.toString() + "\n";
         }
         return result;
     }

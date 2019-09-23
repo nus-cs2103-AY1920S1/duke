@@ -1,7 +1,7 @@
-import Task.Deadline;
-import Task.Event;
-import Task.Task;
-import Task.Todo;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,6 +16,11 @@ import java.util.Scanner;
 public class Storage {
     private File file;
 
+    /**
+     * Constructor for Storage object.
+     * @param filePath path of .txt file containing tasks
+     * @throws IOException when file path is not correct or File object is unable to be initialized
+     */
     public Storage(String filePath) throws IOException {
         this.file = new File(filePath);
         if (!file.exists()) {
@@ -86,15 +91,15 @@ public class Storage {
     }
 
     /**
-     * Converts a Date object to a String object in dd/MM/yyyy HHmm format
+     * Converts a Date object to a String object in dd/MM/yyyy HHmm format.
      *
      * @param date Date object
      * @return String
      */
     public static String dateToStringConverter(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
-        String sDate = sdf.format(date);
-        return sDate;
+        String stringDate = sdf.format(date);
+        return stringDate;
     }
 
     /**
@@ -131,7 +136,6 @@ public class Storage {
                 break;
             }
             case "event": {
-                //split the string by /
                 Event event = new Event(description, strings[3]);
                 if (isDone.equals("1")) {
                     event.doTask();
@@ -139,6 +143,8 @@ public class Storage {
                 list.add(event);
                 break;
             }
+            default:
+
             }
         }
         return list;

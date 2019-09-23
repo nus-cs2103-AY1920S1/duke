@@ -32,7 +32,7 @@ public class Main extends Application {
             stage.setTitle("Obot Wan Kenobi");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
-            duke = new Duke("C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt");
+            duke = new Duke("\\src\\main\\resources\\data\\tasks.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }

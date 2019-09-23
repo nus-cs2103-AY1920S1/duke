@@ -53,8 +53,8 @@ public class Duke {
     /**
      * Constructor to support Duke CLI.
      *
-     * @param filePath absolute filepath of the where the text file is stored.
-     *                 Eg "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt".
+     * @param filePath relative filepath of the where the text file is stored.
+     *
      */
     public Duke(String filePath) {
         taskStorage = new Storage(filePath);

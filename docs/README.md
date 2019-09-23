@@ -124,12 +124,12 @@ To update task date*, enter:
 To update task time*, enter:
 `update | <TaskNo> | time | <NewTime in HHMM format>`
 
->Example of usage: 
->`update | 1 | time | 0900`
->
->Expected outcome:\
->`Got it. Your task is now updated as:`\
->`1. [D][N] Complete CS1234 /by Mon, 23 Sep 2019 09:00AM`
+Example of usage: 
+`update | 1 | time | 0900`
+
+Expected outcome:\
+`Got it. Your task is now updated as:`\
+`1. [D][N] Complete CS1234 /by Mon, 23 Sep 2019 09:00AM`
 
 *Only for Deadline and Event items.
 

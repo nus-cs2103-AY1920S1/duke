@@ -32,7 +32,7 @@ public class Parser {
      */
     public Command process(String line) {
         String[] commands = line.split(" ");
-        String first = commands[0];
+        String first = commands[0].toLowerCase();
         switch (first) {
         case "bye":
             return new Command(CommandType.EXIT);

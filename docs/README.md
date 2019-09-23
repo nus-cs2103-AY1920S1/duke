@@ -6,12 +6,12 @@ The application uses a command line interface (CLI) to keep a record of your tas
 Your task list is saved automatically, and Duke shows you your list whenever you restart the application.
 Duke remembers your tasks, so that you don't have to. 
 
-##Setting Up
+## Setting Up
 1. Ensure you have Java 11 or above installed on your computer. 
 1. Download the jar executable from this <a href="">link</a>.
 1. In the same directory as the jar file you downloaded, create a folder named data. The project structure should look as such:<br/>
 |__ data <br/>
-|__ duke-0.2.jar <br/>
+|__ duke-v0.2.jar <br/>
 1. Double click on the jar file to run it, it should create an empty duke.txt file inside the data folder. 
 1. You can now use Duke! To find out all the features and their respective commands, read the section below. 
 

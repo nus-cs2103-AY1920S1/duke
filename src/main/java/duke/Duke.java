@@ -18,7 +18,11 @@ import java.io.IOException;
  * @author JXKENG
  */
 public class Duke {
-    public static final String FILE_PATH = "./data/duke.txt";
+    //Solution below adapted from
+    //https://stackoverflow.com/a/30121011/
+    //FILE_PATH variable is platform independent
+    public static final String FILE_PATH = System.getProperty("user.dir")
+            + File.separator + "data" + File.separator + "duke.txt";
     private Storage storage = new Storage(FILE_PATH);
     private TaskList tasks = new TaskList();
     private MessageHandler messageHandler = new MessageHandler(tasks, storage);
@@ -71,7 +75,8 @@ public class Duke {
                 message += "File created! " + dukeTxt.getCanonicalPath() + "\n";
                 message += "Reading file...\n";
             } catch (IOException ioe) {
-                message += "\t File creation was not successful. \n";
+                message += "\t File creation was not successful. " +
+                        "Ensure you have an empty folder named data in your current directory.\n";
                 message += "\t Exiting system.";
                 return message;
             }

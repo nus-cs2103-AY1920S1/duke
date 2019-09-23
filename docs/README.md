@@ -1,28 +1,26 @@
 # User Guide
 
 
-
 ## Quick Glimpse
+
 ![Ui.png](Ui.png)
 
 ### List of all commands:
-- [`todo`](#11-Adding-a-ToDo-Task-to-the-Current-Task-List-%E2%80%93-todo)
-- [`deadline`](#12-Adding-a-Deadline-Task-to-the-Current-Task-List-%E2%80%93-deadline)
-- [`event`](#13-Adding-an-Event-Task-to-the-Current-Task-List-%E2%80%93-event)
-- [`list`](#2-Listing-the-Tasks-in-the-current-Task-List-%E2%80%93-list)
-- [`done`](#3-Completing-a-Task-in-the-Current-Task-List-%E2%80%93-done)
+- [`todo`](#11-adding-a-todo-task-to-the-current-task-list----todo)
+- [`deadline`](#12-adding-a-deadline-task-to-the-current-task-list----deadline)
+- [`event`](#13-adding-an-event-task-to-the-current-task-list----event)
+- [`list`](#2-listing-the-tasks-in-the-current-task-list----list)
+- [`done`](#3-completing-a-task-in-the-current-task-list----done)
 - [`delete`](#4-Removing-a-Task-from-the-Current-Task-List-%E2%80%93-delete)
-- [`find`](#51-Searching-for-a-Task-in-the-Current-Task-List-%E2%80%93-find)
-- [`relaxfind`](#52-Searching-for-a-Task-in-the-Current-Task-List-%E2%80%93-relaxfind)
-- [`save`](#61-Loading-a-Task-List-from-another-Save-File-%E2%80%93-load)
-- [`load`](#62-Saving-the-Current-Task-List-to-a-specified-File-%E2%80%93-save)
-- [`bye`](#7-Closing-Duke-%E2%80%93-bye)
-
+- [`find`](#51-searching-for-a-task-in-the-current-task-list-with-keyword----find)
+- [`relaxfind`](#52-searching-for-a-task-in-the-current-task-list-with-similar-keyword----relaxfind)
+- [`save`](#61-loading-a-task-list-from-another-save-file----load)
+- [`load`](#62-saving-the-current-task-list-to-a-specified-file----save)
+- [`bye`](#7-closing-duke----bye)
 
 
 
 ## Features 
-
 
 ### 1. Adding a Task to the Current Task List.
 The following Features will allow you to add Tasks to the current Task List.

@@ -36,7 +36,7 @@ public class MainWindow extends AnchorPane {
         showWelcome();
     }
 
-    private void showWelcome(){
+    private void showWelcome() {
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
         String welcome =  "Hello! I'm \n" + logo + "What can I do for you?";
@@ -62,7 +62,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         String byeMessage = "Bye. Hope to see you again soon!";
-        if(response.equals(byeMessage)){
+        if (response.equals(byeMessage)) {
             delayedExit(1);
         }
     }

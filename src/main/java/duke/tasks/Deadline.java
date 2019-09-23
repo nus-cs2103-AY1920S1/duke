@@ -20,7 +20,7 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
-    public void setDeadline(String newDeadline){
+    public void setDeadline(String newDeadline) {
         this.deadline = newDeadline;
     }
 

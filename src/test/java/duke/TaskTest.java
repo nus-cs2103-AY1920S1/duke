@@ -12,13 +12,13 @@ public class TaskTest {
 
 
     @Test
-    public void testToString(){
+    public void testToString() {
         Task task = new Task(" Slept well", true);
         assertEquals(expectedToString, task.toString());
     }
 
     @Test
-    public void setExpectedToFile(){
+    public void setExpectedToFile() {
         Task task = new Task(" Ride a bike", false);
         assertEquals(expectedToFile, task.toFile());
     }

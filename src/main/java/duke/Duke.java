@@ -38,7 +38,7 @@ public class Duke {
     public Duke() {
         String filePath = "C:\\Users\\Khairul\\Desktop\\Computing Resources\\CS2103T\\duke\\data\\duke.txt";
         storage = new Storage(filePath);
-        assert storage !=null : "storage should hold an actual Storage object.";
+        assert storage != null : "storage should hold an actual Storage object.";
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
@@ -48,7 +48,7 @@ public class Duke {
     }
 
     /**
-     * Gets a response in the form of a String after receiving user
+     * Gets a response in the form of a String after receiving user.
      * input
      */
     public String getResponse(String input) {

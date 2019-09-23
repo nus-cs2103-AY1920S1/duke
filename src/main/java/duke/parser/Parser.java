@@ -1,6 +1,16 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddToDoCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.SnoozeCommand;
 import duke.exceptions.DukeException;
 
 /**
@@ -72,7 +82,7 @@ public class Parser {
             return new SnoozeCommand(words);
 
         case "help":
-            if(words.length >= 3){
+            if (words.length >= 3) {
                 throw new DukeException(":( OOPS!!! Help command should have a maximmum of one command");
             }
             return new HelpCommand(words);

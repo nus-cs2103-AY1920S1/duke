@@ -9,7 +9,7 @@ public class DateTimeTest {
     String expectedToString = " 18th of September 1997, 8.00am";
 
     @Test
-    public void testToString(){
+    public void testToString() {
         DateTime dateTime = new DateTime("18/09/1997 0800");
         assertEquals(expectedToString, dateTime.toString());
     }

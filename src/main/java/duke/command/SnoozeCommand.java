@@ -15,7 +15,14 @@ public class SnoozeCommand extends Command {
     private int index;
     private String newDateTime;
 
-    public SnoozeCommand(String[] commandArray){
+    /**
+     * Returns a SnoozeCommand object from the commandArray, an array of words
+     * which make up the initial user input.
+     *
+     * @param commandArray Array of Strings that form the initial user input
+     */
+
+    public SnoozeCommand(String[] commandArray) {
         this.index = Integer.valueOf(commandArray[1]);
         StringBuilder dateTimeBuilder = new StringBuilder();
         dateTimeBuilder.append(commandArray[2]);
@@ -25,15 +32,15 @@ public class SnoozeCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Storage storage) throws DukeException{
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         if (index < 1 || tasks.getSize() < index) {
             throw new DukeException(":( OOPS!!! There is no available task in the given index.");
         }
         Task taskToChange = tasks.getTask(index - 1);
-        if(taskToChange instanceof Deadline){
+        if (taskToChange instanceof Deadline) {
             Deadline deadlineToChange = (Deadline) taskToChange;
             deadlineToChange.setDeadline(newDateTime);
-        } else if (taskToChange instanceof Event){
+        } else if (taskToChange instanceof Event) {
             Event eventToChange = (Event) taskToChange;
             eventToChange.setDuration(newDateTime);
         } else {

@@ -65,6 +65,8 @@ public class Storage {
                 String eventTime = " " + details[3];
                 Event event = new Event(eventName, details[1].equals("1"), eventTime);
                 tasksList.add(event);
+            default:
+                System.out.println("Should not reach here.");
             }
         }
         s.close();

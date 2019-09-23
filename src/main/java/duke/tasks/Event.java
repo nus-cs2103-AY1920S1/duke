@@ -20,7 +20,7 @@ public class Event extends Task {
         this.duration = duration;
     }
 
-    public void setDuration(String newDuration){
+    public void setDuration(String newDuration) {
         this.duration = newDuration;
     }
 

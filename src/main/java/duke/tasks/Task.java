@@ -54,7 +54,7 @@ public class Task {
         return taskName.contains(toSearch);
     }
 
-    public String getTaskName(){
+    public String getTaskName() {
         return this.taskName;
     }
 

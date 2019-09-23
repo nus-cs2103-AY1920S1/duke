@@ -37,34 +37,34 @@ public class DateTime {
 
     /**
      * Sets the day field of DateTime based on the day of the month
-     * provided
+     * provided.
      *
-     * @param dayInt
+     * @param dayInt Day of the month as an integer
      */
 
-    private void setDay(int dayInt){
+    private void setDay(int dayInt) {
         assert dayInt <= 31 : "day int can only go up to 31";
         switch (dayInt) {
-            case 1:
-                this.day = "1st";
-                break;
-            case 2:
-                this.day = "2nd";
-                break;
-            case 3:
-                this.day = "3rd";
-                break;
-            default:
-                this.day = dayInt + "th";
+        case 1:
+            this.day = "1st";
+            break;
+        case 2:
+            this.day = "2nd";
+            break;
+        case 3:
+            this.day = "3rd";
+            break;
+        default:
+            this.day = dayInt + "th";
         }
     }
 
     /**
-     * Sets the time of the DateTime object based on the timeInt provided
-     * @param timeInt
+     * Sets the time of the DateTime object based on the timeInt provided.
+     * @param timeInt time of the day in integer form
      */
 
-    private void setTime(int timeInt){
+    private void setTime(int timeInt) {
         this.meridiem = timeInt >= 1200 ? "pm" : "am";
         int minutes = timeInt % 100;
         int twentyFourHour = (timeInt - minutes) / 100;

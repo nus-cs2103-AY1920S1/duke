@@ -3,7 +3,6 @@ package duke.ui;
 import duke.task.Task;
 import duke.task.TaskList;
 import static duke.ui.Message.WELCOME_MESSAGE;
-import static duke.ui.Message.LOGO;
 import static duke.ui.Message.taskCountMsg;
 
 import java.util.Scanner;
@@ -21,7 +20,6 @@ public class Ui {
 
     public String showWelcome() {
         StringBuilder sb = new StringBuilder();
-        sb.append(LOGO);
         sb.append(WELCOME_MESSAGE);
         return sb.toString();
     }

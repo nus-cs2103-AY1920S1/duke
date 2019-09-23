@@ -14,7 +14,7 @@ class TaskArgumentsParserTest {
 
     @Test
     void parse() throws TaskArgumentsException, UnknownDateTimeException {
-        TaskArgumentsParser parserA = new TaskArgumentsParser("hello12345 fri to mon java", 2);
+        TaskArgumentsParser parserA = new TaskArgumentsParser("hello12345 mon to thur java", 2);
         TaskArguments argumentsA = parserA.parse();
 
         Assertions.assertEquals(argumentsA.getDetails(), "hello12345");
@@ -24,14 +24,14 @@ class TaskArgumentsParserTest {
         LocalDateTime secondDateTime = argumentsA.getDateTimes().get(1);
 
         Assertions.assertEquals(firstDateTime, LocalDateTime.now()
-                .with(TemporalAdjusters.next(DayOfWeek.FRIDAY))
+                .with(TemporalAdjusters.next(DayOfWeek.MONDAY))
                 .withHour(0)
                 .withMinute(0)
                 .withSecond(0)
                 .withNano(0));
 
         Assertions.assertEquals(secondDateTime, LocalDateTime.now()
-                .with(TemporalAdjusters.next(DayOfWeek.MONDAY))
+                .with(TemporalAdjusters.next(DayOfWeek.THURSDAY))
                 .withHour(0)
                 .withMinute(0)
                 .withSecond(0)

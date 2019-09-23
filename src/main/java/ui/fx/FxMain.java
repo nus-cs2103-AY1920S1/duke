@@ -43,7 +43,7 @@ public class FxMain extends Application {
 
             stage.show();
 
-            mainWindowController.printDukeMessage("Hello! I'm Duke! What can I do for you?");
+            mainWindowController.printDukeMessage("Hello young padawan. How may I help you today?");
 
         } catch (IOException e) {
             e.printStackTrace();

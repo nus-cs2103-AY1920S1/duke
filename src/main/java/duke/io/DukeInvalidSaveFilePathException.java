@@ -3,7 +3,7 @@ package duke.io;
 import duke.error.DukeException;
 
 /**
- * The DukeException to be thrown when a Duke TaskList save file cannot be loaded.
+ * The DukeException to be thrown when a Duke TaskList cannot be saved.
  */
 public class DukeInvalidSaveFilePathException extends DukeException {
 

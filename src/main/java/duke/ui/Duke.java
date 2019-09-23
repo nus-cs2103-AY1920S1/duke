@@ -1,7 +1,16 @@
 package duke.ui;
 
-import duke.command.*;
 
+import duke.command.AddTaskCommand;
+import duke.command.Command;
+import duke.command.CompleteTaskCommand;
+import duke.command.DeleteTaskCommand;
+import duke.command.DukeUnknownCommandException;
+import duke.command.LoadCommand;
+import duke.command.Parser;
+import duke.command.RelaxedSearchCommand;
+import duke.command.SaveCommand;
+import duke.command.SearchCommand;
 import duke.io.Storage;
 
 import duke.error.DukeException;
@@ -24,15 +33,15 @@ import java.util.ArrayList;
 public class Duke {
 
     public static String DEFAULT_SAVE_FILE_NAME = "DukeSave01";
-
+    public ObservableStringValue observableStorageName;
     private Storage storage;
     private TaskList taskList;
     private boolean isActive;
-
     private SimpleStringProperty storageName;
-    public ObservableStringValue observableStorageName;
 
-
+    /**
+     * Constructor for Duke.
+     */
     public Duke() {
         isActive = false;
         storageName = new SimpleStringProperty("");
@@ -43,23 +52,23 @@ public class Duke {
             }
 
             @Override
-            public void addListener(ChangeListener<? super String> changeListener) {
-                storageName.addListener(changeListener);
-            }
-
-            @Override
-            public void removeListener(ChangeListener<? super String> changeListener) {
-                storageName.removeListener(changeListener);
-            }
-
-            @Override
             public String getValue() {
                 return storageName.getValue();
             }
 
             @Override
+            public void addListener(ChangeListener<? super String> changeListener) {
+                storageName.addListener(changeListener);
+            }
+
+            @Override
             public void addListener(InvalidationListener invalidationListener) {
                 storageName.addListener(invalidationListener);
+            }
+
+            @Override
+            public void removeListener(ChangeListener<? super String> changeListener) {
+                storageName.removeListener(changeListener);
             }
 
             @Override

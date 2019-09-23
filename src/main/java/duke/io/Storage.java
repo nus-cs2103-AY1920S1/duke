@@ -55,7 +55,8 @@ public class Storage {
         if (saveFolder.exists() && !saveFolder.isDirectory()) {
             int count = 1;
             while (!saveFolder.isDirectory()) {
-                saveFolder = Paths.get(parentDirectoryPath, saveFolderName + "("+ Integer.toString(count) + ")").toFile();
+                saveFolder = Paths.get(parentDirectoryPath, saveFolderName + "(" + Integer.toString(count) + ")")
+                        .toFile();
                 count++;
             }
         }

@@ -19,13 +19,14 @@ public class DoAfter extends Task {
     /**
      * Constructor of DoAfter object.
      *
-     * @param name   Name of DoAfter.
+     * @param name      Name of DoAfter.
      * @param afterWhen afterWhen of DoAfter.
-     * @throws EmptyTaskDukeException   If name is empty.
+     * @throws EmptyTaskDukeException       If name is empty.
      * @throws InvalidDateTimeDukeException If doAfter does not follow DD/MM/YYYY HHMM.
-     * @throws InvalidTaskDukeException If doAfter is empty.
+     * @throws InvalidTaskDukeException     If doAfter is empty.
      */
-    public DoAfter(String name, String afterWhen) throws EmptyTaskDukeException, InvalidTaskDukeException, InvalidDateTimeDukeException {
+    public DoAfter(String name, String afterWhen) throws EmptyTaskDukeException, InvalidTaskDukeException,
+            InvalidDateTimeDukeException {
         super(name);
         if (name == null) {
             throw new EmptyTaskDukeException("doafter");

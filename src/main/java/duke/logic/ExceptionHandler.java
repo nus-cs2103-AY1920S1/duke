@@ -1,6 +1,11 @@
 package duke.logic;
 
-import duke.exception.*;
+import duke.exception.EmptyFindDukeException;
+import duke.exception.EmptyIndexDukeException;
+import duke.exception.EmptyTaskDukeException;
+import duke.exception.InvalidDateTimeDukeException;
+import duke.exception.InvalidInputDukeException;
+import duke.exception.InvalidTaskDukeException;
 
 /**
  * Represents the exception handler of Duke.
@@ -34,8 +39,7 @@ public class ExceptionHandler {
             return String.format("OOPS!!! You have input an invalid DateTime for your %s!", e.getMessage());
         } else if (e instanceof IndexOutOfBoundsException) {
             return String.format("OOPS!!! You have entered an invalid index!");
-        }
-        else {
+        } else {
             return e.getMessage(); // for undeclared exceptions
         }
     }

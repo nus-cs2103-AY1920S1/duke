@@ -27,7 +27,8 @@ public class Event extends Task {
      * @throws EmptyTaskDukeException   If name is empty.
      * @throws InvalidTaskDukeException If atTime input does not follow DD/MM/YYYY HHMM.
      */
-    public Event(String name, String atTime) throws EmptyTaskDukeException, InvalidTaskDukeException, InvalidDateTimeDukeException {
+    public Event(String name, String atTime) throws EmptyTaskDukeException, InvalidTaskDukeException,
+            InvalidDateTimeDukeException {
         super(name);
         if (name == null) {
             throw new EmptyTaskDukeException("event");

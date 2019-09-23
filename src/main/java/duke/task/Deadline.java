@@ -24,9 +24,9 @@ public class Deadline extends Task {
      *
      * @param name   Name of Deadline.
      * @param byWhen byWhen of Deadline.
-     * @throws EmptyTaskDukeException   If name is empty.
+     * @throws EmptyTaskDukeException       If name is empty.
      * @throws InvalidDateTimeDukeException If byWhen does not follow DD/MM/YYYY HHMM.
-     * @throws InvalidTaskDukeException If byWhen is empty.
+     * @throws InvalidTaskDukeException     If byWhen is empty.
      */
     public Deadline(String name, String byWhen) throws EmptyTaskDukeException, InvalidTaskDukeException,
             InvalidDateTimeDukeException {

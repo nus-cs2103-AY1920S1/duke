@@ -7,85 +7,85 @@
 ### Feature 1: Add tasks to list
 You can add deadlines, things you need to do or events to list
 
-## Usage
+#### Usage:
 todo
 deadline
 event
 
-## Example of usage: 
+#### Example of usage: 
 todo feed cats
 deadline feed bird /by 01/02/2019 1600
 event feed baby /at 26/01/2019 1600
 
-## Expected outcome:
+#### Expected outcome:
 Task will be added to list.
 
 ### Feature 2: List tasks to list
 
-## Usage
+#### Usage:
 list
 
-## Example of usage: 
+#### Example of usage: 
 list
 
-## Expected outcome:
+#### Expected outcome:
 Task will be listed
 
 ### Feature 3: Delete tasks
 You can delete deadlines, todos or events to list
 
-## Usage
+#### Usage:
 delete
 
-## Example of usage: 
+#### Example of usage: 
 delete 2
 
-## Expected outcome:
+#### Expected outcome:
 Second task in list will be deleted.
 
 ### Feature 3: Marking tasks as done
 
-## Usage
+#### Usage:
 done
 
-## Example of usage: 
+#### Example of usage: 
 done 2
 
-## Expected outcome:
+#### Expected outcome:
 Second task in list will be marked as done.
 
 
 ### Feature 4: Find specified tasks
 Find a specific task given a keyword
 
-## Usage
+#### Usage:
 find
 
-## Example of usage: 
+#### Example of usage: 
 find bird
 
-## Expected outcome:
+#### Expected outcome:
 Any tasks with a bird keyword will be displayed
 
 ### Feature 5: Sort tasks
 Sort tasks according chronologically
 
-## Usage
+#### Usage:
 sort
 
-## Example of usage: 
+#### Example of usage: 
 sort deadlines
 
-## Expected outcome:
+#### Expected outcome:
 deadline tasks will be sorted in chronological order
 
 ### Feature 6: Exit chat bot
 
-## Usage
+#### Usage:
 bye
 
-## Example of usage: 
+#### Example of usage: 
 bye
 
-## Expected outcome:
+#### Expected outcome:
 Application will be terminated

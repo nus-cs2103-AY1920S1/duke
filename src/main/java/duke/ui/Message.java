@@ -4,10 +4,11 @@ import duke.task.TaskList;
 
 public class Message {
     public static final String WELCOME_MESSAGE = "Hello rabbit Sean! I'm lion Bo. I've been missing you!\nEnter 'help' to see what you can do!";
-    public static final String EXIT_MESSAGE = "Bye. Hope to see you again soon! Let's go skiing this winter!\n";
+    public static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!\nLet's go skiing this winter!";
     public static final String ADD_TASK_MESSAGE = "Got it. I've added this task: \n";
     public static final String DELETE_MESSAGE = "Noted. I've removed this task: \n";
     public static final String DONE_MESSAGE = "Nice! I've marked this task as done: \n";
+    public static final String EMPTY_LIST_MESSAGE = "There is no task in your list. Try to add some tasks!";
     public static final String INVALID_INPUT_ERROR = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n    Enter 'help' to see what you can do!";
     private static final String COUNT_TASK_MESSAGE = "Now you have %d tasks in the list.\n";
 

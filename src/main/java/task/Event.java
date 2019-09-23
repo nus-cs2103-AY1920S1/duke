@@ -50,6 +50,6 @@ public class Event extends Task {
      */
     @Override
     public String fileFormat() {
-        return String.format("E | %s | %s | %s %s", done ? "1" : "0", task, date, time);
+        return String.format("E | %s | %s | %s %s", done ? "1" : "0", task, date.writeString(), time.writeString());
     }
 }

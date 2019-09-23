@@ -1,3 +1,5 @@
+import exceptions.InvalidInputException;
+import exceptions.MissingInputException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -23,7 +25,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-    private boolean first = true;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/grizz.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/panda.png"));
@@ -38,11 +39,12 @@ public class MainWindow extends AnchorPane {
      *
      * @param d Duke object.
      */
-    public void setDuke(Duke d) {
+    public void setDuke(Duke d) throws InvalidInputException, MissingInputException {
         duke = d;
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(d.greet(), dukeImage)
         );
+        d.processFile();
     }
 
     /**

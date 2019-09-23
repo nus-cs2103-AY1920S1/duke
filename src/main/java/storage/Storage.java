@@ -71,6 +71,8 @@ public class Storage {
                 case "E":
                     date = DukeDate.processDate(details[3].split(" ")[0]);
                     time = DukeTime.processTime(details[3].split(" ")[1]);
+                    System.out.println(date);
+                    System.out.println(time);
                     tasks.loadTask(new Event(counter, details[2], date, time, "E", done));
                     break;
                 default:

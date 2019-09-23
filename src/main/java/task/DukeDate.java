@@ -58,4 +58,8 @@ public class DukeDate {
         return outputFormat.format(date);
     }
 
+    public String writeString() {
+        dateFormat.applyPattern("dd/MM/yyyy");
+        return dateFormat.format(date);
+    }
 }

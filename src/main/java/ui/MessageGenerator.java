@@ -205,7 +205,7 @@ public class MessageGenerator {
      */
     public String greet() {
         String s = line();
-        s += formatter.format(greeting());
+        s += greeting();
         s += line();
         return s;
     }

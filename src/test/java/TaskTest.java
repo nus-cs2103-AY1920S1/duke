@@ -16,11 +16,12 @@ public class TaskTest {
 
     @Test
     public void taskConstructor_success() throws InvalidInputException, MissingInputException {
-        assertEquals(new Event(3, TestCase.EVENT_DESCRIPTION, DukeDate.processDate(TestCase.DATE),
-                DukeTime.processTime(TestCase.TIME), "E").toString(), TestCase.EVENT_SUCCESSFUL_OUTPUT);
-        assertEquals(new Todo(3, TestCase.TODO_DESCRIPTION, "T").toString(), TestCase.TODO_SUCCESSFUL_OUTPUT);
-        assertEquals(new Deadline(3, TestCase.DEADLINE_DESCRIPTION, DukeDate.processDate(TestCase.DATE),
-                DukeTime.processTime(TestCase.TIME), "D").toString(), TestCase.DEADLINE_SUCCESSFUL_OUTPUT);
+        assertEquals(TestCase.EVENT_SUCCESSFUL_OUTPUT, new Event(3, TestCase.EVENT_DESCRIPTION,
+                DukeDate.processDate(TestCase.DATE), DukeTime.processTime(TestCase.TIME), "E").toString());
+        assertEquals(TestCase.TODO_SUCCESSFUL_OUTPUT,
+                new Todo(3, TestCase.TODO_DESCRIPTION, "T").toString());
+        assertEquals(TestCase.DEADLINE_SUCCESSFUL_OUTPUT, new Deadline(3, TestCase.DEADLINE_DESCRIPTION,
+                DukeDate.processDate(TestCase.DATE), DukeTime.processTime(TestCase.TIME), "D").toString());
     }
 
     @Test

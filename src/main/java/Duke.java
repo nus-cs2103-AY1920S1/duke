@@ -24,14 +24,8 @@ public class Duke {
         isExit = false;
     }
 
-    private void run() throws MissingInputException, InvalidInputException {
-        greeter.greet();
+    void processFile() throws InvalidInputException, MissingInputException {
         ui.processFile();
-        while (!isExit) {
-            ui.processInput();
-            isExit = ui.isExit();
-        }
-        greeter.bye();
     }
 
     String greet() {
@@ -41,10 +35,5 @@ public class Duke {
     String getResponse(String input) {
         return ui.processInput(input);
     }
-
-    public static void main(String[] args) throws MissingInputException, InvalidInputException {
-        new Duke().run();
-    }
-
 
 }

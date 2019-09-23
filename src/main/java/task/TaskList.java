@@ -14,15 +14,8 @@ public class TaskList {
     List<Task> taskList = new ArrayList<>();
     MessageGenerator msgGenerator = new MessageGenerator();
 
-    /**
-     * Creates task list and adds a placeholder value for easier tracking.
-     */
-    public TaskList() {
-        taskList.add(null);
-    }
-
     private int noTasks() {
-        return taskList.size() - 1;
+        return taskList.size();
     }
 
     /**
@@ -55,8 +48,8 @@ public class TaskList {
      * @return message to indicate task is removed.
      */
     private String removeTask(int taskNo) {
-        Task deleted = taskList.get(taskNo);
-        taskList.remove(taskNo);
+        Task deleted = taskList.get(taskNo - 1);
+        taskList.remove(taskNo - 1);
         //assert !(taskList.contains(taskList.get(taskNo)));
         return msgGenerator.getRemoveMessage(deleted, noTasks());
     }
@@ -102,7 +95,7 @@ public class TaskList {
      * @return whether or not task number exists.
      */
     private boolean invalidTaskNo(int taskNo) {
-        return taskNo >= taskList.size();
+        return taskNo > taskList.size();
     }
 
     /**
@@ -115,8 +108,8 @@ public class TaskList {
         if (invalidTaskNo(taskNo)) {
             throw new InvalidItemException();
         }
-        taskList.get(taskNo).setDone();
-        return msgGenerator.getDoneMessage(taskList.get(taskNo));
+        taskList.get(taskNo - 1).setDone();
+        return msgGenerator.getDoneMessage(taskList.get(taskNo - 1));
     }
 
     /**
@@ -171,8 +164,8 @@ public class TaskList {
      * @return message when task is updated.
      */
     public String updateTaskDesc(int taskNo, String desc) {
-        taskList.get(taskNo).updateTaskDesc(desc);
-        return msgGenerator.getUpdateMessage(taskList.get(taskNo), noTasks());
+        taskList.get(taskNo - 1).updateTaskDesc(desc);
+        return msgGenerator.getUpdateMessage(taskList.get(taskNo - 1), noTasks());
     }
 
     /**
@@ -182,11 +175,11 @@ public class TaskList {
      * @return message when task is updated.
      */
     public String updateTaskTime(int taskNo, String time) throws InvalidInputException, MissingInputException {
-        if (taskList.get(taskNo).type.equals("T")) {
+        if (taskList.get(taskNo - 1).type.equals("T")) {
             throw new InvalidInputException("Time's not available for Todo!");
         }
-        taskList.get(taskNo).updateTaskTime(time);
-        return msgGenerator.getUpdateMessage(taskList.get(taskNo), noTasks());
+        taskList.get(taskNo - 1).updateTaskTime(time);
+        return msgGenerator.getUpdateMessage(taskList.get(taskNo - 1), noTasks());
     }
 
     /**
@@ -196,11 +189,11 @@ public class TaskList {
      * @return message when task is updated.
      */
     public String updateTaskDate(int taskNo, String date) throws MissingInputException, InvalidInputException {
-        if (taskList.get(taskNo).type.equals("T")) {
+        if (taskList.get(taskNo - 1).type.equals("T")) {
             throw new InvalidInputException("Date's not available for Todo!");
         }
-        taskList.get(taskNo).updateTaskDate(date);
-        return msgGenerator.getUpdateMessage(taskList.get(taskNo), noTasks());
+        taskList.get(taskNo - 1).updateTaskDate(date);
+        return msgGenerator.getUpdateMessage(taskList.get(taskNo - 1), noTasks());
     }
 
     /**

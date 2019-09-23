@@ -1,5 +1,7 @@
 import java.io.IOException;
 
+import exceptions.InvalidInputException;
+import exceptions.MissingInputException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,7 +14,6 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private Duke duke = new Duke();
-    private boolean first = true;
 
     @Override
     public void start(Stage stage) {
@@ -25,6 +26,10 @@ public class Main extends Application {
             stage.show();
 
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InvalidInputException e) {
+            e.printStackTrace();
+        } catch (MissingInputException e) {
             e.printStackTrace();
         }
     }

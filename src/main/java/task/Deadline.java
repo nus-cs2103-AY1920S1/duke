@@ -50,7 +50,7 @@ public class Deadline extends Task {
      */
     @Override
     public String fileFormat() {
-        return String.format("D | %s | %s | %s %s", done ? "1" : "0", task, date, time);
+        return String.format("D | %s | %s | %s %s", done ? "1" : "0", task, date.writeString(), time.writeString());
     }
 
 }

@@ -16,6 +16,8 @@ public class DukeTime {
 
     private Date time;
 
+    private String dateString;
+
     /**
      * Constructs a new DukeTime object.
      *
@@ -56,6 +58,11 @@ public class DukeTime {
     @Override
     public String toString() {
         return outputFormat.format(time);
+    }
+
+    public String writeString() {
+        inputFormat.applyPattern("HHmm");
+        return inputFormat.format(time);
     }
 
 }

@@ -174,6 +174,7 @@ Expected outcome:
 By default, `listalias` will be loaded with the standard commands.
 * Each command type is assigned to one unique alias.
 The format shown represents `<COMMAND TYPE>: <alias>` and in alphabetical order
+
 ```
  Here are your aliases :)
  

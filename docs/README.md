@@ -253,7 +253,7 @@ Tag an alias name to a reserved command. More specifically, one of the following
  ```
 
 
-2. Remaps an existing alias command to a reserved command if the alias exist.
+1. Remaps an existing alias command to a reserved command if the alias exist.
 
  Example of usage: 
 
@@ -267,7 +267,7 @@ Tag an alias name to a reserved command. More specifically, one of the following
  ```
 
 
-3. Unregister an alias if it exist.
+1. Unregister an alias if it exist.
 
  Example of usage: 
 

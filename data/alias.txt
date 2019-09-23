@@ -1,0 +1,10 @@
+TODO | todo
+DONE | done
+DELETE | delete
+DEADLINE | deadline
+LISTALIAS | listalias
+FIND | find
+ADDALIAS | addalias
+LIST | list
+EVENT | event
+BYE | bye

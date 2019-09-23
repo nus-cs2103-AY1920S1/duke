@@ -17,8 +17,6 @@ public class Parser {
             try {
                 if (input.equals("todo") || input.equals("event") || input.equals("deadline")) {
                     throw new EmptyTaskException("☹ OOPS!!! The description of a " + input + " cannot be empty.");
-                } else {
-                    assert false;
                 }
                 switch (input.split(" ")[0]) {
                     case "list":

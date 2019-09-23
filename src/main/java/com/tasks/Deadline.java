@@ -28,7 +28,7 @@ public class Deadline extends DoableTask {
      * @return string
      */
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + deadline.toString() + ")";
+        return "[D]" + super.toString() + "\n (by: " + deadline.toString() + ")";
     }
 
     @Override

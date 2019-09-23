@@ -35,7 +35,7 @@ public class Event extends DoableTask {
      * @return string
      */
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + startDate.toString() + " to " + endDate.toString() +  ")";
+        return "[E]" + super.toString() + "\n (at: " + startDate.toString() + " to " + endDate.toString() +  ")";
     }
 
     @Override

@@ -27,4 +27,12 @@ public class DukeResponder {
         }
         return Printer.flush();
     }
+
+    /**
+     * Returns state lasterror flag.
+     * @return  if last command was an error
+     */
+    public Boolean getLastError() {
+        return state.lastError;
+    }
 }

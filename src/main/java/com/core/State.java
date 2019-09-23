@@ -14,6 +14,11 @@ public class State {
     public boolean toExit = false;
 
     /**
+     * Flag to determine last command executed was an error.
+     */
+    public boolean lastError = false;
+
+    /**
      * List of DoableTask.
      */
     public ArrayList<DoableTask> list = new ArrayList<>();

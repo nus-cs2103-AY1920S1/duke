@@ -68,6 +68,10 @@ public class Printer {
         buffer += str + "\n";
     }
 
+    public static void printHelp(String str) {
+        printError(str + referHelp);
+    }
+
     /**
      * Surround a string with double quotes.
      *

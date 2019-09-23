@@ -53,11 +53,11 @@ Todo command format:
 >Example of usage: 
 >`list`
 >
->Expected outcome:\
->`Here are the items on your list:`\
->`1. [D][N] Complete CS1234 /by Mon, 23 Sep 2019 11:59PM`\
->`2. [E][N] Food Festival /at Tue, 16 Jul 2019, 05:30PM`\
->`3. [T][N] Buy Toothpaste`
+>Expected outcome:
+><br>`Here are the items on your list:`</br>
+><br>`1. [D][N] Complete CS1234 /by Mon, 23 Sep 2019 11:59PM`</br>
+><br>`2. [E][N] Food Festival /at Tue, 16 Jul 2019, 05:30PM`</br>
+><br>`3. [T][N] Buy Toothpaste`</br>
 
 ### `Delete` - Deletes Task
 Delete command format:
@@ -65,10 +65,10 @@ Delete command format:
 
 >Example of usage: `delete 2`
 >
->Expected outcome: \
->`Noted. I've removed this task:`\
->`2. [E][N] Food Festival /at Tue, 16 Jul 2019, 05:30PM`\
->`Now you have 2 tasks(s) in the list.`
+>Expected outcome: 
+><br>`Noted. I've removed this task:`</br>
+><br>`2. [E][N] Food Festival /at Tue, 16 Jul 2019, 05:30PM`</br>
+><br>`Now you have 2 tasks(s) in the list.`</br>
 
 ### `Done` - Marks Task as Done 
 When a task is not done, the task is marked with `[N]`.
@@ -79,9 +79,9 @@ Done command format:
 
 >Example of usage: `done 3`
 >
->Expected outcome: \
->`Nice! I've marked this task as done:`\
->`3. [T][Y] Buy Toothbrush`
+>Expected outcome: 
+><br>`Nice! I've marked this task as done:`</br>
+><br>`3. [T][Y] Buy Toothbrush`</br>
 
 
 ### `Find` - Finds Task in Task List with Matching Keyword/Phrase
@@ -92,9 +92,9 @@ Find command format:
 >Example of usage: 
 >`find Food`
 >
->Expected outcome:\
->`Here are the matching tasks in your list:`\
->`1. [E][N] Food Festival /at Tue, 16 Jul 2019, 05:30PM`
+>Expected outcome:
+><br>`Here are the matching tasks in your list:`</br>
+><br>`1. [E][N] Food Festival /at Tue, 16 Jul 2019, 05:30PM`</br>
 
 ### `Update` - Updates Task Details
 
@@ -107,9 +107,9 @@ To update task description, enter:
 > Example of usage: 
 >`update | 3 | desc | Buy Toothbrush`
 >
->Expected outcome:\
->`Got it. Your task is now updated as:`\
->`3. [T][N] Buy Toothbrush` 
+>Expected outcome:
+><br>`Got it. Your task is now updated as:`</br>
+><br>`3. [T][N] Buy Toothbrush` </br>
 
 To update task date*, enter:
 `update | <TaskNo> | date | <NewDate in DD/MM/YYYY format>`
@@ -117,19 +117,19 @@ To update task date*, enter:
 >Example of usage: 
 >`update | 2 | date | 15/7/2019`
 >
->Expected outcome:\
->`Got it. Your task is now updated as:`\
->`2. [E][N] Food Festival /at Mon, 15 Jul 2019, 05:30PM`
+>Expected outcome:
+><br>`Got it. Your task is now updated as:`</br>
+><br>`2. [E][N] Food Festival /at Mon, 15 Jul 2019, 05:30PM`</br>
 
 To update task time*, enter:
 `update | <TaskNo> | time | <NewTime in HHMM format>`
 
-Example of usage: 
-`update | 1 | time | 0900`
-
-Expected outcome:\
-`Got it. Your task is now updated as:`\
-`1. [D][N] Complete CS1234 /by Mon, 23 Sep 2019 09:00AM`
+>Example of usage: 
+>`update | 1 | time | 0900`
+>
+>Expected outcome:
+><br>`Got it. Your task is now updated as: `</br>
+><br>`1. [D][N] Complete CS1234 /by Mon, 23 Sep 2019 09:00AM`</br>
 
 *Only for Deadline and Event items.
 

@@ -1,5 +1,4 @@
 # The Jedi Academy - User Guide
-![Yoda](https://github.com/MackyMaguire/duke/blob/master/src/main/resources/images/Yoda.png)
 
 ## 1. Introduction
 _**The Jedi Academy**_ is a Personal Assistant Chatbot that helps a person to keep track of his various tasks. _**The Jedi Academy**_ is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Continue reading to find out more about its features and usage!

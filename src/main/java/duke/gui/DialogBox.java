@@ -18,7 +18,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 import java.io.IOException;
-import java.io.File;
+import java.nio.file.Paths;
 
 /**
  * A custom control using FXML.
@@ -31,6 +31,9 @@ class DialogBox extends HBox {
     private Label text;
     @FXML
     private Circle icon;
+
+    public static String DIALOG_BOX_RESOURCE_PATH = Paths.get("/view", "DialogBox.fxml").toString();
+
 
     private static final Insets DIALOGBOX_BACKGROUND_INSET = new Insets(5,37.5,5,37.5);
     private static final Insets LABEL_PADDING_INSET_LEFT = new Insets(0,42.5,0,5);
@@ -53,8 +56,9 @@ class DialogBox extends HBox {
         assert image != null;
 
         try {
-            assert new File("src/main/resources/view/DialogBox.fxml").exists() : "DialogBox.fxml file does not exist";
-            FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/view/DialogBox.fxml"));
+            assert Paths.get("src", "main", "resources", DIALOG_BOX_RESOURCE_PATH)
+                    .toFile().exists() : "DialogBox.fxml file does not exist";
+            FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource(DIALOG_BOX_RESOURCE_PATH));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();

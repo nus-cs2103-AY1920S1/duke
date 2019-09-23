@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.io.File;
+import java.nio.file.Paths;
 
 /**
  * A GUI for Duke using FXML/JavaFX.
@@ -30,8 +30,9 @@ public class Gui extends Application {
     @Override
     public void start(javafx.stage.Stage stage) {
         try {
-            assert new File("src/main/resources/view/MainWindow.fxml").exists() : "MainWindow.fxml does not exist";
-            FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/view/MainWindow.fxml"));
+            assert Paths.get("src", "main", "resources", MainWindow.MAIN_WINDOW_RESOURCE_PATH)
+                    .toFile().exists() : "MainWindow.fxml does not exist";
+            FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource(MainWindow.MAIN_WINDOW_RESOURCE_PATH));
             AnchorPane mainWindow = fxmlLoader.load();
             Scene scene = new Scene(mainWindow);
             stage.setScene(scene);
@@ -39,6 +40,7 @@ public class Gui extends Application {
 
             //set the current working Duke
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle("Duke");
 
             stage.show();
 
@@ -46,7 +48,7 @@ public class Gui extends Application {
             fxmlLoader.<MainWindow>getController().activateDuke();
 
             // tries to load task list, and display message/error
-            fxmlLoader.<MainWindow>getController().loadExistingTaskList("DukeSave01");
+            fxmlLoader.<MainWindow>getController().loadExistingTaskList(Duke.DEFAULT_SAVE_FILE_NAME);
 
             // show the goodbye message as a popup that needs to be clicked to close duke
             fxmlLoader.<MainWindow>getController().dukeActivityStatus.addListener((observable, oldValue, newValue) -> {
@@ -61,10 +63,12 @@ public class Gui extends Application {
     }
 
     private void showGoodbyePopup(Stage stage) {
-        assert new File("src/main/resources/images/fatCat.png").exists() : "fatCat.png does not exist";
+        assert stage != null;
+        assert stage.isShowing();
+
         DialogBox box = DialogBox.getDukeNormalDialog(
                 "GoodBye! Hope to see you again!\n\nCLICK ME or PRESS ENTER",
-                new Image(Gui.class.getResourceAsStream("/images/fatCat.png")));
+                new Image(Gui.class.getResourceAsStream(MainWindow.DUKE_IMAGE_RESOURCE_PATH)));
 
         Scene sc = new javafx.scene.Scene(box);
         sc.setFill(Color.TRANSPARENT);

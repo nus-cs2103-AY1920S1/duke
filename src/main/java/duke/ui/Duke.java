@@ -1,13 +1,6 @@
 package duke.ui;
 
-import duke.command.AddTaskCommand;
-import duke.command.Command;
-import duke.command.CompleteTaskCommand;
-import duke.command.DeleteTaskCommand;
-import duke.command.SearchCommand;
-import duke.command.RelaxedSearchCommand;
-import duke.command.DukeUnknownCommandException;
-import duke.command.Parser;
+import duke.command.*;
 
 import duke.io.Storage;
 
@@ -18,6 +11,10 @@ import duke.tasklist.TaskList;
 import duke.tasklist.ToDo;
 import duke.tasklist.Deadline;
 import duke.tasklist.Event;
+import javafx.beans.InvalidationListener;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableStringValue;
 
 import java.util.ArrayList;
 
@@ -26,12 +23,50 @@ import java.util.ArrayList;
  */
 public class Duke {
 
+    public static String DEFAULT_SAVE_FILE_NAME = "DukeSave01";
+
     private Storage storage;
     private TaskList taskList;
     private boolean isActive;
 
+    private SimpleStringProperty storageName;
+    public ObservableStringValue observableStorageName;
+
+
     public Duke() {
         isActive = false;
+        storageName = new SimpleStringProperty("");
+        observableStorageName = new ObservableStringValue() {
+            @Override
+            public String get() {
+                return storageName.get();
+            }
+
+            @Override
+            public void addListener(ChangeListener<? super String> changeListener) {
+                storageName.addListener(changeListener);
+            }
+
+            @Override
+            public void removeListener(ChangeListener<? super String> changeListener) {
+                storageName.removeListener(changeListener);
+            }
+
+            @Override
+            public String getValue() {
+                return storageName.getValue();
+            }
+
+            @Override
+            public void addListener(InvalidationListener invalidationListener) {
+                storageName.addListener(invalidationListener);
+            }
+
+            @Override
+            public void removeListener(InvalidationListener invalidationListener) {
+                storageName.removeListener(invalidationListener);
+            }
+        };
     }
 
     /**
@@ -44,38 +79,6 @@ public class Duke {
         return Response.fromString("Hi, I'm Duke! What can I do for you?", isActive);
     }
 
-    /**
-     * Returns the Response from Duke from to attempting to load a TaskList from a save file with the given name.
-     *
-     * @param saveFileName The file name of the TaskList's save file
-     * @return The Response from Duke from to attempting to load a TaskList from a save file with the given name.
-     *
-     */
-    public Response loadSaveFile(String saveFileName) {
-        assert saveFileName != null;
-        storage = new Storage(saveFileName);
-        Response response;
-        try {
-            taskList = storage.loadTaskList();
-            // task list successfully loaded
-            response = Response.fromString(
-                    String.format("Your TaskList was successfully loaded from:\n%s", saveFileName),
-                    isActive);
-        } catch (DukeException dukeException0) {
-            taskList = new TaskList();
-            // try write to the path
-            try {
-                storage.save(taskList);
-                // path is valid
-                response = Response.fromError(dukeException0, isActive);
-            } catch (DukeException dukeException1) {
-                isActive = false;
-                // path is invalid
-                response = Response.fromError(dukeException1, isActive);
-            }
-        }
-        return response;
-    }
 
     /**
      * Returns the Response from Duke as a result of the given user input.
@@ -124,6 +127,10 @@ public class Duke {
             return executeCompleteTaskCommand((CompleteTaskCommand) command);
         case COMMAND_DELETE_TASK:
             return executeDeleteTaskCommand((DeleteTaskCommand) command);
+        case COMMAND_LOAD_FILE:
+            return executeLoadCommand((LoadCommand) command);
+        case COMMAND_SAVE_FILE:
+            return executeSaveCommand((SaveCommand) command);
         case COMMAND_SEARCH:
             return executeSearchCommand((SearchCommand) command);
         case COMMAND_RELAX_SEARCH:
@@ -277,6 +284,30 @@ public class Duke {
     private String executeExitCommand() {
         isActive = false;
         return "GoodBye! Hope to see you again!";
+    }
+
+    private String executeLoadCommand(LoadCommand loadCommand) throws DukeException {
+        assert loadCommand != null;
+        assert loadCommand.getArgumentsUsed()[0] != null;
+        String saveFileName = loadCommand.getArgumentsUsed()[0];
+
+        storage = new Storage(saveFileName);
+        taskList = storage.loadTaskList();
+        storageName.set(storage.getFileName());
+        // task list successfully loaded
+        return "Your TaskList was successfully loaded from: " + storage.getFileName();
+    }
+
+    private String executeSaveCommand(SaveCommand saveCommand) throws DukeException {
+        assert saveCommand != null;
+        assert saveCommand.getArgumentsUsed()[0] != null;
+        String saveFileName = saveCommand.getArgumentsUsed()[0];
+
+        Storage storage = new Storage(saveFileName);
+        storage.save(taskList);
+
+        // task list successfully loaded
+        return "Your TaskList was successfully saved to: " + storage.getFileName();
     }
 }
 

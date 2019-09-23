@@ -18,7 +18,7 @@ public class DukeTest {
     void setUpDuke() {
         duke = new Duke();
         duke.greet();
-        duke.loadSaveFile("DukeTestSave01");
+        duke.getResponse("load DukeTestSave01");
     }
 
     @AfterEach()

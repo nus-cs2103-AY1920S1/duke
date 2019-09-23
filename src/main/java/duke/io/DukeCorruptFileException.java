@@ -8,7 +8,7 @@ import java.io.File;
  * The DukeException to be thrown when a the file at the given file path is not formatted
  * in the way the method reading the file expects it to be formatted.
  */
-class DukeCorruptFileException extends DukeException {
+public class DukeCorruptFileException extends DukeException {
 
     /**
      * Constructs the DukeException thrown when a file is not formatted in the way the method that
@@ -17,7 +17,7 @@ class DukeCorruptFileException extends DukeException {
      * @param file The file path of the badly formatted file
      */
     DukeCorruptFileException(File file) {
-        super("The file at ", file.getAbsolutePath(), " is formatted incorrectly.");
+        super("The save file at ", file.getAbsolutePath(), " is formatted incorrectly.");
         assert file.isFile();
     }
 }

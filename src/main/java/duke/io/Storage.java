@@ -14,6 +14,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.nio.file.Paths;
 import java.util.regex.Pattern;
 
 
@@ -34,30 +35,54 @@ public class Storage {
     /**
      * Constructs a file reader-writer to load/save a TaskList.
      *
-     * @param saveFileName The name of the save file for the Task List
+     * @param fileName The name of the save file for the Task List
      */
-    public Storage(String saveFileName) {
-        assert saveFileName != null;
-        assert Pattern.matches("[a-zA-Z0-9._-]+", saveFileName);
+    public Storage(String fileName) throws DukeException {
+        assert fileName != null;
+        assert Pattern.matches("\\p{Alnum}+", fileName);
+
+        if (!fileName.matches("\\p{Alnum}+")) {
+            throw new DukeInvalidFileNameException(fileName);
+        }
 
         String parentDirectoryPath =
                 new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath()).getParent();
-        String storageName = saveFileName + ".txt";
-        saveFile = new File(parentDirectoryPath + "/DukeSaveFiles/" + storageName);
+        String saveFolderName = "DukeSaveFiles";
+        String storageName = fileName + ".txt";
+
+        File saveFolder = Paths.get(parentDirectoryPath, saveFolderName).toFile();
+
+        if (saveFolder.exists() && !saveFolder.isDirectory()) {
+            int count = 1;
+            while (!saveFolder.isDirectory()) {
+                saveFolder = Paths.get(parentDirectoryPath, saveFolderName + "("+ Integer.toString(count) + ")").toFile();
+                count++;
+            }
+        }
+
+        saveFile = Paths.get(parentDirectoryPath, saveFolderName, storageName).toFile();
 
         saveFile.getParentFile().mkdir();
+
         try {
+            // create new file if does not already exist
             if (saveFile.createNewFile()) {
                 new FileWriter(saveFile).append("0").flush();
             }
         } catch (IOException exception) {
-            exception.printStackTrace();
+            throw new DukeInvalidLoadFilePathException(saveFile.getAbsolutePath());
         }
-        if (!saveFile.isFile()) {
-            System.err.println("ERROR: cannot make file");
-        }
-
     }
+
+    /**
+     * Returns the file name of the Storage with the file extension.
+     *
+     * @return the file name of the Storage with the file extension.
+     */
+    public String getFileName() {
+        return saveFile.getName();
+    }
+
 
     /**
      * Helper method to write a Deadline Task to a file.
@@ -142,7 +167,7 @@ public class Storage {
             }
             return taskList;
         } catch (FileNotFoundException exception) {
-            throw new DukeInvalidFilePathException(saveFile.getAbsolutePath());
+            throw new DukeInvalidLoadFilePathException(saveFile.getAbsolutePath());
         } catch (IOException | NumberFormatException exception) {
             throw new DukeCorruptFileException(saveFile);
         }
@@ -201,7 +226,7 @@ public class Storage {
 
             fileWriter.close();
         } catch (FileNotFoundException exception) {
-            throw new DukeInvalidFilePathException(saveFile.getAbsolutePath());
+            throw new DukeInvalidSaveFilePathException(saveFile.getAbsolutePath());
         } catch (IOException exception) {
             // FileNotFoundException should the only exception, if it is not then:
             System.err.println(exception.getMessage());

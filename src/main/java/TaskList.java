@@ -55,4 +55,21 @@ public class TaskList {
     public static void updateTasks(Task[] taskarr) {
         tasks = taskarr;
     }
+
+    /**
+     * This method just returns the number of current tasks saved.
+     * @param arr this is the array of tasks that the code starts with (may not be empty).
+     * @return number of tasks currently.
+     */
+    public static int initialiseNumOfTasks(Task[] arr) {
+        int no = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != null) {
+                no++;
+            } else {
+                break;
+            }
+        }
+        return no;
+    }
 }

@@ -1,5 +1,7 @@
 public class Duke {
     private static TaskList taskList;
+    private static Storage storage = new Storage();
+    private static Ui ui = new Ui();
 
     /**
      * the body of the main method, where Tasklist is initialised and the code runs.
@@ -9,8 +11,8 @@ public class Duke {
         assert input != null: "userinput should not be null";
         Task[] tasks = new Task[100];
         taskList = new TaskList(tasks);
-        Storage.readSavedList(taskList);
-        return Parser.Parse(input, taskList);
+        storage.readSavedList(taskList);
+        return Parser.parse(input, taskList, ui);
     }
 
 
@@ -23,6 +25,7 @@ public class Duke {
             System.exit(0);
         }
         String output = run(input);
+        storage.save(taskList);
         assert !output.equals(""): "output should not be empty";
         return output;
     }

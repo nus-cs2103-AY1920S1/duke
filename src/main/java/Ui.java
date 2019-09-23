@@ -172,7 +172,6 @@ public class Ui {
         }
         output.append(matchedTasks);
         output.append("\n");
-
         output.append(showLine());
         output.append("\n");
         return output.toString();

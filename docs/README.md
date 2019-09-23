@@ -4,7 +4,7 @@
 
 ## Features 
 
-### Feature 1: Add tasks to list
+### *_Feature 1: Add tasks to list_*
 You can add deadlines, things you need to do or events to list
 
 #### Usage:
@@ -20,7 +20,7 @@ event feed baby /at 26/01/2019 1600
 #### Expected outcome:
 Task will be added to list.
 
-### Feature 2: List tasks to list
+### *_Feature 2: List tasks to list_*
 
 #### Usage:
 list
@@ -31,7 +31,7 @@ list
 #### Expected outcome:
 Task will be listed
 
-### Feature 3: Delete tasks
+### *_Feature 3: Delete tasks_*
 You can delete deadlines, todos or events to list
 
 #### Usage:
@@ -43,7 +43,7 @@ delete 2
 #### Expected outcome:
 Second task in list will be deleted.
 
-### Feature 3: Marking tasks as done
+### *_Feature 4: Marking tasks as done_*
 
 #### Usage:
 done
@@ -55,7 +55,7 @@ done 2
 Second task in list will be marked as done.
 
 
-### Feature 4: Find specified tasks
+### *_Feature 5: Find specified tasks_*
 Find a specific task given a keyword
 
 #### Usage:
@@ -67,7 +67,7 @@ find bird
 #### Expected outcome:
 Any tasks with a bird keyword will be displayed
 
-### Feature 5: Sort tasks
+### *_Feature 6: Sort tasks_*
 Sort tasks according chronologically
 
 #### Usage:
@@ -79,7 +79,7 @@ sort deadlines
 #### Expected outcome:
 deadline tasks will be sorted in chronological order
 
-### Feature 6: Exit chat bot
+### *_Feature 7: Exit chat bot_*
 
 #### Usage:
 bye

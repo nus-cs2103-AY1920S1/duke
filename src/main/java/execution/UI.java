@@ -38,6 +38,18 @@ public class UI {
     }
 
     /**
+     * Returns a welcome message. This is mainly for the GUI.
+     *
+     * @return a string.
+     */
+
+    public String welcomeMsg() {
+
+        return "Hello I'm Duke!" + " \nWhat can I do for you?";
+
+    }
+
+    /**
      * Prints out a goodbye statement when the users enter bye, before the program ends.
      */
     public void exit() {

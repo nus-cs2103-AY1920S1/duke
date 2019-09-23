@@ -1,5 +1,0 @@
-event type | isDone | description | extra description | dateCreated | lastModified
-T | 0 | Hunt down Jedi |  dummyExtraDescriptionForTodo | 2019-09-20T21:49:25.395655200 | 2019-09-21T00:10:52.951209300
-D | 0 | Invade Coruscant | 27th of December 2019, 11.59pm | 2019-09-20T21:49:44.641070100 | 2019-09-21T00:13:01.312224600
-E | 0 | Lightsabre practice with Count Dooku | Geonosis | 2019-09-20T23:34:01.443673300 | 2019-09-21T00:07:28.664660800
-T | 0 | ABC |  dummyExtraDescriptionForTodo | 2019-09-23T22:23:14.777482400 | 2019-09-23T22:23:14.832445

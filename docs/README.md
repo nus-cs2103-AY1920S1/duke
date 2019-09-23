@@ -67,7 +67,6 @@ Double click the jar file to run
  
 
 ## Commands
-
 A task in Duke can be classified into three main categories: `todo`, `deadline`, `event `
 <br />
 <br />
@@ -83,8 +82,9 @@ Example of usage: <br />
 
 Expected Outcome:
 <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/todoDemo.png">
-
-
+<br />
+<br />
+<br />
 ### <img id="deadline" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/deadline.png" width="500">
 ***
 A `deadline` task is a task item that has a task description and a task date. The task date indicates when the 
@@ -103,7 +103,9 @@ Possible Error: <br />
 `InvalidParameters  `: <br />
 If either the `<taskDescription>` or `<task date>` is empty or the `taskDate` is not in the valid `dd/MM/yy HH:mm` 
 format
-
+<br />
+<br />
+<br />
 ### <img id="event" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/event.png" width="500">
 ***
 A `event` task is a task item that has a task description and a task date. The task date indicates when the 
@@ -135,7 +137,9 @@ Example of usage: <br />
 
 Expected Outcome:
 <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/listDemo.png">
-
+<br />
+<br />
+<br />
 
 ### <img id="done" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/done.png" width="500">
 ***
@@ -153,6 +157,9 @@ Expected Outcome:
 Possible Error: <br />
 `InvalidParameters  `: <br />
 If the specified `<index>` is not valid
+<br />
+<br />
+<br />
 
 ### <img id="delete" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/delete.png" width="500">
 ***
@@ -181,7 +188,9 @@ Example of usage: <br />
 
 Expected Outcome:
 <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/findDemo.png">
-
+<br />
+<br />
+<br />
 
 ### <img id="remind" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/remind.png" width="500">
 ***
@@ -199,6 +208,9 @@ Expected Outcome:
 
 `InvalidParameters  `: <br />
 If the specified `<index>` is not valid or `<reminderDate>` is not in the correct date format
+<br />
+<br />
+<br />
 
 ### <img id="schedule" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/schedule.png" width="500">
 ***
@@ -218,6 +230,9 @@ Expected Outcome:
 <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/scheduleDemo.png">
 
 <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/scheduleDateDemo.png">
+<br />
+<br />
+<br />
 
 ### <img id="bye" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/bye.png" width="500">
 ***
@@ -229,10 +244,9 @@ Example of usage: <br/>
 Expected Outcome:
 
 <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/byeDemo.png">
-
-
-
-
+<br />
+<br />
+<br />
 
 ## FAQ
 **Where does duke store its task?** <br/>

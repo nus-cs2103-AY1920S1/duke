@@ -29,6 +29,22 @@ public class Storage {
         this.archiveFileName = "./dukeArchive.txt";
     }
 
+
+    /**
+     * Returns the path of storage .txt file
+     *
+     * @return path The path of the .txt file.
+     */
+    public String getPath() {
+        String path = "";
+        if (isArchive) {
+            path = archiveFileName;
+        } else {
+            path = fileName;
+        }
+        return path;
+    }
+
     /**
      * Writes the contents of the task list onto the file.
      *

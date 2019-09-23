@@ -205,7 +205,7 @@ public class Parser {
      * @return outputCommand An AddCommand Class to be executed.
      * @throws DukeException If fullCommand entered does not adhere to specifications.
      */
-    public static Command parseAddCommand(String fullCommand) throws DukeException {
+    public Command parseAddCommand(String fullCommand) throws DukeException {
         String type = "";
         String errorMessage = "";
         if (fullCommand.contains("event")) {

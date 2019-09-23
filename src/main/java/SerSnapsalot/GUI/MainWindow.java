@@ -69,7 +69,7 @@ public class MainWindow extends AnchorPane {
 					System.exit(0);
 				}
 			};
-			timer.schedule(delay, 1111);
+			timer.schedule(delay, 1500);
 		} else {
 			addUserDialog(input, userImage);
 			addDukeDialog(response, dukeImage);

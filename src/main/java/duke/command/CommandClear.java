@@ -10,6 +10,8 @@ import duke.ui.Ui;
  */
 public class CommandClear extends Command {
 
+    public static final String COMMAND_WORD = "clear";
+
     public CommandClear(String command) {
         super(command);
         super.type = "Clear: ";
@@ -21,4 +23,5 @@ public class CommandClear extends Command {
         sh.clearList();
         stor.save(sh.getList());
     }
+
 }

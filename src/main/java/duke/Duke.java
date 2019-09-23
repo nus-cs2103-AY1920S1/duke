@@ -6,6 +6,7 @@ import duke.exception.DukeIoException;
 import duke.parser.Parser;
 import duke.sheet.Sheet;
 import duke.storage.Storage;
+import duke.ui.MainWindow;
 import duke.ui.Ui;
 
 public class Duke {
@@ -45,7 +46,7 @@ public class Duke {
      * Starts the Duke programme.
      *
      */
-    void start() {
+    public void start() {
 
         try {
             assert mw != null;

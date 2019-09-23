@@ -1,4 +1,6 @@
-package duke.exception;
+package duke.command.exception;
+
+import duke.exception.DukeException;
 
 /**
  * Encapsulate the exception thrown when task description is not found.
@@ -13,4 +15,5 @@ public class MissingDescriptionException extends DukeException {
     public MissingDescriptionException(String msg) {
         super(msg);
     }
+
 }

@@ -1,8 +1,11 @@
 package duke.command;
 
+import static duke.command.Messages.MSG_MISSING_DEADLINE;
+import static duke.command.Messages.MSG_MISSING_TASK;
+
 import duke.date.DateUtil;
 import duke.exception.DukeException;
-import duke.exception.MissingDescriptionException;
+import duke.command.exception.MissingDescriptionException;
 import duke.sheet.Sheet;
 import duke.storage.Storage;
 import duke.task.Deadline;
@@ -14,6 +17,9 @@ import duke.ui.Ui;
  */
 public class CommandDeadline extends Command {
 
+    public static final String COMMAND_WORD = "deadline";
+    public static final String REGEX = "/by";
+
     public CommandDeadline(String command) {
         super(command);
         super.type = "Deadline: ";
@@ -21,13 +27,11 @@ public class CommandDeadline extends Command {
 
     @Override
     public void execute(Sheet sh, Ui ui, Storage stor) throws DukeException {
-        String[] commands = command.split("/by");
+        String[] commands = command.split(REGEX);
         if (this.command.isBlank() || command.indexOf("/") == 0) {
-            throw new MissingDescriptionException(
-                    "> < Oh! Did you forget to add the task?");
+            throw new MissingDescriptionException(MSG_MISSING_TASK);
         } else if (commands.length == 1) {
-            throw new MissingDescriptionException(
-                    "> < OOPS!! Did you forget to add the deadline?");
+            throw new MissingDescriptionException(MSG_MISSING_DEADLINE);
         } else {
             String description = commands[0].trim();
             String deadline = commands[1].trim();
@@ -38,8 +42,4 @@ public class CommandDeadline extends Command {
         }
     }
 
-    @Override
-    public String toString() {
-        return "Deadline: " + command;
-    }
 }

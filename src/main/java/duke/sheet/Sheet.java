@@ -103,7 +103,7 @@ public class Sheet {
         List<Task> sortedList = new ArrayList<>(tasks);
         Collections.sort(sortedList);
 
-        StringBuilder sb = new StringBuilder("");
+        StringBuilder sb = new StringBuilder();
 
         int i = 0;
         int j = 0;
@@ -141,8 +141,7 @@ public class Sheet {
     public String find(String keyword) {
         StringBuilder sb = new StringBuilder("");
         int count = 0;
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
+        for (Task task : tasks) {
             if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
                 count++;
                 sb.append(" ").append(count).append(". ").append(task.toString().trim()).append("\n");

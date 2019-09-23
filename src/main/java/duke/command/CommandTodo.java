@@ -1,7 +1,9 @@
 package duke.command;
 
+import static duke.command.Messages.MSG_MISSING_TASK;
+
 import duke.exception.DukeException;
-import duke.exception.MissingDescriptionException;
+import duke.command.exception.MissingDescriptionException;
 import duke.sheet.Sheet;
 import duke.storage.Storage;
 import duke.task.Task;
@@ -13,6 +15,8 @@ import duke.ui.Ui;
  */
 public class CommandTodo extends Command {
 
+    public static final String COMMAND_WORD = "todo";
+
     public CommandTodo(String command) {
         super(command);
         super.type = "Todo: ";
@@ -21,8 +25,7 @@ public class CommandTodo extends Command {
     @Override
     public void execute(Sheet sh, Ui ui, Storage stor) throws DukeException {
         if (this.command.isBlank()) {
-            throw new MissingDescriptionException(
-                    "> < Sorry! The description of a todo cannot be empty.");
+            throw new MissingDescriptionException(MSG_MISSING_TASK);
         }
         Task todoTask = new Todo(command.trim());
         sh.add(todoTask);
@@ -30,8 +33,4 @@ public class CommandTodo extends Command {
         stor.save(sh.getList());
     }
 
-    @Override
-    public String toString() {
-        return "Todo: " + command;
-    }
 }

@@ -69,6 +69,6 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + "[" + this.getStatusIcon() + "] " + this.getDescription()
                 + " (from: " + DateUtil.printTime(startTime)
-                + " , to " + DateUtil.printTime(endTime) + " )\n";
+                + ", to " + DateUtil.printTime(endTime) + ")\n";
     }
 }

@@ -1,4 +1,6 @@
-package duke.exception;
+package duke.command.exception;
+
+import duke.exception.DukeException;
 
 /**
  * Encapsulate the exception thrown when task index entered is not an integer.

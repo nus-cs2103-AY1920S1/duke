@@ -18,17 +18,6 @@ import duke.command.IllegalCommand;
  */
 public class Parser {
 
-    private static final String COMMAND_FIND = "find";
-    private static final String COMMAND_BYE = "bye";
-    private static final String COMMAND_LIST = "list";
-    private static final String COMMAND_DELETE = "delete";
-    private static final String COMMAND_DONE = "done";
-    private static final String COMMAND_TODO = "todo";
-    private static final String COMMAND_DEADLINE = "deadline";
-    private static final String COMMAND_EVENT = "event";
-    private static final String COMMAND_HI = "hi";
-    private static final String COMMAND_CLEAR = "clear";
-
     /**
      * Parses the user input String into executable commands.
      *
@@ -40,25 +29,25 @@ public class Parser {
         String command = cmds[0];
         String detail = concatCommand(cmds);
         switch (command) {
-        case COMMAND_BYE:
+        case CommandExit.COMMAND_WORD:
             return new CommandExit(detail);
-        case COMMAND_LIST:
+        case CommandList.COMMAND_WORD:
             return new CommandList(detail);
-        case COMMAND_DELETE:
+        case CommandDelete.COMMAND_WORD:
             return new CommandDelete(detail);
-        case COMMAND_DONE:
+        case CommandDone.COMMAND_WORD:
             return new CommandDone(detail);
-        case COMMAND_TODO:
+        case CommandTodo.COMMAND_WORD:
             return new CommandTodo(detail);
-        case COMMAND_DEADLINE:
+        case CommandDeadline.COMMAND_WORD:
             return new CommandDeadline(detail);
-        case COMMAND_EVENT:
+        case CommandEvent.COMMAND_WORD:
             return new CommandEvent(detail);
-        case COMMAND_FIND:
+        case CommandFind.COMMAND_WORD:
             return new CommandFind(detail);
-        case COMMAND_HI:
+        case CommandHi.COMMAND_WORD:
             return new CommandHi(detail);
-        case COMMAND_CLEAR:
+        case CommandClear.COMMAND_WORD:
             return new CommandClear(detail);
         default:
             return new IllegalCommand(detail);
@@ -67,7 +56,7 @@ public class Parser {
 
     private static String concatCommand(String[] strs) {
         assert strs != null;
-        StringBuilder output = new StringBuilder("");
+        StringBuilder output = new StringBuilder();
         for (int i = 1; i < strs.length; i++) {
             output.append(strs[i]).append(" ");
         }

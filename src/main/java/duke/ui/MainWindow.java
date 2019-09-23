@@ -1,6 +1,8 @@
-package duke;
+package duke.ui;
 
+import duke.Duke;
 import duke.reminder.Reminder;
+import duke.ui.DialogBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -46,7 +48,7 @@ public class MainWindow extends AnchorPane {
     /**
      * Displays the reminder in a dialogue box.
      */
-    void displayReminder() {
+    public void displayReminder() {
         assert duke != null;
         Reminder reminder = new Reminder(duke.getSheet(), duke.getUi());
         reminder.remind(NUMBER_OF_REMINDER);

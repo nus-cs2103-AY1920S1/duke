@@ -1,4 +1,6 @@
-package duke.exception;
+package duke.date.exception;
+
+import duke.exception.DukeException;
 
 /**
  * Encapsulate the exception thrown when user time input is not recognised.

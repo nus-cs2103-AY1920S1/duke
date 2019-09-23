@@ -1,8 +1,11 @@
 package duke.command;
 
+import static duke.command.Messages.MSG_MISSING_EVENT_SPAN;
+import static duke.command.Messages.MSG_MISSING_TASK;
+
 import duke.date.DateUtil;
 import duke.exception.DukeException;
-import duke.exception.MissingDescriptionException;
+import duke.command.exception.MissingDescriptionException;
 import duke.sheet.Sheet;
 import duke.storage.Storage;
 import duke.task.Event;
@@ -14,6 +17,10 @@ import duke.ui.Ui;
  */
 public class CommandEvent extends Command {
 
+    public static final String COMMAND_WORD = "event";
+
+    private static final String REGEX = "(/from)|(to)";
+
     public CommandEvent(String cmd) {
         super(cmd);
         super.type = "Event: ";
@@ -21,13 +28,11 @@ public class CommandEvent extends Command {
 
     @Override
     public void execute(Sheet sh, Ui ui, Storage stor) throws DukeException {
-        String[] commands = command.split("(/from)|(to)");
+        String[] commands = command.split(REGEX);
         if (this.command.isBlank() || command.indexOf("/") == 0) {
-            throw new MissingDescriptionException(
-                    "> < Oh! Did you forget to add the task?");
+            throw new MissingDescriptionException(MSG_MISSING_TASK);
         } else if (commands.length < 3) {
-            throw new MissingDescriptionException(
-                    "> < OOPS!!! The event span is incomplete.");
+            throw new MissingDescriptionException(MSG_MISSING_EVENT_SPAN);
         } else {
             String description = commands[0].trim();
             String start = commands[1].trim();
@@ -39,8 +44,4 @@ public class CommandEvent extends Command {
         }
     }
 
-    @Override
-    public String toString() {
-        return "Event: " + command;
-    }
 }

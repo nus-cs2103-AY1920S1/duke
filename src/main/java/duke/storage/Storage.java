@@ -3,14 +3,14 @@ package duke.storage;
 import duke.task.Task;
 import duke.exception.DukeIoException;
 
+import java.io.EOFException;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,9 @@ import java.util.List;
 public class Storage {
 
     private String pathToFile;
-    private File tasks;
+    private List<Task> taskList = new ArrayList<>();
+
+    private static final String MSG_IOE_EXCEPTION = "Sorry, something went wrong reading the file. > <";
 
     /**
      * Constructs a Storage object.
@@ -42,16 +44,18 @@ public class Storage {
         try {
             File f = new File(pathToFile);
             f.createNewFile();
-            this.tasks = f;
-            Path p = Paths.get(pathToFile);
-            List<String> lst = Files.readAllLines(p, Charset.forName("UTF-8"));
-            List<Task> taskList = new ArrayList<>();
-            for (String t : lst) {
-                taskList.add(Task.toTask(t));
-            }
+
+            FileInputStream fileInputStream = new FileInputStream(pathToFile);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+            taskList = (ArrayList<Task>)objectInputStream.readObject();
+
+            objectInputStream.close();
             return taskList;
-        } catch (IOException e) {
-            throw new DukeIoException("Sorry, something went wrong. > <");
+        } catch (EOFException e) {
+            return taskList;
+        } catch (IOException | ClassNotFoundException e) {
+            throw new DukeIoException(MSG_IOE_EXCEPTION);
         }
     }
 
@@ -63,19 +67,12 @@ public class Storage {
      */
     public void save(List<Task> lst) throws DukeIoException {
         try {
-            this.tasks = new File(pathToFile);
-            if (this.tasks.exists()) {
-                this.tasks.delete();
-            }
-            this.tasks.createNewFile();
-            FileWriter fw = new FileWriter(tasks, true);
-            Path p = Paths.get(pathToFile);
-            for (Task tsk : lst) {
-                fw.write(tsk.toString());
-            }
-            fw.close();
+            FileOutputStream fileOutputStream = new FileOutputStream(pathToFile);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(lst);
+            objectOutputStream.close();
         } catch (IOException e) {
-            throw new DukeIoException("Sorry, something went wrong. > <");
+            throw new DukeIoException(MSG_IOE_EXCEPTION);
         }
     }
 }

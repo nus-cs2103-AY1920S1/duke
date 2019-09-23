@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 
+import duke.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,12 +14,14 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    private static final String APP_TITLE = "Conversation with Nezuko the Task Master";
+
     @Override
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
-            stage.setTitle("Conversation with Nezuko the Task Master");
+            stage.setTitle(APP_TITLE);
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             MainWindow mw = fxmlLoader.getController();

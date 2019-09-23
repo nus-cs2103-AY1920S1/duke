@@ -1,12 +1,13 @@
 package duke.task;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  * Encapsulates a task object containing task description and task status.
  */
-public class Task implements Comparable<Task> {
+public class Task implements Comparable<Task>, Serializable {
     private String description;
     private boolean isDone;
 
@@ -93,36 +94,6 @@ public class Task implements Comparable<Task> {
      */
     String getStatusIcon() {
         return (isDone ? TICK : CROSS); //return tick or X symbols
-    }
-
-    /**
-     * Converts a String to a Task object.
-     *
-     * @param s String to be converted.
-     * @return New Task object represented by the String.
-     */
-    public static Task toTask(String s) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy_@_hh:mma");
-        boolean isDone = (String.valueOf(s.charAt(4)).equals(TICK));
-        switch (s.charAt(1)) {
-        case 'T':
-            return isDone ? new Todo(s.substring(7)).finish() : new Todo(s.substring(7));
-        case 'E':
-            String description = s.substring(7, s.lastIndexOf('(') - 1);
-            String[] times = s.substring(s.lastIndexOf('(') - 1).split(" ");
-            LocalDateTime start = LocalDateTime.parse(times[2], formatter);
-            LocalDateTime end = LocalDateTime.parse(times[5], formatter);
-            Event e = new Event(description, start, end);
-            return isDone ? e.finish() : e;
-        case 'D':
-            String description2 = s.substring(7, s.lastIndexOf('(') - 1);
-            String[] deadlines = s.substring(s.lastIndexOf('(') - 1).split(" ");
-            LocalDateTime dl = LocalDateTime.parse(deadlines[2], formatter);
-            Deadline d = new Deadline(description2, dl);
-            return isDone ? d.finish() : d;
-        default:
-            return new Task(s.substring(7));
-        }
     }
 
     /**

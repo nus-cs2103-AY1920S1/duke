@@ -9,6 +9,8 @@ import duke.ui.Ui;
  */
 public class CommandList extends Command {
 
+    public static final String COMMAND_WORD = "list";
+
     public CommandList(String command) {
         super(command);
         super.type = "List: ";
@@ -20,8 +22,4 @@ public class CommandList extends Command {
         ui.showList(list);
     }
 
-    @Override
-    public String toString() {
-        return "List: " + command;
-    }
 }

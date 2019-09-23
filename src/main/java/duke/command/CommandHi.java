@@ -9,6 +9,8 @@ import duke.ui.Ui;
  */
 public class CommandHi extends Command {
 
+    public static final String COMMAND_WORD = "hi";
+
     public CommandHi(String command) {
         super(command);
         super.type = "Hi: ";
@@ -19,8 +21,4 @@ public class CommandHi extends Command {
         ui.sayHi();
     }
 
-    @Override
-    public String toString() {
-        return "Hi: " + command;
-    }
 }

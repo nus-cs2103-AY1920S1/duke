@@ -1,4 +1,6 @@
-package duke.exception;
+package duke.command.exception;
+
+import duke.exception.DukeException;
 
 /**
  * Encapsulate the exception thrown when user's query index for task exceeds the number of tasks on the list.
@@ -13,4 +15,5 @@ public class TaskNotFoundException extends DukeException {
     public TaskNotFoundException(String msg) {
         super(msg);
     }
+
 }

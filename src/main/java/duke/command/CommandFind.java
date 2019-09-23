@@ -1,7 +1,9 @@
 package duke.command;
 
+import static duke.command.Messages.MSG_MISSING_KEYWORD;
+
 import duke.exception.DukeException;
-import duke.exception.MissingDescriptionException;
+import duke.command.exception.MissingDescriptionException;
 import duke.sheet.Sheet;
 import duke.storage.Storage;
 import duke.ui.Ui;
@@ -11,6 +13,8 @@ import duke.ui.Ui;
  */
 public class CommandFind extends Command {
 
+    public static final String COMMAND_WORD = "find";
+
     public CommandFind(String command) {
         super(command);
         super.type = "Find: ";
@@ -19,15 +23,10 @@ public class CommandFind extends Command {
     @Override
     public void execute(Sheet sh, Ui ui, Storage stor) throws DukeException {
         if (this.command.isBlank()) {
-            throw new MissingDescriptionException(
-                    "> < Sorry, I did not catch your search keyword.");
+            throw new MissingDescriptionException(MSG_MISSING_KEYWORD);
         }
         String found = sh.find(this.command.trim());
         ui.showSearch(found);
     }
 
-    @Override
-    public String toString() {
-        return "Find: " + command;
-    }
 }

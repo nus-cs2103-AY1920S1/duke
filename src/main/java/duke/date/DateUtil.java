@@ -1,6 +1,6 @@
 package duke.date;
 
-import duke.exception.IllegalTimeFormatException;
+import duke.date.exception.IllegalTimeFormatException;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
@@ -13,6 +13,9 @@ public class DateUtil {
 
     private static final int DATE_TEMPLATE_SIZE = 5;
     private static final String DEFAULT_TIME = "00";
+    private static final String MSG_ILLEGAL_TIME = "> < Sorry, I couldn't recognise the time.\n"
+            + "Enter time in the format of 'dd/MM/yyyy hhmm'";
+    private static final String DATE_FORMAT_PATTERN = "dd/MM/yyyy, hh:mm a";
 
     /**
      * Creates a LocalDateTime object form its String representation.
@@ -73,8 +76,7 @@ public class DateUtil {
             String time = strings[1];
             if (time.length() < 3) {
                 // time is not entered in the format of hhmm.
-                throw new IllegalTimeFormatException("> < Sorry, I couldn't recognise the time.\n"
-                        + "     Enter time in the format of 'hhmm' :D");
+                throw new IllegalTimeFormatException(MSG_ILLEGAL_TIME);
             }
             template[DATE_TEMPLATE_SIZE - 2] = time.substring(0, 2); // set hh
             template[DATE_TEMPLATE_SIZE - 1] = time.substring(2); // set mm
@@ -92,9 +94,7 @@ public class DateUtil {
             int minute = Integer.parseInt(times[4]);
             return LocalDateTime.of(year, month, day, hour, minute);
         } catch (DateTimeException | NumberFormatException e) {
-            throw new IllegalTimeFormatException(
-                    "> < Sorry, I couldn't recognise the time.\n"
-                            + "Try enter in the format of 'dd/MM/yy hhmm' :D");
+            throw new IllegalTimeFormatException(MSG_ILLEGAL_TIME);
         }
     }
 
@@ -105,7 +105,7 @@ public class DateUtil {
      * @return Formatted String representation of the date and time stored in the LocalDateTime object.
      */
     public static String printTime(LocalDateTime dt) {
-        DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy_@_hh:mma");
+        DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT_PATTERN);
         return dt.format(customFormatter);
     }
 }

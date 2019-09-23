@@ -9,6 +9,8 @@ import duke.ui.Ui;
  */
 public class CommandExit extends Command {
 
+    public static final String COMMAND_WORD = "bye";
+
     public CommandExit(String cmd) {
         super(cmd);
         super.type = "Exit: ";
@@ -24,8 +26,4 @@ public class CommandExit extends Command {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "Exit: " + command;
-    }
 }

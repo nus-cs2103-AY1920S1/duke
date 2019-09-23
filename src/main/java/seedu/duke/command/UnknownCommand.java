@@ -6,6 +6,8 @@ import seedu.duke.storage.Storage;
 import seedu.duke.tasklist.TaskList;
 import seedu.duke.ui.Ui;
 
+import java.util.Random;
+
 /**
  * Represents the unrecognizable text command.
  */
@@ -32,8 +34,19 @@ public class UnknownCommand extends Command {
      */
     public String execute(String fullCommand, Ui ui, TaskList tasks, Storage taskStorage, Statistic stat,
                           Storage statStorage) throws DukeException {
+        Random rand = new Random();
+        int random = rand.nextInt(2);
+        String output1 = ":-( I don't understand. Perhaps the archives are incomplete";
+        String output2 = "It appears I have misplaced my light sabre. What was it that you said again?";
+        String finalOutput = "";
 
-        throw new DukeException(":-( OOPS!!! I'm sorry, but I don't know what that means :-(");
+        if (random == 0) {
+            finalOutput = output1;
+        } else {
+            finalOutput = output2;
+        }
+
+        throw new DukeException(finalOutput);
 
     }
 }

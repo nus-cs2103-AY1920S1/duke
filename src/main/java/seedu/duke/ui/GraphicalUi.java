@@ -49,7 +49,7 @@ public class GraphicalUi extends Ui {
      * @return String.
      */
     public String getDoneSequence(TaskList tasks, int taskNum) {
-        String output = "Nice! I've marked this task as done:\n"
+        String output = "Nice! Another happy landing!:\n"
                 + "[" + tasks.getTask(taskNum).getStatusIcon() + "] " + tasks.getTask(taskNum).getTaskName()
                 + "\n";
         output = output.replace("✓", "V");
@@ -95,7 +95,7 @@ public class GraphicalUi extends Ui {
      * @return String.
      */
     public String getEventSequence(TaskList tasks, Event newEvent) {
-        String output = "Got it. I've added this task:\n"
+        String output = "Understood. I've added this dangerous task:\n"
                 + newEvent.toString() + getTasksRemainingSequence(tasks.getSize());
         output = output.replace("✓", "V");
         output = output.replace("✘", "X");
@@ -110,7 +110,7 @@ public class GraphicalUi extends Ui {
      * @return String.
      */
     public String getDeleteSequence(TaskList tasks, Task taskToDelete) {
-        String output = "Noted. I've removed this task.\n"
+        String output = "Noted. I've removed this task from the archives.\n"
                 + taskToDelete.toString() + getTasksRemainingSequence(tasks.getSize());
         output = output.replace("✓", "V");
         output = output.replace("✘", "X");
@@ -153,7 +153,7 @@ public class GraphicalUi extends Ui {
      * @return String.
      */
     public String getFoundTasks(TaskList tasks) {
-        String output = "Here are the matching tasks in your list:\n";
+        String output = "Here are the matching tasks from the Jedi Holocrons:\n";
         output += getListSequence(tasks);
         return (output);
     }
@@ -215,7 +215,7 @@ public class GraphicalUi extends Ui {
         String encouragement = "";
         int eventsCompleted = stat.getCompletedEventsFromOneDayAgo(tasks);
         if (eventsCompleted == 0) {
-            encouragement = "You can do better! :)";
+            encouragement = "You can do better with some meditation :)";
         } else {
             encouragement = "Well Done!";
         }
@@ -257,7 +257,7 @@ public class GraphicalUi extends Ui {
         String encouragement = "";
         int deadlinessCompleted = stat.getCompletedEventsFromOneDayAgo(tasks);
         if (deadlinessCompleted == 0) {
-            encouragement = "You can do better! :)";
+            encouragement = "You can do better, young Padawan! :)";
         } else {
             encouragement = "Well Done!";
         }
@@ -278,7 +278,7 @@ public class GraphicalUi extends Ui {
         String encouragement = "";
         int todosCompleted = stat.getCompletedTodosFromOneDayAgo(tasks);
         if (todosCompleted == 0) {
-            encouragement = "You can do better! :)";
+            encouragement = "You can do better! There is no try. :)";
         } else {
             encouragement = "Well Done!";
         }

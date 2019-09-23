@@ -87,7 +87,7 @@ public class Duke {
         currentOutput += "Bye. \n";
         currentOutput += "Hope to see you again soon!\n";
         currentOutput += SPLIT_LINE;
-        currentOutput += "\nPress enter to quit…\n";
+        currentOutput += "\nPress enter to quit...\n";
         taskList.saveToFile();
         status = 0;
         return currentOutput;

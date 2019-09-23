@@ -50,6 +50,17 @@ public class UI {
     }
 
     /**
+     * Returns the goodbye message. This is mainly for GUI.
+     *
+     * @return a string.
+     */
+
+    public String goodbyeMsg() {
+
+        return "Bye. Hope to see you again soon!";
+    }
+
+    /**
      * Prints out a goodbye statement when the users enter bye, before the program ends.
      */
     public void exit() {

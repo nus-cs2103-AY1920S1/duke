@@ -120,7 +120,7 @@ Example of usage:
 
 Expected outcome:
 <br>`Bye. Hope to see you again soon!`</br>
-<br>Find your saved file in the data folder</br>
+<br>Find your saved file in the same folder as the jar file</br>
 
 ### Acknowledgements
 Some code from More-OOP is reused in this project

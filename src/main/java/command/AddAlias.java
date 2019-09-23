@@ -31,7 +31,7 @@ public class AddAlias extends Command {
         try {
             String[] ar = command.split(" ");
             if (ar.length != 2) {
-                throw new DukeException("OOPS!!! Add Synatx Command must be in this format: addsyntax <type> <alias>.");
+                throw new DukeException("OOPS!!! Add Syntax Command must be in this format: addsyntax <type> <alias>.");
             }
             Alias.updateAliases(ar[0].trim().toUpperCase(), ar[1].trim());
             return Ui.printAddAlias(ar[0].trim().toUpperCase(), ar[1].trim());

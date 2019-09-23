@@ -36,8 +36,8 @@ public class Duke {
     // private String taskFilePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt";
     // private String statFilePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\stats.txt";
 
-    private String taskFilePath = "\\src\\main\\resources\\data\\tasks.txt";
-    private String statFilePath = "\\src\\main\\resources\\data\\stats.txt";
+    private String taskFilePath = "\\data\\tasks.txt";
+    private String statFilePath = "\\data\\stats.txt";
 
     /**
      * Default constructor to support Duke GUI.
@@ -154,7 +154,7 @@ public class Duke {
      */
     public static void main(String[] args) {
         // new Duke("C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt").run();
-        new Duke("\\src\\main\\resources\\data\\tasks.txt").run();
+        new Duke("\\data\\tasks.txt").run();
     }
 
     /**

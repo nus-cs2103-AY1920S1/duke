@@ -1,20 +1,31 @@
-# User Guide
+# FishSeller User Guide
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### List
+View all tasks
 
 ## Usage
 
-### `Keyword` - Describe action
+### `list` - displays all tasks
 
-Describe action and its outcome.
+
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`list`
 
-Expected outcome:
+### Sort
+Sort tasks
 
-`outcome`
+## Usage
+
+### `sort` - sorts all tasks based on argument
+
+
+
+Example of usage: 
+
+`sort date`
+`sort name`
+

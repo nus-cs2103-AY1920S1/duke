@@ -5,7 +5,7 @@ _**The Jedi Academy**_ is a Personal Assistant Chatbot that helps a person to ke
 
 ## 2. Getting Started
 1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest _**The Jedi Academy**_ jar file here.
+2. Download the latest _**The Jedi Academy**_ jar file [here](https://github.com/MackyMaguire/duke/releases/download/v0.2/duke-0.2.jar).
 3. Copy the file to the folder you want to use as the home folder. Your tasks will be saved to and loaded from `data/duke.txt` located in the same folder.
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
 5. Type the command in the command box and press Enter to execute it.

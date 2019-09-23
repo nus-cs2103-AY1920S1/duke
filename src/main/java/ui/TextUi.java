@@ -12,11 +12,6 @@ import java.util.LinkedList;
 
 public class TextUi {
     private static final String DIVIDER = "    ____________________________________________________________";
-    private static final String LOGO = " ____         _        \n"
-                                     + "|  _ \\ _   _| | _____ \n"
-                                     + "| | | | | | | |/ / _ \\\n"
-                                     + "| |_| | |_| |   <  __/\n"
-                                     + "|____/ \\__,_|_|\\_\\___|\n";
 
     public TextUi() {
 
@@ -36,13 +31,17 @@ public class TextUi {
     }
 
     /**
-     * prints out the entire list.
-     * @param taskList is the linkedlist containing the tasks to be printed
+     * prints confirmation message.
      */
-    public void printItemList(ArrayList<Task> taskList) {
-        int i = 0;
+    public void printItemList() {
         System.out.println(DIVIDER + "\n"
                 + "     Here are the items in your list:");
+        System.out.println(DIVIDER);
+    }
+
+    public void printNoteList(String itemName){
+        System.out.println(DIVIDER + "\n"
+                + "     Here are the items in " + itemName + ":");
         System.out.println(DIVIDER);
     }
 
@@ -65,27 +64,8 @@ public class TextUi {
         System.out.println(DIVIDER + "\n"
                 + "     Noted. I've removed this item: \n"
                 + "       " + task + "\n"
-                + "     Now you have " + (size - 1) + " items in the list.\n"
+                + "     Now you have " + (size) + " items in the list.\n"
                 + "    ____________________________________________________________");
-    }
-
-    /**
-     * prints the welcome message.
-     */
-    public void printIntroduction() {
-        System.out.println(LOGO + DIVIDER + "\n"
-                + "     Hello! I'm Duke\n"
-                + "     What can I do for you?\n"
-                + DIVIDER);
-    }
-
-    /**
-     * prints the program exit messsage.
-     */
-    public void printGoodByeMsg() {
-        System.out.println(DIVIDER + "\n"
-                + "     Bye. Hope to see you again soon!\n"
-                + DIVIDER);
     }
 
     /**
@@ -93,7 +73,7 @@ public class TextUi {
      */
     public void printErrorMsg1() {
         System.out.println(DIVIDER + "\n"
-                + "     ☹ OOPS!!! I'm sorry, but I don't know that command :-(\n"
+                + "     OOPS!!! I'm sorry, but I don't know that command :-(\n"
                 + DIVIDER);
     }
 
@@ -107,39 +87,42 @@ public class TextUi {
     }
 
     /**
-     * prints the error message for a loading error.
-     * @param tasknumber task that failed to load
-     */
-    public void printLoadingError(int tasknumber) {
-        System.out.println("    ____________________________________________________________\n"
-                + "     ☹ OOPS!!! I'm sorry, but loading task " + tasknumber
-                + " has failed, it will be removed\n"
-                + "    ____________________________________________________________");
-    }
-
-    /**
      * prints the error message for a wrongly formatted date.
      */
     public void printWrongDate() {
         System.out.println(DIVIDER + "\n"
-                + "     ☹ OOPS!!! I'm sorry, but I don't understand that date :-(\n"
+                + "     OOPS!!! I'm sorry, but I don't understand that date :-(\n"
                 + DIVIDER);
     }
 
     /**
      * prints the ui for listing the found tasks.
-     * @param foundtasks list containing the tasks that were found
+     * @param size represents number of found tasks
      */
-    public void printFoundTasks(ObservableList<String> foundtasks) {
-        if (foundtasks.isEmpty()) {
+    public void printFoundTasks(Integer size) {
+        if (size == 0) {
             System.out.println(DIVIDER + "\n"
-                    + "     ☹ OOPS!!! I'm sorry, but I couldn't find anything :-(\n"
+                    + "     OOPS!!! I'm sorry, but I couldn't find anything :-(\n"
                     + DIVIDER);
         } else {
             System.out.println(DIVIDER + "\n"
-                    + "     Here are the matching items in your list:");
+                    + "     There are " + size + " matching items in your list:");
             System.out.println(DIVIDER);
         }
+    }
+
+    public void printNoteRemoved(String note , String source, int size){
+        System.out.println(DIVIDER + "\n"
+                + "     Noted. I've removed this item: \n"
+                + "       " + note + " from " + source +"\n"
+                + "     Now you have " + (size) + " items in the list.\n"
+                + DIVIDER);
+    }
+
+    public void printDescriptionError (){
+        System.out.println(DIVIDER + "\n"
+                + "     OOPS!!! I'm sorry but Description should not be empty");
+        System.out.println(DIVIDER);
     }
 
 }

@@ -13,10 +13,11 @@ import java.time.LocalDateTime;
 
 public class Todo extends Task {
     @JsonCreator
-    public Todo(@JsonProperty("description") String description,
+    public Todo(@JsonProperty("index") int index,
+                @JsonProperty("description") String description,
                 @JsonProperty("isDone") boolean completionStatus,
                 @JsonProperty("dateDue") LocalDateTime date) {
-        super(description,completionStatus,date);
+        super(index,description,completionStatus,date);
         taskType = new SimpleStringProperty("Todo");
     }
 

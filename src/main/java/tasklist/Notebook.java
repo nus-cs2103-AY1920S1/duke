@@ -10,10 +10,11 @@ import java.time.LocalDateTime;
 public class Notebook extends Task {
 
     @JsonCreator
-    public Notebook(@JsonProperty("description") String description,
-                @JsonProperty("isDone") boolean completionStatus,
-                @JsonProperty("dateDue") LocalDateTime date) {
-        super(description,completionStatus,date);
+    public Notebook(@JsonProperty("index") int index,
+                    @JsonProperty("description") String description,
+                    @JsonProperty("isDone") boolean completionStatus,
+                    @JsonProperty("dateDue") LocalDateTime date) {
+        super(index, description,completionStatus,date);
         taskType = new SimpleStringProperty("notebook");
     }
 

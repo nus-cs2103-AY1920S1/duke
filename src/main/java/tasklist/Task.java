@@ -6,13 +6,8 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
-import notes.Notes;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.beans.property.*;
+import notes.Note;
 import ui.TextUi;
 
 
@@ -35,31 +30,24 @@ import java.util.ArrayList;
  * gurantees that all important methods are implemented
  */
 public abstract class Task {
-
+    protected Integer index;
     protected SimpleStringProperty taskType;
     protected SimpleStringProperty description;
     protected SimpleBooleanProperty isDone;
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm", timezone = "UTC")
     protected ObjectProperty<LocalDateTime> dateDue;
-    protected ArrayList<Notes> noteBook = new ArrayList<>();
+    protected ArrayList<Note> notes = new ArrayList<>();
     protected TextUi ui = new TextUi();
     protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMMM hhmm a");
 
     /**
      * First of two constructors for deadline and event tasks.
      */
-    public Task(String description, boolean completionStatus, LocalDateTime date) {
+    public Task(int index, String description, boolean completionStatus, LocalDateTime date) {
+        this.index = index;
         this.description = new SimpleStringProperty(description);
         this.isDone = new SimpleBooleanProperty(completionStatus);
         this.dateDue = new SimpleObjectProperty<>(date);
-    }
-
-    /**
-     * Second of two constructors for todo tasks.
-     */
-    public Task(String description, boolean completionStatus) {
-        this.description = new SimpleStringProperty(description);
-        this.isDone = new SimpleBooleanProperty(completionStatus);
     }
 
     /**
@@ -68,7 +56,7 @@ public abstract class Task {
      */
     @JsonIgnore
     public String getCurrentStatus() {
-        return ((isDone.getValue() ? "[✓] " : "[✗] ")); //return tick or X symbols
+        return ((isDone.getValue() ? "[1] " : "[0] ")); //return tick or X symbols
     }
 
     /**
@@ -93,23 +81,43 @@ public abstract class Task {
      * @param date contains an optional date
      */
     public void addNote(String category, String description,LocalDateTime date) {
-        noteBook.add(new Notes(category, description, date));
-        ui.printAddedItem(category + " " + description + " " + date, noteBook.size());
+        int index = notes.size() + 1;
+        notes.add(new Note(index,getSourceName(),category, description, date));
+        ui.printAddedItem(category + " " + description + " " + date, notes.size());
     }
 
     /**
      * Method to remove the note or all the notes of a designated task or notebook.
-     * @param noteToRemove contains command indicating whether all tasks are to be deleted or 1 particular one
+     * @param index contains command indicating whether all tasks are to be deleted or 1 particular one
      */
-    public void removeNote(String noteToRemove) {
-        if (noteToRemove.contains("all")) {
-            noteBook.clear();
-            ui.printRemovedItem("All entries", noteBook.size() + 1);
+    public void removeNote(int index) {
+        if (index == -1) {
+            notes.clear();
+            ui.printRemovedItem("All entries", 0);
         } else {
-            int noteToDelete = Integer.parseInt(noteToRemove);
-            noteBook.remove(noteToDelete - 1);
+            ui.printNoteRemoved(notes.get(index).getDescription(),
+                    notes.get(index).getSource(),
+                    notes.size() - 1);
+            notes.remove(index);
+            updateNoteIndex();
         }
     }
+    public void updateNoteIndex(){
+        if (!notes.isEmpty()) {
+            int i = 1;
+            for (Note note : notes) {
+                note.setIndex(i);
+                note.setSource(getSourceName());
+                i++;
+            }
+        }
+    }
+
+    @JsonIgnore
+    public String getSourceName(){
+        return "[" + index + "] " + description.get() ;
+    }
+
 
     public String getTaskType() {
         return taskType.get();
@@ -159,8 +167,17 @@ public abstract class Task {
         this.dateDue.set(dateDue);
     }
 
-    public ObservableList<Notes> getNoteBook() {
-        return FXCollections.observableArrayList(noteBook);
+    public ArrayList<Note> getNotes() {
+        return notes;
     }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
+    }
+
 
 }

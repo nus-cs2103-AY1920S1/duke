@@ -1,7 +1,6 @@
 package tasklist;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import notes.Note;
 import ui.TextUi;
 
 import java.time.LocalDateTime;
@@ -12,18 +11,16 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    protected ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
     private TextUi ui;
+    private ArrayList<Task> uiTaskList;
+    private ArrayList<Note> uiNoteList;
 
     public TaskList() {
         tasks = new ArrayList<Task>();
         ui = new TextUi();
-    }
-
-
-    public TaskList(ArrayList<Task> loadedList) {
-        tasks = loadedList;
-        ui = new TextUi();
+        uiNoteList = new ArrayList<Note>();
+        uiTaskList = new ArrayList<>();
     }
 
     /**
@@ -37,17 +34,23 @@ public class TaskList {
      * prints the ui for listing tasks.
      */
     public void listTasks() {
-        ui.printItemList(tasks);
+        ui.printItemList();
+        resetUiTasks();
+    }
+
+    public void shownotes (Integer tasknum){
+        uiNoteList = tasks.get(tasknum).getNotes();
+        ui.printNoteList(tasks.get(tasknum).getSourceName()+ " " + tasks.get(tasknum).getDescription());
     }
 
     /**
      * Changes the completion status of the task.
-     * @param completedtask tells the method which task has been completed
+     * @param index tells the method which task has been completed
      */
-    public void completeTask(String completedtask) {
-        int taskNumber = Integer.parseInt(completedtask);
-        tasks.get(taskNumber - 1).completeTask();
-        ui.printCompletedTask(tasks.get(taskNumber - 1).getOverallStatus());
+    public void completeTask(int index) {
+        tasks.get(index).completeTask();
+        ui.printCompletedTask(tasks.get(index).getOverallStatus());
+        resetUiTasks();
     }
 
     /**
@@ -58,61 +61,104 @@ public class TaskList {
      * @param date sets the date of the task
      */
     public void addTask(String taskType, String description, boolean completionStatus, LocalDateTime date) {
-        assert !description.isEmpty() : "description should not be empty";
-        switch (taskType) {
-        case "todo":
-            tasks.add(new Todo(description,completionStatus,date));
-            break;
-        case "deadline":
-            tasks.add(new Deadline(description, completionStatus, date));
-            break;
-        case "event":
-            tasks.add(new Event(description, completionStatus, date));
-            break;
-        case "notebook":
-            tasks.add(new Notebook(description,completionStatus,date));
-            break;
-        default:
-            // not necessary as tasktype can only be the above 3
+        if (!description.isEmpty()) {
+            int index = tasks.size() + 1;
+            switch (taskType) {
+            case "todo":
+                tasks.add(new Todo(index, description, completionStatus, date));
+                break;
+            case "deadline":
+                tasks.add(new Deadline(index, description, completionStatus, date));
+                break;
+            case "event":
+                tasks.add(new Event(index, description, completionStatus, date));
+                break;
+            case "notebook":
+                tasks.add(new Notebook(index, description, completionStatus, date));
+                break;
+            default:
+                // not necessary as tasktype can only be the above 3
+            }
+            resetUiTasks();
+        }else {
+            ui.printDescriptionError();
+            clearUI();
         }
     }
 
     /**
      * Deletes the task as specified by user.
-     * @param deletedEvent determines the task to be deleted
+     * @param index determines the task to be deleted
      */
-    public void removeTask(String deletedEvent) {
-        if (deletedEvent.contains("all")) {
+    public void removeTask(int index) {
+        if (index==-1) {
             tasks.clear();
-            ui.printRemovedItem("All tasks", tasks.size() + 1);
+            ui.printRemovedItem("All tasks", 0);
         } else {
-            int taskTodDelete = Integer.parseInt(deletedEvent);
-            ui.printRemovedItem(tasks.get(taskTodDelete - 1).getOverallStatus(), tasks.size());
-            tasks.remove(taskTodDelete - 1);
+            ui.printRemovedItem(tasks.get(index).getOverallStatus(), tasks.size() - 1);
+            tasks.remove(index);
+            updateTaskIndex();
+        }
+        resetUiTasks();
+    }
+
+    public void resetUiTasks(){
+        uiTaskList = tasks;
+    }
+
+    /**
+     * Searches through whole tasklist to try and find a match with the user input.
+     */
+
+    public void findTasks(String search) {
+        uiTaskList = new ArrayList<>();
+        for (Task task : tasks){
+            if (task.getDescription().contains(search)){
+                uiTaskList.add(task);
+            }
+        }
+        ui.printFoundTasks(uiTaskList.size());
+    }
+
+    public void findNotes(String description){
+        uiNoteList = new ArrayList<>();
+        for (Task task : tasks){
+            for (Note notes : task.getNotes()){
+                if (notes.getDescription().contains(description)) {
+                    uiNoteList.add(notes);
+                }
+            }
+        }
+        ui.printFoundTasks(uiNoteList.size());
+    }
+
+    public void updateTaskIndex(){
+        int i = 1;
+        if (!tasks.isEmpty()) {
+            for (Task task : tasks) {
+                task.setIndex(i);
+                task.updateNoteIndex();
+                i++;
+            }
         }
     }
+
+    public ArrayList<Task> getUiTaskList() {
+        return uiTaskList;
+    }
+
 
     public ArrayList<Task> getTasks() {
         return tasks;
     }
 
-    /**
-     * Searches through whole tasklist to try and find a match with the user input.
-     * @param search the string to search for
-     */
-    public void findTasks(String search) {
-        ObservableList<String> foundtasks = FXCollections.observableArrayList();
-        for (Task task: tasks) {
-            if (task.getOverallStatus().contains(search)) {
-                foundtasks.add(task.getOverallStatus());
-            }
-        }
-        ui.printFoundTasks(foundtasks);
+    public ArrayList<Note> getUiNoteList() {
+        return uiNoteList;
     }
 
-    public void setTasks(ArrayList<Task> tasks) {
-        this.tasks = tasks;
+    public void clearUI(){
+        uiTaskList = new ArrayList<>();
+        uiNoteList = new ArrayList<>();
     }
-
-
 }
+

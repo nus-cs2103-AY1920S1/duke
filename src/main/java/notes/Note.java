@@ -8,7 +8,9 @@ import javafx.beans.property.SimpleStringProperty;
 
 import java.time.LocalDateTime;
 
-public class Notes {
+public class Note {
+    private Integer index;
+    private SimpleStringProperty source;
     private SimpleStringProperty category;
     private SimpleStringProperty description;
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm", timezone = "UTC")
@@ -23,9 +25,13 @@ public class Notes {
      * @param date optional date that can be included
      */
     @JsonCreator
-    public Notes(@JsonProperty("category") String category,
-                 @JsonProperty("description") String description,
-                 @JsonProperty("date") LocalDateTime date) {
+    public Note(@JsonProperty("index") int index,
+                @JsonProperty("source") String source,
+                @JsonProperty("category") String category,
+                @JsonProperty("description") String description,
+                @JsonProperty("date") LocalDateTime date) {
+        this.index = index;
+        this.source = new SimpleStringProperty(source);
         this.category = new SimpleStringProperty(category);
         this.description = new SimpleStringProperty(description);
         this.dateCreated = new SimpleObjectProperty<>(LocalDateTime.now());
@@ -78,5 +84,25 @@ public class Notes {
 
     public void setDate(LocalDateTime date) {
         this.date.set(date);
+    }
+
+    public String getSource() {
+        return source.get();
+    }
+
+    public SimpleStringProperty sourceProperty() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source.set(source);
+    }
+
+    public Integer getIndex() {
+        return index;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
     }
 }

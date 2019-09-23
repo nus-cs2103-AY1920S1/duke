@@ -22,6 +22,8 @@ public class TaskView extends DateTable {
     @FXML
     private TableView<Task> taskView;
     @FXML
+    private TableColumn<Task, Integer> indexCol;
+    @FXML
     private TableColumn<Task, String> taskTypeCol;
     @FXML
     private TableColumn<Task, Boolean> statusCol;
@@ -34,6 +36,7 @@ public class TaskView extends DateTable {
 
     TaskView(String filepath) {
         super(filepath);
+        indexCol.setCellValueFactory(new PropertyValueFactory<>("index"));
         taskTypeCol.setCellValueFactory(new PropertyValueFactory<>("taskType"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("isDone"));
         statusCol.setCellFactory(tc -> new CheckBoxTableCell<>());

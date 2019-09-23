@@ -8,6 +8,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class NewGui extends VBox {
     @FXML
@@ -18,6 +19,7 @@ public class NewGui extends VBox {
     private Label systemOutput;
 
     private Duke duke;
+    String str;
 
     @FXML
     private Integer task;
@@ -54,18 +56,15 @@ public class NewGui extends VBox {
 
     private void chooseTableView(String input) {
         if (input.contains("list")) {
-            String[] split = input.split(" ");
             tableArea.getChildren().clear();
-            if (split.length != 1) {
-                task = Integer.parseInt(split[2]) - 1;
-                tableArea.getChildren().addAll(taskNoteBook.getTaskNoteBook());
-            } else {
-                tableArea.getChildren().addAll(taskView.getTable());
-            }
+            tableArea.getChildren().addAll(taskView.getTable());
         }
-        taskView.setTable(duke.getAllTasks());
-        if (task != null) {
-            taskNoteBook.setTaskNoteBook(duke.getAllTasks().get(task).getNoteBook());
+        str = input.contains(" ") ? input.split(" ")[0]:input;
+        if (str.contains("note")){
+            tableArea.getChildren().clear();
+            tableArea.getChildren().addAll(taskNoteBook.getTaskNoteBook());
         }
+        taskView.setTable(duke.getUiTasks());
+        taskNoteBook.setTaskNoteBook(duke.getNotes());
     }
 }

@@ -1,26 +1,29 @@
 package ui;
 
-import notes.Notes;
+import notes.Note;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 
 public class TaskNoteBook extends DateTable {
     @FXML
-    private TableView<Notes> taskNoteBook;
+    private TableView<Note> taskNoteBook;
     @FXML
-    private TableColumn<Notes, String> categoryCol;
+    private TableColumn<Note, Integer> indexCol;
     @FXML
-    private TableColumn<Notes, String> descriptionCol;
+    private TableColumn<Note, String> sourceCol;
     @FXML
-    private TableColumn<Notes, LocalDateTime> dateCol;
+    private TableColumn<Note, String> categoryCol;
     @FXML
-    private TableColumn<Notes, LocalDateTime> dateCreatedCol;
+    private TableColumn<Note, String> descriptionCol;
+    @FXML
+    private TableColumn<Note, LocalDateTime> dateCol;
+    @FXML
+    private TableColumn<Note, LocalDateTime> dateCreatedCol;
 
 
     /**
@@ -29,6 +32,8 @@ public class TaskNoteBook extends DateTable {
      */
     public TaskNoteBook(String filepath) {
         super(filepath);
+        indexCol.setCellValueFactory(new PropertyValueFactory<>("index"));
+        sourceCol.setCellValueFactory(new PropertyValueFactory<>("source"));
         categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
         descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
         dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
@@ -37,11 +42,11 @@ public class TaskNoteBook extends DateTable {
         dateCreatedCol.setCellFactory(new ColumnFormatter<>(outputFormat));
     }
 
-    public TableView<Notes> getTaskNoteBook() {
+    public TableView<Note> getTaskNoteBook() {
         return taskNoteBook;
     }
 
-    public void setTaskNoteBook(ObservableList<Notes> noteBook) {
+    public void setTaskNoteBook(ObservableList<Note> noteBook) {
         taskNoteBook.setItems(noteBook);
     }
 

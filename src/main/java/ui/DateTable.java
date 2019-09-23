@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 
 public class DateTable extends TableView {
 
-    DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
+    DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
 
     public DateTable(String filepath) {
         loadFxml(filepath);

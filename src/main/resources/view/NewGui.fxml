@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.NewGui">
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.NewGui">
    <children>
       <TextField fx:id="userInput" alignment="CENTER" onAction="#handleUserInput" prefHeight="10.0" prefWidth="600.0" promptText="Please enter your commands here!" />
       <HBox prefHeight="19.0" prefWidth="600.0" style="-fx-border-color: black;">
@@ -19,13 +19,13 @@
                   <Image url="@../images/DaDuke.png" />
                </image>
             </ImageView>
-            <ScrollPane prefHeight="111.0" prefWidth="547.0">
+            <ScrollPane HBox.hgrow="ALWAYS">
                <content>
-                  <Label fx:id="systemOutput" text="Hi, how can I help you today" />
+                  <Label fx:id="systemOutput" text="Hi, my name is duke , how can I help you today?" />
                </content>
             </ScrollPane>
          </children>
       </HBox>
-      <StackPane fx:id="tableArea" prefHeight="272.0" prefWidth="600.0" />
+      <StackPane fx:id="tableArea" VBox.vgrow="ALWAYS" />
    </children>
 </VBox>

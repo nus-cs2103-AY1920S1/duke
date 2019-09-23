@@ -1,4 +1,4 @@
-package storage;
+package Task;
 
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,6 +9,7 @@ import tasklist.TaskList;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class JsonParser {
@@ -16,8 +17,15 @@ public class JsonParser {
     private String filepath;
     private TaskList taskList;
 
-    public JsonParser(String filepath) {
+    public JsonParser(String filepath) throws IOException {
         this.filepath = filepath;
+        File file = new File(filepath);
+        if (file.createNewFile()) {
+            FileWriter fileWriter = new FileWriter(filepath);
+            fileWriter.write("{}");
+            fileWriter.close();
+        }
+
     }
 
     /**

@@ -13,10 +13,11 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     @JsonCreator
-    public Event(@JsonProperty("description") String description,
+    public Event(@JsonProperty("index") int index,
+                 @JsonProperty("description") String description,
                  @JsonProperty("isDone") boolean completionStatus,
                  @JsonProperty("dateDue") LocalDateTime date) {
-        super(description, completionStatus,date);
+        super(index, description, completionStatus,date);
         taskType = new SimpleStringProperty("Event");
     }
 

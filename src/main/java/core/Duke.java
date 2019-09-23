@@ -2,7 +2,8 @@ package core;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import storage.JsonParser;
+import notes.Note;
+import Task.JsonParser;
 import tasklist.Task;
 import tasklist.TaskList;
 import parser.Parser;
@@ -16,19 +17,11 @@ import java.io.*;
 public class Duke {
     private TaskList tasks;
     private JsonParser jsonParser;
-    private String filepath = "../SaveFile.json";
+    private static String FILEPATH = "../SaveFile.json";
 
 
     public Duke() throws IOException {
-        File file = new File(filepath);
-        if (!file.exists()) {
-            file.createNewFile();
-            FileWriter fileWriter = new FileWriter(filepath);
-            fileWriter.write("{}");
-            fileWriter.close();
-        }
-
-        jsonParser = new JsonParser(filepath);
+        jsonParser = new JsonParser(FILEPATH);
         tasks = jsonParser.readData();
     }
 
@@ -43,12 +36,13 @@ public class Duke {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         tasks = jsonParser.readData();
-        parser.parseTasks(input, tasks,false);
+        parser.parseTasks(input, tasks);
         jsonParser.storeData(tasks);
         return outContent.toString();
     }
 
-    public ObservableList<Task> getAllTasks() {
-        return FXCollections.observableArrayList(tasks.getTasks());
+    public ObservableList<Task> getUiTasks() {
+        return FXCollections.observableArrayList(tasks.getUiTaskList());
     }
+    public ObservableList<Note> getNotes(){ return FXCollections.observableArrayList(tasks.getUiNoteList());}
 }

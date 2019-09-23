@@ -7,10 +7,7 @@ import seedu.duke.task.Event;
 import seedu.duke.task.Task;
 import seedu.duke.task.Todo;
 
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.File;
+import java.io.*;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -35,7 +32,7 @@ public class Storage {
      */
     public Storage(String filepath) {
 
-        this.filepath = filepath;
+        this.filepath = System.getProperty("user.dir") + filepath;
     }
 
     /**
@@ -132,6 +129,7 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
 
         // Creates a scanner object to read the txt file from filePath.
+        // String absolutePath = System.getProperty("user.dir") + getFilePath();
         Scanner scanner = new Scanner(new File(getFilePath()));
         scanner.nextLine(); // To avoid reading the first line of headers.
 
@@ -141,7 +139,6 @@ public class Storage {
 
         for (String input : inputsFromFile) {
             // A Possible input string is: "D | 0 | CS2103 Ip  | Wed 2359".
-
             String[] words = input.split("\\|");
             Boolean isDone = false;
 
@@ -183,6 +180,7 @@ public class Storage {
     public TreeMap<String, Integer> loadStats() throws FileNotFoundException {
         ArrayList<String> inputsFromFile = new ArrayList<>();
 
+        // String absolutePath = System.getProperty("user.dir") + getFilePath();
         Scanner scanner = new Scanner(new File(getFilePath()));
 
         while (scanner.hasNextLine()) {

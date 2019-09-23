@@ -1,0 +1,6 @@
+statistic | integerValue
+totalCommandsExecuted  : 18
+totalTasksDeleted  : 0
+totalTodosCompleted  : 0
+totalDeadlinesCompleted  : 0
+totalEventsCompleted  : 0

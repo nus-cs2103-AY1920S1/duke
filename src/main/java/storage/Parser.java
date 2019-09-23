@@ -36,6 +36,8 @@ public class Parser {
         switch (first) {
         case "bye":
             return new Command(CommandType.EXIT);
+        case "help":
+            return new Command(CommandType.HELP);
         case "list":
             return new Command(CommandType.PRINTLIST);
         case "todo":

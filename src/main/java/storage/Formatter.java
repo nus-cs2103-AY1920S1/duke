@@ -24,7 +24,7 @@ public class Formatter {
     }
 
     /**
-     * Appends a variable number of string.
+     * Appends a variable number of strings.
      *  
      * @return Appended string with new line for each element (varargs version).
      */

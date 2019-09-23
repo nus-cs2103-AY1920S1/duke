@@ -10,9 +10,9 @@ public class DukeTime {
 
     public static final String TIME_FORMAT_MESSAGE = "Time should be given in HHMM format from 0000 to 2359";
 
-    private static final SimpleDateFormat inputFormat = new SimpleDateFormat("HHmm");
+    private static SimpleDateFormat inputFormat = new SimpleDateFormat();
 
-    private static final SimpleDateFormat outputFormat = new SimpleDateFormat("HH:mma");
+    private static final SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mma");
 
     private Date time;
 
@@ -34,6 +34,11 @@ public class DukeTime {
      */
     public static DukeTime processTime(String timeString) throws InvalidInputException {
         Date time;
+        inputFormat.applyPattern("HHmm");
+        inputFormat.setLenient(false);
+        if (timeString.length() <= 3) {
+            throw new InvalidInputException(TIME_FORMAT_MESSAGE);
+        }
         try {
             time = inputFormat.parse(timeString);
         } catch (ParseException e) {

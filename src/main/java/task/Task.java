@@ -8,7 +8,7 @@ public abstract class Task {
     boolean done;
     private int no;
     String task;
-    private String type;
+    String type;
     DukeTime time;
     DukeDate date;
     public static String MISSING_DESC_ERROR_MESSAGE = "Task description is incomplete!";

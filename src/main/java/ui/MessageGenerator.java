@@ -3,11 +3,13 @@ package ui;
 import storage.Formatter;
 import task.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MessageGenerator {
 
     Formatter formatter = new Formatter();
+
     private static String LINE = "_______________________________________________________\n";
 
     /**
@@ -52,11 +54,38 @@ public class MessageGenerator {
     private String greeting() {
         String s = formatter.format("Hello I'm Pan Pan!\n");
         s += formatter.format("What can I do for you?\n");
+        s += formatter.format("For list of commands, type help.\n");
         return s;
     }
 
     private String byeString() {
         return "Bye. Hope to see you again soon!";
+    }
+
+    private List<String> helpMessage() {
+        List<String> messageChain = new ArrayList<>(20);
+        messageChain.add("Here's the list of commands:");
+        messageChain.add("To create a new Todo, type:");
+        messageChain.add(formatter.format("todo <Task Description>"));
+        messageChain.add("To create a new Deadline, type:");
+        messageChain.add(formatter.format("deadline <Task Description> /by<DD/MM/YYYY> <HHMM>"));
+        messageChain.add("To create a new Event, type:");
+        messageChain.add(formatter.format("event <Task Description> /at<DD/MM/YYYY> <HHMM>"));
+        messageChain.add("To list all tasks:");
+        messageChain.add(formatter.format("list"));
+        messageChain.add("To find a task containing keyword(s)");
+        messageChain.add(formatter.format("find <keyword(s)>"));
+        messageChain.add("To delete a task:");
+        messageChain.add(formatter.format("delete <TaskNo>"));
+        messageChain.add("To mark a task as done, type:");
+        messageChain.add(formatter.format("done <TaskNo>"));
+        messageChain.add("To update a task description, type:");
+        messageChain.add(formatter.format("update | <TaskNo> | desc | <New Description>"));
+        messageChain.add("To update a task time, type:");
+        messageChain.add(formatter.format("update | <TaskNo> | time | <New Time>"));
+        messageChain.add("To update a task date, type:");
+        messageChain.add(formatter.format("update | <TaskNo> | date | <New Date>"));
+        return messageChain;
     }
 
     /**
@@ -189,6 +218,18 @@ public class MessageGenerator {
     public String bye() {
         String s = line();
         s += formatter.format(byeString());
+        s += line();
+        return s;
+    }
+
+    /**
+     * Returns help message when user asks for help.
+     *
+     * @return String containing list of commands.
+     */
+    public String getHelpMessage() {
+        String s = line();
+        s += formatter.appendStrings(helpMessage().toArray(new String[(helpMessage().size())]));
         s += line();
         return s;
     }

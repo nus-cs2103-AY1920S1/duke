@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.InvalidItemException;
 import storage.Command;
 import storage.CommandType;
 import storage.Parser;
@@ -16,6 +17,7 @@ public class UI {
 
     private Parser parser = new Parser();
     private TaskList tasks = new TaskList();
+    private MessageGenerator msg = new MessageGenerator();
     private boolean isExit = false;
     private Storage storage;
     private Scanner sc = new Scanner(System.in);
@@ -102,11 +104,13 @@ public class UI {
                 return tasks.findMatchingTasks(parser.getKeyword(command));
             case UPDATE:
                 return tasks.updateTask(parser.getUpdateInfo(command));
+            case HELP:
+                return msg.getHelpMessage();
             default:
                 assert command.type.equals(CommandType.INVALID); //cases should always fall up to Invalid case.
                 throw new InvalidCommandException();
             }
-        } catch (InvalidCommandException | InvalidInputException | MissingInputException e) {
+        } catch (InvalidCommandException | InvalidInputException | MissingInputException | InvalidItemException e) {
             return e.getErrorMessage();
         }
     }

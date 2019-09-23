@@ -5,17 +5,16 @@ import exceptions.MissingInputException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
 import java.util.Date;
 
 public class DukeDate {
 
-    private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private static SimpleDateFormat dateFormat = new SimpleDateFormat();
 
     private static SimpleDateFormat outputFormat = new SimpleDateFormat("EEE, dd MMM YYYY");
 
-    private static String INCOMPLETE_DATE_MESSAGE = "Date is incomplete!\n Date should be in DD/MM/YYYY format.";
-
-    private static String INVALID_DATE_MESSAGE = "Date is invalid! \n It should be in DD/MM/YYYY format.";
+    private static String INVALID_DATE_MESSAGE = "Input is invalid!\n Date should be in DD/MM/YYYY format.";
 
     Date date;
 
@@ -36,17 +35,14 @@ public class DukeDate {
      * @throws InvalidInputException when date is not valid.
      * @throws MissingInputException when date is not complete.
      */
-    public static DukeDate processDate(String dateString) throws InvalidInputException, MissingInputException {
+    public static DukeDate processDate(String dateString) throws InvalidInputException {
         Date date;
-
-        if (dateString.length() < 3) {
-            throw new MissingInputException(INVALID_DATE_MESSAGE);
-        }
-
+        dateFormat.applyPattern("dd/MM/yyyy");
+        dateFormat.setLenient(false);
         try {
             date = dateFormat.parse(dateString);
-        } catch (ParseException e) {
-            throw new InvalidInputException(INCOMPLETE_DATE_MESSAGE);
+        } catch (ParseException | DateTimeException e) {
+            throw new InvalidInputException(INVALID_DATE_MESSAGE);
         }
 
         return new DukeDate(date);

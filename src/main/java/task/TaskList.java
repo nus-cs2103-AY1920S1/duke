@@ -57,7 +57,7 @@ public class TaskList {
     private String removeTask(int taskNo) {
         Task deleted = taskList.get(taskNo);
         taskList.remove(taskNo);
-        assert !(taskList.contains(taskList.get(taskNo)));
+        //assert !(taskList.contains(taskList.get(taskNo)));
         return msgGenerator.getRemoveMessage(deleted, noTasks());
     }
 
@@ -111,16 +111,12 @@ public class TaskList {
      * @param taskNo identification number for task.
      * @return done message.
      */
-    public String setDone(int taskNo) {
-        try {
-            if (invalidTaskNo(taskNo)) {
-                throw new InvalidItemException();
-            }
-            taskList.get(taskNo).setDone();
-            return msgGenerator.getDoneMessage(taskList.get(taskNo));
-        } catch (DukeException e) {
-            return e.getErrorMessage();
+    public String setDone(int taskNo) throws InvalidItemException {
+        if (invalidTaskNo(taskNo)) {
+            throw new InvalidItemException();
         }
+        taskList.get(taskNo).setDone();
+        return msgGenerator.getDoneMessage(taskList.get(taskNo));
     }
 
     /**
@@ -129,15 +125,11 @@ public class TaskList {
      * @param taskNo identification number for task.
      * @return String with delete message.
      */
-    public String deleteTask(int taskNo) {
-        try {
-            if (invalidTaskNo(taskNo)) {
-                throw new InvalidItemException();
-            }
-            return removeTask(taskNo);
-        } catch (DukeException e) {
-            return e.getErrorMessage();
+    public String deleteTask(int taskNo) throws InvalidItemException {
+        if (invalidTaskNo(taskNo)) {
+            throw new InvalidItemException();
         }
+        return removeTask(taskNo);
     }
 
     /**
@@ -190,6 +182,9 @@ public class TaskList {
      * @return message when task is updated.
      */
     public String updateTaskTime(int taskNo, String time) throws InvalidInputException, MissingInputException {
+        if (taskList.get(taskNo).type.equals("T")) {
+            throw new InvalidInputException("Time's not available for Todo!");
+        }
         taskList.get(taskNo).updateTaskTime(time);
         return msgGenerator.getUpdateMessage(taskList.get(taskNo), noTasks());
     }
@@ -201,6 +196,9 @@ public class TaskList {
      * @return message when task is updated.
      */
     public String updateTaskDate(int taskNo, String date) throws MissingInputException, InvalidInputException {
+        if (taskList.get(taskNo).type.equals("T")) {
+            throw new InvalidInputException("Date's not available for Todo!");
+        }
         taskList.get(taskNo).updateTaskDate(date);
         return msgGenerator.getUpdateMessage(taskList.get(taskNo), noTasks());
     }

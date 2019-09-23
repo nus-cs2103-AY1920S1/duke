@@ -155,9 +155,9 @@ public class Ui {
             } else {
                 Stream<Path> noteStream = Files.walk(Paths.get(Note.FILE_BASE_PATH));
                 List<String> noteList = noteStream
-                        .map(x -> x.toString())
-                        .filter(f -> f.endsWith(".txt"))
-                        .map(x -> x.replace(Note.FILE_BASE_PATH, ""))
+                        .map(x -> x.toFile())
+                        .map(x -> x.getName())
+                        .filter(x -> x.endsWith(".txt"))
                         .map(x -> x.replace(".txt", ""))
                         .collect(Collectors.toList());
                 String response = "";

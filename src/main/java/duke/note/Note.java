@@ -2,10 +2,23 @@ package duke.note;
 
 import java.io.File;
 
+/**
+ * A Note that stores information for the user.
+ * Notes contain a title and a description.
+ */
 public class Note {
-    public static final String FILE_BASE_PATH = ".\\notes\\";
+    /**
+     * The directory location for writing Notes to the hard drive.
+     */
+    public static final String FILE_BASE_PATH = ".//notes//";
+    
+    /**
+     * The File object that represents the directory location for writing Notes to the hard drive.
+     */
     public static final File NOTE_DIRECTORY = new File(Note.FILE_BASE_PATH);
+    
     private String fileName;
+    
     private String noteContents;
     
     public Note(String fileName) {

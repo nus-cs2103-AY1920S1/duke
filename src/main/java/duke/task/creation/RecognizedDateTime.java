@@ -13,7 +13,7 @@ class RecognizedDateTime {
             + "("
             + "(?i)"
             + "Today|Tomorrow|"
-            + "Mon|Monday|Tue|Tues|Tuesday|Wed|Wednesday|Thu|Thursday|Fri|Friday|Sat|Saturday|Sun|Sunday"
+            + "Mon|Monday|Tue|Tues|Tuesday|Wed|Wednesday|Thu|Thurs|Thursday|Fri|Friday|Sat|Saturday|Sun|Sunday"
             + ")"
             + "(\\s([0-9]{4}))?"
             + ")";

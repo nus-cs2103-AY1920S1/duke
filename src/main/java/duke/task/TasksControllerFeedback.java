@@ -19,7 +19,7 @@ class TasksControllerFeedback {
                     .newLine()
                     .append("You have more than 10 undone tasks on your list.")
                     .newLine()
-                    .append("Are you succumbing to the dark side?")
+                    .append("Are you falling to the dark side?")
                     .newLine()
                     .append("/vader/");
 

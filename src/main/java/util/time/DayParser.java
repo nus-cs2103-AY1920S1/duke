@@ -61,6 +61,7 @@ public class DayParser {
                     .withSecond(0)
                     .withNano(0);
 
+        case "thu":
         case "thur":
         case "thurs":
         case "thursday":

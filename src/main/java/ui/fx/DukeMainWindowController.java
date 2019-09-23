@@ -22,8 +22,9 @@ public class DukeMainWindowController {
     @FXML
     private TextField userInput;
 
-    private Image userImage;
-    private Image dukeImage;
+    private Image anakinImage;
+    private Image yodaImage;
+    private Image vaderImage;
 
     private List<FxDukeInput> fxDukeInputs;
 
@@ -31,8 +32,9 @@ public class DukeMainWindowController {
      * Constructor for MainWindow component of the JavaFx application.
      */
     public DukeMainWindowController() {
-        this.userImage = new Image(getClass().getResourceAsStream("/images/DaUser.png"));
-        this.dukeImage = new Image(getClass().getResourceAsStream("/images/DaDuke.png"));
+        this.anakinImage = new Image(getClass().getResourceAsStream("/images/anakin.png"));
+        this.yodaImage = new Image(getClass().getResourceAsStream("/images/yoda.png"));
+        this.vaderImage = new Image(getClass().getResourceAsStream("/images/vader.png"));
 
         this.fxDukeInputs = new ArrayList<>();
     }
@@ -77,7 +79,13 @@ public class DukeMainWindowController {
      * @param message message to be printed
      */
     void printDukeMessage(String message) {
-        dialogContainer.getChildren().addAll(FxDialogBox.getDukeDialog(message, dukeImage));
+        if (message.contains("\n/vader/")) {
+            message = message.replace("\n/vader/", "");
+            dialogContainer.getChildren().addAll(FxDialogBox.getDukeDialog(message, vaderImage));
+            return;
+        }
+
+        dialogContainer.getChildren().addAll(FxDialogBox.getDukeDialog(message, yodaImage));
     }
 
     /**
@@ -86,7 +94,7 @@ public class DukeMainWindowController {
      */
     private void printUserMessage(String message) {
         dialogContainer.getChildren().addAll(
-                FxDialogBox.getUserDialog(message, userImage)
+                FxDialogBox.getUserDialog(message, anakinImage)
         );
     }
 

@@ -14,6 +14,28 @@ class TasksControllerFeedback {
                 .newLine()
                 .appendTasks(tasks);
 
+        if (tasks.stream().filter(task -> !task.isTaskDone()).count() >= 10) {
+            builder.newLine()
+                    .newLine()
+                    .append("You have more than 10 undone tasks on your list.")
+                    .newLine()
+                    .append("Are you succumbing to the dark side?")
+                    .newLine()
+                    .append("/vader/");
+
+            return builder.build();
+        }
+
+        if (tasks.stream().filter(task -> !task.isTaskDone()).count() >= 5) {
+            builder.newLine()
+                    .newLine()
+                    .append("I sense more than 5 undone tasks on your list.")
+                    .newLine()
+                    .append("You seem to have gotten lazy padawan.");
+
+            return builder.build();
+        }
+
         return builder.build();
     }
 

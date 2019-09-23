@@ -10,8 +10,7 @@ public class ErrorMessageFormatter {
      * @return the formatted message.
      */
     public static String formatErrorMessage(String message) {
-        return "☹ OOPS! I'm sorry! "
-                + message.replace(".", "!")
-                + " :-(";
+        return "I'm sorry, I do not understand. "
+                + message;
     }
 }

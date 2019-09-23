@@ -23,7 +23,11 @@ public class TasksController {
     private ITaskRepo tasksRepo;
     private List<UiOutputAccessor> registeredUis;
 
-
+    /**
+     * Constructor for a TasksController. A repo with from which the controller will write and read data is needed
+     * as a dependency.
+     * @param tasksRepo the repo from which the controller will read and write data.
+     */
     public TasksController(ITaskRepo tasksRepo) {
         this.feedbackFormatter = new TasksControllerFeedback();
         this.tasksRepo = tasksRepo;
@@ -96,9 +100,16 @@ public class TasksController {
         return true;
     }
 
+    /**
+     * Adds a task to a particular index. The index is based on the list of tasks displayed by the listTasks() method.
+     * @param index the index at which to add the new task.
+     * @param task the new task to be added.
+     * @return true if the addition was successful.
+     * @throws UiException if the ui fails unexpectedly.
+     */
     public boolean addTaskToIndex(int index, Task task) throws UiException {
         try {
-            tasksRepo.addTask(task);
+            tasksRepo.addTaskToIndex(index, task);
         } catch (TaskRepoException e) {
             this.displayError(e);
             return false;
@@ -250,7 +261,7 @@ public class TasksController {
     public List<Task> sortTasks(TaskSorts sortingMethod) throws UiException {
         // Try to sort tasks and print corresponding feedback
         try {
-            List<Task> oldTasks = tasksRepo.getCurrentTasks();
+            final List<Task> oldTasks = tasksRepo.getCurrentTasks();
 
             List<Task> sortedTasks = tasksRepo.getCurrentTasks();
             sortedTasks.sort(sortingMethod.comparator);

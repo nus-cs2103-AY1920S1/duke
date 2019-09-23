@@ -36,12 +36,12 @@ public class ClOutput extends DukeOutput {
 
             String messageWithIndent = message.replaceAll("(?m)^", "     ");
 
-            String HORIZONTAL_DIVIDER = "    ____________________________________________________________\n";
-            String output = builder.append(HORIZONTAL_DIVIDER)
+            String horizontalDivider = "____________________________________________________________\n";
+            String output = builder.append(horizontalDivider)
                     .append("\n")
                     .append(messageWithIndent)
                     .append("\n")
-                    .append(HORIZONTAL_DIVIDER)
+                    .append(horizontalDivider)
                     .toString();
 
             System.out.println(output);

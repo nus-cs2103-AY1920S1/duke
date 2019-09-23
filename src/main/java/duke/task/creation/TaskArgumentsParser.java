@@ -64,7 +64,8 @@ class TaskArgumentsParser {
         }
 
         if (numDates == 2) {
-            String doubleDateTimeRegex = "(" + dateTimeRegexWithToSeparator + "|" + dateTimeRegexWithSpaceSeparator + ")";
+            String doubleDateTimeRegex = "(" + dateTimeRegexWithToSeparator + "|"
+                    + dateTimeRegexWithSpaceSeparator + ")";
 
             foundPatterns = findMatchingPatterns(arguments, doubleDateTimeRegex);
 

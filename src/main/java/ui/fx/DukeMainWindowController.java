@@ -27,6 +27,9 @@ public class DukeMainWindowController {
 
     private List<FxDukeInput> fxDukeInputs;
 
+    /**
+     * Constructor for MainWindow component of the JavaFx application.
+     */
     public DukeMainWindowController() {
         this.userImage = new Image(getClass().getResourceAsStream("/images/DaUser.png"));
         this.dukeImage = new Image(getClass().getResourceAsStream("/images/DaDuke.png"));

@@ -6,7 +6,7 @@ public class StubInput extends DukeInput {
 
     public StubInput(String input) {
         super(false);
-        this.input =input;
+        this.input = input;
     }
 
     /**

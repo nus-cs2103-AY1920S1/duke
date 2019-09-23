@@ -19,8 +19,8 @@ class UiTest {
         UiOutputAccessor outputAccessor = ui.getUiOutputAccessor();
 
         Assertions.assertThrows(UiException.class, () -> {
-          outputAccessor.displayOutput("hello");
-       });
+            outputAccessor.displayOutput("hello");
+        });
     }
 
     @Test

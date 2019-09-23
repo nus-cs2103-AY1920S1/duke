@@ -116,8 +116,8 @@ public class TimeFrame implements Serializable, Comparable<TimeFrame> {
     }
 
     /**
-     * Compares an object to a TimeFrame instance to see if they are equal. Two time frames are equal if they have the same
-     * start and end LocalDateTimes.
+     * Compares an object to a TimeFrame instance to see if they are equal. Two time frames are equal if
+     * they have the same start and end LocalDateTimes.
      * @param obj object to be compared.
      * @return true if the objects are equal.
      */

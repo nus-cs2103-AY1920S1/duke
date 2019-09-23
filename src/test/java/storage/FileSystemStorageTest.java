@@ -5,14 +5,13 @@ import duke.task.tasks.Event;
 import duke.task.tasks.ToDo;
 import error.storage.StorageException;
 import error.task.TaskCreationException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class FileSystemStorageTest {
     private static final String rootTestDirectory = System.getProperty("user.home") + "/DukeTests";
@@ -24,8 +23,8 @@ class FileSystemStorageTest {
 
         boolean isStorageFileCreated = new File(storagePath).exists();
 
-        assertTrue(isStorageFileCreated);
-        assertTrue(deleteDirectory(new File(rootTestDirectory)));
+        Assertions.assertTrue(isStorageFileCreated);
+        Assertions.assertTrue(deleteDirectory(new File(rootTestDirectory)));
     }
 
     @Test
@@ -41,10 +40,10 @@ class FileSystemStorageTest {
         storage.writeTasks(mockTasks);
 
         List<Task> storedTasks = storage.getTasks();
-        assertEquals(mockTaskA, storedTasks.get(0));
-        assertEquals(mockTaskB, storedTasks.get(1));
+        Assertions.assertEquals(mockTaskA, storedTasks.get(0));
+        Assertions.assertEquals(mockTaskB, storedTasks.get(1));
 
-        assertTrue(deleteDirectory(new File(rootTestDirectory)));
+        Assertions.assertTrue(deleteDirectory(new File(rootTestDirectory)));
     }
 
 

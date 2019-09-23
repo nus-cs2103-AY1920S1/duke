@@ -25,7 +25,7 @@ public class DeleteCommand implements Command {
 
     DeleteCommand(int index, boolean deleteAll, TasksController tasksController) throws CommandCreationException {
         this.deletedTaskIndex = index;
-        this.tasksController =tasksController;
+        this.tasksController = tasksController;
         this.deleteAll = deleteAll;
 
         this.isExecuted = false;

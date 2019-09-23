@@ -8,10 +8,10 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * An abstract class to encapsulate a controller for the UI component of the Duke chatbox. It acts as a mediator between
- * the direct Ui components and the main program driver. It contains 2 inner components, DukeInput.java and DukeOutput. These
- * two components serve as direct handlers for getting user input and printing output messages respectively. DukeUi
- * helps to orchestrate the Ui's behavior by forwarding any input to the main program driver and by providing a method
- * for the main program driver to display any messages.
+ * the direct Ui components and the main program driver. It contains 2 inner components, DukeInput.java and DukeOutput.
+ * These two components serve as direct handlers for getting user input and printing output messages respectively.
+ * DukeUi helps to orchestrate the Ui's behavior by forwarding any input to the main program driver and by providing a
+ * method for the main program driver to display any messages.
  */
 public class Ui implements DukeInputListener {
     private DukeInput inputChannel;
@@ -21,6 +21,12 @@ public class Ui implements DukeInputListener {
 
     private boolean isUiInitialized;
 
+    /**
+     * Constructor for a Ui class.
+     * @param dukeInput the input channel for the ui.
+     * @param dukeOutput the output channel for the ui.
+     * @param driver the main driver to receive inputs.
+     */
     public Ui(DukeInput dukeInput, DukeOutput dukeOutput, UiDriver driver) {
         this.inputChannel = dukeInput;
         this.inputChannel.addListener(this);
@@ -46,8 +52,7 @@ public class Ui implements DukeInputListener {
      * Displays output through internal DukeOutput component. Output CAN ONLY be displayed after initializeUi() has been
      * called to open the output channel.
      * @param output output message to be displayed.
-     * @throws UiException if message fails to be displayed by the output channel or if ui has not been previously
-     * initialized.
+     * @throws UiException if message fails to be displayed by the output channel or if ui has not been initialized.
      */
     public void displayOutput(String output) throws UiException {
         if (!isUiInitialized) {

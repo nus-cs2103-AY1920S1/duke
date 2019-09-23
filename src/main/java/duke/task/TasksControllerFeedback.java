@@ -7,8 +7,8 @@ import util.strings.OutputBuilder;
 import java.util.List;
 import java.util.Optional;
 
-public class TasksControllerFeedback {
-    public String displayAllTasks(List<Task> tasks) {
+class TasksControllerFeedback {
+    String displayAllTasks(List<Task> tasks) {
         OutputBuilder builder = new OutputBuilder();
         builder.append("Here are the tasks in your list:")
                 .newLine()
@@ -17,7 +17,7 @@ public class TasksControllerFeedback {
         return builder.build();
     }
 
-    public String displayMatchingTasks(List<Task> tasks) {
+    String displayMatchingTasks(List<Task> tasks) {
         OutputBuilder builder = new OutputBuilder();
         builder.append("Here are the matching tasks in your list:")
                 .newLine()
@@ -26,7 +26,7 @@ public class TasksControllerFeedback {
         return builder.build();
     }
 
-    public String displayTaskAdded(Task task, Optional<Integer> numTasks) {
+    String displayTaskAdded(Task task, Optional<Integer> numTasks) {
         OutputBuilder builder = new OutputBuilder();
         builder.append("Got it. I've added this task:")
                 .newLine()
@@ -40,7 +40,7 @@ public class TasksControllerFeedback {
         return builder.build();
     }
 
-    public String displayTaskSetToDone(Optional<Task> modifiedTask) {
+    String displayTaskSetToDone(Optional<Task> modifiedTask) {
         OutputBuilder builder = new OutputBuilder();
         builder.append("Nice! I've marked this task as done!");
 
@@ -52,7 +52,7 @@ public class TasksControllerFeedback {
         return builder.build();
     }
 
-    public String displayTaskSetToUndone(Optional<Task> modifiedTask) {
+    String displayTaskSetToUndone(Optional<Task> modifiedTask) {
         OutputBuilder builder = new OutputBuilder();
         builder.append("Noted! I've marked this task as undone!");
 
@@ -65,7 +65,7 @@ public class TasksControllerFeedback {
     }
 
 
-    public String displayTaskDeleted(Task deletedTask, Optional<Integer> numTasks) {
+    String displayTaskDeleted(Task deletedTask, Optional<Integer> numTasks) {
         OutputBuilder builder = new OutputBuilder();
         builder.append("Noted. I've removed this task:")
                 .newLine()
@@ -79,14 +79,14 @@ public class TasksControllerFeedback {
         return builder.build();
     }
 
-    public String displayTasksSorted(TaskSorts sortingMethod) {
+    String displayTasksSorted(TaskSorts sortingMethod) {
         OutputBuilder builder = new OutputBuilder();
         builder.append("Noted. I have sorted your tasks according to " + sortingMethod.keyword);
 
         return builder.build();
     }
 
-    public String displayAllTasksDeleted() {
+    String displayAllTasksDeleted() {
         OutputBuilder builder = new OutputBuilder();
         builder.append("Noted. I have deleted all your tasks.")
                 .newLine()

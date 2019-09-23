@@ -44,7 +44,8 @@ class TaskBuilder {
         return argsList.toArray();
     }
 
-    private static Task invokeTaskConstructor(Constructor<?> constructor, Object[] arguments) throws TaskCreationException {
+    private static Task invokeTaskConstructor(Constructor<?> constructor, Object[] arguments)
+            throws TaskCreationException {
         try {
             return (Task) constructor.newInstance(arguments);
 

@@ -19,7 +19,8 @@ class TaskFactoryTest {
         Task task = taskFactory.getTask("deadline", "hello everyone 02/01/2020 0210").get();
 
         Assertions.assertEquals(task.getClass(), Deadline.class);
-        Assertions.assertEquals(task.getTaskDescription(), "[D][\u2718] hello everyone (by: Jan 02 2020, Thu, 02:10AM)");
+        Assertions.assertEquals(task.getTaskDescription(),
+                "[D][✘] hello everyone (by: Jan 02 2020, Thu, 02:10AM)");
     }
 
     @Test
@@ -27,7 +28,7 @@ class TaskFactoryTest {
         Task task = taskFactory.getTask("todo",  "hello everyone").get();
 
         Assertions.assertEquals(task.getClass(), ToDo.class);
-        Assertions.assertEquals(task.getTaskDescription(), "[T][\u2718] hello everyone");
+        Assertions.assertEquals(task.getTaskDescription(), "[T][✘] hello everyone");
     }
 
     @Test
@@ -35,7 +36,8 @@ class TaskFactoryTest {
         Task task = taskFactory.getTask("event", "hello everyone 02/01/2020 0210").get();
 
         Assertions.assertEquals(task.getClass(), Event.class);
-        Assertions.assertEquals(task.getTaskDescription(), "[E][\u2718] hello everyone (at: Jan 02 2020, Thu, 02:10AM)");
+        Assertions.assertEquals(task.getTaskDescription(),
+                "[E][✘] hello everyone (at: Jan 02 2020, Thu, 02:10AM)");
     }
 
     @Test
@@ -44,24 +46,26 @@ class TaskFactoryTest {
 
         Assertions.assertEquals(task.getClass(), DoAfter.class);
         Assertions.assertEquals(task.getTaskDescription(),
-                "[A][\u2718] hello everyone (after: Jan 02 2020, Thu, 02:10AM)");
+                "[A][✘] hello everyone (after: Jan 02 2020, Thu, 02:10AM)");
     }
 
     @Test
     void testCreateDoWithin() throws TaskCreationException {
-        Task task = taskFactory.getTask("within",  "hello everyone 02/01/2020 0210 to 03/02/2021 0900").get();
+        Task task = taskFactory.getTask("within",
+                "hello everyone 02/01/2020 0210 to 03/02/2021 0900").get();
 
         Assertions.assertEquals(task.getClass(), DoWithin.class);
         Assertions.assertEquals(task.getTaskDescription(),
-                "[W][\u2718] hello everyone (from: Jan 02 2020, Thu, 02:10AM to: Feb 03 2021, Wed, 09:00AM)");
+                "[W][✘] hello everyone (from: Jan 02 2020, Thu, 02:10AM to: Feb 03 2021, Wed, 09:00AM)");
     }
 
     @Test
     void testCreateDoWithin2() throws TaskCreationException {
-        Task task = taskFactory.getTask("within", "hello everyone 02/01/2020 0210 03/02/2021 0900").get();
+        Task task = taskFactory.getTask("within",
+                "hello everyone 02/01/2020 0210 03/02/2021 0900").get();
 
         Assertions.assertEquals(task.getClass(), DoWithin.class);
         Assertions.assertEquals(task.getTaskDescription(),
-                "[W][\u2718] hello everyone (from: Jan 02 2020, Thu, 02:10AM to: Feb 03 2021, Wed, 09:00AM)");
+                "[W][✘] hello everyone (from: Jan 02 2020, Thu, 02:10AM to: Feb 03 2021, Wed, 09:00AM)");
     }
 }

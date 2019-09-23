@@ -1,108 +1,107 @@
 package duke.task.tasks.entities;
 
 import duke.task.TimeFrame;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import util.time.DateTime;
 
 import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class TimeFrameTest {
 
     @Test
     void hasDescription() {
         TimeFrame mockTimeFrameA = new TimeFrame(null, null);
-        assertFalse(mockTimeFrameA.hasDescription());
+        Assertions.assertFalse(mockTimeFrameA.hasDescription());
 
         TimeFrame mockTimeFrameB = new TimeFrame(LocalDateTime.now(), null);
-        assertTrue(mockTimeFrameB.hasDescription());
+        Assertions.assertTrue(mockTimeFrameB.hasDescription());
 
         TimeFrame mockTimeFrameC = new TimeFrame(null, LocalDateTime.now());
-        assertTrue(mockTimeFrameC.hasDescription());
+        Assertions.assertTrue(mockTimeFrameC.hasDescription());
 
         TimeFrame mockTimeFrameD = new TimeFrame(LocalDateTime.now(), LocalDateTime.now());
-        assertTrue(mockTimeFrameD.hasDescription());
+        Assertions.assertTrue(mockTimeFrameD.hasDescription());
     }
 
     @Test
     void getDescription() {
-        LocalDateTime timeA = LocalDateTime.now();
-        LocalDateTime timeB = LocalDateTime.now().plusMinutes(5);
+        final LocalDateTime timeA = LocalDateTime.now();
+        final LocalDateTime timeB = LocalDateTime.now().plusMinutes(5);
 
-        TimeFrame mockTimeFrameA = new TimeFrame(null, null);
-        assertNull(mockTimeFrameA.getDescription());
+        final TimeFrame mockTimeFrameA = new TimeFrame(null, null);
+        Assertions.assertNull(mockTimeFrameA.getDescription());
 
-        TimeFrame mockTimeFrameB = new TimeFrame(timeA, null);
-        assertEquals(mockTimeFrameB.getDescription(), "after: " + DateTime.getString(timeA));
+        final TimeFrame mockTimeFrameB = new TimeFrame(timeA, null);
+        Assertions.assertEquals(mockTimeFrameB.getDescription(), "after: " + DateTime.getString(timeA));
 
-        TimeFrame mockTimeFrameC = new TimeFrame(null, timeA);
-        assertEquals(mockTimeFrameC.getDescription(), "by: " + DateTime.getString(timeA));
+        final TimeFrame mockTimeFrameC = new TimeFrame(null, timeA);
+        Assertions.assertEquals(mockTimeFrameC.getDescription(), "by: " + DateTime.getString(timeA));
 
-        TimeFrame mockTimeFrameD = new TimeFrame(timeA, timeA);
-        assertEquals(mockTimeFrameD.getDescription(), "at: " + DateTime.getString(timeA));
+        final TimeFrame mockTimeFrameD = new TimeFrame(timeA, timeA);
+        Assertions.assertEquals(mockTimeFrameD.getDescription(), "at: " + DateTime.getString(timeA));
 
-        TimeFrame mockTimeFrameE = new TimeFrame(timeA, timeB);
-        assertEquals(mockTimeFrameE.getDescription(), "from: " + DateTime.getString(timeA) +
-                " to: " + DateTime.getString(timeB));
+        final TimeFrame mockTimeFrameE = new TimeFrame(timeA, timeB);
+        Assertions.assertEquals(mockTimeFrameE.getDescription(), "from: " + DateTime.getString(timeA)
+                + " to: " + DateTime.getString(timeB));
     }
 
     @Test
     void getDateTimes() {
-        LocalDateTime timeA = LocalDateTime.now();
-        LocalDateTime timeB = LocalDateTime.now().plusMinutes(5);
+        final LocalDateTime timeA = LocalDateTime.now();
+        final LocalDateTime timeB = LocalDateTime.now().plusMinutes(5);
 
-        TimeFrame mockTimeFrameA = new TimeFrame(null, null);
-        assertEquals(0, mockTimeFrameA.getDateTimes().size());
+        final TimeFrame mockTimeFrameA = new TimeFrame(null, null);
+        Assertions.assertEquals(0, mockTimeFrameA.getDateTimes().size());
 
-        TimeFrame mockTimeFrameB = new TimeFrame(timeA, null);
-        assertEquals(1, mockTimeFrameB.getDateTimes().size());
-        assertEquals(timeA, mockTimeFrameB.getDateTimes().get(0));
+        final TimeFrame mockTimeFrameB = new TimeFrame(timeA, null);
+        Assertions.assertEquals(1, mockTimeFrameB.getDateTimes().size());
+        Assertions.assertEquals(timeA, mockTimeFrameB.getDateTimes().get(0));
 
-        TimeFrame mockTimeFrameC = new TimeFrame(null, timeA);
-        assertEquals(1, mockTimeFrameC.getDateTimes().size());
-        assertEquals(timeA, mockTimeFrameC.getDateTimes().get(0));
+        final TimeFrame mockTimeFrameC = new TimeFrame(null, timeA);
+        Assertions.assertEquals(1, mockTimeFrameC.getDateTimes().size());
+        Assertions.assertEquals(timeA, mockTimeFrameC.getDateTimes().get(0));
 
-        TimeFrame mockTimeFrameD = new TimeFrame(timeA, timeB);
-        assertEquals(2, mockTimeFrameD.getDateTimes().size());
-        assertEquals(timeA, mockTimeFrameD.getDateTimes().get(0));
-        assertEquals(timeB, mockTimeFrameD.getDateTimes().get(1));
+        final TimeFrame mockTimeFrameD = new TimeFrame(timeA, timeB);
+        Assertions.assertEquals(2, mockTimeFrameD.getDateTimes().size());
+        Assertions.assertEquals(timeA, mockTimeFrameD.getDateTimes().get(0));
+        Assertions.assertEquals(timeB, mockTimeFrameD.getDateTimes().get(1));
     }
 
     @Test
     void compareTo() {
-        LocalDateTime timeA = LocalDateTime.now();
-        LocalDateTime timeB = LocalDateTime.now().plusMinutes(5);
+        final LocalDateTime timeA = LocalDateTime.now();
+        final LocalDateTime timeB = LocalDateTime.now().plusMinutes(5);
 
-        TimeFrame mockTimeFrameA = new TimeFrame(null, null);
-        TimeFrame mockTimeFrameB = new TimeFrame(timeA, null);
-        TimeFrame mockTimeFrameC = new TimeFrame(null, timeA);
-        TimeFrame mockTimeFrameD = new TimeFrame(timeA, timeA);
-        TimeFrame mockTimeFrameE = new TimeFrame(timeA, timeB);
+        final TimeFrame mockTimeFrameA = new TimeFrame(null, null);
+        final TimeFrame mockTimeFrameB = new TimeFrame(timeA, null);
+        final TimeFrame mockTimeFrameC = new TimeFrame(null, timeA);
+        final TimeFrame mockTimeFrameD = new TimeFrame(timeA, timeA);
+        final TimeFrame mockTimeFrameE = new TimeFrame(timeA, timeB);
 
-        assertEquals(mockTimeFrameA.compareTo(mockTimeFrameA), 0);
-        assertEquals(mockTimeFrameA.compareTo(mockTimeFrameB), -1);
-        assertEquals(mockTimeFrameA.compareTo(mockTimeFrameC), 1);
-        assertEquals(mockTimeFrameA.compareTo(mockTimeFrameD), 1);
-        assertEquals(mockTimeFrameA.compareTo(mockTimeFrameE), 1);
+        Assertions.assertEquals(mockTimeFrameA.compareTo(mockTimeFrameA), 0);
+        Assertions.assertEquals(mockTimeFrameA.compareTo(mockTimeFrameB), -1);
+        Assertions.assertEquals(mockTimeFrameA.compareTo(mockTimeFrameC), 1);
+        Assertions.assertEquals(mockTimeFrameA.compareTo(mockTimeFrameD), 1);
+        Assertions.assertEquals(mockTimeFrameA.compareTo(mockTimeFrameE), 1);
 
-        assertEquals(mockTimeFrameB.compareTo(mockTimeFrameC), 1);
-        assertEquals(mockTimeFrameC.compareTo(mockTimeFrameB), -1);
-        assertEquals(mockTimeFrameC.compareTo(mockTimeFrameD), 0);
-        assertEquals(mockTimeFrameC.compareTo(mockTimeFrameE), -1);
-        assertEquals(mockTimeFrameC.compareTo(mockTimeFrameE), -1);
+        Assertions.assertEquals(mockTimeFrameB.compareTo(mockTimeFrameC), 1);
+        Assertions.assertEquals(mockTimeFrameC.compareTo(mockTimeFrameB), -1);
+        Assertions.assertEquals(mockTimeFrameC.compareTo(mockTimeFrameD), 0);
+        Assertions.assertEquals(mockTimeFrameC.compareTo(mockTimeFrameE), -1);
+        Assertions.assertEquals(mockTimeFrameC.compareTo(mockTimeFrameE), -1);
     }
 
     @Test
     void testEquals() {
-        LocalDateTime timeA = LocalDateTime.now();
-        LocalDateTime timeB = LocalDateTime.now().plusMinutes(5);
+        final LocalDateTime timeA = LocalDateTime.now();
+        final LocalDateTime timeB = LocalDateTime.now().plusMinutes(5);
 
-        TimeFrame mockTimeFrameA = new TimeFrame(timeA, timeB);
-        TimeFrame mockTimeFrameB = new TimeFrame(timeA, timeB);
-        TimeFrame mockTimeFrameC = new TimeFrame(timeA, null);
+        final TimeFrame mockTimeFrameA = new TimeFrame(timeA, timeB);
+        final TimeFrame mockTimeFrameB = new TimeFrame(timeA, timeB);
+        final TimeFrame mockTimeFrameC = new TimeFrame(timeA, null);
 
-        assertEquals(mockTimeFrameA, mockTimeFrameB);
-        assertNotEquals(mockTimeFrameA, mockTimeFrameC);
+        Assertions.assertEquals(mockTimeFrameA, mockTimeFrameB);
+        Assertions.assertNotEquals(mockTimeFrameA, mockTimeFrameC);
     }
 }

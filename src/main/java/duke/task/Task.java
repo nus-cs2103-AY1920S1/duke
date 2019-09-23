@@ -28,6 +28,13 @@ public abstract class Task implements Serializable, Cloneable {
     private TimeFrame timeFrame;
     private boolean isDone;
 
+    /**
+     * Constructor for the Task abstract class.
+     * @param uniqueCharCode a unique char assigned to each task for identification.
+     * @param details the details describing the task.
+     * @param timeFrame the timeframe in which the task is to be completed.
+     * @throws TaskCreationException if timeframe is not compatible with the task type.
+     */
     public Task(char uniqueCharCode, String details, TimeFrame timeFrame) throws TaskCreationException {
         if (!this.isTimeFrameCompatible(timeFrame)) {
             throw new TaskCreationException("The given time frame is not compatible.");
@@ -52,21 +59,8 @@ public abstract class Task implements Serializable, Cloneable {
         return details;
     }
 
-    public void setTaskDetails(String details) {
-        this.details = details;
-    }
-
     public TimeFrame getTaskTimeFrame() {
         return this.timeFrame;
-    }
-
-    public void setTaskTimeFrame(TimeFrame timeFrame) throws TaskModificationException {
-        if (this.isTimeFrameCompatible(timeFrame)) {
-            this.timeFrame = timeFrame;
-            return;
-        }
-
-        throw new TaskModificationException("Time frame is incompatible.");
     }
 
     public boolean isTaskDone() {
@@ -106,9 +100,9 @@ public abstract class Task implements Serializable, Cloneable {
     @Override
     public boolean equals(Object o) {
         if (o instanceof Task) {
-            return ((Task) o).getTaskDetails().equals(this.details) &&
-                    ((Task) o).getTaskTimeFrame().equals(this.timeFrame) &&
-                    ((Task) o).getUniqueCharCode() == this.uniqueCharCode;
+            return ((Task) o).getTaskDetails().equals(this.details)
+                    && ((Task) o).getTaskTimeFrame().equals(this.timeFrame)
+                    && ((Task) o).getUniqueCharCode() == this.uniqueCharCode;
         } else {
             return false;
         }

@@ -15,6 +15,7 @@ import java.util.Optional;
 public class FindCommand implements Command {
     private String parameter;
     private TasksController tasksController;
+
     FindCommand(String parameter, TasksController tasksController) {
         this.parameter = parameter;
         this.tasksController = tasksController;

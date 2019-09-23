@@ -20,7 +20,12 @@ public class AddCommand implements Command {
     private boolean isExecuted;
     private boolean isSuccessful;
 
-    public AddCommand(Task task, TasksController tasksController) throws CommandCreationException {
+    /**
+     * Constructor for add command.
+     * @param task task to be added.
+     * @param tasksController the controller that will be responsible for adding the task.
+     */
+    public AddCommand(Task task, TasksController tasksController) {
         this.task = task;
         this.tasksController = tasksController;
         this.isExecuted = false;

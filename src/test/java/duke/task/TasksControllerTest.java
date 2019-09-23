@@ -176,7 +176,7 @@ class TasksControllerTest {
 
         List<Task> storedTasks = this.repo.getCurrentTasks();
 
-        for (int i = 0; i < tasks.size(); i ++) {
+        for (int i = 0; i < tasks.size(); i++) {
             Assertions.assertEquals(tasks.get(i), storedTasks.get(i));
         }
     }

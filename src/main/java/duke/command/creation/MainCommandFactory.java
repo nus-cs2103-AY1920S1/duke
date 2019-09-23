@@ -38,16 +38,17 @@ public class MainCommandFactory implements CommandFactory {
         String keyword = producer.getKeyword();
 
         if (this.commandProducerHashMap.containsKey(keyword)) {
-            throw new CommandProducerRegisterException("Cannot register CommandProducer as its keyword already exists.");
+            throw new CommandProducerRegisterException("Cannot register CommandProducer as its "
+                    + "keyword already exists.");
         }
 
         this.commandProducerHashMap.put(keyword, producer);
     }
 
     /**
-     * Registers other CommandFactory instances that would be used to create commands before checking against the internal
-     * CommandProducer hashmap. This allows other commands with more complicated instantiation logic to be produced
-     * in another factory but still be created by the program.
+     * Registers other CommandFactory instances that would be used to create commands before checking against the
+     * internal CommandProducer hashmap. This allows other commands with more complicated instantiation logic to be
+     * produced in another factory but still be created by the program.
      * @param factory the CommandFactory instance to be added.
      */
     public void registerCommandFactory(CommandFactory factory) {

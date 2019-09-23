@@ -28,7 +28,11 @@ what to do for you.
 ## Introduction
 ### About
 This is a java project created for CS2103T Software Engineering. This java project was 
-developed using Java version 11.0.1 in MacOS Mojave Version 10.14.6<br /><br />
+developed using Java version 11.0.1 in MacOS Mojave Version 10.14.6
+
+### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/docs/Ui.png" width="500"> <br/>
+
+
 Author: Ong Bing Jue <br/>
 Version: 1.0.4 <br />
 Release Date: 30 Sepetember 2019 <br />
@@ -76,6 +80,8 @@ Example of usage: <br />
 `todo borrow books`
 
 Expected Outcome:
+### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/todoDemo.png" width="500">
+
 
 ### <img id="deadline" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/deadline.png" width="500">
 
@@ -88,6 +94,8 @@ Example of usage: <br />
 `deadline homework /by 30/09/2019 1200`
 
 Expected Outcome:
+### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/deadlineDemo.png" width="500">
+
 
 Possible Error: <br />
 `InvalidParameters  `: <br />
@@ -105,6 +113,8 @@ Example of usage: <br />
 `event meeting /at 30/09/2019 1200`
 
 Expected Outcome:
+### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/eventDemo.png" width="500">
+
 
 Possible Error: <br />
 `InvalidParameters  `: <br />
@@ -122,6 +132,8 @@ Example of usage: <br />
 `list`
 
 Expected Outcome:
+### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/listDemo.png" width="500">
+
 
 ### <img id="done" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/done.png" width="500">
 
@@ -133,6 +145,8 @@ Example of usage: <br />
 `done 1`
 
 Expected Outcome:
+### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/doneDemo.png" width="500">
+
 
 Possible Error: <br />
 `InvalidParameters  `: <br />
@@ -148,6 +162,7 @@ Example of usage: <br />
 `delete 1`
 
 Expected Outcome:
+### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/deleteDemo.png" width="500">
 
 Possible Error: <br />
 `InvalidParameters  `: <br />
@@ -163,6 +178,7 @@ Example of usage: <br />
 `find books`
 
 Expected Outcome:
+### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/findDemo.png" width="500">
 
 
 ### <img id="remind" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/remind.png" width="500">
@@ -177,6 +193,7 @@ Example of usage: <br />
 `remind 2 01/09/2019 0000`
 
 Expected Outcome:
+### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/reminderDemo.png" width="500">
 
 `InvalidParameters  `: <br />
 If the specified `<index>` is not valid or `<reminderDate>` is not in the correct date format
@@ -195,6 +212,12 @@ Example of usage: <br />
 `schedule 01/09/2019 0000` <br/>
 
 Expected Outcome:
+
+### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/scheduleDemo.png" width="500">
+
+### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/scheduleDateDemo.png" width="500">
+
+
 
 `InvalidParameters  `: <br />
 If the specified `<index>` is not valid or `<reminderDate>` is not in the correct date format

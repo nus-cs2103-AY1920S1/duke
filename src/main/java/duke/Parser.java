@@ -31,17 +31,7 @@ public class Parser {
         // "done" commands
         if (input.startsWith("done ")) {
             if (input.length() > DONE_SUFFIX_LENGTH) {
-                try {
-                    int taskIndex = Integer.parseInt(
-                            input.substring(DONE_SUFFIX_LENGTH)
-                    );
-                    Task item = this.taskList.get(taskIndex - 1);
-                    item.setDone();
-                    return ("Nice! I've marked this task as done:\n  " + item);
-                } catch (NumberFormatException e) {
-                    throw new DukeException("The description of a done"
-                            + " must be an integer.");
-                }
+                return setTaskDone(input.substring(DONE_SUFFIX_LENGTH));
             } else {
                 throw new DukeException("The description of a done"
                         + " cannot be empty.");
@@ -56,26 +46,7 @@ public class Parser {
             }
         } else if (input.startsWith("delete ") || input.startsWith("remove ")) {
             if (input.length() > DELETE_SUFFIX_LENGTH) {
-                try {
-                    int taskIndex = Integer.parseInt(
-                            input.substring(DELETE_SUFFIX_LENGTH)
-                    );
-                    if (this.taskList.size() >= taskIndex && taskIndex > 0) {
-                        String output = ("Noted. I've removed this task:\n  "
-                                + this.taskList.get(taskIndex - 1)
-                                + "\nNow you have "
-                                + (this.taskList.size() - 1)
-                                + " tasks in the list.");
-                        this.taskList.remove(taskIndex - 1);
-                        return output;
-                    } else {
-                        throw new DukeException("The integer entered for "
-                                + "deletion is not valid.");
-                    }
-                } catch (NumberFormatException e) {
-                    throw new DukeException("The description of a delete"
-                            + "/remove must be an integer.");
-                }
+                return deleteTask(input.substring(DELETE_SUFFIX_LENGTH));
             } else {
                 throw new DukeException("The description of a delete"
                         + "/remove cannot be empty.");
@@ -145,5 +116,50 @@ public class Parser {
         return ("Got it. I've added this task:\n  " + task
                 + "\nNow you have " + this.taskList.size()
                 + " tasks in the list.");
+    }
+
+    /**
+     * Sets a task in the task list to its 'done' status.
+     * @param taskNum String representing the integer for the task in the list
+     * @return the String output upon successfully setting the status of the task to done
+     * @throws DukeException if the String passed as taskNum is not a valid integer
+     */
+    private String setTaskDone(String taskNum) throws DukeException {
+        try {
+            int taskIndex = Integer.parseInt(taskNum);
+            Task item = this.taskList.get(taskIndex - 1);
+            item.setDone();
+            return ("Nice! I've marked this task as done:\n  " + item);
+        } catch (NumberFormatException e) {
+            throw new DukeException("The description of a done"
+                    + " must be an integer.");
+        }
+    }
+
+    /**
+     * Deletes a specified task from the task list.
+     * @param taskNum String representing the integer for the task in the list
+     * @return the String output upon successfully deleting the task
+     * @throws DukeException if the String passed as taskNum is not a valid integer
+     */
+    private String deleteTask(String taskNum) throws DukeException {
+        try {
+            int taskIndex = Integer.parseInt(taskNum);
+            if (this.taskList.size() >= taskIndex && taskIndex > 0) {
+                String output = ("Noted. I've removed this task:\n  "
+                        + this.taskList.get(taskIndex - 1)
+                        + "\nNow you have "
+                        + (this.taskList.size() - 1)
+                        + " tasks in the list.");
+                this.taskList.remove(taskIndex - 1);
+                return output;
+            } else {
+                throw new DukeException("The integer entered for "
+                        + "deletion is not valid.");
+            }
+        } catch (NumberFormatException e) {
+            throw new DukeException("The description of a delete"
+                    + "/remove must be an integer.");
+        }
     }
 }

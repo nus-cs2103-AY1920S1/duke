@@ -8,7 +8,16 @@
 /build/
 src/main/resources/docs/
 
+# Storage files
+duke_data.txt
+
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml
 bin/
+
+# VScode settings
+.classpath
+.project
+/.settings/
+/.VScode

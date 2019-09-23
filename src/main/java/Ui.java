@@ -84,4 +84,10 @@ public class Ui {
     public String announceExisted() {
         return "Sorry, you can't add this task as the task already.";
     }
+
+    public String announceCleared() {
+        return "You have cleared the local file. " +
+                "There are currently no task." +
+                "You are free to be productive with Jarvis again! Enjoy :)";
+    }
 }

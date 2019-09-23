@@ -97,4 +97,8 @@ public class TaskList {
         }
         return false;
     }
+
+    public void clear() {
+        taskStorage.clear();
+    }
 }

@@ -29,7 +29,7 @@ public class Storage {
                 tempFile.createNewFile();
             }
         } catch (IOException e) {
-            System.out.println("Failed to create a new file at the specified location.");
+            System.out.println("There is no valid file found.");
         }
     }
 

@@ -46,6 +46,7 @@ public class Duke extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            stage.setTitle("Jarvis");
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
@@ -62,7 +63,6 @@ public class Duke extends Application {
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
@@ -77,7 +77,7 @@ public class Duke extends Application {
         String input;
         input = sc.nextLine();
         String check = "dummy";
-        while (check.equals("bye") == false) {
+        while (!check.equals("bye")) {
             System.out.println(execution(input));
         }
     }
@@ -100,8 +100,6 @@ public class Duke extends Application {
 
         try {
             check = input.toLowerCase();
-
-
             Parser parser = new Parser(input);
             String userCommand = parser.getUserCommand();
             String due = parser.getDue();
@@ -109,7 +107,7 @@ public class Duke extends Application {
             if (check.equals("list")) {
                 return ui.showListOfTask(tasks);
             } else if (userCommand.equals("done")) {
-                int target = Integer.valueOf(taskDescription);
+                int target = Integer.parseInt(taskDescription);
                 Task taskDone;
                 if (tasks.size() >= target && target > 0) {
                     taskDone = tasks.get(target - 1);
@@ -122,7 +120,7 @@ public class Duke extends Application {
             } else if (userCommand.equals("find")) {
                 return tasks.keywordSearch(taskDescription);
             } else if (userCommand.equals("delete")) {
-                int target = Integer.valueOf(taskDescription);
+                int target = Integer.parseInt(taskDescription);
                 Task taskDelete;
                 if (tasks.size() >= target && target > 0) {
                     taskDelete = tasks.get((target - 1));
@@ -168,7 +166,6 @@ public class Duke extends Application {
                 throw new EmptyToDoDescriptionException("The description of a todo cannot be empty.");
             }
             t = new Todo(taskDescription);
-            System.out.println(tasks.checkForSameTask(t));
             if (tasks.checkForSameTask(t)) {
                 return ui.announceExisted();
             } else {
@@ -205,6 +202,11 @@ public class Duke extends Application {
                 tasks.add(t);
                 storage.writeToFile(typeOfTask, "0", taskDescription, t);
             }
+        } else if (userCommand.equals("clear")) {
+            storage.clear();
+            tasks.clear();
+            assert tasks.size() == 0;
+            return ui.announceCleared();
         } else {
             throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(");
         }

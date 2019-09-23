@@ -113,11 +113,11 @@ public class UserInterface {
     }
 
     public void printSnooze(Task task){
-        this.print("Following task has been rescheduled:\n" + task);
+        this.print("Following task has been rescheduled:\n  " + task);
     }
 
     public String printSnoozeGui(Task task){
-        return "Following task rescheduled uwu:\n" + task;
+        return "Following task rescheduled uwu:\n  " + task;
     }
 
     /**

@@ -35,6 +35,8 @@ public class Deadline extends Task {
             throw new DukeException("Bad date or time provided");
         }catch(NumberFormatException e){
             throw new DukeException("Bad date or time format");
+        }catch(IndexOutOfBoundsException e){
+            throw new DukeException("Provide both date and time");
         }
     }
 
@@ -46,7 +48,7 @@ public class Deadline extends Task {
     public String toFileString(){
         StringBuilder fileString = new StringBuilder();
         fileString.append("D | 0 | " + description + " | ");
-        fileString.append(datetimeToString() + "\n");
+        fileString.append(datetimeToString());
         return fileString.toString();
     }
 

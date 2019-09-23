@@ -37,6 +37,10 @@ public class Event extends Task {
             this.endDateTime = LocalDateTime.of(year, month, day, endHour, endMinute);
         }catch(DateTimeException e){
             throw new DukeException("Bad date or time provided");
+        }catch(IndexOutOfBoundsException e){
+            throw new DukeException("Provide both date and time");
+        }catch(NumberFormatException e){
+            throw new DukeException("Bad date or time format");
         }
     }
 

@@ -12,7 +12,7 @@ public class Todo extends Task {
 
     public String toFileString(){
         StringBuilder fileString = new StringBuilder();
-        fileString.append("T | 0 | " + description + "\n" );
+        fileString.append("T | 0 | " + description);
         return fileString.toString();
     }
 

@@ -96,7 +96,7 @@ public class FileManager {
             return;
         }
         try {
-            editor.write(task.toFileString());
+            editor.write(task.toFileString() +"\n");
             editor.flush();
         } catch (IOException e){
             throw new DukeException("File write error");

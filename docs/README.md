@@ -32,13 +32,15 @@ developed using Java version 11.0.1 in MacOS Mojave Version 10.14.6<br /><br />
 Author: Ong Bing Jue <br/>
 Version: 1.0.4 <br />
 Release Date: 30 Sepetember 2019 <br />
-Github: http://github.com/bjhoohaha/duke <br />
+Github: <a href="http://github.com/bjhoohaha/duke">http://github.com/bjhoohaha/duke</a> <br />
 
 ### Getting Started
 
 * Java JDK 11 <br />
 Download and install jdk 11 from: <br />
-https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html 
+<a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html">
+https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html
+</a>
 
 * Mac / Linux <br />
     `java -jar Duke-0.1.3.jar`
@@ -217,7 +219,7 @@ You can update a reminder set for a task item by setting a new reminder for the 
 previous reminder set.
 
 **Why do I get `InvalidCommand` error?** <br />
-This may happen if the user enters an invalid command. Please check [Commands](#commands) for more information
+This may happen if the user enters an invalid command. Please check available [Commands](#commands) for more information
 
 **Why do I get `InvalidParameter` error?** <br />
 This may happen if an invalid parameter is entered for the following command. Please check the individual commands in 

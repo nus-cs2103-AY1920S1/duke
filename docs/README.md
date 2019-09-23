@@ -1,20 +1,295 @@
 # User Guide
 
+
+
+## Quick Glimpse
+![Ui.png](Ui.png)
+
+### List of all commands:
+- [`todo`](#11-Adding-a-ToDo-Task-to-the-Current-Task-List-%E2%80%93-todo)
+- [`deadline`](#12-Adding-a-Deadline-Task-to-the-Current-Task-List-%E2%80%93-deadline)
+- [`event`](#13-Adding-an-Event-Task-to-the-Current-Task-List-%E2%80%93-event)
+- [`list`](#2-Listing-the-Tasks-in-the-current-Task-List-%E2%80%93-list)
+- [`done`](#3-Completing-a-Task-in-the-Current-Task-List-%E2%80%93-done)
+- [`delete`](#4-Removing-a-Task-from-the-Current-Task-List-%E2%80%93-delete)
+- [`find`](#51-Searching-for-a-Task-in-the-Current-Task-List-%E2%80%93-find)
+- [`relaxfind`](#52-Searching-for-a-Task-in-the-Current-Task-List-%E2%80%93-relaxfind)
+- [`save`](#61-Loading-a-Task-List-from-another-Save-File-%E2%80%93-load)
+- [`load`](#62-Saving-the-Current-Task-List-to-a-specified-File-%E2%80%93-save)
+- [`bye`](#7-Closing-Duke-%E2%80%93-bye)
+
+
+
+
 ## Features 
 
-### Feature 1 
-Description of feature.
 
-## Usage
+### 1. Adding a Task to the Current Task List.
+The following Features will allow you to add Tasks to the current Task List.
+![AddTask](readmeAssets/AddTask.png)
 
-### `Keyword` - Describe action
+#### 1.1 Adding a ToDo Task to the Current Task List -- `todo` 
+Adds basic ToDo Task which only contains a `description` and a `completion status` to the current Task List.
 
-Describe action and its outcome.
+**Syntax**:\
+`todo` `DESCRIPTION`
 
-Example of usage: 
+**Example**: \
+`todo walk the dog`\
+**Outcome**:\
+An `incomplete` ToDo Task with the `DESCRIPTION` `walk the dog` is added to the current TaskList.
 
-`keyword (optional arguments)`
 
-Expected outcome:
+#### 1.2 Adding a Deadline Task to the Current Task List -- `deadline`
 
-`outcome`
+Adds a Deadline Task which contains a `description` and a `date-time to complete by` to the current Task List.
+
+**Syntax**:
+`deadline` `DESCRIPTION` `/by` `DATETIME_TO_COMPLETE`
+
+**Example**:\
+`deadline Walk the dog /by 3pm`\
+**Outcome**:\
+An `incomplete` Deadline Task with the `DESCRIPTION` `Walk the dog`, and `DATETIME_TO_COMEPLETE` of `3pm` is added to the current Task List`
+
+> #### **Formatted date and time**:
+> If `DATETIME_TO_COMPLETE` is entered in the `dd/MM/yyyy hhmm` format, it will automatically be converted to a more readable format.
+>
+>**Example**:\
+>`deadline Walk the dog /by 11/11/1111 1111`\
+>**Outcome**:  
+>An `incomplete` Deadline Task with the `DESCRIPTION` `Walk the dog` and `DATETIME_TO_COMEPLETE` of `11th of NOVEMBER 2019, 11.11am` is added to the current Task List.
+
+
+
+#### 1.3 Adding an Event Task to the Current Task List -- `event`
+
+Adds an Event Task which contains a `description` and a `date-time of event` to the current Task List.
+
+**Syntax**: \
+`event` `DESCRIPTION` `/by` `DATETIME_OF_EVENT`
+
+
+**Example**: \
+`deadline Walk the dog /at 3pm` \
+**Outcome**: \
+An `incomplete` Deadline Task with the `DESCRIPTION` `Walk the dog` and `DATETIME_OF_EVENT` of `3pm` is added to the current Task List.
+
+
+>### **Formatted date and time**:
+> If `DATETIME_TO_COMPLETE` is entered in the `dd/MM/yyyy hhmm` format, it will automatically be converted to a more readable format.
+>
+>**Example**: \
+`event Walk the dog /at 11/11/1111 1111` \
+**Outcome**: \
+An `incomplete` Event Task with the `DESCRIPTION` `Walk the dog` and `DATETIME_OF_EVENT` of `11th of NOVEMBER 2019, 11.11am` is added to the current Task List.
+
+
+### 2. Listing the Tasks in the current Task List -- `list`
+Displays all the current tasks in your current Task List. 
+
+
+**Command**: \
+`list`
+
+**Outcome**: \
+All the tasks in the current Task List will be displayed.
+
+![List](readmeAssets/List.png)
+
+
+### 3. Completing a Task in the Current Task List -- `done`
+Marks a Task in the current Task List which corresponds to the given `INDEX`.
+
+**Syntax**: \
+`done` `INDEX`
+
+**Example**: \
+`done` `4` \
+**Outcome**: \
+The `4th` task in the current Task List will have it's `completion status` to set `complete`.
+
+![done](readmeAssets/Done.png)
+
+### 4. Removing a Task from the Current Task List -- `delete`
+Removes a Task in the current Task List which corresponds to the given `INDEX`.
+
+**Syntax**: \
+`delete` `INDEX`
+
+**Example**: \
+`delete` `4` \
+**Outcome**: \
+The `4th` task in the current Task List will be removed from it.
+
+
+
+### 5. Searching for Tasks in the Current Task List.
+If you want to search for a task in the Current Task List there are two option. The first `find` is more strict, while the second `relaxfind` is less strict.
+
+
+
+#### 5.1 Searching for a Task in the Current Task List with Keyword -- `find`
+Lists all tasks in the current Task List which contain the given `KEYWORD` in their `descriptions`.
+
+![find](readmeAssets/find.png)
+
+**Syntax**: \
+`find` `KEYWORD`
+
+**Example**: \
+`find` `dog` \
+**Outcome**: \
+All tasks in the current Task List which contain the word `dog` in their `descriptions`.
+
+
+>**Not case sensitive**:
+> Tasks with `dog` and `DOG` in their description will both be included in the result list.
+
+
+#### 5.2 Searching for a Task in the Current Task List with Similar Keyword -- `relaxfind`
+Lists all tasks in the current Task List whose `description` contains a word whose Levenshtein distance from the `KEYWORD` is less than or equal to `3`.
+
+![relaxfind](readmeAssets/relaxfind.png)
+
+**Syntax**: \
+`relaxfind` `KEYWORD`
+
+**Example**: \
+`relaxfind` `dog` \
+**Outcome**: \
+All tasks in the current Task List which contain contain a word whose Levenshtein distance from `dog` is less than or equal to `3`.
+
+>#### **Levenshtein distance**:
+>In information theory, linguistics and computer science, the Levenshtein distance is a string metric for measuring the difference between two sequences. Informally, the Levenshtein distance between two words is the minimum number of single-character edits (insertions, deletions or substitutions) required to change one word into the other.
+> **[- Wikipedia](https://en.wikipedia.org/wiki/Levenshtein_distance)**
+
+
+
+### 6. Saving and Loading a Task List from a File. 
+
+Changes to your current Task List are automatically saved to the current Task List save file. Whenever you start Duke, the Task List will be loaded from the `DukeSave01.txt` file.
+
+
+
+#### 6.1 Loading a Task List from another Save File -- `load`
+Sets the current Task List to the Task List loaded from a Save File with the specified `FILE_NAME` in the `DukeSaveFiles` directory. \
+
+>![currentFilePicture](readmeAssets/CurrentFile.png)
+>The save file which the current task list will save to it is shown in the top left of the window.
+
+**Syntax**: \
+`load` `FILE_NAME`
+
+**Example**: \
+`load DukeSave01` \
+**Outcome**: \
+The current Task List will be set to the Task List as saved in the `DukeSave01.txt` file under the `DukeSaveFiles` directory.
+
+>**Warning**: \
+>The file must be properly formatted for the Task List to be loaded.
+
+>**Valid naming format**:\
+>File names can only contain alphanumeric characters. e.g. `SavEfIle01` is valid but ``$@\/f|le01`` is not.
+
+>**Loading is optional**: \
+> Duke will load the default TaskList saved at `DukeSave01.txt`
+>![DefaultLoadFile](readmeAssets/Hi.png)
+
+>**Note**: \
+>If the file does not already exist in the directory, it will be created for you.
+
+
+
+#### 6.2 Saving the Current Task List to a specified File -- `save`
+Saves the current TaskList to a Save File with the specified `FILE_NAME` in the `DukeSaveFiles` directory.
+
+**Syntax**: \
+`save` `FILE_NAME`
+
+
+**Example**: \
+`save` `MySaveFile01` \
+**Outcome**: \
+The tasks in the current Task List will be saved to the `MySaveFile01.txt` in the `DukeSaveFiles` directory.
+
+>**Warning**: 
+>This will overwrite whatever data is in the existing file.
+
+>**Note**:
+>If the file does not already exist in the directory, it will be created for you.
+
+
+
+#### 6.3. Where is the DukeSaveFiles Directory Located?
+If you are running from Duke from the `.jar`, the `DukeSaveFiles` directory will be created within the same directory where your `duke-x.x.x.jar` file is located, if it does not already exist.
+```
+downloads
+L duke-0.1.1.jar <------- .jar file
+L DukeSaveFiles    <----- DukeSaveFiles directory
+   L SaveFile02.txt   <-- save file
+```
+
+If you are running Duke directly from the `duke.gui.DukeLauncher` `.class` file, the `DukeSaveFiles` directory will be created within the same directory as the `main` file. 
+```
+ downloads
+ L duke
+   L build
+     L classes
+       L java
+         L DukeSaveFiles  < ------------- DukeSaveFiles directory
+           L SaveFile02.txt    <--------- save file
+         L main     <-------------------- main file
+            L duke
+             L gui
+               L DukeLauncher.class   <-- .class file
+```
+
+
+
+#### 6.4 How are the Save Files Formatted?
+If you want to edit the save files directly ensure they are formatted in the following way:
+
+1. The first line of the file should contain the number of tasks that are in the task list
+
+2. The subsequent lines will contain the data to create each task to populate the Task List. Tasks which require a date/time in the 4th line, otherwise only 3 lines are used. 
+```
+ <number of tasks>
+ <type of task>               T = ToDo, D = Dealine, E = Event
+ <completion status of task>  0 = incomplete, 1 = complete
+ <description of task>        
+ <date/time of the task>
+ ...
+ ...
+ ...
+```
+
+**Example**
+``` 
+ 2
+ T
+ 0
+ Walk the Dog 
+ D
+ 1 
+ Walk the Cat 
+ Yesterday 
+```
+
+This creates a Task List with 2 Tasks:
+1. an `incomplete` `ToDo` task with the description `Walk the Dog`. 
+2. a `complete` `Deadline` Task with the description `Walk the Cat` and a time of `Yesterday`.
+
+
+
+### 7. Closing Duke -- `bye`
+Closing Duke.
+
+**Command**: \
+`bye`
+
+**Outcome**: \
+Duke will show a goodbye popup which you can click, or press `Enter` to close Duke.
+![popup](readmeAssets/popup.png)
+> **Alternatively**
+> You may simply press the close button for the window.

@@ -14,8 +14,8 @@ import java.util.Iterator;
 public class Parser {
 
     /**
-     * Parses the argument provided by the user for the Date/Time parameter of the Deadline and
-     * Event Tasks, if possible.
+     * Parses the argument provided by the user for the Date/Time parameter of the Deadline and Event Tasks, if
+     * possible.
      *
      * <p>If the argument provided by the user is in dd/MM/yyyy HHmm format, it will be formatted into a more explicit
      * format. For example, "12/12/1212 1212" will be formatted to "12th of DECEMBER 1212, 12:12pm".</p>
@@ -111,6 +111,10 @@ public class Parser {
             return new SearchCommand(arguments[0]);
         case COMMAND_RELAX_SEARCH:
             return new RelaxedSearchCommand(arguments[0]);
+        case COMMAND_LOAD_FILE:
+            return new LoadCommand(arguments[0]);
+        case COMMAND_SAVE_FILE:
+            return new SaveCommand(arguments[0]);
         case COMMAND_ADD_TODO:
             //Fallthrough
         case COMMAND_ADD_DEADLINE:
@@ -180,6 +184,10 @@ public class Parser {
             return Type.COMMAND_SEARCH;
         case "relaxfind":
             return Type.COMMAND_RELAX_SEARCH;
+        case "load":
+            return Type.COMMAND_LOAD_FILE;
+        case "save":
+            return Type.COMMAND_SAVE_FILE;
         default:
             throw new DukeUnknownCommandException();
         }

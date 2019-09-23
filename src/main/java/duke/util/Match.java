@@ -28,7 +28,8 @@ public class Match {
     }
 
     /**
-     * Returns True if the two provided words have a levenshtein distance less than a given threshold.
+     * Returns True if the two provided words have a levenshtein distance less than or equal to
+     * a given threshold.
      *
      * @param word1 The word to match with word2
      * @param word2 The word to match with word1
@@ -40,7 +41,8 @@ public class Match {
     }
 
     /**
-     * Returns True if the words provided, ignoring case, have a levenshtein distance below the threshold.
+     * Returns True if the words provided, ignoring case, have a levenshtein distance below or equal
+     * to the threshold.
      *
      * @param word1 The word to match with word2
      * @param word2 The word to match with word1
@@ -52,8 +54,9 @@ public class Match {
     }
 
     /**
-     * Calculate the levenshtein distance between two words.
+     * Calculate the Levenshtein distance between two words.
      */
+    // Reused from https://en.wikipedia.org/wiki/Levenshtein_distance#Recursive with minor modifications
     private static int levenshteinDistance(String word, int wordLen, String other, int otherLen) {
         if (wordLen == 0 || otherLen == 0) {
             return Math.max(wordLen, otherLen);

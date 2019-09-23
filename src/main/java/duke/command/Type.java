@@ -19,7 +19,9 @@ public enum Type {
     COMMAND_RELAX_SEARCH(1, "keyword"),
     COMMAND_ADD_TODO(1, "description"),
     COMMAND_ADD_DEADLINE(2, "description", "time", "/by"),
-    COMMAND_ADD_EVENT(2, "description", "time", "/at");
+    COMMAND_ADD_EVENT(2, "description", "time", "/at"),
+    COMMAND_LOAD_FILE(1, "file name"),
+    COMMAND_SAVE_FILE(1, "file name");
 
     Type(int parametersExpected, String... parameterNamesAndDelimiters) {
         this.parametersExpected = parametersExpected;

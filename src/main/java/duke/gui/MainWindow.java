@@ -5,6 +5,7 @@ import duke.ui.Duke;
 import javafx.fxml.FXML;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -13,10 +14,17 @@ import javafx.scene.layout.VBox;
 
 import duke.ui.Response;
 
+import java.nio.file.Paths;
+
 /**
  * The main window of the JavaFX GUI for Duke.
  */
 public class MainWindow extends AnchorPane {
+
+    public static String MAIN_WINDOW_RESOURCE_PATH = Paths.get("/view", "MainWindow.fxml").toString();
+    public static String USER_IMAGE_RESOURCE_PATH = Paths.get("/images", "user_icon.png").toString();
+    public static String DUKE_IMAGE_RESOURCE_PATH = Paths.get("/images","duke_icon.png").toString();
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -26,17 +34,22 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
     @FXML
+    private Label dukeStorageName;
+    @FXML
     SimpleBooleanProperty dukeActivityStatus;
 
     private Duke duke;
 
-    private Image userImage = new Image(Gui.class.getResourceAsStream("/images/dog.jpg"));
-    private Image dukeImage = new Image(Gui.class.getResourceAsStream("/images/fatCat.png"));
+    private Image USER_IMAGE;
+    private Image DUKE_IMAGE;
 
     @FXML
     public void initialize() {
         dukeActivityStatus = new SimpleBooleanProperty();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        USER_IMAGE = new Image(Gui.class.getResourceAsStream(USER_IMAGE_RESOURCE_PATH));
+        DUKE_IMAGE = new Image(Gui.class.getResourceAsStream(DUKE_IMAGE_RESOURCE_PATH));
+
     }
 
 
@@ -48,21 +61,23 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke duke) {
         assert duke != null;
         this.duke = duke;
+        dukeStorageName.textProperty().bind(duke.observableStorageName);
     }
 
     /**
-     * Tries to load an TaskList from the save file with the specified name, and displays the Response from the attemp.
+     * Tries to load an TaskList from the save file with the specified name, and displays the Response from the attempt.
      *
      * @param fileName The file from which to try to load a TaskList from
      */
     void loadExistingTaskList(String fileName) {
         assert fileName != null;
 
-        Response response = duke.loadSaveFile(fileName);
+        Response response = duke.getResponse("load " + fileName);
+
         if (!response.wasCausedByError()) {
-            display(DialogBox.getDukeNormalDialog(response.toString(), dukeImage));
+            display(DialogBox.getDukeNormalDialog(response.toString(), DUKE_IMAGE));
         } else {
-            display(DialogBox.getDukeErrorDialog(response.toString(), dukeImage));
+            display(DialogBox.getDukeErrorDialog(response.toString(), DUKE_IMAGE));
         }
     }
 
@@ -76,7 +91,7 @@ public class MainWindow extends AnchorPane {
         dukeActivityStatus.set(response.isActive());
 
         assert response.toString() != null;
-        display(DialogBox.getDukeNormalDialog(response.toString(), dukeImage));
+        display(DialogBox.getDukeNormalDialog(response.toString(), DUKE_IMAGE));
     }
 
 
@@ -108,8 +123,8 @@ public class MainWindow extends AnchorPane {
         assert response != null;
 
         display(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeNormalDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, USER_IMAGE),
+                DialogBox.getDukeNormalDialog(response, DUKE_IMAGE)
         );
     }
 
@@ -124,8 +139,8 @@ public class MainWindow extends AnchorPane {
         assert response != null;
 
         display(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeErrorDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, USER_IMAGE),
+                DialogBox.getDukeErrorDialog(response, DUKE_IMAGE)
         );
     }
 

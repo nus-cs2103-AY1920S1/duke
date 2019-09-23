@@ -116,8 +116,8 @@ public class TaskList {
     }
 
     /**
-     * Returns an ArrayList containing the Tasks which have descriptions containing an exact match
-     * with the keyword provided.
+     * Returns an ArrayList containing the Tasks which have descriptions contains the keyword
+     * (not case-sensitive).
      *
      * @param keyword The keyword to search for in the TaskList
      * @return An ArrayList containing the Tasks which contain the matching Tasks
@@ -128,11 +128,8 @@ public class TaskList {
         ArrayList<Task> results = new ArrayList<>();
         for (Task task : this.taskList) {
             for (String word : task.getDescription().split("\\s+")) {
-                if (results.contains(task)) {
-                    break;
-                }
 
-                if (!word.equals(keyword)) {
+                if (!word.equalsIgnoreCase(keyword)) {
                     continue;
                 }
 
@@ -156,16 +153,10 @@ public class TaskList {
         ArrayList<Task> results = new ArrayList<>();
         for (Task task : this.taskList) {
             for (String word : task.getDescription().split("\\s+")) {
-                if (results.contains(task)) {
+                if (Match.matchFuzzyIgnoreCase(keyword, word, 3)) {
+                    results.add(task);
                     break;
                 }
-
-                if (Match.matchFuzzyIgnoreCase(keyword, word, 3)) {
-                    continue;
-                }
-
-                results.add(task);
-                break;
             }
         }
         return results;

@@ -8,11 +8,7 @@ import duke.command.PrintListCommand;
 import duke.command.DeleteCommand;
 import duke.command.FindCommand;
 
-import duke.exception.EmptyFindDukeException;
-import duke.exception.EmptyIndexDukeException;
-import duke.exception.EmptyTaskDukeException;
-import duke.exception.InvalidInputDukeException;
-import duke.exception.InvalidTaskDukeException;
+import duke.exception.*;
 
 import duke.task.Deadline;
 import duke.task.DoAfter;
@@ -37,7 +33,7 @@ public class Parser {
      * @throws InvalidTaskDukeException  If user did not input appropriate DateTime for Event and Deadline.
      */
     public static Command parse(String fullCommand) throws InvalidInputDukeException, EmptyTaskDukeException,
-            InvalidTaskDukeException, EmptyFindDukeException, EmptyIndexDukeException {
+            InvalidTaskDukeException, EmptyFindDukeException, EmptyIndexDukeException, InvalidDateTimeDukeException {
         Scanner scanner = new Scanner(fullCommand);
         if (scanner.hasNext()) {
             String toProcess = scanner.next();
@@ -83,7 +79,7 @@ public class Parser {
      * @throws InvalidTaskDukeException If user did not input appropriate DateTime for Event and Deadline.
      */
     private static Command createAddCommand(String fullCommand) throws EmptyTaskDukeException,
-            InvalidTaskDukeException {
+            InvalidTaskDukeException, InvalidDateTimeDukeException {
         Task taskToAdd = null;
         String[] checkType = Arrays.copyOf(fullCommand.split(" ", 2), 2);
         String typeOfTask = checkType[0];

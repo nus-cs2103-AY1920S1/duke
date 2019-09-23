@@ -1,7 +1,13 @@
 package duke.task;
 
 import duke.exception.EmptyTaskDukeException;
+import duke.exception.InvalidDateTimeDukeException;
 import duke.exception.InvalidTaskDukeException;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Represents an Event task.
@@ -11,7 +17,7 @@ public class Event extends Task {
     /**
      * Represents date and time of event.
      */
-    private String atTime;
+    private Date atTime;
 
     /**
      * Constructor of Event object.
@@ -21,7 +27,7 @@ public class Event extends Task {
      * @throws EmptyTaskDukeException   If name is empty.
      * @throws InvalidTaskDukeException If atTime input does not follow DD/MM/YYYY HHMM.
      */
-    public Event(String name, String atTime) throws EmptyTaskDukeException, InvalidTaskDukeException {
+    public Event(String name, String atTime) throws EmptyTaskDukeException, InvalidTaskDukeException, InvalidDateTimeDukeException {
         super(name);
         if (name == null) {
             throw new EmptyTaskDukeException("event");
@@ -29,7 +35,12 @@ public class Event extends Task {
         if (atTime == null) {
             throw new InvalidTaskDukeException("event");
         }
-        this.atTime = atTime;
+        try {
+            DateFormat inputFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+            this.atTime = inputFormatter.parse(atTime);
+        } catch (ParseException e) {
+            throw new InvalidDateTimeDukeException("event");
+        }
     }
 
     /**
@@ -38,7 +49,9 @@ public class Event extends Task {
      * @return
      */
     public String getAtTime() {
-        return atTime;
+        DateFormat outputFormatter = new SimpleDateFormat("dd MMMM YYYY, hh.mmaa");
+        String output = outputFormatter.format(this.atTime);
+        return output;
     }
 
     /**
@@ -48,10 +61,12 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
+        DateFormat outputFormatter = new SimpleDateFormat("dd MMMM YYYY, h.mmaa");
+        String output = outputFormatter.format(this.atTime);
         StringBuilder stringBuilder = new StringBuilder("[E]");
         stringBuilder.append(super.toString());
         stringBuilder.append(" (");
-        stringBuilder.append(DateTime.create(atTime));
+        stringBuilder.append(output);
         stringBuilder.append(")");
         return stringBuilder.toString();
     }

@@ -1,6 +1,7 @@
 package duke.logic;
 
 import duke.exception.EmptyTaskDukeException;
+import duke.exception.InvalidDateTimeDukeException;
 import duke.exception.InvalidTaskDukeException;
 import duke.exception.LoadingErrorDukeException;
 
@@ -63,6 +64,8 @@ public class Storage {
             throw new LoadingErrorDukeException();
         } catch (IOException | EmptyTaskDukeException | InvalidTaskDukeException e) {
             e.printStackTrace();
+        } catch (InvalidDateTimeDukeException e) {
+            e.printStackTrace();
         }
         return loadedList;
     }
@@ -100,7 +103,7 @@ public class Storage {
      * @throws EmptyTaskDukeException   If task is invalid.
      */
     private static Task createTaskFromInput(String[] inputArray) throws InvalidTaskDukeException,
-            EmptyTaskDukeException {
+            EmptyTaskDukeException, InvalidDateTimeDukeException {
         Task createdTask = null;
         switch (inputArray[0]) {
         case "TD":

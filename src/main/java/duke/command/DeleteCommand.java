@@ -35,7 +35,8 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Storage storage) {
         Task deleted = tasks.remove(position);
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("Noted. I've removed this task: %s\n", deleted));
+        sb.append(String.format("Noted. I've removed this task:\n"));
+        sb.append(String.format("  %s\n", deleted));
         sb.append(String.format("Now you have %d tasks in the list.", tasks.size()));
         return sb.toString();
     }

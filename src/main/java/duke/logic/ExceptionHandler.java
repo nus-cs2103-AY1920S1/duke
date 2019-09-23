@@ -1,10 +1,6 @@
 package duke.logic;
 
-import duke.exception.EmptyFindDukeException;
-import duke.exception.EmptyIndexDukeException;
-import duke.exception.EmptyTaskDukeException;
-import duke.exception.InvalidInputDukeException;
-import duke.exception.InvalidTaskDukeException;
+import duke.exception.*;
 
 /**
  * Represents the exception handler of Duke.
@@ -34,7 +30,12 @@ public class ExceptionHandler {
             return String.format("OOPS!!! Done/Delete command cannot have an empty index!");
         } else if (e instanceof EmptyFindDukeException) {
             return String.format("OOPS!!! Find command needs an input text to find!");
-        } else {
+        } else if (e instanceof InvalidDateTimeDukeException) {
+            return String.format("OOPS!!! You have input an invalid DateTime for your %s!", e.getMessage());
+        } else if (e instanceof IndexOutOfBoundsException) {
+            return String.format("OOPS!!! You have entered an invalid index!");
+        }
+        else {
             return e.getMessage(); // for undeclared exceptions
         }
     }

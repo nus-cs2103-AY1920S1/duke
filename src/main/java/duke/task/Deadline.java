@@ -1,7 +1,13 @@
 package duke.task;
 
 import duke.exception.EmptyTaskDukeException;
+import duke.exception.InvalidDateTimeDukeException;
 import duke.exception.InvalidTaskDukeException;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Represents a Deadline task.
@@ -11,7 +17,7 @@ public class Deadline extends Task {
     /**
      * Represents due date (byWhen) of the Deadline.
      */
-    private String byWhen;
+    private Date byWhen;
 
     /**
      * Constructor of Deadline object.
@@ -19,9 +25,11 @@ public class Deadline extends Task {
      * @param name   Name of Deadline.
      * @param byWhen byWhen of Deadline.
      * @throws EmptyTaskDukeException   If name is empty.
-     * @throws InvalidTaskDukeException If byWhen input does not follow DD/MM/YYYY HHMM.
+     * @throws InvalidDateTimeDukeException If byWhen does not follow DD/MM/YYYY HHMM.
+     * @throws InvalidTaskDukeException If byWhen is empty.
      */
-    public Deadline(String name, String byWhen) throws EmptyTaskDukeException, InvalidTaskDukeException {
+    public Deadline(String name, String byWhen) throws EmptyTaskDukeException, InvalidTaskDukeException,
+            InvalidDateTimeDukeException {
         super(name);
         if (name == null) {
             throw new EmptyTaskDukeException("deadline");
@@ -29,7 +37,12 @@ public class Deadline extends Task {
         if (byWhen == null) {
             throw new InvalidTaskDukeException("deadline");
         }
-        this.byWhen = byWhen;
+        try {
+            DateFormat inputFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+            this.byWhen = inputFormatter.parse(byWhen);
+        } catch (ParseException e) {
+            throw new InvalidDateTimeDukeException("deadline");
+        }
     }
 
     /**
@@ -38,7 +51,9 @@ public class Deadline extends Task {
      * @return String representation of due date.
      */
     public String getByWhen() {
-        return byWhen;
+        DateFormat outputFormatter = new SimpleDateFormat("dd MMMM YYYY, hh.mmaa");
+        String output = outputFormatter.format(this.byWhen);
+        return output;
     }
 
     /**
@@ -48,10 +63,12 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
+        DateFormat outputFormatter = new SimpleDateFormat("dd MMMM YYYY, h.mmaa");
+        String output = outputFormatter.format(this.byWhen);
         StringBuilder stringBuilder = new StringBuilder("[DL]");
         stringBuilder.append(super.toString());
         stringBuilder.append(" (");
-        stringBuilder.append(DateTime.create(byWhen));
+        stringBuilder.append(output);
         stringBuilder.append(")");
         return stringBuilder.toString();
     }

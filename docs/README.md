@@ -1,6 +1,6 @@
 # User Guide
 
-![Screenshot of ui](i.png)
+![Screenshot of ui](Ui.png)
 
 ## Features 
 

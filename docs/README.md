@@ -17,34 +17,34 @@ As Will Smith, you are able to tell your butler Geoffrey your task list which in
 6. Type a command in the text box and press Enter key to get a response from Geoffrey.
 7. For the list of available commands, refer to the Features section.
 
-## 4. Features
-### Create Task
+## 3. Features
+### 3.1. Create Task
 Geoffrey can create a task. All tasks created by default is indicated as not done.
 
 There are three types of tasks and their definitions are as follows:
 * todo: A simple task with a description
 * deadline: A task that also has a specified deadline
 * event: A task with a specified location
-### Display Tasks
+### 3.2. Display Tasks
 Geoffrey can display a list of all tasks, in the order of their creation.
-### Sort Task
+### 3.3. Sort Task
 Geoffrey can display the task list sorted by deadlines or type of tasks.
-### Find Tasks 
+### 3.4. Find Tasks 
 Geoffrey can display all tasks that matches a search string.
-### Mark Task as Done
+### 3.5. Mark Task as Done
 Geoffrey can mark a task as done, visible via a check mark next to the task.
-### Delete Task
+### 3.6. Delete Task
 Geoffrey can delete a task from the list. Deleted tasks cannot be recovered.
-### Save Tasks
+### 3.7. Save Tasks
 All tasks added are automatically saved.
-### Load Tasks
+### 3.8. Load Tasks
 Tasks are automatically loaded upon launching the application.
-### Bye (Exit)
+### 3.9 Exit
 The application will stop running and the user interface will close when the user says "bye".
 
-## Usage
+## 4. Usage
 
-### Create Task
+### 4.1. Create Task
 ##### `todo [description]`
 
 Creates a simple todo task with a description.
@@ -81,7 +81,7 @@ Expected outcome:
 > [E][X] basketball tournament (at: Bel-Air Academy)<br>
 > Now you have 5 task(s) in the list.
 
-### Display Tasks
+### 4.2. Display Tasks
 ##### `list`
 Displays all tasks in a list. The number indexing the task is the task index.
 
@@ -94,7 +94,7 @@ Expected outcome:
 > 2. [E][X] Ashley's recital (at: Bel-Air Theater)
 > 3. [D][X] buy gift for Aunt Viv (by: 12 Sep 1995 12:00)
 
-### Sort Task
+### 4.3. Sort Task
 ##### `sort [criteria]`
 
 Displays a list of tasks sorted by either deadlines or type of task. For the former case, only deadline tasks will be listed and will be displayed in order of urgency. For the latter case, deadlines will be displayed first, followed by events and todos. Within each type of tasks, tasks appear in the order they were created.
@@ -114,7 +114,7 @@ Expected outcome:
 > 2. [D][X] help Uncle Phil (by: 12 Sep 1995 11:00)
 > 3. [D][X] buy gift for Aunt Viv (by: 12 Sep 1995 12:00)
 
-### Find Tasks 
+### 4.4. Find Tasks 
 
 ##### `find [search string]`
 Find all tasks that partially matches the search string.
@@ -131,7 +131,7 @@ Expected outcome:
 > 1. [D][X] help Uncle Phil (by: 12 Sep 1995 11:00)
 > 2. [T][X] get Uncle Phil's favorite color
 
-### Mark Task as Done
+### 4.5. Mark Task as Done
 ##### `done [index]`
 Mark a specific task as done. The task index must be provided. The task index can be known from calling the command `list`.
 
@@ -144,7 +144,7 @@ Expected outcome:
 > Nice! I've marked this task as done:<br>
 > [T][✓] get Uncle Phil's favorite color
 
-### Delete Task
+### 4.6. Delete Task
 ##### `delete [index]`
 
 Delete a specific task. The task index must be provided. The task index can be known from calling the command `list`. Only one task can be deleted at a time. 
@@ -159,7 +159,11 @@ Expected outcome:
 > [T][✓] get Uncle Phil's favorite color<br>
 > Now you have 5 task(s) in the list.
 
-### Bye (Exit)
+### 4.7. Save Tasks
+All tasks added are automatically saved everytime changes to the task list are made.
+### 4.8. Load Tasks
+Tasks are automatically loaded upon launching the application.
+### 4.9. Exit
 ##### `todo` - Describe action
 
 Exits the application. The user interface will automatically close in about 2 seconds after the command is entered.

@@ -31,14 +31,17 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Passes a user-inputted string to the parser and returns the parser's output.
+     * If the response is a "bye" command, it saves the current task list.
+     * @param input String input from the user
+     * @return returns a String from Duke back to the UI
      */
     protected String getResponse(String input) {
         // Guard function for bye command
         if (input.equals("bye")) {
             // Save file
             try {
+                assert this.storage != null : "Storage not initialized.";
                 this.storage.save(this.tasks);
             } catch (DukeException e) {
                 return e.getMessage();
@@ -47,6 +50,7 @@ public class Duke {
         }
 
         try {
+            assert this.parser != null : "Parser not initialized.";
             return parser.parse(input);
         } catch (DukeException e) {
             return e.getMessage();

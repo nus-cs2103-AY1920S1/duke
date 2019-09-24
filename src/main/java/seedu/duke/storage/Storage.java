@@ -8,8 +8,10 @@ import seedu.duke.task.Task;
 import seedu.duke.task.Todo;
 
 
-import java.io.*;
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -114,6 +116,44 @@ public class Storage {
     }
 
     /**
+     * Checks if the 'data' folder is present in the working directory.
+     *
+     * @return Boolean.
+     */
+    public Boolean folderExists() {
+        String dataFolder = System.getProperty("user.dir") + "\\data\\";
+        File f = new File(dataFolder);
+        if (f.exists()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Creates the data folder.
+     */
+    public void createDataFolder() {
+        String dataFolder = System.getProperty("user.dir") + "\\data\\";
+        File f = new File(dataFolder);
+        f.mkdirs();
+    }
+
+    /**
+     * Checks if the file (specified in filePath) exists.
+     *
+     * @return Boolean.
+     */
+    public Boolean fileExists() {
+        File f = new File(getFilePath());
+        if (f.exists()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Returns an ArrayList(Task) from the data loaded from the filePath.
      *
      * @return ArrayList(Task) parsed from text file.
@@ -122,30 +162,18 @@ public class Storage {
      */
     public ArrayList<Task> loadTasks() throws FileNotFoundException, DukeException, IOException {
 
-        // Checks if a 'data' folder is present in working directory
-        String dataFolder = System.getProperty("user.dir") + "\\data\\";
-        File f = new File(dataFolder);
-        if (!f.exists()) {
-            f.mkdirs();
+        if (!folderExists()) {
+            createDataFolder();
             createEmptyTaskFile();
-            // clearTaskFileBeforeSaving();
         } else {
-            // Folder exist, Must check if txt file exists within the folder
-            f = new File(getFilePath());
-            if(!f.exists()) {
+            if (!fileExists()) {
                 createEmptyTaskFile();
-                // clearTaskFileBeforeSaving();
             }
         }
 
         // Initialises variables to handle the txt input file.
         ArrayList<String> inputsFromFile = new ArrayList<>();
-        String description = "";
-        String extraDescription = "";
-        String createDateTime = "";
-        String lastModifiedDateTime = "";
         ArrayList<Task> tasks = new ArrayList<>();
-
 
         try {
             // Creates a scanner object to read the txt file from filePath.
@@ -203,22 +231,18 @@ public class Storage {
      */
     public TreeMap<String, Integer> loadStats() throws DukeException, IOException {
 
-        // Checks if a 'data' folder is present in working directory
-        String dataFolder = System.getProperty("user.dir") + "\\data\\";
-        File f = new File(dataFolder);
-        if (!f.exists()) {
-            f.mkdirs();
+        if (!folderExists()) {
+            createDataFolder();
             createEmptyStatFile();
-        } else {
-            // Folder exist, Must check if txt file exists within the folder
-            f = new File(getFilePath());
-            if(!f.exists()) {
+        } else  {
+            if (!fileExists()) {
                 createEmptyStatFile();
             }
         }
 
         ArrayList<String> inputsFromFile = new ArrayList<>();
         TreeMap<String, Integer> map = new TreeMap<String, Integer>();
+
         try {
             Scanner scanner = new Scanner(new File(getFilePath()));
 
@@ -238,11 +262,16 @@ public class Storage {
         return map;
     }
 
+    /**
+     * Creates empty stat file for initialization.
+     *
+     * @throws DukeException If file cannot be created.
+     */
     public void createEmptyStatFile() throws DukeException {
         String absoluteFilepath = getFilePath();
         try {
-            String data = "statistic | integerValue" + System.lineSeparator() + "totalCommandsExecuted  : 0" +
-                    System.lineSeparator() + "totalTasksDeleted  : 0" + System.lineSeparator()
+            String data = "statistic | integerValue" + System.lineSeparator() + "totalCommandsExecuted  : 0"
+                    + System.lineSeparator() + "totalTasksDeleted  : 0" + System.lineSeparator()
                     + "totalTodosCompleted  : 0" + System.lineSeparator() + "totalDeadlinesCompleted  : 0"
                     + System.lineSeparator() + "totalEventsCompleted  : 0" + System.lineSeparator();
             Files.write(Paths.get(absoluteFilepath), data.getBytes());

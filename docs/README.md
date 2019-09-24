@@ -1,10 +1,14 @@
 # User Guide for [Duke](https://github.com/victorvic54/duke)
 ![Duke](Ui.png)
 
+<br />
+
 ## Overview
 Duke, a Personal Assistant chat bot that helps a person to keep 
 track of their tasks. You can ask duke to do something through a command line from the application.
-##
+
+<br />
+
 ## Getting Started
 In order to run the application, please follow the below instructions:
 1. Download and install java version 11 or later to your computer 
@@ -13,7 +17,9 @@ In order to run the application, please follow the below instructions:
    download it directly from [here](https://github.com/victorvic54/duke/releases/download/v0.2/duke.jar)
 3. Double click the application. If it doesn't work, open your terminal, go to your directory where you downloaded the jar file
    and run `java -jar duke.jar`
-##
+
+<br />
+
 ## Features 
 ### Add task
 Users are able to add the following type of task:
@@ -37,7 +43,8 @@ Duke will also help to match your incomplete or typo text as precise as possible
 ### Save and load tasks
 Automatic save and load that whenever the user add task or load task when they open the application.
 
-##
+<br />
+
 ## Usage
 
 ### `todo` - Adds a todo task

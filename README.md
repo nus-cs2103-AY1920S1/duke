@@ -5,7 +5,7 @@
 
 ## User Guide
 
-1. Ensure you have the latest verion of Java
+1. Ensure you have the latest version of Java
 2. Download the latest version of Duke. ([Click here](https://github.com/jeunhoe/duke/releases/download/v1.0/duke-1.0.jar))
 3. Double click the file to open it.
 4. Duke should pop up in a new window.
@@ -14,14 +14,15 @@
 ## Features
 
 ### Adding Tasks
-You can add tasks to Duke so Duke can help you manage them! Such tasks include ToDos, Deadlines, DoAfters and Events.
+You can add tasks to Duke so Duke can help you manage them! Such tasks include **ToDos**, **Deadlines**, **DoAfters** and
+ **Events**.
 
-#### **ToDo**
-Adds an **ToDo** task to Duke.
+### **ToDo**
+Adds a **ToDo** task to Duke.
 
-*Usage*
+Usage
 
-`event NAME_OF_TODO`
+`todo NAME_OF_TODO`
 
 Adds **ToDo** to Duke.
 
@@ -33,10 +34,10 @@ Expected Outcome:
 
 ![Task ToDo](https://raw.githubusercontent.com/jeunhoe/duke/master/docs/images/taskToDo.png)
 
-#### **Deadline**
+### **Deadline**
 Adds a **Deadline** task to Duke.
 
-*Usage*
+Usage
 
 `deadline NAME_OF_DEADLINE /by DATE_TIME`
 
@@ -50,10 +51,10 @@ Expected Outcome:
 
 ![Task Deadline](https://raw.githubusercontent.com/jeunhoe/duke/master/docs/images/taskDeadline.png)
 
-#### **DoAfter**
+### **DoAfter**
 Adds a **DoAfter** task to Duke.
 
-*Usage*
+Usage
 
 `doafter NAME_OF_DOAFTER /after DATE_TIME`
 
@@ -67,10 +68,10 @@ Example Outcome:
 
 ![Task DoAfter](https://raw.githubusercontent.com/jeunhoe/duke/master/docs/images/taskDoAfter.png)
 
-#### **Event**
+### **Event**
 Adds an **Event** task to Duke.
 
-*Usage*
+Usage
 
 `event NAME_OF_EVENT /at DATE_TIME`
 
@@ -91,10 +92,12 @@ Apart from adding tasks to Duke, Duke allows you to manage these tasks by runnin
 3. Finding task
 4. Listing all tasks
 
-#### **Done**
+### **Done**
 Marks a task as **done** in Duke.
 
-*Usage*
+**"Done"** tasks will be displayed with a [+]
+
+Usage
 
 `done INDEX_OF_TASK`
 
@@ -108,10 +111,10 @@ Expected Outcome:
 
 ![Done Command](https://raw.githubusercontent.com/jeunhoe/duke/master/docs/images/doneCommand.png)
 
-#### **Delete**
+### **Delete**
 **Deletes** a task from Duke.
 
-*Usage*
+Usage
 
 `delete INDEX_OF_TASK`
 
@@ -125,10 +128,10 @@ Expected Outcome:
 
 ![Delete Command](https://raw.githubusercontent.com/jeunhoe/duke/master/docs/images/deleteCommand.png)
 
-#### **Find**
+### **Find**
 **Finds** a task in Duke.
 
-*Usage*
+Usage
 
 `find STRING`
 
@@ -142,10 +145,10 @@ Expected Outcome:
 
 ![Find Command](https://raw.githubusercontent.com/jeunhoe/duke/master/docs/images/findCommand.png)
 
-#### **List**
+### **List**
 **Prints** out all tasks in Duke.
 
-*Usage*
+Usage
 
 `list`
 
@@ -162,12 +165,12 @@ Expected Outcome:
 ### Exiting Duke
 When you're all done with Duke, remember to save your data!
 
-#### **Bye**
+### **Bye**
 Saves all current data and **exits** Duke.
 
 *Usage*
 
-#### `bye`
+`bye`
 
 Saves all current data and **exits** Duke.
 

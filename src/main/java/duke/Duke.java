@@ -29,11 +29,11 @@ public class Duke {
 
         try {
             this.ui = new UI();
-            this.storage = new Storage("data/duke.txt");
+            this.storage = new Storage("./data/duke.txt");
             ArrayList<Task> existing = storage.readFileContents();
             this.taskList = new TaskList(existing);
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e + " the file does not exist");
         }
 
     }

@@ -3,6 +3,7 @@ package duke.parser;
 import duke.command.Command;
 import duke.command.CommandDelete;
 import duke.command.CommandExit;
+import duke.command.CommandHelp;
 import duke.command.CommandList;
 import duke.command.CommandDone;
 import duke.command.CommandClear;
@@ -49,6 +50,8 @@ public class Parser {
             return new CommandHi(detail);
         case CommandClear.COMMAND_WORD:
             return new CommandClear(detail);
+        case CommandHelp.COMMAND_WORD:
+            return new CommandHelp(detail);
         default:
             return new IllegalCommand(detail);
         }

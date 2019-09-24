@@ -5,6 +5,7 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * Encapsulates a sheet for the list of tasks.
@@ -103,19 +104,15 @@ public class Sheet {
         List<Task> sortedList = new ArrayList<>(tasks);
         Collections.sort(sortedList);
 
-        StringBuilder sb = new StringBuilder();
+        Object[] unfinishedTasks = sortedList.stream()
+                                             .filter(task -> !(task.isDone()))
+                                             .limit(numOfReminder)
+                                             .toArray();
 
-        int i = 0;
-        int j = 0;
-        while (i < numOfReminder && j < numOfTask) {
-            if (sortedList.get(j).isDone()) {
-                j++;
-                continue;
-            }
-            sb.append(" ").append(i + 1).append(". ").append(sortedList.get(j).toString().trim()).append("\n");
-            j++;
-            i++;
-        }
+        StringBuilder sb = IntStream.range(1, unfinishedTasks.length + 1)
+                 .mapToObj(i -> new StringBuilder("" + i).append(". ")
+                         .append(unfinishedTasks[i - 1].toString().trim()))
+                 .reduce(new StringBuilder(), (x, y) -> x.append(" ").append(y).append("\n"));
 
         if (sb.toString().isBlank()) {
             sb.append("There are currently no urgent tasks~");

@@ -17,6 +17,20 @@ public class Ui {
     private static final String MSG_TASK_NUM_SINGULAR = "Now you have %d task in the list.\n";
     private static final String MSG_TASK_NUM_PLURAL = "Now you have %d tasks in the list.\n";
     private static final String MSG_CLEAR = "Great! I've removed all your tasks!\n";
+    private static final String MSG_HELP = "Nezuko understands the following commands:\n"
+            + "  - done <index>: mark task <index> as done.\n"
+            + "  - delete <index>: delete task <index>.\n"
+            + "  - todo <task description>: adds a todo task to you task list.\n"
+            + "  - deadline <task description>: adds a deadline task to your task list.\n"
+            + "  - event <task description>: adds an event task to ypur task list.\n"
+            + "  - find <keyword>: look up fot tasks containing the <keyword>.\n"
+            + "  - list: view the full list of tasks.\n"
+            + "  - help: check out the available commands.\n"
+            + "  - bye: exit the programme.\n"
+            + "  - clear: remove all tasks from the task list.\n"
+            + "You can go to the Task Master Nezuko User Guide at https://xiaoyu-nus.github.io/duke/"
+            + "for more information.";
+
     private MainWindow mw;
 
     public Ui(MainWindow mw) {
@@ -108,6 +122,10 @@ public class Ui {
 
     public void showReminder(String sortedTask) {
         mw.displayMsg(MSG_REMINDER + sortedTask);
+    }
+
+    public void showHelp() {
+        mw.displayMsg(MSG_HELP);
     }
 }
 

@@ -372,7 +372,7 @@ public class Storage {
      * @param words String array.
      * @return Event object.
      */
-    public Deadline newDeadline(String[] words) {
+    public Deadline newDeadline(String[] words) throws DukeException {
         Boolean isDone = false;
 
         if (words[1].contains("1")) {

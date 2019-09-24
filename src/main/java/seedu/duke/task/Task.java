@@ -1,6 +1,8 @@
 package seedu.duke.task;
 
 import java.time.LocalDateTime;
+
+import seedu.duke.core.DukeException;
 import seedu.duke.statistic.Statistic;
 
 /**
@@ -24,7 +26,13 @@ public abstract class Task {
      *
      * @param description Description String of the task.
      */
-    public Task(String description) {
+    public Task(String description) throws DukeException {
+
+        if (description.trim().isBlank()) {
+            throw new DukeException("Woah, the description should not be empty or blank."
+                    + "\nOnly the Sith deals in absolutes");
+        }
+
         this.description = description;
         this.isDone = false;
         this.taskType = PossibleTaskTypes.DEFAULT;

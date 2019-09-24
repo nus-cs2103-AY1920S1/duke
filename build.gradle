@@ -1,9 +1,8 @@
 plugins {
     id 'java'
     id 'application'
-	id 'checkstyle'
 	id 'com.github.johnrengelman.shadow' version '5.1.0'
-    id 'org.openjfx.javafxplugin' version '0.0.7'
+    id 'checkstyle'
 }
 
 checkstyle {
@@ -28,7 +27,7 @@ run {
 
 shadowJar {
     archiveBaseName = "obot-wan-kenobi"
-    archiveVersion = "0.1.4"
+    archiveVersion = "0.1.5"
     archiveClassifier = null
     archiveAppendix = null
 }
@@ -37,8 +36,9 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
     compile 'joda-time:joda-time:2.9.4'
     String javaFxVersion = '11'
-    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
+
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
     implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
@@ -55,11 +55,6 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-web', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-web', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-web', version: javaFxVersion, classifier: 'linux'
-}
-
-javafx {
-    version = "11.0.2"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
 test {

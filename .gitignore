@@ -14,3 +14,5 @@ src/main/resources/docs/
 bin/
 src/main/java/META-INF/MANIFEST.MF
 data/stats.txt
+obot_data/tasks.txt
+obot_data/stats.txt

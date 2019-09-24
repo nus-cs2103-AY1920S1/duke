@@ -53,7 +53,7 @@ public class TodoCommand extends Command {
      * @param fullCommand User input string.
      * @return New Todo object.
      */
-    public Todo newTodo(String fullCommand) {
+    public Todo newTodo(String fullCommand) throws DukeException {
         String description = Parser.getTodoDescription(fullCommand);
         Todo newTodo = new Todo(description);
         return newTodo;
@@ -68,7 +68,7 @@ public class TodoCommand extends Command {
     public void checkForInvalidInput(String fullCommand) throws DukeException {
         if (fullCommand.length() < 5) {
             // fullCommand contains only the string "todo".
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty. You are a bold one");
         }
 
     }

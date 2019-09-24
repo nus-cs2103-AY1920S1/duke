@@ -8,16 +8,17 @@ by Chen Kai Bin<br/>
 # Introduction
 
 Duke, is an individual project done for CS2103T, a Software Engineering module 
-at the School of Computing of National University of Singapore.
-It is a personal chatbot assistant that has a CLI (Command Line Interface) and it
-helps to manage your tasks such as events, deadlines and todos.
+offered at the School of Computing in National University of Singapore.
+It is a personal chatbot assistant that has a CLI (Command Line Interface). 
+Duke also helps to manage your tasks such as events, deadlines and todos.
 Although its fuctionality is simple, Duke is highly user-friendly.
 
 ## Features 
-- Supports adding/deletion of tasks
+- Supports addition/deletion of tasks
 - Supports searching of tasks
 - Ability to add dates to tasks
 - Provides basic in-app statistics
+- Offers random fun-fact trivia
 
 ## Getting started
 Download Duke [here](https://github.com/ckb055/duke)

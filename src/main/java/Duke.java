@@ -112,7 +112,7 @@ public class Duke extends Application {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         dialogContainer.setBackground(new Background(
-                new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+                new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, Insets.EMPTY)));
  //       dialogContainer.setBackground(Background.EMPTY);
         scrollPane.setContent(dialogContainer);
 

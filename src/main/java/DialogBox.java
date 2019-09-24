@@ -22,7 +22,7 @@ public class DialogBox extends HBox {
         text = l;
         displayPicture = iv;
         text.setFont(new Font("Verdana", 11));
-        text.setTextFill(Color.GOLD);
+        text.setTextFill(Color.DARKMAGENTA);
         text.setWrapText(true);
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);

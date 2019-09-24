@@ -1,0 +1,4 @@
+To-Do    | Not done | Borrow a book from the library
+Deadline | Not done | Return book to the library /by Sat Dec 29 23:59:00 SGT 2018
+Event    | Not done | Outing at the library /at Sat Dec 29 12:00:00 SGT 2018
+End of file

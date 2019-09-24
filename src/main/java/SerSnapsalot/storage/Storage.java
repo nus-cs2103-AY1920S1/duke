@@ -25,8 +25,8 @@ public class Storage {
     protected boolean isArchive = false;
 
     public Storage() {
-        this.fileName = "./duke.txt";
-        this.archiveFileName = "./dukeArchive.txt";
+        this.fileName = "./tasklist.txt";
+        this.archiveFileName = "./tasklistArchive.txt";
     }
 
 

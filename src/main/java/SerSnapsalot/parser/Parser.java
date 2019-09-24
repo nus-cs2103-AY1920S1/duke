@@ -58,10 +58,12 @@ public class Parser {
                 command = parseAddCommand(fullCommand);
             } else if (fullCommand.contains("todo")) {
                 command = parseAddCommand(fullCommand);
-            } else if (fullCommand.equals("snap")){
+            } else if (fullCommand.equals("snap")) {
                 command = parseSnapCommand("snap");
-            } else {
+            } else if (fullCommand.equals("help")) {
                 command = new HelpCommand("help", fullCommand);
+            } else {
+            	throw new DukeException("To view other keywords, use the keyword: help");
             }
         } catch (DukeException e) {
             command = new ExceptionCommand("DukeException" ,e.toString());

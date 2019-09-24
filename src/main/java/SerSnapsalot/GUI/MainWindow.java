@@ -50,9 +50,12 @@ public class MainWindow extends AnchorPane {
 	}
 
 	/**
+	 * Reads user input and parses it to obtain a reply from Duke.
 	 * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
 	 * the dialog container. Clears the user input after processing.
-	 * Solution adapted from Project Group
+	 * Closes the system after a 1.5 seconds when the exit command is given.
+	 *
+	 * Solution for ending with delay adapted from Project Group
 	 */
 	@FXML
 	private void handleUserInput() {
@@ -76,21 +79,35 @@ public class MainWindow extends AnchorPane {
 		}
 	}
 
+	/**
+	 * Creates a DialogBox with String input and Image and ands them to the scroll pane.
+	 * @param input The String input to be added to the label.
+	 * @param image The Image to be added to the ImageView.
+	 */
 	private void addUserDialog (String input, Image image) {
 		dialogContainer.getChildren().addAll(
 			DialogBox.getUserDialog(input, image)
 		);
 		userInput.clear();
 	}
+
+	/**
+	 * Creates a DialogBox with String input and Image and ands them to the scroll pane.
+	 * Flips the ImageView and Label.
+	 * @param input The String input to be added to the label.
+	 * @param image The Image to be added to the ImageView.
+	 */
 	private void addDukeDialog (String input, Image image) {
 		dialogContainer.getChildren().addAll(
 			DialogBox.getDukeDialog(input, image)
 		);
 		userInput.clear();
 	}
-
+	/**
+	 * Easter Egg command that changes the images and creates 4 DialogBox conversations.
+	 */
 	private void snap() {
-		addUserDialog("Snap me daddy", userImage);
+		addUserDialog("OH SNAP!", userImage);
 		addDukeDialog("I am Ironman", theSnap);
 		hasSnap = (!hasSnap);
 		if (hasSnap) {
@@ -104,6 +121,14 @@ public class MainWindow extends AnchorPane {
 		} else {
 			userImage = tomImage;
 			dukeImage = tonyImage;
+
+			String tomLivingMessage = " Hey! Holy cow! You will not believe what's been going on.";
+			tomLivingMessage += "Do you remember when we were in space? And I got all dusty? And I must've passed out because I woke up and you were gone. ";
+			tomLivingMessage += "But Doctor Strange was there right. And he said 'It's been five years. Come on, they need us.' ";
+			tomLivingMessage += "And he started doing the yellow sparkly thing that he does.";
+			String tonyLivingMessage = "-Hugs tearfully-";
+			addUserDialog(tomLivingMessage, userImage);
+			addDukeDialog(tonyLivingMessage, dukeImage);
 		}
 	}
 }

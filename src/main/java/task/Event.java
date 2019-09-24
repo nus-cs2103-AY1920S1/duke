@@ -62,6 +62,14 @@ public class Event extends Task {
     }
 
     /**
+     * Sets localDateTime with user input by replacing current DateTime.
+     * @param newDateTime String format of new DateTime user wishes to set
+     */
+    public void setLocalDateTime(String newDateTime) {
+        this.at = parseDateTime(newDateTime);
+    }
+
+    /**
      * Returns String representation of this event.
      * @return String in format [E] (super class Task's toString) at: (this event's datetime in the format
      *     dd/mm/yyyy hhmm)

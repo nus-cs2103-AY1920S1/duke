@@ -11,6 +11,7 @@ import command.DeadlineCommand;
 import command.EventCommand;
 import command.DeleteCommand;
 import command.FindCommand;
+import command.RescheduleCommand;
 import exception.DukeException;
 import exception.InvalidInputException;
 
@@ -42,9 +43,11 @@ public class Parser {
             return new DeleteCommand(rawString);
         } else if (rawString.startsWith("find ")) {
             return new FindCommand(rawString);
+        } else if (rawString.startsWith("reschedule ")) {
+            return new RescheduleCommand(rawString);
         } else {
             throw new InvalidInputException("Invalid command! Try the commands: bye, list, done, todo, deadline, "
-                    + "event, find or delete and their respective formats!");
+                    + "event, find, delete or reschedule and their respective formats!");
         }
     }
 }

@@ -62,6 +62,14 @@ public class Deadline extends Task {
     }
 
     /**
+     * Sets localDateTime with user input by replacing current DateTime.
+     * @param newDateTime String format of new DateTime user wishes to set
+     */
+    public void setLocalDateTime(String newDateTime) {
+        this.by = parseDateTime(newDateTime);
+    }
+
+    /**
      * Returns String representation of this deadline.
      * @return String in format [D] (super class Task's toString) at: (this deadline's datetime in the format
      *     dd/mm/yyyy hhmm)

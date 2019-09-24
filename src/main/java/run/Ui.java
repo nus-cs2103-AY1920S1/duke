@@ -10,6 +10,18 @@ import java.util.ArrayList;
 public class Ui {
 
     public static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+    public static final String NO_TASKS = "No tasks!";
+    public static final String NO_TASK_AT_DONE_PARAMETER = "No task at that number! (Marking as done unsuccessful)";
+    public static final String NO_TASK_AT_DELETE_PARAMETER = "No task at that number! (Deletion unsuccessful)";
+    public static final String NO_TASK_AT_RESCHEDULE_PARAMETER = "No task at that number! (Reschedule unsuccessful)";
+    public static final String NO_MATCHING_TASK_FOUND = "No tasks found containing your search!";
+    public static final String WRONG_RESCHEDULE_TASK_TYPE = "Task is not an event or deadline! Nothing to reschedule";
+    public static final String PRINT_LIST_PREAMBLE = "Here are the tasks in your list:";
+    public static final String PRINT_ADD_PREAMBLE = "Got it. I've added this task: ";
+    public static final String PRINT_DONE_PREAMBLE = "Nice! I've marked this task as done: ";
+    public static final String PRINT_DELETE_PREAMBLE = "Noted. I've removed this task: ";
+    public static final String PRINT_FIND_PREAMBLE = "Here are the matching tasks in your list:";
+    public static final String PRINT_RESCHEDULE_PREAMBLE = "Done! Here's the reschedules task: ";
 
     /**
      * Prints an error message to the user.
@@ -44,7 +56,7 @@ public class Ui {
      */
     public static String printList(ArrayList<Task> tasks) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Here are the tasks in your list:");
+        stringBuilder.append(PRINT_LIST_PREAMBLE);
         for (int i = 1; i <= tasks.size(); i++) {
             Task currTask = tasks.get(i - 1);
             stringBuilder.append(i + "." + currTask);
@@ -60,7 +72,7 @@ public class Ui {
      */
     public static String printAdd(Task task, int size) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Got it. I've added this task: ");
+        stringBuilder.append(PRINT_ADD_PREAMBLE);
         stringBuilder.append("  " + task);
         stringBuilder.append("Now you have " + size + " tasks in the list.");
         return stringBuilder.toString();
@@ -73,7 +85,7 @@ public class Ui {
      */
     public static String printDone(Task task) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Nice! I've marked this task as done: ");
+        stringBuilder.append(PRINT_DONE_PREAMBLE);
         stringBuilder.append("  " + task);
         return stringBuilder.toString();
     }
@@ -86,7 +98,7 @@ public class Ui {
      */
     public static String printDelete(Task task, int size) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Noted. I've removed this task: ");
+        stringBuilder.append(PRINT_DELETE_PREAMBLE);
         stringBuilder.append("  " + task);
         stringBuilder.append("Now you have " + size + " tasks in the list.");
         return stringBuilder.toString();
@@ -100,14 +112,23 @@ public class Ui {
      */
     public static String printFind(ArrayList<Task> tasks) {
         if (tasks.size() == 0) {
-            return "No tasks found containing your search!";
+            return NO_MATCHING_TASK_FOUND;
         }
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Here are the matching tasks in your list:");
+        stringBuilder.append(PRINT_FIND_PREAMBLE);
         for (int i = 1; i <= tasks.size(); i++) {
             Task currTask = tasks.get(i - 1);
             stringBuilder.append(i + "." + currTask);
         }
         return stringBuilder.toString();
+    }
+
+    /**
+     * Prints updated (rescheduled) task.
+     * @param currTask updated task to be printed
+     * @return String of PRINT_RESCHEDULE_PREAMBLE and updated task
+     */
+    public static String printReschedule(Task currTask) {
+        return PRINT_RESCHEDULE_PREAMBLE + currTask.toString();
     }
 }

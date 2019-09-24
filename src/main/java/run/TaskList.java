@@ -1,5 +1,7 @@
 package run;
 
+import task.Deadline;
+import task.Event;
 import task.Task;
 
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ public class TaskList {
      */
     public String list() {
         if (this.tasks.size() == 0) {
-            return "No tasks!";
+            return Ui.NO_TASKS;
         }
         return Ui.printList(this.tasks);
     }
@@ -54,7 +56,7 @@ public class TaskList {
      */
     public String done(int taskNum) {
         if (taskNum > this.tasks.size()) {
-            return "No task at that number! (Marking as done unsuccessful)";
+            return Ui.NO_TASK_AT_DONE_PARAMETER;
         }
         Task currTask = this.tasks.get(taskNum - 1);
         currTask.setDone();
@@ -68,7 +70,7 @@ public class TaskList {
      */
     public String delete(int taskNum) {
         if (taskNum > this.tasks.size()) {
-            return "No task at that number! (Deletion unsuccessful)";
+            return Ui.NO_TASK_AT_DELETE_PARAMETER;
         }
         Task currTask = this.tasks.get(taskNum - 1);
         this.tasks.remove(taskNum - 1);
@@ -89,5 +91,26 @@ public class TaskList {
             }
         }
         return Ui.printFind(passedTasks);
+    }
+
+    /**
+     * Updates the DateTime of a Event or Deadline task in the tasklist.
+     * @param taskNum int of task number that is to be deleted (1-indexed)
+     * @return String output after changing task's DateTime
+     */
+    public String reschedule(int taskNum, String newDateTime) {
+        if (taskNum > this.tasks.size()) {
+            return Ui.NO_TASK_AT_RESCHEDULE_PARAMETER;
+        }
+        Task currTask = this.tasks.get(taskNum - 1);
+        if (currTask instanceof task.Event) {
+            ((Event) currTask).setLocalDateTime(newDateTime);
+            return Ui.printReschedule(currTask);
+        } else if (currTask instanceof task.Deadline) {
+            ((Deadline) currTask).setLocalDateTime(newDateTime);
+            return Ui.printReschedule(currTask);
+        } else {
+            return Ui.WRONG_RESCHEDULE_TASK_TYPE;
+        }
     }
 }

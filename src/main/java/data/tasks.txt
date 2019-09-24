@@ -1,6 +1,3 @@
 T//fix code//true
-E//formal dinner//true//2/12/1997 2359
-T//presentation//false
-T//testesttesttestesttesttestesttesttestesttesttestesttesttestesttesttestesttesttestesttesttestesttesttestesttesttestesttesttestesttest//false
+E//formal dinner//true//3/11/2011 1400
 T//blankblankblank//false
-T//newnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnew//false

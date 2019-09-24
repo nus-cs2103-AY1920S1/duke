@@ -26,8 +26,6 @@ public class Duke {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     public Duke() {
         ui = new Ui();
@@ -42,20 +40,6 @@ public class Duke {
         parser = new Parser();
     }
 
-    /**
-     * Receives input from the GUI as user input and sends it to be parsed.
-     * Places the user input and response in a DialogBoxes and display them.
-     * @param stage The stage of the GUI.
-     */
-    private void handleUserInput(Stage stage) {
-        String userText = (userInput.getText());
-        String dukeText = (getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, user),
-                DialogBox.getDukeDialog(dukeText, duke)
-        );
-        userInput.clear();
-    }
 
     /**
      * Sends user input to be parsed into a command.Command, which is then executed.

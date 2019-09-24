@@ -19,7 +19,6 @@ repositories {
 
 application {
     // Change this to your main class.
-    // mainClassName = "seedu.duke.Duke"
 	mainClassName = "seedu.duke.core.Launcher"
 }
 
@@ -28,8 +27,8 @@ run {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
-    archiveVersion = "0.1.3"
+    archiveBaseName = "obot-wan-kenobi"
+    archiveVersion = "0.1.4"
     archiveClassifier = null
     archiveAppendix = null
 }

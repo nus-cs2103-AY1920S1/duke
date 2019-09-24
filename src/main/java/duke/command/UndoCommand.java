@@ -21,7 +21,7 @@ public class UndoCommand extends Command {
     public void execute(Model model, UiOutput uiOutput, Storage storage) {
         try {
             Command undoneCommand = model.undo();
-            uiOutput.say("Okay, I've undid the last '" + undoneCommand.getName() + "' command.");
+            uiOutput.say("Okay, I've undone the last '" + undoneCommand.getName() + "' command.");
         } catch (IllegalStateException e) {
             uiOutput.oops("I don't have anything to undo!");
         }

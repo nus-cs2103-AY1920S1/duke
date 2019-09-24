@@ -20,7 +20,7 @@ public class FindCommand extends Command {
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             int k = i + 1;
-            if (task.description.contains(searchPhrase)) {
+            if (task.description.toLowerCase().contains(searchPhrase.toLowerCase())) {
                 if (i > 0) {
                     sb.append("\n");
                 }

@@ -36,6 +36,7 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private AnchorPane mainLayout = new AnchorPane();
     private Image user = new Image(this.getClass().getResourceAsStream("/images/will.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/jeffrey.png"));
     private Image banner = new Image(this.getClass().getResourceAsStream("/images/banner.png"));
@@ -53,6 +54,7 @@ public class Duke extends Application {
      * The ui class handles the output to the user.
      */
     private Ui ui;
+    private Stage stage;
 
     /**
      * Creates a new chat bot with a specified file path.
@@ -69,8 +71,7 @@ public class Duke extends Application {
         }
     }
 
-    @Override
-    public void start(Stage stage) {
+    private void setUpWindow() {
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -82,14 +83,16 @@ public class Duke extends Application {
         userInput = new TextField();
         sendButton = new Button("Send");
 
-        AnchorPane mainLayout = new AnchorPane();
+
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
+    }
 
+    private void addWindowStyling() {
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Geoffrey - Freshest Task Manager");
         stage.setResizable(false);
@@ -107,6 +110,9 @@ public class Duke extends Application {
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
+        //Scroll down to the end every time dialogContainer's height changes.
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
         userInput.setPrefWidth(325.0);
 
         sendButton.setPrefWidth(55.0);
@@ -118,7 +124,9 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+    }
 
+    private void addEventHandlers() {
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -127,10 +135,9 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
+    }
 
-        //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
+    private void showBanner() {
         ImageView bannerView = new ImageView(banner);
         bannerView.setFitWidth(350);
         bannerView.setPreserveRatio(true);
@@ -140,23 +147,6 @@ public class Duke extends Application {
         );
     }
 
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-        return textToAdd;
-    }
-
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
@@ -184,6 +174,15 @@ public class Duke extends Application {
         } catch (IndexOutOfBoundsException e) {
             return "The command is invalid!";
         }
+    }
+
+    @Override
+    public void start(Stage stage) {
+        this.stage = stage;
+        setUpWindow();
+        addWindowStyling();
+        addEventHandlers();
+        showBanner();
     }
 }
 

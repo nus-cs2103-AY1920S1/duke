@@ -38,7 +38,7 @@ public class Duke {
             try {
                 return Parser.parse(tasks, ui, inputIgnoreCase, storage);
             } catch (Exception err) {
-                return "[Exception]" + err;
+                return "[Exception]" + err.getMessage();
             }
         }
     }

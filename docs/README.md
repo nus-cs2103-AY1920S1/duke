@@ -92,7 +92,7 @@ Command: `list` - to show or list down the list of tasks that they have created.
 
 <br />
 
-### `find` - Search for tasks
+### `find` - Search for tasks 
 Command: `find <keyword>` - find the tasks with a `keyword` from the description of the list of tasks.
 
 Example of usage:

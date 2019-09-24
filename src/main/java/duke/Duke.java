@@ -90,7 +90,4 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("CurrentTaskList.txt").run();
     }
-    
-    
-    //Add dummy comment for A-Assertions.
 }

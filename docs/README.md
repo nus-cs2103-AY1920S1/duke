@@ -1,59 +1,188 @@
 # User Guide
-## Introduction
-Geoffrey is the freshest task manager on the block. This simple chat-bot is inspired by the American 90's show The Fresh Prince of Bel Air, which stars Will Smith.
+## 1. Introduction
+Geoffrey is the freshest task manager on the block. This simple chat-bot is inspired by the American 90's show The Fresh Prince of Bel-Air.
 
 As Will Smith, you are able to tell your butler Geoffrey your task list which includes general to-do's, deadlines, and events. Not only can Geoffrey remember these tasks, he can mark them as done, delete them, and sort them based on your commands.
 
 ##### Figure 1. Screenshot of Geoffrey
 ![Image of Yaktocat](Ui.png)
 
-## Quick Start
+## 2. Quick Start
 
 1. Ensure you have Java 11 or above installed on your computer.
 2. Download the latest release (jar file) here, into the folder of your choice.
-3. Open your terminal in that folder directory and enter java -jar <path to jar file> in the command line.
-4. The GUI will be displayed, which is a chat-bot with a command box as seen in Figure 1 above.
-5. Type a command in the text box and press Enter key to get a response from Geoffrey.
-6. For the list of available commands, refer to the Features section.
+3. In the same directory, create a folder named 'data' and in the 'data' folder create an empty file named 'tasks.txt'.
+4. Open your terminal in that folder directory and enter java -jar <path to jar file> in the command line.
+5. The GUI will be displayed, which is a chat-bot with a command box as seen in Figure 1 above.
+6. Type a command in the text box and press Enter key to get a response from Geoffrey.
+7. For the list of available commands, refer to the Features section.
 
-## Features
+## 4. Features
 ### Create Task
-Description of feature.
+Geoffrey can create a task. All tasks created by default is indicated as not done.
 
-### Mark Task as Done
-Description of feature.
-
-### Delete Task
-Description of feature.
-
+There are three types of tasks and their definitions are as follows:
+* todo: A simple task with a description
+* deadline: A task that also has a specified deadline
+* event: A task with a specified location
 ### Display Tasks
-Description of feature.
-
-### Find Tasks 
-Description of feature.
-
+Geoffrey can display a list of all tasks, in the order of their creation.
 ### Sort Task
-Description of feature.
-
+Geoffrey can display the task list sorted by deadlines or type of tasks.
+### Find Tasks 
+Geoffrey can display all tasks that matches a search string.
+### Mark Task as Done
+Geoffrey can mark a task as done, visible via a check mark next to the task.
+### Delete Task
+Geoffrey can delete a task from the list. Deleted tasks cannot be recovered.
 ### Save Tasks
-Description of feature.
-
-### Load Tasks and Progress 
-Description of feature.
-
+All tasks added are automatically saved.
+### Load Tasks
+Tasks are automatically loaded upon launching the application.
 ### Bye (Exit)
-Description of feature.
+The application will stop running and the user interface will close when the user says "bye".
 
 ## Usage
 
-### `Keyword` - Describe action
+### Create Task
+##### `todo [description]`
 
-Describe action and its outcome.
+Creates a simple todo task with a description.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo clean room`
 
 Expected outcome:
 
-`outcome`
+`Got it. I've added this task:
+[T][X] clean room
+Now you have 5 task(s) in the list.`
+
+##### `deadline [description] /by [deadline]`
+
+Creates a task with a description and deadline. The deadline must be specified in the following datetime format: dd-MM-yyy HH:mm. Geoffrey will format the date to a more readable version.
+
+Example of usage: 
+
+`deadline lab report /by 25-09-2019 23:59`
+
+Expected outcome:
+
+`Got it. I've added this task:
+[D][X] lab report (by: 25 Sep 2019 23:59)
+Now you have 5 task(s) in the list.`
+
+##### `event [description] /at [location]`
+
+Creates an event task with a specified location. The location specified can be in any format and will be parsed as a string.
+
+Example of usage: 
+
+`event basketball tournament /at Bel-Air Academy`
+
+Expected outcome:
+
+`Got it. I've added this task:
+[E][X] basketball tournament (at: Bel-Air Academy)
+Now you have 5 task(s) in the list.`
+
+### Display Tasks
+Displays all tasks in a list. The number indexing the task is the task index.
+
+Example of usage: 
+
+`list`
+
+Expected outcome:
+
+`Here are the tasks in your list:
+1. [T][✓] prank Carlton
+2. [E][X] Ashley's recital (at: Bel-Air Theater)
+3. [D][X] buy gift for Aunt Viv (by: 12 Sep 1995 12:00)`
+
+### Sort Task
+##### `sort [criteria]`
+
+Displays a list of tasks sorted by either deadlines or type of task. For the former case, only deadline tasks will be listed and will be displayed in order of urgency. For the latter case, deadlines will be displayed first, followed by events and todos. Within each type of tasks, tasks appear in the order they were created.
+
+There are only two criteria:
+* deadline
+* type
+
+Caution: The indices of each task generated by a `sort` command is not the actual index of the task. Call the `list` command if you wish to look for a specific task index.
+
+Example of usage: 
+
+`sort deadline`
+
+Expected outcome:
+
+`Here are your tasks sorted by deadline:
+1. [D][✓] homework (by: 9 Sep 1995 23:59)
+2. [D][X] help Uncle Phil (by: 12 Sep 1995 11:00)
+3. [D][X] buy gift for Aunt Viv (by: 12 Sep 1995 12:00)`
+
+### Find Tasks 
+
+##### `find [search string]`
+Find all tasks that partially matches the search string.
+
+Note: The indices displayed are the actual indices of the tasks and can be used in the commands `done` and `delete`.
+
+Caution: The indices of each task generated by a `sort` command is not the actual index of the task. Call the `list` command if you wish to look for a specific task index.
+
+Example of usage: 
+
+`find Phil`
+
+Expected outcome:
+
+`Here are the matching task(s) in your list:
+1. [D][X] help Uncle Phil (by: 12 Sep 1995 11:00)
+2. [T][X] get Uncle Phil's favorite color`
+
+### Mark Task as Done
+##### `done [index]`
+Mark a specific task as done. The task index must be provided. The task index can be known from calling the command `list`.
+
+Caution: Once a task is deleted, the indices of the other tasks will change. Therefore, please call `list` again before deleting another task.
+
+Example of usage: 
+
+`delete 3`
+
+Expected outcome:
+
+`Nice! I've marked this task as done:
+[T][✓] get Uncle Phil's favorite color`
+
+### Delete Task
+##### `delete [index]`
+
+Delete a specific task. The task index must be provided. The task index can be known from calling the command `list`. Only one task can be deleted at a time. 
+
+Caution: Once a task is deleted, the indices of the other tasks will change. Therefore, please call `list` again before deleting another
+
+Example of usage: 
+
+`delete 2`
+
+Expected outcome:
+
+`Noted. I've deleted the following task:
+[T][✓] get Uncle Phil's favorite color
+Now you have 5 task(s) in the list.`
+
+### Bye (Exit)
+##### `todo` - Describe action
+
+Exits the application. The user interface will automatically close in about 2 seconds after the command is entered.
+
+Example of usage: 
+
+`bye`
+
+Expected outcome:
+
+`Goodbye, Master William. Hope to see you again soon.

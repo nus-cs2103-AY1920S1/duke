@@ -8,7 +8,7 @@ public class MyPaths {
     /**
      * Path to task list.
      */
-    static final String TASK_LIST = "src/main/data/tasks.txt";
+    static final String TASK_LIST = "data/tasks.txt";
 
     static final String MAIN_WINDOW = "/view/MainWindow.fxml";
     static final String ICON = "/images/icon.png";

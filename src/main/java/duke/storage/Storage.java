@@ -22,6 +22,7 @@ public class Storage {
 
     private String pathToFile;
     private List<Task> taskList = new ArrayList<>();
+    private File file;
 
     private static final String MSG_IOE_EXCEPTION = "Sorry, something went wrong reading the file. > <";
 
@@ -31,6 +32,7 @@ public class Storage {
      * @param pathToFile Path to the file accessed by the Storage object.
      */
     public Storage(String pathToFile) {
+        this.file = new File(pathToFile);
         this.pathToFile = pathToFile;
     }
 
@@ -43,8 +45,8 @@ public class Storage {
     public List<Task> load() throws DukeIoException {
         try {
             //Solution below adapted from https://github.com/podocarp/duke.git
-            File f = new File(pathToFile);
-            f.createNewFile();
+            this.file.getParentFile().mkdir();
+            this.file.createNewFile();
 
             FileInputStream fileInputStream = new FileInputStream(pathToFile);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);

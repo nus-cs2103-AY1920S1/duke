@@ -1,5 +1,5 @@
-![Image of duke](https://ckb055.github.io/duke/Ui.png)
-[Project on github] https://github.com/ckb055/duke
+![Image of duke](https://ckb055.github.io/duke/Ui.png =200x)
+[Project on github](https://github.com/ckb055/duke)
 
 # User Guide
 User guide for Duke, 

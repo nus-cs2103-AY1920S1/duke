@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -61,7 +62,9 @@ public class Storage {
                     task = new Event(data[2], data[3]);
                     break;
                 default:
-                    throw new DukeException("Failed to load tasks.");
+                    // Empty the existing data file
+                    new PrintWriter(file).close();
+                    throw new DukeException("Failed to load tasks. Incorrect data format.");
                 }
                 if (data[1].equals("1")) {
                     task.markAsDone();
@@ -82,11 +85,13 @@ public class Storage {
      * save each task to the destination file. A new file is created if the
      * destination file does not exits.
      *
-     * @param tasks The list of tasks to be saved to the destination file
+     * @param tasks the list of tasks to be saved to the destination file
      * @throws DukeException if file writing fails
      */
     public void save(TaskList tasks) throws DukeException {
         try {
+            // Empty the existing data file
+            new PrintWriter(file).close();
             FileWriter fw = new FileWriter(file);
             for (Task task : tasks.getTasks()) {
                 fw.write(task.encode());

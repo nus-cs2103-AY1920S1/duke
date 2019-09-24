@@ -1,4 +1,4 @@
-# Task Master Nezuko - User Guide
+# Task Master Nezuko: User Guide
 
 By: `Xiaoyu`      Since: `Aug 2019`      Licence: `MIT`
 
@@ -8,7 +8,7 @@ By: `Xiaoyu`      Since: `Aug 2019`      Licence: `MIT`
 1. [Quick Start](##Quick Start)
 1. [Features](##Features)
     1. [Viewing help: `help`](###Viewing help)
-    1. []
+    1. 
 ## Introduction
 
 Task Master Nezuko(TMN) is a handy tool for you to manage you tasks on a PC. More importantly, it is *designed for Demon Slayer and Command Line App lovers* like you. Talk to Nezuko the Task Master through a few easy-to-remember commands, you can manage you tasks in anyway you want. Let us jump to the [Quic Start](#Quick Start) to get started!

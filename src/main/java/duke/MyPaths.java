@@ -15,4 +15,6 @@ public class MyPaths {
 
     public static final String USER_PROFILE = "/images/Tanjiro.png";
     public static final String MANAGER_PROFILE = "/images/Nezuko.png";
+
+    public static final String BACKGROUND = "/images/background.png";
 }

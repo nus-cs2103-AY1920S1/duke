@@ -20,7 +20,7 @@
          </font></Button>
       <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" maxHeight="Infinity" maxWidth="Infinity" prefHeight="392.0" prefWidth="435.0" vvalue="1.0" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-0.3333333333333144" AnchorPane.topAnchor="0.0">
          <content>
-            <VBox fx:id="dialogContainer" prefHeight="441.0" prefWidth="507.0" style="-fx-background-image: url('file:C:/Users/User/Desktop/folders/schoolwork/Y2S1/CS2103/IP/duke/src/main/resources/images/background.png'); -fx-background-size: 100%;" />
+            <VBox fx:id="dialogContainer" prefHeight="441.0" prefWidth="507.0" style="-fx-background-image: url('images/background.png'); -fx-background-size: 100%;" />
          </content>
       </ScrollPane>
    </children>

@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.File;
+import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,6 +15,7 @@ public class Storage {
     private Ui user;
     private ArrayList<Task> items;
     private Scanner pastScan;
+    private File relative;
 
     /**
      * Constructor for Storage.
@@ -24,7 +26,16 @@ public class Storage {
         parse = p;
         user = p.getUser();
         items = p.getList();
-        pastScan = new Scanner(new FileReader("savedList.txt"));
+        relative = new File("savedList.txt");
+        if(!relative.exists()) {
+            try {
+                relative.createNewFile();
+            } catch (IOException e) {
+                System.out.println("File cannot be created");
+            }
+
+        }
+        pastScan = new Scanner(new FileReader(relative));
     }
 
     /**
@@ -82,10 +93,9 @@ public class Storage {
      * Store current tasks into text file.
      * @param inputs Arraylist containing current tasks
      */
-    public static void storeCurrent(ArrayList<Task> inputs) {
+    public void storeCurrent(ArrayList<Task> inputs) {
         try {
-            File file = new File("/Users/teojunhong/JavaProject/2103T/duke/savedList.txt");
-            FileWriter fw = new FileWriter(file);
+            FileWriter fw = new FileWriter(relative);
             PrintWriter pw = new PrintWriter(fw);
             for (Task input : inputs) {
                 int status = 0;

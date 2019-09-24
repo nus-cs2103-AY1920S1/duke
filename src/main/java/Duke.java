@@ -46,7 +46,7 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-
+        System.out.println("Loading ");
         store.loadExisting();
 
         //Step 1. Setting up required components

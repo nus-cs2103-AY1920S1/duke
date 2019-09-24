@@ -31,7 +31,7 @@ Fig. 1. Screenshot of Obot
 
 ### Place 2
 ## Setting up 
-1. Ensure you have Java version 11.0.4 or later installed in your Computer.
+1. Ensure you have Java version `11.0.4" 2019-07-16 LTS` or later installed in your Computer.
 You can download it [here](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html)
 2. Verify that the correct version exists by typing `java -version` into the terminal/CMD. 
 3. Download the jar file from [here](https://github.com/AhmadHatziq/duke/releases/tag/A-Release)

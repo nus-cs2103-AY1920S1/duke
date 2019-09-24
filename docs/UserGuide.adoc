@@ -18,7 +18,7 @@ By: `Xiaoyu`      Since: `Aug 2019`      Licence: `MIT`
 
 == Introduction
 
-Task Master Nezuko(TMN) is a handy tool for you to manage you tasks on a PC. More importantly, it is *designed for Demon Slayer and Command Line App lovers like you*. Talk to Nezuko the Task Master through a few easy-to-remember commands, you can manage you tasks in anyway you want. Let us jump to the <<Quick Start>> to get started!
+Task Master Nezuko(TMN) is a handy tool for you to manage you tasks on a PC. More importantly, it is *designed for Demon Slayer and Command Line App lovers* like you. Talk to Nezuko the Task Master through a few easy-to-remember commands, you can manage you tasks in anyway you want. Let us jump to the <<Quick Start>> to get started!
 
 == Quick Start
 
@@ -32,12 +32,13 @@ image::Ui.png[width="790"]
 .  Type the command in the command box and press kbd:[Enter] to execute it.
 .  Some example commands you can try:
 
-* *`list`* : lists all tasks
-* **`deadline`**`project meeting /by 20/09/2020 1800` : adds a task `project meeting` due at `6 PM` on `20th Sept, 2020` to the Task Manager.
-* **`delete`**`3` : deletes the 3rd task in the full list
-* *`done`**`2` : marks the 2nd task in the full list as done
+* **`list`** : lists all tasks
+* **`deadline`** `project meeting /by 20/09/2020 1800` : adds a task `project meeting` due at `6 PM` on `20th Sept, 2020` to the Task Manager.
+* **`delete`** `3` : deletes the 3rd task in the full list
+* **`done`** `2` : marks the 2nd task in the full list as done
 
 .  Refer to <<Features>> for details of each command.
+
 
 [[Features]]
 == Features
@@ -45,132 +46,165 @@ image::Ui.png[width="790"]
 ====
 *Command Format*
 
-* Words in `< >` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Words in `<` `>` are the parameters to be supplied by the user. e.g. in `delete <index>`, `index` is a parameter which can be used as `delete 3`.
+
+*Output Format*
+
+* A task is formatted as follow: +
+    `_index_. [type] [status] _task description_ (timing)` +
+The following table summarises what each field means:
+|===
+|Field | Description
+
+|Index | Index of task in the list
+|Type | `[T]`: Todo task without timing information +
+`[D]`: Deadline task with a deadline +
+`[E]`: Event task with two timing information marking the start and end of the event
+|Status | `[x]` Task is unfinished +
+`[v]` Task is finished
+|Task Description | User input task description
+|Timing| `(by:` `_date_` `)`: Task due by `_date_` +
+`(from:` `_starting date_` `to` `_ending date_` `)`: Task happening between `_starting_date_` and `_ending date_`
+|===
+
+* e.g. in `2. [D][x] assignment 1 (by: 21/09/2019 0900 PM)`, the task _assignment 1_ is the second task in the list; it is a unfinished deadline task due by 21st Sept, 2019 at 0900 PM.
+
 ====
 
 === Viewing help : `help`
 
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding a todo task: `todo`
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
-
-[TIP]
-A person can have any number of tags (including 0)
+`todo` allows you to add a task without any timing information. +
+Format: `todo <task description>`
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `todo repair my fridge`
 
-=== Listing all persons : `list`
+=== Adding a deadline task: `deadline`
+
+Use this command if you have any task due before certain time or date that you want to specify. +
+Format: `deadline <task description> /by <date> <time>` +
+Format date: `<dd/MM/yyyy>` **or** `<dd/MM>` +
+Format time: `<hhmm>`
+
+[TIP]
+Either `<date>` or `<time>` can be omitted. If so, the default date will be the current date, and the default time will be 1200AM.
+
+Examples:
+
+* `deadline Lecture 6 quiz /by 28/9` +
+Adds the task `[D][x] Lecture 6 quiz (by: 28/09/2019 1200 AM)` to your task list.
+* `deadline essay draft /by 2359` +
+Adds the task `[D][x] essay draft (by: _current date_ 1159 PM)` to your task list.
+
+=== Adding an event task: `event`
+
+Use this command if you have any activity that has a duration to happen. +
+Format: `event <task description> /from <date> <time> to <date> <time>` +
+Format date: `<dd/MM/yyyy>` **or** `<dd/MM>` +
+Format time: `<hhmm>`
+
+[TIP]
+Either `<date>` or `<time>` can be omitted. If so, the default date will be the current date, and the default time will be 1200AM.
+
+Examples:
+
+* `event CCA interview /from 28/9 1930 to 28/9 1945` +
+Adds the task `[E][x] CCA interview (from: 28/09/2019 0730 PM to 28/09/2019 0745 PM)` to your task list.
+
+=== Listing all tasks : `list`
 
 Shows a list of all persons in the address book. +
 Format: `list`
 
-=== Editing a person : `edit`
+=== Deleting a task : `delete`
 
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Deletes a existing task from the task list. +
+Format: `delete <index>`
+
+Examples:
+
+* `delete 1` +
+Deletes the 1st task in the task list.
+
+=== Marking a task as done: `done`
+
+Marks a task as done in the task list. +
+Format: `done <index>`
+
+Examples:
+
+* `done 1` +
+Marks the 1st task in the task list as done.
+
+=== Finding tasks by description: `find`
+
+Finds tasks whose description contain the given keyword/phrase. +
+Format: `find <keyword>`
 
 ****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* The search is case insensitive. e.g `lecture` will match `Lecture`.
+* Only one exact keyword or phrase can be searched at one time. e.g. `do homework` will not match `do laundry` or `do coding homework`, but will match `do homework with Ben`.
+* Only the description is searched.
+* Partial words will be matched. e.g. `CS` will match `CS2103` and `CS2101`.
 ****
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `find meetings` +
+Returns `Project Meeting` and `meeting at U Town`.
+* `find to buy:` +
+Returns `to buy: shoes` and `to buy: notepad`.
 
-=== Locating persons by name: `find`
+=== Sending a greeting : `hi`
 
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Sends a greeting to Nezuko and see what she replies!
 
-****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
-
-Examples:
-
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
-
-// tag::delete[]
-=== Deleting a person : `delete`
-
-Deletes the specified person from the address book. +
-Format: `delete INDEX`
-
-****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `list` +
-`delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
-
-// end::delete[]
 === Clearing all entries : `clear`
 
-Clears all entries from the address book. +
+Clears all entries from the task list. +
 Format: `clear`
 
-=== Exiting the program : `exit`
+=== Exiting the program : `bye`
 
 Exits the program. +
-Format: `exit`
+Format: `bye`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+Task Master data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+=== Notifying on close deadlines
 
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
+Nezuko will sort and find a few most urgent unfinished tasks for you and alert you on the matter at the start of the programme. +
+Todo tasks have the lowest priority.
+
 
 == FAQ
 
-*Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*Q*: What is the default number of tasks that I will be reminded of at the start of the programme? +
+*A*: The default number is 5. We are sorry that the number of tasks to remind cannot be modified in this version of TM Nezuko. We welcome you to look out for future updates.
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* *Todo* `todo <task description>` +
+e.g. `todo watch a movie`
+* *Deadline* `deadline <task description> /by <date> <time>`
+e.g. `deadline Lecture 6 quiz /by 28/9 0900`
+* *Event* `event <task description> /from <date> <time> to <date> <time>
+e.g. `event CCA interview /from 28/9 1930 to 28/9 1945`
 * *Clear* : `clear`
-* *Delete* : `delete INDEX` +
+* *Delete* : `delete <index>` +
 e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
+* *Done* : `done <index>` +
+e.g. `done 5`
+* *Find* : `find <keyword>` +
+e.g. `find assignment`
 * *List* : `list`
+* *Hi*: `hi`
 * *Help* : `help`

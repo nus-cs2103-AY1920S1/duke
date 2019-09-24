@@ -34,7 +34,7 @@ public class MainWindow extends AnchorPane {
 
     private static final String MSG_WELCOME = "Hello! I'm Nezuko ><\n" + "What can I do for you?\n";
 
-    private static final int NUMBER_OF_REMINDER = 5;
+    private static int numberOfReminder = 5;
 
     /**
      * Initializes a MainWindow object.
@@ -56,7 +56,16 @@ public class MainWindow extends AnchorPane {
     public void displayReminder() {
         assert duke != null;
         Reminder reminder = new Reminder(duke.getSheet(), duke.getUi());
-        reminder.remind(NUMBER_OF_REMINDER);
+        reminder.remind(numberOfReminder);
+    }
+
+    /**
+     * Sets the maximum number of tasks to remind at the start of the programme.
+     *
+     * @param num maximum number of tasks to remind
+     */
+    public void setNumberOfReminder(int num) {
+        numberOfReminder = num;
     }
 
     public String getInput() {

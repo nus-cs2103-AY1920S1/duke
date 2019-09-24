@@ -1,4 +1,5 @@
 import execution.UI;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -6,8 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -39,7 +38,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         UI ui = new UI();
+
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String style = "-fx-background-color: rgba(40, 42, 47, 1);";
+        this.dialogContainer.setStyle(style);
 
         //duke welcome message upon opening GUI
         dialogContainer.getChildren().addAll(
@@ -70,7 +72,7 @@ public class MainWindow extends AnchorPane {
 
         //exits the application after the user says bye
         if(response.equals(ui.goodbyeMsg())) {
-            TimeUnit.SECONDS.sleep(1);
+            Platform.exit();
             System.exit(0);
         }
     }

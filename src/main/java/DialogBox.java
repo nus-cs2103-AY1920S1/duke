@@ -47,7 +47,8 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox current = new DialogBox(text, img);
         current.setBackground(Background.EMPTY);
-        String style = "-fx-background-color: rgba(0,255,0,0.3);";
+        String style = "-fx-background-color: rgba(28, 97, 176, 1);" +
+                       "-fx-text-fill: white";
         current.dialog.setStyle(style);
         return current;
     }
@@ -55,7 +56,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        String style = "-fx-background-color: rgba(255,255,0,0.3);";
+        String style = "-fx-background-color: rgba(203, 207, 215, 1);";
         db.dialog.setStyle(style);
         return db;
     }

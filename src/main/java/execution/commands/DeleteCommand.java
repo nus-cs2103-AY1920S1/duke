@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList taskList, UI ui, Storage storage) throws DukeException {
 
-        super.execute(taskList, ui, storage);
+        this.checkValidity(taskList);
 
         int deleteNum = Integer.parseInt(this.descriptionOfTask.trim()) - 1;
         Task deleted = taskList.deleteTask(deleteNum);
@@ -47,10 +47,19 @@ public class DeleteCommand extends Command {
      *
      * @throws DukeException if description (the number) is left empty.
      */
-    @Override
-    protected void checkValidity() throws DukeException {
-        if (this.descriptionOfTask.isEmpty()) {
-            throw new DukeException(" ☹ OOPS!!! The description of an delete cannot be empty.");
+    protected void checkValidity(TaskList tasklist) throws DukeException {
+        try {
+            int indexToBeDeleted = Integer.parseInt(this.descriptionOfTask.trim()) - 1;
+
+            if (this.descriptionOfTask.isEmpty()) {
+                throw new DukeException(" ☹ OOPS!!! The description of an delete cannot be empty.");
+            } else if (indexToBeDeleted >= tasklist.getSize()) {
+                throw new DukeException(" ☹ OOPS!!! You do not have that many tasks.");
+            }
+        } catch (Exception e){
+            throw new DukeException("☹ OOPS!!! You only can put a number after the command" +
+                    "\n delete. If you want to put more numbers, " +
+                    "\n please use the command DeleteAll. ");
         }
     }
 }

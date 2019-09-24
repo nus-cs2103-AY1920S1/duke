@@ -12,6 +12,7 @@ spaces between letters will be converted to '-'
 
 1. [Introduction](#introduction)
 2. [Setting up](#setting-up)
+3. [Storage](#storage)
 3. [Features](#features)
     1. [Adding a new to-do task](#1-adding-a-new-to-do-task)
     2. [Adding a new event task](#2-adding-a-new-event-task)
@@ -30,13 +31,18 @@ Obot Wan Kenobi is a chatbot based on the persona of Jedi Master Obi-Wan Kenobi.
 Fig. 1. Screenshot of Obot
 
 ## Setting up 
-1. Ensure you have Java version `"11.0.4" 2019-07-16 LTS` or later installed in your Computer.
+1. Ensure you have Java version `"11.0.4" 2019-07-16 LTS` or later installed in your system.
 You can download it [here](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html)
 2. Verify that the correct version exists by typing `java -version` into the terminal/CMD. 
 3. Download the jar file from [here](https://github.com/AhmadHatziq/duke/releases/tag/A-Release)
 4. Execute the jar file from the command line by running the following
    1. Change the working directory to the folder containing the .jar file ie `cd "Dowloads"`
    2. Execute the .jar file by running `java -jar obot-0.1.4.jar`
+   
+## Storage
+During execution, a folder called `obot-data` will be created. Inside, there will be 2 files; `tasks.txt` and `stats.txt`.
+</br>
+`tasks.txt` will store the tasks while `stats.txt` will store the user statistics.
 
 ## Features 
 
@@ -65,7 +71,7 @@ Expected outcome:
 <br/>
 
 ### 2. Adding a new event task 
-An event task is similar to a to-do task, escept that it is associated with a particular location, the event location.
+An event task is similar to a to-do task, except that it is associated with a particular location, the event location.
 
 Event task can be added via the following format:
 event [event_name] /at [event_location]
@@ -117,8 +123,10 @@ Expected outcome:
 <br/>
 
 ### 4. Viewing task-related statistics 
-Obot can also give the statistics regarding the number of tasks completed __in the current day.__
+Obot can give the statistics regarding the number of tasks completed __in the current day.__
 Tasks completed more than one day ago will not be counted.
+<br/>
+You can verify the above by saving a finished task, opening the storage file and editing the datetime.
 
 To view statistics pertaining to each task (to-do, event or deadline), enter the following command:
 

@@ -26,8 +26,8 @@ run {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
-    archiveVersion = "0.1.3"
+    archiveBaseName = "task_master_nezuko"
+    archiveVersion = "1.0"
     archiveClassifier = null
     archiveAppendix = null
 }

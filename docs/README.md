@@ -194,7 +194,7 @@ Todo tasks have the lowest priority.
 
 * **Todo** `todo <task description>`\
 e.g. `todo watch a movie`
-* **Deadline** `deadline <task description> /by <date> <time>`
+* **Deadline** `deadline <task description> /by <date> <time>`\
 e.g. `deadline Lecture 6 quiz /by 28/9 0900`
 * **Event** `event <task description> /from <date> <time> to <date> <time>`\
 e.g. `event CCA interview /from 28/9 1930 to 28/9 1945`

@@ -25,13 +25,14 @@ public class AddCommand implements Command {
      * Execute method which calls the method upon initialisation of the object.
      * @param dukeData the storage object of the program
      * @param ui       ui object which handles output of user interaction
+     * @param taskList the list of tasks that is stored in the Duke program
      * @return a string representation of the output for the add command
      */
     @Override
-    public String execute(DukeData dukeData, Ui ui) throws IOException {
-        TaskList tasks = dukeData.load();
-        int index = tasks.getSize() + 1; // since index is always -1 of size of arraylist
+    public String execute(DukeData dukeData, Ui ui, TaskList taskList) throws IOException {
+        int index = taskList.getSize() + 1; // since index is always -1 of size of arraylist
         dukeData.addTask(index, this.taskToBeAdded);
-        return ui.showTaskAdded(this.taskToBeAdded, tasks);
+        taskList.addTask(this.taskToBeAdded);
+        return ui.showTaskAdded(this.taskToBeAdded, taskList);
     }
 }

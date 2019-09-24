@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Ui;
 import duke.data.DukeData;
+import duke.data.TaskList;
 
 import java.io.IOException;
 
@@ -23,11 +24,13 @@ public class DoneCommand implements Command {
      * Execute method which calls the method upon initialisation of the object.
      * @param dukeData the storage object of the program
      * @param ui       ui object which handles output of user interaction
+     * @param taskList the list of tasks that is stored in the Duke program
      * @return a string representation of the Duke's response when a Task is marked done
      */
     @Override
-    public String execute(DukeData dukeData, Ui ui) throws IOException {
-        dukeData.taskDone(this.taskIndex - 1); // array that is why -1 to index
-        return ui.showDone(this.taskIndex, dukeData.load());
+    public String execute(DukeData dukeData, Ui ui, TaskList taskList) throws IOException {
+        taskList.markTaskAsDone(this.taskIndex);
+        dukeData.taskDone(taskList);
+        return ui.showDone(this.taskIndex, taskList);
     }
 }

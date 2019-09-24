@@ -16,11 +16,15 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String date) {
         super(description);
-        try {
-            this.dateTime = new DateTime(date);
-            this.date = this.dateTime.getDateTimeString();
-        } catch (ParseException e) {
-            System.err.println("Cant parse Date: " + date);
+        if (!DateTime.isDateFormatted(date)) {
+            try {
+                this.dateTime = new DateTime(date);
+                this.date = this.dateTime.getDateTimeString();
+            } catch (ParseException e) {
+                System.err.println("Cant parse Date: " + date);
+            }
+        } else {
+            this.date = date;
         }
     }
 

@@ -98,12 +98,12 @@ public class Ui {
 
     /**
      * Notifies the user of the task marked as done.
-     * @param taskNo the task number, in the order of input
+     * @param taskIndex the task index number, in the order of input
      * @param list the TaskList which contains all Tasks in the list
      * @return a string to inform user of the task marked as done
      */
-    public String showDone(int taskNo, TaskList list) {
-        Task t = list.getTask(taskNo - 1);
+    public String showDone(int taskIndex, TaskList list) {
+        Task t = list.getTask(taskIndex);
         String done = String.format("Nice! I've marked this task as done:%n %s",
                 t.toString());
         return addLines(done);
@@ -145,6 +145,7 @@ public class Ui {
     public String showFind(String keyword, TaskList list) {
         StringBuilder found = new StringBuilder("Here are the matching tasks in your list:");
         ArrayList<Task> taskList = list.getList();
+        boolean hasNoMatches = true;
         int count = 0;
         for (int i = 0; i < list.getSize(); i++) {
             Task t = taskList.get(i);
@@ -154,9 +155,15 @@ public class Ui {
                 found.append(System.getProperty("line.separator"));
                 found.append(" ").append(count).append(".");
                 found.append(t.toString());
+                hasNoMatches = false;
             }
         }
-        return addLines(found.toString());
+
+        if (hasNoMatches) {
+            return "There are no matches in your TaskList!";
+        } else {
+            return addLines(found.toString());
+        }
     }
 
     /**

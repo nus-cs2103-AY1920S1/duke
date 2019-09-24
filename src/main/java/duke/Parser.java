@@ -31,11 +31,11 @@ public class Parser {
             case "done":
                 cmdLine = inputSplit[1]; // extract the rest of the line
                 int taskNo = Integer.parseInt(cmdLine);
-                return new DoneCommand(taskNo);
+                return new DoneCommand(taskNo - 1); // taskIndex is -1 of taskNo
             case "delete":
                 cmdLine = inputSplit[1]; // extract the rest of the line
                 int taskNum = Integer.parseInt(cmdLine);
-                return new DeleteCommand(taskNum);
+                return new DeleteCommand(taskNum - 1); // taskIndex is -1 of taskNum
             case "todo":
                 cmdLine = inputSplit[1]; // extract the rest of the line
                 if (cmdLine.isEmpty()) {

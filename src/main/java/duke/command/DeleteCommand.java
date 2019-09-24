@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Ui;
 import duke.data.DukeData;
+import duke.data.TaskList;
 
 import java.io.IOException;
 
@@ -23,12 +24,14 @@ public class DeleteCommand implements Command {
      * Execute method which calls the method upon initialisation of the object.
      * @param dukeData the storage object of the program
      * @param ui       ui object which handles output of user interaction
+     * @param taskList the list of tasks that is stored in the Duke program
      * @return a string representation of the output for the delete command
      */
     @Override
-    public String execute(DukeData dukeData, Ui ui) throws IOException {
-        String deleted = ui.showDelete(this.taskIndex - 1, dukeData.load());
-        dukeData.removeTask(this.taskIndex - 1);
+    public String execute(DukeData dukeData, Ui ui, TaskList taskList) throws IOException {
+        String deleted = ui.showDelete(this.taskIndex , taskList);
+        taskList.removeTask(this.taskIndex);
+        dukeData.removeTask(taskList); // taskList is the new taskList with the element deleted
         return deleted;
     }
 }

@@ -3,6 +3,7 @@ package duke;
 import duke.command.Command;
 import duke.command.DukeException;
 import duke.data.DukeData;
+import duke.data.TaskList;
 
 import java.io.IOException;
 
@@ -14,6 +15,7 @@ import java.io.IOException;
  */
 public class Duke { // handles all input and output
     private DukeData myData;
+    private TaskList myTasks;
     private Ui myUi;
 
     /**
@@ -22,15 +24,25 @@ public class Duke { // handles all input and output
     public Duke() {
         this.myData = new DukeData();
         this.myUi = new Ui();
+        try {
+            this.myTasks = new TaskList(this.myData.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Creates a Duke program with filePath as the path to save Duke's data.
      * @param filePath the path to save the Duke's data from user input
      */
-    public Duke(String filePath) {
+    public Duke(String filePath) throws IOException {
         this.myData = new DukeData(filePath);
         this.myUi = new Ui();
+        try {
+            this.myTasks = new TaskList(this.myData.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -46,7 +58,7 @@ public class Duke { // handles all input and output
             try {
                 Command cmd = Parser.parse(userCommand);
                 assert cmd != null;
-                output = Ui.addLines(cmd.execute(this.myData, this.myUi));
+                output = Ui.addLines(cmd.execute(this.myData, this.myUi, this.myTasks));
                 System.out.println(output);
             } catch (IOException e) {
                 System.err.println(Ui.addLines(e.getMessage()));
@@ -81,7 +93,7 @@ public class Duke { // handles all input and output
         try {
             Command cmd = Parser.parse(input);
             assert cmd != null;
-            return cmd.execute(this.myData, this.myUi);
+            return cmd.execute(this.myData, this.myUi, this.myTasks);
         } catch (DukeException | IOException e) {
             return Ui.addLines(e.getMessage());
         }

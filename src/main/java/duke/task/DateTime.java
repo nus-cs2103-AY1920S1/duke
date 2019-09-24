@@ -9,10 +9,10 @@ import java.util.Date;
  * readable format, e.g. 2nd of January 2019 4PM.
  */
 public class DateTime {
-    private final SimpleDateFormat DATETIME_FORMATGIVEN = new SimpleDateFormat(
+    private static final SimpleDateFormat DATETIME_FORMATGIVEN = new SimpleDateFormat(
             "d/M/yyyy HHmm");
-    private final String FORMAT_TO_SHOW = " 'of' MMMM yyyy, ha";
-    private final SimpleDateFormat DATETIME_FORMATTER = new SimpleDateFormat(
+    private static final String FORMAT_TO_SHOW = " 'of' MMMM yyyy, ha";
+    private static final SimpleDateFormat DATETIME_FORMATTER = new SimpleDateFormat(
             FORMAT_TO_SHOW);
     private String dateTime;
     private Date date;
@@ -38,6 +38,10 @@ public class DateTime {
         String suffix = getSuffix(Integer.parseInt(splitDate[0]));
         String dateTimeString = suffix + DATETIME_FORMATTER.format(this.date);
         return dateTimeString;
+    }
+
+    public static boolean isDateFormatted(String date) {
+        return date.equals(DATETIME_FORMATTER);
     }
 
     private String getSuffix(int d) {

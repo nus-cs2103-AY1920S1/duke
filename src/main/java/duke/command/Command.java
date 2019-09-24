@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Ui;
 import duke.data.DukeData;
+import duke.data.TaskList;
 
 import java.io.IOException;
 
@@ -14,8 +15,9 @@ public interface Command {
      * Execute method which calls the method upon initialisation of the object.
      * @param dukeData the storage object of the program
      * @param ui ui object which handles output of user interaction
+     * @param taskList
      * @return a string representation of the output for that command
      */
-    String execute(DukeData dukeData, Ui ui) throws IOException, DukeException;
+    String execute(DukeData dukeData, Ui ui, TaskList taskList) throws IOException, DukeException;
 
 }

@@ -1,4 +1,4 @@
-![Image of duke](https://ckb055.github.io/duke/Ui.png =200x100)
+![Image of duke](https://ckb055.github.io/duke/Ui.png =485.5x742.5)
 [Project on github](https://github.com/ckb055/duke)
 
 # User Guide
@@ -11,13 +11,15 @@ helps to manage your tasks such as events, deadlines and todos.
 Although its fuctionality is simple, Duke is highly user-friendly.
 
 ## Features 
-- 
-
-
-### Feature 1 
-Description of feature.
+- Supports adding/deletion of tasks
+- Supports searching of tasks
+- Ability to add dates to tasks
+- Provides help in the program
 
 ## Usage
+### Commands
+
+<span style="color:red">add</span>
 
 ### `Keyword` - Describe action
 

@@ -10,7 +10,7 @@ As Will Smith, you are able to tell your butler Geoffrey your task list which in
 ## 2. Quick Start
 
 1. Ensure you have Java 11 or above installed on your computer.
-2. Download the latest release (jar file) here, into the folder of your choice.
+2. Download the latest release (jar file) [here](https://github.com/dalisc/duke/releases/tag/v.02), into the folder of your choice.
 3. In the same directory, create a folder named 'data' and in the 'data' folder create an empty file named 'tasks.txt'.
 4. Open your terminal in that folder directory and enter java -jar <path to jar file> in the command line.
 5. The GUI will be displayed, which is a chat-bot with a command box as seen in Figure 1 above.

@@ -1,7 +1,16 @@
 package execution;
 
 import exception.DukeException;
-import execution.commands.*;
+import execution.commands.ByeCommand;
+import execution.commands.FindCommand;
+import execution.commands.MassDeleteCommand;
+import execution.commands.ListCommand;
+import execution.commands.DoneCommand;
+import execution.commands.DeleteCommand;
+import execution.commands.Command;
+import execution.commands.TodoCommand;
+import execution.commands.DeadlineCommand;
+import execution.commands.EventCommand;
 
 /**
  * Represents a parser that parses a string value to decide which command to create based on the input string.
@@ -37,36 +46,36 @@ public class Parser {
 
         switch (action) {
 
-            case "bye":
-                return new ByeCommand(rest);
+        case "bye":
+            return new ByeCommand(rest);
 
-            case "list":
-                return new ListCommand(rest);
+        case "list":
+            return new ListCommand(rest);
 
-            case "done":
-                return new DoneCommand(rest);
+        case "done":
+            return new DoneCommand(rest);
 
-            case "todo":
-                return new TodoCommand(rest);
+        case "todo":
+            return new TodoCommand(rest);
 
-            case "deadline":
-                return new DeadlineCommand(rest);
+        case "deadline":
+            return new DeadlineCommand(rest);
 
-            case "event":
-                return new EventCommand(rest);
+        case "event":
+            return new EventCommand(rest);
 
-            case "delete":
-                return new DeleteCommand(rest);
+        case "delete":
+            return new DeleteCommand(rest);
 
-            case "find":
-                return new FindCommand(rest);
+        case "find":
+            return new FindCommand(rest);
 
-            case "deleteAll":
-                return new MassDeleteCommand(rest);
+        case "deleteAll":
+            return new MassDeleteCommand(rest);
 
-            default:
-                System.out.println("ERROR: " + rest);
-                throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        default:
+            System.out.println("ERROR: " + rest);
+            throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 
         }
 

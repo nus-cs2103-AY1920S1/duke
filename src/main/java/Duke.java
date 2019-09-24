@@ -30,29 +30,30 @@ public class Duke {
             this.storage = new Storage("data/duke.txt");
             ArrayList<Task> existing = storage.readFileContents();
             this.taskList = new TaskList(existing);
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
 
     }
+
 
     /**
      * Runs the program. It will start from here.
      *
      * @param args
      * @throws IOException if there is an issue reading the file.
-     */
-//    public static void main(String[] args) throws IOException, DukeException  {
-//
-//       new Duke().run();
-//
-//    }
+     *//*
+    public static void main(String[] args) throws IOException, DukeException {
+
+       new Duke().run();
+
+    }*/
 
 
 
     /**
-     * Runs the program by prompting user to enter the command. The program will then carry out the program if the command
-     * is valid. If not, it will throw a Duke exception.
+     * Runs the program by prompting user to enter the command. The program will then carry out the program
+     * if the command is valid. If not, it will throw a Duke exception.
      *
      * @throws IOException if there is an issue reading the .txt file to recover the previous list.
      */
@@ -65,7 +66,7 @@ public class Duke {
                 Command current = Parser.parse(command);
                 current.execute(taskList, ui, storage);
                 command = this.ui.promptEntry();
-    }
+            }
 
 
         } catch (Exception e) {

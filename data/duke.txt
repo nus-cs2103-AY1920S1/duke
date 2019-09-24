@@ -1,2 +1,2 @@
-T | 0 | sleep       **** Priority ****
-T | 1 | rest
+T | 0 | Buy 5 AAA batteries 
+E | 0 | 2103 meeting | Lawnce's house next Thursday 12 noon

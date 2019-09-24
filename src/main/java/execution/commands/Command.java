@@ -15,7 +15,7 @@ public abstract class Command {
     /**
      * Constructs the Command object with the description of task string value as parameter.
      *
-     * @param descriptionOfTask
+     * @param descriptionOfTask to construct the command.
      */
     public Command(String descriptionOfTask) {
 
@@ -32,7 +32,7 @@ public abstract class Command {
      * @param storage to store any changes in the storage.
      * @throws DukeException if the user input is invalid.
      */
-    public void execute (TaskList tasklist, UI ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasklist, UI ui, Storage storage) throws DukeException {
 
         checkValidity();
 

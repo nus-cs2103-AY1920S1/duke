@@ -29,7 +29,7 @@ public class TodoCommand extends Command {
      * @param tasklist arraylist of tasks to add the new todo object to when it is created.
      * @param ui to set a response from duke.
      * @param storage to store any changes in the storage.
-     * @throws DukeException
+     * @throws DukeException is thrown if the description is empty.
      */
     @Override
     public void execute(TaskList tasklist, UI ui, Storage storage) throws DukeException {
@@ -37,18 +37,18 @@ public class TodoCommand extends Command {
         super.execute(tasklist, ui, storage);
         checkValidity();
 
-        int int_Priority = this.descriptionOfTask.indexOf('*');
+        int intPriority = this.descriptionOfTask.indexOf('*');
 
         Task newTodo;
-        if (int_Priority >= 0) {
-            String newDescription = this.descriptionOfTask.substring(0, int_Priority) +
-                    this.descriptionOfTask.substring(int_Priority + 1);
-             newTodo = new ToDo(newDescription);
+        if (intPriority >= 0) {
+            String newDescription = this.descriptionOfTask.substring(0, intPriority)
+                    + this.descriptionOfTask.substring(intPriority + 1);
+            newTodo = new ToDo(newDescription);
             newTodo.markAsPriority();
             tasklist.addPriorityTask(newTodo);
         } else {
-             newTodo = new ToDo(this.descriptionOfTask);
-             tasklist.addTask(newTodo);
+            newTodo = new ToDo(this.descriptionOfTask);
+            tasklist.addTask(newTodo);
         }
         ui.displayAddingOfTask(newTodo, tasklist.getSize());
         storage.saveToDataFile(tasklist);

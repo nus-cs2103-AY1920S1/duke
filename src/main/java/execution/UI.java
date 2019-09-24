@@ -144,8 +144,8 @@ public class UI {
             this.response = "Here are the tasks in your list\n";
 
             for (int i = 0; i < taskList.getSize(); i++) {
-                System.out.println((i + 1) + ". " + taskList.getList().get(i) + "\n") ;
-                this.response += (i + 1) + ". " + taskList.getList().get(i) + "\n" ;
+                System.out.println((i + 1) + ". " + taskList.getList().get(i) + "\n");
+                this.response += (i + 1) + ". " + taskList.getList().get(i) + "\n";
             }
 
         }

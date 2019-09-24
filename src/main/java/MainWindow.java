@@ -49,7 +49,9 @@ public class MainWindow extends AnchorPane {
         );
     }
 
-    /** Set Controller for MainWindow */
+    /**
+     * Set Controller for MainWindow.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
@@ -71,7 +73,7 @@ public class MainWindow extends AnchorPane {
         UI ui = new UI();
 
         //exits the application after the user says bye
-        if(response.equals(ui.goodbyeMsg())) {
+        if (response.equals(ui.goodbyeMsg())) {
             Platform.exit();
             System.exit(0);
         }

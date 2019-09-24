@@ -29,7 +29,7 @@ public class DoneCommand extends Command {
      * @param taskList of current tasks
      * @param ui to set a response from duke.
      * @param storage to store any changes in the storage.
-     * @throws DukeException
+     * @throws DukeException is thrown if description of command is empty.
      */
     @Override
     public void execute(TaskList taskList, UI ui, Storage storage) throws DukeException {
@@ -37,7 +37,7 @@ public class DoneCommand extends Command {
         super.execute(taskList, ui, storage);
         checkValidity();
 
-        Task doneTask = taskList.getTaskByIndex(Integer.parseInt(this.descriptionOfTask.trim()) -1);
+        Task doneTask = taskList.getTaskByIndex(Integer.parseInt(this.descriptionOfTask.trim()) - 1);
         doneTask.markAsDone();
         ui.displayDone(doneTask);
         storage.saveToDataFile(taskList);

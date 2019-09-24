@@ -56,10 +56,10 @@ public class DeleteCommand extends Command {
             } else if (indexToBeDeleted >= tasklist.getSize()) {
                 throw new DukeException(" ☹ OOPS!!! You do not have that many tasks.");
             }
-        } catch (Exception e){
-            throw new DukeException("☹ OOPS!!! You only can put a number after the command" +
-                    "\n delete. If you want to put more numbers, " +
-                    "\n please use the command DeleteAll. ");
+        } catch (Exception e) {
+            throw new DukeException("☹ OOPS!!! You only can put a number after the command"
+                    + "\n delete. If you want to put more numbers, "
+                    + "\n please use the command DeleteAll. ");
         }
     }
 }

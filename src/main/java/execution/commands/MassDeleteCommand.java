@@ -41,7 +41,7 @@ public class MassDeleteCommand extends Command {
         Integer[] arrayInInt = new Integer[arrayToBeDeleted.length];
 
         //changing to integer array for sorting
-        for(int i=0; i<arrayToBeDeleted.length; i++) {
+        for (int i = 0; i < arrayToBeDeleted.length; i++) {
             arrayInInt[i] = Integer.parseInt(arrayToBeDeleted[i]);
         }
 
@@ -49,9 +49,9 @@ public class MassDeleteCommand extends Command {
         Arrays.sort(arrayInInt, Collections.reverseOrder());
 
         //delete the tasks using the DeleteCommand
-        for(int j = 0; j<arrayInInt.length; j++) {
+        for (int j = 0; j < arrayInInt.length; j++) {
 
-            Command deleting = new DeleteCommand(arrayInInt[j]+"");
+            Command deleting = new DeleteCommand(arrayInInt[j] + "");
             deleting.execute(taskList, ui, storage);
 
         }

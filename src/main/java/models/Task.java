@@ -1,8 +1,8 @@
 package models;
 
 /**
- * Representing the attributes and behavior of a general models.Task. The abstract methods will be more specific for the child
- * classes of the models.Task class.
+ * Representing the attributes and behavior of a general models.Task. The abstract methods will be more specific
+ * for the child classes of the models.Task class.
  */
 public abstract class Task {
 
@@ -90,7 +90,7 @@ public abstract class Task {
      *
      * @return string value to be saved in the Duke.txt file.
      */
-    public abstract String toTextFile() ;
+    public abstract String toTextFile();
 
     /**
      * Returns the string value of the description attribute since it has only protected access.

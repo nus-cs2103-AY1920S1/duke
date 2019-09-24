@@ -30,7 +30,7 @@ public class FindCommand extends Command {
      * @param taskList to retrieve the current tasks in the arraylist.
      * @param ui to set a response from duke.
      * @param storage to store any changes in the storage.
-     * @throws DukeException
+     * @throws DukeException is thrown if the description is empty.
      */
     @Override
     public void execute(TaskList taskList, UI ui, Storage storage) throws DukeException {

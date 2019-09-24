@@ -5,7 +5,11 @@ import models.Event;
 import models.Task;
 import models.ToDo;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -46,30 +50,30 @@ public class Storage {
 
             switch (type) {
 
-                case 'T':
-                    ToDo newT = new ToDo(isDone, des);
-                    list.add(newT);
-                    break;
+            case 'T':
+                ToDo newT = new ToDo(isDone, des);
+                list.add(newT);
+                break;
 
-                case 'D':
-                    int index = des.indexOf('|');
-                    String taskName = des.substring(0, index).trim();
-                    String date = des.substring(index + 1).trim();
-                    Deadline newD = new Deadline(isDone, taskName, date);
-                    list.add(newD);
-                    break;
+            case 'D':
+                int index = des.indexOf('|');
+                String taskName = des.substring(0, index).trim();
+                String date = des.substring(index + 1).trim();
+                Deadline newD = new Deadline(isDone, taskName, date);
+                list.add(newD);
+                break;
 
-                case 'E':
-                    int index1 = des.indexOf('|');
-                    String taskName1 = des.substring(0, index1).trim();
-                    String date1 = des.substring(index1 + 1).trim();
-                    Event newE = new Event(isDone, taskName1, date1);
-                    list.add(newE);
-                    break;
+            case 'E':
+                int index1 = des.indexOf('|');
+                String taskName1 = des.substring(0, index1).trim();
+                String date1 = des.substring(index1 + 1).trim();
+                Event newE = new Event(isDone, taskName1, date1);
+                list.add(newE);
+                break;
 
-                default:
-                    System.out.println("Error!");
-                    break;
+            default:
+                System.out.println("Error!");
+                break;
 
             }
         }

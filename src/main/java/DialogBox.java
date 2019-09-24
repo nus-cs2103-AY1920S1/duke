@@ -19,6 +19,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructs a DialogBox.
+     *
+     * @param text of the dialog box.
+     * @param img of the dialog box, either from the user or duke.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -44,15 +50,29 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns the user dialog box.
+     *
+     * @param text entered by the user.
+     * @param img of the user.
+     * @return a Dialog Box to show on the MainWindow.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox current = new DialogBox(text, img);
         current.setBackground(Background.EMPTY);
-        String style = "-fx-background-color: rgba(28, 97, 176, 1);" +
-                       "-fx-text-fill: white";
+        String style = "-fx-background-color: rgba(28, 97, 176, 1);"
+                       + "-fx-text-fill: white";
         current.dialog.setStyle(style);
         return current;
     }
 
+    /**
+     * Returns Duke's dialog box.
+     *
+     * @param text response from Duke.
+     * @param img of Duke.
+     * @return a Dialog Box to show on the MainWindow.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

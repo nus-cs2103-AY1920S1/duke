@@ -26,7 +26,7 @@ public class ListCommand extends Command {
      * @param taskList that we want to print.
      * @param ui to set a response from duke.
      * @param storage to store any changes in the storage.
-     * @throws DukeException
+     * @throws DukeException is thrown if there are any errors.
      */
     @Override
     public void execute(TaskList taskList, UI ui, Storage storage) throws DukeException {

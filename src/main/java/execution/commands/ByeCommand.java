@@ -24,10 +24,10 @@ public class ByeCommand extends Command {
     /**
      * Executes a bye command.
      *
-     * @param taskList
+     * @param taskList current tasklist.
      * @param ui to set a response from duke.
      * @param storage to store any changes in the storage.
-     * @throws DukeException
+     * @throws DukeException thrown if there are any errors.
      */
     @Override
     public void execute(TaskList taskList, UI ui, Storage storage) throws DukeException {

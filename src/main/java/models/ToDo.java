@@ -19,8 +19,8 @@ public class ToDo extends Task {
     }
 
     /**
-     * Recovery of a models.ToDo object based on the format of a task in the Duke.txt file that we save our information into.
-     * Whether the task is done or not depends on the int value of the task when it is saved.
+     * Recovery of a models.ToDo object based on the format of a task in the Duke.txt file that we save our information
+     * into. Whether the task is done or not depends on the int value of the task when it is saved.
      *
      * @param intDone if task is done, the int value == 1. If the task is not done, int value == 0.
      * @param description of the task.

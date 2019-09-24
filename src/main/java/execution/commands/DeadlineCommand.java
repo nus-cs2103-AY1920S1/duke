@@ -43,20 +43,20 @@ public class DeadlineCommand extends Command {
             String time = new SimpleDateFormat("h:mm a").format(date).toLowerCase();
             String ordinalIndicator;
 
-            int int_day = Integer.parseInt(day);
-            if (int_day >= 11 && int_day <= 13) {
+            int intDay = Integer.parseInt(day);
+            if (intDay >= 11 && intDay <= 13) {
                 ordinalIndicator = "th";
-            } else if (int_day % 10 == 1) {
+            } else if (intDay % 10 == 1) {
                 ordinalIndicator = "st";
-            } else if (int_day % 10 == 2) {
+            } else if (intDay % 10 == 2) {
                 ordinalIndicator = "nd";
-            } else if (int_day % 10 == 3) {
+            } else if (intDay % 10 == 3) {
                 ordinalIndicator = "rd";
             } else {
                 ordinalIndicator = "th";
             }
 
-            result = int_day + ordinalIndicator + " of " + month + " " + year + ", " + time;
+            result = intDay + ordinalIndicator + " of " + month + " " + year + ", " + time;
         } catch (ParseException e) {
             System.out.println(e.getMessage());
         }
@@ -84,17 +84,17 @@ public class DeadlineCommand extends Command {
         String description = wholeTask.substring(0, index).trim();
         //when it is due by
         String date = wholeTask.substring(index + 4).trim();
-        int int_Priority = date.indexOf('*');
+        int intPriority = date.indexOf('*');
         //if the format is correct
         String formattedDate = getFormattedDate(date);
 
 
         //the execution
         Task newDeadline;
-        if(int_Priority >= 0) {
+        if (intPriority >= 0) {
             //removing the * if is priority
-            String cleanDate = formattedDate.substring(0, int_Priority) +
-                    formattedDate.substring(int_Priority + 1);
+            String cleanDate = formattedDate.substring(0, intPriority)
+                    + formattedDate.substring(intPriority + 1);
             newDeadline = new Deadline(description, cleanDate);
             newDeadline.markAsPriority();
             taskList.addPriorityTask(newDeadline);

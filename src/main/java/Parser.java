@@ -23,7 +23,7 @@ public class Parser {
 
             return LocalDateTime.of(year, month, date, hour, minute);
         } else {
-            throw new DukeException("Date time format invalid");
+            throw new DukeException("Invalid date and time format");
         }
     }
 
@@ -104,8 +104,10 @@ public class Parser {
             return err.getMessage();
         } catch (NumberFormatException err) {
             return "Invalid string on the action, should be integer";
+        } catch (ArrayIndexOutOfBoundsException err) {
+            return "Invalid format provided";
         } catch (Exception err) {
-            return "[Exception]\n" + err;
+            return "[Exception]\n" + err.getMessage();
         }
     }
 

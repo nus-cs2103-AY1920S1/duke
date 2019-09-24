@@ -1,8 +1,8 @@
 # User Guide - SerSnapsalot
 By: `Ken Yoon` Since: `Sep 2019` 
 
-```
-1. Introduction
+
+1. [Introduction](https://github.com/Xelyion/duke/blob/master/docs/README.md#Introduction)
 
 2. Quick Start
 
@@ -37,10 +37,10 @@ By: `Ken Yoon` Since: `Sep 2019`
 4. FAQ
 
 5. Command Summary
-```
+
 ---
 
-## 1. Introduction
+## [1. Introduction](https://github.com/Xelyion/duke/blob/master/docs/README.md#Introduction)
 SerSnapsalot(SS) is for us who 
 ## 2. Quick Start
 

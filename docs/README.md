@@ -46,13 +46,13 @@ A to-do task is the most simplest form of a task.
 To-do task can be added via the following format:
 todo [task_name]
 
-
+<br/>
 
 Sample command:
 
 `todo Laundry`
 
-
+<br/>
 
 Expected outcome:
 
@@ -62,7 +62,7 @@ Expected outcome:
 
 `Now you have X tasks in the list`
 
-
+<br/>
 
 ### 2. Adding a new event task 
 An event task is similar to a to-do task, escept that it is associated with a particular location, the event location.

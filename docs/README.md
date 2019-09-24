@@ -1,7 +1,7 @@
 # User Guide
 Text-based personal assistant with CLI input.
 
-![Duke UI](/docs/Ui.png)
+![Duke UI](https://raw.githubusercontent.com/gabrielchao/duke/master/docs/Ui.png)
 
 ## Features 
 

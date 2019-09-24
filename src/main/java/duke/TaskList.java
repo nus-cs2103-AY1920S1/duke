@@ -79,7 +79,7 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Returns the string representation of Tasks that match a search term.
+     * Returns the string representation of Tasks that matches a partial search term.
      * @param regex a string representing the search term
      * @return a string containing the string representation of all Task
      *     objects that match the search term.

@@ -23,17 +23,21 @@ public class StorageParser {
         int length = splited.length;
         //Preliminary check to ensure state file was not corrupted by checking line size (not exhaustive)
         assert (length == 3 || length == 4);
-        if (splited[0].equals("T")) {
-            ToDo currTask = new ToDo(splited[1], Boolean.parseBoolean(splited[2]));
-            return currTask;
-        } else if (splited[0].equals("D")) {
-            Deadline currTask = new Deadline(splited[1], Boolean.parseBoolean(splited[2]), splited[3]);
-            return currTask;
-        } else if (splited[0].equals("E")) {
-            Event currTask = new Event(splited[1], Boolean.parseBoolean(splited[2]), splited[3]);
-            return currTask;
-        } else {
+        String taskType = splited[0];
+        Task currTask = null;
+        switch (taskType) {
+        case "T":
+            currTask = new ToDo(splited[1], Boolean.parseBoolean(splited[2]));
+            break;
+        case "D":
+            currTask = new Deadline(splited[1], Boolean.parseBoolean(splited[2]), splited[3]);
+            break;
+        case "E":
+            currTask = new Event(splited[1], Boolean.parseBoolean(splited[2]), splited[3]);
+            break;
+        default:
             throw new ParseFileException("Exception while reading contents of state file!");
         }
+        return currTask;
     }
 }

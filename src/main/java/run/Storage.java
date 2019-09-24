@@ -61,7 +61,9 @@ public class Storage {
                 if (nextLine.equals("")) {
                     break;
                 } else {
-                    tasks.add(sp.parseLine(nextLine));
+                    Task currTask = sp.parseLine(nextLine);
+                    assert currTask != null;
+                    tasks.add(currTask);
                 }
             }
         } catch (IOException ex) {

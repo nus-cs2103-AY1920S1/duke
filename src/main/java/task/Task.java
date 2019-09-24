@@ -43,11 +43,11 @@ public class Task {
     }
 
     /**
-     * Get tick or cross String icon based on if task is completed or incomplete respectively.
+     * Get DONE or NOT DONE String based on if task is completed or incomplete respectively.
      * @return tick or cross String icon
      */
     public String getStatusIcon() {
-        return (isDone ? "✓" : "✗"); //return tick or X symbols
+        return (isDone ? "DONE" : "NOT DONE");
     }
 
     /**

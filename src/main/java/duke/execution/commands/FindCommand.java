@@ -1,10 +1,10 @@
-package execution.commands;
+package duke.execution.commands;
 
-import exception.DukeException;
-import execution.Storage;
-import execution.TaskList;
-import execution.UI;
-import models.Task;
+import duke.exception.DukeException;
+import duke.execution.Storage;
+import duke.execution.TaskList;
+import duke.execution.UI;
+import duke.models.Task;
 
 import java.util.ArrayList;
 
@@ -49,7 +49,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Handles the error and checks if it is valid for execution.
+     * Handles the error and checks if it is valid for duke.execution.
      *
      * @throws DukeException if the description of the find command is empty.
      */

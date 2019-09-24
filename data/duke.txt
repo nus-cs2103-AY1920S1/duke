@@ -1,2 +1,2 @@
-T | 0 | Buy 5 AAA batteries 
-E | 0 | 2103 meeting | Lawnce's house next Thursday 12 noon
+T | 1 | Buy 5 AAA batteries
+E | 1 | 2103 meeting | Lawnce's house next Thursday 12 noon

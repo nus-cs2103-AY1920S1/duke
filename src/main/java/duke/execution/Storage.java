@@ -1,9 +1,9 @@
-package execution;
+package duke.execution;
 
-import models.Deadline;
-import models.Event;
-import models.Task;
-import models.ToDo;
+import duke.models.Deadline;
+import duke.models.Event;
+import duke.models.Task;
+import duke.models.ToDo;
 
 import java.io.FileNotFoundException;
 import java.io.File;
@@ -31,7 +31,7 @@ public class Storage {
     }
 
     /**
-     * This method will print the contents of the execution.Storage object (file).
+     * This method will print the contents of the duke.execution.Storage object (file).
      *
      * @throws FileNotFoundException if the file is not found based on the filepath.
      */

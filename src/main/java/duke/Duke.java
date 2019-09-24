@@ -1,17 +1,19 @@
-import exception.DukeException;
-import execution.Parser;
-import execution.Storage;
-import execution.TaskList;
-import execution.UI;
-import execution.commands.Command;
-import models.Task;
+package duke;
+
+import duke.exception.DukeException;
+import duke.execution.Parser;
+import duke.execution.Storage;
+import duke.execution.TaskList;
+import duke.execution.UI;
+import duke.execution.commands.Command;
+import duke.models.Task;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 
 /**
- * Represents Duke, a personal assistant ChatBot that helps a person to keep track of various things.
+ * Represents duke.Duke, a personal assistant ChatBot that helps a person to keep track of various things.
  */
 public class Duke {
 
@@ -20,7 +22,7 @@ public class Duke {
     private Storage storage;
 
     /**
-     * Initialises a new Duke object.
+     * Initialises a new duke.Duke object.
      *
      */
     public Duke() {
@@ -45,7 +47,7 @@ public class Duke {
      *//*
     public static void main(String[] args) throws IOException, DukeException {
 
-       new Duke().run();
+       new duke.Duke().run();
 
     }*/
 
@@ -53,7 +55,7 @@ public class Duke {
 
     /**
      * Runs the program by prompting user to enter the command. The program will then carry out the program
-     * if the command is valid. If not, it will throw a Duke exception.
+     * if the command is valid. If not, it will throw a duke.Duke duke.exception.
      *
      * @throws IOException if there is an issue reading the .txt file to recover the previous list.
      */

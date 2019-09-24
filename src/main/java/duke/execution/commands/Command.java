@@ -1,9 +1,9 @@
-package execution.commands;
+package duke.execution.commands;
 
-import exception.DukeException;
-import execution.Storage;
-import execution.TaskList;
-import execution.UI;
+import duke.exception.DukeException;
+import duke.execution.Storage;
+import duke.execution.TaskList;
+import duke.execution.UI;
 
 /**
  * Represents the attributes and behavior of a Command object.
@@ -27,7 +27,7 @@ public abstract class Command {
      * Executes the command object and carries out its operations as per different type of command.
      * This is can be treated like an abstract method as it will be overridden based on the type of command.
      *
-     * @param tasklist arraylist of tasks since a task would be created from this execution of a command.
+     * @param tasklist arraylist of tasks since a task would be created from this duke.execution of a command.
      * @param ui to set a response from duke.
      * @param storage to store any changes in the storage.
      * @throws DukeException if the user input is invalid.
@@ -39,9 +39,9 @@ public abstract class Command {
     }
 
     /**
-     * Checks for any exception in the execution of the commands.
+     * Checks for any duke.exception in the duke.execution of the commands.
      *
-     * @throws DukeException when there is an exception during the execution.
+     * @throws DukeException when there is an duke.exception during the duke.execution.
      */
     protected void checkValidity() throws DukeException {
         return;

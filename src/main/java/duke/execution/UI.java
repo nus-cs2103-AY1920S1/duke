@@ -1,6 +1,6 @@
-package execution;
+package duke.execution;
 
-import models.Task;
+import duke.models.Task;
 
 import java.util.Scanner;
 
@@ -14,7 +14,7 @@ public class UI {
     protected String response = "";
 
     /**
-     * Creates a execution.UI object.
+     * Creates a duke.execution.UI object.
      */
     public UI() {
 
@@ -22,7 +22,7 @@ public class UI {
     }
 
     /**
-     * Prints out a welcome statement when users first open the Duke program.
+     * Prints out a welcome statement when users first open the duke.Duke program.
      */
     public void welcome() {
         
@@ -45,7 +45,7 @@ public class UI {
 
     public String welcomeMsg() {
 
-        return "Hello I'm Duke!" + " \nWhat can I do for you?";
+        return "Hello I'm duke.Duke!" + " \nWhat can I do for you?";
 
     }
 

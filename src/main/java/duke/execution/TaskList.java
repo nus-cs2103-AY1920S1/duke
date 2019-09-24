@@ -1,6 +1,6 @@
-package execution;
+package duke.execution;
 
-import models.Task;
+import duke.models.Task;
 
 import java.util.ArrayList;
 
@@ -69,9 +69,9 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the list attribute of this execution.TaskList object.
+     * Adds a task to the list attribute of this duke.execution.TaskList object.
      *
-     * @param current the models.Task object to be added to the list.
+     * @param current the duke.models.Task object to be added to the list.
      */
     public void addTask(Task current) {
 
@@ -92,9 +92,9 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task off the list attribute of this execution.TaskList object.
+     * Deletes a task off the list attribute of this duke.execution.TaskList object.
      *
-     * @param current the models.Task object to be deleted off the list.
+     * @param current the duke.models.Task object to be deleted off the list.
      */
     public Task deleteTask(int current) {
 

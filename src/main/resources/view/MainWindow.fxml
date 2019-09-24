@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="623.0" style="-fx-background-color: #474747#474747;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="623.0" style="-fx-background-color: #474747#474747;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
    <children>
       <TextField fx:id="userInput" layoutX="14.0" layoutY="753.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="495.0" AnchorPane.bottomAnchor="6.0" />
       <Button fx:id="sendButton" layoutX="527.0" layoutY="753.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="82.0" style="-fx-background-color: #1c61b0#1c61b0;" text="Send" textFill="WHITE" AnchorPane.bottomAnchor="6.0" />

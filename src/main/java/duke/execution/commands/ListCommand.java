@@ -1,9 +1,9 @@
-package execution.commands;
+package duke.execution.commands;
 
-import exception.DukeException;
-import execution.Storage;
-import execution.TaskList;
-import execution.UI;
+import duke.exception.DukeException;
+import duke.execution.Storage;
+import duke.execution.TaskList;
+import duke.execution.UI;
 
 /**
  * Represents the characteristics of a ListCommand object.
@@ -20,7 +20,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Execution of a ListCommand object. This execution is just to print out the list of tasks in the current
+     * Execution of a ListCommand object. This duke.execution is just to print out the list of tasks in the current
      * arraylist.
      *
      * @param taskList that we want to print.

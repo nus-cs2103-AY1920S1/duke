@@ -1,11 +1,11 @@
-package execution.commands;
+package duke.execution.commands;
 
-import exception.DukeException;
-import execution.Storage;
-import execution.TaskList;
-import execution.UI;
-import models.Task;
-import models.ToDo;
+import duke.exception.DukeException;
+import duke.execution.Storage;
+import duke.execution.TaskList;
+import duke.execution.UI;
+import duke.models.Task;
+import duke.models.ToDo;
 
 /**
  * Represents the characteristics of a TodoCommand object.
@@ -56,7 +56,7 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Handles the error and checks if it is valid for execution.
+     * Handles the error and checks if it is valid for duke.execution.
      *
      * @throws DukeException is thrown when the description of the toDo is empty.
      */

@@ -1,9 +1,9 @@
-package execution.commands;
+package duke.execution.commands;
 
-import exception.DukeException;
-import execution.Storage;
-import execution.TaskList;
-import execution.UI;
+import duke.exception.DukeException;
+import duke.execution.Storage;
+import duke.execution.TaskList;
+import duke.execution.UI;
 
 /**
  * Represents the characteristics of a Bye Command object.

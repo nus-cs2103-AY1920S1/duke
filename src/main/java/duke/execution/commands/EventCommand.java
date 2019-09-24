@@ -1,11 +1,11 @@
-package execution.commands;
+package duke.execution.commands;
 
-import exception.DukeException;
-import execution.Storage;
-import execution.TaskList;
-import execution.UI;
-import models.Event;
-import models.Task;
+import duke.exception.DukeException;
+import duke.execution.Storage;
+import duke.execution.TaskList;
+import duke.execution.UI;
+import duke.models.Event;
+import duke.models.Task;
 
 /**
  * Represents the characteristics of an EventCommand.
@@ -47,7 +47,7 @@ public class EventCommand extends Command {
         String date = wholeTask.substring(index + 4).trim();
         int intPriority = date.indexOf('*');
 
-        //execution
+        //duke.execution
         Task newEvent;
         if (intPriority >= 0) {
             String cleanDate = date.substring(0, intPriority) + date.substring(intPriority + 1);
@@ -63,7 +63,7 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Handles the error and checks if it is valid for execution.
+     * Handles the error and checks if it is valid for duke.execution.
      *
      * @throws DukeException thrown if event description input is empty or does not have /at in it.
      */

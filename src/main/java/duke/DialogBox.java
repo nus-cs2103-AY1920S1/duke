@@ -1,3 +1,5 @@
+package duke;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,7 +22,7 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
-     * Constructs a DialogBox.
+     * Constructs a duke.DialogBox.
      *
      * @param text of the dialog box.
      * @param img of the dialog box, either from the user or duke.
@@ -55,7 +57,7 @@ public class DialogBox extends HBox {
      *
      * @param text entered by the user.
      * @param img of the user.
-     * @return a Dialog Box to show on the MainWindow.
+     * @return a Dialog Box to show on the duke.MainWindow.
      */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox current = new DialogBox(text, img);
@@ -67,11 +69,11 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Returns Duke's dialog box.
+     * Returns duke.Duke's dialog box.
      *
-     * @param text response from Duke.
-     * @param img of Duke.
-     * @return a Dialog Box to show on the MainWindow.
+     * @param text response from duke.Duke.
+     * @param img of duke.Duke.
+     * @return a Dialog Box to show on the duke.MainWindow.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);

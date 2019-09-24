@@ -1,16 +1,16 @@
-package execution;
+package duke.execution;
 
-import exception.DukeException;
-import execution.commands.ByeCommand;
-import execution.commands.FindCommand;
-import execution.commands.MassDeleteCommand;
-import execution.commands.ListCommand;
-import execution.commands.DoneCommand;
-import execution.commands.DeleteCommand;
-import execution.commands.Command;
-import execution.commands.TodoCommand;
-import execution.commands.DeadlineCommand;
-import execution.commands.EventCommand;
+import duke.exception.DukeException;
+import duke.execution.commands.ByeCommand;
+import duke.execution.commands.FindCommand;
+import duke.execution.commands.MassDeleteCommand;
+import duke.execution.commands.ListCommand;
+import duke.execution.commands.DoneCommand;
+import duke.execution.commands.DeleteCommand;
+import duke.execution.commands.Command;
+import duke.execution.commands.TodoCommand;
+import duke.execution.commands.DeadlineCommand;
+import duke.execution.commands.EventCommand;
 
 /**
  * Represents a parser that parses a string value to decide which command to create based on the input string.

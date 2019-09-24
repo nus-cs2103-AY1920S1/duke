@@ -1,6 +1,6 @@
 package modelstest;
 
-import models.ToDo;
+import duke.models.ToDo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

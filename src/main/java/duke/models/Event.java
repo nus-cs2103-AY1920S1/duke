@@ -1,17 +1,17 @@
-package models;
+package duke.models;
 
 /**
- * Represents the attributes of an models.Event object, which is a sub-class of models.Task.
+ * Represents the attributes of an duke.models.Event object, which is a sub-class of duke.models.Task.
  */
 public class Event extends Task {
 
     protected String dateAndTime;
 
     /**
-     * Creates an models.Event object with a description.
-     * The identity is also intialised as E, for all models.Event objects.
+     * Creates an duke.models.Event object with a description.
+     * The identity is also intialised as E, for all duke.models.Event objects.
      *
-     * @param description of the models.Event task.
+     * @param description of the duke.models.Event task.
      */
     public Event(String description, String at) {
 
@@ -22,7 +22,7 @@ public class Event extends Task {
     }
 
     /**
-     * Recovery of an models.Event object based on the format of a task in the Duke.txt file that we save our
+     * Recovery of an duke.models.Event object based on the format of a task in the duke.Duke.txt file that we save our
      * information into. Whether the task is done or not depends on the int value of the task when it is saved.
      *
      * @param intDone if task is done, the int value == 1. If the task is not done, int value == 0.
@@ -43,9 +43,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the string value of an models.Event object.
+     * Returns the string value of an duke.models.Event object.
      *
-     * @return the identity of the models.Event task followed by the status icon and description.
+     * @return the identity of the duke.models.Event task followed by the status icon and description.
      */
     @Override
     public String toString() {
@@ -54,9 +54,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns a string value to be saved in the Duke.txt file.
+     * Returns a string value to be saved in the duke.Duke.txt file.
      *
-     * @return a string in the Duke.txt file format for an models.Event object.
+     * @return a string in the duke.Duke.txt file format for an duke.models.Event object.
      */
     public String toTextFile() {
 

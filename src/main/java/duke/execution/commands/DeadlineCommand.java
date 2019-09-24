@@ -1,11 +1,11 @@
-package execution.commands;
+package duke.execution.commands;
 
-import exception.DukeException;
-import execution.Storage;
-import execution.TaskList;
-import execution.UI;
-import models.Deadline;
-import models.Task;
+import duke.exception.DukeException;
+import duke.execution.Storage;
+import duke.execution.TaskList;
+import duke.execution.UI;
+import duke.models.Deadline;
+import duke.models.Task;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -89,7 +89,7 @@ public class DeadlineCommand extends Command {
         String formattedDate = getFormattedDate(date);
 
 
-        //the execution
+        //the duke.execution
         Task newDeadline;
         if (intPriority >= 0) {
             //removing the * if is priority
@@ -109,7 +109,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Handles the error and checks if it is valid for execution.
+     * Handles the error and checks if it is valid for duke.execution.
      *
      * @throws DukeException if description of deadline is empty or is not in the correct format.
      */

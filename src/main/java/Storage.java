@@ -14,15 +14,15 @@ public class Storage {
      *
      */
     public Storage() throws IOException {
-        String folderPath = System.getProperty("user.dir") + "\\data";
+        String folderPath = System.getProperty("user.dir") + File.separator + "data";
         File directory = new File(folderPath);
         directory.mkdirs();
-        String filePath = System.getProperty("user.dir") + "\\data\\duke.txt";
+        String filePath = System.getProperty("user.dir") + File.separator + "data" + File.separator + "duke.txt";
         file = new File(filePath);
         file.createNewFile();
         FileOutputStream fos = new FileOutputStream(filePath, true);
         fos.close();
-        String archiveFilePath = System.getProperty("user.dir") + "\\data\\DukeArchive.txt";
+        String archiveFilePath = System.getProperty("user.dir") + File.separator + "data" + File.separator + "DukeArchive.txt";
         archiveFile = new File(archiveFilePath);
         FileOutputStream fs = new FileOutputStream(archiveFilePath, true);
         fs.close();

@@ -1,4 +1,6 @@
-![Image of duke](https://ckb055.github.io/duke/Ui.png | width=250)
+![Image of duke](https://ckb055.github.io/duke/Ui.png =250x250)
+
+<img src="https://ckb055.github.io/duke/Ui.png" width="340" height="520">
 
 # User Guide
 User guide for Duke,<br/>

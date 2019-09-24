@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 
 public class Deadline extends Task {
     private Date date;
-    private String dateToStorage;
+    private String dateToBeStored;
 
     /**
      * Constructor for deadline
@@ -23,7 +23,7 @@ public class Deadline extends Task {
      */
 
     public void parseTime(String time) throws ParseException {
-        this.dateToStorage = time;
+        this.dateToBeStored = time;
         this.date = new SimpleDateFormat("dd/MM/yyyy hhmm").parse(time);
     }
 
@@ -41,8 +41,8 @@ public class Deadline extends Task {
      * @return the duedate of the deadline
      */
 
-    public String getDateToStorage() {
-        return this.dateToStorage;
+    public String getDateToBeStored() {
+        return this.dateToBeStored;
     }
 
     /**

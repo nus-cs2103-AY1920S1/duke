@@ -1,8 +1,7 @@
 public class AddCommand extends Command {
     private Task task;
     /**
-     * Creates an AddCommand object
-     * Adds the task to the tasklist
+     * Constructor for AddCommand
      * @param task
      */
     public AddCommand(Task task) {
@@ -26,7 +25,8 @@ public class AddCommand extends Command {
             e.printStackTrace();
         }
         int taskListSizeAfterAddingTask = tasks.getSize();
-        assert taskListSize + 1 == taskListSizeAfterAddingTask : "size of tasklist did not grow";
+        assert taskListSize + 1 == taskListSizeAfterAddingTask :
+                "size of tasklist did not grow by 1 after addition";
         return ui.addMessage(tasks, this.task);
     }
 

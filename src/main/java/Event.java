@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 
 public class Event extends Task {
     private Date date;
-    private String dateToStorage;
+    private String dateToBeStored;
 
     public Event(String desc) {
         super(desc);
@@ -18,7 +18,7 @@ public class Event extends Task {
      */
 
     public void parseTime(String time) throws ParseException {
-        this.dateToStorage = time;
+        this.dateToBeStored = time;
         this.date = new SimpleDateFormat("dd/MM/yyyy hhmm").parse(time);
     }
 
@@ -34,8 +34,8 @@ public class Event extends Task {
      * Getter method to get the date in the form of a String
      * @return the date of the event
      */
-    public String getDateToStorage() {
-        return this.dateToStorage;
+    public String getDateToBeStored() {
+        return this.dateToBeStored;
     }
 
     @Override

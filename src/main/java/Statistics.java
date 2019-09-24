@@ -56,11 +56,11 @@ public class Statistics {
     public String toString() {
         return "     ---------- S T A T I S T I C S ----------\n" +
                 String.format("%-15s %15s %15s", "Type : ", "Completed : ", "Uncompleted :\n") +
-                String.format("%s %17d %15d", "ToDo      ",
+                String.format("%s %17d %16d", "ToDo      ",
                         this.numOfCompletedToDos, this.numOfUncompletedToDos) + "\n" +
-                String.format("%s %17d %15d", "Event      ",
+                String.format("%s %16d %16d", "Event      ",
                         this.numOfCompletedEvents, this.numOfUncompletedEvents) + "\n" +
-                String.format("%s %17d %15d", "Deadline",
+                String.format("%s %17d %16d", "Deadline ",
                         this.numOfCompletedDeadlines, this.numOfUncompletedDeadlines);
     }
 }

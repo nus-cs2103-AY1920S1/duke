@@ -4,7 +4,7 @@ public class FunFactCommand extends Command{
     private int randomInt;
 
     /**
-     * Constructor to create a funfact object
+     * Constructor to create a FunFactCommand object
      */
 
     public FunFactCommand() {

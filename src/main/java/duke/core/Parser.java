@@ -64,7 +64,7 @@ public class Parser {
      * @return A better formatted string that clearly shows day of the week, abbreviation of the month, and AM/PM.
      * @throws DukeException If the given string cannot be parsed into <code>LocalDateTime</code>.
      */
-    private static String formatDateTimeForDeadline(String input) throws DukeException {
+    public static String formatDateTimeForDeadline(String input) throws DukeException {
         try {
             DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
             LocalDateTime dueTime = LocalDateTime.parse(input, inputFormatter);
@@ -82,7 +82,7 @@ public class Parser {
      * @return A better formatted string that clearly shows day of the week, abbreviation of the month, and AM/PM.
      * @throws DukeException If the given string cannot be parsed into <code>LocalDateTime</code>.
      */
-    private static String formatDateTimeForEvent(String input) throws DukeException {
+    public static String formatDateTimeForEvent(String input) throws DukeException {
         String[] words = input.split("-");
         if (words.length < 2) {
             throw new DukeException("Input date and time is not in d/MM/yyyy HHmm-HHmm format (24-hour clock) :-(");
@@ -243,12 +243,7 @@ public class Parser {
             return new FindCommand(instruction.substring(5));
         case "update":
             String newValue = subString(words, 3, words.length);
-            if (words[2].equals("description")) {
-                return new UpdateCommand(Integer.parseInt(words[1]), words[2], newValue);
-            } else {
-                assert words[2].equals("time") : "Invalid attribute type for an update command";
-                return new UpdateCommand(Integer.parseInt(words[1]), words[2], formatDateTimeForDeadline(newValue));
-            }
+            return new UpdateCommand(Integer.parseInt(words[1]), words[2], newValue);
         case "deadline": case "event": case "todo":
             if (words.length < 2) {
                 throw new DukeException("OOPS!!! The description of a task cannot be empty.");

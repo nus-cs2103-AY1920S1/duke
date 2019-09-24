@@ -96,9 +96,9 @@ public class TaskList {
             t.updateDescription(newValue);
         } else if (attribute.equals("time")) {
             if (t instanceof Deadline) {
-                ((Deadline) t).updateDueTime(newValue);
+                ((Deadline) t).updateDueTime(Parser.formatDateTimeForDeadline(newValue));
             } else if (t instanceof Event) {
-                ((Event) t).updateOccurTime(newValue);
+                ((Event) t).updateOccurTime(Parser.formatDateTimeForEvent(newValue));
             } else {
                 throw new DukeException("OOPS!!! Normal tasks do not have a time attribute.");
             }

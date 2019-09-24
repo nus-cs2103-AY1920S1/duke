@@ -32,7 +32,6 @@ Example of usage:
 Expected outcome:
 
 ![Todo example](todoeg.png)
-Format: ![Alt Text](url)
 
 ### `deadline <task description> /by <date & time>` - Create a deadline task
 
@@ -46,7 +45,6 @@ Example usage:
 Expected outcome:
 
 ![Deadline example](deadlineeg.png)
-Format: ![Alt Text](url)
 
 ### `event <task description> /at <date & time period>` - Create an event
 
@@ -60,7 +58,6 @@ Example of usage:
 Expected outcome:
 
 ![Event example](eventeg.png)
-Format: ![Alt Text](url)
 
 ### `list` - Show the list of tasks
 
@@ -74,7 +71,6 @@ Example of usage:
 Expected outcome:
 
 ![List example](listeg.png)
-Format: ![Alt Text](url)
 
 ### `done <id>` - Mark task as completed
 
@@ -87,7 +83,6 @@ Example of usage:
 Expected outcome:
 
 ![Done example](doneeg.png)
-Format: ![Alt Text](url)
 
 ### `find <keyword or phrase>` - Find tasks with matching keyword
 
@@ -100,7 +95,6 @@ Example of usage:
 Expected outcome:
 
 ![Find example](findeg.png)
-Format: ![Alt Text](url)
 
 ### `setnotes (id) <note content>` - Set notes
 
@@ -114,7 +108,6 @@ Example of usage 1 (set notes to task):
 Expected outcome 1 (set notes to task):
 
 ![Set notes to task example](setnotestaskeg.png)
-Format: ![Alt Text](url)
 
 Example of usage 2 (set general notes): 
 
@@ -123,7 +116,6 @@ Example of usage 2 (set general notes):
 Expected outcome 2 (set general notes):
 
 ![Set general notes example](setnotesgeneg.png)
-Format: ![Alt Text](url)
 
 ### `listnotes` - List all general notes
 
@@ -136,7 +128,6 @@ Example of usage:
 Expected outcome:
 
 ![List general notes example](listnoteseg.png)
-Format: ![Alt Text](url)
 
 ### `deletenotes general <id>` - Delete a general note
 
@@ -149,7 +140,6 @@ Example of usage:
 Expected outcome:
 
 ![Delete general notes example](deletegennoteseg.png)
-Format: ![Alt Text](url)
 
 ### `deletenotes task <id>` - Delete a task's note
 
@@ -162,7 +152,6 @@ Example of usage:
 Expected outcome:
 
 ![Delete task notes example](deletetasknoteseg.png)
-Format: ![Alt Text](url)
 
 ### `delete <task id>` - Delete a task
 
@@ -175,4 +164,3 @@ Example of usage:
 Expected outcome:
 
 ![Delete task example](deleteeg.png)
-Format: ![Alt Text](url)

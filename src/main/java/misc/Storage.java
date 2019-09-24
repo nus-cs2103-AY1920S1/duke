@@ -19,6 +19,11 @@ public class Storage {
 
     public Storage(String filePath) {
         this.filePath = filePath;
+        File folder = new File(filePath);
+
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
     }
 
     /**

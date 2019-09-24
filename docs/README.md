@@ -1,3 +1,5 @@
+<img src="https://ckb055.github.io/duke/Ui.png" width="200" height="200" />
+
 ![Image of duke](https://ckb055.github.io/duke/Ui.png =200x)
 [Project on github](https://github.com/ckb055/duke)
 

@@ -1,3 +1,8 @@
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
+
 import java.util.Date;
 
 public class TaskManager {
@@ -14,7 +19,7 @@ public class TaskManager {
      * @throws EmptyDescriptionException     Indicates an empty description that should not be left empty.
      * @throws UnknownCommandException       Indicates the inability of the bot to read the command that is given by the user.
      */
-    public static String createTask(Parser parser, Storage storage, Ui ui, TaskList tasks)
+    public String createTask(Parser parser, Storage storage, Ui ui, TaskList tasks)
             throws EmptyToDoDescriptionException, EmptyDescriptionException,
             UnknownCommandException {
 
@@ -24,9 +29,7 @@ public class TaskManager {
         Task t;
         String typeOfTask = "";
         if (userCommand.equals("todo")) {
-            if (taskDescription.equals("dummy")) {
-                throw new EmptyToDoDescriptionException("The description of a todo cannot be empty.");
-            }
+            checkEmptyTaskDescription("todo", taskDescription);
             t = new Todo(taskDescription);
             if (tasks.checkForSameTask(t)) {
                 return ui.announceExisted();
@@ -36,10 +39,8 @@ public class TaskManager {
                 storage.writeToFile(typeOfTask, "0", taskDescription, t);
             }
         } else if (userCommand.equals("deadline")) {
+            checkEmptyTaskDescription("deadline", taskDescription);
             Date dateDue = storage.convertStringToDate(due);
-            if (taskDescription.equals("dummy")) {
-                throw new EmptyDescriptionException("The description of a deadline cannot be empty.");
-            }
             t = new Deadline(taskDescription, dateDue);
             if (tasks.checkForSameTask(t)) {
                 return ui.announceExisted();
@@ -49,9 +50,7 @@ public class TaskManager {
                 storage.writeToFile(typeOfTask, "0", taskDescription, t);
             }
         } else if (userCommand.equals("event")) {
-            if (taskDescription.equals("dummy")) {
-                throw new EmptyDescriptionException("The description of a event cannot be empty.");
-            }
+            checkEmptyTaskDescription("event", taskDescription);
             String[] eventStartEnd = due.split("-", 2);
             Date start = storage.convertStringToDate(eventStartEnd[0]);
             Date end = storage.convertStringToDate(eventStartEnd[1]);
@@ -64,11 +63,6 @@ public class TaskManager {
                 tasks.add(t);
                 storage.writeToFile(typeOfTask, "0", taskDescription, t);
             }
-        } else if (userCommand.equals("clear")) {
-            storage.clear();
-            tasks.clear();
-            assert tasks.size() == 0;
-            return ui.announceCleared();
         } else {
             throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(");
         }
@@ -78,4 +72,16 @@ public class TaskManager {
         return ui.newTaskAdded(t, taskCount);
     }
 
+    private static void checkEmptyTaskDescription(String userCommand, String taskDescription)
+            throws EmptyDescriptionException, EmptyToDoDescriptionException {
+        if (taskDescription.equals("dummy") || taskDescription.equals("")) {
+            if (userCommand.equals("event")) {
+                throw new EmptyDescriptionException("The description of a event cannot be empty.");
+            } else if (userCommand.equals("deadline")) {
+                throw new EmptyDescriptionException("The description of a deadline cannot be empty.");
+            } else if (userCommand.equals("todo")) {
+                throw new EmptyToDoDescriptionException("The description of a todo cannot be empty.");
+            }
+        }
+    }
 }

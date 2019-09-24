@@ -93,3 +93,10 @@ class IndexDoesNotExistException extends DukeException {
         super(message);
     }
 }
+
+class EmptyKeywordException extends DukeException {
+
+    public EmptyKeywordException(String message) {
+        super(message);
+    }
+}

@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import tasks.Task;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -107,29 +108,38 @@ public class Duke extends Application {
                 return ui.showListOfTask(tasks);
             } else if (userCommand.equals("done")) {
                 int target = Integer.parseInt(taskDescription);
-                Task taskDone;
+                Task completedTask;
                 if (tasks.size() >= target && target > 0) {
-                    taskDone = tasks.get(target - 1);
+                    completedTask = tasks.get(target - 1);
                 } else {
                     throw new IndexDoesNotExistException(taskDescription + " is out of the list.");
                 }
-                taskDone.markAsDone();
+                completedTask.markAsDone();
                 storage.updateLocalFile(tasks.get());
-                return ui.doneAnnouncement(taskDone);
+                return ui.doneAnnouncement(completedTask);
             } else if (userCommand.equals("find")) {
+                if (taskDescription.equals("dummy") || taskDescription.equals("")) {
+                    throw new EmptyKeywordException("You can't get me to search for nothing.\n" +
+                            "Try again! :)");
+                }
                 return tasks.keywordSearch(taskDescription);
             } else if (userCommand.equals("delete")) {
                 int target = Integer.parseInt(taskDescription);
-                Task taskDelete;
+                Task taskToDelete;
                 if (tasks.size() >= target && target > 0) {
-                    taskDelete = tasks.get((target - 1));
+                    taskToDelete = tasks.get((target - 1));
                     tasks.removeTask((target - 1));
                 } else {
                     throw new IndexDoesNotExistException(taskDescription + " is out of the list.");
                 }
                 storage.updateLocalFile(tasks.get());
                 taskCount = tasks.size();
-                return ui.deleteAnnouncement(taskDelete, taskCount);
+                return ui.deleteAnnouncement(taskToDelete, taskCount);
+            } else if (userCommand.equals("clear")) {
+                storage.clear();
+                tasks.clear();
+                assert tasks.size() == 0;
+                return ui.announceCleared();
             } else if (!userCommand.equals("bye")) {
                 return manager.createTask(parser, storage, ui, tasks);
             } else if (userCommand.equals("bye")) {

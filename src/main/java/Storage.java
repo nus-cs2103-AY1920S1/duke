@@ -1,9 +1,13 @@
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -166,7 +170,7 @@ public class Storage {
      * @param description Contains the description of the task that is going to be written.
      */
     public void writeToFile(String taskType,
-                                    String isDone, String description, Task task) {
+        String isDone, String description, Task task) {
         try {
             FileWriter fw = new FileWriter(filePath, true);
             String textToAdd = new String();

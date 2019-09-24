@@ -1,3 +1,5 @@
+import tasks.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -15,11 +17,6 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> listOfTask) {
         this.taskStorage = listOfTask;
-    }
-
-    /** Constructs the TaskList object. By default, this constructor builds an empty list of tasks. */
-    public TaskList() {
-        this.taskStorage = new ArrayList<Task>();
     }
 
     /**
@@ -76,7 +73,7 @@ public class TaskList {
             String[] subject = description.split(" ");
 
             for (String word : subject) {
-                if (word.equals(input)) {
+                if (word.contains(input)) {
                     result.add(task);
                 }
             }

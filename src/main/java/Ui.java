@@ -1,3 +1,5 @@
+import tasks.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -6,7 +8,6 @@ import java.util.ArrayList;
 public class Ui {
 
     public Ui() {
-
     }
 
     public String welcome() {
@@ -18,6 +19,11 @@ public class Ui {
                 + "|___|  \\__,_|_|    \\__/  |_|___|\n"
         + ("What can I do for you?");
         return logo;
+    }
+
+    public String greeting() {
+        return "Hello! Nice to meet you!\n" +
+                "I am hope you are having a productive day.";
     }
 
     public String showListOfTask(TaskList tasks) {
@@ -69,12 +75,13 @@ public class Ui {
     }
 
     public String announceMatchingTask(ArrayList<Task> taskList) {
-        String header = "Here are the matching tasks in your list:";
+        String result = "Here are the matching tasks in your list:";
+        Task evaluatingTask;
         for (int i = 1; i <= taskList.size(); i++) {
-            Task evaluatingTask = taskList.get(i - 1);
-            return header + ("\n" + i + "." + evaluatingTask.toString());
+            evaluatingTask = taskList.get(i - 1);
+            result = result + ("\n" + i + "." + evaluatingTask.toString());
         }
-        return new String();
+        return result;
     }
 
     public String announceNoneMatchingTask() {
@@ -82,12 +89,13 @@ public class Ui {
     }
 
     public String announceExisted() {
-        return "Sorry, you can't add this task as the task already.";
+        return "Sorry, you can't add this task as \n" +
+                "a similar task has been found in the list.";
     }
 
     public String announceCleared() {
-        return "You have cleared the local file. " +
-                "There are currently no task." +
+        return "You have cleared the local file.\n" +
+                "There are currently no task.\n" +
                 "You are free to be productive with Jarvis again! Enjoy :)";
     }
 }

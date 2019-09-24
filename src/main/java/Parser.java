@@ -15,13 +15,13 @@ public class Parser {
         String[] dueSplit = input.split("/", 2);
         String due = "dummy";
         if (dueSplit.length > 1) {
-            due = dueSplit[1].split(" ", 2)[1];
+            due = dueSplit[1].split(" ", 2)[1].trim();
         }
         String[] doneMarkers = dueSplit[0].split(" ", 2);
-        String userCommand = doneMarkers[0].toLowerCase();
+        String userCommand = doneMarkers[0].toLowerCase().trim();
         String taskDescription = "dummy";
         if (doneMarkers.length > 1) {
-            taskDescription = doneMarkers[1];
+            taskDescription = doneMarkers[1].trim();
         }
 
         this.userCommand = userCommand;

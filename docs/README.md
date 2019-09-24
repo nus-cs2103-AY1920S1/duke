@@ -1,9 +1,11 @@
 ![Image of duke](https://ckb055.github.io/duke/Ui.png)
-[Project on github](https://github.com/ckb055/duke)
 
 # User Guide
 User guide for Duke, 
 by Chen Kai Bin A0187250E
+[View the github project here](https://github.com/ckb055/duke)
+
+# Introduction
 
 Duke, is an individual project done for CS2103T, a Software Engineering module at the School of Computing of NUS.
 It is a personal chatbot assistant that has a CLI (Command Line Interface) and it
@@ -27,8 +29,8 @@ Example of usage :
 `todo cs2103t tutorial`
 
 Expected outcome :
-`Got it. I've added this task:`
-    `[T][✘] cs2103t tutorial`
+`Got it. I've added this task:`<br/>
+    `[T][✘] cs2103t tutorial`<br/>
 `Now you have X tasks in the list.`
     
 #### <span style="color:red">event</span>
@@ -39,9 +41,9 @@ Example of usage :
 `event birthday party /at 21/11/2014 1400`
 
 Expected outcome :
-`Got it. I've added this task:`
-    `[E][✘] birthday party (at : Fri`
-    `Nov 21 14:00:00 SGT 2014)`
+`Got it. I've added this task:`<br/>
+    `[E][✘] birthday party (at : Fri`<br/>
+    `Nov 21 14:00:00 SGT 2014)`<br/>
 `Now you have X tasks in the list.`
 
 #### <span style="color:red">deadline</span>
@@ -52,9 +54,9 @@ Example of usage :
 `deadline submit project /by 20/10/2011 1800`
 
 Expected outcome :
-`Got it. I've added this task:`
-    `[D][✘] submit project (by : Thu Oct 20`
-    `18:00:00 SGT 2011)`
+`Got it. I've added this task:`<br/>
+    `[D][✘] submit project (by : Thu Oct 20`<br/>
+    `18:00:00 SGT 2011)`<br/>
 `Now you have X tasks in the list.`
 
 #### <span style="color:red">find</span>
@@ -74,7 +76,7 @@ Example of usage :
 `list`
 
 Expect outcome :
-`Here are the tasks in your list:`
+`Here are the tasks in your list:`<br/>
 `(a numbered list of tasks depending on your tasklist)`
 
 #### <span style="color:red">stats</span>
@@ -93,7 +95,7 @@ Example of usage :
 `funfact`
 
 Expected outcome :
-`Fun fact! Did you know that...?`
+`Fun fact! Did you know that...?`<br/>
     `(a random funfact)`
 
 ### `Keyword` - Describe action

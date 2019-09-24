@@ -14,14 +14,13 @@ spaces between letters will be converted to '-'
 2. [Setting up](#setting-up)
 3. [Features](#features)
     1. [Adding a new to-do task](#1-adding-a-new-to-do-task)
-    2. [Adding a new event task](#2-dding-a-new-event-task)
+    2. [Adding a new event task](#2-adding-a-new-event-task)
     3. [Adding a new deadline task](#3-adding-a-new-deadline-task)
     4. [Viewing task-related statistics](#4-viewing-task-related-statistics)
     5. [Viewing all statistics](#5-viewing-all-statistics)
     6. [Resetting global statistics](#6-resetting-global-statistics)
     7. [Exiting the application](#7-exiting-the-application)
-    
-[here](#place-2)
+  
     
 ## Introduction
 Obot Wan Kenobi is a chatbot based on the persona of Jedi Master Obi-Wan Kenobi. He can handle basic tasks such as recording to-do, deadline and event tasks; as well as output relevant statistics based on the user's history.

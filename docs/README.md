@@ -70,11 +70,13 @@ An event task is similar to a to-do task, escept that it is associated with a pa
 Event task can be added via the following format:
 event [event_name] /at [event_location]
 
+<br/>
 
 Sample command:
 
 `event Exam /at MPSH1-C`
 
+<br/>
 
 Expected outcome:
 
@@ -84,6 +86,7 @@ Expected outcome:
 
 `Now you have X tasks in the list`
 
+<br/>
 
 ### 3. Adding a new deadline task 
 A deadine task is similar to a to-do task, except that it is associated with a particular cut-off time, the due deadline.
@@ -95,11 +98,13 @@ deadline [deadline_name] /by [deadline_date]
 [deadline_date] must be of the following format:
 __DD/MM/YYYY HHMM__
 
+<br/>
 
 Sample command:
 
 `deadline CS Quiz /by 31/12/2019 2359`
 
+<br/>
 
 Expected outcome:
 
@@ -109,6 +114,7 @@ Expected outcome:
 
 `Now you have X tasks in the list`
 
+<br/>
 
 ### 4. Viewing task-related statistics 
 Obot can also give the statistics regarding the number of tasks completed __in the current day.__
@@ -123,11 +129,13 @@ stats [event_type]
 * `todo`
 * `event`
 
+<br/>
 
 Sample command:
 
 `stats event`
 
+<br/>
 
 Possible outcome 1:
 
@@ -135,6 +143,7 @@ Possible outcome 1:
 
 `Well Done!`
 
+<br/>
 
 Possible outcome 2:
 
@@ -142,17 +151,20 @@ Possible outcome 2:
 
 `You can do better! :)`
 
+<br/>
 
 ### 5. Viewing all statistics 
 Aside from task-related statistics, Obot can also give statistics regarding the __total commands entered, total tasks deleted__ and __total tasks completed__. These statistics will consider tasks that have previously been marked completed but deleted by the user. 
 
 To view all statistics (which also included the tasks completed in the current day), enter the following sample command:
 
+<br/>
 
 Sample command:
 
 `stats all`
 
+<br/>
 
 Possible outcome:
 
@@ -177,19 +189,23 @@ Possible outcome:
 
 `Total Events Completed TODAY: 2`
 
+<br/>
 
 ### 6. Resetting global statistics
 Global statistic values can be reset. However, dynamic statistic values (Feature 4) cannot be reset.
 
 To reset global statistic values, enter the following sample code: 
 
+<br/>
 
 `stats reset`
 
+<br/>
 
 To view the outcome, view all statistics with:
 `stats all`
 
+<br/>
 
 Expected outcome:
 
@@ -215,15 +231,18 @@ Expected outcome:
 
 `Total Events Completed TODAY: 2` - Dynamic statistic based on when aa `event` was marked completed.
 
+<br/>
 
 ### 7. Exiting the application 
 Yes, this is a feature.
 
 Obot can be exited by entering the following command:
 
+<br/>
 
 `bye`
 
+<br/>
 
 Expected outcome:
 

@@ -1,4 +1,4 @@
-![Image of duke](https://ckb055.github.io/duke/Ui.png =485.5x742.5)
+![Image of duke](https://ckb055.github.io/duke/Ui.png =485x742)
 [Project on github](https://github.com/ckb055/duke)
 
 # User Guide
@@ -19,7 +19,29 @@ Although its fuctionality is simple, Duke is highly user-friendly.
 ## Usage
 ### Commands
 
-<span style="color:red">add</span>
+`<span style="color:red">todo</span>`
+`todo [task]`
+Adds a todo to the tasklist.
+
+Example of usage : 
+`todo cs2103t tutorial`
+
+Expected outcome :
+`Got it. I've added this task:
+    [T][✘] cs2103t tutorial
+Now you have X tasks in the list.`
+    
+
+`<span style="color:red">event</span>`
+Adds an event to the tasklist.
+
+Example of usage : 
+`todo cs2103t tutorial`
+
+Expected outcome :
+`Got it. I've added this task:
+    [T][✘] cs2103t tutorial
+Now you have X tasks in the list.`
 
 ### `Keyword` - Describe action
 

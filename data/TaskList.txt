@@ -7,3 +7,4 @@ T | 0 |
 T | 0 | say hello
 T | 0 | blabla
 T | 0 | sing karaoke
+T | 0 | cs2103t tutorial

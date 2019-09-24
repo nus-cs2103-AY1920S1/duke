@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.CommandResult;
 import duke.io.BufferedStringOutput;
 import duke.task.TaskList;
 import duke.util.PreParser;
@@ -50,12 +51,17 @@ public class Duke {
     }
 
     /**
-     * Generates Duke's response to user input.
+     * Generates the result of Duke's action on user input.
      */
-    public String getResponse(String input) {
+    public CommandResult getResult(String input) {
+        Command command = null;
         try {
-            Command command = preParser.parse(input);
+            command = preParser.parse(input);
             command.execute(model, bufferedUiOutput, storage);
+            if (command.isExit()) {
+                onExit();
+            }
+
             try {
                 storage.save(model.copyOfCurrentTasks());
             } catch (IOException e) {
@@ -67,10 +73,14 @@ public class Duke {
             bufferedUiOutput.oops(e.getMessage());
             e.printStackTrace();
         }
-        return bufferedUiOutput.nextResponse();
+        return new CommandResult(bufferedUiOutput.nextResponse(), command == null ? false : command.isExit());
     }
 
     public String getStartupMessages() {
         return startupMessages.nextResponse();
+    }
+
+    public void onExit() {
+        // Shutdown preparations here
     }
 }

@@ -11,6 +11,8 @@
     6. [Resetting global statistics](feature_6_link)
     7. [Exiting the application](feature_7_link)
     
+[here](#place-2)
+    
 ## Introduction <!--- <introduction_header_link> -->
 Obot Wan Kenobi is a chatbot based on the persona of Jedi Master Obi-Wan Kenobi. He can handle basic tasks such as recording to-do, deadline and event tasks; as well as output relevant statistics based on the user's history.
 
@@ -18,7 +20,8 @@ Obot Wan Kenobi is a chatbot based on the persona of Jedi Master Obi-Wan Kenobi.
 
 Fig. 1. Screenshot of Obot
 
-## Setting up <link_destination>
+### Place 2
+## Setting up <link_destination> 
 1. Ensure you have Java version 11.0.4 or later installed in your Computer.
 You can download it [here](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html)
 2. Verify that the correct version exists by typing `java -version` into the terminal/CMD. 

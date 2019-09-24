@@ -18,7 +18,7 @@ import duke.ui.Ui;
 public class CommandDeadline extends Command {
 
     public static final String COMMAND_WORD = "deadline";
-    public static final String REGEX = "/by";
+    private static final String REGEX = "/by";
 
     public CommandDeadline(String command) {
         super(command);

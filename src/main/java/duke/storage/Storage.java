@@ -42,13 +42,14 @@ public class Storage {
      */
     public List<Task> load() throws DukeIoException {
         try {
+            //Solution below adapted from https://github.com/podocarp/duke.git
             File f = new File(pathToFile);
             f.createNewFile();
 
             FileInputStream fileInputStream = new FileInputStream(pathToFile);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
-            taskList = (ArrayList<Task>)objectInputStream.readObject();
+            taskList = (ArrayList<Task>) objectInputStream.readObject();
 
             objectInputStream.close();
             return taskList;

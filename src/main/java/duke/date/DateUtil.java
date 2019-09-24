@@ -25,7 +25,7 @@ public class DateUtil {
      * @throws IllegalTimeFormatException If the input String is not convertible to a LocalDateTime object.
      */
     public static LocalDateTime toTime(String s) throws IllegalTimeFormatException {
-        String [] formattedTime = formatTimeString(s);
+        String[] formattedTime = formatTimeString(s);
         return toLocalDateTime(formattedTime);
     }
 

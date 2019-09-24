@@ -1,5 +1,8 @@
 package duke.ui;
 
+import static duke.MyPaths.MANAGER_PROFILE;
+import static duke.MyPaths.USER_PROFILE;
+
 import duke.Duke;
 import duke.reminder.Reminder;
 import duke.ui.DialogBox;
@@ -26,8 +29,10 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream(USER_PROFILE));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream(MANAGER_PROFILE));
+
+    private static final String MSG_WELCOME = "Hello! I'm Nezuko ><\n" + "What can I do for you?\n";
 
     private static final int NUMBER_OF_REMINDER = 5;
 
@@ -38,7 +43,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hello! I'm Nezuko ><\n" + "What can I do for you?\n", dukeImage));
+                DialogBox.getDukeDialog(MSG_WELCOME, dukeImage));
     }
 
     public void setDuke(Duke d) {
@@ -72,7 +77,7 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
-    public void displayMsg(String response) {
+    void displayMsg(String response) {
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(response, dukeImage));
     }
 }

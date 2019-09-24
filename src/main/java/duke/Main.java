@@ -1,11 +1,15 @@
 package duke;
 
+import static duke.MyPaths.ICON;
+import static duke.MyPaths.MAIN_WINDOW;
+
 import java.io.IOException;
 
 import duke.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -19,9 +23,10 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(MAIN_WINDOW));
             AnchorPane ap = fxmlLoader.load();
             stage.setTitle(APP_TITLE);
+            stage.getIcons().add(new Image(Main.class.getResourceAsStream(ICON)));
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             MainWindow mw = fxmlLoader.getController();

@@ -29,7 +29,7 @@ public class Duke {
      * Constructs a Duke object.
      *
      * @param pathToFile Path to file storing the task list.
-     * @param mw MainWindow.
+     * @param mw         MainWindow.
      */
     public Duke(String pathToFile, MainWindow mw) {
         this.mw = mw;
@@ -44,7 +44,6 @@ public class Duke {
 
     /**
      * Starts the Duke programme.
-     *
      */
     public void start() {
 

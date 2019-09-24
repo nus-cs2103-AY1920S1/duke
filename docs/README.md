@@ -1,4 +1,4 @@
-= Nezuko the Task Master - User Guide
+= Task Master Nezuko - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -14,29 +14,28 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level3
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Xiaoyu`      Since: `Aug 2019`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 3 (AB3) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB3 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Task Master Nezuko(TMN) is a handy tool for you to manage you tasks on a PC. More importantly, it is *designed for Demon Slayer and Command Line App lovers like you*. Talk to Nezuko the Task Master through a few easy-to-remember commands, you can manage you tasks in anyway you want. Let us jump to the <<Quick Start>> to get started!
 
 == Quick Start
 
 .  Ensure you have Java `11` or above installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Download the latest `taskmaster.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your TM Nezuko.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
 +
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
-e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
+.  Type the command in the command box and press kbd:[Enter] to execute it.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
-* *`exit`* : exits the app
+* *`list`* : lists all tasks
+* **`deadline`**`project meeting /by 20/09/2020 1800` : adds a task `project meeting` due at `6 PM` on `20th Sept, 2020` to the Task Manager.
+* **`delete`**`3` : deletes the 3rd task in the full list
+* *`done`**`2` : marks the 2nd task in the full list as done
 
 .  Refer to <<Features>> for details of each command.
 
@@ -46,7 +45,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in `< >` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.

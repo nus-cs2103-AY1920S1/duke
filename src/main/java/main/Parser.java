@@ -6,12 +6,25 @@ import exception.DoneException;
 import exception.DukeException;
 import exception.TaskException;
 
+/**
+ * Parses all the commands input by the user.
+ *
+ * The only public method, parse(), is used to determine which command will be returned and executed in Duke. The other
+ * two methods are private and used to assist the parse() method in processing an Event or a Deadline type Command.
+ */
 public class Parser {
-    //private Scanner sc;
-    public Parser() {
-        //this.sc = new Scanner(System.in);
-    }
+    public Parser() { }
 
+    /**
+     * Returns a String array which has two elements.
+     *
+     * The first element is the name of the new Event Task and the second element is the String representing the date
+     * of the Event Task.
+     *
+     * @param command A string array representing the initial input split into individual words.
+     * @return Returns a String array which contains the name and the date of a new Event Task.
+     * @throws TaskException Thrown when there is insufficient information to create an Event Task.
+     */
     private String[] getEventDetails(String[] command) throws TaskException {
         if (command.length <= 1) {
             throw new TaskException();
@@ -24,6 +37,16 @@ public class Parser {
         return toReturn.split(" /at ");
     }
 
+    /**
+     * Returns a String array which has two elements.
+     *
+     * The first element is the name of the new Deadline Task and the second element is the String representing the
+     * date of the Deadline Task.
+     *
+     * @param command A string array representing the initial input split into individual words.
+     * @return Returns a String array which contains the name and the date of a new Deadline Task.
+     * @throws TaskException Thrown when there is insufficient information to create an Deadline Task.
+     */
     private String[] getDeadlineDetails(String[] command) throws TaskException {
         if (command.length <= 1) {
             throw new TaskException();
@@ -37,7 +60,16 @@ public class Parser {
     }
 
 
-
+    /**
+     * Parses the input and returns a Command that corresponds to the type of input given.
+     *
+     * When a String (commandLine) is supplied, this method will split commandLine into multiple words (via
+     * String.split(" "). This will result in a String array containing individual words. The first word is then used
+     * to determine which Command is to be returned. If an invalid command is given, an UnknownCommand will be returned.
+     *
+     * @param commandLine A string representing a full line of input from the user.
+     * @return Returns a Command object corresponding to the type of input from the user.
+     */
     public Command parse(String commandLine) {
         String[] nextCommand = commandLine.split(" ");
         switch (nextCommand[0]) {

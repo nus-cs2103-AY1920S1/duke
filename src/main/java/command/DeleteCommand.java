@@ -1,22 +1,33 @@
 package command;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import main.*;
 import exception.DeleteException;
 import task.Task;
 
-public class DeleteCommand extends Command {
-    int taskNum;
+/**
+ * A Command to remove a Task from the TaskList and Storage.
+ */
+public class DeleteCommand implements Command {
+    /**
+     * Indicates which element of the TaskList needs to be deleted.
+     */
+    private int taskNum;
 
     public DeleteCommand(int taskNum) {
         this.taskNum = taskNum;
     }
 
-    public void execute(TaskList tl, Storage st) {
+    /**
+     * Deletes a specific Task from the TaskList and Storage as indicated by the taskNum attribute.
+     *
+     * @param taskList The TaskList from the main Duke object.
+     * @param storage The Storage from the main Duke object.
+     */
+    public void execute(TaskList taskList, Storage storage) {
         try {
-            ArrayList<Task> list = tl.getTaskList();
+            ArrayList<Task> list = taskList.getTaskList();
             if (taskNum > list.size() || taskNum <= 0) {
                 throw new DeleteException();
             }
@@ -25,9 +36,7 @@ public class DeleteCommand extends Command {
 
             UI.removedTask(task, listSize);
 
-            st.writeToFile(list);
-        } catch (IOException IOe) {
-            System.err.println(IOe);
+            storage.writeToFile(list);
         } catch (DeleteException dE) {
             System.err.println(dE);
         }

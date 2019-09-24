@@ -1,5 +1,8 @@
 package exception;
 
+/**
+ * An exception which only occurs if an an error is encountered when a Delete Command is executed.
+ */
 public class DeleteException extends DukeException {
     public DeleteException() {};
 

@@ -20,6 +20,8 @@ spaces between letters will be converted to '-'
     4. [Viewing task-related statistics](#4-viewing-task-related-statistics)
     5. [Viewing all statistics](#5-viewing-all-statistics)
     6. [Resetting global statistics](#6-resetting-global-statistics)
+    7. [Deleting tasks](#7-deleting-tasks)
+    8. [Finding tasks](#8-finding-tasks)
     7. [Exiting the application](#7-exiting-the-application)
   
     
@@ -246,7 +248,43 @@ Expected outcome:
 
 <br/>
 
-### 7. Exiting the application 
+### 7. Finding tasks
+Obot can help locate tasks that match a particular string.
+
+<br/>
+
+Sample command:
+
+`find assignment`
+
+<br/>
+
+Possible outcome:
+
+`All possible tasks matching the above term`
+
+### 8. Deleting tasks
+Obot can delete tasks from his memory banks. 
+
+<br/>
+
+Sample command:
+
+`delete 2`
+
+</br>
+
+Possible outcome:
+
+`Noted. i've removed this task from the archives`
+
+`<Task Description>`
+
+`Now you have X tasks in the list`
+
+</br>
+
+### 9. Exiting the application 
 Yes, this is a feature.
 
 Obot can be exited by entering the following command:

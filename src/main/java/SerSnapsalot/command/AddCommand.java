@@ -34,8 +34,13 @@ public class AddCommand extends Command {
     @Override
     public String execute(Ui ui, TaskList taskList, Storage storage) throws DukeException {
         Task newTask;
-        if (this.type.equals("deadline") || this.type.equals("event")) {
-            newTask = new Deadline(command);
+        if (type.equals("deadline") || type.equals("event")) {
+            if (type.equals("deadline")) {
+                newTask = new Deadline(command);
+            } else {
+                assert (type.equals("event"));
+                newTask = new Event(command);
+            }
             try {
                 newTask.understandDate();
             } catch (Exception e) {

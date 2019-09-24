@@ -60,7 +60,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String output = "[E][" + this.getStatusIcon() + "] " + this.description;
-        output += " (at:\n" + this.time + ")";
+        output += " (at:\n    " + this.time + ")";
         return output;
     }
 }

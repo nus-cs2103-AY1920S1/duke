@@ -39,8 +39,10 @@ public class TaskList {
      */
     public String printTaskList() {
         String output = "Here are the tasks in your list:";
+        int index = 1;
         for (Task x : tasks) {
-            output += ("\n" + x);
+            output += ("\n" + index + ". " + x);
+            index++;
         }
         return output;
     }
@@ -96,7 +98,7 @@ public class TaskList {
                     output += "Here are the matching tasks in your list:";
                     hasMatch = true;
                 }
-                output += ("\n" + index + "." + x);
+                output += ("\n" + index + ". " + x);
             }
         }
         if (!hasMatch) {

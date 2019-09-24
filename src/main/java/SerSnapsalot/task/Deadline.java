@@ -59,7 +59,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String output = "[D][" + this.getStatusIcon() + "] " + this.description;
-        output += " (by:\n" + this.time + ")";
+        output += " (by:\n    " + this.time + ")";
         return output;
     }
 }

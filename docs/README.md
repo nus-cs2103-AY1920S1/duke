@@ -14,12 +14,12 @@ spaces between letters will be converted to '-'
 2. [Setting up](#setting-up)
 3. [Features](#features)
     1. [Adding a new to-do task](#1-adding-a-new-to-do-task)
-    2. [Adding a new event task](feature_2_link)
-    3. [Adding a new deadline task](feature_3_link)
-    4. [Viewing task-related statistics](feature_4_link)
-    5. [Viewing all statistics](feature_5_link)
-    6. [Resetting global statistics](feature_6_link)
-    7. [Exiting the application](feature_7_link)
+    2. [Adding a new event task](#2-dding-a-new-event-task)
+    3. [Adding a new deadline task](#3-adding-a-new-deadline-task)
+    4. [Viewing task-related statistics](#4-viewing-task-related-statistics)
+    5. [Viewing all statistics](#5-viewing-all-statistics)
+    6. [Resetting global statistics](#6-resetting-global-statistics)
+    7. [Exiting the application](#7-exiting-the-application)
     
 [here](#place-2)
     
@@ -196,6 +196,8 @@ Expected outcome:
 `Total Events Completed TODAY: 2` - Dynamic statistic based on when aa `event` was marked completed.
 
 ### 7. Exiting the application 
+Yes, this is a feature.
+
 Obot can be exited by entering the following command:
 
 `bye`

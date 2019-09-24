@@ -4,10 +4,10 @@ By: `Xiaoyu`      Since: `Aug 2019`      Licence: `MIT`
 
 ## Table of Contents
 
-1. [Introduction](#introduction)
-1. [Quick Start](#quick start)
-1. [Features](#features)
-    1. [Viewing help: `help`](#viewing-help--help)
+1. [Introduction](#introduction) 
+1. [Quick Start](#quick-start) 
+1. [Features](#features) 
+    1. [Viewing help: `help`](#viewing-help--help) 
     1. 
 ## Introduction
 

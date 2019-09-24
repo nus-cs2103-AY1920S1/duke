@@ -243,8 +243,6 @@ Yes, this is a feature.
 
 Obot can be exited by entering the following command:
 
-<br/>
-
 `bye`
 
 <br/>

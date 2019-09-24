@@ -21,11 +21,4 @@ public class ListCommand extends Command {
         return tasks.list();
     }
 
-    /**
-     * Checks if this command is an exit ("bye") command.
-     * @return false boolean since command is not exit ("bye") command
-     */
-    public boolean isExit() {
-        return false;
-    }
 }

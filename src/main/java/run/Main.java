@@ -13,7 +13,9 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    public static Stage STAGE;
     private Duke duke = new Duke();
+
 
     @Override
     public void start(Stage stage) {
@@ -24,6 +26,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
+            this.STAGE = stage;
         } catch (IOException e) {
             e.printStackTrace();
         }

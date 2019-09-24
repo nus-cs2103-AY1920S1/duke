@@ -18,15 +18,7 @@ public class ByeCommand extends Command {
      * @return String output of executed command to be shown to the user
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.closeScanner();
         return ui.exit();
     }
 
-    /**
-     * Checks if this command is an exit ("bye") command.
-     * @return true boolean since command is exit ("bye") command
-     */
-    public boolean isExit() {
-        return true;
-    }
 }

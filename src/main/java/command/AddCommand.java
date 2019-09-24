@@ -26,14 +26,6 @@ public abstract class AddCommand extends Command {
     public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
-     * Checks if this command is an exit ("bye") command.
-     * @return false boolean since command is not exit ("bye") command
-     */
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Updates state of save file to latest tasks from TaskList.
      * Catches IO exception and UpdateStateException that may be thrown while
      * updating state.

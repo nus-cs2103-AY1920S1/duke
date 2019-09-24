@@ -54,48 +54,24 @@ public class Duke {
     }
 
     /**
-     * Runs introductory messages and begins awaiting user input.
-     */
-    public void run() {
-        ui.introduction();
-        ui.init();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("---------")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
-    /*
-    public static void main(String[] args) {
-        new Duke("C:\\Users\\nisga\\OneDrive\\Desktop\\duke\\src\\main\\java\\data\\tasks.txt").run();
-    }
-    */
-
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
-    /**
-     * Calls parser to get a response from user input.
+     * Calls parser to get a response from user input. If response is exit message additionally closes stage
+     * Todo: Bad design, split handling
      * @param input raw String entered by user
      * @return String response after parsing user input
      */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            return c.execute(tasks, ui, storage);
+            String response = c.execute(tasks, ui, storage);
+            if(response.equals(Ui.EXIT_MESSAGE)) {
+                Main.STAGE.close();
+                return Ui.EXIT_MESSAGE;
+            } else {
+                return response;
+            }
         } catch (DukeException ex) {
             return ex.getMessage();
         }
     }
+
 }

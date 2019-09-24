@@ -20,8 +20,4 @@ public abstract class Command {
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
-    /** Checks if this command is an exit ("bye") command.
-     * @return boolean that checks if this is exit ("bye") command
-     */
-    public abstract boolean isExit();
 }

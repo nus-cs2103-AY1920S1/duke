@@ -3,13 +3,13 @@ package run;
 import task.Task;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Handles all the interaction with the user (taking input and printing output).
  */
 public class Ui {
-    protected Scanner sc;
+
+    public static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
     /**
      * Prints an error message to the user.
@@ -30,50 +30,12 @@ public class Ui {
     }
 
     /**
-     * Introduction that is printed when Duke is first accessed.
-     */
-    public void introduction() {
-        showLine();
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        showLine();
-    }
-
-    /**
-     * Initialises a scanner (Used when Duke is first accessed).
-     */
-    public void init() {
-        this.sc = new Scanner(System.in);
-    }
-
-    /**
      * Prints exit message (Used when Duke is exited).
      */
     public String exit() {
-        return "Bye. Hope to see you again soon!";
+        return EXIT_MESSAGE;
     }
 
-    /**
-     * Closes the scanner (Used when Duke is exited).
-     */
-    public void closeScanner() {
-        this.sc.close();
-    }
-
-    /**
-     * Prints line space for readability.
-     */
-    public void showLine() {
-        System.out.println("---------------------------------------------------------------------");
-    }
-
-    /**
-     * Reads the line that user inputs.
-     * @return rawString of user input
-     */
-    public String readCommand() {
-        return sc.nextLine();
-    }
 
     /**
      * Prints a list of tasks.

@@ -1,3 +1,3 @@
 T//fix code//true
-T//go to school//true
-E//formal dinner//false//2/12/1997 2359
+E//formal dinner//true//2/12/1997 2359
+T//presentation//false

@@ -111,7 +111,16 @@ public class TaskList {
         return task;
     }
 
-    public void clearTasks() {
+    /**
+     * Clears all the tasks in this task list.
+     *
+     * @throws DukeException if the task list is empty
+     */
+    public void clearTasks()throws DukeException {
+        if (isEmpty()) {
+            throw new DukeException("No need to clear your task list "
+                    + "since it is empty.");
+        }
         tasks.clear();
     }
 

@@ -5,7 +5,7 @@ Geoffrey is the freshest task manager on the block. This simple chat-bot is insp
 As Will Smith, you are able to tell your butler Geoffrey your task list which includes general to-do's, deadlines, and events. Not only can Geoffrey remember these tasks, he can mark them as done, delete them, and sort them based on your commands.
 
 ##### Figure 1. Screenshot of Geoffrey
-![Image of Yaktocat](Ui.png)
+![Image of Yaktocat](Ui.png | width=100)
 
 ## 2. Quick Start
 

@@ -8,3 +8,5 @@ T | 0 | say hello
 T | 0 | blabla
 T | 0 | sing karaoke
 T | 0 | cs2103t tutorial
+D | 0 | submit project  |  20/10/2011 1800
+E | 0 | birthday party  |  21/11/2014 1400

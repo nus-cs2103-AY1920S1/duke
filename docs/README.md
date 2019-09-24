@@ -1,4 +1,4 @@
-![Image of duke](https://ckb055.github.io/duke/Ui.png =485x742)
+![Image of duke](https://ckb055.github.io/duke/Ui.png =100x200)
 [Project on github](https://github.com/ckb055/duke)
 
 # User Guide
@@ -19,7 +19,7 @@ Although its fuctionality is simple, Duke is highly user-friendly.
 ## Usage
 ### Commands
 
-`<span style="color:red">todo</span>`
+#### <span style="color:red">todo</span>
 `todo [task]`
 Adds a todo to the tasklist.
 
@@ -27,20 +27,34 @@ Example of usage :
 `todo cs2103t tutorial`
 
 Expected outcome :
-`Got it. I've added this task:
-    [T][✘] cs2103t tutorial
+`Got it. I've added this task:"\n\t"
+    [T][✘] cs2103t tutorial"\n"
 Now you have X tasks in the list.`
     
+#### <span style="color:red">event</span>
+`event [task] /at [DD/MM/YYYY HHmm]`
+Adds an event with a specified date to the tasklist.
 
-`<span style="color:red">event</span>`
-Adds an event to the tasklist.
-
-Example of usage : 
-`todo cs2103t tutorial`
+Example of usage :
+`event birthday party /at 21/11/2014 1400`
 
 Expected outcome :
-`Got it. I've added this task:
-    [T][✘] cs2103t tutorial
+`Got it. I've added this task:"\n\t"
+    [E][✘] birthday party (at : Fri "\n"
+    Nov 21 14:00:00 SGT 2014)"\n"
+Now you have X tasks in the list.`
+
+#### <span style="color:red">deadline</span>
+`deadline [task] /by [DD/MM/YYYY HHmm]`
+Adds a deadline with a specified date to the tasklist.
+
+Example of usage : 
+`deadline submit project /by 20/10/2011 1800`
+
+Expected outcome :
+`Got it. I've added this task:"\n\t"
+    [D][✘] submit project (by : Thu Oct 20"\n"
+    18:00:00 SGT 2011)"\n"
 Now you have X tasks in the list.`
 
 ### `Keyword` - Describe action

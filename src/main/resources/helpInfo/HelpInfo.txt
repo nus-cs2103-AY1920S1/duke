@@ -19,8 +19,8 @@ example syntax : delete 8
 todo [task] - adds a todo 
 example syntax : todo do homework
 
-deadline [task] [/by] [DD/MM/YYYY HHmm] - adds a deadline with a specified date
+deadline [task] /by [DD/MM/YYYY HHmm] - adds a deadline with a specified date
 example syntax : deadline submit project /by 20/10/2011 1800
 
-event [task] [/at] [DD/MM/YYYY HHmm] - adds an event with a specified date
+event [task] /at [DD/MM/YYYY HHmm] - adds an event with a specified date
 example syntax : event birthday party /at 21/11/2014 1400

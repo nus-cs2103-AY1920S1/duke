@@ -1,20 +1,32 @@
-# User Guide
+# Usage
+**todo**
+* `todo [taskName]`
+* This adds a 'todo' task in the current task list.
 
-## Features 
+**deadline**
+* `deadline [taskName] /by [dueDate]`
+* This adds a 'deadline' task in the current task list.
 
-### Feature 1 
-Description of feature.
+**event**
+* `event [taskName] /by [eventDate]`
+* This adds an 'event' task in the current task list.
 
-## Usage
+**find**
+* `find [keyword]`
+* This searches for the keyword entered.
 
-### `Keyword` - Describe action
+**done**
+* `done [n]`
+* This marks the nth task in the current task list as done.
 
-Describe action and its outcome.
+**list**
+* `list`
+* This lists all the current tasks added.
 
-Example of usage: 
+**listdone**
+* `listdone`
+* This lists all the tasks that you have marked as done.
 
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
+**delete**
+* `delete`
+* This deletes the nth task in the current task list.

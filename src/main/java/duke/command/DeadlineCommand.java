@@ -22,12 +22,11 @@ public class DeadlineCommand extends Command {
     public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) {
         try {
             if (description.equals("")) {
-                throw new DukeException("The description of a deadline cannot be empty.");
+                throw new DukeException(ui.EMPTY_DESCRIPTION_RESPONSE);
             }
             Task deadlineTask = new Deadline(description, by);
             tasks.add(deadlineTask);
-            response = "Got it. I've added this task:\n    " + deadlineTask + "\nNow you have " + tasks.size()
-                    + " task(s) in the " + "list.";
+            response = ui.addDeadlineResponse(deadlineTask, tasks);
             storage.save(tasks);
         } catch (DukeException | IOException e) {
             response = e.getMessage();

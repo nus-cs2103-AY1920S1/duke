@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class ByeCommand extends Command {
     @Override
     public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws IOException {
-        response = "Goodbye, Master William. Hope to see you again soon.";
+        response = ui.BYE_RESPONSE;
         storage.save(tasks);
         setTimeout(() -> System.exit(0), 1000);
     }

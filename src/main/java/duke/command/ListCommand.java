@@ -10,9 +10,9 @@ public class ListCommand extends Command {
     @Override
     public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) {
         if (tasks.size() == 0) {
-            response = "There are no tasks for now.";
+            response = ui.NO_TASKS_RESPONSE;
         } else {
-            StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
+            StringBuilder sb = new StringBuilder(ui.LISTING_RESPONSE);
             for (int i = 0; i < tasks.size(); i++) {
                 int k = i + 1;
                 Task task = tasks.get(i);

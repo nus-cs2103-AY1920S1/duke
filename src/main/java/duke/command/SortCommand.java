@@ -29,58 +29,21 @@ public class SortCommand extends Command {
             }
             deadlines = getSortedTaskByDeadline(deadlines);
             if (deadlines.size() == 0) {
-                response = "You have no deadlines.";
+                response = ui.NO_DEADLINES_RESPONSE;
             } else {
-                StringBuilder sb = new StringBuilder("Here are your tasks sorted by " + by + ":\n");
-                for (int i = 0; i < deadlines.size(); i++) {
-                    int k = i + 1;
-                    if (i > 0) {
-                        sb.append("\n");
-                    }
-                    sb.append(k);
-                    sb.append(". ");
-                    sb.append(deadlines.get(i));
-                }
-                response = sb.toString();
+                StringBuilder sb = new StringBuilder(ui.DEADLINE_SORT_RESPONSE);
+                response = ui.listOfDeadlines(deadlines, sb);
             }
         } else if (by.equals("type")) {
             tasks = getSortedTaskByType(tasks);
             if (tasks.size() == 0) {
-                response = "You have no tasks.";
+                response = ui.NO_TASKS_RESPONSE;
             } else {
-                StringBuilder sb = new StringBuilder("Here are your tasks sorted by " + by
-                        + ":\nDeadline, Event, Todo\n");
-                for (int i = 0; i < tasks.size(); i++) {
-                    int k = i + 1;
-                    if (i > 0) {
-                        sb.append("\n");
-                    }
-                    sb.append(k);
-                    sb.append(". ");
-                    sb.append(tasks.get(i));
-                }
-                response = sb.toString();
-            }
-        } else if (by.equals("type")) {
-            tasks = getSortedTaskByType(tasks);
-            if (tasks.size() == 0) {
-                response = "You have no tasks.";
-            } else {
-                StringBuilder sb = new StringBuilder("Here are your tasks sorted by " + by
-                        + ":\nDeadline, Event, Todo\n");
-                for (int i = 0; i < tasks.size(); i++) {
-                    int k = i + 1;
-                    if (i > 0) {
-                        sb.append("\n");
-                    }
-                    sb.append(k);
-                    sb.append(". ");
-                    sb.append(tasks.get(i));
-                }
-                response = sb.toString();
+                StringBuilder sb = new StringBuilder(ui.TYPE_SORT_RESPONSE);
+                response = ui.listOfTasks(tasks, sb);
             }
         } else {
-            throw new DukeException("I don't know what that means!");
+            throw new DukeException(ui.DUKE_EXCEPTION);
         }
 
 

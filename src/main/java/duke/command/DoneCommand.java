@@ -17,10 +17,10 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws IOException {
-        assert index > 0 && index <= tasks.size() : "The task index does not exist.";
+        assert index > 0 && index <= tasks.size() : ui.NO_INDEX_RESPONSE;
         Task task = tasks.get(index - 1);
         task.markAsDone();
-        response = "Very good. I've marked this task as done:\n    " + task;
+        response = ui.doneTaskResponse(task);
         storage.save(tasks);
     }
 }

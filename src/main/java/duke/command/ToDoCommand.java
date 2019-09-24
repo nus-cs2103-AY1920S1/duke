@@ -19,12 +19,11 @@ public class ToDoCommand extends Command {
     @Override
     public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException, IOException {
         if (description.equals("")) {
-            throw new DukeException("The description of a todo cannot be empty.");
+            throw new DukeException(ui.EMPTY_DESCRIPTION_RESPONSE);
         }
         Task toDoTask = new ToDo(description);
         tasks.add(toDoTask);
-        response = "Got it. I've added this task:\n    " + toDoTask + "\nNow you have " + tasks.size()
-                + " task(s) in the " + "list.";
+        response = ui.addTodoTaskResponse(toDoTask, tasks);
         storage.save(tasks);
     }
 }

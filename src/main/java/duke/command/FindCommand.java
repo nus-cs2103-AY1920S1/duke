@@ -16,7 +16,7 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) {
-        StringBuilder sb = new StringBuilder("Here are the matching task(s) in your list:\n");
+        StringBuilder sb = new StringBuilder(ui.LISTING_RESPONSE);
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             int k = i + 1;

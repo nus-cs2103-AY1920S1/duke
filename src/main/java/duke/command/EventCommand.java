@@ -21,7 +21,7 @@ public class EventCommand extends Command {
     @Override
     public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException, IOException {
         if (description.equals("")) {
-            throw new DukeException("The description of an event cannot be empty.");
+            throw new DukeException(ui.EMPTY_DESCRIPTION_RESPONSE);
         }
         Task eventTask = new Event(description, at);
         tasks.add(eventTask);

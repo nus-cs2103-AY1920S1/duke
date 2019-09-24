@@ -34,7 +34,7 @@ developed using Java version 11.0.1 in MacOS Mojave Version 10.14.6
 
 
 Author: Ong Bing Jue <br/>
-Version: 1.0.4 <br />
+Version: 0.2.0 <br />
 Release Date: 30 Sepetember 2019 <br />
 Github: <a href="http://github.com/bjhoohaha/duke">http://github.com/bjhoohaha/duke</a> <br />
 

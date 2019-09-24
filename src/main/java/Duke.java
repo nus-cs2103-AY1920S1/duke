@@ -19,6 +19,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
 import java.awt.*;
+import java.io.IOException;
 
 /**
  * Duke, a personal chat bot assistant that helps you manage your tasks.
@@ -44,7 +45,7 @@ public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private static final String TASKLIST_FILEPATH = "src/main/resources/taskList/TaskList.txt";
+    private static final String TASKLIST_FILEPATH = "taskList/TaskList.txt";
 
     /**
      * Images for the user and Duke
@@ -75,6 +76,8 @@ public class Duke extends Application {
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

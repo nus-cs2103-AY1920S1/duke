@@ -1,9 +1,6 @@
-import java.io.FileWriter;
+import java.io.*;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -15,8 +12,8 @@ public class Storage {
     private String filepath;
     private String[] funFacts;
     private String helpInfo;
-    private final String FUN_FACT_FILEPATH = "src/main/resources/funFacts/FunFacts.txt";
-    private final String HELP_INFO_FILEPATH = "src/main/resources/helpInfo/HelpInfo.txt";
+    private final String FUN_FACT_FILEPATH = "/funFacts/FunFacts.txt";
+    private final String HELP_INFO_FILEPATH = "/helpInfo/HelpInfo.txt";
 
     /**
      * Constructs a storage object.
@@ -25,8 +22,12 @@ public class Storage {
 
     public Storage (String filepath) {
         this.filepath = filepath;
-        this.funFacts = loadFunFacts(FUN_FACT_FILEPATH);
-        this.helpInfo = loadHelpInfo(HELP_INFO_FILEPATH);
+        try {
+            this.funFacts = loadFunFacts(FUN_FACT_FILEPATH);
+            this.helpInfo = loadHelpInfo(HELP_INFO_FILEPATH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -35,17 +36,15 @@ public class Storage {
      * @return A string that displays the help info to the user
      */
 
-    public String loadHelpInfo(String filePath) {
+    public String loadHelpInfo(String filePath) throws IOException {
         StringBuilder sb = new StringBuilder("");
-        try {
-            Scanner sc = new Scanner(new File(filePath));
-            while (sc.hasNextLine()) {
-                // scan til EOF
-                sb.append(sc.nextLine());
-                sb.append("\n");
-            }
-        } catch (FileNotFoundException f) {
-            f.printStackTrace();
+        InputStream inputStream = this.getClass().getResourceAsStream(filePath);
+        InputStreamReader inputReader = new InputStreamReader(inputStream);
+        BufferedReader br = new BufferedReader(inputReader);
+        String line = "";
+        while ((line = br.readLine()) != null) {
+            sb.append(line);
+            sb.append("\n");
         }
         return sb.toString();
     }
@@ -63,16 +62,15 @@ public class Storage {
      * @param filePath
      * @return A string array of fun facts
      */
-    public String[] loadFunFacts(String filePath) {
+    public String[] loadFunFacts(String filePath) throws IOException {
         StringBuilder sb = new StringBuilder("");
-        try {
-            Scanner sc = new Scanner(new File(filePath));
-            while (sc.hasNextLine()) {
-                // scan til EOF
-                sb.append(sc.nextLine());
-            }
-        } catch (FileNotFoundException f) {
-            f.printStackTrace();
+        InputStream inputStream = this.getClass().getResourceAsStream(filePath);
+        InputStreamReader inputReader = new InputStreamReader(inputStream);
+        BufferedReader br = new BufferedReader(inputReader);
+        String line = "";
+        while ((line = br.readLine()) != null) {
+            sb.append(line);
+            sb.append("\n");
         }
         String[] funFacts = sb.toString().split("-", 20);
         return funFacts;
@@ -105,8 +103,13 @@ public class Storage {
      * @throws DukeException if the file is not found.
      */
 
-    public ArrayList<Task> load() throws DukeException{
+    public ArrayList<Task> load() throws DukeException, IOException{
         ArrayList<Task> tasks = new ArrayList<>();
+        File f = new File(this.filepath);
+        if (!f.exists()) {
+            new File("./taskList").mkdir();
+            new File("./taskList/TaskList.txt").createNewFile();
+        }
         try {
             File loadUpFile = new File(this.filepath);
             Scanner scLoad = new Scanner(loadUpFile);

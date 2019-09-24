@@ -7,11 +7,11 @@ import seedu.duke.task.Event;
 import seedu.duke.task.Task;
 import seedu.duke.task.Todo;
 
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.File;
-
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -31,11 +31,11 @@ public class Storage {
      * Constructor for the Storage class.
      *
      * @param filepath Absolute filepath of the text file.
-     *                 Eg. "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt".
+     *                 Eg. "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\obot_data\\tasks.txt".
      */
     public Storage(String filepath) {
 
-        this.filepath = filepath;
+        this.filepath = System.getProperty("user.dir") + filepath;
     }
 
     /**
@@ -49,7 +49,7 @@ public class Storage {
         File f = new File(filepath);
         String data = "";
 
-        // If the file does not exist, create sa new text file.
+        // If the file does not exist, creates a new text file.
         if (!f.exists()) {
             try {
                 Files.write(Paths.get(filepath), data.getBytes());
@@ -116,60 +116,109 @@ public class Storage {
     }
 
     /**
+     * Checks if the 'data' folder is present in the working directory.
+     *
+     * @return Boolean.
+     */
+    public Boolean folderExists() {
+        String dataFolder = System.getProperty("user.dir") + "\\obot_data\\";
+        File f = new File(dataFolder);
+        if (f.exists()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Creates the data folder.
+     */
+    public void createDataFolder() {
+        String dataFolder = System.getProperty("user.dir") + "\\obot_data\\";
+        File f = new File(dataFolder);
+        f.mkdirs();
+    }
+
+    /**
+     * Checks if the file (specified in filePath) exists.
+     *
+     * @return Boolean.
+     */
+    public Boolean fileExists() {
+        File f = new File(getFilePath());
+        if (f.exists()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Returns an ArrayList(Task) from the data loaded from the filePath.
      *
      * @return ArrayList(Task) parsed from text file.
      * @throws FileNotFoundException An FilenotFoundException may occur when if filePath is invalid.
      * @throws DukeException Custom error.
      */
-    public ArrayList<Task> loadTasks() throws FileNotFoundException, DukeException {
-        // Initialises variables to handle the txt input file.
-        ArrayList<String> inputsFromFile = new ArrayList<>();
-        String description = "";
-        String extraDescription = "";
-        String createDateTime = "";
-        String lastModifiedDateTime = "";
-        ArrayList<Task> tasks = new ArrayList<>();
+    public ArrayList<Task> loadTasks() throws FileNotFoundException, DukeException, IOException {
 
-        // Creates a scanner object to read the txt file from filePath.
-        Scanner scanner = new Scanner(new File(getFilePath()));
-        scanner.nextLine(); // To avoid reading the first line of headers.
-
-        while (scanner.hasNextLine()) {
-            inputsFromFile.add(scanner.nextLine());
+        if (!folderExists()) {
+            createDataFolder();
+            createEmptyTaskFile();
+        } else {
+            if (!fileExists()) {
+                createEmptyTaskFile();
+            }
         }
 
-        for (String input : inputsFromFile) {
-            // A Possible input string is: "D | 0 | CS2103 Ip  | Wed 2359".
+        // Initialises variables to handle the txt input file.
+        ArrayList<String> inputsFromFile = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
-            String[] words = input.split("\\|");
-            Boolean isDone = false;
+        try {
+            // Creates a scanner object to read the txt file from filePath.
+            Scanner scanner = new Scanner(new File(getFilePath()));
 
-            String taskType = words[0].trim();
 
-            switch (taskType) {
-            case "T":
+            while (scanner.hasNextLine()) {
 
-                Todo newTodo = newTodo(words);
-                tasks.add(newTodo);
-                break;
-
-            case "E":
-
-                Event newEvent = newEvent(words);
-                tasks.add(newEvent);
-                break;
-
-            case "D":
-
-                Deadline newDeadline = newDeadline(words);
-                tasks.add(newDeadline);
-                break;
-
-            default:
-                throw new DukeException("Unable to read from saved file");
+                inputsFromFile.add(scanner.nextLine());
             }
 
+            for (String input : inputsFromFile) {
+                // A Possible input string is: "D | 0 | CS2103 Ip  | Wed 2359".
+                String[] words = input.split("\\|");
+                Boolean isDone = false;
+
+                String taskType = words[0].trim();
+
+                switch (taskType) {
+                case "T":
+
+                    Todo newTodo = newTodo(words);
+                    tasks.add(newTodo);
+                    break;
+
+                case "E":
+
+                    Event newEvent = newEvent(words);
+                    tasks.add(newEvent);
+                    break;
+
+                case "D":
+
+                    Deadline newDeadline = newDeadline(words);
+                    tasks.add(newDeadline);
+                    break;
+
+                default:
+                    // String is not a task. Ignore
+                    // throw new DukeException("Unable to read from saved file");
+                }
+
+            }
+        } catch (FileNotFoundException e) {
+            throw new DukeException("File not found (Storage.java > loadTasks");
         }
         return tasks;
     }
@@ -180,24 +229,74 @@ public class Storage {
      * @return Tree Mapping of String to Integer.
      * @throws FileNotFoundException Thrown when file not found.
      */
-    public TreeMap<String, Integer> loadStats() throws FileNotFoundException {
-        ArrayList<String> inputsFromFile = new ArrayList<>();
+    public TreeMap<String, Integer> loadStats() throws DukeException, IOException {
 
-        Scanner scanner = new Scanner(new File(getFilePath()));
-
-        while (scanner.hasNextLine()) {
-            inputsFromFile.add(scanner.nextLine());
-        }
-
-        TreeMap<String, Integer> map = new TreeMap<String, Integer>();
-
-        for (String input : inputsFromFile) {
-            if (input.contains(":")) {
-                String[] words = input.split(":");
-                map.put(words[0].trim(), Integer.parseInt(words[1].trim()));
+        if (!folderExists()) {
+            createDataFolder();
+            createEmptyStatFile();
+        } else  {
+            if (!fileExists()) {
+                createEmptyStatFile();
             }
         }
+
+        ArrayList<String> inputsFromFile = new ArrayList<>();
+        TreeMap<String, Integer> map = new TreeMap<String, Integer>();
+
+        try {
+            Scanner scanner = new Scanner(new File(getFilePath()));
+
+            while (scanner.hasNextLine()) {
+                inputsFromFile.add(scanner.nextLine());
+            }
+
+            for (String input : inputsFromFile) {
+                if (input.contains(":")) {
+                    String[] words = input.split(":");
+                    map.put(words[0].trim(), Integer.parseInt(words[1].trim()));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new DukeException("Stats file not found, Storage.java, loadStats()");
+        }
         return map;
+    }
+
+    /**
+     * Creates empty stat file for initialization.
+     *
+     * @throws DukeException If file cannot be created.
+     */
+    public void createEmptyStatFile() throws DukeException {
+        String absoluteFilepath = getFilePath();
+        try {
+            String data = "statistic | integerValue" + System.lineSeparator() + "totalCommandsExecuted  : 0"
+                    + System.lineSeparator() + "totalTasksDeleted  : 0" + System.lineSeparator()
+                    + "totalTodosCompleted  : 0" + System.lineSeparator() + "totalDeadlinesCompleted  : 0"
+                    + System.lineSeparator() + "totalEventsCompleted  : 0" + System.lineSeparator();
+            Files.write(Paths.get(absoluteFilepath), data.getBytes());
+        } catch (IOException e) {
+            String errorMessage = "Empty file: " + absoluteFilepath + " unable to be created";
+            System.out.println(errorMessage);
+            throw new DukeException(errorMessage);
+        }
+    }
+
+    /**
+     * Creates an empty file if file is not present during reading. Since saving data will always overwrite whole file,
+     * it suffices for the file to merely be present and not formatted correctly.
+     */
+    public void createEmptyTaskFile() throws DukeException {
+        String absoluteFilepath = getFilePath();
+        try {
+            String data = "event type | isDone | description | extra description | dateCreated | lastModified"
+                    + System.lineSeparator();
+            Files.write(Paths.get(absoluteFilepath), data.getBytes());
+        } catch (IOException e) {
+            String errorMessage = "Empty file: " + absoluteFilepath + " unable to be created";
+            System.out.println(errorMessage);
+            throw new DukeException(errorMessage);
+        }
     }
 
     /**

@@ -33,8 +33,11 @@ public class Duke {
     private CommandLineUi cli;
     private GraphicalUi gui;
 
-    private String taskFilePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt";
-    private String statFilePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\stats.txt";
+    // private String taskFilePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt";
+    // private String statFilePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\stats.txt";
+
+    private String taskFilePath = "\\obot_data\\tasks.txt";
+    private String statFilePath = "\\obot_data\\stats.txt";
 
     /**
      * Default constructor to support Duke GUI.
@@ -50,8 +53,8 @@ public class Duke {
     /**
      * Constructor to support Duke CLI.
      *
-     * @param filePath absolute filepath of the where the text file is stored.
-     *                 Eg "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt".
+     * @param filePath relative filepath of the where the text file is stored.
+     *
      */
     public Duke(String filePath) {
         taskStorage = new Storage(filePath);
@@ -150,7 +153,8 @@ public class Duke {
      * @param args Main entry point.
      */
     public static void main(String[] args) {
-        new Duke("C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt").run();
+        // new Duke("C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt").run();
+        new Duke("\\obot_data\\tasks.txt").run();
     }
 
     /**

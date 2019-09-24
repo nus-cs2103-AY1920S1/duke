@@ -1,12 +1,14 @@
 package duke.command;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
 import duke.task.Task;
 import duke.DukeException;
+import duke.task.TaskComparator;
 
 /**
  * Represents the User-Interface that prints the messages from various
@@ -92,6 +94,7 @@ public class Ui {
      * @param list The list of task in which all the tasks are to be printed.
      */
     public String printList(ArrayList<Task> list) {
+        Collections.sort(list, new TaskComparator());
         String message;
         if (list.size() == 0) {
             message = "Nothing added yet";
@@ -107,6 +110,7 @@ public class Ui {
     public static int taskNumber = 1;
 
     public String printListUsingStream(ArrayList<Task> list) {
+        Collections.sort(list, new TaskComparator());
         String message;
         if (list.size() == 0) {
             message = "Nothing added yet";

@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.util.Objects;
-import java.util.stream.Stream;
 
 /**
  * Represents a Task that contains the fields description that describes the
@@ -9,7 +8,7 @@ import java.util.stream.Stream;
  * differentiates the type of task which can be an Event task, Todo task, or
  * Deadline task.
  */
-public class Task {
+public class Task{
 
     protected String description;
     protected boolean isDone = false;

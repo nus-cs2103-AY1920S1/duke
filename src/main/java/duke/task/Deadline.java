@@ -45,6 +45,14 @@ public class Deadline extends Task {
         return this.description;
     }
 
+    /**
+     * Get the date of the deadline task.
+     * @return The date of the deadline task.
+     */
+    public Date getDate() {
+        return this.date;
+    }
+
     public String toString() {
         return "[" + this.typeOfTask + "]" + "[" + this.getStatusIcon() + "] "
                 + this.description + " (by: " + time + ")";

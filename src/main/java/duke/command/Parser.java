@@ -56,35 +56,30 @@ public class Parser {
      */
     public String parseLineInput(String input) throws DukeException, IOException, ParseException {
         String firstWord = input.split(" ")[0];
+        String message;
         if (firstWord.equals("bye")) {
             return new String("Bye. Hope to see you again soon!");
         } else if (firstWord.equals("list")) {
-            return ui.printListUsingStream(this.taskList.getList());
+            message = ui.printListUsingStream(this.taskList.getList());
         } else if (firstWord.equals("done")) {
-            String message = processTaskDone(input, this.taskList, this.storage);
-            return message;
+            message = processTaskDone(input, this.taskList, this.storage);
         } else if (firstWord.equals("todo")) {
-            String message = processTaskTodo(input, this.taskList, this.storage, this.set);
-            return message;
+            message = processTaskTodo(input, this.taskList, this.storage, this.set);
         } else if (firstWord.equals("deadline")) {
-            String message = processTaskDeadline(input, this.taskList, this.storage, this.set);
-            return message;
+            message = processTaskDeadline(input, this.taskList, this.storage, this.set);
         } else if (firstWord.equals("event")) {
-            String message = processTaskEvent(input, this.taskList, this.storage, this.set);
-            return message;
+            message = processTaskEvent(input, this.taskList, this.storage, this.set);
         } else if (firstWord.equals("delete")) {
-            String message = processDeleteTask(input, this.taskList, this.storage, this.set);
-            return message;
+            message = processDeleteTask(input, this.taskList, this.storage, this.set);
         } else if (firstWord.equals("bye")) {
-            ui.printByeMessage();
+            message = ui.printByeMessage();
         } else if (firstWord.equals("find")) {
             String item = input.split(" ")[1];
-            String message = processFindWithStream(item, this.taskList, this.storage);
-            return message;
+            message = processFindWithStream(item, this.taskList, this.storage);
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but i don't know what that means :-(");
         }
-        return "";
+        return message;
     }
 
     public String processTaskDone(String input, TaskList taskList, Storage storage) throws IOException {

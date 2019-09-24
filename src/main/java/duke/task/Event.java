@@ -35,6 +35,14 @@ public class Event extends Task {
         return this.time;
     }
 
+    /**
+     * Get the date of the Event task.
+     * @return The date of the Event task.
+     */
+    public Date getDate() {
+        return this.date;
+    }
+
     public String toString() {
         return "[" + this.typeOfTask + "]" + "[" + this.getStatusIcon() + "] "
                 + this.description + " (at: " + time + ")";

@@ -8,7 +8,21 @@ By: `Xiaoyu`      Since: `Aug 2019`      Licence: `MIT`
 1. [Quick Start](#quick-start) 
 1. [Features](#features) 
     1. [Viewing help: `help`](#viewing-help--help) 
-    1. 
+    1. [Adding a todo task: `todo`](#adding-a-todo-task-todo) 
+    1. [Adding a deadline task: `deadline`](#adding-a-deadline-task-deadline)  
+    1. [Adding an event task: `event`](#adding-an-event-task-event) 
+    1. [Listing all tasks: `list`](#listing-all-tasks--list) 
+    1. [Deleting a task: `delete`](#deleting-a-task--delete) 
+    1. [Marking a task as done: `done`](#marking-a-task-as-done-done) 
+    1. [Finding tasks by description: `find`](#finding-tasks-by-description-find) 
+    1. [Sending a greeting: `hi`](#sending-a-greeting--hi) 
+    1. [Clearing all entries: `clear`](#clearing-all-entries--clear) 
+    1. [Exiting the programme: `bye`](#exiting-the-program--bye) 
+    1. [Saving the date](#saving-the-data) 
+    1. [Notifying on close deadlines](#notifying-on-close-deadlines) 
+1. [FAQ](#faq) 
+1. [Command Summary](#command-summary) 
+
 ## Introduction
 
 Task Master Nezuko(TMN) is a handy tool for you to manage you tasks on a PC. More importantly, it is *designed for Demon Slayer and Command Line App lovers* like you. Talk to Nezuko the Task Master through a few easy-to-remember commands, you can manage you tasks in anyway you want. Let us jump to the [Quic Start](#quick-start) to get started!
@@ -25,39 +39,35 @@ Task Master Nezuko(TMN) is a handy tool for you to manage you tasks on a PC. Mor
 1.  Type the command in the command box and press kbd:[Enter] to execute it.
 1.  Some example commands you can try:
 
-* **`list`** : lists all tasks
-* **`deadline`** `project meeting /by 20/09/2020 1800` : adds a task `project meeting` due at `6 PM` on `20th Sept, 2020` to the Task Manager.
-* **`delete`** `3` : deletes the 3rd task in the full list
-* **`done`** `2` : marks the 2nd task in the full list as done
+    * **`list`** : lists all tasks
+    * **`deadline`** `project meeting /by 20/09/2020 1800` : adds a task `project meeting` due at `6 PM` on `20th Sept, 2020` to the Task Manager.
+    * **`delete`** `3` : deletes the 3rd task in the full list
+    * **`done`** `2` : marks the 2nd task in the full list as done
 
-1.  Refer to <<Features>> for details of each command.
+1.  Refer to [Features](#features) for details of each command.
 
 
 ## Features
 
 ####
-*Command Format*
+**Command Format**
 
 * Words in `<` `>` are the parameters to be supplied by the user. e.g. in `delete <index>`, `index` is a parameter which can be used as `delete 3`.
 
-*Output Format*
+**Output Format**
 
-* A task is formatted as follow: +
-    `_index_. [type] [status] _task description_ (timing)` +
-The following table summarises what each field means:
-|###
-|Field | Description
+* A task is formatted as follow:   
+    *`index.`* `[type] [status]` *`task description`* `(timing)`\
+The following table summarises what each field means:\
 
-|Index | Index of task in the list
-|Type | `[T]`: Todo task without timing information +
-`[D]`: Deadline task with a deadline +
-`[E]`: Event task with two timing information marking the start and end of the event
-|Status | `[x]` Task is unfinished +
-`[v]` Task is finished
-|Task Description | User input task description
-|Timing| `(by:` `_date_` `)`: Task due by `_date_` +
-`(from:` `_starting date_` `to` `_ending date_` `)`: Task happening between `_starting_date_` and `_ending date_`
-|###
+Field | Description
+------------ | ------------
+Index | Index of task in the list
+Type | `[T]`: Todo task without timing information<br>`[D]`: Deadline task with a deadline<br>`[E]`: Event task with two timing information marking the start and end of the event
+Status | `[x]` Task is unfinished<br>`[v]` Task is finished
+Task Description | User input task description
+Timing| `(by:` *`date`* `)`: Task due by *`date`*<br><br>`(from:` *`starting date`* `to` *`ending date`* `)`: Task happening between *`starting_date`* and *`ending date`*
+
 
 * e.g. in `2. [D][x] assignment 1 (by: 21/09/2019 0900 PM)`, the task _assignment 1_ is the second task in the list; it is a unfinished deadline task due by 21st Sept, 2019 at 0900 PM.
 
@@ -82,8 +92,8 @@ Format: `deadline <task description> /by <date> <time>` +
 Format date: `<dd/MM/yyyy>` **or** `<dd/MM>` +
 Format time: `<hhmm>`
 
-[TIP]
-Either `<date>` or `<time>` can be omitted. If so, the default date will be the current date, and the default time will be 1200AM.
+:bulb: 
+> Either `<date>` or `<time>` can be omitted. If so, the default date will be the current date, and the default time will be 1200AM.
 
 Examples:
 
@@ -99,8 +109,8 @@ Format: `event <task description> /from <date> <time> to <date> <time>` +
 Format date: `<dd/MM/yyyy>` **or** `<dd/MM>` +
 Format time: `<hhmm>`
 
-[TIP]
-Either `<date>` or `<time>` can be omitted. If so, the default date will be the current date, and the default time will be 1200AM.
+:bulb:
+> Either `<date>` or `<time>` can be omitted. If so, the default date will be the current date, and the default time will be 1200AM.
 
 Examples:
 

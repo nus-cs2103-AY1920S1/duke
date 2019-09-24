@@ -219,3 +219,14 @@ A: They will be saved in the same folder as the jar file as "tasklist.txt" and "
   * Archive load: `archive load`
   * Exit: `bye`
 
+## Acknowledgements
+ * Libraries used: JavaFX, JUnit5
+ * Images from:
+   
+   https://www.pinterest.com/pin/316518680060680715/   
+   
+   https://comicbook.com/marvel/2019/07/04/spider-man-far-from-home-reveals-how-people-returned-avengers-infinity-war-snap/   
+   
+   https://wegotthiscovered.com/movies/spiderman-return-mcu-apple-buying-sony-rumor-true/   
+   
+   https://weheartit.com/entry/328726211   

@@ -44,7 +44,7 @@ public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private static final String TASKLIST_FILEPATH = "data/TaskList.txt";
+    private static final String TASKLIST_FILEPATH = "src/main/resources/taskList/TaskList.txt";
 
     /**
      * Images for the user and Duke

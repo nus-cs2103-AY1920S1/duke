@@ -1,15 +1,14 @@
-![Image of duke](https://ckb055.github.io/duke/Ui.png =250x250)
-
 <img src="https://ckb055.github.io/duke/Ui.png" width="340" height="520">
 
 # User Guide
 User guide for Duke,<br/>
 by Chen Kai Bin<br/>
-[View the github project here](https://github.com/ckb055/duke)
+[View the Github project here](https://github.com/ckb055/duke)
 
 # Introduction
 
-Duke, is an individual project done for CS2103T, a Software Engineering module at the School of Computing of NUS.
+Duke, is an individual project done for CS2103T, a Software Engineering module 
+at the School of Computing of National University of Singapore.
 It is a personal chatbot assistant that has a CLI (Command Line Interface) and it
 helps to manage your tasks such as events, deadlines and todos.
 Although its fuctionality is simple, Duke is highly user-friendly.

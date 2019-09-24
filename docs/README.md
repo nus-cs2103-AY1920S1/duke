@@ -47,9 +47,11 @@ To-do task can be added via the following format:
 todo [task_name]
 
 
+
 Sample command:
 
 `todo Laundry`
+
 
 
 Expected outcome:
@@ -59,6 +61,7 @@ Expected outcome:
 `[T][x] Laundry`
 
 `Now you have X tasks in the list`
+
 
 
 ### 2. Adding a new event task 

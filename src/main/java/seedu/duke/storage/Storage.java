@@ -31,7 +31,7 @@ public class Storage {
      * Constructor for the Storage class.
      *
      * @param filepath Absolute filepath of the text file.
-     *                 Eg. "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt".
+     *                 Eg. "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\obot_data\\tasks.txt".
      */
     public Storage(String filepath) {
 
@@ -121,7 +121,7 @@ public class Storage {
      * @return Boolean.
      */
     public Boolean folderExists() {
-        String dataFolder = System.getProperty("user.dir") + "\\data\\";
+        String dataFolder = System.getProperty("user.dir") + "\\obot_data\\";
         File f = new File(dataFolder);
         if (f.exists()) {
             return true;
@@ -134,7 +134,7 @@ public class Storage {
      * Creates the data folder.
      */
     public void createDataFolder() {
-        String dataFolder = System.getProperty("user.dir") + "\\data\\";
+        String dataFolder = System.getProperty("user.dir") + "\\obot_data\\";
         File f = new File(dataFolder);
         f.mkdirs();
     }

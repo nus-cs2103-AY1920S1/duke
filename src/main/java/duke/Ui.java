@@ -160,7 +160,7 @@ public class Ui {
         }
 
         if (hasNoMatches) {
-            return "There are no matches in your TaskList!";
+            return "There are no matches found! :(";
         } else {
             return addLines(found.toString());
         }

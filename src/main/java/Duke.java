@@ -21,7 +21,7 @@ import javafx.scene.text.Font;
 import java.awt.*;
 
 /**
- * Duke, a personal chat bot assistant that helps you manage your tasks
+ * Duke, a personal chat bot assistant that helps you manage your tasks.
  *
  * @author KaiBin
  * @version 1.0

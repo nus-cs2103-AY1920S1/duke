@@ -1,3 +1,4 @@
+import duke.exception.FileLoadingException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -17,14 +18,10 @@ public class Duke {
     /**
      * Creates Duke.
      */
-    public Duke() {
+    public Duke() throws FileNotFoundException, FileLoadingException {
         ui = new Ui();
-        storage = new Storage("src/main/java/tasklists.txt");
-        try {
-            taskList = new TaskList(storage.load());
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
+        storage = new Storage();
+        taskList = new TaskList(storage.load());
     }
 
     /**

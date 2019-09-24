@@ -1,3 +1,4 @@
+import duke.exception.FileLoadingException;
 import javafx.application.Application;
 
 import javafx.fxml.FXMLLoader;
@@ -8,11 +9,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Duke duke;
 
     @Override
     public void start(Stage stage) {
@@ -24,12 +26,25 @@ public class Main extends Application {
             Scene scene = new Scene(mainWindow);
             stage.setTitle("Duke");
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            //fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
+
+            VBox dialogContainer = (VBox) scene.lookup("#dialogContainer");
+
+            try {
+                duke = new Duke();
+            } catch (FileNotFoundException | FileLoadingException e ) {
+                DialogBox fileErrorDialog = DialogBox.getDukeDialog(
+                        e.getMessage(),
+                        new Image(this.getClass().getResourceAsStream("/images/shocked_cat_square.jpg")));
+                dialogContainer.getChildren().addAll(fileErrorDialog);
+                return;
+            }
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
 
             // set up hello message on start
             String hello = duke.getHello();
-            VBox dialogContainer = (VBox) scene.lookup("#dialogContainer");
+
             DialogBox helloDialog = DialogBox.getDukeDialog(
                     hello,
                     new Image(this.getClass().getResourceAsStream("/images/shocked_cat_square.jpg"))

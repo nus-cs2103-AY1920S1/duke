@@ -13,6 +13,6 @@ src/main/resources/docs/
 *.iml
 bin/
 
-src/main/java/tasklists.txt
+src/main/java/tasklist.txt
 /src/main/resources/images/sayang_cat_square.jpg
 /src/main/resources/images/shocked_cat_square.jpg

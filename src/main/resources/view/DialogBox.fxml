@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="CENTER_RIGHT" fillHeight="false" maxHeight="Infinity" maxWidth="Infinity" prefWidth="400.0" spacing="10.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER_RIGHT" fillHeight="false" maxHeight="Infinity" maxWidth="Infinity" prefWidth="400.0" spacing="10.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
 
         <Label fx:id="dialog" alignment="CENTER_RIGHT" contentDisplay="CENTER" lineSpacing="5.0" maxHeight="Infinity" maxWidth="250.0" style="-fx-background-color: #add8e6; -fx-background-radius: 15; -fx-border-color: #ffffff; -fx-border-radius: 15;" text="Label" textAlignment="CENTER" wrapText="true">

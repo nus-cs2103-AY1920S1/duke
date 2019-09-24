@@ -27,7 +27,8 @@ public class Ui {
     public String getHelloMessage() {
         return "harro!! i am duke! :>\n"
                 + "wat can i do for u??\n"
-                + "type 'help' if u dk or forgot d commands!!";
+                + "type 'help' if u dk or forgot d commands!!\n"
+                + "& don't forget to type 'bye' to save ur changes okie!!";
     }
 
     /**

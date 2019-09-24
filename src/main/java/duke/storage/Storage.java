@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.exception.FileLoadingException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -25,7 +26,8 @@ public class Storage {
     /**
      * The path to the file that contains the tasks.
      */
-    private static String filePath;
+    private static String filePath = "../main/data/taskslist.txt";
+    private static String directoryPath = "../main/data";
     private static DateTimeFormatter formatter;
 
     /**
@@ -35,24 +37,43 @@ public class Storage {
         formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     }
 
-    /**
-     * Creates a Storage object with the specified file path.
-     * @param filePath The path to the file that contains the tasks.
-     */
-    public Storage(String filePath) {
-        Storage.filePath = filePath;
-        formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    }
+//    /**
+//     * Creates a Storage object with the specified file path.
+//     * @param filePath The path to the file that contains the tasks.
+//     */
+//    public Storage(String filePath) {
+//        Storage.filePath = filePath;
+//        formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+//    }
 
     /**
      * Loads the tasks from the file and stores it in an ArrayList.
      * @return The list of tasks that was read from the file.
+     * @throws FileLoadingException if the file cannot be loaded.
      * @throws FileNotFoundException if the file cannot be found in the specified path.
      */
-    public ArrayList<Task> load() throws FileNotFoundException {
-        File file = new File(filePath);
+    public ArrayList<Task> load() throws FileLoadingException, FileNotFoundException {
+        File taskFile = new File(filePath);
+        File dataDirectory = new File(directoryPath);
+        try {
+            if (!taskFile.isFile()) {
+                dataDirectory.mkdirs();
+                taskFile.createNewFile();
+            }
+        } catch (IOException e) {
+            throw new FileLoadingException("got error when loading file leh!!");
+        }
+//        try {
+//            if (!taskFile.getAbsoluteFile().exists()) {
+//                dataDirectory.mkdir();
+//                taskFile.createNewFile();
+//            }
+//        } catch (IOException e) {
+//            throw new FileLoadingException("got error when loading file leh!!");
+//        }
+
         ArrayList<Task> list = new ArrayList<>();
-        Scanner sc = new Scanner(file);
+        Scanner sc = new Scanner(taskFile);
 
         while (sc.hasNext()) {
             String line = sc.nextLine(); // eg. T,false,read book

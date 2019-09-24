@@ -27,7 +27,7 @@ run {
 
 shadowJar {
     archiveBaseName = "obot-wan-kenobi"
-    archiveVersion = "0.1.4"
+    archiveVersion = "0.1.5"
     archiveClassifier = null
     archiveAppendix = null
 }

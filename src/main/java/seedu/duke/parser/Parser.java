@@ -41,7 +41,10 @@ public class Parser {
      * @param fullCommand Input string from User.
      * @return Second word of user string.
      */
-    public static String parseStatCommand(String fullCommand) {
+    public static String parseStatCommand(String fullCommand) throws DukeException {
+        if (fullCommand.equals("stats") || fullCommand.equals("stats ")) {
+            throw new DukeException("Invalid stats command. Did you mean 'stats all'? ");
+        }
         return (fullCommand.split(" ")[1]);
     }
 

@@ -174,16 +174,19 @@ Possible outcome:
 
 `Total Tasks Deleted: 20`
 
+<br/>
 
 `Total To-Dos Completed: 12`
 
 `Total Todos Completed TODAY: 2`
 
+<br/>
 
 `Total Deadlines Completed: 7`
 
 `Total Deadlines Completed TODAY: 1`
 
+<br/>
 
 `Total Events Completed: 4`
 
@@ -213,19 +216,21 @@ Expected outcome:
 
 `Total Commands Executed: 1` - Number of total commands executed will be 1 as `stats all` has been executed.
 
-
 `Total Tasks Deleted: 0`
 
+<br/>
 
 `Total To-Dos Completed: 0`
 
 `Total Todos Completed TODAY: 2` - Dynamic statistic based on when a `todo` was marked completed.
 
+<br/>
 
 `Total Deadlines Completed: 0`
 
 `Total Deadlines Completed TODAY: 1` - Dynamic statistic based on when a `deadline` was marked completed.
 
+<br/>
 
 `Total Events Completed: 0`
 

@@ -1,0 +1,4 @@
+[D][X] Submit CS2103 Ip (by: 01/10/2019 2359)
+[E][X] Joshua's Wedding  (at: 05/10/2019 1700)
+[T][X] MA1101R Tutorial 2
+[T][X] CS2100 Tutorial 3

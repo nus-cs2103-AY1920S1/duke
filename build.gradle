@@ -27,7 +27,7 @@ shadowJar {
 
 application {
     // Change this to your main class.
-    mainClassName = "Duke"
+    mainClassName = "Launcher"
 }
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'

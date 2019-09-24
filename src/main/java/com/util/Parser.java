@@ -190,7 +190,7 @@ public class Parser {
      * @param pattern Regex expression to separate string by
      * @return ArrayList where each item is a substring
      */
-    private ArrayList<String> splitStrIntoArr(String input, String pattern) {
+    public ArrayList<String> splitStrIntoArr(String input, String pattern) {
         ArrayList<String> result = convertToArrayList(input.split(pattern));
         return result;
     }

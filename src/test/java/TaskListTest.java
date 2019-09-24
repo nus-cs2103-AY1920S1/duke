@@ -1,3 +1,6 @@
+import com.TaskList;
+import com.tasks.Task;
+import com.tasks.ToDo;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

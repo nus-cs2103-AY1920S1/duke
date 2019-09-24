@@ -1,3 +1,11 @@
+import com.TaskList;
+import com.commands.Command;
+import com.commands.DoneCommand;
+import com.commands.ListCommand;
+import com.commands.SubCommand;
+import com.exceptions.DukeException;
+import com.util.Parser;
+import core.Duke;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,7 +19,7 @@ class ParserTest {
         //TaskList taskList = new Duke("F:\\CS2103\\duke\\data\\duke.txt").getTaskList();
         TaskList taskList = new Duke().getTaskList();
         Command expectedOutput = new ListCommand();
-        Command actualOutput = new Parser().parse("list", taskList);
+        Command actualOutput = new Parser().parse("list");
 
         assertEquals(expectedOutput, actualOutput);
     }
@@ -21,7 +29,7 @@ class ParserTest {
         //TaskList taskList = new Duke("F:\\CS2103\\duke\\data\\duke.txt").getTaskList();
         TaskList taskList = new Duke().getTaskList();
         Command expectedOutput = new DoneCommand(1);
-        Command actualOutput = new Parser().parse("done 1", taskList);
+        Command actualOutput = new Parser().parse("done 1");
 
         assertEquals(expectedOutput, actualOutput);
     }
@@ -58,7 +66,7 @@ class ParserTest {
         TaskList taskList = new Duke().getTaskList();
         try {
             assertEquals(expectedOutput,
-                    new Parser().parse("deadline cs2103 iP 28/8/2019 2359", taskList));
+                    new Parser().parse("deadline cs2103 iP 28/8/2019 2359"));
         } catch (DukeException e) {
             assertEquals("Please have one \"/by\" provided.", e.getMessage());
         }

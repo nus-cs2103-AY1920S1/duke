@@ -90,4 +90,6 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("CurrentTaskList.txt").run();
     }
+    
+    //Dummy comment for A-CodeQuality
 }

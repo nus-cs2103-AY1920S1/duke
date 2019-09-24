@@ -118,7 +118,7 @@ Adds the task `[E][x] CCA interview (from: 28/09/2019 0730 PM to 28/09/2019 0745
 
 ### Listing all tasks : `list`
 
-Shows a list of all persons in the address book.\
+Shows a list of all tasks in the task list.\
 Format: `list`
 
 ### Deleting a task : `delete`
@@ -156,7 +156,7 @@ Format: `find <keyword>`
 Examples:
 
 * `find meetings`\
-Returns `Project Meeting` and `meeting at U Town`.
+Returns `Project Meetings` and `meeting at U Town`.
 * `find to buy:`\
 Returns `to buy: shoes` and `to buy: notepad`.
 
@@ -171,7 +171,7 @@ Format: `clear`
 
 ### Exiting the program : `bye`
 
-Exits the program.\
+Exits the programme.\
 Format: `bye`
 
 ### Saving the data
@@ -187,8 +187,8 @@ Todo tasks have the lowest priority.
 
 ## FAQ
 
-*Q*: What is the default number of tasks that I will be reminded of at the start of the programme?\
-*A*: The default number is 5. We are sorry that the number of tasks to remind cannot be modified in this version of TM Nezuko. We welcome you to look out for future updates.
+**Q**: What is the default number of tasks that I will be reminded of at the start of the programme?\
+**A**: The default number is 5. We are sorry that the number of tasks to remind cannot be modified in this version of TM Nezuko. We welcome you to look out for future updates.
 
 ## Command Summary
 
@@ -196,7 +196,7 @@ Todo tasks have the lowest priority.
 e.g. `todo watch a movie`
 * **Deadline** `deadline <task description> /by <date> <time>`
 e.g. `deadline Lecture 6 quiz /by 28/9 0900`
-* **Event** `event <task description> /from <date> <time> to <date> <time>
+* **Event** `event <task description> /from <date> <time> to <date> <time>`\
 e.g. `event CCA interview /from 28/9 1930 to 28/9 1945`
 * **Clear** : `clear`
 * **Delete** : `delete <index>`\

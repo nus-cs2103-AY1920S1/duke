@@ -1,8 +1,9 @@
-![Image of duke](https://ckb055.github.io/duke/Ui.png) | # User Guide
------------------------------------------------------  | ------------
-| User guide for Duke,<br/>
-| by Chen Kai Bin<br/>
-| [View the github project here](https://github.com/ckb055/duke)
+![Image of duke](https://ckb055.github.io/duke/Ui.png | width=250)
+
+# User Guide
+User guide for Duke,<br/>
+by Chen Kai Bin<br/>
+[View the github project here](https://github.com/ckb055/duke)
 
 # Introduction
 

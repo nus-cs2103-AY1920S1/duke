@@ -1,10 +1,10 @@
 import java.io.FileNotFoundException;
-import duke.command.*;
-import duke.exception.*;
-import duke.parser.*;
-import duke.task.*;
-import duke.ui.*;
-import duke.storage.*;
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
 
 /**
  * This is a Personal Assistant Chatbot named Duke. It acts like a task manager to help a person keep track of
@@ -62,7 +62,7 @@ public class Duke {
      * Represents the main class of the Duke application.
      * Starts up a new Duke application with a filepath showing location of previously saved tasks.
      *
-     * @param args
+     * @param args string array of arguments, entry point of program.
      */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();

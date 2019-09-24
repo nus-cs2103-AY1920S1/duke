@@ -1,7 +1,14 @@
 package duke.parser;
 
-import duke.command.*;
-import duke.exception.*;
+import duke.command.ByeCommand;
+import duke.command.SendTasksCommand;
+import duke.command.DoneTaskCommand;
+import duke.command.AddTodoCommand;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.DeleteTaskCommand;
+import duke.command.FindCommand;
+import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -17,14 +24,14 @@ public class ParserTest {
         assertEquals(new DoneTaskCommand("2").getClass(),
                 new Parser("done 2").parse("done 2").getClass());
         assertEquals(new AddTodoCommand("project increments").getClass(),
-                new Parser("todo project increments").parse("todo " +
-                        "project increments").getClass());
+                new Parser("todo project increments").parse("todo "
+                        + "project increments").getClass());
         assertEquals(new AddDeadlineCommand("return book ", " 15/09/2019 1700").getClass(),
-                new Parser("deadline return book /by 15/09/2019 1700").parse("deadline " +
-                        "return book /by 15/09/2019 1700").getClass());
+                new Parser("deadline return book /by 15/09/2019 1700").parse("deadline "
+                        + "return book /by 15/09/2019 1700").getClass());
         assertEquals(new AddEventCommand("project meeting ", " 17/12/2019 1500").getClass(),
-                new Parser("event project meeting /at 17/12/2019 1500").parse("event " +
-                        "project meeting /at 17/12/2019 1500").getClass());
+                new Parser("event project meeting /at 17/12/2019 1500").parse("event "
+                        + "project meeting /at 17/12/2019 1500").getClass());
         assertEquals(new DeleteTaskCommand("5").getClass(),
                 new Parser("delete 5").parse("delete 5").getClass());
         assertEquals(new FindCommand("book").getClass(),
@@ -79,8 +86,8 @@ public class ParserTest {
     public void parse_missingDateTime2_exceptionThrown() {
         try {
             assertEquals(new AddEventCommand("project meeting ", " 17/12/2019 1500"),
-                    new Parser("event project meeting /at ").parse("event " +
-                            "project meeting /at "));
+                    new Parser("event project meeting /at ").parse("event "
+                            + "project meeting /at "));
             fail(); // the test should not reach this line
         } catch (DukeException e) {
             assertEquals("☹ OOPS!!! Please provide a date and time.", e.toString());

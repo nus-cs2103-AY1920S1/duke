@@ -1,6 +1,10 @@
 package duke.storage;
 
-import duke.task.*;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -40,7 +44,8 @@ public class Storage {
     }
 
     /**
-     * Figures out the type of task being loaded from saved file, creates the new task and adds to the new list of tasks.
+     * Figures out the type of task being loaded from saved file, creates the new task and adds to the
+     * new list of tasks.
      * For each task being created, check if it is done already and mark it accordingly while loading.
      *
      * @param item entire task as a string.
@@ -54,7 +59,7 @@ public class Storage {
             if (splitStr[1].equals("1")) {
                 tasks.get(count).setDone();
             }
-            count ++;
+            count++;
         } else if (item.startsWith("D")) {
             // split command into 4 parts
             String[] splitStr = item.split(" \\| ", 4);
@@ -62,7 +67,7 @@ public class Storage {
             if (splitStr[1].equals("1")) {
                 tasks.get(count).setDone();
             }
-            count ++;
+            count++;
         } else if (item.startsWith("E")) {
             // split command into 4 parts
             String[] splitStr = item.split(" \\| ", 4);
@@ -70,7 +75,7 @@ public class Storage {
             if (splitStr[1].equals("1")) {
                 tasks.get(count).setDone();
             }
-            count ++;
+            count++;
         }
     }
 

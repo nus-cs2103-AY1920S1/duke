@@ -1,7 +1,22 @@
 package duke.parser;
 
-import duke.command.*;
-import duke.exception.*;
+import duke.command.Command;
+import duke.command.ByeCommand;
+import duke.command.SendTasksCommand;
+import duke.command.DoneTaskCommand;
+import duke.command.AddTodoCommand;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.DeleteTaskCommand;
+import duke.command.FindCommand;
+import duke.exception.DukeException;
+import duke.exception.MissingTaskIndexException;
+import duke.exception.MissingTodoException;
+import duke.exception.MissingDeadlineException;
+import duke.exception.MissingEventException;
+import duke.exception.MissingDateTimeException;
+import duke.exception.MissingKeywordException;
+import duke.exception.InvalidCommandException;
 
 /**
  * Deals with making sense of the user command.
@@ -110,7 +125,7 @@ public class Parser {
             // to extract keyword, split command at space
             String[] splitStr = fullCommand.split(" ", 2);
             // if less than 2 words
-            if (splitStr.length <2) {
+            if (splitStr.length < 2) {
                 throw new MissingKeywordException();
             } else {
                 // take 2nd word

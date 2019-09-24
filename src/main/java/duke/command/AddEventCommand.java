@@ -1,10 +1,13 @@
 package duke.command;
 
-import duke.exception.*;
-import duke.task.*;
-import duke.ui.*;
-import duke.storage.*;
-import duke.format.*;
+import duke.exception.DukeException;
+import duke.exception.ListFullException;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Event;
+import duke.ui.Ui;
+import duke.storage.Storage;
+import duke.format.DateTime;
 
 /**
  * This command adds an Event to the list of tasks.
@@ -42,7 +45,7 @@ public class AddEventCommand extends Command {
      *
      * @param tasklist existing list of tasks.
      * @param ui user interface to inform user what has been added.
-     * @param storage
+     * @param storage is not used here.
      * @throws DukeException if list of tasks is full or if dateTime provided is invalid.
      */
     public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {

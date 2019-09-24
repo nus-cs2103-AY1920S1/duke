@@ -71,7 +71,7 @@ public class Ui {
      *
      * @param input messages from Duke.
      */
-    public static void sendMessage (String input) {
+    public static void sendMessage(String input) {
         System.out.println("     " + input);
     }
 

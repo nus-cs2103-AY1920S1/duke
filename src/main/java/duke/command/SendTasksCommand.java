@@ -1,8 +1,9 @@
 package duke.command;
 
-import duke.task.*;
-import duke.ui.*;
-import duke.storage.*;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
 
 /**
  * This command lists down all tasks from the list of tasks.
@@ -23,11 +24,11 @@ public class SendTasksCommand extends Command {
      *
      * @param tasklist existing list of tasks.
      * @param ui user interface to inform user what tasks are available.
-     * @param storage
+     * @param storage is not used here.
      */
     public void execute(TaskList tasklist, Ui ui, Storage storage) {
         ui.sendMessage("Here are the tasks in your list: ");
-        for (int i = 0; i < tasklist.size(); i ++) {
+        for (int i = 0; i < tasklist.size(); i++) {
             Task item = tasklist.get(i);
             ui.sendMessage((i + 1) + "." + item.toString());
         }

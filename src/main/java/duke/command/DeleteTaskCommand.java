@@ -1,9 +1,11 @@
 package duke.command;
 
-import duke.exception.*;
-import duke.task.*;
-import duke.ui.*;
-import duke.storage.*;
+import duke.exception.DukeException;
+import duke.exception.InvalidIndexException;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
 
 /**
  * This command deletes task from the list of tasks.
@@ -38,7 +40,7 @@ public class DeleteTaskCommand extends Command {
      *
      * @param tasklist existing list of tasks.
      * @param ui user interface to inform user what has been deleted.
-     * @param storage
+     * @param storage is not used here.
      * @throws DukeException if task index is invalid.
      */
     public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {

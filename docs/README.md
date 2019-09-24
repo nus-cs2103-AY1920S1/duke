@@ -36,8 +36,8 @@ You can download it [here](https://www.oracle.com/technetwork/java/javase/downlo
 2. Verify that the correct version exists by typing `java -version` into the terminal/CMD. 
 3. Download the jar file from [here](https://github.com/AhmadHatziq/duke/releases/tag/A-Release)
 4. Execute the jar file from the command line by running the following
-   1. Change the working directory to the folder containing the .jar file ie `cd "Dowloads"`
-   2. Execute the .jar file by running `java -jar obot-0.1.4.jar`
+   1. Change the working directory to the folder containing the .jar file ie `cd "Downloads"`
+   2. Execute the .jar file by running `java -jar obot-0.1.5.jar`
    
 ## Storage
 During execution, a folder called `obot-data` will be created. Inside, there will be 2 files; `tasks.txt` and `stats.txt`.

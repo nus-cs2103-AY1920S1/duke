@@ -1,8 +1,8 @@
 ![Image of duke](https://ckb055.github.io/duke/Ui.png)
 
 # User Guide
-User guide for Duke, 
-by Chen Kai Bin A0187250E
+User guide for Duke,<br/>
+by Chen Kai Bin<br/>
 [View the github project here](https://github.com/ckb055/duke)
 
 # Introduction
@@ -17,6 +17,9 @@ Although its fuctionality is simple, Duke is highly user-friendly.
 - Supports searching of tasks
 - Ability to add dates to tasks
 - Provides basic in-app statistics
+
+## Getting started
+Download Duke [here](https://github.com/ckb055/duke)
 
 ## Usage
 ### Commands
@@ -60,7 +63,7 @@ Expected outcome :
 `Now you have X tasks in the list.`
 
 #### <span style="color:red">find</span>
-`find [task]`
+`find [keyword]`
 Finds tasks related to the keyword entered.
 
 Example of usage :
@@ -68,6 +71,29 @@ Example of usage :
 
 Expect outcome :
 `(Displays a numbered lists of all tasks containing the specified keyword)`
+
+#### <span style="color:red">done</span>
+`done [index]`
+Marks the task with the specified index done.
+
+Example of usage :
+`done 3`
+
+Expect outcome :
+`Nice! I have marked this task as done`<br/>
+`[T][✓] cs2103t tutorial`
+
+#### <span style="color:red">delete</span>
+`delete [index]`
+Deletes the task with the specified index.
+
+Example of usage :
+`delete 3`
+
+Expect outcome :
+`Noted. I've removed this task`<br/>
+`[T][✓] cs2103t tutorial`<br/>
+`Now you have X tasks in the list.`
 
 #### <span style="color:red">list</span>
 Displays all your current tasks in the tasklist.
@@ -97,15 +123,3 @@ Example of usage :
 Expected outcome :
 `Fun fact! Did you know that...?`<br/>
     `(a random funfact)`
-
-### `Keyword` - Describe action
-
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`

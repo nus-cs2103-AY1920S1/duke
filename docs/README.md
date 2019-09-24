@@ -20,8 +20,8 @@ spaces between letters will be converted to '-'
     4. [Viewing task-related statistics](#4-viewing-task-related-statistics)
     5. [Viewing all statistics](#5-viewing-all-statistics)
     6. [Resetting global statistics](#6-resetting-global-statistics)
-    7. [Deleting tasks](#7-deleting-tasks)
-    8. [Finding tasks](#8-finding-tasks)
+    7. [Finding tasks](#7-finding-tasks)
+    8. [Deleting tasks](#8-deleting-tasks)
     7. [Exiting the application](#7-exiting-the-application)
   
     

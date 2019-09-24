@@ -41,12 +41,12 @@ Example:
 'list'
 
 Expected outcome:
-1.[T][✘]water plants
-2.[T][✘]eat lunch
-3.[D][✘]watch webcasts (by: 27/09/2019 1800)
-4.[E][✘]team meeting (at: 24/09/2019 1600)
-5.[T][✘]run later 
-
+1. T][✘]water plants 
+2. [T][✘]eat lunch
+3. [D][✘]watch webcasts (by: 27/09/2019 1800) 
+4. [E][✘]team meeting (at: 24/09/2019 1600) 
+5. [T][✘]run later 
+ 
 ### Finding a task by using a keyword: 'find'
 Finds a task which contains the specified phrase of keyword. 
 

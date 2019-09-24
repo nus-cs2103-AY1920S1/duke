@@ -50,11 +50,11 @@ Task Master Nezuko(TMN) is a handy tool for you to manage you tasks on a PC. Mor
 ## Features
 
 
-####**Command Format**
+####Command Format
 
 * Words in `<` `>` are the parameters to be supplied by the user. e.g. in `delete <index>`, `index` is a parameter which can be used as `delete 3`.
 
-####**Output Format**
+####Output Format
 
 * A task is formatted as follow:   
     *`index.`*`[type][status]`*`task description`*`(timing)`\

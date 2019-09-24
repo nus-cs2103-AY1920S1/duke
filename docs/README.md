@@ -1,9 +1,19 @@
 #### Table of contents
 
-1. [Introduction](introduction_header_link)
-2. [Setting up](Setting_header_link)
-3. [Features](features_link)
-    1. [Adding a new to-do task](feature_1_link)
+<!---
+Summary of the conversion rules:
+
+punctuation marks will be dropped
+leading white spaces will be dropped
+upper case will be converted to lower
+spaces between letters will be converted to '-'
+
+-->
+
+1. [Introduction](#introduction)
+2. [Setting up](#setting-up)
+3. [Features](#features)
+    1. [Adding a new to-do task](#1-adding-a-new-to-do-task)
     2. [Adding a new event task](feature_2_link)
     3. [Adding a new deadline task](feature_3_link)
     4. [Viewing task-related statistics](feature_4_link)
@@ -13,7 +23,7 @@
     
 [here](#place-2)
     
-## Introduction <!--- <introduction_header_link> -->
+## Introduction
 Obot Wan Kenobi is a chatbot based on the persona of Jedi Master Obi-Wan Kenobi. He can handle basic tasks such as recording to-do, deadline and event tasks; as well as output relevant statistics based on the user's history.
 
 ![Image of Ui screenshot](https://ahmadhatziq.github.io/duke/Ui.png)
@@ -21,7 +31,7 @@ Obot Wan Kenobi is a chatbot based on the persona of Jedi Master Obi-Wan Kenobi.
 Fig. 1. Screenshot of Obot
 
 ### Place 2
-## Setting up <link_destination> 
+## Setting up 
 1. Ensure you have Java version 11.0.4 or later installed in your Computer.
 You can download it [here](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html)
 2. Verify that the correct version exists by typing `java -version` into the terminal/CMD. 
@@ -30,9 +40,9 @@ You can download it [here](https://www.oracle.com/technetwork/java/javase/downlo
    1. Change the working directory to the folder containing the .jar file ie `cd "Dowloads"`
    2. Execute the .jar file by running `java -jar obot-0.1.4.jar`
 
-## Features <features_link>
+## Features 
 
-### 1. Adding a new to-do task <features_1_link>
+### 1. Adding a new to-do task 
 A to-do task is the most simplest form of a task.
 
 To-do task can be added via the following format:
@@ -50,7 +60,7 @@ Expected outcome:
 
 `Now you have X tasks in the list`
 
-### 2. Adding a new event task <feature_2_link>
+### 2. Adding a new event task 
 An event task is similar to a to-do task, escept that it is associated with a particular location, the event location.
 
 Event task can be added via the following format:
@@ -68,7 +78,7 @@ Expected outcome:
 
 `Now you have X tasks in the list`
 
-### 3. Adding a new deadline task <feature_3_link>
+### 3. Adding a new deadline task 
 A deadine task is similar to a to-do task, except that it is associated with a particular cut-off time, the due deadline.
 
 Deadline task can be added via the following format:
@@ -90,7 +100,7 @@ Expected outcome:
 
 `Now you have X tasks in the list`
 
-### 4. Viewing task-related statistics <feature_4_link>
+### 4. Viewing task-related statistics 
 Obot can also give the statistics regarding the number of tasks completed __in the current day.__
 Tasks completed more than one day ago will not be counted.
 
@@ -119,7 +129,7 @@ Possible outcome 2:
 
 `You can do better! :)`
 
-### 5. Viewing all statistics <feature_5_link>
+### 5. Viewing all statistics 
 Aside from task-related statistics, Obot can also give statistics regarding the __total commands entered, total tasks deleted__ and __total tasks completed__. These statistics will consider tasks that have previously been marked completed but deleted by the user. 
 
 To view all statistics (which also included the tasks completed in the current day), enter the following sample command:
@@ -151,7 +161,7 @@ Possible outcome:
 
 `Total Events Completed TODAY: 2`
 
-### 6. Resetting global statistics <feature_6_link>
+### 6. Resetting global statistics
 Global statistic values can be reset. However, dynamic statistic values (Feature 4) cannot be reset.
 
 To reset global statistic values, enter the following sample code: 
@@ -185,7 +195,7 @@ Expected outcome:
 
 `Total Events Completed TODAY: 2` - Dynamic statistic based on when aa `event` was marked completed.
 
-### 7. Exiting the application <feature_7_link>
+### 7. Exiting the application 
 Obot can be exited by entering the following command:
 
 `bye`

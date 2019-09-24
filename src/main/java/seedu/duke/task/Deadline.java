@@ -1,5 +1,6 @@
 package seedu.duke.task;
 
+import seedu.duke.core.DukeException;
 import seedu.duke.statistic.Statistic;
 import java.time.LocalDateTime;
 
@@ -18,7 +19,7 @@ public class Deadline extends Task {
      * @param description Description String of the task.
      * @param dueDateTime dateTime String of the task.
      */
-    public Deadline(String description, String dueDateTime) {
+    public Deadline(String description, String dueDateTime) throws DukeException {
         // Sets isDone to the default value, false.
         // Possible String for dateTime = 2/12/2019 1800.
         // Sample fullCommand = "deadline cs /by 21/12/2019 0800".
@@ -44,7 +45,7 @@ public class Deadline extends Task {
      * @param lastModifiedDateTime LocalDateTime object.
      */
     public Deadline(String description, String dueDateTime, Boolean isDone, LocalDateTime createDateTime,
-                    LocalDateTime lastModifiedDateTime) {
+                    LocalDateTime lastModifiedDateTime) throws DukeException  {
         super(description, isDone, createDateTime, lastModifiedDateTime);
         this.dueDateTime = dueDateTime;
 
@@ -100,7 +101,7 @@ public class Deadline extends Task {
      * @param by Unparsed dateTime String.
      * @return Parsed dateTime String.
      */
-    public String parseBy(String by) {
+    public String parseBy(String by) throws DukeException {
 
         taskType = PossibleTaskTypes.DEADLINE;
 
@@ -126,6 +127,10 @@ public class Deadline extends Task {
             dayString = "th";
         }
 
+        if (day > 31) {
+            throw new DukeException("This is an invalid day");
+        }
+
 
         String hoursString = hour;
         String amOrpm = "";
@@ -136,12 +141,20 @@ public class Deadline extends Task {
             amOrpm = "pm";
         }
 
+        if (Integer.parseInt(hoursString.substring(0, 2)) > 23 ) {
+            throw new DukeException("This is an invalid time");
+        }
+
         String minuteString = "";
 
         if (Integer.parseInt(hoursString.substring(2)) == 0) {
             minuteString = "";
         } else {
             minuteString = "." + hoursString.substring(2);
+        }
+
+        if (Integer.parseInt(hoursString.substring(2)) > 59) {
+            throw new DukeException("This is an invalid time");
         }
 
         int hourString = -1;
@@ -155,6 +168,10 @@ public class Deadline extends Task {
         int year = Integer.parseInt(words[2].split(" ")[0]);
 
         int month = Integer.parseInt(words[1]);
+
+        if ( month-1 > 11) {
+            throw new DukeException("This is an invalid month");
+        }
 
         String[] possibleMonths = {"January", "February", "March", "April", "May", "June", "July", "August",
                                    "September", "October", "November", "December"};

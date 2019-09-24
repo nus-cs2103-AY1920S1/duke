@@ -53,7 +53,7 @@ public class TodoCommand extends Command {
      * @param fullCommand User input string.
      * @return New Todo object.
      */
-    public Todo newTodo(String fullCommand) {
+    public Todo newTodo(String fullCommand) throws DukeException {
         String description = Parser.getTodoDescription(fullCommand);
         Todo newTodo = new Todo(description);
         return newTodo;

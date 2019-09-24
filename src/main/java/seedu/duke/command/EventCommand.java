@@ -53,7 +53,7 @@ public class EventCommand extends Command {
      * @param fullCommand User input string.
      * @return New Event object.
      */
-    public Event newEvent(String fullCommand) {
+    public Event newEvent(String fullCommand) throws DukeException  {
         String description = Parser.getEventDescription(fullCommand);
         String extraDescription = Parser.getEventLocation(fullCommand);
 

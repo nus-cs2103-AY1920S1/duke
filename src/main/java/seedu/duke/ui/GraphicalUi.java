@@ -66,6 +66,8 @@ public class GraphicalUi extends Ui {
      */
     public String getTodoSequence(TaskList tasks, Todo newTodo) {
         String output = "Got it. I've added this task:\n"
+                + "As a wise person said, there is no to-do, there is only try\n"
+                + "Oh wait...\n"
                 + newTodo.toString() + getTasksRemainingSequence(tasks.getSize());
         output = output.replace("✓", "V");
         output = output.replace("✘", "X");
@@ -80,7 +82,8 @@ public class GraphicalUi extends Ui {
      * @return String.
      */
     public String getDeadlineSequence(TaskList tasks, Deadline newDeadline) {
-        String output = "Got it. I've added this task:\n"
+        String output = "Got it. I've added this deadline task:\n"
+                + "Remember to watch our for those wrist-rockets!\n"
                 + newDeadline.toString() + getTasksRemainingSequence(tasks.getSize());
         output = output.replace("✓", "V");
         output = output.replace("✘", "X");
@@ -186,6 +189,7 @@ public class GraphicalUi extends Ui {
                 + "\nTotal Deadlines Completed TODAY:   " + stat.getCompletedDeadlinesFromOneDayAgo(tasks)
                 + "\n\nTotal Events Completed:                  " + stat.getTotalEventsCompleted()
                 + "\nTotal Events Completed TODAY:    " + stat.getCompletedEventsFromOneDayAgo(tasks)
+                + "\n\n Death sticks consumed TODAY:     You don't want to sell me death sticks"
 
 
                 + "\n";

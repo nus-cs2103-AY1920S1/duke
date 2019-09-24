@@ -1,5 +1,6 @@
 package seedu.duke.task;
 
+import seedu.duke.core.DukeException;
 import seedu.duke.statistic.Statistic;
 import java.time.LocalDateTime;
 
@@ -14,7 +15,7 @@ public class Todo extends Task {
      *
      * @param description Description String ot the task.
      */
-    public Todo(String description) {
+    public Todo(String description) throws DukeException {
         super(description);
         taskType = PossibleTaskTypes.TODO;
     }

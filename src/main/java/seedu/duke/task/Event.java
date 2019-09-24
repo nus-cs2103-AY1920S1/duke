@@ -1,5 +1,6 @@
 package seedu.duke.task;
 
+import seedu.duke.core.DukeException;
 import seedu.duke.statistic.Statistic;
 import java.time.LocalDateTime;
 
@@ -17,7 +18,7 @@ public class Event extends Task {
      * @param description Description String of the task.
      * @param location Location String of the task.
      */
-    public Event(String description, String location) {
+    public Event(String description, String location) throws DukeException {
         super(description);
         this.location = location;
         taskType = PossibleTaskTypes.EVENT;

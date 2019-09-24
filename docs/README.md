@@ -41,7 +41,7 @@ You can download it [here](https://www.oracle.com/technetwork/java/javase/downlo
    
 ## Storage
 During execution, a folder called `obot-data` will be created. Inside, there will be 2 files; `tasks.txt` and `stats.txt`.
-</br>
+<br/>
 `tasks.txt` will store the tasks while `stats.txt` will store the user statistics.
 
 ## Features 

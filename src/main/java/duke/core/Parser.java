@@ -15,6 +15,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -57,20 +58,49 @@ public class Parser {
     }
 
     /**
-     * Formats a given date and time string into a more readable format.
+     * Formats a given date and time string into a more readable format. Applicable to deadlines.
      *
      * @param input The date and time string input by the user, in the form "d/MM/yyyy HHmm".
      * @return A better formatted string that clearly shows day of the week, abbreviation of the month, and AM/PM.
      * @throws DukeException If the given string cannot be parsed into <code>LocalDateTime</code>.
      */
-    private static String formatDateTime(String input) throws DukeException {
-        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+    private static String formatDateTimeForDeadline(String input) throws DukeException {
         try {
-            LocalDateTime dateTime = LocalDateTime.parse(input, inputFormatter);
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+            LocalDateTime dueTime = LocalDateTime.parse(input, inputFormatter);
             DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("EEE, d MMM yyyy, h:mma");
-            return outputFormatter.format(dateTime);
+            return outputFormatter.format(dueTime);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Input date and time is not in dd/MM/yyyy HHmm format (24-hour clock) :-(");
+            throw new DukeException("Input date and time is not in d/MM/yyyy HHmm format (24-hour clock) :-(");
+        }
+    }
+
+    /**
+     * Formats a given date and time string into a more readable format. Applicable to events.
+     *
+     * @param input The date and time string input by the user, in the form "d/MM/yyyy HHmm-HHmm".
+     * @return A better formatted string that clearly shows day of the week, abbreviation of the month, and AM/PM.
+     * @throws DukeException If the given string cannot be parsed into <code>LocalDateTime</code>.
+     */
+    private static String formatDateTimeForEvent(String input) throws DukeException {
+        String[] words = input.split("-");
+        if (words.length < 2) {
+            throw new DukeException("Input date and time is not in d/MM/yyyy HHmm-HHmm format (24-hour clock) :-(");
+        }
+        try {
+            String startTimeString = words[0];
+            String formattedStartTime = formatDateTimeForDeadline(startTimeString);
+
+            String endTimeString = words[1];
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("HHmm");
+            LocalTime endTime = LocalTime.parse(endTimeString, inputFormatter);
+            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("h:mma");
+            String formattedEndTime = outputFormatter.format(endTime);
+
+            return formattedStartTime + " to " + formattedEndTime;
+
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Input date and time is not in d/MM/yyyy HHmm-HHmm format (24-hour clock) :-(");
         }
     }
 
@@ -88,14 +118,14 @@ public class Parser {
             int i = findIdx(words, "/by");
             String description = subString(words, 1, i);
             String dueTime = subString(words, i + 1, words.length);
-            String formattedDueTime = formatDateTime(dueTime);
+            String formattedDueTime = formatDateTimeForDeadline(dueTime);
             return new Deadline(description, formattedDueTime);
         } else {
             assert words[0].equals("event") : "Instruction type should be event";
             int i = findIdx(words, "/at");
             String description = subString(words, 1, i);
             String occurTime = subString(words, i + 1, words.length);
-            String formattedOccurTime = formatDateTime(occurTime);
+            String formattedOccurTime = formatDateTimeForEvent(occurTime);
             return new Event(description, formattedOccurTime);
         }
     }
@@ -217,7 +247,7 @@ public class Parser {
                 return new UpdateCommand(Integer.parseInt(words[1]), words[2], newValue);
             } else {
                 assert words[2].equals("time") : "Invalid attribute type for an update command";
-                return new UpdateCommand(Integer.parseInt(words[1]), words[2], formatDateTime(newValue));
+                return new UpdateCommand(Integer.parseInt(words[1]), words[2], formatDateTimeForDeadline(newValue));
             }
         case "deadline": case "event": case "todo":
             if (words.length < 2) {

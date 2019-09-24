@@ -49,16 +49,16 @@ Task Master Nezuko(TMN) is a handy tool for you to manage you tasks on a PC. Mor
 
 ## Features
 
-####
-**Command Format**
+
+####**Command Format**
 
 * Words in `<` `>` are the parameters to be supplied by the user. e.g. in `delete <index>`, `index` is a parameter which can be used as `delete 3`.
 
-**Output Format**
+####**Output Format**
 
 * A task is formatted as follow:   
-    *`index.`* `[type] [status]` *`task description`* `(timing)`\
-The following table summarises what each field means:\
+    *`index.`*`[type][status]`*`task description`*`(timing)`\
+The following table summarises what each field means:
 
 Field | Description
 ------------ | ------------
@@ -66,8 +66,7 @@ Index | Index of task in the list
 Type | `[T]`: Todo task without timing information<br>`[D]`: Deadline task with a deadline<br>`[E]`: Event task with two timing information marking the start and end of the event
 Status | `[x]` Task is unfinished<br>`[v]` Task is finished
 Task Description | User input task description
-Timing| `(by:` *`date`* `)`: Task due by *`date`*<br><br>`(from:` *`starting date`* `to` *`ending date`* `)`: Task happening between *`starting_date`* and *`ending date`*
-
+Timing| `(by:` *`date`* `)`: Task due by *`date`*<br>`(from:` *`starting_date`* `to` *`ending_date`* `)`: Task happening between *`starting_date`* and *`ending_date`*
 
 * e.g. in `2. [D][x] assignment 1 (by: 21/09/2019 0900 PM)`, the task _assignment 1_ is the second task in the list; it is a unfinished deadline task due by 21st Sept, 2019 at 0900 PM.
 
@@ -78,7 +77,7 @@ Format: `help`
 
 ### Adding a todo task: `todo`
 
-`todo` allows you to add a task without any timing information. +
+`todo` allows you to add a task without any timing information.\
 Format: `todo <task description>`
 
 Examples:
@@ -87,9 +86,9 @@ Examples:
 
 ### Adding a deadline task: `deadline`
 
-Use this command if you have any task due before certain time or date that you want to specify. +
-Format: `deadline <task description> /by <date> <time>` +
-Format date: `<dd/MM/yyyy>` **or** `<dd/MM>` +
+Use this command if you have any task due before certain time or date that you want to specify.\
+Format: `deadline <task description> /by <date> <time>`\
+Format date: `<dd/MM/yyyy>` **or** `<dd/MM>`\
 Format time: `<hhmm>`
 
 :bulb: 
@@ -97,16 +96,16 @@ Format time: `<hhmm>`
 
 Examples:
 
-* `deadline Lecture 6 quiz /by 28/9` +
+* `deadline Lecture 6 quiz /by 28/9`\
 Adds the task `[D][x] Lecture 6 quiz (by: 28/09/2019 1200 AM)` to your task list.
-* `deadline essay draft /by 2359` +
+* `deadline essay draft /by 2359`\
 Adds the task `[D][x] essay draft (by: _current date_ 1159 PM)` to your task list.
 
 ### Adding an event task: `event`
 
-Use this command if you have any activity that has a duration to happen. +
-Format: `event <task description> /from <date> <time> to <date> <time>` +
-Format date: `<dd/MM/yyyy>` **or** `<dd/MM>` +
+Use this command if you have any activity that has a duration to happen.\
+Format: `event <task description> /from <date> <time> to <date> <time>`\
+Format date: `<dd/MM/yyyy>` **or** `<dd/MM>`\
 Format time: `<hhmm>`
 
 :bulb:
@@ -114,37 +113,37 @@ Format time: `<hhmm>`
 
 Examples:
 
-* `event CCA interview /from 28/9 1930 to 28/9 1945` +
+* `event CCA interview /from 28/9 1930 to 28/9 1945`\
 Adds the task `[E][x] CCA interview (from: 28/09/2019 0730 PM to 28/09/2019 0745 PM)` to your task list.
 
 ### Listing all tasks : `list`
 
-Shows a list of all persons in the address book. +
+Shows a list of all persons in the address book.\
 Format: `list`
 
 ### Deleting a task : `delete`
 
-Deletes a existing task from the task list. +
+Deletes a existing task from the task list.\
 Format: `delete <index>`
 
 Examples:
 
-* `delete 1` +
+* `delete 1`\
 Deletes the 1st task in the task list.
 
 ### Marking a task as done: `done`
 
-Marks a task as done in the task list. +
+Marks a task as done in the task list.\
 Format: `done <index>`
 
 Examples:
 
-* `done 1` +
+* `done 1`\
 Marks the 1st task in the task list as done.
 
 ### Finding tasks by description: `find`
 
-Finds tasks whose description contain the given keyword/phrase. +
+Finds tasks whose description contain the given keyword/phrase.\
 Format: `find <keyword>`
 
 ****
@@ -156,9 +155,9 @@ Format: `find <keyword>`
 
 Examples:
 
-* `find meetings` +
+* `find meetings`\
 Returns `Project Meeting` and `meeting at U Town`.
-* `find to buy:` +
+* `find to buy:`\
 Returns `to buy: shoes` and `to buy: notepad`.
 
 ### Sending a greeting : `hi`
@@ -167,45 +166,45 @@ Sends a greeting to Nezuko and see what she replies!
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the task list. +
+Clears all entries from the task list.\
 Format: `clear`
 
 ### Exiting the program : `bye`
 
-Exits the program. +
+Exits the program.\
 Format: `bye`
 
 ### Saving the data
 
-Task Master data are saved in the hard disk automatically after any command that changes the data. +
+Task Master data are saved in the hard disk automatically after any command that changes the data.\
 There is no need to save manually.
 
 ### Notifying on close deadlines
 
-Nezuko will sort and find a few most urgent unfinished tasks for you and alert you on the matter at the start of the programme. +
+Nezuko will sort and find a few most urgent unfinished tasks for you and alert you on the matter at the start of the programme.\
 Todo tasks have the lowest priority.
 
 
 ## FAQ
 
-*Q*: What is the default number of tasks that I will be reminded of at the start of the programme? +
+*Q*: What is the default number of tasks that I will be reminded of at the start of the programme?\
 *A*: The default number is 5. We are sorry that the number of tasks to remind cannot be modified in this version of TM Nezuko. We welcome you to look out for future updates.
 
 ## Command Summary
 
-* *Todo* `todo <task description>` +
+* **Todo** `todo <task description>`\
 e.g. `todo watch a movie`
-* *Deadline* `deadline <task description> /by <date> <time>`
+* **Deadline** `deadline <task description> /by <date> <time>`
 e.g. `deadline Lecture 6 quiz /by 28/9 0900`
-* *Event* `event <task description> /from <date> <time> to <date> <time>
+* **Event** `event <task description> /from <date> <time> to <date> <time>
 e.g. `event CCA interview /from 28/9 1930 to 28/9 1945`
-* *Clear* : `clear`
-* *Delete* : `delete <index>` +
+* **Clear** : `clear`
+* **Delete** : `delete <index>`\
 e.g. `delete 3`
-* *Done* : `done <index>` +
+* **Done** : `done <index>`\
 e.g. `done 5`
-* *Find* : `find <keyword>` +
+* **Find** : `find <keyword>`\
 e.g. `find assignment`
-* *List* : `list`
-* *Hi*: `hi`
-* *Help* : `help`
+* **List** : `list`
+* **Hi**: `hi`
+* **Help** : `help`

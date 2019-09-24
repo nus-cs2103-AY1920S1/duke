@@ -71,12 +71,12 @@ public class EventCommand extends Command {
 
         if ((fullCommand.length() < 6)) {
             // fullCommand contains only the string "event".
-            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+            throw new DukeException("A padawan makes many mistakes. The description of an event cannot be empty.");
 
         } else if ((fullCommand.lastIndexOf('/') < 1)
                 || (4 + fullCommand.lastIndexOf('/') > fullCommand.length()))  {
             // fullCommand does not contain '/' char or there are no chars after "/at".
-            throw new DukeException(":-( OOPS!!! The location of an event cannot be empty.");
+            throw new DukeException("The location of an event cannot be empty. A padawan makes many mistakes");
         }
 
     }

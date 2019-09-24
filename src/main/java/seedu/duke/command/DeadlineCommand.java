@@ -96,13 +96,14 @@ public class DeadlineCommand extends Command {
         if ((fullCommand.length() < 9)) {
 
             // fullCommand contains only the string "deadline".
-            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+            throw new DukeException("A padawan makes many mistakes.\n"
+                    + "OOPS!!! The description of an event cannot be empty.");
 
         } else if ((fullCommand.lastIndexOf('/') < 1)
                 || (4 + fullCommand.lastIndexOf('/') > fullCommand.length()))  {
 
             // fullCommand does not contain '/' chars or there are no char after "/by".
-            throw new DukeException("☹ OOPS!!! The time period of an event cannot be empty.");
+            throw new DukeException("An unhappy landing!!! The time period of an event cannot be empty.");
 
         }
 

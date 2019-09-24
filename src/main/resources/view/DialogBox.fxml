@@ -1,17 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Text fx:id="dialog" fill="WHITE" text="Text">
-         <font>
-            <Font name="Georgia" size="12.0" />
-         </font></Text>
+      <DialogPane opacity="0.88" prefWidth="40.0" style="-fx-background-color: #387E7E; -fx-border-color: black; -fx-border-radius: 2; -fx-border-style: solid; -fx-background-radius: 4; -fx-border-width: 2;">
+         <content>
+              <Text fx:id="dialog" fill="WHITE" lineSpacing="5.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.6" text="Text">
+               <font>
+                  <Font name="FontAwesome Regular" size="11.0" />
+               </font>
+               <rotationAxis>
+                  <Point3D />
+               </rotationAxis>
+            </Text>
+         </content>
+         <padding>
+            <Insets left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+      </DialogPane>
       <Circle fx:id="displayPicture" fill="WHITE" radius="44.0" stroke="#496285" strokeType="INSIDE">
          <HBox.margin>
             <Insets left="5.0" right="5.0" />

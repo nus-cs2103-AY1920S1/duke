@@ -1,10 +1,5 @@
-T, 1, meet my baby
-D, 0, go out with selva, 22/2/2019 1500
-T, 1, meet selva
-D, 1, return book, 2/4/2019 1200
-E, 0, read book, 3/8/2018 2012
-D, 0, meet selca, 2/3/2019 1800
-D, 0, love selva, 7/8/2019 1700
-D, 0, return books, 2/6/2019 1700
-E, 0, make coffee, 2/4/2019 1900
-E, 0, find selva, 2/5/2018 1600
+T, 0, water plants
+T, 1, eat lunch
+D, 0, watch webcasts, 27/9/2019 1800
+E, 0, team meeting, 24/9/2019 1600
+T, 0, run later

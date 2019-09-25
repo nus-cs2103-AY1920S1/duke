@@ -7,12 +7,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * An example of a custom control using FXML.
@@ -57,9 +62,16 @@ public class DialogBox extends HBox {
      * @return DialogBox dialog for user
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        DialogBox dialogBox = new DialogBox(text, img);
-        dialogBox.setMinHeight(dialogBox.dialog.getMinHeight());
-        return dialogBox;
+        var db = new DialogBox(text, img);
+        db.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+        BackgroundFill backgroundFill = new BackgroundFill(
+                Color.web("#FF9633"),
+                new CornerRadii(20),
+                new Insets(5, 5, 5, 5)
+        );
+        Background background = new Background(backgroundFill);
+        db.setBackground(background);
+        return db;
     }
 
     /**
@@ -71,6 +83,14 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+        BackgroundFill backgroundFill = new BackgroundFill(
+                Color.web("#4D6CFA"),
+                new CornerRadii(20),
+                new Insets(5, 5, 5, 5)
+        );
+        Background background = new Background(backgroundFill);
+        db.setBackground(background);
         db.flip();
         return db;
     }

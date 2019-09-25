@@ -1,49 +1,72 @@
 # User Guide
 
-A summary of features and commands available in _Duke_.
+_Duke_ is like a personal assistant that helps you keep track of things.
+
+This user guide gives summary of features and commands available in _Duke_.
 
 <img src="Ui.png">
 
+## Setting Up
+
+Users should have Java 11 or above to run this program. If opening the `.jar` files through double-clicking does not work try running it through command line:
+
+    java -jar path/to/file/duke-????.jar
+
 ## Features 
 
-### 1. Add tasks
+### **1. Add tasks**
 
 Records task to be noted of but yet to be completed to a list of tasks.
 
 Tracks 3 types of tasks:
 1. **ToDos**: Tasks without any date or time attached,just a description of what should be done
-2. **Deadlines**: Tasks that should be done by a specificdate and time
+2. **Deadlines**: Tasks that should be done by a specific date and time
 3. **Events**: Tasks that start and end at a specific time
 
-### 2. Mark tasks as done
+### **2. Mark tasks as done**
 
 Ability to mark tasks as done. Users will be notified if task has already been marked completed.
 
-### 3. Delete tasks from list
+### 3. **Delete tasks from list**
 
 Delete tasks from list of tasks.
 
-### 4. Saving list of tasks
+### 4. **Saving list of tasks**
 
 Tasks currently in the list are saved to a `.txt` file in the `data` folder.
 
-### 5. View current list of tasks
+### 5. **View current list of tasks**
 
-Lists of all the tasks that are currently in the list.
+Lists of all the tasks that are currently in the list, tasks are listed in order of when they were added.
 
-### 6. Understanding dates and times of a specific format
+### 6. **Understanding dates and times of a specific format**
 
-Deadline tasks added with the date and time specified in a certain format will be recognised and converted to a new format.
+_Deadline_ and _Event_ tasks added with the date and time specified in a certain format will be recognised and converted to a new format.
 
 _Example: `2/12/2019 1800` to `2 December 2019, 6:00 PM`_
 
-### 7. Search by keywords
+### 7. **Search by keywords**
 
 Searches for tasks which contain matching keywords; searches are not case-sensitive.
 
-### 8. View statistics and insights
+### 8. **View statistics and insights**
 
 Shows a list of numbers and statistics about the items managed by _Duke_ and the history of actions the user has taken.
+
+Information includes:
+
+- Tasks done
+    - Number done so far (since the first use of _Duke_)
+    - Number done in the past 7 days
+    - Number of _ToDo_, _Deadline_, _Event_ tasks done individually
+    - List of done tasks so far
+- Tasks deleted
+    - Number deleted so far
+    - Number deleted that was **not** done
+    - List of deleted tasks so far
+- Search
+    - List of keywords searched so far
+    - List of keywords searched in the past 7 days
 
 ## Usage
 
@@ -67,7 +90,7 @@ Expected outcome:
 
 ### `deadline` - Add a task of type _Deadline_
 
-Adds a _Deadline_ task to the list of tasks.
+Adds a _Deadline_ task to the list of tasks. `/by` descriptions of form `dd/MM/yyy HHmm` are recognised by _Duke_ and will be parsed into a more readable form. Time recognised is in the 24-hour clock format.
 
 Format: `deadline task-name-due /by date-time`
 
@@ -91,7 +114,7 @@ Expected outcome:
 
 ### `event` - Add a task of type _Event_
 
-Adds an _Event_ task to the list of tasks.
+Adds an _Event_ task to the list of tasks. Similar to _Deadline_ tasks, `/at` descriptions of form `dd/MM/yyy HHmm` are recognised by _Duke_ and will be parsed into a more readable form.
 
 Format: `event event-name /at location-time-duration`
 
@@ -181,6 +204,8 @@ Expected outcome:
 ### `stats` - Gives summary statistics on _Duke_
 
 Gives some numbers about the tasks _Duke_ is and has handled, also gives some information about past searches for keywords.
+
+In the list of words searched so far, the keywords are presented in an array where each sub-array of keywords represent the words searched in a certain session of using _Duke_. A new session of using _Duke_ starts when the application is started to the point when it is exited.
 
 Example of usage: 
 

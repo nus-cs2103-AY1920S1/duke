@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
         int taskListSize = tasks.getSize();
         tasks.delete(task);
         try {
-            storage.writeToHardDisk(tasks);
+            storage.writeToExternalTextFile(tasks);
         } catch (DukeException e) {
             e.printStackTrace();
         }

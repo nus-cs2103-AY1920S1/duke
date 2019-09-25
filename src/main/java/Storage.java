@@ -155,7 +155,7 @@ public class Storage {
         return tasks;
     }
 
-    public void writeToHardDisk(TaskList tasks) throws DukeException{
+    public void writeToExternalTextFile(TaskList tasks) throws DukeException{
         try {
             String taskListFilePath = this.filepath;
             FileWriter fw = new FileWriter (taskListFilePath);

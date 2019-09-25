@@ -23,7 +23,7 @@ public class DoneCommand extends Command{
         Task task = tasks.getTask(this.index);
         task.markAsDone();
         try {
-            storage.writeToHardDisk(tasks);
+            storage.writeToExternalTextFile(tasks);
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }

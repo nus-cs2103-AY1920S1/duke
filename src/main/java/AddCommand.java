@@ -20,7 +20,7 @@ public class AddCommand extends Command {
         int taskListSize = tasks.getSize();
         tasks.addTask(this.task);
         try {
-            storage.writeToHardDisk(tasks);
+            storage.writeToExternalTextFile(tasks);
         } catch (DukeException e) {
             e.printStackTrace();
         }

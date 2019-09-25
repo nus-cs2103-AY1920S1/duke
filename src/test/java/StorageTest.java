@@ -7,6 +7,7 @@ import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.Todo;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ public class StorageTest {
             for (int i = 0; i < expected.size(); i++) {
                 assertEquals(expected.get(i).toString(), storage.load().get(i).toString());
             }
-        } catch (DukeException e) {
+        } catch (DukeException | IOException e) {
             fail();
         }
     }
@@ -38,7 +39,7 @@ public class StorageTest {
         try {
             storage.load();
             assertTrue(f.exists() && !f.isDirectory());
-        } catch (DukeException e) {
+        } catch (DukeException | IOException e) {
             fail();
         } finally {
             f.delete();

@@ -57,6 +57,9 @@ public class Duke extends Application {
         } catch (IOException e) {
             dukeText = ui.showLoadingError();
             tasks = new TaskList();
+        } catch (DukeException e) {
+            dukeText = ui.showError(e.getMessage());
+            tasks = new TaskList();
         }
 
         //dont know how to show welcome
@@ -64,6 +67,8 @@ public class Duke extends Application {
     }
 
     public String run(String command) {
+
+        assert ui != null : "UI cannot be null when program is run";
 
         String fullCommand = ui.readCommand(command);
         try {

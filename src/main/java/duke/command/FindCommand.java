@@ -34,7 +34,7 @@ public class FindCommand extends Command {
         for (int i = 0; i < tasks.size(); ++i) {
             Task task = tasks.getTask(i);
             for (final String query : this.queries) {
-                if (task.getDescription().contains(query)) {
+                if (task.getDescription().toLowerCase().contains(query.toLowerCase())) {
                     matches.addTask(task);
                     break;
                 }

@@ -46,10 +46,10 @@ public class Parser {
     }
 
     private static TagCommand createTagCommand(String[] arr) throws DukeException {
-        String tagDescription = arr[1];
-        if (tagDescription.isEmpty()) {
+        if (arr.length == 1) {
             throw new DukeException("OOPS!!! The description of a tag cannot be empty.");
         }
+        String tagDescription = arr[1];
         String[] indexTag = tagDescription.split(" ");
         int indexOfTag = Integer.parseInt(indexTag[0]);
         String wordOfTag = indexTag[1];
@@ -60,19 +60,19 @@ public class Parser {
     }
 
     private static AddCommand createTodoCommand(String[] arr) throws DukeException {
-        String what = arr[1];
-        if (what.isEmpty()) {
+        if (arr.length == 1) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
+        String what = arr[1];
         Todo todo = new Todo(what);
         return new AddCommand(todo);
     }
 
     private static AddCommand createDeadlineCommand(String[] arr) throws DukeException {
-        String when = arr[1];
-        if (when.isEmpty()) {
+        if (arr.length == 1) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         }
+        String when = arr[1];
         String[] parts = when.split("/by");
         if (parts.length == 1) {
             throw new DukeException("OOPS!!! The time of a deadline cannot be empty.");
@@ -89,10 +89,10 @@ public class Parser {
     }
 
     private static AddCommand createEventCommand(String[] arr) throws DukeException {
-        String where = arr[1];
-        if (where.isEmpty()) {
+        if (arr.length == 1) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         }
+        String where = arr[1];
         String[] partsE = where.split("/at");
         if (partsE.length == 1) {
             throw new DukeException("OOPS!!! The time of an event cannot be empty.");

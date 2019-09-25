@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserTest {
 
@@ -32,27 +33,4 @@ public class ParserTest {
     void parse_todoCommand() throws DukeException {
         assertEquals(new AddCommand(new Todo("read book")), Parser.parse("todo read book"));
     }
-
-    @Test
-    void parse_deadlineCommand() throws DukeException {
-        Deadline expectedDeadline = new Deadline("return book");
-        try {
-            expectedDeadline.parseTime("06/06/2019 1800");
-        } catch (ParseException ex) {
-            throw new DukeException(ex.getMessage());
-        }
-        assertEquals(new AddCommand(expectedDeadline), Parser.parse("deadline return book /by 06/06/2019 1800"));
-    }
-
-    @Test
-    void parse_eventCommand() throws DukeException {
-        Event expectedEvent = new Event("project meeting");
-        try {
-            expectedEvent.parseTime("2/12/2019 1400");
-        } catch (ParseException ex) {
-            throw new DukeException(ex.getMessage());
-        }
-        assertEquals(new AddCommand(expectedEvent), Parser.parse("event project meeting /at 2/12/2019 1400"));
-    }
-
 }

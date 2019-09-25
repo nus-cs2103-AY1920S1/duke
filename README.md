@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/jon-chua/duke.svg?branch=master)](https://travis-ci.org/jon-chua/duke)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bfa3ec5eb6e94e398d86e84471e95fbb)](https://www.codacy.com/manual/jon-chua/duke?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jon-chua/duke&amp;utm_campaign=Badge_Grade)
+
 # Setting up
 
 **Prerequisites**

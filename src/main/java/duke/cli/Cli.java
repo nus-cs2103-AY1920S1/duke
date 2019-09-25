@@ -1,10 +1,16 @@
 package duke.cli;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 import duke.ui.Ui;
 
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 import java.util.Scanner;
 
 import static duke.ui.Messages.BYE_MESSAGE;
@@ -21,6 +27,15 @@ public class Cli implements Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String SEPARATOR = "-".repeat(60);
     private static final String INDENTATION = "  ";
+    private static final Map<Class<? extends Task>, String> TASK_SHORT_NAME_MAP = Map.of(
+        Todo.class, "[T]",
+        Event.class, "[E]",
+        Deadline.class, "[D]"
+    );
+    private static final Map<Boolean, String> TASK_STATUS_MAP = Map.of(
+        true, "[✓]",
+        false, "[X]"
+    );
     private final Scanner input;
     private final PrintStream output;
 
@@ -31,6 +46,23 @@ public class Cli implements Ui {
 
     private void show(final String message) {
         this.output.println(message.stripTrailing());
+    }
+
+    @Override
+    public String getTaskRepresentation(final Task task) {
+        return TASK_SHORT_NAME_MAP.get(task.getClass()) + TASK_STATUS_MAP.get(task.isDone()) + " " + task.toString();
+    }
+
+    @Override
+    public String getTaskListRepresentation(final TaskList tasks) {
+        StringBuilder ret = new StringBuilder();
+        for (int i = 0; i < tasks.size(); ++i) {
+            ret.append(i + 1)
+                .append(".")
+                .append(getTaskRepresentation(tasks.getTask(i)))
+                .append("\n");
+        }
+        return ret.toString();
     }
 
     /**

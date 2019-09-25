@@ -26,6 +26,10 @@ public interface Ui {
 
     void showBye();
 
+    String getTaskRepresentation(final Task task);
+
+    String getTaskListRepresentation(final TaskList tasks);
+
     /**
      * Displays the help message.
      */
@@ -43,7 +47,7 @@ public interface Ui {
         showMessage(
             String.format("%s%n%s%n%s",
                 TASK_ADD_SUCCESS,
-                task.toString(),
+                getTaskRepresentation(task),
                 String.format(TASKS_COUNT, tasks.size())));
     }
 
@@ -57,16 +61,17 @@ public interface Ui {
         showMessage(
             String.format("%s%n%s%n%s",
                 TASK_DELETED,
-                task.toString(),
+                getTaskRepresentation(task),
                 String.format(TASKS_COUNT, tasks.size())));
     }
 
     /**
      * Informs the user that a Task has been marked as done.
+     *
      * @param task the Task that was marked as done
      */
     default void taskMarkedAsDone(final Task task) {
-        showMessage(String.format("%s%n%s", TASK_MARKED_AS_DONE, task.toString()));
+        showMessage(String.format("%s%n%s", TASK_MARKED_AS_DONE, getTaskRepresentation(task)));
     }
 
     /**
@@ -78,10 +83,11 @@ public interface Ui {
 
     /**
      * Lists the matches from the last find Command.
+     *
      * @param matches the Tasks that matched
      */
     default void findMatches(final TaskList matches) {
-        showMessage(String.format("%s%n%s", FIND_TASKS, matches.toString()));
+        showMessage(String.format("%s%n%s", FIND_TASKS, getTaskListRepresentation(matches)));
     }
 
     /**
@@ -93,9 +99,10 @@ public interface Ui {
 
     /**
      * Lists the tasks currently in the task list.
+     *
      * @param tasks the current TaskList
      */
     default void listTasks(TaskList tasks) {
-        showMessage(String.format("%s%n%s", LIST_TASKS, tasks.toString()));
+        showMessage(String.format("%s%n%s", LIST_TASKS, getTaskListRepresentation(tasks)));
     }
 }

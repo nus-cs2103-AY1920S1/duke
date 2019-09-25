@@ -26,16 +26,6 @@ public abstract class Task {
     }
 
     /**
-     * Returns tick or cross depending on whether this Task is done.
-     *
-     * @return tick if this Task is done, cross otherwise
-     */
-    public String getStatusIcon() {
-        // Note: \u2718 (the cross symbol) crashes the GUI for some reason
-        return (isDone ? "✓" : "X");
-    }
-
-    /**
      * Returns true if this Task is done.
      *
      * @return true if this Task is done
@@ -53,7 +43,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + this.description;
+        return this.description;
     }
 
     /**

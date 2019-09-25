@@ -33,18 +33,6 @@ public class TaskList {
         return tasks.size();
     }
 
-    @Override
-    public String toString() {
-        StringBuilder ret = new StringBuilder();
-        for (int i = 0; i < tasks.size(); ++i) {
-            ret.append(i + 1)
-                .append(".")
-                .append(tasks.get(i).toString())
-                .append("\n");
-        }
-        return ret.toString();
-    }
-
     /**
      * Converts this TaskList into a String suitable for storage in the data file.
      *

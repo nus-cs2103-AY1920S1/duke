@@ -136,11 +136,11 @@ public class Parser {
         int numInputWords = fullUserInputArr.size();
         // Empty description, just "done" with no keyword
         if (numInputWords == 1) {
-            throw new IncorrectInfoInputException(StaticStrings.NO_DONE_IDX_PROVIDED);
+            throw new DukeException(StaticStrings.NO_DONE_IDX_PROVIDED);
         }
         // More than one input after "done"
         if (numInputWords > 2) {
-            throw new IncorrectInfoInputException(StaticStrings.TOO_MANY_DONE_INPUT);
+            throw new DukeException(StaticStrings.TOO_MANY_DONE_INPUT);
         }
         try {
             // Check if integer is provided, not characters

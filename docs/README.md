@@ -13,8 +13,7 @@ It's very easy to make some words **bold** and other words *italic*
 ## Usage
 
 ### `list`
-**List all the tasks in the list in the following order [D], [E] and [T].**
-**In category [D] and [E], the list of Task is sorted from the earliest to the latest date.**
+**List all the tasks in the list of tasks.**
 
 Example of usage:
 ```
@@ -124,6 +123,24 @@ find book
 Expected outcome:
 ```
 [T][✘] return book
+```
+
+### `sort`
+**Sort the list of task in order from [D], [E], then [T]. In category [D] and [E], the tasks are sorted from the earliest date to the latest date.**
+
+Example of usage:
+```
+sort
+```
+
+Expected outcome:
+```
+Here is your sorted List:
+1. [D][✓] submit assignment (by: 21/09/2019 2359)
+2. [E][✘] project meeting (at: 19/09/2019 1300)
+3. [E][✘] eat deck mala (at: 21/09/2019 1230)
+4. [E][✘] training (at: 23/09/2019 1900)
+5. [T][✘] return book
 ```
 
 ### `bye`

@@ -19,13 +19,13 @@ public class EventCommand extends Command {
     }
 
     public void execute(TaskList tl, Storage st) throws IOException {
-            ArrayList<Task> list = tl.getTaskList();
+        ArrayList<Task> list = tl.getTaskList();
 
-            Task event = new Event(eventName, date);
+        Task event = new Event(eventName, date);
 
-            tl.addTaskList(event);
-            UI.newTask(list);
+        tl.addTaskList(event);
+        UI.newTask(list);
 
-            st.writeToFile(list);
+        st.writeToFile(list);
     }
 }

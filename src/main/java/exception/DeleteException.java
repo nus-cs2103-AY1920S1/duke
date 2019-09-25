@@ -1,7 +1,9 @@
 package exception;
 
 public class DeleteException extends DukeException {
-    public DeleteException() {};
+    public DeleteException() {
+
+    }
 
     @Override
     public String toString() {

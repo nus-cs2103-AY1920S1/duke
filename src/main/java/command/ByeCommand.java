@@ -1,6 +1,8 @@
 package command;
 
-import main.*;
+import main.Storage;
+import main.TaskList;
+import main.UI;
 
 public class ByeCommand extends Command {
     public ByeCommand() {

@@ -17,17 +17,11 @@ public class DoneCommand extends Command {
     }
 
     public void execute(TaskList tl, Storage st) {
-        try {
-            ArrayList<Task> list = tl.getTaskList();
-            Task currTask = list.get(taskNum);
-            currTask.setDone();
-            UI.done(currTask);
+        ArrayList<Task> list = tl.getTaskList();
+        Task currTask = list.get(taskNum);
+        currTask.setDone();
+        UI.done(currTask);
 
-            st.writeToFile(list);
-        } catch (FileNotFoundException Fe) {
-            System.out.println(Fe);
-        } catch (IOException IOe) {
-            System.out.println(IOe);
-        }
+        st.writeToFile(list);
     }
 }

@@ -5,7 +5,9 @@ public abstract class Task {
     protected boolean isDone;
     //private Inputs Type;
 
-    public Task() {}
+    public Task() {
+
+    }
 
     public Task(String name) {
         this.name = name;

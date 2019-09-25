@@ -1,7 +1,9 @@
 package exception;
 
 public class UnknownCommandException extends DukeException {
-    public UnknownCommandException() {};
+    public UnknownCommandException() {
+
+    }
 
     @Override
     public String toString() {

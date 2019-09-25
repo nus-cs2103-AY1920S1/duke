@@ -15,20 +15,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private Path p = Paths.get(System.getProperty("user.dir"));
-    private File data = new File(p + "/data/duke.txt");
+    private Path path = Paths.get(System.getProperty("user.dir"));
+    private File data = new File(path + "/data/duke.txt");
 
     public Storage() {
     }
 
 
-    public ArrayList<Task> readFromFile() throws FileNotFoundException {
+    public ArrayList<Task> readFromFile() {
         ArrayList<Task> toReturn = new ArrayList<>();
 
         try {
             Scanner sc = new Scanner(data);
 
-            while(sc.hasNextLine()) {
+            while (sc.hasNextLine()) {
                 String[] next = sc.nextLine().split("-");
 
                 switch (next[0]) {
@@ -59,33 +59,36 @@ public class Storage {
                     }
                     toReturn.add(deadline);
                     break;
+
+                default:
+                    break;
                 }
             }
             sc.close();
-        } catch(FileNotFoundException fE) {
-            System.out.println(fE);
+        } catch (FileNotFoundException fileExp) {
+            System.out.println(fileExp);
         }
 
         return toReturn;
     }
 
-    public void writeToFile(ArrayList<Task> list) throws FileNotFoundException, IOException {
+    public void writeToFile(ArrayList<Task> list) {
         try {
-            Path p = Paths.get(System.getProperty("user.dir"));
-            File data = new File(p + "/data/duke.txt");
+            Path path = Paths.get(System.getProperty("user.dir"));
+            File data = new File(path + "/data/duke.txt");
             FileWriter fw = new FileWriter(data);
 
             String toWrite = "";
-            for(Task task : list) {
+            for (Task task : list) {
                 toWrite += task.toFile() + " \n";
             }
 
             fw.write(toWrite);
             fw.close();
-        } catch (FileNotFoundException Fe) {
-            System.out.println(Fe);
-        } catch (IOException IOe) {
-            System.out.println(IOe);
+        } catch (FileNotFoundException fileExp) {
+            System.out.println(fileExp);
+        } catch (IOException inOutExp) {
+            System.out.println(inOutExp);
         }
     }
 

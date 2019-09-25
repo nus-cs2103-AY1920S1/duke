@@ -1,7 +1,9 @@
 package exception;
 
 public class DoneException extends DukeException {
-    public DoneException() {};
+    public DoneException() {
+
+    }
 
     @Override
     public String toString() {

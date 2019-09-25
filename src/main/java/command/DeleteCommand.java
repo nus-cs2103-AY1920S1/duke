@@ -3,8 +3,10 @@ package command;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import main.*;
 import exception.DeleteException;
+import main.Storage;
+import main.TaskList;
+import main.UI;
 import task.Task;
 
 public class DeleteCommand extends Command {
@@ -26,10 +28,8 @@ public class DeleteCommand extends Command {
             UI.removedTask(task, listSize);
 
             st.writeToFile(list);
-        } catch (IOException IOe) {
-            System.err.println(IOe);
-        } catch (DeleteException dE) {
-            System.err.println(dE);
+        } catch (DeleteException delExp) {
+            System.err.println(delExp);
         }
     }
 }

@@ -1,6 +1,10 @@
-import command.*;
-import main.*;
-import task.*;
+import command.ByeCommand;
+import command.Command;
+import main.Parser;
+import main.Storage;
+import main.TaskList;
+import main.UI;
+import task.Task;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,28 +16,23 @@ public class Duke {
     private TaskList taskList;
     private UI ui;
 
-    private Duke(){
+    private Duke() {
         storage = new Storage();
-        try {
-            ArrayList<Task> list = storage.readFromFile();
-            this.taskList = new TaskList(list);
-
-        }   catch (FileNotFoundException fE) {
-            System.err.println(fE);
-        }
+        ArrayList<Task> list = storage.readFromFile();
+        this.taskList = new TaskList(list);
     }
 
     private void run() throws IOException {
         Parser parser = new Parser();
         Scanner sc = new Scanner(System.in);
 
-        while(sc.hasNextLine()) {
+        while (sc.hasNextLine()) {
             String nextLine = sc.nextLine();
 
             Command c = parser.parse(nextLine);
             c.execute(taskList, storage);
 
-            if(c instanceof ByeCommand) {
+            if (c instanceof ByeCommand) {
                 break;
             }
         }

@@ -13,18 +13,18 @@ public class Deadline extends Task {
     public Deadline(String name, String dateString) {
         this.name = name;
 
-        try{
+        try {
             Date dateTime = parser.parse(dateString);
             this.date = dateTime;
-        } catch (ParseException pE) {
-            System.err.println(pE);
+        } catch (ParseException parseExp) {
+            System.err.println(parseExp);
         }
 
         this.isDone = false;
     }
 
     public String toFile() {
-        if(isDone) {
+        if (isDone) {
             return "D-1-" + name + "-" + parser.format(date);
         } else {
             return "D-0-" + name + "-" + parser.format(date);

@@ -8,12 +8,13 @@ public class Todo extends Task {
     }
 
     public String toFile() {
-        if(isDone) {
+        if (isDone) {
             return "T-1-" + name;
         } else {
             return "T-0-" + name;
         }
     }
+
     public String toString() {
         if (isDone) {
             return "[T][✓] " + name;

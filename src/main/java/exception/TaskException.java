@@ -1,7 +1,9 @@
 package exception;
 
 public class TaskException extends DukeException {
-    public TaskException() {};
+    public TaskException() {
+
+    }
 
     @Override
     public String toString() {

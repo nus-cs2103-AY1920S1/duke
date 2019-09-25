@@ -1,7 +1,10 @@
 package command;
 
 import java.io.IOException;
-import java.util.ArrayList;import main.*;
+
+import main.Storage;
+import main.TaskList;
+import main.UI;
 import task.Deadline;
 import task.Task;
 
@@ -15,12 +18,12 @@ public class DeadlineCommand extends Command {
         this.date = date;
     }
 
-    public void execute(TaskList tl, Storage st) throws IOException {
-            Task deadline = new Deadline(deadlineName, date);
+    public void execute(TaskList tl, Storage st) {
+        Task deadline = new Deadline(deadlineName, date);
 
-            tl.addTaskList(deadline);
-            UI.newTask(tl.getTaskList());
+        tl.addTaskList(deadline);
+        UI.newTask(tl.getTaskList());
 
-            st.writeToFile(tl.getTaskList());
+        st.writeToFile(tl.getTaskList());
     }
 }

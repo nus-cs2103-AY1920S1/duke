@@ -4,14 +4,13 @@ import task.Task;
 
 import java.util.ArrayList;
 
-public class UI {
-    public UI(){}
+public interface UI {
 
     public static void start() {
-        System.out.println("    ____________________________________________________________\n" +
-                "     Hello! I'm Duke\n" +
-                "     What can I do for you?\n" +
-                "    ____________________________________________________________\n");
+        System.out.println("    ____________________________________________________________\n"
+                + "     Hello! I'm Duke\n"
+                + "     What can I do for you?\n"
+                + "    ____________________________________________________________\n");
 
     }
 
@@ -26,7 +25,7 @@ public class UI {
 
     }
 
-    public static void removedTask(Task task, int listSize){
+    public static void removedTask(Task task, int listSize) {
         System.out.println(" Noted. I've removed this task: ");
         System.out.println("    " + task);
         System.out.println("Now you have " + listSize + " tasks in the list.");

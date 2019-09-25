@@ -13,18 +13,18 @@ public class Event extends Task {
     public Event(String name, String dateString) {
         this.name = name;
 
-        try{
+        try {
             Date dateTime = parser.parse(dateString);
             this.date = dateTime;
-        } catch (ParseException pE) {
-            System.err.println(pE);
+        } catch (ParseException parseExp) {
+            System.err.println(parseExp);
         }
 
         this.isDone = false;
     }
 
     public String toFile() {
-        if(isDone) {
+        if (isDone) {
             return "E-1-" + name + "-" + parser.format(date);
         } else {
             return "E-0-" + name + "-" + parser.format(date);

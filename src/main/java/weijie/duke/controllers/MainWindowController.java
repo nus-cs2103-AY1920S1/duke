@@ -14,7 +14,6 @@ import weijie.duke.commands.ITaskCommand;
 import weijie.duke.commands.TaskCommandFactory;
 import weijie.duke.exceptions.DukeException;
 import weijie.duke.responses.TaskResponse;
-import weijie.duke.utils.StringUtils;
 
 import java.util.Timer;
 import java.util.TimerTask;

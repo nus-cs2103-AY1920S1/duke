@@ -34,7 +34,7 @@
 
         <Label fx:id="text"
                text="Label"
-               maxWidth="260"
+               maxWidth="275"
                wrapText="true"
                alignment="TOP_LEFT"
                style="-fx-background-color: #926bb0; -fx-background-radius: 10 10 10 10;"

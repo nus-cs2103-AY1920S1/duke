@@ -49,10 +49,10 @@ public class FileSystemStorage implements ITaskStorage {
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            throw new DukeIoException("☹ OOPS!!! Invalid file provided.");
+            throw new DukeIoException("Invalid file provided.");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-            throw new DukeIoException("☹ OOPS!!! Unexpected IO error has occurred!");
+            throw new DukeIoException("Unexpected IO error has occurred.");
         }
     }
 
@@ -70,9 +70,9 @@ public class FileSystemStorage implements ITaskStorage {
             objectOutputStream.writeObject(tasks.toArray(new Task[0]));
 
         } catch (FileNotFoundException e) {
-            throw new DukeIoException("☹ OOPS!!! Invalid file file provided.");
+            throw new DukeIoException("Invalid file provided.");
         } catch (IOException e) {
-            throw new DukeIoException("☹ OOPS!!! Unexpected IO error has occurred!");
+            throw new DukeIoException("Unexpected IO error has occurred.");
         }
     }
 

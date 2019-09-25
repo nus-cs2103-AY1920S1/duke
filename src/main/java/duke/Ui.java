@@ -19,7 +19,9 @@ public class Ui {
     }
 
     /**
-     * Prints Duke welcome message.
+     * Returns Duke welcome message.
+     *
+     * @return String Duke welcome message.
      */
     String showWelcome() {
         return "Hello! I'm Duke. What can I do for you?";
@@ -35,31 +37,48 @@ public class Ui {
     }
 
     /**
-     * Prints a loading error message.
+     * Returns Duke load file error message.
+     *
+     * @return String Duke load file error message.
      */
     String showLoadingError() {
         return "Error loading data from file. Creating tasklist from scratch.";
     }
 
     /**
-     * Prints an error message.
+     * Returns Duke error message.
      *
-     * @param errorMessage errorMessage to print.
+     * @return String Duke error message.
      */
     String showError(String errorMessage) {
         return errorMessage;
     }
 
+    /**
+     * Returns Duke farewell message.
+     *
+     * @return String Duke farewell message.
+     */
     public String showFarewell() {
         return "Bye. Hope to see you again soon!";
     }
 
+    /**
+     * Returns Duke successfully added task.
+     *
+     * @return String Duke successfully added task.
+     */
     public String showAddTask(Task task, int size) {
         String s = "Got it. I've added this task:\n";
         s = appendTask(s, task);
         return appendListSize(s, size);
     }
 
+    /**
+     * Returns Duke successfully deleted task.
+     *
+     * @return String Duke successfully deleted task.
+     */
     public String showDeleteTask(Task task, int size) {
         String s = "Noted. I've removed this task:\n";
         s = appendTask(s, task);
@@ -78,15 +97,30 @@ public class Ui {
         }
     }
 
+    /**
+     * Returns Duke successfully set task as done.
+     *
+     * @return String Duke successfully set task as done.
+     */
     public String showDoneTask(Task task) {
         String s = "Nice! I've marked this task as done:\n";
         return appendTask(s, task);
     }
 
+    /**
+     * Returns error message stating the task index does not exist.
+     *
+     * @return String error message stating the task index does not exist.
+     */
     public String showIndexError(int index) {
         return " ☹ OOPS!!! There is no task number " + (index + 1) + "\n";
     }
 
+    /**
+     * Returns error message that Duke was unable to save to file.
+     *
+     * @return String error message that Duke was unable to save to file.
+     */
     public String showSaveError() {
         return "Unable to write to datafile.";
     }

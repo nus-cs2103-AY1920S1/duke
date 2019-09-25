@@ -18,7 +18,7 @@ public class TaskList {
     private List<Task> tasks;
 
     /**
-     * Class constructor.
+     * Class constructor that allocates new list of initial capacity 100.
      */
     public TaskList() {
         this.tasks = new ArrayList<>(100);
@@ -63,7 +63,7 @@ public class TaskList {
      *
      * @param index task identifier.
      * @return Task the task marked as done.
-     * @throws DukeException If there is no such task in the list.
+     * @throws IndexOutOfBoundsException If there is no such index in the list.
      */
     public Task setIsDone(int index) throws IndexOutOfBoundsException {
             tasks.get(index).isDone = true;
@@ -75,7 +75,7 @@ public class TaskList {
      *
      * @param index task identifier.
      * @return Task the task removed.
-     * @throws DukeException If there is no such task in the list.
+     * @throws IndexOutOfBoundsException If there is no such index in the list.
      */
     public Task removeTask(int index) throws IndexOutOfBoundsException {
             return tasks.remove(index);

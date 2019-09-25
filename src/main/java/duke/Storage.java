@@ -36,40 +36,40 @@ public class Storage {
      * Loads a list of tasks from a file. If no file is present, a new file is created and an empty list is returned.
      *
      * @return List list of tasks.
-     * @throws DukeException If there has been IOException while performing an operation on the file.
+     * @throws IOException If there has been IOException while reading from the file.
      */
     public List<Task> load() throws IOException {
 
         List<Task> tasks = new ArrayList<>(100);
-            if (!file.createNewFile()) {
+        if (!file.createNewFile()) {
 
-                //read file contents into List
-                FileReader fr = new FileReader(file);
-                BufferedReader br = new BufferedReader(fr);
-                String line;
+            //read file contents into List
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            String line;
 
-                while ((line = br.readLine()) != null) {
-                    String[] lines = line.split(" \\| ");
-                    boolean isDone;
-                    if (lines[1].equals("1")) {
-                        isDone = true;
-                    } else {
-                        isDone = false;
-                    }
-                    if (lines[0].equals("T")) {
-                        tasks.add(new Todo(lines[2], isDone));
-                    } else if (lines[0].equals("D")) {
-                        tasks.add(new Deadline(lines[2], lines[3], isDone));
-                    } else if (lines[0].equals("E")) {
-                        tasks.add(new Event(lines[2], lines[3], isDone));
-                    } else {
-                        System.out.println("Corrupted data.");
-                    }
+            while ((line = br.readLine()) != null) {
+                String[] lines = line.split(" \\| ");
+                boolean isDone;
+                if (lines[1].equals("1")) {
+                    isDone = true;
+                } else {
+                    isDone = false;
                 }
-
-                br.close();
-                fr.close();
+                if (lines[0].equals("T")) {
+                    tasks.add(new Todo(lines[2], isDone));
+                } else if (lines[0].equals("D")) {
+                    tasks.add(new Deadline(lines[2], lines[3], isDone));
+                } else if (lines[0].equals("E")) {
+                    tasks.add(new Event(lines[2], lines[3], isDone));
+                } else {
+                    System.out.println("Corrupted data.");
+                }
             }
+
+            br.close();
+            fr.close();
+        }
 
         return tasks;
     }
@@ -78,17 +78,17 @@ public class Storage {
      * Saves a list of tasks to a file.
      *
      * @param tasks a list of tasks.
-     * @throws DukeException If there has been IOException while performing an operation on the file.
+     * @throws IOException If there has been IOException while writing to the file.
      */
     public void saveDataToFile(List<Task> tasks) throws IOException {
         //write to a completely new file
-            FileWriter fw = new FileWriter(file, false);
-            for (Task task : tasks) {
-                String s = task.toDataFormat();
-                fw.write(s + "\n");
-            }
+        FileWriter fw = new FileWriter(file, false);
+        for (Task task : tasks) {
+            String s = task.toDataFormat();
+            fw.write(s + "\n");
+        }
 
-            fw.close();
+        fw.close();
     }
 
 }

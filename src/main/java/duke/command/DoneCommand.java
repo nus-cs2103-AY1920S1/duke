@@ -30,12 +30,11 @@ public class DoneCommand extends Command {
      * @param tasks   list of tasks.
      * @param ui      ui.
      * @param storage storage.
-     * @throws DukeException If there is no such task in tasks.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             Task t = tasks.setIsDone(index);
-            if (!persistState(tasks, storage)) {
+            if (!isSaved(tasks, storage)) {
                 return ui.showSaveError();
             }
             return ui.showDoneTask(t);

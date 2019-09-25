@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
-import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -28,7 +27,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             Task t = tasks.removeTask(index);
-            if (!persistState(tasks, storage)) {
+            if (!isSaved(tasks, storage)) {
                 return ui.showSaveError();
             }
             return ui.showDeleteTask(t, tasks.getSize());

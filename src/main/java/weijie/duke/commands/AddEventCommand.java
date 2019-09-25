@@ -24,7 +24,7 @@ public class AddEventCommand extends AddCommand {
         String[] descriptionAndDate = input.split(" /at ");
 
         if (descriptionAndDate.length <= 1) {
-            return new TaskResponse(new DukeInvalidInputException("☹ OOPS!!! Must specify date and time for event"));
+            return new TaskResponse(new DukeInvalidInputException("Specify date and time for event."));
         }
 
         LocalDateTime dateTime;
@@ -32,7 +32,7 @@ public class AddEventCommand extends AddCommand {
             dateTime = LocalDateTime.parse(descriptionAndDate[1].trim(), DateUtils.DUKE_DATETIME_PARSE_FORMAT);
         } catch (DateTimeParseException e) {
             return new TaskResponse(
-                    new DukeInvalidInputException("☹ OOPS!!! Date and time must be in the format DD/MM/YYYY HHMM"));
+                    new DukeInvalidInputException("Date and time must be in the format DD/MM/YYYY HHMM."));
         }
 
         Task task = new Event(descriptionAndDate[0], dateTime);

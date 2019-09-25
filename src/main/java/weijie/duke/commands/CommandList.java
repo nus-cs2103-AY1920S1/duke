@@ -14,6 +14,7 @@ public enum CommandList {
     FIND_COMMAND("find", FindCommand.class),
     UNDO_COMMAND("undo", UndoCommand.class),
     REDO_COMMAND("redo", RedoCommand.class),
+    SNAP_COMMAND("snap", SnapCommand.class),
     INVALID_COMMAND(null, InvalidCommand.class);
 
 

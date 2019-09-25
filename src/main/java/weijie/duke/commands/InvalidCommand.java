@@ -8,7 +8,7 @@ import java.util.Optional;
 public class InvalidCommand implements ITaskCommand {
     @Override
     public TaskResponse execute(String... args) {
-        String response = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        String response = "I don't even know what command you are.";
         return new TaskResponse(response, new ArrayList<>());
     }
 

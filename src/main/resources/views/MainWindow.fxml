@@ -2,8 +2,8 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
+
 <AnchorPane maxHeight="-Infinity"
             maxWidth="-Infinity"
             minHeight="-Infinity"
@@ -27,7 +27,8 @@
             onAction="#handleUserInput"
             prefHeight="41.0"
             prefWidth="76.0"
-            text="Send"/>
+            text="Send"
+            style="-fx-background-color: lightgray"/>
 
     <ScrollPane fx:id="scrollPane"
                 hbarPolicy="NEVER"

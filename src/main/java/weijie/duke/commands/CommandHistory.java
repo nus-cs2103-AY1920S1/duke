@@ -17,7 +17,6 @@ public class CommandHistory {
     }
 
     public void addCommand(ITaskCommand command) {
-        System.out.println("before: " + commandStateHistory + "\nindex: " + presentState);
         command.getCommandState()
                 .ifPresent(undo -> {
                     if (presentState >= commandStateHistory.size()) {
@@ -29,12 +28,11 @@ public class CommandHistory {
                     presentState++;
                     maxIndex = presentState;
                 });
-        System.out.println("after: " + commandStateHistory + "\nindex: " + presentState);
     }
 
     TaskResponse undo() {
         if (presentState <= 0) {
-            return new TaskResponse("There is no command to undo!", new ArrayList<>());
+            return new TaskResponse("There is no command to undo.", new ArrayList<>());
         }
 
         presentState--;
@@ -43,7 +41,7 @@ public class CommandHistory {
 
     TaskResponse redo() {
         if (presentState >= commandStateHistory.size() || presentState >= maxIndex) {
-            return new TaskResponse("There is no command to redo!", new ArrayList<>());
+            return new TaskResponse("There is no command to redo.", new ArrayList<>());
         }
 
         TaskResponse taskResponse = commandStateHistory.get(presentState).redo();

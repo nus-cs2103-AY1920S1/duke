@@ -28,7 +28,7 @@ public class Duke extends Application {
     private CommandHistory history;
 
     public Duke() {
-        this.filePath = "data/duke.txt"; // TODO: refactor into argument
+        this.filePath = "data/duke.txt";
     }
 
     @Override
@@ -45,6 +45,7 @@ public class Duke extends Application {
 
             primaryStage.setScene(scene);
             primaryStage.show();
+            primaryStage.setResizable(false);
 
         } catch (DukeIoException | IOException | DukeIllegalArgumentException e) {
             e.printStackTrace();

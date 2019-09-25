@@ -1,0 +1,10 @@
+#dialogContainer {
+    -fx-background-image: url("../images/DaBackgroundOpacity.png");
+    -fx-background-position: center;
+    -fx-background-size: 100%;
+}
+
+#sendButton #userInput {
+    -fx-font-family: "Gill Sans MT";
+    -fx-font-size: 13;
+}

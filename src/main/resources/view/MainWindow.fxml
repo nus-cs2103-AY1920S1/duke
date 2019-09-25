@@ -1,7 +1,3 @@
-<!--@@author Sam-limyr -reused-->
-<!--Reused from https://github.com/Sam-limyr/duke/blob/bc7352d1d488f6270abc44f3f6d7be39538ad10e/src/main/resources
-/view/MainWindow.fxml with minor modifications-->
-
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>

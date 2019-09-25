@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 
@@ -17,8 +18,8 @@ import java.io.IOException;
  * A DialogBox is drawn whenever the user issues a Command or Duke responds.
  */
 public class DialogBox extends HBox {
-    private static final Image USER_AVATAR = new Image(DialogBox.class.getResourceAsStream("/images/User.png"));
-    private static final Image DUKE_AVATAR = new Image(DialogBox.class.getResourceAsStream("/images/Duke.png"));
+    private static final Image USER_AVATAR = new Image(DialogBox.class.getResourceAsStream("/images/User.jpg"));
+    private static final Image DUKE_AVATAR = new Image(DialogBox.class.getResourceAsStream("/images/Duke.jpg"));
     @FXML
     private HBox box;
     @FXML
@@ -39,6 +40,8 @@ public class DialogBox extends HBox {
         this.dialog.setText(dialog);
         this.box.getStyleClass().add(styleClass);
         this.avatar.setImage(avatar);
+        Circle clip = new Circle(35, 35, 35);
+        this.avatar.setClip(clip);
     }
 
     /**

@@ -35,7 +35,7 @@ public class DeleteCommand implements Command {
             throws IOException {
         String deleted = ui.showDelete(this.taskIndex, taskList);
         taskList.removeTask(this.taskIndex);
-        dukeData.removeTask(taskList); // taskList removed deleted task
+        dukeData.update(taskList); // taskList removed deleted task
         return deleted;
     }
 }

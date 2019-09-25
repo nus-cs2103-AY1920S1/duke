@@ -5,7 +5,12 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * The DukeData class manages the data of the user's task list by
@@ -14,8 +19,6 @@ import java.io.*;
 public class DukeData {
     // every time Duke starts up, create and load a new or existing file.
     private File saveFile;
-    private FileWriter fw;
-    private BufferedWriter bw;
     private String userDir;
 
     /**
@@ -27,126 +30,35 @@ public class DukeData {
 
         // create a new file and directory if it doesnt already exist
         File dir = new File(this.userDir + "/DukeData");
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+        String fileName = "myDukeList" + ".txt";
+        File tagFile = new File(dir, fileName);
         try {
-            if (!dir.exists()) {
-                dir.mkdir();
-            }
-            String fileName = "myDukeList" + ".txt";
-            File tagFile = new File(dir, fileName);
-            try {
-                if (!tagFile.exists()) {
-                    tagFile.createNewFile();
-                }
-                this.saveFile = tagFile;
-            } catch (IOException e) {
-                System.err.println("Data file is null.");
-            }
-
-            // attach the file to FileWriter and BufferedWriter
-            assert this.saveFile != null;
-            this.fw = new FileWriter(this.saveFile);
-            this.bw = new BufferedWriter(this.fw);
+            tagFile.createNewFile();
+            this.saveFile = tagFile;
         } catch (IOException e) {
-            System.err.println("Cant make Directory.");
+            System.err.println("Data file is null.");
         }
     }
 
     /**
-     * Generates a new DukeData object which handles creation of a
-     * new txt file in the given data directory, filePath.
-     * @param filePath the file path where the user wants to save Duke's data
-     */
-    public DukeData(String filePath) {
-
-        // create a new File in the data file
-        File dir = new File(filePath + "/data");
-        try {
-            if (!dir.exists()) {
-                dir.mkdir();
-            } else {
-                String fileName = "myDukeList" + ".txt";
-                File tagFile = new File(dir, fileName);
-                try {
-                    if (!tagFile.exists()) {
-                        tagFile.createNewFile();
-                    }
-                    this.saveFile = tagFile;
-                } catch (IOException e) {
-                    System.err.println("Data file is null.");
-                }
-            }
-
-            // attach the file to FileWriter and BufferedWriter
-            this.fw = new FileWriter(this.saveFile);
-            this.bw = new BufferedWriter(this.fw);
-        } catch (IOException e) {
-            System.err.println("Cant make Directory.");
-        }
-    }
-
-    /**
-     * Adds and updates the given task to the file saved in the hard disk.
-     * @param index the index of the task to be added
-     * @param task Task object which can represent ToDo, Deadline, or Event
-     */
-    public void addTask(int index, Task task)
-            throws IOException {
-        this.bw.write(String.format(" %d. %s", index, task.toData()));
-        this.bw.newLine();
-        this.bw.flush();
-    }
-
-    /**
-     * Updates the data file in the hard disk by removing the said task.
-     * @param updatedTaskList the TaskList which has removed the unwanted Task
+     * Updates the data file in the hard disk with the corresponding
+     * updated task list.
+     * @param updatedTaskList the updated TaskList
      * @throws IOException if an I/O Exception occurs
      */
-    public void removeTask(TaskList updatedTaskList)
+    public void update(TaskList updatedTaskList)
             throws IOException {
         // replace the file with the new updated data
-        int count = 1;
         FileWriter updatedFW = new FileWriter(this.saveFile);
         BufferedWriter updatedBW = new BufferedWriter(updatedFW);
         for (Task task : updatedTaskList.getList()) {
-            updatedBW.write(String.format(
-                    " %d. %s", count, task.toData()));
+            updatedBW.write(task.toData());
             updatedBW.newLine();
-            count++;
         }
         updatedBW.flush();
-        this.fw = updatedFW;
-        this.bw = updatedBW;
-    }
-
-    /**
-     * Updates the data file in the hard disk by changing
-     * the status of the given task.
-     * @param updatedTaskList the TaskList which has removed the specified Task
-     * @throws IOException if an I/O Exception occurs
-     * @throws FileNotFoundException when the file does not exist
-     */
-    public void taskDone(TaskList updatedTaskList)
-            throws IOException, FileNotFoundException {
-        // now we replace the file with the new updated data
-        int count = 1;
-        FileWriter updatedFW = new FileWriter(this.saveFile);
-        BufferedWriter updatedBW = new BufferedWriter(updatedFW);
-        for (Task task : updatedTaskList.getList()) {
-            updatedBW.write(String.format(" %d. %s", count, task.toData()));
-            updatedBW.newLine();
-            count++;
-        }
-        updatedBW.flush();
-        this.bw = updatedBW;
-        this.fw = updatedFW;
-    }
-
-    /**
-     * Closes the BufferedWriter file upon exit of the Duke program.
-     * @throws IOException if an I/O Exception occurs
-     */
-    public void exit() throws IOException {
-        this.bw.close();
     }
 
     /**
@@ -179,29 +91,36 @@ public class DukeData {
         BufferedReader readFile = new BufferedReader(
                 new FileReader(this.saveFile));
         String oneTask = readFile.readLine();
-        while (oneTask != null)  {
-            String[] taskInfo = oneTask.split(" | ");
+        while (oneTask != null) {
+            String[] taskInfo = oneTask.split(" \\| ");
             String taskType = taskInfo[0];
+            boolean isMarkedDone = taskInfo[1].equals("O");
+            String description = taskInfo[2];
             Task newTask;
-            switch (taskType.substring(4)) {
-            case "T":
-                newTask = new ToDo(taskInfo[2]);
-                existingList.addTask(newTask);
-                break;
-            case "D":
-                newTask = new Deadline(taskInfo[2], taskInfo[3]);
-                existingList.addTask(newTask);
-                break;
-            case "E":
-                newTask = new Event(taskInfo[2], taskInfo[3]);
-                existingList.addTask(newTask);
-                break;
-            default: // never happens
-                newTask = null;
-            }
-            if (taskInfo[1].equals("O")) {
-                assert newTask != null;
-                newTask.markAsDone();
+            switch (taskType) {
+                case "T":
+                    newTask = new ToDo(description);
+                    if (isMarkedDone) {
+                        newTask.markAsDone();
+                    }
+                    existingList.addTask(newTask);
+                    break;
+                case "D":
+                    newTask = new Deadline(description, taskInfo[3]);
+                    if (isMarkedDone) {
+                        newTask.markAsDone();
+                    }
+                    existingList.addTask(newTask);
+                    break;
+                case "E":
+                    newTask = new Event(description, taskInfo[3]);
+                    if (isMarkedDone) {
+                        newTask.markAsDone();
+                    }
+                    existingList.addTask(newTask);
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + taskType);
             }
             oneTask = readFile.readLine();
         }

@@ -33,20 +33,6 @@ public class Duke { // handles all input and output
     }
 
     /**
-     * Creates a Duke program with filePath as the path to save Duke's data.
-     * @param filePath the path to save the Duke's data from user input
-     */
-    public Duke(String filePath) {
-        this.myData = new DukeData(filePath);
-        this.myUi = new Ui();
-        try {
-            this.myTasks = new TaskList(this.myData.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * This method runs the Duke program.
      */
     private void run() {

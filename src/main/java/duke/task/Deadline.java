@@ -1,7 +1,5 @@
 package duke.task;
 
-import java.text.ParseException;
-
 /**
  * The Deadline class represents any tasks that has a
  * description, and a deadline in nature.
@@ -17,14 +15,11 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String date) {
         super(description);
-        if (!DateTime.isDateFormatted(date)) {
-            try {
-                this.dateTime = new DateTime(date);
-                this.date = this.dateTime.getDateTimeString();
-            } catch (ParseException e) {
-                System.err.println("Cant parse Date: " + date);
-            }
+        if (!date.contains("of")) { // only formatted dates contain "of"
+            this.dateTime = new DateTime(date);
+            this.date = this.dateTime.getDateTimeString();
         } else {
+            // since it is already formatted, no need to parse DateTime
             this.date = date;
         }
     }
@@ -44,7 +39,7 @@ public class Deadline extends Task {
      * @return the data representation of the Event Task
      */
     public String toData() {
-        return String.format("E | %s | %s | %s",
+        return String.format("D | %s | %s | %s",
                 this.getStatusIcon(), this.description, this.date);
     }
 

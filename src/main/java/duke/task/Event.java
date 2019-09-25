@@ -1,7 +1,5 @@
 package duke.task;
 
-import java.text.ParseException;
-
 /**
  * The Event class represents any tasks that has a
  * description, and an event date in nature.
@@ -17,14 +15,11 @@ public class Event extends Task {
      */
     public Event(String description, String date) {
         super(description);
-        if (!DateTime.isDateFormatted(date)) {
-            try {
-                this.dateTime = new DateTime(date);
-                this.date = this.dateTime.getDateTimeString();
-            } catch (ParseException e) {
-                System.err.println("Cant parse Date: " + date);
-            }
+        if (!date.contains("of")) { // only formatted dates contain "of"
+            this.dateTime = new DateTime(date);
+            this.date = this.dateTime.getDateTimeString();
         } else {
+            // since it is already formatted, no need to parse DateTime
             this.date = date;
         }
     }
@@ -34,7 +29,7 @@ public class Event extends Task {
      * @return a string representation of an Event object
      */
     public String toString() {
-        return String.format("[E][%s] %s(at: %s)",
+        return String.format("[E][%s] %s (at: %s)",
                 this.getStatusIcon(), this.description, this.date);
     }
 

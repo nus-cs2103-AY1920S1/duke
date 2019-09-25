@@ -32,9 +32,8 @@ public class AddCommand implements Command {
     @Override
     public String execute(DukeData dukeData, Ui ui, TaskList taskList)
             throws IOException {
-        int index = taskList.getSize() + 1; // since index is -1 of size of arraylist
-        dukeData.addTask(index, this.taskToBeAdded);
         taskList.addTask(this.taskToBeAdded);
+        dukeData.update(taskList);
         return ui.showTaskAdded(this.taskToBeAdded, taskList);
     }
 }

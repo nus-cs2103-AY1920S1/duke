@@ -34,7 +34,7 @@ public class DoneCommand implements Command {
     public String execute(DukeData dukeData, Ui ui, TaskList taskList)
             throws IOException {
         taskList.markTaskAsDone(this.taskIndex);
-        dukeData.taskDone(taskList);
+        dukeData.update(taskList);
         return ui.showDone(this.taskIndex, taskList);
     }
 }

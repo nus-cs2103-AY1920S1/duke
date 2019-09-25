@@ -15,17 +15,20 @@ public class DateTime {
     private static final SimpleDateFormat DATETIME_FORMATTER =
             new SimpleDateFormat(FORMAT_TO_SHOW);
     private String dateTime;
-    private Date date;
+    private Date date; // formatted
 
     /**
      * Constructs a new DateTime object with the given date and time.
      * @param dateTime the date/time string representation in the old format
-     * @throws ParseException when the parameter dateTime given is
      * not presented in the given format
      */
-    public DateTime(String dateTime) throws ParseException {
+    public DateTime(String dateTime) {
         this.dateTime = dateTime;
-        this.date = DATETIME_FORMATGIVEN.parse(dateTime);
+        try {
+            this.date = DATETIME_FORMATGIVEN.parse(dateTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -39,10 +42,6 @@ public class DateTime {
         String suffix = getSuffix(Integer.parseInt(splitDate[0]));
         String dateTimeString = suffix + DATETIME_FORMATTER.format(this.date);
         return dateTimeString;
-    }
-
-    public static boolean isDateFormatted(String date) {
-        return date.equals(DATETIME_FORMATTER);
     }
 
     private String getSuffix(int d) {

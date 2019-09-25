@@ -1,5 +1,6 @@
 package command;
 
+import exception.DukeException;
 import exception.RescheduleParameterException;
 import exception.UpdateStateException;
 import run.Storage;
@@ -29,8 +30,7 @@ public class RescheduleCommand extends Command {
             taskNum = Integer.parseInt(splited[1]);
             newDateTime = splited[2] + " " + splited[3];
         } else {
-            throw new RescheduleParameterException("Invalid parameter! Try the format: reschedule (task number) "
-                    + "(dd/mm/yyyy hhmm)");
+            throw new RescheduleParameterException(DukeException.RESCHEDULE_PARAMETER_EXCEPTION_MESSAGE);
         }
     }
 
@@ -42,15 +42,9 @@ public class RescheduleCommand extends Command {
      * @param storage current storage state
      * @return String output of executed command to be shown to the user
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, UpdateStateException {
         String output = tasks.reschedule(taskNum, newDateTime);
-        try {
-            storage.updateState(tasks);
-        } catch (IOException ex) {
-            Ui.showError("IO exception caught while deleting task!");
-        } catch (UpdateStateException ex) {
-            Ui.showError(ex.getMessage());
-        }
+        storage.updateState(tasks);
         return output;
     }
 

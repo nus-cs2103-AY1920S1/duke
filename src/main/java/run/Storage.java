@@ -1,5 +1,6 @@
 package run;
 
+import exception.DukeException;
 import exception.ParseFileException;
 import exception.UpdateStateException;
 import parser.StorageParser;
@@ -43,7 +44,7 @@ public class Storage {
                 Ui.showMessage("State file detected!");
             }
         } catch (IOException ex) {
-            Ui.showError("IO exception encountered while initializing state file!");
+            Ui.showErrorMessage("IO exception encountered while initializing state file!");
         }
     }
 
@@ -67,10 +68,10 @@ public class Storage {
                 }
             }
         } catch (IOException ex) {
-            Ui.showError("IO exception caught while loading state file, initializing new empty Task List!");
+            Ui.showErrorMessage("IO exception caught while loading state file, initializing new empty Task List!");
             return new ArrayList<Task>();
         } catch (ParseFileException ex) {
-            Ui.showError("Exception while reading contents of state file, initializing new empty Task List!");
+            Ui.showErrorMessage("Exception while reading contents of state file, initializing new empty Task List!");
             return new ArrayList<Task>();
         } finally {
             if (sc != null) {
@@ -102,7 +103,7 @@ public class Storage {
                     textToAddSB.append(fileUpdateEvent((Event) currTask));
                     textToAddSB.append(System.lineSeparator());
                 } else {
-                    throw new UpdateStateException("Exception while updating state!");
+                    throw new UpdateStateException(DukeException.UPDATE_STATE_EXCEPTION_MESSAGE);
                 }
             }
             fw.write(textToAddSB.toString());

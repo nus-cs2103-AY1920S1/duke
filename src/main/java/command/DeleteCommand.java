@@ -1,6 +1,7 @@
 package command;
 
 import exception.DeleteParameterException;
+import exception.DukeException;
 import exception.UpdateStateException;
 import run.Storage;
 import run.TaskList;
@@ -26,7 +27,7 @@ public class DeleteCommand extends Command {
         if (splited[1].matches("^[0-9]*[1-9][0-9]*$") && splited.length == 2) {
             taskNum = Integer.parseInt(splited[1]);
         } else {
-            throw new DeleteParameterException("Invalid parameter! Try the format: delete (task number)");
+            throw new DeleteParameterException(DukeException.DELETE_PARAMETER_EXCEPTION_MESSAGE);
         }
     }
 
@@ -38,15 +39,9 @@ public class DeleteCommand extends Command {
      * @param storage current storage state
      * @return String output of executed command to be shown to the user
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, UpdateStateException {
         String output = tasks.delete(taskNum);
-        try {
-            storage.updateState(tasks);
-        } catch (IOException ex) {
-            Ui.showError("IO exception caught while deleting task!");
-        } catch (UpdateStateException ex) {
-            Ui.showError(ex.getMessage());
-        }
+        storage.updateState(tasks);
         return output;
     }
 

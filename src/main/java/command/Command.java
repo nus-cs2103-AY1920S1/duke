@@ -1,8 +1,11 @@
 package command;
 
+import exception.UpdateStateException;
 import run.Storage;
 import run.TaskList;
 import run.Ui;
+
+import java.io.IOException;
 
 /**
  * Abstract class for commands that results from user input that may
@@ -18,6 +21,6 @@ public abstract class Command {
      * @param storage current storage state
      * @return String output of executed command to be shown to the user
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, UpdateStateException;
 
 }

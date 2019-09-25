@@ -23,20 +23,20 @@ public abstract class AddCommand extends Command {
      * @param storage current storage state
      * @return String output of executed command to be shown to the user
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, UpdateStateException;
 
     /**
      * Updates state of save file to latest tasks from TaskList.
      * Catches IO exception and UpdateStateException that may be thrown while
      * updating state.
      */
-    public void addCommandUpdateState() {
+    public void addCommandUpdateState() throws IOException, UpdateStateException {
         try {
             storage.updateState(tasks);
         } catch (IOException ex) {
-            Ui.showError("IO exception caught while adding task!");
+            throw new IOException("IO exception caught while adding task!");
         } catch (UpdateStateException ex) {
-            Ui.showError(ex.getMessage());
+            throw new UpdateStateException(ex.getMessage());
         }
     }
 }

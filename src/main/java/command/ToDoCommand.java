@@ -2,10 +2,13 @@ package command;
 
 import exception.DukeException;
 import exception.EmptyToDoDescriptionException;
+import exception.UpdateStateException;
 import run.Storage;
 import run.TaskList;
 import run.Ui;
 import task.ToDo;
+
+import java.io.IOException;
 
 /**
  * Extends AddCommand class and is used to create and manage a new todo task.
@@ -20,7 +23,7 @@ public class ToDoCommand extends AddCommand {
      */
     public ToDoCommand(String rawString) throws DukeException {
         if (rawString.equals("todo") || rawString.equals("todo ")) {
-            throw new EmptyToDoDescriptionException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new EmptyToDoDescriptionException(DukeException.EMPTY_TODO_DESCRIPTION_MESSAGE);
         }
         this.rawString = rawString;
     }
@@ -33,7 +36,7 @@ public class ToDoCommand extends AddCommand {
      * @param storage current storage state
      * @return String output of executed command to be shown to the user
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, UpdateStateException {
         super.tasks = tasks;
         super.ui = ui;
         super.storage = storage;

@@ -1,9 +1,12 @@
 package command;
 
+import exception.UpdateStateException;
 import run.TaskList;
 import run.Ui;
 import run.Storage;
 import task.Deadline;
+
+import java.io.IOException;
 
 /**
  * Extends AddCommand class and is used to create and manage a new deadline task.
@@ -28,7 +31,7 @@ public class DeadlineCommand extends AddCommand {
      * @param storage current storage state
      * @return String output of executed command to be shown to the user
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, UpdateStateException {
         super.tasks = tasks;
         super.ui = ui;
         super.storage = storage;

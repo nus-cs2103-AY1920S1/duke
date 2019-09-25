@@ -17,15 +17,9 @@ public class Deadline extends Task {
      * @param description this deadline's name
      * @param by this deadline's date and time in the format dd/mm/yyyy hhmm
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws NumberFormatException, DateTimeException {
         super(description);
-        try {
-            this.by = parseDateTime(by);
-        } catch (NumberFormatException ex) {
-            Ui.showError("Invalid format! Try dd/mm/yyyy hhmm instead!");
-        } catch (DateTimeException ex) {
-            Ui.showError(ex.getMessage());
-        }
+        this.by = parseDateTime(by);
     }
 
     /**
@@ -40,16 +34,12 @@ public class Deadline extends Task {
     }
 
     private LocalDateTime parseDateTime(String by) throws DateTimeException, NumberFormatException {
-        try {
-            String[] splited = by.split(" ");
-            String[] dateFields = splited[0].split("/");
-            int hour = Integer.parseInt(splited[1].substring(0, 2));
-            int minute = Integer.parseInt(splited[1].substring(2));
-            return LocalDateTime.of(Integer.parseInt(dateFields[2]), Integer.parseInt(dateFields[1]),
-                    Integer.parseInt(dateFields[0]), hour, minute);
-        } catch (DateTimeException | NumberFormatException ex) {
-            throw ex;
-        }
+        String[] splited = by.split(" ");
+        String[] dateFields = splited[0].split("/");
+        int hour = Integer.parseInt(splited[1].substring(0, 2));
+        int minute = Integer.parseInt(splited[1].substring(2));
+        return LocalDateTime.of(Integer.parseInt(dateFields[2]), Integer.parseInt(dateFields[1]),
+                Integer.parseInt(dateFields[0]), hour, minute);
     }
 
     /**

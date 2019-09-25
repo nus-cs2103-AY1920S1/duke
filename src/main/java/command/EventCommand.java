@@ -1,9 +1,13 @@
 package command;
 
+import exception.UpdateStateException;
 import run.Storage;
 import run.TaskList;
 import run.Ui;
 import task.Event;
+
+import java.io.IOException;
+import java.time.DateTimeException;
 
 /**
  * Extends AddCommand class and is used to create and manage a new event task.
@@ -28,7 +32,7 @@ public class EventCommand extends AddCommand {
      * @param storage current storage state
      * @return String output of executed command to be shown to the user
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, UpdateStateException, NumberFormatException, DateTimeException {
         super.tasks = tasks;
         super.ui = ui;
         super.storage = storage;

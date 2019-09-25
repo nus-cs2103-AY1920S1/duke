@@ -1,6 +1,7 @@
 package command;
 
 import exception.DoneParameterException;
+import exception.DukeException;
 import exception.UpdateStateException;
 import run.Storage;
 import run.TaskList;
@@ -26,7 +27,7 @@ public class DoneCommand extends Command {
         if (splited[1].matches("^[0-9]*[1-9][0-9]*$") && splited.length == 2) {
             taskNum = Integer.parseInt(splited[1]);
         } else {
-            throw new DoneParameterException("Invalid parameter! Try the format: done (task number)");
+            throw new DoneParameterException(DukeException.DONE_PARAMETER_EXCEPTION);
         }
     }
 
@@ -39,15 +40,9 @@ public class DoneCommand extends Command {
      * @param storage current storage state
      * @return String output of executed command to be shown to the user
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, UpdateStateException {
         String output = tasks.done(taskNum);
-        try {
-            storage.updateState(tasks);
-        } catch (IOException ex) {
-            Ui.showError("IO exception caught while marking task as done!");
-        } catch (UpdateStateException ex) {
-            Ui.showError(ex.getMessage());
-        }
+        storage.updateState(tasks);
         return output;
     }
 

@@ -15,6 +15,8 @@ import command.RescheduleCommand;
 import exception.DukeException;
 import exception.InvalidInputException;
 
+import java.time.DateTimeException;
+
 /**
  * Parser for reading user input and understand which command user is trying to use.
  */
@@ -26,7 +28,7 @@ public class Parser {
      * @return command created if user input is successfully parsed
      * @throws DukeException if user enters an invalid input and suggests available commands instead
      */
-    public static Command parse(String rawString) throws DukeException {
+    public static Command parse(String rawString) throws DukeException, NumberFormatException, DateTimeException {
         if (rawString.equals("bye")) {
             return new ByeCommand();
         } else if (rawString.equals("list")) {

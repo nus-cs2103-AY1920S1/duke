@@ -18,6 +18,9 @@ import exception.DukeException;
 import parser.Parser;
 import command.Command;
 
+import java.io.IOException;
+import java.time.DateTimeException;
+
 /**
  * Creates a new Duke interface task management system that has includes a task list, storage system and user
  * interface.
@@ -69,7 +72,7 @@ public class Duke {
             } else {
                 return response;
             }
-        } catch (DukeException ex) {
+        } catch (DukeException | IOException | NumberFormatException | DateTimeException ex) {
             return ex.getMessage();
         }
     }

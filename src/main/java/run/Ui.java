@@ -22,22 +22,25 @@ public class Ui {
     public static final String PRINT_DELETE_PREAMBLE = "Noted. I've removed this task: ";
     public static final String PRINT_FIND_PREAMBLE = "Here are the matching tasks in your list:";
     public static final String PRINT_RESCHEDULE_PREAMBLE = "Done! Here's the rescheduled task: ";
+    public static final String DATE_TIME_FORMAT_EXCEPTION_MESSAGE = "DateTime or Number Format exception!";
 
     /**
-     * Prints an error message to the user.
-     * @param errorMessage the error message to be printed to the user
-     */
-    public static void showError(String errorMessage) {
-        System.out.println(errorMessage);
-    }
-
-    /**
-     * Prints a message to the user.
-     * @param message the message to be printed
+     * Prints a message to the user. Only used before MainWindow launches.
+     * @param message the error message to be printed to the user
      */
     public static void showMessage(String message) {
         System.out.println("---------------------------------------------------------------------");
         System.out.println(message);
+        System.out.println("---------------------------------------------------------------------");
+    }
+
+    /**
+     * Prints an error message to the user. Only used before MainWindow launches
+     * @param errorMessage the message to be printed
+     */
+    public static void showErrorMessage(String errorMessage) {
+        System.out.println("---------------------------------------------------------------------");
+        System.out.println(errorMessage);
         System.out.println("---------------------------------------------------------------------");
     }
 

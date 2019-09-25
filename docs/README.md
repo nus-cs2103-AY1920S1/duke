@@ -47,7 +47,7 @@ _Example: `2/12/2019 1800` to `2 December 2019, 6:00 PM`_
 
 ### 7. **Search by keywords**
 
-Searches for tasks which contain matching keywords; searches are not case-sensitive.
+Searches for tasks which contain matching keywords; searches are not case-sensitive. Multiple keywords can be searched in a go, as long as a task has descriptions matching any keyword provided, it will be shown.
 
 ### 8. **View statistics and insights**
 
@@ -133,7 +133,9 @@ Expected outcome:
 
 ### `find` - Finds tasks which match keywords
 
-Finds tasks which has descriptions matching given keyword(s). This command is not case-sensitive.
+Finds tasks which has descriptions matching given keyword(s). This command is not case-sensitive. Multiple keywords can be searched in a go. Tasks that match any of the given keywords will be listed. Note that keywords have to match words character for character (but differences in upper and lower casing allowed). Keywords that are character subsets of a longer word will not be matched. 
+
+For example, searching `book` will not return a task that has `books` in its description, but a task with `BOOK` will be returned.
 
 Format: `keyword keyword1 [keyword2 ...]`
 

@@ -1,3 +1,3 @@
-T, 1, fry patties
-D, 0, make patties, 12th of October 2019, 12pm
-E, 0, serve patties, 13th of November 2019, 11am
+T, 1, go krusty krab
+D, 1, make patties, 12th of October 2019, 12.15pm
+E, 0, serve burger, 13th of November 2019, 10.45am

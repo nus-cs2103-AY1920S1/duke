@@ -45,6 +45,13 @@ shadowJar {
     archiveAppendix = null
 }
 
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.2.1"
+    archiveClassifier = null
+    archiveAppendix = null
+}
+
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
     String javaFxVersion = '11'

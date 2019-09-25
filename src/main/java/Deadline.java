@@ -56,7 +56,7 @@ public class Deadline extends Task {
      * @param description Full description of deadline task.
      * @param by date and time of deadline
      */
-    public Deadline (String description, String by) {
+    public Deadline(String description, String by) {
         super(description);
         this.by = by.trim();
 
@@ -66,7 +66,7 @@ public class Deadline extends Task {
 
         formattedDateAndTime = formattedDate + ", " + formattedTime;
 
-        if(!formattedDateAndTime.equals("")){
+        if (!formattedDateAndTime.equals("")) {
             this.by = formattedDateAndTime;
         }
     }
@@ -78,7 +78,7 @@ public class Deadline extends Task {
     public void processDate(String dateInString) {
         String[] splitDates = dateInString.split("/");
         int size = splitDates.length;
-        if(size == 3) {
+        if (size == 3) {
             String date = splitDates[0];
             String month = splitDates[1];
             String year = splitDates[2];
@@ -108,7 +108,7 @@ public class Deadline extends Task {
         } else {
             amOrPm = "am";
         }
-        if(min == 0) {
+        if (min == 0) {
             formattedTime = hour + amOrPm + "";
         } else {
             formattedTime = hour + "." + min + amOrPm;

@@ -164,8 +164,8 @@ public class Parser {
     public boolean noClash(String timeAndDate) {
         ArrayList<Task> list = tasks.getList();
         for (int i = 0; i < list.size(); i++) {
-            if(list.get(i) instanceof  Event) {
-                if(((Event) list.get(i)).getAt().equals(timeAndDate)) {
+            if (list.get(i) instanceof  Event) {
+                if (((Event) list.get(i)).getAt().equals(timeAndDate)) {
                     return false;
                 }
             }

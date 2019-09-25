@@ -13,12 +13,11 @@ public class Event extends Task {
     //private String dateAndTime;
     protected String amOrPm;
     protected  String[] suffixes = {  "0th",  "1st",  "2nd",  "3rd",  "4th",  "5th",  "6th",  "7th",  "8th",  "9th",
-            "10th", "11th", "12th", "13th", "14th", "15th", "16th", "17th", "18th", "19th",
-            "20th", "21st", "22nd", "23rd", "24th", "25th", "26th", "27th", "28th", "29th",
-            "30th", "31st" };
+                                      "10th", "11th", "12th", "13th", "14th", "15th", "16th", "17th", "18th", "19th",
+                                      "20th", "21st", "22nd", "23rd", "24th", "25th", "26th", "27th", "28th", "29th",
+                                      "30th", "31st" };
     protected String[] months = {  " ", "January", "February", "March", "April", "May",
-            "June", "July", "August", "September",
-            "October", "November", "December" };
+                                   "June", "July", "August", "September", "October", "November", "December" };
     protected String formattedTime;
     protected String formattedDate;
     protected String formattedDateAndTime = "";
@@ -47,7 +46,7 @@ public class Event extends Task {
      * @param description Full description of deadline task.
      * @param at dateAndTime in which event is going to take place.
      */
-    public Event (String description, String at) {
+    public Event(String description, String at) {
         super(description);
         this.at = at.trim();
 
@@ -57,7 +56,7 @@ public class Event extends Task {
 
         formattedDateAndTime = formattedDate + ", " + formattedTime;
 
-        if(!formattedDateAndTime.equals("")){
+        if (!formattedDateAndTime.equals("")) {
             this.at = formattedDateAndTime;
         }
     }
@@ -69,7 +68,7 @@ public class Event extends Task {
     public void processDate(String dateInString) {
         String[] splitDates = dateInString.split("/");
         int size = splitDates.length;
-        if(size == 3) {
+        if (size == 3) {
             String date = splitDates[0];
             String month = splitDates[1];
             String year = splitDates[2];
@@ -99,7 +98,7 @@ public class Event extends Task {
         } else {
             amOrPm = "am";
         }
-        if(min == 0) {
+        if (min == 0) {
             formattedTime = hour + amOrPm + "";
         } else {
             formattedTime = hour + "." + min + amOrPm;

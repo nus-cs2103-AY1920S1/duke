@@ -1,7 +1,7 @@
 # User Guide
 
 
- ## Introduction
+## Introduction
  ![intro](public/intro.png)  
  
  Ever wondered what it would be like to have the *Mad Titan* manage your tasks for you? Wait no more!  
@@ -10,7 +10,7 @@
  ever feel overwhelmed, you may be able to persuade Thanos to use the powers of the *Infinity Gauntlet* to help you 
  balance your tasks better.
  
- ## Quickstart
+## Quickstart
  1. Ensure Java 11 is downloaded on your computer. To check if you have Java installed, type `java  --version` into your
   command line.
  2. Download the `.jar` file from here.

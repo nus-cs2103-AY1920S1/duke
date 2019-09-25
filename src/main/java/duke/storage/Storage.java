@@ -150,7 +150,8 @@ public class Storage {
     private String serializeTask(final Task task) {
         List<String> tokens = new ArrayList<>(List.of(
             TASK_SHORT_NAME_MAP.get(task.getClass()),
-            TASK_STATUS_MAP.get(task.isDone())
+            TASK_STATUS_MAP.get(task.isDone()),
+            task.getDescription()
         ));
         if (task instanceof Event) {
             tokens.add(((Event) task).getAtString());

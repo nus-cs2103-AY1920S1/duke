@@ -30,10 +30,12 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, UI ui, Storage storage) throws DukeException {
+
         super.execute(taskList, ui, storage);
         checkValidity();
 
         ui.listTasks(taskList);
+
     }
 
 }

@@ -116,6 +116,11 @@ public abstract class Task {
 
     }
 
+    /**
+     * Appends a priority description to tasks with priority.
+     *
+     * @return the description.
+     */
     public String priorityDescription() {
 
         return "**** Priority ****";

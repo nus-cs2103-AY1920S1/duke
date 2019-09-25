@@ -9,5 +9,11 @@ T, 0, water plants
 E, 0, team meeting, 3/3/2019 1700
 T, 0, practice papers
 D, 0, finish homework, 1/2/2019 1800
-T, 1, read textbooks
+T, 0, read textbooks
 T, 0, do work
+T, 0, run later
+T, 0, yoga
+T, 0, read books
+T, 0, read me
+T, 0, read me
+T, 0, write notes

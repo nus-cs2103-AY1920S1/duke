@@ -7,13 +7,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
+
+import javax.swing.plaf.ColorUIResource;
 
 /**
  * An example of a custom control using FXML.
@@ -26,8 +35,8 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private static Image USER_IMAGE = new Image(DialogBox.class.getResourceAsStream("/images/DaUser.png"));
-    private static Image DUKE_IMAGE = new Image(DialogBox.class.getResourceAsStream("/images/DaDuke.png"));
+    private static Image USER_IMAGE = new Image(DialogBox.class.getResourceAsStream("/images/DaUserTransparent.png"));
+    private static Image DUKE_IMAGE = new Image(DialogBox.class.getResourceAsStream("/images/DaDukeTransparent.png"));
 
     private DialogBox(String text, Image img) {
         try {
@@ -40,7 +49,9 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+        // When list gets too long (vertically)
+        dialog.setMinHeight(Label.USE_PREF_SIZE);
+        dialog.setWrapText(true);
         displayPicture.setImage(img);
     }
 
@@ -55,11 +66,14 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text) {
-        return new DialogBox(text, USER_IMAGE);
+        var db = new DialogBox(text, USER_IMAGE);
+        db.dialog.setId("userLabel");
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text) {
         var db = new DialogBox(text, DUKE_IMAGE);
+        db.dialog.setId("dukeLabel");
         db.flip();
         return db;
     }

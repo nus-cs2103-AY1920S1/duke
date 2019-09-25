@@ -110,6 +110,8 @@ public class Parser {
             }
             break;
 
+        case "find":
+            return new FindCommand(nextCommand[1]);
 
         default:
             break;

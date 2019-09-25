@@ -16,6 +16,10 @@ public abstract class Task {
         isDone = true;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public abstract String toFile();
 
     @Override

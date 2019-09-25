@@ -44,6 +44,13 @@ public class UI {
 
     }
 
+    public static void findStart(){
+        System.out.println("    ____________________________________________________________\n" +
+                "     Here are the matching tasks in your list:");
+    }
 
+    public static void endLine() {
+        System.out.println("    ____________________________________________________________");
+    }
 
 }

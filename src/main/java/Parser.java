@@ -107,10 +107,6 @@ public class Parser {
             assert !(by == null);
             tasks.add(new Deadline(taskDescription, by));
             storage.append(tasks.getLast());
-            if (noClash(by)) {
-                tasks.add(new Deadline(taskDescription, by));
-                storage.append(tasks.getLast());
-            }
         } else {
             throw new Exception();
         }
@@ -130,8 +126,6 @@ public class Parser {
             String at = fullDescription[1];
             assert !(taskDescription == null);
             assert !(at == null);
-            tasks.add(new Event(taskDescription, at));
-            storage.append(tasks.getLast());
             if (noClash(at)) {
                 tasks.add(new Event(taskDescription, at));
                 storage.append(tasks.getLast());
@@ -170,12 +164,8 @@ public class Parser {
     public boolean noClash(String timeAndDate) {
         ArrayList<Task> list = tasks.getList();
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) instanceof Deadline) {
-                if (((Deadline) list.get(i)).getBy().equals(timeAndDate)) {
-                    return false;
-                }
-            } else if (list.get(i) instanceof Event) {
-                if (((Event) list.get(i)).getAt().equals(timeAndDate)) {
+            if(list.get(i) instanceof  Event) {
+                if(((Event) list.get(i)).getAt().equals(timeAndDate)) {
                     return false;
                 }
             }

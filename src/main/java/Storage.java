@@ -51,23 +51,18 @@ public class Storage {
         FileReader fileReader = new FileReader(file);
         Scanner sc = new Scanner(fileReader);
         while (sc.hasNextLine()) {
-            try {
-                String[] task = sc.nextLine().replaceAll(", ", ",").split(",");
+            String[] task = sc.nextLine().replaceAll(", ", ",").split(",");
 
-                if (task[0].equals("T")) {
-                    Task newTask = new Todo(task[2]);
-                    list.add(newTask);
-                } else if (task[0].equals("D")) {
-                    Task newTask = new Deadline(task[2], task[3]);
-                    list.add(newTask);
-                } else if (task[0].equals("E")) {
-                    Task newTask = new Event(task[2], task[3]);
-                    list.add(newTask);
-                }
-            } catch (ParseException e) {
-                System.out.println("Parse Exception");
+            if (task[0].equals("T")) {
+                Task newTask = new Todo(task[2]);
+                list.add(newTask);
+            } else if (task[0].equals("D")) {
+                Task newTask = new Deadline(task[2], task[3]);
+                list.add(newTask);
+            } else if (task[0].equals("E")) {
+                Task newTask = new Event(task[2], task[3]);
+                list.add(newTask);
             }
-
         }
         return list;
     }

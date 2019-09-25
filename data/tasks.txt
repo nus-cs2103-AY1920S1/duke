@@ -1,19 +1,3 @@
-E, 0, team meeting, 24/9/2019 1600
-T, 0, run later
-T, 0, exercise later
-D, 0, cs2103t, 4/2/2019 1700
-E, 0, meet friend, 2/3/2019 1600
-T, 0, water plants
-T, 0, grow plants
-T, 0, water plants
-E, 0, team meeting, 3/3/2019 1700
-T, 0, practice papers
-D, 0, finish homework, 1/2/2019 1800
-T, 0, read textbooks
-T, 0, do work
-T, 0, run later
-T, 0, yoga
-T, 0, read books
-T, 0, read me
-T, 0, read me
-T, 0, write notes
+T, 1, fry patties
+D, 0, make patties, 12th of October 2019, 12pm
+E, 0, serve patties, 13th of November 2019, 11am

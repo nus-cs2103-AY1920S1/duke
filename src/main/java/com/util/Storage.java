@@ -3,14 +3,10 @@ package com.util;
 import com.tasks.*;
 import com.exceptions.*;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 
 /**
  * Class responsible for loading and saving tasks
@@ -27,10 +23,19 @@ public class Storage {
     private String filePath;
     private File file;
     private boolean doesFileExist;
+    private static String storageFileName = "duke.txt";
+
     public Storage () {
-        this.filePath = "F:\\CS2103\\duke\\data\\duke.txt";
+        //this.filePath = "F:\\CS2103\\duke\\data\\duke.txt";
+        this.filePath = getFilePath();
         this.file = new File(filePath);
         this.doesFileExist = file.exists();
+    }
+
+    private String getFilePath() {
+        String currDir = System.getProperty("user.dir");
+        String dataDir = currDir + File.separator + storageFileName;
+        return dataDir;
     }
 
     /**

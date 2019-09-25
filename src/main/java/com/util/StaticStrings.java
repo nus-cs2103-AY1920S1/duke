@@ -24,7 +24,7 @@ public class StaticStrings {
 
     public static final String ERROR_FILE_NOT_FOUND = "File not found at given file path. Error in creating new file there. :-(";
     public static final String ERROR_READ_FROM_FILE = "Woah! File not written in the right format. :-( ";
-    public static final String ERROR_SAVE_FROM_FILE = "Whoops! There was an error in saving to the file.";
+    public static final String ERROR_SAVE_FROM_FILE = "Whoops! There was an error in saving to the file. All changes made will not be saved.";
 
     // Exception messages when executing Commands
 

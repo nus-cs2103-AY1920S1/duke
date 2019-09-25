@@ -24,11 +24,19 @@ public class StatsStorage {
     private String fp;
     private File f;
     private boolean doesFileExist;
+    private static String statsStorageFileName = "dukeStats.txt";
 
     public StatsStorage() {
-        this.fp = "F:\\CS2103\\duke\\data\\dukeStats.txt";
+        //this.fp = "F:\\CS2103\\duke\\data\\dukeStats.txt";
+        this.fp = getFilePath();
         this.f = new File(fp);
         this.doesFileExist = f.exists();
+    }
+
+    private String getFilePath() {
+        String currDir = System.getProperty("user.dir");
+        String dataDir = currDir + File.separator + statsStorageFileName;
+        return dataDir;
     }
 
     public ArrayList<Log> load() {

@@ -8,11 +8,18 @@ public class TagCommand extends Command {
     private int index;
     private String tag;
 
+    /**
+     * Constructor for a tag command.
+     *
+     * @param index index of the Task to tag to.
+     * @param tag word that will be tagged to the Task.
+     */
     public TagCommand(int index, String tag) {
         super();
         this.index = index;
         this.tag = tag;
     }
+
     /**
      * Executes the command, adds tag to the task of specified index.
      * Throws exception if task is not found.
@@ -31,7 +38,7 @@ public class TagCommand extends Command {
         Task task = tasks.getTask(index);
         task.addTag(tag);
         storage.writeToHardDisk(tasks);
-        return ui.printTagMessage(tag, task, tasks);
+        return ui.printTagMessage(tag, task);
     }
 
     /**

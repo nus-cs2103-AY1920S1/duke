@@ -13,7 +13,7 @@ import java.util.ArrayList;
 class Storage {
     private String filepath;
     private ArrayList<Task> alist;
-    final char TICK = '\u2713';
+    private final char tick = '✓';
 
     Storage(String filepath) {
         this.filepath = filepath;
@@ -65,7 +65,7 @@ class Storage {
         if (!tags.isEmpty()) {
             loadTags(tags, todo);
         }
-        if (symbol == TICK) {
+        if (symbol == tick) {
             todo.markDone();
         }
         alist.add(todo);
@@ -76,7 +76,7 @@ class Storage {
         if (!tags.isEmpty()) {
             loadTags(tags, deadline);
         }
-        if (symbol == TICK) {
+        if (symbol == tick) {
             deadline.markDone();
         }
         alist.add(deadline);
@@ -87,7 +87,7 @@ class Storage {
         if (!tags.isEmpty()) {
             loadTags(tags, event);
         }
-        if (symbol == TICK) {
+        if (symbol == tick) {
             event.markDone();
         }
         alist.add(event);

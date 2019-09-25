@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
  */
 public class Event extends Task {
     private Date date;
-    final static String EVENT_TYPE = "E";
+    static final String EVENT_TYPE = "E";
 
     public Event(String description) {
         super(description);

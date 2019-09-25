@@ -29,6 +29,11 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param filePath filepath of duke.txt
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

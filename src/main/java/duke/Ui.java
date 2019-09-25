@@ -75,8 +75,8 @@ class Ui {
      * Prints delete command message.
      */
     String printDeleteMessage(Task task, TaskList tasks) {
-        return "Noted. I've removed this task:\n" + task +
-                "\n" + "Now you have " + tasks.getListSize() + " tasks in the list.";
+        return "Noted. I've removed this task:\n" + task
+                + "\n" + "Now you have " + tasks.getListSize() + " tasks in the list.";
     }
 
     /**
@@ -91,13 +91,13 @@ class Ui {
      * Prints add command message.
      */
     String printAddMessage(Task task, TaskList tasks) {
-        return "Got it. I've added this task:" + task +
-                "\n" + "Now you have " + tasks.getListSize() + " tasks in the list.";
+        return "Got it. I've added this task:" + task
+                + "\n" + "Now you have " + tasks.getListSize() + " tasks in the list.";
     }
 
-    String printTagMessage(String tag, Task task, TaskList tasks) {
-        return "Noted. I've tagged this task:" + task +
-                "\n" + " as #" + tag;
+    String printTagMessage(String tag, Task task) {
+        return "Noted. I've tagged this task:" + task
+                + "\n" + " as #" + tag;
     }
 
     /**

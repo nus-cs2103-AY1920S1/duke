@@ -5,7 +5,7 @@ package duke;
  * a task to be done.
  */
 public class Todo extends Task {
-    final static String TODO_TYPE = "T";
+    static final String TODO_TYPE = "T";
 
     public Todo(String description) {
         super(description);

@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
  */
 public class Deadline extends Task {
     private Date date;
-    final static String DEADLINE_TYPE = "D";
+    static final String DEADLINE_TYPE = "D";
 
     public Deadline(String description) {
         super(description);

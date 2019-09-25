@@ -83,3 +83,8 @@ jacocoTestReport {
         html.enabled = true
     }
 }
+
+coveralls {
+    saveAsFile = true
+    sendToCoveralls = false
+}

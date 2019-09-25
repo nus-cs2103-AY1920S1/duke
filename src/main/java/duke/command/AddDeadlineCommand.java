@@ -48,16 +48,16 @@ public class AddDeadlineCommand extends Command {
      * @param storage is not used here.
      * @throws DukeException if list of tasks is full or if dateTime provided is invalid.
      */
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
         if (tasklist.size() >= 100) {
             throw new ListFullException();
         } else {
             DateTime dateTime = new DateTime(deadline);
             tasklist.add(new Deadline(task, dateTime.toReformat()));
             Task thing = tasklist.get(tasklist.size() - 1);
-            ui.sendMessage("Got it. I've added this task: ");
-            ui.sendMessage("  " + thing.toString());
-            ui.sendMessage(String.format("Now you have %d tasks in the list.", tasklist.size()));
+            return "Got it. I've added this task: \n"
+                    + "  " + thing.toString() + "\n"
+                    + String.format("Now you have %d tasks in the list.", tasklist.size());
         }
     }
 }

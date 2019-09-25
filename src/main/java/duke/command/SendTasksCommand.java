@@ -26,12 +26,13 @@ public class SendTasksCommand extends Command {
      * @param ui user interface to inform user what tasks are available.
      * @param storage is not used here.
      */
-    public void execute(TaskList tasklist, Ui ui, Storage storage) {
-        ui.sendMessage("Here are the tasks in your list: ");
+    public String execute(TaskList tasklist, Ui ui, Storage storage) {
+        StringBuilder temp = new StringBuilder("Here are the tasks in your list: \n");
         for (int i = 0; i < tasklist.size(); i++) {
             Task item = tasklist.get(i);
-            ui.sendMessage((i + 1) + "." + item.toString());
+            temp.append((i + 1) + "." + item.toString() + "\n");
         }
+        return temp.toString();
     }
 
 }

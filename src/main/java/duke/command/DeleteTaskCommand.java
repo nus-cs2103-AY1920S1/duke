@@ -43,7 +43,7 @@ public class DeleteTaskCommand extends Command {
      * @param storage is not used here.
      * @throws DukeException if task index is invalid.
      */
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
         // convert string to int
         int index = Integer.parseInt(itemIndex) - 1;
         if (index < 0 || index >= tasklist.size()) {
@@ -52,9 +52,9 @@ public class DeleteTaskCommand extends Command {
             Task item = tasklist.get(index);
             // delete task
             tasklist.remove(index);
-            ui.sendMessage("Noted. I've removed this task: ");
-            ui.sendMessage("  " + item.toString());
-            ui.sendMessage(String.format("Now you have %d tasks in the list.", tasklist.size()));
+            return "Noted. I've removed this task: \n"
+                    + "  " + item.toString() + "\n"
+                    + String.format("Now you have %d tasks in the list.", tasklist.size());
         }
     }
 

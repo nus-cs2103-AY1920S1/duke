@@ -45,7 +45,7 @@ public class ParserTest {
                     new Parser("done").parse("done"));
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! Please indicate a task index.", e.toString());
+            assertEquals("OOPS!!! Please indicate a task index.", e.toString());
         }
     }
 
@@ -56,7 +56,7 @@ public class ParserTest {
                     new Parser("todo").parse("todo"));
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! The description of a todo cannot be empty.", e.toString());
+            assertEquals("OOPS!!! The description of a todo cannot be empty.", e.toString());
         }
     }
 
@@ -67,7 +67,7 @@ public class ParserTest {
                     new Parser("deadline").parse("deadline"));
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! The description of a deadline cannot be empty.", e.toString());
+            assertEquals("OOPS!!! The description of a deadline cannot be empty.", e.toString());
         }
     }
 
@@ -78,7 +78,7 @@ public class ParserTest {
                     new Parser("deadline return book ").parse("deadline return book "));
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! Please provide a date and time.", e.toString());
+            assertEquals("OOPS!!! Please provide a date and time.", e.toString());
         }
     }
 
@@ -90,7 +90,7 @@ public class ParserTest {
                             + "project meeting /at "));
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! Please provide a date and time.", e.toString());
+            assertEquals("OOPS!!! Please provide a date and time.", e.toString());
         }
     }
 
@@ -101,7 +101,7 @@ public class ParserTest {
                     new Parser("event").parse("event"));
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! The description of an event cannot be empty.", e.toString());
+            assertEquals("OOPS!!! The description of an event cannot be empty.", e.toString());
         }
     }
 
@@ -112,7 +112,7 @@ public class ParserTest {
                     new Parser("delete").parse("delete"));
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! Please indicate a task index.", e.toString());
+            assertEquals("OOPS!!! Please indicate a task index.", e.toString());
         }
     }
 
@@ -122,7 +122,7 @@ public class ParserTest {
             assertEquals(new SendTasksCommand(), new Parser("blah").parse("blah"));
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", e.toString());
+            assertEquals("OOPS!!! I'm sorry, but I don't know what that means :-(", e.toString());
         }
     }
 
@@ -132,7 +132,7 @@ public class ParserTest {
             assertEquals(new FindCommand("book"), new Parser("find").parse("find"));
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! Please indicate keyword to be searched.", e.toString());
+            assertEquals("OOPS!!! Please indicate keyword to be searched.", e.toString());
         }
     }
 }

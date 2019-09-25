@@ -1,13 +1,7 @@
 T | 1 | borrow book
 T | 0 | read book
-D | 0 | return book  |  Saturday 5pm
-E | 1 | project meeting  |  tomorrow 3-6pm
-D | 0 | project increments  |  Thursday 2359
-D | 1 | return book  | 2nd of December 2019, 6.0pm
 D | 0 | return book  |  2nd of December 2019, 6pm
 D | 0 | finish readings  |  23rd of July 2023, 12:59am
-E | 1 | wedding dinner  |  30th of October 2025, 9:20pm
 T | 1 | finish project
 E | 0 | dinner  |  2nd of December 2019, 6pm
-D | 0 | finish project  |  3rd of January 2020, 6:10pm
-D | 0 | todo event  |  14th of April 1995, 11:59am
+D | 1 | finish project  |  3rd of January 2020, 6:10pm

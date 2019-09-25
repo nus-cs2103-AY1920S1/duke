@@ -56,7 +56,7 @@ public class MainWindowController extends AnchorPane {
         scrollPane.vvalueProperty()
                 .bind(dialogContainer.heightProperty());
         dialogContainer.getChildren()
-                .add(new ThanosDialogController("Hello! I am inevitable.\nWhat can I do for you?", thanosImage));
+                .add(new ThanosDialogController("I am... inevitable.\nWhat can I do for you?", thanosImage));
     }
 
     @FXML
@@ -73,7 +73,8 @@ public class MainWindowController extends AnchorPane {
 
         if (input.equals("bye")) {
             doAfter(300, () -> dialogList.add(
-                    new ThanosDialogController(StringUtils.indent("Bye. Hope to see you again soon!"),
+                    new ThanosDialogController(
+                            "I finally rest. And watch the sun rise on a grateful universe.",
                             thanosImage)));
 
             doAfter(1000, () -> {

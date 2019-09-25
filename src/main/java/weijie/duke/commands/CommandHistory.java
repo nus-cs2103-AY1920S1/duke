@@ -32,7 +32,7 @@ public class CommandHistory {
 
     TaskResponse undo() {
         if (presentState <= 0) {
-            return new TaskResponse("There is no command to undo!", new ArrayList<>());
+            return new TaskResponse("There is no command to undo.", new ArrayList<>());
         }
 
         presentState--;
@@ -41,7 +41,7 @@ public class CommandHistory {
 
     TaskResponse redo() {
         if (presentState >= commandStateHistory.size() || presentState >= maxIndex) {
-            return new TaskResponse("There is no command to redo!", new ArrayList<>());
+            return new TaskResponse("There is no command to redo.", new ArrayList<>());
         }
 
         TaskResponse taskResponse = commandStateHistory.get(presentState).redo();

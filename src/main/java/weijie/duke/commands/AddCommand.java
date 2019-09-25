@@ -63,10 +63,11 @@ public abstract class AddCommand implements ITaskCommand {
 
     private String getResponseFormat() {
         int size = repo.getSize();
-        return "Got it. I've added this task:\n  %s\nNow you have " + size + " tasks in the list.";
+        return "I hope they remember you:\n  %s\nNow you have " + size + " tasks in the list.";
     }
 
     private String getUndoResponseFormat() {
-        return "Undid previous command.\nThis task was removed:\n  %s";
+        return "The hardest choices require the strongest wills." +
+                "\nThis task was removed:\n  %s";
     }
 }

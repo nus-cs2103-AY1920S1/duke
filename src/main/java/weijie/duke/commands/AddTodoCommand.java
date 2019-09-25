@@ -21,7 +21,7 @@ public class AddTodoCommand extends AddCommand {
 
         if (description.isEmpty()) {
             return new TaskResponse(
-                    new DukeInvalidInputException("☹ OOPS!!! The description of a todo cannot be empty."));
+                    new DukeInvalidInputException("The description of a todo cannot be empty."));
         }
 
         Task task = new Todo(description);

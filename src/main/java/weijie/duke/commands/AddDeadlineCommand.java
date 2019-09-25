@@ -24,7 +24,7 @@ public class AddDeadlineCommand extends AddCommand {
         String[] descriptionAndDate = input.split(" /by ");
 
         if (descriptionAndDate.length <= 1) {
-            return new TaskResponse(new DukeInvalidInputException("☹ OOPS!!! Must specify date and time for deadline"));
+            return new TaskResponse(new DukeInvalidInputException("Specify date and time for deadline"));
         }
 
         LocalDateTime dateTime;
@@ -32,7 +32,7 @@ public class AddDeadlineCommand extends AddCommand {
             dateTime = LocalDateTime.parse(descriptionAndDate[1].trim(), DateUtils.DUKE_DATETIME_PARSE_FORMAT);
         } catch (DateTimeParseException e) {
             return new TaskResponse(
-                    new DukeInvalidInputException("☹ OOPS!!! Date and time must be in the format DD/MM/YYYY HHMM"));
+                    new DukeInvalidInputException("Date and time must be in the format DD/MM/YYYY HHMM"));
         }
 
         Task task = new Deadline(descriptionAndDate[0], dateTime);

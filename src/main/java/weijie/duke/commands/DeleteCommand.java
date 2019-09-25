@@ -26,14 +26,14 @@ public class DeleteCommand implements ITaskCommand {
 
         if (args.length < 2) {
             return new TaskResponse(
-                    new DukeInvalidInputException("☹ OOPS!!! Please input the number of the task to mark as done."));
+                    new DukeInvalidInputException("Input the number of the task to delete."));
         }
 
         int id = Integer.parseInt(args[1]) - 1;
 
         if (id >= repo.getSize()) {
             return new TaskResponse(
-                    new DukeInvalidInputException("☹ OOPS!!! Task with that number does not exist!"));
+                    new DukeInvalidInputException("A task with that number does not exist."));
         }
 
         Task toBeDeleted = repo.get(id);
@@ -47,7 +47,7 @@ public class DeleteCommand implements ITaskCommand {
 
         int size = repo.getSize();
 
-        String responseFormat = "Noted. I've removed this task:\n  " + toBeDeleted.getDescription()
+        String responseFormat = "Gone. Reduced to atoms:\n  " + toBeDeleted.getDescription()
                 + "\nNow you have " + size + " tasks in the list.";
         return new TaskResponse(responseFormat, Collections.singletonList(toBeDeleted));
     }
@@ -61,7 +61,7 @@ public class DeleteCommand implements ITaskCommand {
 
                 try {
                     repo.insert(deletedTaskIndex, deletedTask);
-                    return new TaskResponse("Undid delete command.\nThis task was restored:\n  %s",
+                    return new TaskResponse("Now is no time at all.\nThis task was restored:\n  %s",
                             Collections.singletonList(deletedTask));
 
                 } catch (DukeIoException e) {

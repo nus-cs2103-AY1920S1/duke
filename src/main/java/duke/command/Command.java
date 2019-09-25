@@ -25,7 +25,7 @@ public abstract class Command {
      */
     boolean isSaved(TaskList tasks, Storage storage) {
         try {
-            storage.saveDataToFile(tasks.getAllTasks());
+            storage.saveDataToFile(tasks.getAllTasks(), false);
             return true;
         } catch (IOException e) {
             return false;

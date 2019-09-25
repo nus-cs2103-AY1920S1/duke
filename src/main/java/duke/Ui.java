@@ -64,6 +64,15 @@ public class Ui {
     }
 
     /**
+     * Returns Duke archiving message.
+     *
+     * @return String Duke archiving message.
+     */
+    public String showArchive() {
+        return "Archived all done tasks at " + Constants.ARCHIVE;
+    }
+
+    /**
      * Returns Duke successfully added task.
      *
      * @return String Duke successfully added task.

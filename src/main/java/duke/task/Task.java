@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.Constants;
+
 /**
  * Task class represents an act a user wants to perform.
  *
@@ -31,8 +33,8 @@ public class Task {
         this.description = description;
     }
 
-    private String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    public String getStatusIcon() {
+        return (isDone ? Constants.TICK : Constants.CROSS); //return tick or X symbols
     }
 
     /**
@@ -69,4 +71,6 @@ public class Task {
         }
         return " | " + isDoneInt + " | " + description;
     }
+
+
 }

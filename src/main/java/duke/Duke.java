@@ -45,7 +45,7 @@ public class Duke extends Application {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("/Users/stephenchua/duke/src/main/data/duke.txt");
+        storage = new Storage(Constants.DATASTORE);
 
         String dukeText;
         try {

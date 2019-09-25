@@ -1,0 +1,9 @@
+T | 1 | new book
+T | 1 | fun run
+T | 1 | good
+T | 1 | food
+T | 1 | shower
+T | 1 | ba
+T | 1 | bad
+T | 1 | tea
+T | 1 | music

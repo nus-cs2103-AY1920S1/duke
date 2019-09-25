@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.AddCommand;
+import duke.command.ArchiveCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
@@ -93,6 +94,8 @@ class Parser {
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException(" ☹ OOPS!!! You must input a search term");
             }
+        } else if (fullCommand.startsWith("archive")) {
+            return new ArchiveCommand();
 
         } else {
             throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

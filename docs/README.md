@@ -26,7 +26,7 @@ Command | What Duke does | CLI entry format
 
 **Product Screenshot**
 
-![alt text](https://github.com/atharvjoshi/duke/blob/master/docs/Ui.png)
+![](Ui.png)
 
 
 # Acknowledgements

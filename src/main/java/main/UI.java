@@ -73,4 +73,19 @@ public interface UI {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(" " + task);
     }
+
+    /**
+     * Prints the first portion of a find Command.
+     */
+    public static void findStart(){
+        System.out.println("    ____________________________________________________________\n" +
+                "     Here are the matching tasks in your list:");
+    }
+
+    /**
+     * Prints a plain line.
+     */
+    public static void endLine() {
+        System.out.println("    ____________________________________________________________");
+    }
 }

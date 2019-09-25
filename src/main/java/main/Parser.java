@@ -1,14 +1,6 @@
 package main;
 
-import command.ByeCommand;
-import command.Command;
-import command.DeadlineCommand;
-import command.DeleteCommand;
-import command.DoneCommand;
-import command.EventCommand;
-import command.ListCommand;
-import command.TodoCommand;
-import command.UnknownCommand;
+import command.*;
 import exception.DeleteException;
 import exception.DoneException;
 import exception.DukeException;
@@ -150,6 +142,8 @@ public class Parser {
             }
             break;
 
+        case "find":
+            return new FindCommand(nextCommand[1]);
 
         default:
             break;

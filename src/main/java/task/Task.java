@@ -31,6 +31,15 @@ public abstract class Task {
     }
 
     /**
+     * Returns the name of the Task.
+     *
+     * @return String which is the name of the Task.
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
      * Returns a String representing the Task in a format to be saved into the hard disk's storage file.
      *
      * To be implemented by each individual Task class.

@@ -1,6 +1,6 @@
 # Currents - User Guide 
 
-<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/currents1.jpg">
+<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/currents2.jpg" width="582" height="142">
 
 ## Features of Currents
 

@@ -1,20 +1,23 @@
 package utilities;
 
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+
 import expense.Expense;
 import expense.RandomExpense;
 import task.Deadline;
 import task.Event;
 import task.Task;
 import task.ToDo;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 
 /**
  * Utilities.Storage enables data to be retrieved and stored in the text file.
@@ -23,6 +26,7 @@ public class Storage {
 
     private String filename;
     private String lineBreak = "_____EXPENSES_____";
+    private File file;
 
     /**
      * constructor.
@@ -31,6 +35,20 @@ public class Storage {
      */
     public Storage(String filename) {
         this.filename = filename;
+
+        File directory = new File(String.valueOf(Path.of(filename).getParent()));
+        if (!directory.isDirectory()) {
+            directory.mkdirs();
+        }
+
+        this.file = new File(filename);
+        if (!file.isFile()) {
+           try {
+               file.createNewFile();
+           } catch (IOException e) {
+               System.out.println("Error reading file");
+           }
+        }
     }
 
     /**
@@ -43,10 +61,12 @@ public class Storage {
     public ArrayList<Task> load() throws Exception  {
         ArrayList<Task> list = new ArrayList<>();
 
-        BufferedReader br = Files.newBufferedReader(Paths.get(filename));
+        FileReader filereader = new FileReader(file);
+        BufferedReader br = new BufferedReader(filereader);
         String lineToRead;
+        lineToRead = br.readLine();
 
-        while (!(lineToRead = br.readLine()).equals(lineBreak)) {
+        while ((lineToRead!=null) && (!lineToRead.equals(lineBreak))) {
             if ((!lineToRead.equals("")) && (lineToRead.charAt(0) == 'T')) {
                 Task newTask = ToDo.outputAsToDo(lineToRead);
                 list.add(newTask);
@@ -57,6 +77,7 @@ public class Storage {
                 Task newTask = Event.outputAsEvent(lineToRead);
                 list.add(newTask);
             }
+            lineToRead = br.readLine();
         }
         return list;
 

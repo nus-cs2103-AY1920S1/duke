@@ -1,12 +1,3 @@
-[T][?] asd
-[Expenses] $312.23 (on: grocerires)
-[T][?] asdasd
-[T][?] vckjnbxkjmvsd
-[T][?] xkcvnjk
-[T][?] jkznjzxc
-[T][?] cjvkbxjmvs
-[D][?] adas (by: 3rd of March 2043, 10:22 am)
-[T][?] go gym
-[T][?] asdas
-[T][?] hello wellow jello
-[T][?] knckajamcalskmclzkxmclksnczlkxmcalsnczlkxmcalsknczlkxnclasncslnckzc
+[E][?] party (at: 20th of June 2021, 5:00 pm)
+[D][?] essay (by: 30th of May 2023, 11:59 pm)
+[Expenses] $45.20 (on: steak)

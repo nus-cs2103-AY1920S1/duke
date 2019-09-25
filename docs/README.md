@@ -1,11 +1,11 @@
 # Currents - User Guide 
 
-<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/currents2.jpg" width="582" height="142">
+<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/currents.jpg" width="291" height="71">
 
 ## Features of Currents
 
 #### Todo: `todo`
-Allows you to track tasks that needs to be done. 
+Allows you to track tasks that needs to be done and adds it to a list. 
 
 #### Deadline: `deadline`
 Reminds you of your upcoming deadlines and adds it to a list. 
@@ -39,17 +39,12 @@ Closes the application.
 
 Command | Example | Expected Outcome | Description
 ---------------|---------------|---------------|---------------
-`todo` | todo go gym | 
-
-
-
-
-
-"    Todo \n" + "        Eg. todo __(task)__\n"
-                + "    Event \n" + "        Eg. event __(task)__ /at _(dd/MM/yyyy)_(hhmm)__\n"
-                + "    Deadline \n" + "        Eg. deadline __(task)__ /by _(dd/MM/yyyy)_(hhmm)__\n"
-                + "    Delete \n" + "        Eg. delete __(number)__ or delete all\n"
-                + "    Done \n" + "        Eg. done __(number)__\n"
-                + "    Find \n" + "        Eg. find __(keyword)__\n"
-                + "    Expenses \n" + "        Eg. expenses __$(amount)__ /on __(what you spent on)__\n"
-                + "    List \n" + "    Help\n" + "    Bye\n";
+`todo <task>` | todo go gym | <img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/todo.jpg" width="291" height="71"> | Add a new to do task.
+`event <description> /at <dd/MM/yyyy> <hhmm>` | event party /at 20/06/2021 1700 | <img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/event.jpg" width="291" height="71"> | Add a new event task.
+`deadline <description> /by <dd/MM/yyyy> <hhmm>` | deadline essay /by 30/05/2023 2359 | <img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/deadline.jpg" width="291" height="71"> | Add a new deadline task.
+`done <taskNumber>` | done 1 | <img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/done.jpg" width="291" height="71"> | Ticks off a todo/event/deadline task.
+`delete <taskNumber>` | delete 1 | <img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/delete.jpg" width="291" height="71"> | Deletes a tasks from the list
+`find <keyword>` | find essay | <img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/find.jpg" width="291" height="71"> | Find the words that match with your input and prints out corresponding tasks.
+`expenses $<amount> /on <description>` | expenses $45.20 /on steak | <img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/expenses.jpg" width="291" height="71"> | Adds an expense to the list.
+`list` | list | <img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/list.jpg" width="291" height="71"> | Prints out everything that you have added to your list.
+`help` | help |  | Prints out all the command that you can use in the application.

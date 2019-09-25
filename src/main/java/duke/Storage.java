@@ -37,8 +37,9 @@ public class Storage {
      *
      * @return List list of tasks.
      * @throws IOException If there has been IOException while reading from the file.
+     * @throws DukeException If there has been corrupted data in the file.
      */
-    public List<Task> load() throws IOException {
+    public List<Task> load() throws IOException, DukeException {
 
         List<Task> tasks = new ArrayList<>(100);
         if (!file.createNewFile()) {
@@ -47,23 +48,23 @@ public class Storage {
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             String line;
-
-            while ((line = br.readLine()) != null) {
-                String[] lines = line.split(" \\| ");
-                boolean isDone;
-                if (lines[1].equals("1")) {
-                    isDone = true;
-                } else {
-                    isDone = false;
-                }
-                if (lines[0].equals("T")) {
-                    tasks.add(new Todo(lines[2], isDone));
-                } else if (lines[0].equals("D")) {
-                    tasks.add(new Deadline(lines[2], lines[3], isDone));
-                } else if (lines[0].equals("E")) {
-                    tasks.add(new Event(lines[2], lines[3], isDone));
-                } else {
-                    System.out.println("Corrupted data.");
+                while ((line = br.readLine()) != null) {
+                    String[] lines = line.split(" \\| ");
+                    boolean isDone;
+                    if (lines[1].equals("1")) {
+                        isDone = true;
+                    } else {
+                        isDone = false;
+                    }
+                    if (lines[0].equals("T")) {
+                        tasks.add(new Todo(lines[2], isDone));
+                    } else if (lines[0].equals("D")) {
+                        tasks.add(new Deadline(lines[2], lines[3], isDone));
+                    } else if (lines[0].equals("E")) {
+                        tasks.add(new Event(lines[2], lines[3], isDone));
+                    } else {
+                        throw new DukeException("Corrupted data in file.");
+                    }
                 }
             }
 

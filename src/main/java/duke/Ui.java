@@ -69,6 +69,8 @@ public class Ui {
      * @return String Duke successfully added task.
      */
     public String showAddTask(Task task, int size) {
+        assert size >= 0 : "showAddTask should not have a negative size";
+
         String s = "Got it. I've added this task:\n";
         s = appendTask(s, task);
         return appendListSize(s, size);
@@ -80,6 +82,8 @@ public class Ui {
      * @return String Duke successfully deleted task.
      */
     public String showDeleteTask(Task task, int size) {
+        assert size >= 0 : "showDeleteTask should not have a negative size";
+
         String s = "Noted. I've removed this task:\n";
         s = appendTask(s, task);
         return appendListSize(s, size);
@@ -90,6 +94,8 @@ public class Ui {
     }
 
     private String appendListSize(String s, int size) {
+        assert size >= 0 : "appendListSize should not have a negative size";
+
         if (size == 1) {
             return s.concat("Now you have 1 task in the list.");
         } else {
@@ -113,6 +119,7 @@ public class Ui {
      * @return String error message stating the task index does not exist.
      */
     public String showIndexError(int index) {
+        assert index >= 0 : "showIndexError should not have a negative index";
         return " ☹ OOPS!!! There is no task number " + (index + 1) + "\n";
     }
 

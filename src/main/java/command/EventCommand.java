@@ -33,13 +33,13 @@ public class EventCommand implements Command {
      * @param storage The Storage from the main Duke object.
      */
     public void execute(TaskList taskList, Storage storage) {
-            ArrayList<Task> list = taskList.getTaskList();
+        ArrayList<Task> list = taskList.getTaskList();
 
-            Task event = new Event(eventName, date);
+        Task event = new Event(eventName, date);
 
-            taskList.addTaskList(event);
-            UI.newTask(list);
+        taskList.addTaskList(event);
+        UI.newTask(list);
 
-            storage.writeToFile(list);
+        storage.writeToFile(list);
     }
 }

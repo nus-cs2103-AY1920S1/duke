@@ -28,6 +28,7 @@ public class DoneCommand implements Command {
      */
     public void execute(TaskList taskList, Storage storage) {
         ArrayList<Task> list = taskList.getTaskList();
+
         Task currTask = list.get(taskNum);
         currTask.setDone();
         UI.done(currTask);

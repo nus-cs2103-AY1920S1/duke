@@ -1,7 +1,9 @@
 package command;
 
 import java.io.IOException;
-import main.*;
+
+import main.Storage;
+import main.TaskList;
 
 /**
  * An interface to be implemented by all the Command type objects.

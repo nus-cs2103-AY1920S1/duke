@@ -1,6 +1,8 @@
 package command;
 
-import main.*;
+import main.Storage;
+import main.TaskList;
+import main.UI;
 
 /**
  * A Command to handle "bye" inputs resulting in a termination of the Duke program.

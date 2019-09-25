@@ -1,6 +1,14 @@
 package main;
 
-import command.*;
+import command.ByeCommand;
+import command.Command;
+import command.DeadlineCommand;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.EventCommand;
+import command.ListCommand;
+import command.TodoCommand;
+import command.UnknownCommand;
 import exception.DeleteException;
 import exception.DoneException;
 import exception.DukeException;
@@ -30,7 +38,7 @@ public class Parser {
             throw new TaskException();
         }
         String toReturn = "";
-        for(int i = 1; i < command.length; i++) {
+        for (int i = 1; i < command.length; i++) {
             toReturn += command[i] + " ";
         }
 
@@ -52,7 +60,7 @@ public class Parser {
             throw new TaskException();
         }
         String toReturn = "";
-        for(int i = 1; i < command.length; i++) {
+        for (int i = 1; i < command.length; i++) {
             toReturn += command[i] + " ";
         }
 
@@ -86,8 +94,8 @@ public class Parser {
                 } else {
                     return new DoneCommand(Integer.valueOf(nextCommand[1]) - 1);
                 }
-            } catch (DukeException dE) {
-                System.err.println(dE);
+            } catch (DukeException dukeExp) {
+                System.err.println(dukeExp);
             }
             break;
 

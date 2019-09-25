@@ -8,24 +8,23 @@ import java.util.ArrayList;
  * Stores all the different messages to be printed to the console. This class only contains static methods and as such
  * this class will never need to be initialised.
  */
-public class UI {
-    public UI(){}
+public interface UI {
 
     /**
      * Prints the start message when Duke is executed.
      */
-    public static void start() {
-        System.out.println("    ____________________________________________________________\n" +
-                "     Hello! I'm Duke\n" +
-                "     What can I do for you?\n" +
-                "    ____________________________________________________________\n");
+    static void start() {
+        System.out.println("    ____________________________________________________________\n"
+                + "     Hello! I'm Duke\n"
+                + "     What can I do for you?\n"
+                + "    ____________________________________________________________\n");
 
     }
 
     /**
      * Prints the closing message when a ByeCommand is executed.
      */
-    public static void bye() {
+    static void bye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
@@ -34,7 +33,7 @@ public class UI {
      *
      * @param taskList A TaskList instance unique to each instance of Duke.
      */
-    public static void newTask(ArrayList<Task> taskList) {
+    static void newTask(ArrayList<Task> taskList) {
         System.out.println("Got it. I've added this task: ");
         System.out.println("    " + taskList.get(taskList.size() - 1));
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
@@ -48,7 +47,7 @@ public class UI {
      * @param task The Task to be removed from the TaskList.
      * @param listSize The size of the TaskList, after removal of Task.
      */
-    public static void removedTask(Task task, int listSize){
+    static void removedTask(Task task, int listSize){
         System.out.println(" Noted. I've removed this task: ");
         System.out.println("    " + task);
         System.out.println("Now you have " + listSize + " tasks in the list.");
@@ -60,7 +59,7 @@ public class UI {
      *
      * @param taskList A TaskList instance unique to each instance of Duke.
      */
-    public static void numTasks(ArrayList<Task> taskList) {
+    static void numTasks(ArrayList<Task> taskList) {
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
 
     }
@@ -70,12 +69,8 @@ public class UI {
      *
      * @param task The Task designated as done.
      */
-    public static void done(Task task) {
+    static void done(Task task) {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(" " + task);
-
     }
-
-
-
 }

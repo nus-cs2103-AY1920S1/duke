@@ -2,8 +2,10 @@ package command;
 
 import java.util.ArrayList;
 
-import main.*;
 import exception.DeleteException;
+import main.Storage;
+import main.TaskList;
+import main.UI;
 import task.Task;
 
 /**
@@ -37,8 +39,8 @@ public class DeleteCommand implements Command {
             UI.removedTask(task, listSize);
 
             storage.writeToFile(list);
-        } catch (DeleteException dE) {
-            System.err.println(dE);
+        } catch (DeleteException delExp) {
+            System.err.println(delExp);
         }
     }
 }

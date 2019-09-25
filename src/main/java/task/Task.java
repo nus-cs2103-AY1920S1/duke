@@ -14,7 +14,9 @@ public abstract class Task {
     protected String name;
 
 
-    public Task() {}
+    public Task() {
+
+    }
 
     public Task(String name) {
         this.name = name;

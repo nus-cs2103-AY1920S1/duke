@@ -16,7 +16,7 @@ public class Todo extends Task {
      * @return A String representation of this Task formatted for the storage file.
      */
     public String toFile() {
-        if(isDone) {
+        if (isDone) {
             return "T-1-" + name;
         } else {
             return "T-0-" + name;

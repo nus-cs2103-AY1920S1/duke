@@ -1,7 +1,8 @@
 package command;
 
-import java.io.IOException;
-import java.util.ArrayList;import main.*;
+import main.Storage;
+import main.TaskList;
+import main.UI;
 import task.Deadline;
 import task.Task;
 
@@ -31,11 +32,11 @@ public class DeadlineCommand implements Command {
      * @param storage The Storage from the main Duke object.
      */
     public void execute(TaskList taskList, Storage storage) {
-            Task deadline = new Deadline(deadlineName, date);
+        Task deadline = new Deadline(deadlineName, date);
 
-            taskList.addTaskList(deadline);
-            UI.newTask(taskList.getTaskList());
+        taskList.addTaskList(deadline);
+        UI.newTask(taskList.getTaskList());
 
-            storage.writeToFile(taskList.getTaskList());
+        storage.writeToFile(taskList.getTaskList());
     }
 }

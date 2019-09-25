@@ -4,7 +4,9 @@ package exception;
  * An exception which only occurs if an an error is encountered when a UnknownCommand is executed.
  */
 public class UnknownCommandException extends DukeException {
-    public UnknownCommandException() {};
+    public UnknownCommandException() {
+
+    }
 
     @Override
     public String toString() {

@@ -20,8 +20,8 @@ import java.util.Scanner;
  * This allows the list of Tasks to be stored and accessed for subsequent initialisations of Duke.
  */
 public class Storage {
-    private Path p = Paths.get(System.getProperty("user.dir"));
-    private File data = new File(p + "/data/duke.txt");
+    private Path path = Paths.get(System.getProperty("user.dir"));
+    private File data = new File(path + "/data/duke.txt");
 
     public Storage() { }
 
@@ -40,7 +40,7 @@ public class Storage {
         try {
             Scanner sc = new Scanner(data);
 
-            while(sc.hasNextLine()) {
+            while (sc.hasNextLine()) {
                 String[] next = sc.nextLine().split("-");
 
                 switch (next[0]) {
@@ -71,11 +71,14 @@ public class Storage {
                     }
                     toReturn.add(deadline);
                     break;
+
+                default:
+                    break;
                 }
             }
             sc.close();
-        } catch(FileNotFoundException fE) {
-            System.err.println(fE);
+        } catch (FileNotFoundException fileExp) {
+            System.out.println(fileExp);
         }
 
         return toReturn;
@@ -91,8 +94,8 @@ public class Storage {
      */
     public void writeToFile(ArrayList<Task> list) {
         try {
-            Path p = Paths.get(System.getProperty("user.dir"));
-            File data = new File(p + "/data/duke.txt");
+            Path path = Paths.get(System.getProperty("user.dir"));
+            File data = new File(path + "/data/duke.txt");
             FileWriter fw = new FileWriter(data);
 
             StringBuilder toWrite = new StringBuilder("");

@@ -26,10 +26,11 @@ public class Event extends Task {
     public Event(String name, String dateString) {
         this.name = name;
 
-        try{
-            this.date = parser.parse(dateString);
-        } catch (ParseException pE) {
-            System.err.println(pE);
+        try {
+            Date dateTime = parser.parse(dateString);
+            this.date = dateTime;
+        } catch (ParseException parseExp) {
+            System.err.println(parseExp);
         }
 
         this.isDone = false;
@@ -41,7 +42,7 @@ public class Event extends Task {
      * @return A String representation of this Task formatted for the storage file.
      */
     public String toFile() {
-        if(isDone) {
+        if (isDone) {
             return "E-1-" + name + "-" + parser.format(date);
         } else {
             return "E-0-" + name + "-" + parser.format(date);

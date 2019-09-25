@@ -44,7 +44,10 @@ public class MainWindow extends AnchorPane implements Ui {
 
     @Override
     public String getTaskRepresentation(final Task task) {
-        return TASK_SHORT_NAME_MAP.get(task.getClass()) + TASK_STATUS_MAP.get(task.isDone()) + task.getDescription();
+        return TASK_SHORT_NAME_MAP.get(task.getClass())
+            + TASK_STATUS_MAP.get(task.isDone())
+            + " "
+            + task.getDescription();
     }
 
     @Override

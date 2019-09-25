@@ -8,9 +8,9 @@ This user guide gives summary of features and commands available in _Duke_.
 
 ## Setting Up
 
-Users should have Java 11 or above to run this program. If opening the `.jar` files through double-clicking does not work try running it through command line:
+This program requires users to have Java 11 or above. If opening the `.jar` files through double-clicking does not work try running it through command line:
 
-    java -jar path/to/file/duke-????.jar
+    java -jar path/to/file/duke-0.2.2.jar
 
 ## Features 
 

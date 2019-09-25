@@ -7,7 +7,6 @@ import java.time.format.DateTimeFormatter;
  */
 public abstract class Task {
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    static final String STORAGE_STRING_SEPARATOR = " | ";
     private String description;
     private boolean isDone;
 
@@ -45,10 +44,4 @@ public abstract class Task {
     public String toString() {
         return this.description;
     }
-
-    /**
-     * Returns the representation of this Task in the data file.
-     * @return the representation of this Task in the data file
-     */
-    public abstract String toStorageString();
 }

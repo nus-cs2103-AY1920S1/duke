@@ -14,6 +14,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import static duke.task.Task.DATE_TIME_FORMATTER;
@@ -24,6 +28,16 @@ import static duke.ui.Messages.WRITE_TASK_FAILED;
  * The storage interface of the Duke application.
  */
 public class Storage {
+    private static final String DATA_FILE_SEPARATOR = " | ";
+    private static final Map<Class<? extends Task>, String> TASK_SHORT_NAME_MAP = Map.of(
+        Todo.class, "T",
+        Event.class, "E",
+        Deadline.class, "D"
+    );
+    private static final Map<Boolean, String> TASK_STATUS_MAP = Map.of(
+        true, "1",
+        false, "0"
+    );
     private final File file;
 
     /**
@@ -99,7 +113,7 @@ public class Storage {
         assert this.file.getParentFile().exists(); // parent directory should have been created in the constructor
         try (FileWriter writer = new FileWriter(this.file, StandardCharsets.UTF_8, false)) {
             assert this.file.exists(); // file should be created when FileWriter is created
-            writer.write(tasks.toStorageString());
+            writer.write(serializeTaskList(tasks));
         } catch (IOException e) {
             throw new DukeStorageException(WRITE_TASK_FAILED + e.getMessage());
         }
@@ -107,6 +121,7 @@ public class Storage {
 
     /**
      * Returns the directory that Duke should store its data.
+     *
      * @return the directory that Duke should store its data
      */
     private Path getDataDir() {
@@ -124,5 +139,39 @@ public class Storage {
                 : xdgDataHome;
         }
         return Path.of(path + "/Duke");
+    }
+
+    /**
+     * Returns the representation of the given task in the data file.
+     *
+     * @param task the task to serialize
+     * @return the representation of the given task in the data file
+     */
+    private String serializeTask(final Task task) {
+        List<String> tokens = new ArrayList<>(List.of(
+            TASK_SHORT_NAME_MAP.get(task.getClass()),
+            TASK_STATUS_MAP.get(task.isDone())
+        ));
+        if (task instanceof Event) {
+            tokens.add(((Event) task).getAtString());
+        } else if (task instanceof Deadline) {
+            tokens.add(((Deadline) task).getByString());
+        }
+        return String.join(DATA_FILE_SEPARATOR, tokens);
+    }
+
+    /**
+     * Returns the representation of the given TaskList in the data file.
+     *
+     * @param tasks the TaskList to serialize
+     * @return the representation of the given TaskList in the data file
+     */
+    private String serializeTaskList(final TaskList tasks) {
+        StringBuilder ret = new StringBuilder();
+        for (int i = 0; i < tasks.size(); ++i) {
+            ret.append(serializeTask(tasks.getTask(i)))
+                .append("\n");
+        }
+        return ret.toString();
     }
 }

@@ -32,18 +32,4 @@ public class TaskList {
     public int size() {
         return tasks.size();
     }
-
-    /**
-     * Converts this TaskList into a String suitable for storage in the data file.
-     *
-     * @return the converted String
-     */
-    public String toStorageString() {
-        StringBuilder ret = new StringBuilder();
-        for (Task task : tasks) {
-            ret.append(task.toStorageString())
-                .append("\n");
-        }
-        return ret.toString();
-    }
 }

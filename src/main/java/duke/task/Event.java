@@ -17,23 +17,12 @@ public class Event extends Task {
         this(description, at, false);
     }
 
-    private String getAtString() {
+    public String getAtString() {
         return DATE_TIME_FORMATTER.format(this.at);
     }
 
     @Override
     public String toString() {
         return this.getDescription() + " (at: " + this.getAtString() + ")";
-    }
-
-    @Override
-    public String toStorageString() {
-        String[] tokens = new String[]{
-            "E",
-            this.isDone() ? "1" : "0",
-            this.getDescription(),
-            this.getAtString()
-        };
-        return String.join(Todo.STORAGE_STRING_SEPARATOR, tokens);
     }
 }

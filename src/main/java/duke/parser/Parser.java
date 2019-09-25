@@ -8,7 +8,7 @@ public class Parser {
      */
 
     public boolean isTodo(String[] tokens) {
-        return tokens[0].equals("todo");
+        return tokens[0].equals("todo") || tokens[0].equals("t");
     }
 
     /**
@@ -16,7 +16,7 @@ public class Parser {
      */
 
     public boolean isDeadline(String[] tokens) {
-        return tokens[0].equals("deadline");
+        return tokens[0].equals("deadline") || tokens[0].equals("dl");
     }
 
     /**
@@ -24,7 +24,7 @@ public class Parser {
      */
 
     public boolean isEvent(String[] tokens) {
-        return tokens[0].equals("event");
+        return tokens[0].equals("event") || tokens[0].equals("e");
     }
 
     /**
@@ -32,7 +32,7 @@ public class Parser {
      */
 
     public boolean isDelete(String[] tokens) {
-        return tokens[0].equals("delete");
+        return tokens[0].equals("delete") || tokens[0].equals("dlt");
     }
 
     /**
@@ -40,7 +40,7 @@ public class Parser {
      */
 
     public boolean isDone(String[] tokens) {
-        return tokens[0].equals("done");
+        return tokens[0].equals("done") || tokens[0].equals("d");
     }
 
     /**
@@ -48,7 +48,7 @@ public class Parser {
      */
 
     public boolean isList(String command) {
-        return (command.equals("list"));
+        return (command.equals("list") || command.equals("l"));
     }
 
     /**
@@ -56,11 +56,11 @@ public class Parser {
      */
 
     public boolean isBye(String command) {
-        return (command.equals("bye"));
+        return (command.equals("bye") || command.equals("b"));
     }
 
     public boolean isFind(String[] command) {
-        return (command.equals("find"));
+        return (command.equals("find") || command.equals("f"));
     }
 
 }

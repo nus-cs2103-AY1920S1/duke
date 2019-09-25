@@ -5,21 +5,42 @@ Duke is a personal task manager that helps you track your todos, events, and
 deadlines. It is in the form of a chatbot and can be used on the command line
 as well as from a GUI.
 
+## Quick Start
+1. Ensure you have Java 11 or above installed in your Computer.
+2. Download the latest `duke.jar` [here](https://github.com/gary-lgy/duke/releases).
+4. Double-click the file to start the app. The GUI should appear in a few seconds.
+5. Type the command in the command box and press Enter to execute it.  
+   e.g. typing `help` and pressing Enter will open the help window.
+6. Some example commands you can try:
+    - `list` : lists all tasks
+    - `todo learn to use Duke` : adds a todo
+    - `delete 3` : deletes the 3rd task in the list
+    - `exit` : exits the app
+
+Details of the commands are explained below.
+
 ## Features 
 
 ### Available in both CLI and GUI
-GUI:  
-![GUI version](./Ui_300x460.png)
-<br><br>
-CLI:  
-![CLI version](./Cli_417x460.png)  
-<br><br>
+GUI:
+
+![GUI version](./gui_demo.gif)
+
+CLI:
+
+![CLI version](./cli_demo.gif)
+
 While the GUI may be more intuitive to use, the CLI version provides a simpler
-and distraction-free environment for you to focus on managing your tasks.  
-The command syntax is the same in both GUI and CLI.  
-Duke launches in GUI by default, the CLI version can be launched by running
-`java -jar duke-x.x.jar cli` in your terminal, where `duke-x.x.jar` is the
-name of the jar file you have downloaded.
+and distraction-free environment for you to focus on managing your tasks.
+
+The command syntax is the same in both GUI and CLI.
+
+Duke launches in GUI by default, the CLI version can be launched by passing
+`cli` as an option to the jar file on the command line.
+
+### Responsive UI
+Resize and position the window however you like, and Duke will still work as
+expected for you.
 
 ### Easily migratable
 All your tasks are stored in a plaintext file, in a human-readable format.
@@ -46,39 +67,39 @@ find, natural language data time format, JSON storage, etc.
 ## Usage
 
 ### Viewing help: `help`
-Format: `help`
+__Format__: `help`
 
 ### Adding a todo: `todo`
 Adds a `todo` to Duke.  
-Format: `todo DESCRIPTION`  
-Example:
+__Format__: `todo DESCRIPTION`  
+__Example__:
 - `todo Read book`
 
 ### Adding an event: `event`
 Adds an `event` to Duke. An `event` is something that happens at the specific time.  
-Format: `event DESCRIPTION /at dd/MM/yyyy HHmm`  
-Example:
+__Format__: `event DESCRIPTION /at dd/MM/yyyy HHmm`  
+__Example__:
 - `event job interview /at 1/9/2018 1330`
 
 ### Adding a deadline: `deadline`
 Adds a `deadline` to Duke. A deadline is a task that should be done by a certain time.  
-Format: `deadline DESCRIPTION /by dd/MM/yyyy HHmm`  
-Example:
+__Format__: `deadline DESCRIPTION /by dd/MM/yyyy HHmm`  
+__Example__:
 - `deadline return book /by 18/2/2019 0900`
 
 ### Listing all tasks: `list`
 Shows a list of all tasks(`todo`s, `event`s, `deadline`s)in Duke.  
-Format: `list`
+__Format__: `list`
 
 ### Locating tasks by keywords: `find`
 Finds tasks whose descriptions contain any of the given keywords.  
-Format: `find KEYWORD...`  
-Example: `find school project`
+__Format__: `find KEYWORD...`  
+__Example__: `find school project`
 
 ### Deleting a task: `delete`
 Deletes the specified task from Duke.  
-Format: `delete TASK_NUMBER`  
-Example:
+__Format__: `delete TASK_NUMBER`  
+__Example__:
 ```
 list
 delete 2
@@ -86,4 +107,4 @@ delete 2
 
 ### Exiting Duke: `bye`
 Exits Duke.  
-Format: `bye`
+__Format__: `bye`

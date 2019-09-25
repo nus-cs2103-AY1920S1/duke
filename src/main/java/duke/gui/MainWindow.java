@@ -70,7 +70,7 @@ public class MainWindow extends AnchorPane implements Ui {
         try {
             storage.loadTasks(tasks);
         } catch (DukeStorageException e) {
-            showMessage(e.getMessage());
+            showWarning(e.getMessage());
         }
 
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

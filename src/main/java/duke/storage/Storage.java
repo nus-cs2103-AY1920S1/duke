@@ -99,8 +99,9 @@ public class Storage {
             }
         } catch (IndexOutOfBoundsException | DateTimeParseException e) {
             throw fileCorruptedException;
+        } finally {
+            scanner.close();
         }
-        scanner.close();
     }
 
     /**

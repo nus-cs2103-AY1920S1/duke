@@ -1,9 +1,8 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -92,5 +91,18 @@ public class TaskList {
      */
     public int getSize() {
         return tasks.size();
+    }
+
+    /**
+     * Returns elements that have passed the given predicate,
+     * retains elements that have failed the given predicate.
+     *
+     * @param p Predicate to test a given trait.
+     * @return List list of discarded elements from TaskList.
+     */
+    public List<Task> discardByTrait(Predicate<Task> p) {
+        List<Task> discarded = tasks.stream().filter(p::test).collect(Collectors.toList());
+        tasks = tasks.stream().filter(x -> !p.test(x)).collect(Collectors.toList());
+        return  discarded;
     }
 }

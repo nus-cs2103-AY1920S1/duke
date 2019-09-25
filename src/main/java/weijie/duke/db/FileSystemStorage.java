@@ -81,7 +81,6 @@ public class FileSystemStorage implements ITaskStorage {
         boolean createdDirs = false;
 
         if (lastSlashPos >= 0) {
-            System.out.println("1");
             File directory = new File(path.substring(0, lastSlashPos));
             if (!directory.exists()) {
                 createdDirs = directory.mkdirs();

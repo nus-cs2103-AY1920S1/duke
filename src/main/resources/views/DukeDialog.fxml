@@ -3,7 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 
 <fx:root maxHeight="1.7976931348623157E308"
          maxWidth="1.7976931348623157E308"
@@ -11,23 +12,45 @@
          spacing="10.0"
          type="javafx.scene.layout.HBox"
          xmlns="http://javafx.com/javafx/8.0.172-ea"
-         xmlns:fx="http://javafx.com/fxml/1"
-         style="-fx-background-color: lightblue;">
+         xmlns:fx="http://javafx.com/fxml/1">
 
     <padding>
-        <Insets bottom="15.0"
-                left="20.0"
-                right="-30.0"
-                top="15.0"/>
+        <Insets bottom="10.0"
+                left="15.0"
+                right="5.0"
+                top="10.0"/>
     </padding>
 
-    <Circle fx:id="displayPicture"
-            radius="50"
-            stroke="#333333"/>
+    <AnchorPane
+            maxWidth="Infinity"
+            maxHeight="Infinity"
+            prefWidth="400.0">
 
-    <Text fx:id="text"
-          text="Label"
-          wrappingWidth="280"/>
+        <Circle fx:id="displayPicture"
+                radius="35"
+                stroke="#333333"
+                AnchorPane.leftAnchor="0.0"
+                AnchorPane.topAnchor="0.0"/>
+
+        <Label fx:id="text"
+               text="Label"
+               maxWidth="250"
+               wrapText="true"
+               alignment="TOP_LEFT"
+               style="-fx-background-color: lightblue; -fx-background-radius: 10 10 10 10;"
+               AnchorPane.topAnchor="0.0"
+               AnchorPane.leftAnchor="80.0">
+
+            <padding>
+                <Insets bottom="10.0"
+                        left="12.0"
+                        right="12.0"
+                        top="10.0"/>
+            </padding>
+
+        </Label>
+
+    </AnchorPane>
 
 
 </fx:root>

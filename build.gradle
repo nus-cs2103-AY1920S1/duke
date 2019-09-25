@@ -42,8 +42,9 @@ checkstyle {
 }
 
 shadowJar {
+    def buildVersion = System.getenv("DUKE_VERSION_NUMBER") ?: "test"
     archiveBaseName = "duke"
-    archiveVersion = "0.1.3"
+    archiveVersion = buildVersion
     archiveClassifier = null
     archiveAppendix = null
 }

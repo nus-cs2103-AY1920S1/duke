@@ -28,7 +28,7 @@ public class Duke extends Application {
     private CommandHistory history;
 
     public Duke() {
-        this.filePath = "data/duke.txt"; // TODO: refactor into argument
+        this.filePath = "data/duke.txt";
     }
 
     @Override

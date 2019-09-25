@@ -24,7 +24,7 @@ public class TaskResponse {
     }
 
     /**
-     * Returns the Task response formatted for human readability on the console.
+     * Returns the Task response formatted for human readability.
      * @return A String of the formatted response.
      */
     public String getFormattedResponse() {

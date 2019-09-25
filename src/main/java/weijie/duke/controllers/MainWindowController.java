@@ -71,6 +71,7 @@ public class MainWindowController extends AnchorPane {
             doAfter(300, () -> dialogList.add(
                     new DukeDialogController(StringUtils.indent("Bye. Hope to see you again soon!"),
                             dukeImage)));
+
             doAfter(1000, () -> {
                 Platform.exit();
                 System.exit(0);

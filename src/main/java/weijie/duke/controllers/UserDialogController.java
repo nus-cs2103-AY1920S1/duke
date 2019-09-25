@@ -4,16 +4,16 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 
 
 class UserDialogController extends HBox {
     @FXML
-    private Text text;
+    private Label text;
     @FXML
     private Circle displayPicture;
 

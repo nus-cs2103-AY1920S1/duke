@@ -1,5 +1,7 @@
 package duke.command;
 
+import static duke.ui.SpeechMaker.MESSAGE_SET_PRIORITY;
+
 import duke.DukeException;
 import duke.task.Priority;
 import duke.task.Task;
@@ -42,9 +44,7 @@ public class PriorityCommand extends Command {
 
         // set priority level and show response
         selectedTask.setPriority(newPriority);
-        String setPriorityMessage = "Okay! I've set this task's priority to "
-                    + newPriority.toString() + ":\n"
-                    + "  " + selectedTask.toString();
+        String setPriorityMessage = String.format(MESSAGE_SET_PRIORITY, selectedTask, newPriority);
         ui.showText(setPriorityMessage);
 
         // try to save to storage

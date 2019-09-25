@@ -1,8 +1,11 @@
 package duke.command;
 
+import static duke.ui.SpeechMaker.MESSAGE_TASK_DELETED;
+
 import duke.DukeException;
 import duke.task.TaskList;
 import duke.task.Task;
+import duke.ui.SpeechMaker;
 import duke.util.Storage;
 import duke.util.TextUi;
 
@@ -36,9 +39,8 @@ public class DeleteCommand extends Command {
         int initialListSize = tasks.size();
         int taskIndex = getTaskIndex(details, initialListSize); // might throw exception
         Task deletedTask = tasks.remove(taskIndex);
-        String textToDisplay = "Noted. I've removed this task:"
-                + "\n  " + deletedTask.toString()
-                + "\nNow you have " + tasks.size() + " tasks in the list.\n";
+        String textToDisplay = String.format(MESSAGE_TASK_DELETED, deletedTask)
+                + SpeechMaker.getNumberOfTasksMessage(tasks.size());
         ui.showText(textToDisplay);
         try {
             save(tasks, storage);

@@ -1,5 +1,8 @@
 package duke.command;
 
+import static duke.ui.SpeechMaker.MESSAGE_TASK_DONE;
+import static duke.ui.SpeechMaker.MESSAGE_TASK_UNDONE;
+
 import duke.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -38,16 +41,16 @@ public class DoneCommand extends Command {
             throws DukeException {
         int taskIndex = getTaskIndex(details, tasks.size());
         Task selectedTask = tasks.get(taskIndex);
+
         String textToDisplay;
         if (isDone) {
             selectedTask.markAsDone();
-            textToDisplay = "Nice! I've marked this task as done:"
-                    + "\n  " + selectedTask.toString();
+            textToDisplay = String.format(MESSAGE_TASK_DONE, selectedTask);
         } else {
             selectedTask.markAsUndone();
-            textToDisplay = "Oh dear. I've marked this task as undone:"
-                    + "\n  " + selectedTask.toString();
+            textToDisplay = String.format(MESSAGE_TASK_UNDONE, selectedTask);
         }
+
         ui.showText(textToDisplay);
         try {
             save(tasks, storage);

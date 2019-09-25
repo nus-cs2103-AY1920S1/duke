@@ -33,7 +33,11 @@ public class ListCommand extends Command {
         } else {
             response = tasks.toIndexedString();
         }
+
+        // response should either be a Snowball message
+        // or a non-empty list of tasks
         assert !response.equals("");
+
         ui.showText(response);
         return response;
     }

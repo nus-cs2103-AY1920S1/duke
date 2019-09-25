@@ -42,7 +42,7 @@ public class FindCommand extends Command {
         }
         boolean hasNoMatchingTasks = foundTasks.length() == 0;
         if (hasNoMatchingTasks) {
-            return "Hmm... you have no tasks containing this description!\n"
+            return "Hmm... there are no tasks containing this description!\n"
                     + "Did you mean to find something else?";
         }
         return foundTasks.toString();

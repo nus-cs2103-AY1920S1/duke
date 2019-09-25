@@ -1,7 +1,10 @@
 package duke.command;
 
+import static duke.ui.SpeechMaker.MESSAGE_TASK_ADDED;
+
 import duke.DukeException;
 import duke.task.TaskList;
+import duke.ui.SpeechMaker;
 import duke.util.Storage;
 import duke.util.TextUi;
 
@@ -32,9 +35,8 @@ abstract class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, TextUi ui, Storage storage) {
         int numberOfTasks = tasks.size();
-        String textToDisplay = "Got it. I've added this task:"
-                + "\n  " + tasks.get(numberOfTasks - 1)
-                + "\nNow you have " + numberOfTasks + " tasks in the list.\n";
+        String textToDisplay = String.format(MESSAGE_TASK_ADDED, tasks.get(numberOfTasks - 1))
+                + SpeechMaker.getNumberOfTasksMessage(tasks.size());
         ui.showText(textToDisplay);
         try {
             save(tasks, storage);

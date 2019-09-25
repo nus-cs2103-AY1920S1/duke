@@ -62,7 +62,7 @@ public class Duke {
             Command c = Parser.parse(input);
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            return SpeechMaker.getApology(e.getMessage());
+            return SpeechMaker.getApologyMessage(e.getMessage());
         }
     }
 }

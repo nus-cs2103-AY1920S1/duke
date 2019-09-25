@@ -67,7 +67,7 @@ public abstract class AddCommand implements ITaskCommand {
     }
 
     private String getUndoResponseFormat() {
-        return "The hardest choices require the strongest wills." +
-                "\nThis task was removed:\n  %s";
+        return "The hardest choices require the strongest wills."
+                + "\nThis task was removed:\n  %s";
     }
 }

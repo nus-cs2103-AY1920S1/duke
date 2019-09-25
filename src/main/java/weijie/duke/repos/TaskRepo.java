@@ -12,6 +12,14 @@ public class TaskRepo implements IRepository<Task> {
     private ITaskStorage storage;
     private List<Task> tasks;
 
+
+    /**
+     * Constructs a new {@code Task} repository that uses the given {@code ITaskStorage} to store and retrieve the
+     * tasks.
+     *
+     * @param storage Storage to store and retrieve the tasks from.
+     * @throws DukeIoException If reading or writing to/from the storage throws an IO Exception.
+     */
     public TaskRepo(ITaskStorage storage) throws DukeIoException {
         assert storage != null;
         this.storage = storage;

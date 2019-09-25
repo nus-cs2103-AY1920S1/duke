@@ -48,9 +48,9 @@ class AddDeadlineCommandTest {
         String[] args1 = "deadline thingy /by 12/6/2019 1900".split(" ");
         String[] args2 = "deadline other thing /by 14/7/2019 1234".split(" ");
 
-        AddDeadlineCommand command = new AddDeadlineCommand(repo);
-        TaskResponse response1 = command.execute(args1);
-        TaskResponse response2 = command.execute(args2);
+        final AddDeadlineCommand command = new AddDeadlineCommand(repo);
+        final TaskResponse response1 = command.execute(args1);
+        final TaskResponse response2 = command.execute(args2);
 
         Task task1 = new Deadline("thingy",
                 LocalDateTime.of(2019, 6, 12, 19, 0));

@@ -1,3 +1,6 @@
+
+[![coverage report](https://api.travis-ci.com/weiijiie/duke.svg?branch=master)](https://travis-ci.com/weiijiie/duke)
+
 # Setting up
 
 **Prerequisites**

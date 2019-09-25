@@ -24,7 +24,7 @@ public class SnapCommand implements ITaskCommand {
     public TaskResponse execute(String... args) {
 
         int size = repo.getSize();
-        for (int i = size; i > (size+ 1) / 2; i--) {
+        for (int i = size; i > (size + 1) / 2; i--) {
             int toBeSnapped = (int) (Math.random() * i);
             snappedTasks.add(repo.get(toBeSnapped));
 

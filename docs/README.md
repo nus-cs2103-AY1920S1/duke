@@ -11,10 +11,11 @@
  ![intro](public/intro.png)  
  
  Ever wondered what it would be like to have the *Mad Titan* manage your tasks for you? Wait no more!  
+ 
  Duke is simple chat-bot that uses a Command Line Interface (CLI) to allow you to interact with none other than the 
- Warlord Thanos. Enlist Thanos' help in managing your various tasks, including todos, deadlines and events. And, if you
- ever feel overwhelmed, you may be able to persuade Thanos to use the powers of the *Infinity Gauntlet* to help you 
- balance your tasks better.
+ Warlord Thanos himself. Enlist Thanos' help in managing your various tasks, including todos, deadlines and events.
+ And, if you ever feel overwhelmed, you may be able to persuade Thanos to use the powers of the *Infinity Gauntlet* to 
+ help you balance your tasks better.
  
 ## Quickstart
  1. Ensure Java 11 is downloaded on your computer. To check if you have Java installed, type `java  --version` into your
@@ -61,7 +62,7 @@ Thanos will show all your tasks to you. That's pretty much it.
 ### Undoing and redoing commands
 ![undo](public/undo.png)
 
-Using the power of the *Time Stone*, the flow of time itself is under Thanos' command. Thanos can thus undo and redo 
+Using the power of the *Time Stone*, the flow of time itself is under Thanos' command. Thanos can thus undo any and redo 
 command you make, in the event of a mistake, without even breaking a sweat
 
 ### Bringing balance to the universe (and your tasks)

@@ -12,6 +12,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+
+/**
+ * Class which handles creation logic of commands, and the management of command dependencies.
+ */
 public class TaskCommandFactory {
 
     private List<Object> registeredDependencies;
@@ -49,16 +53,25 @@ public class TaskCommandFactory {
                 }
             }
 
-            throw new DukeDependencyNotFoundException("☹ OOPS!!! This command is missing a dependency");
+            throw new DukeDependencyNotFoundException("This command is missing a dependency.");
 
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
             throw new DukeException(e.getMessage());
         }
     }
 
+    /**
+     * <p>
+     *     Registers the input object as a dependency for tasks. If any included command has the type of the input
+     *     object as a constructor parameter, or has a constructor parameter that the input object can be assigned to,
+     *     then the command will be automatically constructed with the dependency when created.
+     *  </p>
+     * @param dependency Dependency to be registered.
+     * @throws DukeIllegalArgumentException When registered dependency is a primitive or a wrapper class.
+     */
     public void registerDependency(Object dependency) throws DukeIllegalArgumentException {
         if (ClassUtils.isPrimitiveOrWrapper(dependency.getClass())) {
-            throw new DukeIllegalArgumentException("Cannot register boxed/unboxed primitive dependencies!");
+            throw new DukeIllegalArgumentException("Cannot register boxed/unboxed primitive dependencies.");
         }
         registeredDependencies.add(dependency);
     }

@@ -36,7 +36,7 @@ class ListCommandTest {
 
     @Test
     void execute_listCommandWithFewTasksSaved_returnsCorrectListOfTasks() throws DukeIoException {
-        String[] args = "list".split(" ");
+        final String[] args = "list".split(" ");
 
         Event event = new Event("2103 project due",
                 LocalDateTime.of(2019, 8, 29, 23, 59));

@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Testing dependency injection of the TaskCommandFactory
+ * Testing dependency injection of the TaskCommandFactory.
  */
 class TaskCommandFactoryTest {
     private TaskCommandFactory taskCommandFactory;
@@ -69,45 +69,45 @@ class TaskCommandFactoryTest {
         assertThrows(DukeIllegalArgumentException.class, () ->
                 taskCommandFactory.registerDependency(0.1231));
     }
-}
 
 
+    static class NoDependencyCommand implements ITaskCommand {
 
-class NoDependencyCommand implements ITaskCommand {
+        @Override
+        public TaskResponse execute(String... args) {
+            return null;
+        }
 
-    @Override
-    public TaskResponse execute(String... args) {
-        return null;
+        @Override
+        public Optional<CommandState> getCommandState() {
+            return Optional.empty();
+        }
     }
 
-    @Override
-    public Optional<CommandState> getCommandState() {
-        return Optional.empty();
+    @SuppressWarnings({"FieldCanBeLocal", "unused"})
+    static class ManyDependencyCommand implements ITaskCommand {
+
+        private final IRepository<Task> repo;
+        private final CommandHistory history;
+        private final ITaskStorage storage;
+
+        ManyDependencyCommand(IRepository<Task> repo, CommandHistory history, ITaskStorage storage) {
+
+            this.repo = repo;
+            this.history = history;
+            this.storage = storage;
+        }
+
+        @Override
+        public TaskResponse execute(String... args) {
+            return null;
+        }
+
+        @Override
+        public Optional<CommandState> getCommandState() {
+            return Optional.empty();
+        }
     }
-}
 
-@SuppressWarnings({"FieldCanBeLocal", "unused"})
-class ManyDependencyCommand implements ITaskCommand {
-
-    private final IRepository<Task> repo;
-    private final CommandHistory history;
-    private final ITaskStorage storage;
-
-    ManyDependencyCommand(IRepository<Task> repo, CommandHistory history, ITaskStorage storage) {
-
-        this.repo = repo;
-        this.history = history;
-        this.storage = storage;
-    }
-
-    @Override
-    public TaskResponse execute(String... args) {
-        return null;
-    }
-
-    @Override
-    public Optional<CommandState> getCommandState() {
-        return Optional.empty();
-    }
 }
 

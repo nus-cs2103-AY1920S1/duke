@@ -153,4 +153,18 @@ public class Ui {
         assert error != null;
         System.out.println(error);
     }
+
+    public String printHelp() {
+        printLine();
+        printIndent();
+        return "    I can only do these functions for now: \n \n"
+                + "    Todo \n" + "        Eg. todo __(task)__\n"
+                + "    Event \n" + "        Eg. event __(task)__ /at _(dd/MM/yyyy)_(hhmm)__\n"
+                + "    Deadline \n" + "        Eg. deadline __(task)__ /by _(dd/MM/yyyy)_(hhmm)__\n"
+                + "    Delete \n" + "        Eg. delete __(number)__ or delete all\n"
+                + "    Done \n" + "        Eg. done __(number)__\n"
+                + "    Find \n" + "        Eg. find __(keyword)__\n"
+                + "    Expenses \n" + "        Eg. expenses __$(amount)__ /on __(what you spent on)__\n"
+                + "    List \n" + "    Help\n" + "    Bye\n";
+    }
 }

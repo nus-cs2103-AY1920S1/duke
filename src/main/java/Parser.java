@@ -35,7 +35,7 @@ public class Parser {
                     + "    Done \n" + "        Eg. done __(number)__\n"
                     + "    Find \n" + "        Eg. find __(keyword)__\n"
                     + "    Expenses \n" + "        Eg. expenses __$(amount)__ /on __(what you spent on)__\n"
-                    + "    List \n" + "    Bye\n");
+                    + "    List \n" + "    Help\n" + "    Bye\n");
         }
 
         //variable refers to either date or what the expenditure is spent on.
@@ -115,6 +115,9 @@ public class Parser {
                 Command byeCommand = new ByeCommand(description);
                 byeCommand.exitSwitch();
                 return  byeCommand;
+            case "help":
+                Command helpCommand = new HelpCommand(description);
+                return helpCommand;
             default:
                 Ui.printIndent();
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-("
@@ -126,7 +129,7 @@ public class Parser {
                         + "    Done \n" + "        Eg. done __(number)__\n"
                         + "    Find \n" + "        Eg. find __(keyword)__\n"
                         + "    Expenses \n" + "        Eg. expenses __$(amount)__ /on __(what you spent on)__\n"
-                        + "    List \n" + "    Bye\n");
+                        + "    List \n" + "    Help\n" + "    Bye\n");
         }
     }
 
@@ -272,7 +275,8 @@ public class Parser {
         assert  taskType != null;
         if (taskType.equals("todo") || taskType.equals("event") || taskType.equals("deadline") ||
                 taskType.equals("delete") || taskType.equals("done") || taskType.equals("find") ||
-                taskType.equals("list") || taskType.equals("bye") || taskType.equals("expenses")) {
+                taskType.equals("list") || taskType.equals("bye") || taskType.equals("expenses") ||
+                taskType.equals("help")) {
             return true;
         } else {
             return false;

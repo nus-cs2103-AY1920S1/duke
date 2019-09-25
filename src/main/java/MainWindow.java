@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -28,7 +29,16 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        Ui ui = new Ui();
+
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String style = "-fx-background-color: rgb(0, 81, 186);";
+        this.dialogContainer.setStyle(style);
+
+        //duke welcome message upon opening GUI
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(ui.greeting(), dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -48,5 +58,13 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        Ui ui = new Ui();
+
+        //exits the application after the user says bye
+        if (response.equals(ui.printBye())) {
+            Platform.exit();
+            System.exit(0);
+        }
     }
 }

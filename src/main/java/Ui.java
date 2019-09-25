@@ -18,7 +18,7 @@ public class Ui {
     /**
      * Prints the greeting at the initiation of the chat bot.
      */
-    public void greeting() {
+    public String greeting() {
         String logo = "     ____        _        \n"
                 + "    |  _ \\ _   _| | _____ \n"
                 + "    | | | | | | | |/ / _ \\\n"
@@ -28,20 +28,21 @@ public class Ui {
         // Prints out greeting of the chat bot.
         printLine();
         printIndent();
-        System.out.println("Hello! My name is \n" + logo + "\n"
-                + "    What can I do for you? \n");
+        logo += "    Hello! My name is \n" + logo + "\n"
+                + "    What can I do for you? \n";
         printIndent();
-        System.out.println("I can only do these functions for now: \n \n"
+        logo += "    I can only do these functions for now: \n \n"
                 + "    Todo \n" + "        Eg. todo __(task)__\n"
                 + "    Event \n" + "        Eg. event __(task)__ /at _(dd/MM/yyyy)_(hhmm)__\n"
                 + "    Deadline \n" + "        Eg. deadline __(task)__ /by _(dd/MM/yyyy)_(hhmm)__\n"
                 + "    Delete \n" + "        Eg. delete __(number)__ or delete all\n"
                 + "    Done \n" + "        Eg. done __(number)__\n"
                 + "    Find \n" + "        Eg. find __(keyword)__\n"
-                + "    List \n" + "    Bye\n");
-        printIndent();
-        System.out.println("Ill be adding in more features soon! Please be patient! :)");
-        printLine();
+                + "    Expenses \n" + "        Eg. expenses __$(amount)__ /on __(what you spent on)__\n"
+                + "    List \n" + "    Help\n" + "    Bye\n";
+        //printIndent();
+        //System.out.println("Ill be adding in more features soon! Please be patient! :)");
+        return logo;
     }
 
     /**

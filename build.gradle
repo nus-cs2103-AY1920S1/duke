@@ -10,7 +10,7 @@ checkstyle {
 }
 
 group 'seedu.duke'
-version '0.2.8'
+version '0.3.0'
 
 repositories {
     mavenCentral()
@@ -23,7 +23,7 @@ application {
 
 shadowJar {
     archiveBaseName = "duke"
-    archiveVersion = "0.2.8"
+    archiveVersion = "0.3.0"
     archiveClassifier = null
     archiveAppendix = null
 }

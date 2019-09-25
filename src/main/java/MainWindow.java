@@ -11,6 +11,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import ui.Ui;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -29,9 +31,9 @@ public class MainWindow extends AnchorPane {
 
     private static final String LOGO =
             " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
+                    + "|   _  \\ _   _|  | _____ \n"
+                    + "|  |  |  |  |  |  |  |/ / _ \\\n"
+                    + "|  |_ |  |  |_ |  |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
 
     private static final String INTRODUCTION = "Hello from \n";
@@ -42,6 +44,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(INTRODUCTION + LOGO, dukeImage)
+        );
     }
 
     public void setDuke(Duke duke) {
@@ -62,5 +67,14 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
+        if (input.equals("bye")) {
+            new Thread(() -> {
+                try {
+                    Thread.sleep(600);
+                    System.exit(0);
+                } catch (InterruptedException e) {
+                }
+            }).start();
+        }
     }
 }

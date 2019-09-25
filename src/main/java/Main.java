@@ -39,17 +39,6 @@ public class Main extends Application {
 
     private Duke duke = new Duke("list.txt");
 
-//    public void showIntroduction() {
-//        Label dukeLogo = new Label(LOGO);
-////        dukeLogo.setMaxWidth(scrollPane.getWidth());
-//        dukeLogo.setAlignment(Pos.CENTER);
-//        dialogContainer.getChildren().add(dukeLogo);
-//
-//        String intro = INTRODUCTION;
-//        dialogContainer.getChildren().add(
-//                DialogBox.getDukeDialog(intro, dukeImage)
-//        );
-//    }
 
     @Override
     public void start(Stage stage) {

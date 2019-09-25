@@ -20,11 +20,11 @@ import static duke.ui.Messages.BYE_MESSAGE;
  */
 public class Cli implements Ui {
     private static final String LOGO =
-        " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+        " ____        _        " + System.lineSeparator()
+            + "|  _ \\ _   _| | _____ " + System.lineSeparator()
+            + "| | | | | | | |/ / _ \\" + System.lineSeparator()
+            + "| |_| | |_| |   <  __/" + System.lineSeparator()
+            + "|____/ \\__,_|_|\\_\\___|" + System.lineSeparator();
     private static final String SEPARATOR = "-".repeat(60);
     private static final String INDENTATION = "  ";
     private static final Map<Class<? extends Task>, String> TASK_SHORT_NAME_MAP = Map.of(
@@ -60,7 +60,7 @@ public class Cli implements Ui {
             ret.append(i + 1)
                 .append(".")
                 .append(getTaskRepresentation(tasks.getTask(i)))
-                .append("\n");
+                .append(System.lineSeparator());
         }
         return ret.toString();
     }
@@ -120,7 +120,7 @@ public class Cli implements Ui {
     public void showWelcome() {
         showSeparator();
         showMessage("Hello from");
-        showIndented(LOGO.split("\\n"));
+        showIndented(LOGO.split("\\r?\\n"));
         showMessage("What can I do for you?");
         showSeparator();
         showMessage("");

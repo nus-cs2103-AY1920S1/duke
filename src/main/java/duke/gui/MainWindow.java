@@ -54,7 +54,7 @@ public class MainWindow extends AnchorPane implements Ui {
             ret.append(i + 1)
                 .append(".")
                 .append(getTaskRepresentation(tasks.getTask(i)))
-                .append("\n");
+                .append(System.lineSeparator());
         }
         return ret.toString();
     }

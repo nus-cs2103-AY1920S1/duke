@@ -170,7 +170,7 @@ public class Storage {
         StringBuilder ret = new StringBuilder();
         for (int i = 0; i < tasks.size(); ++i) {
             ret.append(serializeTask(tasks.getTask(i)))
-                .append("\n");
+                .append(System.lineSeparator());
         }
         return ret.toString();
     }

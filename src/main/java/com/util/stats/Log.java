@@ -40,7 +40,7 @@ public class Log {
      */
     public Log(String date, String time, String commandWord, String task, ArrayList<String> keywords) {
         String dateTime = date + " " + time;
-        this.dateTimeStamp = LocalDateTime.parse( dateTime, dateTimeFormat);
+        this.dateTimeStamp = LocalDateTime.parse(dateTime, dateTimeFormat);
         this.commandWord = commandWord;
         this.task = task;
         this.keywords = keywords;

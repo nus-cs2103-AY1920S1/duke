@@ -27,8 +27,8 @@ public class Storage {
     private String filePath;
     private File file;
     private boolean doesFileExist;
-    public Storage (String filePath) {
-        this.filePath = filePath;
+    public Storage () {
+        this.filePath = "F:\\CS2103\\duke\\data\\duke.txt";
         this.file = new File(filePath);
         this.doesFileExist = file.exists();
     }

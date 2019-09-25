@@ -25,7 +25,7 @@ public class Duke {
     private Parser parser;
 
     public Duke() {
-        storage = new Storage("F:\\CS2103\\duke\\data\\duke.txt");
+        storage = new Storage();
         ui = new CLIUi();
         try {
             taskList = new TaskList(storage.load());

@@ -53,4 +53,32 @@ public class Task {
         String lcDescription = description.toLowerCase();
         return lcDescription.contains(lcKeyword);
     }
+
+    /**
+     * Returns whether description for /by is of
+     * recognised date-time format
+     * Format: 2/12/2019 1800
+     * Which can then be converted to format: 2 December 2019 6:00 pm
+     * @param str by description
+     * @return Whether description for /by can be converted
+     */
+    protected boolean isValidDateTimeFormat(String str) {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyy hhmm");
+        try {
+            inputFormat.parse(str);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
+    protected String getNewDateTimeFormat(String subDescription) throws ParseException {
+        SimpleDateFormat displayFormat = new SimpleDateFormat("dd MMMM yyyy, hh:mm a");
+        // Note: SimpleDateFormat will also recognise dd/MM/yy (where yy A.D.)
+        SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        Date date = inputFormat.parse(subDescription);
+        // Output: 2nd of December 2019, 6pm
+        String newSubDescription = displayFormat.format(date);
+        return newSubDescription;
+    }
 }

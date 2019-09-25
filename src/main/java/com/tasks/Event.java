@@ -1,9 +1,19 @@
 package com.tasks;
 
+import java.text.ParseException;
+
 public class Event extends Task {
 
     public Event(String description, String at) {
         super(description, at);
+        // If event /at is of correct format
+        try {
+            if (isValidDateTimeFormat(at)) {
+                this.subDescription = getNewDateTimeFormat(at);
+            }
+        } catch (ParseException e) {
+            this.subDescription = at;
+        }
     }
 
     @Override

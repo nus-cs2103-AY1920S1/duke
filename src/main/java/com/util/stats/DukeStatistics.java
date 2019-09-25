@@ -22,7 +22,7 @@ public class DukeStatistics {
     //private static Logger logger = Logger.getLogger("DukeStatistics");
 
     public DukeStatistics() {
-        statsStorage = new StatsStorage("F:\\CS2103\\duke\\data\\dukeStats.txt");
+        statsStorage = new StatsStorage();
         executionLogs = new ArrayList<Log>(statsStorage.load());
     }
 
@@ -82,10 +82,9 @@ public class DukeStatistics {
     }
 
     private int getNumTaskTypeDone(String taskType) {
-        String pattern = "^" + taskType;
         ArrayList<Log> toDoLogs = filterLogsByCommand(executionLogs, "done")
                 .stream()
-                .filter((l) -> l.getTask().matches(pattern))
+                .filter((l) -> l.getTask().contains(taskType))
                 .collect(Collectors.toCollection(ArrayList::new));
         return toDoLogs.size();
     }
@@ -118,7 +117,7 @@ public class DukeStatistics {
     public int getNumUndoneTasksDeleted() {
         ArrayList<Log> undoneDeleteTasks = filterLogsByCommand(executionLogs, "delete")
                 .stream()
-                .filter((l) -> l.getTask().matches("[x]"))
+                .filter((l) -> l.getTask().contains("[x]"))
                 .collect(Collectors.toCollection(ArrayList::new));
         return undoneDeleteTasks.size();
     }

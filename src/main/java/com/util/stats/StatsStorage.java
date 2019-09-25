@@ -1,7 +1,5 @@
 package com.util.stats;
 
-import com.exceptions.DukeException;
-import com.exceptions.DukeStorageException;
 import com.util.StaticStrings;
 
 import java.io.File;
@@ -26,11 +24,10 @@ public class StatsStorage {
     private String fp;
     private File f;
     private boolean doesFileExist;
-    private Log currLog;
 
-    public StatsStorage(String filePath) {
-        this.fp = filePath;
-        this.f = new File(filePath);
+    public StatsStorage() {
+        this.fp = "F:\\CS2103\\duke\\data\\dukeStats.txt";
+        this.f = new File(fp);
         this.doesFileExist = f.exists();
     }
 

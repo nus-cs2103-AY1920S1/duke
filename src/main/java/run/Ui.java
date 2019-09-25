@@ -21,7 +21,7 @@ public class Ui {
     public static final String PRINT_DONE_PREAMBLE = "Nice! I've marked this task as done: ";
     public static final String PRINT_DELETE_PREAMBLE = "Noted. I've removed this task: ";
     public static final String PRINT_FIND_PREAMBLE = "Here are the matching tasks in your list:";
-    public static final String PRINT_RESCHEDULE_PREAMBLE = "Done! Here's the reschedules task: ";
+    public static final String PRINT_RESCHEDULE_PREAMBLE = "Done! Here's the rescheduled task: ";
 
     /**
      * Prints an error message to the user.
@@ -57,9 +57,13 @@ public class Ui {
     public static String printList(ArrayList<Task> tasks) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(PRINT_LIST_PREAMBLE);
+        stringBuilder.append("\n");
         for (int i = 1; i <= tasks.size(); i++) {
             Task currTask = tasks.get(i - 1);
-            stringBuilder.append(i + "." + currTask);
+            stringBuilder.append(i + ". " + currTask);
+            if (i != tasks.size()) {
+                stringBuilder.append("\n");
+            }
         }
         return stringBuilder.toString();
     }
@@ -73,7 +77,8 @@ public class Ui {
     public static String printAdd(Task task, int size) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(PRINT_ADD_PREAMBLE);
-        stringBuilder.append("  " + task);
+        stringBuilder.append(task);
+        stringBuilder.append("\n");
         stringBuilder.append("Now you have " + size + " tasks in the list.");
         return stringBuilder.toString();
     }
@@ -86,7 +91,7 @@ public class Ui {
     public static String printDone(Task task) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(PRINT_DONE_PREAMBLE);
-        stringBuilder.append("  " + task);
+        stringBuilder.append(task);
         return stringBuilder.toString();
     }
 
@@ -99,7 +104,8 @@ public class Ui {
     public static String printDelete(Task task, int size) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(PRINT_DELETE_PREAMBLE);
-        stringBuilder.append("  " + task);
+        stringBuilder.append(task);
+        stringBuilder.append("\n");
         stringBuilder.append("Now you have " + size + " tasks in the list.");
         return stringBuilder.toString();
     }
@@ -116,9 +122,13 @@ public class Ui {
         }
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(PRINT_FIND_PREAMBLE);
+        stringBuilder.append("\n");
         for (int i = 1; i <= tasks.size(); i++) {
             Task currTask = tasks.get(i - 1);
-            stringBuilder.append(i + "." + currTask);
+            stringBuilder.append(i + ". " + currTask);
+            if (i != tasks.size()) {
+                stringBuilder.append("\n");
+            }
         }
         return stringBuilder.toString();
     }

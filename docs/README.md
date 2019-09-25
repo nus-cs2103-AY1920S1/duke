@@ -1,5 +1,7 @@
 # Currents - User Guide 
-<img src = "https://github.com/caesarpjz/duke/tree/master/docs/images/currents1.jpg">
+
+<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/currents1.jpg">
+
 ## Features of Currents
 
 #### Todo: `todo`

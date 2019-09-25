@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * TaskList class manages the task list and has operations to add/delete/modify tasks in the list.
@@ -40,13 +41,7 @@ public class TaskList {
      * @return List Found tasks.
      */
     public List<Task> getTasksWithKeywords(String keyword) {
-        List<Task> foundTasks = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.hasKeywordsInDescription(keyword)) {
-                foundTasks.add(task);
-            }
-        }
-        return foundTasks;
+        return tasks.stream().filter(x -> x.hasKeywordsInDescription(keyword)).collect(Collectors.toList());
     }
 
     /**

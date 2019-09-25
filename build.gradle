@@ -9,7 +9,7 @@ group 'duke'
 version '0.1.0'
 
 application {
-    mainClassName = "duke.core.DukeApplication"
+    mainClassName = "duke.core.DukeMain"
 }
 
 checkstyle {

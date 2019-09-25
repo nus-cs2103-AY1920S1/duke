@@ -21,8 +21,4 @@ public class DukeApplication extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
-        Application.launch(DukeApplication.class, args);
-    }
-
 }

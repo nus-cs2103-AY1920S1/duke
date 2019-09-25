@@ -20,7 +20,7 @@ public class DateTimeTest {
             assertEquals(" 2nd of December 2019, 6pm", new DateTime(" 2/12/2019 ").toReformat());
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! Please provide the date and time in the correct format as follows: "
+            assertEquals("OOPS!!! Please provide the date and time in the correct format as follows: "
                     + "DD/MM/YYYY HHMM (eg. 2/12/2019 1800)", e.toString());
         }
     }
@@ -31,7 +31,7 @@ public class DateTimeTest {
             assertEquals(" 2nd of December 2019, 6pm", new DateTime(" 2/12 1800 ").toReformat());
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! Please provide the date and time in the correct format as follows: "
+            assertEquals("OOPS!!! Please provide the date and time in the correct format as follows: "
                     + "DD/MM/YYYY HHMM (eg. 2/12/2019 1800)", e.toString());
         }
     }
@@ -42,7 +42,7 @@ public class DateTimeTest {
             assertEquals(" 2nd of December 2019, 6pm", new DateTime(" 32/12/2019 1800 ").toReformat());
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! Please provide the date and time in the correct format as follows: "
+            assertEquals("OOPS!!! Please provide the date and time in the correct format as follows: "
                     + "DD/MM/YYYY HHMM (eg. 2/12/2019 1800)", e.toString());
         }
     }
@@ -53,7 +53,7 @@ public class DateTimeTest {
             assertEquals(" 2nd of December 2019, 6pm", new DateTime(" 2/00/2019 1800 ").toReformat());
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! Please provide the date and time in the correct format as follows: "
+            assertEquals("OOPS!!! Please provide the date and time in the correct format as follows: "
                     + "DD/MM/YYYY HHMM (eg. 2/12/2019 1800)", e.toString());
         }
     }
@@ -64,7 +64,7 @@ public class DateTimeTest {
             assertEquals(" 2nd of December 2019, 6pm", new DateTime(" 2/12/2019 2400 ").toReformat());
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! Please provide the date and time in the correct format as follows: "
+            assertEquals("OOPS!!! Please provide the date and time in the correct format as follows: "
                     + "DD/MM/YYYY HHMM (eg. 2/12/2019 1800)", e.toString());
         }
     }

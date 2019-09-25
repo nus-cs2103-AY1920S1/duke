@@ -39,15 +39,16 @@ public class FindCommand extends Command {
      * @param storage is not used here.
      */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) {
-        ui.sendMessage("Here are the matching tasks in your list: ");
+    public String execute(TaskList tasklist, Ui ui, Storage storage) {
+        StringBuilder temp = new StringBuilder("Here are the matching tasks in your list: \n");
         for (int i = 0; i < tasklist.size(); i++) {
             String task = tasklist.get(i).toString();
             boolean isMatch = task.contains(keyword);
             if (isMatch) {
-                ui.sendMessage((i + 1) + "." + task);
+                temp.append((i + 1) + "." + task + "\n");
             }
         }
+        return temp.toString();
     }
 
 }

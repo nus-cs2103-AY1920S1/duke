@@ -58,7 +58,7 @@ public class DialogBox extends HBox {
      * @return dialog box with user text and image.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox("Mocha: \n" + text, img);
     }
 
     /**
@@ -69,7 +69,7 @@ public class DialogBox extends HBox {
      * @return dialog box with Duke response and image.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox("Milk: \n" + text, img);
         db.flip();
         return db;
     }

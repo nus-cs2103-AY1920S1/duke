@@ -1,3 +1,4 @@
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -5,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -34,6 +36,17 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
+     * Displays application startup messages.
+     */
+    public void handleStartup() {
+        String welcome = duke.getWelcome();
+        String loaded = duke.getLoaded();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(loaded + "\n" + welcome, dukeImage)
+        );
+    }
+
+    /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
@@ -46,5 +59,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (response.equals("Bye. Hope to see you again soon!")) {
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+            pause.setOnFinished(event -> Main.stage.hide());
+            pause.play();
+        }
     }
 }

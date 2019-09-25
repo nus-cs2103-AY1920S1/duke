@@ -12,16 +12,19 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private Duke duke = new Duke();
+    public static Stage stage;
 
     @Override
     public void start(Stage stage) {
         try {
+            this.stage = stage;
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("Duke");
+            stage.setTitle("Milk & Mocha's TaskManager");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().handleStartup();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

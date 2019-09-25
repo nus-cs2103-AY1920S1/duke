@@ -44,7 +44,7 @@ public class DoneTaskCommand extends Command {
      * @param storage is not used here.
      * @throws DukeException if task index is invalid.
      */
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
         // convert string to int
         int index = Integer.parseInt(itemIndex) - 1;
         if (index < 0 || index >= tasklist.size()) {
@@ -53,8 +53,8 @@ public class DoneTaskCommand extends Command {
             Task item = tasklist.get(index);
             // tick completed task
             item.setDone();
-            ui.sendMessage("Nice! I've marked this task as done: ");
-            ui.sendMessage("  " + item.toString());
+            return "Nice! I've marked this task as done: \n"
+                    + "  " + item.toString();
         }
     }
 

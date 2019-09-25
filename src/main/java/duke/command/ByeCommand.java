@@ -3,6 +3,7 @@ package duke.command;
 import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
+
 import java.io.IOException;
 
 /**
@@ -28,14 +29,13 @@ public class ByeCommand extends Command {
      * @param ui user interface to say bye to the user.
      * @param storage saves list of tasks.
      */
-    public void execute(TaskList tasklist, Ui ui, Storage storage) {
+    public String execute(TaskList tasklist, Ui ui, Storage storage) {
         try {
             storage.saveFile(tasklist);
         } catch (IOException e) {
-            System.out.println("Unable to save data: " + e.getMessage());
-        } finally {
-            ui.sendBye();
+            return "Unable to save data: " + e.getMessage();
         }
+        return ui.sendBye();
     }
 
 }

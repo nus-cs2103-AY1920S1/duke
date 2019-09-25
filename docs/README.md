@@ -1,12 +1,6 @@
 # User Guide
 
- 1. [Introduction](#introduction)
- 2. [Quickstart](#quickstart)
- 3. [Features](#features)
- 4. [Usage](#usage)
- 
- <br>
- 
+
  ## Introduction
  ![intro](public/intro.png)  
  
@@ -194,3 +188,5 @@ Example of usage:
 Parameters:  
 none
 
+
+![bye](public/bye.png)

@@ -1,4 +1,4 @@
-# Snowball the Task Manager 
+# Snowball the Task Manager – User Guide
 
 ## About
 
@@ -58,7 +58,7 @@ Example:
 4\. [D][-] [Important!!] Write presentation script (by: Fri, 13 Sep 19, 14:00)<br>
 
 
-## Commands
+## Usage
 
 > **Command Format**
 > * Words in UPPER-CASE are the parameters to be supplied by the user.
@@ -73,9 +73,9 @@ Example:
 * Tasks types and completion status are shown along with the task description and time 
   (if any). Priority levels that are higher than None are also displayed.
 * For example: `list`
-    > 1. [E][+] Project meeting (at: Tue, 10 Sep 19, 12:00) 
-    > 1. [D][-] Submit presentation slides (by: Wed, 11 Sep 19, 23:59)
-    > 1. [T][-] Go to sleep
+    > 1\. [E][+] Project meeting (at: Tue, 10 Sep 19, 12:00)<br> 
+    2\. [D][-] Submit presentation slides (by: Wed, 11 Sep 19, 23:59)<br>
+    3\. [T][-] Go to sleep
 
 ##### `find PHRASE`
 * Displays all tasks that contain `PHRASE` in their description, priority level, 
@@ -99,6 +99,10 @@ Example:
 
 ##### `todo DESCRIPTION`
 * Adds a new To-Do task with the given description.
+* Example: `todo Read textbook`
+    >Got it. I've added this task:<br>
+      [T][-] Read textbook<br>
+    Now you have 5 tasks in the list.
 
 ##### `deadline DESCRIPTION /by TIME`
 * Adds a new Deadline task with the given description and due time.
@@ -111,6 +115,12 @@ Example:
         * Note the 'T' between date and time
 * If `TIME` does not match any valid format, the due date and time will be set 
   to the current date and time. 
+* For example, you could type: `deadline Write project completion report /by 200919 1800`
+    >Got it. I've added this task:<br>
+      [D][-] Write project completion report (by: Fri, 20 Sep 2019, 18:00)<br>
+    Now you have 6 tasks in the list.
+* Example #2 - Snowball responds with an error message if `TIME` is not specified: `deadline Write project completion report`
+    >Sorry, what's the deadline for this? 
 
 ##### `event DESCRIPTION /at TIME`
 * Adds a new Event task with the given description and event time.
@@ -123,6 +133,12 @@ Example:
         * Note the 'T' between date and time
 * If `TIME` does not match any valid format, the event date and time will be set 
   to the current date and time. 
+* For example: `event Internship interview /at 270819 1500`
+    >Got it. I've added this task:<br>
+      [E][-] Internship interview (at: Tue, 27 Aug 2019, 15:00)<br>
+    Now you have 7 tasks in the list.
+* Again, an error message is shown if `TIME` is missing: `event Internship`
+    >Sorry, I need to know when your event is!
 
 #### Completing Tasks
 
@@ -133,7 +149,7 @@ Example:
 * For example: `done 1`
     >Nice! I've marked this task as done:<br>
     [T][+] Make user guide
-* Invalid usage: `done 1.`
+* Invalid usage for a list with 2 tasks: `done 1.` or `done 5`
     >Sorry, I couldn't find the task you requested!
 
 ##### `undone INDEX`
@@ -143,7 +159,7 @@ Example:
 * For example: `undone 1`
     >Oh dear. I've marked this task as undone:<br>
     [T][-] Make user guide
-* Invalid usage: `undone 1.`
+* Invalid usage for a list with 2 tasks: `undone 1.` or `undone 5`
     >Sorry, I couldn't find the task you requested!
 
 #### Changing Task Priority Levels
@@ -165,15 +181,22 @@ Example:
 
 ##### `delete INDEX`
 * Deletes the task with the given index number. 
-* Use with caution: deleted tasks cannot be recovered.
+* **Use with caution**: deleted tasks cannot be recovered.
+* `INDEX` should be the list index number of the task with no other symbols or 
+  punctuation, as in the `done`, `undone`, and `priority` commands.
+* Example usage: `delete 1`
+    >Noted. I've deleted this task:<br>
+      [D][-] Submit presentation slides (by: Wed, 11 Sep 19, 23:59)<br>
+    Now you have 6 tasks in the list.
 
 #### Saying Bye
 
 ##### `bye`
 * Displays a goodbye message from Snowball. 
 * Does not actually do anything useful. But it's always good manners to say bye before 
-  you leave a chat!
-
+  leaving a chat!
+* Example: `bye`
+    >Bye. Hope to see you again soon!
 
 ## Command Summary
 

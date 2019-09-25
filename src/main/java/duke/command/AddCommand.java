@@ -25,17 +25,11 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
-
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        if (tasks.getSize() == 1) {
-            System.out.println("Now you have 1 task in the list.");
-        } else {
-            System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
+        if (!persistState(tasks, storage)) {
+            return ui.showSaveError();
         }
-
-        persistState(tasks, storage);
+        return ui.showAddTask(task,tasks.getSize());
     }
 }

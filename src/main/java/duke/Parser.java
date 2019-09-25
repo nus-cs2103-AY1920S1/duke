@@ -7,7 +7,6 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
-import duke.command.UnknownCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -96,7 +95,7 @@ class Parser {
             }
 
         } else {
-            return new UnknownCommand();
+            throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }

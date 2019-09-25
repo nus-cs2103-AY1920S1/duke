@@ -25,17 +25,15 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-
-        Task t = tasks.removeTask(index);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(t);
-        if (tasks.getSize() == 1) {
-            System.out.println("Now you have 1 task in the list.");
-        } else {
-            System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        try {
+            Task t = tasks.removeTask(index);
+            if (!persistState(tasks, storage)) {
+                return ui.showSaveError();
+            }
+            return ui.showDeleteTask(t, tasks.getSize());
+        } catch (IndexOutOfBoundsException e) {
+            return ui.showIndexError(index);
         }
-
-        persistState(tasks, storage);
     }
 }

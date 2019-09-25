@@ -38,10 +38,9 @@ public class Storage {
      * @return List list of tasks.
      * @throws DukeException If there has been IOException while performing an operation on the file.
      */
-    public List<Task> load() throws DukeException {
+    public List<Task> load() throws IOException {
 
         List<Task> tasks = new ArrayList<>(100);
-        try {
             if (!file.createNewFile()) {
 
                 //read file contents into List
@@ -71,9 +70,7 @@ public class Storage {
                 br.close();
                 fr.close();
             }
-        } catch (IOException e) {
-            throw new DukeException("There has been an IOException while creating the data file.");
-        }
+
         return tasks;
     }
 
@@ -83,9 +80,8 @@ public class Storage {
      * @param tasks a list of tasks.
      * @throws DukeException If there has been IOException while performing an operation on the file.
      */
-    public void saveDataToFile(List<Task> tasks) throws DukeException {
+    public void saveDataToFile(List<Task> tasks) throws IOException {
         //write to a completely new file
-        try {
             FileWriter fw = new FileWriter(file, false);
             for (Task task : tasks) {
                 String s = task.toDataFormat();
@@ -93,9 +89,6 @@ public class Storage {
             }
 
             fw.close();
-        } catch (IOException e) {
-            throw new DukeException("Unable to write to datafile.");
-        }
     }
 
 }

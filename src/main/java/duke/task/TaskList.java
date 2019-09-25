@@ -65,14 +65,9 @@ public class TaskList {
      * @return Task the task marked as done.
      * @throws DukeException If there is no such task in the list.
      */
-    public Task setIsDone(int index) throws DukeException {
-        try {
+    public Task setIsDone(int index) throws IndexOutOfBoundsException {
             tasks.get(index).isDone = true;
             return tasks.get(index);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(" ☹ OOPS!!! There is no task number " + (index + 1));
-        }
-
     }
 
     /**
@@ -82,14 +77,8 @@ public class TaskList {
      * @return Task the task removed.
      * @throws DukeException If there is no such task in the list.
      */
-    public Task removeTask(int index) throws DukeException {
-        try {
+    public Task removeTask(int index) throws IndexOutOfBoundsException {
             return tasks.remove(index);
-
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(" ☹ OOPS!!! There is no task number " + (index + 1));
-        }
-
     }
 
     /**

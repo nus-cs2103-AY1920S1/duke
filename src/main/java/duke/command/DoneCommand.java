@@ -32,15 +32,15 @@ public class DoneCommand extends Command {
      * @param storage storage.
      * @throws DukeException If there is no such task in tasks.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             Task t = tasks.setIsDone(index);
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(t);
+            if (!persistState(tasks, storage)) {
+                return ui.showSaveError();
+            }
+            return ui.showDoneTask(t);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(" ☹ OOPS!!! There is no task number " + (index + 1));
+            return ui.showIndexError(index);
         }
-
-        persistState(tasks, storage);
     }
 }

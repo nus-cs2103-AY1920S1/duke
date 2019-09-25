@@ -13,29 +13,16 @@ import java.util.Scanner;
 public class Ui {
 
     /**
-     * Scanner to receive user input.
-     */
-    private Scanner scanner;
-
-    /**
      * Class constructor.
      */
     Ui() {
-        this.scanner = new Scanner(System.in);
     }
 
     /**
      * Prints Duke welcome message.
      */
-    void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+    String showWelcome() {
+        return "Hello! I'm Duke. What can I do for you?";
     }
 
     /**
@@ -43,15 +30,15 @@ public class Ui {
      *
      * @return String trimmed user input.
      */
-    String readCommand() {
-        return scanner.nextLine().trim();
+    String readCommand(String command) {
+        return command.trim();
     }
 
     /**
      * Prints a loading error message.
      */
-    void showLoadingError() {
-        System.out.println("Error loading data from file");
+    String showLoadingError() {
+        return "Error loading data from file. Creating tasklist from scratch.";
     }
 
     /**
@@ -59,8 +46,49 @@ public class Ui {
      *
      * @param errorMessage errorMessage to print.
      */
-    void showError(String errorMessage) {
-        System.out.println(errorMessage);
+    String showError(String errorMessage) {
+        return errorMessage;
+    }
+
+    public String showFarewell() {
+        return "Bye. Hope to see you again soon!";
+    }
+
+    public String showAddTask(Task task, int size) {
+        String s = "Got it. I've added this task:\n";
+        s = appendTask(s, task);
+        return appendListSize(s, size);
+    }
+
+    public String showDeleteTask(Task task, int size) {
+        String s = "Noted. I've removed this task:\n";
+        s = appendTask(s, task);
+        return appendListSize(s, size);
+    }
+
+    private String appendTask(String s, Task task) {
+        return s.concat(task.toString() + "\n");
+    }
+
+    private String appendListSize(String s, int size) {
+        if (size == 1) {
+            return s.concat("Now you have 1 task in the list.");
+        } else {
+            return s.concat("Now you have " + size + " tasks in the list.");
+        }
+    }
+
+    public String showDoneTask(Task task) {
+        String s = "Nice! I've marked this task as done:\n";
+        return appendTask(s, task);
+    }
+
+    public String showIndexError(int index) {
+        return " ☹ OOPS!!! There is no task number " + (index + 1) + "\n";
+    }
+
+    public String showSaveError() {
+        return "Unable to write to datafile.";
     }
 
     /**
@@ -68,10 +96,17 @@ public class Ui {
      *
      * @param list task list to print.
      */
-    public void printList(List<Task> list) {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println((i + 1) + "." + list.get(i).toString());
+    public String showList(List<Task> list) {
+        //guard clause
+        if (list.size() == 0) {
+            return "No tasks found\n";
         }
+
+        //happy path
+        String s = "Here are the tasks in your list:\n";
+        for (int i = 0; i < list.size(); i++) {
+            s = s.concat((i + 1) + "." + list.get(i).toString() + "\n");
+        }
+        return s;
     }
 }

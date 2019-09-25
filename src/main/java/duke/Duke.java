@@ -3,6 +3,7 @@ package duke;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -45,32 +46,32 @@ public class Duke extends Application {
     public Duke() {
         ui = new Ui();
         storage = new Storage("/Users/stephenchua/duke/src/main/data/duke.txt");
+        initialize();
+    }
+
+    private void initialize() {
+        String dukeText;
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
+            dukeText = ui.showWelcome();
+        } catch (IOException e) {
+            dukeText = ui.showLoadingError();
             tasks = new TaskList();
         }
+
+        //dont know how to show welcome
+        //return dukeText;
     }
 
+    public String run(String command) {
 
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
+        String fullCommand = ui.readCommand(command);
+        try {
+            Command c = Parser.parse(fullCommand);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke().run();
     }
 
     @Override
@@ -86,12 +87,13 @@ public class Duke extends Application {
         sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton, dialogContainer);
 
         scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
+
 
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
@@ -145,6 +147,7 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
+
     }
 
     /**
@@ -153,8 +156,8 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        String userText = new String(userInput.getText());
-        String dukeText = new String(getResponse(userInput.getText()));
+        String userText = userInput.getText();
+        String dukeText = run(userInput.getText());
         dialogContainer.getChildren().addAll(
             DialogBox.getUserDialog(userText, user),
             DialogBox.getDukeDialog(dukeText, duke)
@@ -162,13 +165,7 @@ public class Duke extends Application {
         userInput.clear();
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
+
 
     /**
      * Iteration 1:

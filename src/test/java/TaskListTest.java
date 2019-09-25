@@ -16,7 +16,7 @@ public class TaskListTest {
             TaskList tasks = new TaskList(new ArrayList<>());
             tasks.setIsDone(1);
             fail();
-        } catch (DukeException e) {
+        } catch (IndexOutOfBoundsException e) {
             assertEquals(" ☹ OOPS!!! There is no task number " + (testIndex + 1), e.getMessage());
         }
     }

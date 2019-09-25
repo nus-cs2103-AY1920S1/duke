@@ -3,7 +3,7 @@
 # User Guide
 User guide for Duke,<br/>
 by Chen Kai Bin<br/>
-[View the Github project here](https://github.com/ckb055/duke)
+[view the Github project here](https://github.com/ckb055/duke)
 
 # Introduction
 
@@ -21,7 +21,7 @@ Although its fuctionality is simple, Duke is highly user-friendly.
 - Offers random fun-fact trivia
 
 ## Getting started
-Download Duke [here](https://github.com/ckb055/duke)
+Download Duke [here](https://github.com/ckb055/duke/releases/tag/v0.2)
 
 ## Usage
 ### Commands

@@ -31,8 +31,8 @@ public class MainWindowController extends AnchorPane {
 
     private final TaskCommandFactory factory;
     private final CommandHistory commandHistory;
-    private final Image userImage;
-    private final Image dukeImage;
+    private final Image starkImage;
+    private final Image thanosImage;
 
     /**
      * <p>
@@ -44,8 +44,8 @@ public class MainWindowController extends AnchorPane {
     public MainWindowController(TaskCommandFactory factory, CommandHistory commandHistory) {
         this.factory = factory;
         this.commandHistory = commandHistory;
-        this.userImage = new Image(getClass().getResourceAsStream("/images/DaUser.png"));
-        this.dukeImage = new Image(getClass().getResourceAsStream("/images/DaDuke.png"));
+        this.starkImage = new Image(getClass().getResourceAsStream("/images/Stark.png"));
+        this.thanosImage = new Image(getClass().getResourceAsStream("/images/Thanos.png"));
     }
 
     /**
@@ -56,7 +56,7 @@ public class MainWindowController extends AnchorPane {
         scrollPane.vvalueProperty()
                 .bind(dialogContainer.heightProperty());
         dialogContainer.getChildren()
-                .add(new DukeDialogController("Hello! I'm Duke\nWhat can I do for you?", dukeImage));
+                .add(new ThanosDialogController("Hello! I am inevitable.\nWhat can I do for you?", thanosImage));
     }
 
     @FXML
@@ -64,13 +64,17 @@ public class MainWindowController extends AnchorPane {
         String input = userInput.getText();
         userInput.clear();
 
+        if (input.equals("")) {
+            return;
+        }
+
         ObservableList<Node> dialogList = dialogContainer.getChildren();
-        dialogList.add(new UserDialogController(input, userImage));
+        dialogList.add(new StarkDialogController(input, starkImage));
 
         if (input.equals("bye")) {
             doAfter(300, () -> dialogList.add(
-                    new DukeDialogController(StringUtils.indent("Bye. Hope to see you again soon!"),
-                            dukeImage)));
+                    new ThanosDialogController(StringUtils.indent("Bye. Hope to see you again soon!"),
+                            thanosImage)));
 
             doAfter(1000, () -> {
                 Platform.exit();
@@ -87,10 +91,10 @@ public class MainWindowController extends AnchorPane {
 
             doAfter(300, () -> {
                 if (response.isInvalidInput()) {
-                    dialogList.add(new DukeDialogController(response.getErrorMessage(), dukeImage));
+                    dialogList.add(new ThanosDialogController(response.getErrorMessage(), thanosImage));
                 } else {
                     commandHistory.addCommand(command);
-                    dialogList.add(new DukeDialogController(response.getFormattedResponse(), dukeImage));
+                    dialogList.add(new ThanosDialogController(response.getFormattedResponse(), thanosImage));
                 }
             });
 

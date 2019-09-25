@@ -11,15 +11,15 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 
-class DukeDialogController extends HBox {
+class ThanosDialogController extends HBox {
     @FXML
     private Label text;
     @FXML
     private Circle displayPicture;
 
-    DukeDialogController(String text, Image img) {
+    ThanosDialogController(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/DukeDialog.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/ThanosDialog.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();

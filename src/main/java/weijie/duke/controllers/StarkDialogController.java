@@ -11,15 +11,15 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 
-class UserDialogController extends HBox {
+class StarkDialogController extends HBox {
     @FXML
     private Label text;
     @FXML
     private Circle displayPicture;
 
-    UserDialogController(String text, Image img) {
+    StarkDialogController(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/UserDialog.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/StarkDialog.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();

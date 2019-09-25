@@ -45,6 +45,7 @@ public class Duke extends Application {
 
             primaryStage.setScene(scene);
             primaryStage.show();
+            primaryStage.setResizable(false);
 
         } catch (DukeIoException | IOException | DukeIllegalArgumentException e) {
             e.printStackTrace();

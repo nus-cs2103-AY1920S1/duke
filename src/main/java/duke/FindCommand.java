@@ -1,10 +1,10 @@
 package duke;
+
 /**
  * Represents a command to find tasks that contain the specified keyword. A <code>FindCommand</code> object corresponds
  * to an input from user to find tasks e.g., find book
  */
 public class FindCommand extends Command {
-
     private String word;
 
     FindCommand(String word) {

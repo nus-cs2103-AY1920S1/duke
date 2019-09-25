@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public class Task {
     String description;
-    String type;
     private boolean isDone;
     ArrayList<String> tags = new ArrayList<>();
 

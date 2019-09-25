@@ -10,10 +10,6 @@ It's very easy to make some words **bold** and other words *italic*
 - Find a task based on an input.
 - Do not allow duplicate task.
 
-### Add Task
-Supports
-Do not allow duplicate task to be added to the list of Task.
-
 ## Usage
 
 ### `list`

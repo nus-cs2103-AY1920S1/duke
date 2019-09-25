@@ -12,7 +12,6 @@ public class Duke {
     /**
      * Main method of duke.Duke application.
      */
-
     public static void main(String[] args) {
         // Create a scanner to take in user input
         Scanner sc = new Scanner(System.in);

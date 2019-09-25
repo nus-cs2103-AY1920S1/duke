@@ -4,8 +4,9 @@ package duke.task;
  * The ToDoException class handles any incorrect todo input by the user,
  * and prompts them to enter in the correct format.
  */
-public class ToDoException extends Exception{
-    private static final String MISSING_DESCRIPTION = " OOPS!!! The description of a todo cannot be empty.";
+public class ToDoException extends Exception {
+    private static final String MISSING_DESCRIPTION =
+            " OOPS!!! The description of a todo cannot be empty.";
     private String error;
 
     /**

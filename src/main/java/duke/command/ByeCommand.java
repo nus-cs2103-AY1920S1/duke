@@ -17,8 +17,10 @@ public class ByeCommand implements Command {
      * @param ui ui object which handles output of user interaction
      * @param taskList the list of tasks that is stored in the Duke program
      * @return a String representation of the Duke's farewell
+     * @throws IOException if an I/O error occurs
      */
-    public String execute(DukeData dukeData, Ui ui, TaskList taskList) throws IOException {
+    public String execute(DukeData dukeData, Ui ui, TaskList taskList)
+            throws IOException {
         dukeData.exit();
         return ui.showFarewell();
     }

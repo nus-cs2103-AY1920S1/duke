@@ -8,7 +8,8 @@ import duke.task.Task;
 import java.io.IOException;
 
 /**
- * The AddCommand handles the adding of any ToDo, Deadline, or Event Tasks into the Duke program.
+ * The AddCommand handles the adding of any ToDo, Deadline, or Event
+ * Tasks into the Duke program.
  */
 public class AddCommand implements Command {
     private Task taskToBeAdded;
@@ -29,8 +30,9 @@ public class AddCommand implements Command {
      * @return a string representation of the output for the add command
      */
     @Override
-    public String execute(DukeData dukeData, Ui ui, TaskList taskList) throws IOException {
-        int index = taskList.getSize() + 1; // since index is always -1 of size of arraylist
+    public String execute(DukeData dukeData, Ui ui, TaskList taskList)
+            throws IOException {
+        int index = taskList.getSize() + 1; // since index is -1 of size of arraylist
         dukeData.addTask(index, this.taskToBeAdded);
         taskList.addTask(this.taskToBeAdded);
         return ui.showTaskAdded(this.taskToBeAdded, taskList);

@@ -10,16 +10,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * The Ui class handles all user interactions and is responsible for returning the correct
+ * The Ui class handles all user interactions and
+ * is responsible for returning the correct
  * String representations of the output for the user.
  */
 public class Ui {
-    private static final String LOGO = "____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-
     private QuoteGenerator quoteGenie;
     private Scanner sc;
 
@@ -52,13 +47,14 @@ public class Ui {
      * @return a String of Greetings.
      */
     public static String showIntro() {
-        String out = String.format("Hello! I am Doraemon! :D%nWhat can I do for you?");
+        String out = String.format(
+                "Hello! I am Doraemon! :D%nWhat can I do for you?");
         return addLines(out);
     }
 
     /**
-     * Lists out all the tasks the user has added, be it ToDo, Deadlines or Events,
-     * in the order of input.
+     * Lists out all the tasks the user has added,
+     * be it ToDo, Deadlines or Events, in the order of input.
      * @param tasks an ArrayList which consists of the Task objects
      * @return a String representation of all Tasks in the list
      */
@@ -79,7 +75,8 @@ public class Ui {
      * @return a string of farewell words
      */
     public String showFarewell() {
-        String bye = String.format("GoodBye! Hope to see you again soon!");
+        String bye = String.format(
+                "GoodBye! Hope to see you again soon!");
         return addLines(bye);
     }
 
@@ -90,8 +87,8 @@ public class Ui {
      * @return a String of information notifying the user of the added task
      */
     public String showTaskAdded(Task task, TaskList list) {
-        String added = String.format("Got it! I've added this task:" +
-                        "%n   %s%n Now you have %d task in the list.",
+        String added = String.format("Got it! I've added this task:"
+                        + "%n   %s%n Now you have %d task in the list.",
                 task.toString(), list.getSize());
         return addLines(added);
     }
@@ -104,7 +101,8 @@ public class Ui {
      */
     public String showDone(int taskIndex, TaskList list) {
         Task t = list.getTask(taskIndex);
-        String done = String.format("Nice! I've marked this task as done:%n %s",
+        String done = String.format(
+                "Nice! I've marked this task as done:%n %s",
                 t.toString());
         return addLines(done);
     }
@@ -117,33 +115,38 @@ public class Ui {
      */
     public String showDelete(int index, TaskList list) {
         Task t = list.getTask(index);
-        String del = String.format("Noted. I've removed this task:%n   %s%n" +
-                        " Now you have %d tasks in the list.",
+        String del = String.format(
+                "Noted. I've removed this task:%n   %s%n"
+                        + " Now you have %d tasks in the list.",
                 t.toString(), list.getSize() - 1);
         return addLines(del);
     }
 
     /**
      * Shows the user his data that is stored in the hard disk.
-     * @param dukeData the DukeData object that stores the user's data from Duke program
+     * @param dukeData the DukeData object that stores
+     *                 the user's data from Duke program
      * @return a String representation of the data present in the local Storage file
      * @throws IOException if an I/O Exception occurs
      */
     public String showData(DukeData dukeData) throws IOException {
-        String data = String.format("This is the list of tasks stored in your local storage disc:%s",
+        String data = String.format(
+                "This is the list of tasks stored in your local storage disc:%s",
                 dukeData.showDataFile());
         return addLines(data);
     }
 
     /**
-     * This method searches the TaskList for the tasks that contain the relevant keyword,
-     * and displays the details of the tasks.
+     * This method searches the TaskList for the tasks that contain
+     * the relevant keyword, and displays the details of the tasks.
      * @param keyword the word that users key in to find the task with the keyword
      * @param list the TaskList to search for the tasks with the keyword
-     * @return a String representation of the list of tasks containing the keyword
+     * @return a String representation of the
+     *         list of tasks containing the keyword
      */
     public String showFind(String keyword, TaskList list) {
-        StringBuilder found = new StringBuilder("Here are the matching tasks in your list:");
+        StringBuilder found = new StringBuilder(
+                "Here are the matching tasks in your list:");
         ArrayList<Task> taskList = list.getList();
         boolean hasNoMatches = true;
         int count = 0;
@@ -167,7 +170,8 @@ public class Ui {
     }
 
     /**
-     * This methods generates and displays a random quote to brighten the user's day.
+     * This methods generates and displays a random quote
+     * to brighten the user's day.
      * @return a String representation of the
      */
     public String showQuote() {

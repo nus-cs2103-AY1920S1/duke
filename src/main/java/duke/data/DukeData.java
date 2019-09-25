@@ -54,7 +54,7 @@ public class DukeData {
     /**
      * Generates a new DukeData object which handles creation of a
      * new txt file in the given data directory, filePath.
-     * @param filePath the file path where the user wants to save Duke's data to
+     * @param filePath the file path where the user wants to save Duke's data
      */
     public DukeData(String filePath) {
 
@@ -89,7 +89,8 @@ public class DukeData {
      * @param index the index of the task to be added
      * @param task Task object which can represent ToDo, Deadline, or Event
      */
-    public void addTask(int index, Task task) throws IOException {
+    public void addTask(int index, Task task)
+            throws IOException {
         this.bw.write(String.format(" %d. %s", index, task.toData()));
         this.bw.newLine();
         this.bw.flush();
@@ -97,16 +98,18 @@ public class DukeData {
 
     /**
      * Updates the data file in the hard disk by removing the said task.
-     * @param updatedTaskList the TaskList which has already removed the unwanted Task
+     * @param updatedTaskList the TaskList which has removed the unwanted Task
      * @throws IOException if an I/O Exception occurs
      */
-    public void removeTask(TaskList updatedTaskList) throws IOException {
+    public void removeTask(TaskList updatedTaskList)
+            throws IOException {
         // replace the file with the new updated data
         int count = 1;
         FileWriter updatedFW = new FileWriter(this.saveFile);
         BufferedWriter updatedBW = new BufferedWriter(updatedFW);
         for (Task task : updatedTaskList.getList()) {
-            updatedBW.write(String.format(" %d. %s", count, task.toData()));
+            updatedBW.write(String.format(
+                    " %d. %s", count, task.toData()));
             updatedBW.newLine();
             count++;
         }
@@ -118,11 +121,12 @@ public class DukeData {
     /**
      * Updates the data file in the hard disk by changing
      * the status of the given task.
-     * @param updatedTaskList the TaskList which has already removed the unwanted Task
+     * @param updatedTaskList the TaskList which has removed the specified Task
      * @throws IOException if an I/O Exception occurs
      * @throws FileNotFoundException when the file does not exist
      */
-    public void taskDone(TaskList updatedTaskList) throws IOException, FileNotFoundException {
+    public void taskDone(TaskList updatedTaskList)
+            throws IOException, FileNotFoundException {
         // now we replace the file with the new updated data
         int count = 1;
         FileWriter updatedFW = new FileWriter(this.saveFile);
@@ -172,7 +176,8 @@ public class DukeData {
     public TaskList load() throws IOException {
         TaskList existingList = new TaskList();
 
-        BufferedReader readFile = new BufferedReader(new FileReader(this.saveFile));
+        BufferedReader readFile = new BufferedReader(
+                new FileReader(this.saveFile));
         String oneTask = readFile.readLine();
         while (oneTask != null)  {
             String[] taskInfo = oneTask.split(" | ");

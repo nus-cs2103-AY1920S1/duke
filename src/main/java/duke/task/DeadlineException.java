@@ -4,10 +4,13 @@ package duke.task;
  * The DeadlineException class handles any incorrect deadline input by the user,
  * and prompts them to enter in the correct format.
  */
-public class DeadlineException extends Exception{
-    private static final String MISSING_DESCRIPTION = " OOPS!!! The description of a deadline cannot be empty.";
-    private static final String MISSING_DATE = " OOPS!!! The date of a deadline cannot be empty.";
-    private static final String MISSING_BOTH = " OOPS!!! The description or date of an event cannot be empty.";
+public class DeadlineException extends Exception {
+    private static final String MISSING_DESCRIPTION =
+            " OOPS!!! The description of a deadline cannot be empty.";
+    private static final String MISSING_DATE =
+            " OOPS!!! The date of a deadline cannot be empty.";
+    private static final String MISSING_BOTH =
+            " OOPS!!! The description or date of an event cannot be empty.";
     private String error;
     private int type; // 1 = empty desc, 2 = no date, 3 = either
 
@@ -23,12 +26,13 @@ public class DeadlineException extends Exception{
 
     /**
      * Gets the error message tied to the exception found.
-     * @return a string of error message for the exception found in the Deadline object
+     * @return a string of error message for the exception
+     * found in the Deadline object
      */
     public String getMessage() {
         if (this.type == 1) {
             return MISSING_DESCRIPTION;
-        } else if (this.type == 2){
+        } else if (this.type == 2) {
             return MISSING_DATE;
         } else {
             return MISSING_BOTH;

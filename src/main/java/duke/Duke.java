@@ -9,8 +9,9 @@ import java.io.IOException;
 
 /**
  * <h1>Duke</h1>
- * The Duke program allows users to manage and organise their to-do, deadlines, and events
- * all in one application. Users can add their tasks, marking them as done, list the tasks
+ * The Duke program allows users to manage and organise their
+ * to-do, deadlines, and events all in one application.
+ * Users can add their tasks, marking them as done, list the tasks
  * they have, and even delete them after they are done.
  */
 public class Duke { // handles all input and output
@@ -35,7 +36,7 @@ public class Duke { // handles all input and output
      * Creates a Duke program with filePath as the path to save Duke's data.
      * @param filePath the path to save the Duke's data from user input
      */
-    public Duke(String filePath) throws IOException {
+    public Duke(String filePath) {
         this.myData = new DukeData(filePath);
         this.myUi = new Ui();
         try {
@@ -58,7 +59,8 @@ public class Duke { // handles all input and output
             try {
                 Command cmd = Parser.parse(userCommand);
                 assert cmd != null;
-                output = Ui.addLines(cmd.execute(this.myData, this.myUi, this.myTasks));
+                output = Ui.addLines(cmd.execute(
+                        this.myData, this.myUi, this.myTasks));
                 System.out.println(output);
             } catch (IOException e) {
                 System.err.println(Ui.addLines(e.getMessage()));
@@ -88,12 +90,16 @@ public class Duke { // handles all input and output
 
     /**
      * This method generates a response to user input.
+     * @param input the user's command input
+     * @return a String representation of the
+     *         Duke's response based on the user input
      */
     public String getResponse(String input) {
         try {
             Command cmd = Parser.parse(input);
             assert cmd != null;
-            return cmd.execute(this.myData, this.myUi, this.myTasks);
+            return cmd.execute(
+                    this.myData, this.myUi, this.myTasks);
         } catch (DukeException | IOException e) {
             return Ui.addLines(e.getMessage());
         }

@@ -19,7 +19,8 @@ public class TaskList {
 
     /**
      * Creates a new TaskList object by importing an old TaskList.
-     * @param taskList an existing TaskList object, which is to be imported into new TaskList.
+     * @param taskList an existing TaskList object,
+     *                 which is to be imported into new TaskList.
      */
     public TaskList(TaskList taskList) {
         this.tasks = taskList.getList();
@@ -50,7 +51,7 @@ public class TaskList {
     }
 
     /**
-     * Gets the Task object with the given index index number from the list.
+     * Gets the Task object with the given index number from the list.
      * @param index the index number of the Task
      * @return the Task object with the given index
      */

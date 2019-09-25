@@ -7,7 +7,8 @@ import duke.data.TaskList;
 import java.io.IOException;
 
 /**
- * The DeleteCommand handles any command from the user to delete any task from the list.
+ * The DeleteCommand handles any command from the
+ * user to delete any task from the list.
  */
 public class DeleteCommand implements Command {
     private int taskIndex;
@@ -21,17 +22,20 @@ public class DeleteCommand implements Command {
     }
 
     /**
-     * Execute method which calls the method upon initialisation of the object.
+     * Execute method which calls the method upon
+     * initialisation of the object.
      * @param dukeData the storage object of the program
      * @param ui       ui object which handles output of user interaction
      * @param taskList the list of tasks that is stored in the Duke program
      * @return a string representation of the output for the delete command
+     * @throws IOException if an I/O error occurs
      */
     @Override
-    public String execute(DukeData dukeData, Ui ui, TaskList taskList) throws IOException {
-        String deleted = ui.showDelete(this.taskIndex , taskList);
+    public String execute(DukeData dukeData, Ui ui, TaskList taskList)
+            throws IOException {
+        String deleted = ui.showDelete(this.taskIndex, taskList);
         taskList.removeTask(this.taskIndex);
-        dukeData.removeTask(taskList); // taskList is the new taskList with the element deleted
+        dukeData.removeTask(taskList); // taskList removed deleted task
         return deleted;
     }
 }

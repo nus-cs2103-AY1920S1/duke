@@ -4,7 +4,8 @@ package duke.command;
  * Handles any command that is not understandable by Duke.
  */
 public class DukeException extends Exception {
-    private static final String DUMB_DUKE = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String DUMB_DUKE =
+            "OOPS!!! I'm sorry, but I don't know what that means :-(";
     private String error;
 
     /**

@@ -2,7 +2,10 @@ package duke.quote;
 
 import duke.Ui;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Random;
 
 /**
@@ -12,7 +15,7 @@ public class QuoteGenerator {
     private static final Random RANDOMISER = new Random();
     private final InputStream QUOTES_FILE =
             this.getClass().getResourceAsStream("/quotes.txt");
-    private Quote[] allQuotes = new Quote[74];
+    private Quote[] allQuotes = new Quote[74]; // number of quotes
 
     /**
      * Creates a new QuoteGenerator and loads all the quotes available.
@@ -34,7 +37,8 @@ public class QuoteGenerator {
         int countQuote = 0;
         try {
             // load the file of quotes into allQuotes using BufferedReader
-            BufferedReader br = new BufferedReader(new InputStreamReader(QUOTES_FILE));
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(QUOTES_FILE));
             String nextQuote = br.readLine();
             while (nextQuote != null) {
                 allQuotes[countQuote] = new Quote(nextQuote);

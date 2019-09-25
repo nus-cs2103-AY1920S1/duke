@@ -3,7 +3,8 @@ package duke.task;
 import java.text.ParseException;
 
 /**
- * The Event class represents any tasks that have a description, and an event date in nature.
+ * The Event class represents any tasks that has a
+ * description, and an event date in nature.
  */
 public class Event extends Task {
     private String date;

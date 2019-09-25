@@ -9,11 +9,11 @@ import java.util.Date;
  * readable format, e.g. 2nd of January 2019 4PM.
  */
 public class DateTime {
-    private static final SimpleDateFormat DATETIME_FORMATGIVEN = new SimpleDateFormat(
-            "d/M/yyyy HHmm");
+    private static final SimpleDateFormat DATETIME_FORMATGIVEN =
+            new SimpleDateFormat("d/M/yyyy HHmm");
     private static final String FORMAT_TO_SHOW = " 'of' MMMM yyyy, ha";
-    private static final SimpleDateFormat DATETIME_FORMATTER = new SimpleDateFormat(
-            FORMAT_TO_SHOW);
+    private static final SimpleDateFormat DATETIME_FORMATTER =
+            new SimpleDateFormat(FORMAT_TO_SHOW);
     private String dateTime;
     private Date date;
 
@@ -31,7 +31,8 @@ public class DateTime {
     /**
      * This method formats the date and time into the more readable format,
      * and returns a string representation of it.
-     * @return a string representation of the given date and time in the new format
+     * @return a string representation of the given
+     * date and time in the new format
      */
     public String getDateTimeString() {
         String[] splitDate = this.dateTime.split("/");

@@ -3,7 +3,6 @@ package duke.task;
 /**
  * Task is an abstract class that handles its concrete subclasses,
  * ToDo, Deadline, and Event.
- *
  * A Task can have a status which can be marked as done, a method to
  * get its status icon and description, as well as its String representation.
  */
@@ -12,7 +11,7 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Constructs a Task object (which cannot be initialised on its own)
+     * Constructs a Task object (which cannot be initialised on its own).
      * @param description a Description of the Task
      */
     public Task(String description) {

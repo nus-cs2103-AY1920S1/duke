@@ -5,7 +5,8 @@ import duke.data.DukeData;
 import duke.data.TaskList;
 
 /**
- * The ListCommand handles the command where the user requests to view the tasks in his/her list.
+ * The ListCommand handles the command where the user
+ * requests to view the tasks in his/her list.
  */
 public class ListCommand implements Command {
 

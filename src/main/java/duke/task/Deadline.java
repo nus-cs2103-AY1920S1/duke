@@ -3,7 +3,8 @@ package duke.task;
 import java.text.ParseException;
 
 /**
- * The Deadline class represents any tasks that have a description, and a deadline in nature.
+ * The Deadline class represents any tasks that has a
+ * description, and a deadline in nature.
  */
 public class Deadline extends Task {
     private String date;
@@ -48,7 +49,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a string representation of the expected Deadline in the new format.
+     * Returns a string representation of the expected
+     * Deadline in the new format.
      * @return a string of the deadline's date
      */
     public String getDeadline() {

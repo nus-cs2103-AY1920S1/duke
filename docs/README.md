@@ -13,8 +13,8 @@ It's very easy to make some words **bold** and other words *italic*
 ## Usage
 
 ### `list`
-List all the tasks in the list in the following order [D], [E] and [T].
-In category [D] and [E], the list of Task is sorted from the earliest date to the latest.
+**List all the tasks in the list in the following order [D], [E] and [T].**
+**In category [D] and [E], the list of Task is sorted from the earliest to the latest date.**
 
 Example of usage:
 ```
@@ -31,7 +31,7 @@ Here are the tasks in your list:
 ```
 
 ### `todo`
-Creates a todo task and append it to the list.
+**Creates a todo task and append it to the list.**
 
 The format is as follow:
 `todo <description>`
@@ -49,7 +49,7 @@ Now you have 3 tasks in the list
 ```
 
 ### `event`
-Creates an event task and append it to the list.
+**Creates an event task and append it to the list.**
 
 The format is as follow:
 `event <description> /at <datetimeformat>`
@@ -67,7 +67,7 @@ Now you have 4 tasks in the list
 ```
 
 ### `deadline`
-Creates a deadline task and append it to the list.
+**Creates a deadline task and append it to the list.**
 
 The format is as follow:
 `deadline <description> /by <datetimeformat>`
@@ -85,7 +85,7 @@ Now you have 5 tasks in the list
 ```
 
 ### `done <index>`
-Marks the task at the given index as done.
+**Marks the task at the given index as done.**
 
 Example of usage:
 ```
@@ -99,7 +99,7 @@ Nice! I've marked this task as done:
 ```
 
 ### `delete <index>`
-Delete the task at the given index from the list.
+**Delete the task at the given index from the list.**
 
 Example of usage:
 ```
@@ -114,7 +114,7 @@ Now you have 4 taks in the list
 ```
 
 ### `find <string>`
-Finds all the tasks in the list that partially/ fully matches the given string.
+**Finds all the tasks in the list that partially/ fully matches the given string.**
 
 Example of usage:
 ```
@@ -127,7 +127,7 @@ Expected outcome:
 ```
 
 ### `bye`
-Terminates the program and exits.
+**Terminates the program and exits.**
 
 Example of usage:
 ```

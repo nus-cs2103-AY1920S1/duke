@@ -1,3 +1,7 @@
+import javax.print.DocFlavor;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,16 +34,19 @@ public class Parser {
                     + "    Delete \n" + "        Eg. delete __(number)__ or delete all\n"
                     + "    Done \n" + "        Eg. done __(number)__\n"
                     + "    Find \n" + "        Eg. find __(keyword)__\n"
+                    + "    Expenses \n" + "        Eg. expenses __$(amount)__ /on __(what you spent on)__\n"
                     + "    List \n" + "    Bye\n");
         }
-        int dateIndex = 0;
-        String date = inputArray[0];
+
+        //variable refers to either date or what the expenditure is spent on.
+        int variableIndex = 0;
+        String variable = inputArray[0];
         String description = getDescriptionOfTask(properInput);
-        if (taskType.equals("deadline") || taskType.equals("event")) {
+        if (taskType.equals("deadline") || taskType.equals("event") || taskType.equals("expenses")) {
             int slashIndex = properInput.indexOf("/");
-            dateIndex = slashIndex + 4;
-            if (properInput.length() > dateIndex) {
-                date = properInput.substring(dateIndex);
+            variableIndex = slashIndex + 4;
+            if (properInput.length() > variableIndex) {
+                variable = properInput.substring(variableIndex);
             } else {
                 throw new DukeException("    Wrong Format! Please follow the correct format! :)))");
             }
@@ -55,7 +62,7 @@ public class Parser {
                 }
             case "deadline":
                 if (isValidDeadlineCommand(properInput) && isValidDateFormat(properInput)) {
-                        return new DeadlineCommand(description, formatDate(date));
+                        return new DeadlineCommand(description, formatDate(variable));
                 } else {
                     Ui.printIndent();
                     throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct deadline format! :<\n"
@@ -63,7 +70,7 @@ public class Parser {
                 }
             case "event":
                 if (isValidEventCommand(properInput) && isValidDateFormat(properInput)) {
-                        return new EventCommand(description, formatDate(date));
+                        return new EventCommand(description, formatDate(variable));
                 } else {
                     Ui.printIndent();
                     throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct event format! :<\n"
@@ -91,7 +98,16 @@ public class Parser {
                 } else {
                     Ui.printIndent();
                     throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct done format! :<\n"
-                            + "    Done \n" + "        Eg. done __(number)__\n");
+                            + "    Done \n" + "        Eg. done __(number[make sure its a task and not an expense])__\n");
+                }
+            case "expenses":
+                if (isValidExpensesCommand(properInput)) {
+                    System.out.println("asda");
+                    return new ExpensesCommand(description, variable);
+                } else {
+                    Ui.printIndent();
+                    throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct done format! :<\n"
+                            + "    Expenses \n" + "        Eg. expenses __$(amount)__ /on __(what you spent on)__\n");
                 }
             case "list":
                 return new ListCommand(description);
@@ -109,6 +125,7 @@ public class Parser {
                         + "    Delete \n" + "        Eg. delete __(number)__ or delete all\n"
                         + "    Done \n" + "        Eg. done __(number)__\n"
                         + "    Find \n" + "        Eg. find __(keyword)__\n"
+                        + "    Expenses \n" + "        Eg. expenses __$(amount)__ /on __(what you spent on)__\n"
                         + "    List \n" + "    Bye\n");
         }
     }
@@ -255,7 +272,7 @@ public class Parser {
         assert  taskType != null;
         if (taskType.equals("todo") || taskType.equals("event") || taskType.equals("deadline") ||
                 taskType.equals("delete") || taskType.equals("done") || taskType.equals("find") ||
-                taskType.equals("list") || taskType.equals("bye") ) {
+                taskType.equals("list") || taskType.equals("bye") || taskType.equals("expenses")) {
             return true;
         } else {
             return false;
@@ -266,7 +283,8 @@ public class Parser {
         assert text != null;
         int spaceIndex = text.indexOf(" ");
         if ((text.contains("deadline") && isValidDeadlineCommand(text))
-                || text.contains("event") && isValidEventCommand(text)) {
+                || (text.contains("event") && isValidEventCommand(text))
+                || (text.contains("expenses") && isValidExpensesCommand(text))) {
             int slashIndex = text.indexOf("/");
             return text.substring(spaceIndex + 1, slashIndex - 1);
         } else if (text.contains("todo") || text.contains("done") ||
@@ -306,8 +324,8 @@ public class Parser {
                     isNumber = true;
                 }
             }
-            if (isNumber && Integer.parseInt(text.substring(7)) > 0) {
-                return text.contains(" ") && (text.contains("all") || Integer.parseInt(text.substring(7)) <= TaskList.listOfTasks.size());
+            if (text.contains("all") || (isNumber && Integer.parseInt(text.substring(7)) > 0)) {
+                return text.contains(" ") || Integer.parseInt(text.substring(7)) <= CompleteList.listOfPlans.size();
             } else {
                 Ui.printIndent();
                 throw new DukeException("Wrong Format! Please add an 'all' or a valid number after the delete word! Thank You :)");
@@ -335,12 +353,19 @@ public class Parser {
                 }
             }
             if (isNumber && Integer.parseInt(text.substring(5)) > 0) {
-                return text.contains(" ") && Integer.parseInt(text.substring(5)) <= TaskList.listOfTasks.size();
+                return text.contains(" ") && Integer.parseInt(text.substring(5)) <= CompleteList.listOfPlans.size() &&
+                        isValidDoneNumberGiven(text.substring(5));
             } else {
                 Ui.printIndent();
-                throw new DukeException("Wrong Format! Please add a valid number after the done word! Thank You :)");
+                throw new DukeException("Wrong Format! Please add a valid number that is a task " +
+                        "(and not an expenses!!) after the done word! Thank You :)");
             }
         }
+    }
+
+    public static boolean isValidExpensesCommand(String text) {
+        assert text != null;
+        return text.contains(" ") && text.contains("/") && text.contains("on") && text.length() > 20;
     }
 
     public static String findWord(String text) {
@@ -359,5 +384,28 @@ public class Parser {
         assert text != null;
         int spaceIndex = text.indexOf(" ");
         return text.substring(spaceIndex + 1);
+    }
+
+    public static boolean isValidDoneNumberGiven(String num) {
+        int taskNumber = Integer.parseInt(num);
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(Storage.file));
+            String text;
+            int counter = 0;
+            int lineCounter = 0;
+            while ((text = br.readLine()) != null) {
+                lineCounter++;
+                if (lineCounter == taskNumber) {
+                    if (text.contains("[Expenses]")) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        return false;
     }
 }

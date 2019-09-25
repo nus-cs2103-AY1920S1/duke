@@ -16,7 +16,7 @@ public class ListCommand extends Command {
     /**
      *
      *
-     * @param tasks Not needed in this case.
+     * @param errands Not needed in this case.
      * @param ui Not needed in this case.
      * @param storage Not needed in this case.
      * @return Returns those tasks that match the keyword.
@@ -25,11 +25,11 @@ public class ListCommand extends Command {
      *                               thus, an error message will be shown.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws FileNotFoundException {
-        assert tasks != null;
+    public String execute(CompleteList errands, Ui ui, Storage storage) throws FileNotFoundException {
+        assert errands != null;
         assert ui != null;
         assert storage != null;
-        if (TaskList.listOfTasks.isEmpty()) {
+        if (CompleteList.listOfPlans.isEmpty()) {
             return "There is no tasks in your list currently!!!";
         } else {
             String list = "Here are the tasks in your list:\n";

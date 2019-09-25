@@ -45,7 +45,7 @@ public class Command {
     /**
      * Dummy return value as it is always overrided by child classes.
      *
-     * @param tasks Not needed in this case.
+     * @param list Not needed in this case.
      * @param ui Not needed in this case.
      * @param storage Not needed in this case.
      * @return Returns a dummy string.
@@ -55,8 +55,7 @@ public class Command {
      * @throws DukeException If there is a different input that is not accepted,
      *                       a error message will show up.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(CompleteList list, Ui ui, Storage storage) throws IOException, DukeException {
         return "";
     }
-
 }

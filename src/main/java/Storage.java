@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    protected static ArrayList<Task> taskList = new ArrayList<Task>();
+
+    protected static ArrayList<Planner> taskList = new ArrayList<Planner>();
     protected static String file = "todo.txt";
 
     /**
@@ -109,36 +110,46 @@ public class Storage {
      * @throws DukeException If there is nothing in the file to be loaded,
      *     this exception will be thrown.
      */
-    public ArrayList<Task> load() throws IOException, DukeException {
+    public ArrayList<Planner> load() throws IOException, DukeException {
         File f = new File(file);
         assert f != null;
         Scanner sc = new Scanner(f);
-        ArrayList<Task> tempList;
+        ArrayList<Planner> tempList;
         if (countLines(file) == 0) {
             throw new DukeException("Woahsies wavy! There is nothing in this file!");
         } else {
             while (sc.hasNext()) {
-                String task = sc.nextLine();
-                int index = task.indexOf("[");
-                String taskType = task.substring(index + 1, index + 2);
-                int spaceIndex = task.indexOf(" ");
+                String plans = sc.nextLine();
+                int startBracketindex = plans.indexOf("[");
+                int closeBracketIndex = plans.indexOf("]");
+                String taskType = plans.substring(startBracketindex + 1, closeBracketIndex);
+                int spaceIndex = plans.indexOf(" ");
                 switch (taskType) {
                 case "T":
-                    Task toDo = new Todo(task.substring(spaceIndex));
+                    Task toDo = new Todo(plans.substring(spaceIndex));
                     taskList.add(toDo);
+                    TaskList.listOfTasks.add(toDo);
                     break;
                 case "D":
-                    int byIndex = task.indexOf("(");
-                    Task deadline = new Deadline(task.substring(spaceIndex, byIndex - 1),
-                            task.substring(byIndex + 4));
+                    int byIndex = plans.indexOf("(");
+                    Task deadline = new Deadline(plans.substring(spaceIndex, byIndex - 1),
+                            plans.substring(byIndex + 4));
                     taskList.add(deadline);
+                    TaskList.listOfTasks.add(deadline);
                     break;
                 case "E":
-                    int atIndex = task.indexOf("(");
-                    Task event = new Event(task.substring(spaceIndex, atIndex - 1),
-                            task.substring(atIndex + 4));
+                    int atIndex = plans.indexOf("(");
+                    Task event = new Event(plans.substring(spaceIndex, atIndex - 1),
+                            plans.substring(atIndex + 4));
                     taskList.add(event);
+                    TaskList.listOfTasks.add(event);
                     break;
+                case "Expenses":
+                    int onIndex = plans.indexOf("(");
+                    Expenses expense = new Expenses(plans.substring(spaceIndex, onIndex - 1),
+                            plans.substring(onIndex + 4));
+                    taskList.add(expense);
+                    ExpenseList.listOfExpenses.add(expense);
                 default:
                     break;
                 }
@@ -146,7 +157,7 @@ public class Storage {
             Ui.printLine();
             Ui.printIndent();
             System.out.println("Your file has been loaded! :)");
-            tempList = new ArrayList<Task>(taskList);
+            tempList = new ArrayList<Planner>(taskList);
             return tempList;
         }
     }

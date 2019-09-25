@@ -1,11 +1,9 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class TaskList {
+public class TaskList extends CompleteList {
 
     protected static ArrayList<Task> listOfTasks = new ArrayList<Task>();
-    protected Task tasking = new Task("");
-    protected Storage store = new Storage(Storage.file);
 
     /**
      * Constructor for TaskList.

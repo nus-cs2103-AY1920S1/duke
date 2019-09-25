@@ -96,7 +96,7 @@ public class Ui {
      */
     public static String printDelete(int i) {
         printIndent();
-        return TaskList.listOfTasks.get(i - 1).toString();
+        return CompleteList.listOfPlans.get(i - 1).toString();
         //printLine();
     }
 

@@ -29,14 +29,16 @@ public class EventCommand extends Command {
      *                     created, or cannot be opened for any other reason.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        assert tasks != null;
+    public String execute(CompleteList errands, Ui ui, Storage storage) throws IOException {
+        assert errands != null;
         assert ui != null;
         assert storage != null;
-        String eventOutput = ui.printGI() + "\n";
+        TaskList tasks = new TaskList();
         Task assignmentToDo = new Event(action, variable);
         tasks.addToTaskList(assignmentToDo);
+        errands.addToCompleteList(assignmentToDo);
         storage.addToFile(Storage.file, assignmentToDo.toString());
+        String eventOutput = ui.printGI() + "\n";
         eventOutput += "  " + assignmentToDo.toString() + "\n";
         eventOutput += Ui.printNumOfTasks();
         return eventOutput;

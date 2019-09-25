@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 public class Duke {
 
     private Storage storage;
-    private TaskList tasks;
+    private CompleteList errands;
     private Ui ui;
 
     /**
@@ -17,10 +17,10 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(Storage.file);
         try {
-            tasks = new TaskList(storage.load());
+            errands = new CompleteList(storage.load());
         } catch (DukeException | FileNotFoundException e) {
             ui.showLoadingError();
-            tasks = new TaskList();
+            errands = new CompleteList();
         }
     }
 
@@ -35,10 +35,10 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filepath);
         try {
-            tasks = new TaskList(storage.load());
+            errands = new CompleteList(storage.load());
         } catch (DukeException | FileNotFoundException e) {
             ui.showLoadingError();
-            tasks = new TaskList();
+            errands = new CompleteList();
         }
     }
 
@@ -55,7 +55,7 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.printLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                System.out.println(c.execute(tasks, ui, storage));
+                System.out.println(c.execute(errands, ui, storage));
                 isThereANextCommand = c.shouldExit();
             } catch (DukeException | IOException e) {
                 ui.showError(e.getMessage());
@@ -80,7 +80,7 @@ public class Duke {
         try {
             String fullCommand = input;
             Command c = Parser.parse(fullCommand);
-            return (c.execute(tasks, ui, storage));
+            return (c.execute(errands, ui, storage));
         } catch (DukeException | IOException e) {
             ui.showError(e.getMessage());
             return e.getMessage();

@@ -3,9 +3,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Task {
+public class Task extends Planner {
 
-    protected String description;
+    //protected String description;
     protected boolean isDone;
     protected boolean isCorrectFormat;
 
@@ -16,7 +16,7 @@ public class Task {
      *     either Todo, Event or Deadline.
      */
     public Task(String description) {
-        this.description = description;
+        super(description);
         this.isDone = false;
         this.isCorrectFormat = false;
     }

@@ -13,14 +13,14 @@ public class ByeCommand extends Command {
      * Prints out bye statement to signal to user
      * that the bot is shutting down.
      *
-     * @param tasks Saves tasks into tasklist if task
+     * @param errands Saves tasks into tasklist if task
      *              is present
      * @param ui Prints out messages to show to user.
      * @param storage Stores tasks into file.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        assert tasks != null;
+    public String execute(CompleteList errands, Ui ui, Storage storage) {
+        assert errands != null;
         assert ui != null;
         assert storage != null;
         return ui.printBye();

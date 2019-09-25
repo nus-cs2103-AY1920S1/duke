@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
      * tell the user that the delete tasks has been deleted to
      * the list of tasks.
      *
-     * @param tasks Not needed in this case.
+     * @param errands Not needed in this case.
      * @param ui Prints out statements to indicate to user what
      *           has happened.
      * @param storage Stores the tasks inside another file so that
@@ -29,23 +29,23 @@ public class DeleteCommand extends Command {
      *                     created, or cannot be opened for any other reason.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        assert tasks != null;
+    public String execute(CompleteList errands, Ui ui, Storage storage) throws IOException {
+        assert errands != null;
         assert ui != null;
         assert storage != null;
         if (variable.equals("all")) {
             storage.writeToFile(Storage.file, "");
-            TaskList.listOfTasks.clear();
+            CompleteList.listOfPlans.clear();
             Ui.printIndent();
             return "Everything in your list has been removed! "
                     + "Add more tasks to get started again!!!";
         } else {
             int taskNumber = Integer.parseInt(variable);
             String deleteOutput = ui.printRemove() + "\n" + Ui.printDelete(taskNumber) + "\n";
-            TaskList.listOfTasks.remove(taskNumber - 1);
+            CompleteList.listOfPlans.remove(taskNumber - 1);
             storage.writeToFile(Storage.file, "");
-            for (Task task : TaskList.listOfTasks) {
-                storage.addToFile(Storage.file, task.toString());
+            for (Planner errand : CompleteList.listOfPlans) {
+                storage.addToFile(Storage.file, errand.toString());
             }
             deleteOutput += Ui.printNumOfTasks();
             return deleteOutput;

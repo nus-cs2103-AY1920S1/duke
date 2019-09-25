@@ -22,7 +22,7 @@ public class FindCommand extends Command {
      * tell the user that the deadline tasks has been added to
      * the list of tasks.
      *
-     * @param tasks Not needed in this case.
+     * @param errands Not needed in this case.
      * @param ui Prints out statements to indicate to user what
      *           has happened.
      * @param storage Not needed in this case.
@@ -34,8 +34,8 @@ public class FindCommand extends Command {
      *                       will be sent to the user.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
-        assert tasks != null;
+    public String execute(CompleteList errands, Ui ui, Storage storage) throws DukeException, IOException {
+        assert errands != null;
         assert ui != null;
         assert storage != null;
         File f = new File(Storage.file);

@@ -29,14 +29,16 @@ public class DeadlineCommand extends Command {
      *                     created, or cannot be opened for any other reason.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        assert tasks != null;
+    public String execute(CompleteList errands, Ui ui, Storage storage) throws IOException {
+        assert errands != null;
         assert ui != null;
         assert storage != null;
-        String deadlineOutput = ui.printGI() + "\n";
         Task assignmentToDo = new Deadline(action, variable);
+        TaskList tasks = new TaskList();
         tasks.addToTaskList(assignmentToDo);
+        errands.addToCompleteList(assignmentToDo);
         storage.addToFile(Storage.file, assignmentToDo.toString());
+        String deadlineOutput = ui.printGI() + "\n";
         deadlineOutput += "  " + assignmentToDo.toString() + "\n";
         deadlineOutput += Ui.printNumOfTasks();
         return deadlineOutput;

@@ -9,7 +9,6 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -27,8 +26,6 @@ public class MainWindow extends AnchorPane implements Ui {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     /**
      * Initialises the MainWindow.

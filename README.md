@@ -10,9 +10,7 @@ This chatbot is a fork from the [original CLI chatbot](https://github.com/nus-cs
 
 # Preview of Duke
 
-**Level-10 Implementation on 7/9/19**
-
-<img src="https://raw.githubusercontent.com/Q-gabe/duke/master/preview/DukePreview.png" alt = "Duke Preview as of Level-10" width="500" /> 
+<img src="https://raw.githubusercontent.com/Q-gabe/duke/master/docs/Ui.png" alt = "Duke Preview" width="500" /> 
 
 # Course Tutorials 
 

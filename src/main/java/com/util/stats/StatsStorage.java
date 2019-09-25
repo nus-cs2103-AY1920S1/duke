@@ -24,19 +24,37 @@ public class StatsStorage {
     private String fp;
     private File f;
     private boolean doesFileExist;
-    private static String statsStorageFileName = "dukeStats.txt";
+    private static String STATSSTORAGE_FILENAME = "dukeStats.txt";
+    private static String STORAGE_DIRNAME = "dukeData";
 
     public StatsStorage() {
-        //this.fp = "F:\\CS2103\\duke\\data\\dukeStats.txt";
         this.fp = getFilePath();
         this.f = new File(fp);
         this.doesFileExist = f.exists();
     }
 
+    /**
+     * Gets appropriate filepath to save data txt files to.
+     * If application is not running on the developer's PC, save files
+     * to location relative to where application is at.
+     * @return location to save files
+     */
     private String getFilePath() {
+        String devDirFilePath = "F:\\CS2103\\duke\\data";
+        File devFile = new File(devDirFilePath);
+        // App running from dev pc (i.e. duke local repo), has data folder
+        if (devFile.exists()) {
+            return devDirFilePath + File.separator + STATSSTORAGE_FILENAME;
+        }
         String currDir = System.getProperty("user.dir");
-        String dataDir = currDir + File.separator + statsStorageFileName;
-        return dataDir;
+        // If data dir is not yet initialise, create it
+        String dataDirFilePath = currDir + File.separator + STORAGE_DIRNAME;
+        File dataDir = new File(dataDirFilePath);
+        if (!dataDir.exists()) {
+            dataDir.mkdir();
+        }
+        String dataFilePath = dataDirFilePath + File.separator + STATSSTORAGE_FILENAME;
+        return dataFilePath;
     }
 
     public ArrayList<Log> load() {

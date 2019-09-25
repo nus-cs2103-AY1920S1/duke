@@ -23,19 +23,37 @@ public class Storage {
     private String filePath;
     private File file;
     private boolean doesFileExist;
-    private static String storageFileName = "duke.txt";
+    private static String STORAGE_FILENAME = "duke.txt";
+    private static String STORAGE_DIRNAME = "dukeData";
 
     public Storage () {
-        //this.filePath = "F:\\CS2103\\duke\\data\\duke.txt";
         this.filePath = getFilePath();
         this.file = new File(filePath);
         this.doesFileExist = file.exists();
     }
 
+    /**
+     * Gets appropriate filepath to save data txt files to.
+     * If application is not running on the developer's PC, save files
+     * to location relative to where application is at.
+     * @return location to save files
+     */
     private String getFilePath() {
+        String devDirFilePath = "F:\\CS2103\\duke\\data";
+        File devFile = new File(devDirFilePath);
+        // App running from dev pc (i.e. duke local repo), has data folder
+        if (devFile.exists()) {
+            return devDirFilePath + File.separator + STORAGE_FILENAME;
+        }
         String currDir = System.getProperty("user.dir");
-        String dataDir = currDir + File.separator + storageFileName;
-        return dataDir;
+        // If data dir is not yet initialise, create it
+        String dataDirFilePath = currDir + File.separator + STORAGE_DIRNAME;
+        File dataDir = new File(dataDirFilePath);
+        if (!dataDir.exists()) {
+            dataDir.mkdir();
+        }
+        String dataFilePath = dataDirFilePath + File.separator + STORAGE_FILENAME;
+        return dataFilePath;
     }
 
     /**

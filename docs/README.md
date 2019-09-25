@@ -272,7 +272,7 @@ Sample command:
 
 `delete 2`
 
-</br>
+<br/>
 
 Possible outcome:
 
@@ -282,7 +282,7 @@ Possible outcome:
 
 `Now you have X tasks in the list`
 
-</br>
+<br/>
 
 ### 9. Exiting the application 
 Yes, this is a feature.

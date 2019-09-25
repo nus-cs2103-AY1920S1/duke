@@ -108,6 +108,21 @@ public class Deadline extends Task {
         String[] words = dueDateTime.split("/");
         String[] years = dueDateTime.split(" ");
 
+        // Checks if there is both a date and a time.
+        if ((years.length != 2) || (words.length != 3)) {
+            throw new DukeException("Invalid response. Either date or time is missing");
+        }
+
+        // Checks if hour string is valid.
+        if (years[1].length() != 4) {
+            throw new DukeException("Invalid response. Hour must be in the form of HHMM");
+        }
+
+        // Checks if the date string is valid.
+        if (years[0].length() < 8) {
+            throw new DukeException("Invalid date responds. Date must be in the form of DD/MM/YYYY");
+        }
+
         int day = Integer.parseInt(words[0]);
 
         assert day > 0 : "Day should be strictly positive";
@@ -141,7 +156,7 @@ public class Deadline extends Task {
             amOrpm = "pm";
         }
 
-        if (Integer.parseInt(hoursString.substring(0, 2)) > 23 ) {
+        if (Integer.parseInt(hoursString.substring(0, 2)) > 23) {
             throw new DukeException("This is an invalid time");
         }
 
@@ -169,7 +184,7 @@ public class Deadline extends Task {
 
         int month = Integer.parseInt(words[1]);
 
-        if ( month-1 > 11) {
+        if (month - 1 > 11) {
             throw new DukeException("This is an invalid month");
         }
 

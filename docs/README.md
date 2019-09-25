@@ -1,6 +1,6 @@
 # User Guide
 Welcome to Shaun's task manager! 
-![Screenshot of Duke](https://raw.githubusercontent.com/ShaunNgTX/duke/master/docs/UI.png)
+![Screenshot of Duke](https://raw.githubusercontent.com/ShaunNgTX/duke/master/docs/Ui.png)
 
 ## Features 
 1. Add task

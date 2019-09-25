@@ -20,7 +20,7 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
-    public static Todo outputAsTodo (String lineToRead) {
+    public static Todo outputAsTodo(String lineToRead) {
         return new Todo(lineToRead);
     }
 

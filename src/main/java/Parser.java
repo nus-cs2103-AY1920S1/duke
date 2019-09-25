@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
- * Reads command and creates its respective Task object. Performs operations on TaskList. Stores the TaskList in a storage file.
+ * Reads command and creates its respective Task object. Performs operations and stores tasklist in a storage file.
  */
 public class Parser {
 
@@ -18,7 +18,7 @@ public class Parser {
      * @param storage storage object.
      * @param tasks TaskList object.
      */
-    public Parser (Storage storage, TaskList tasks) {
+    public Parser(Storage storage, TaskList tasks) {
         this.storage = storage;
         this.tasks = tasks;
     }
@@ -28,14 +28,14 @@ public class Parser {
      * @param laterInput is the number to be marked as done.
      * @return string representation of task done.
      */
-    public String checkDone (String laterInput) {
+    public String checkDone(String laterInput) {
         try {
             laterInput = laterInput.trim();
             int taskNum = Integer.parseInt(laterInput);
             assert (taskNum != 0);
-            tasks.taskDone(taskNum-1);
+            tasks.taskDone(taskNum - 1);
             String toOutput = "Nice! I've marked this task as done: " + "\n"
-                        + tasks.taskPrint(taskNum-1) + "\n"
+                        + tasks.taskPrint(taskNum - 1) + "\n"
                             + "Nice! I've marked this task as done: ";
             /*System.out.println("IsDone?" + tasks.getList().get(taskNum-1).getIsDone());
             System.out.println("Nice! I've marked this task as done: \n" + tasks.taskPrint(taskNum-1));
@@ -55,19 +55,19 @@ public class Parser {
      * @param laterInput is the number representing task to be deleted.
      * @return string representation of task to be deleted.
      */
-    public String checkDelete (String laterInput) {
+    public String checkDelete(String laterInput) {
         try {
             laterInput = laterInput.trim();
             int numToDelete = Integer.parseInt(laterInput);
             assert (numToDelete != 0);
             String toOutput = "Noted. I've removed this task: " + " \n"
-                    + tasks.taskPrint(numToDelete -1).toString() + "\n"
-                        + "Now you have " + (tasks.size() -1) + " tasks in the list. \n";
+                    + tasks.taskPrint(numToDelete - 1).toString() + "\n"
+                        + "Now you have " + (tasks.size() - 1) + " tasks in the list. \n";
             /*System.out.println("Noted. I've removed this task: ");
             System.out.println(tasks.taskPrint(numToDelete -1));
             System.out.println("Now you have " + (tasks.size() -1) + " tasks in the list. ");
              */
-            tasks.remove(numToDelete-1);
+            tasks.remove(numToDelete - 1);
             storage.update(tasks.getList());
             return toOutput;
         } catch (Exception e) {
@@ -81,7 +81,7 @@ public class Parser {
      * @param description description of todo.
      * @throws Exception if description is empty.
      */
-    public void checkToDo (String description) throws Exception {
+    public void checkToDo(String description) throws Exception {
         assert !description.isEmpty();
         if (!description.isEmpty()) {
             tasks.add(new Todo(description));
@@ -96,7 +96,7 @@ public class Parser {
      * @param description description of deadline task.
      * @throws Exception if description is empty.
      */
-    public void checkDeadline (String description) throws Exception {
+    public void checkDeadline(String description) throws Exception {
         description = description.trim();
         assert !(description == null);
         if (!description.isEmpty()) {
@@ -107,8 +107,8 @@ public class Parser {
             assert !(by == null);
             tasks.add(new Deadline(taskDescription, by));
             storage.append(tasks.getLast());
-            if(noClash(by)) {
-                tasks.add(new Deadline(taskDescription, by)); //checks for no clash with another task in the list, if true then add Deadline to the TaskList
+            if (noClash(by)) {
+                tasks.add(new Deadline(taskDescription, by));
                 storage.append(tasks.getLast());
             }
         } else {
@@ -121,7 +121,7 @@ public class Parser {
      * @param description description of event object.
      * @throws Exception if description is empty.
      */
-    public void checkEvent (String description) throws Exception {
+    public void checkEvent(String description) throws Exception {
         description = description.trim();
         assert !(description == null);
         if (!description.isEmpty()) {
@@ -132,8 +132,8 @@ public class Parser {
             assert !(at == null);
             tasks.add(new Event(taskDescription, at));
             storage.append(tasks.getLast());
-            if(noClash(at)) {
-                tasks.add(new Event(taskDescription, at)); //check for no clash with another task in the list, if true then add Event to the TaskList
+            if (noClash(at)) {
+                tasks.add(new Event(taskDescription, at));
                 storage.append(tasks.getLast());
             }
         } else {
@@ -142,15 +142,15 @@ public class Parser {
     }
 
     /**
-     * Finds the tasks with the command
+     * Finds the tasks with the command.
      * @param itemToFind finds for tasks with the command.
      * @return String representation of task.
      */
-    public String checkFind (String itemToFind) {
+    public String checkFind(String itemToFind) {
         String output = "";
-        if(!itemToFind.isEmpty()) {
+        if (!itemToFind.isEmpty()) {
             TaskList tasksFound = tasks.findByKeyword(itemToFind);
-            if(tasksFound == null) {
+            if (tasksFound == null) {
                 output = "Sorry no tasks found with the keyword: " + itemToFind;
                 //System.out.println("Sorry no tasks found with the keyword: " + itemToFind);
             } else {
@@ -169,13 +169,13 @@ public class Parser {
      */
     public boolean noClash(String timeAndDate) {
         ArrayList<Task> list = tasks.getList();
-        for(int i = 0; i < list.size(); i++) {
-            if(list.get(i) instanceof Deadline) {
-                if(((Deadline) list.get(i)).getBy().equals(timeAndDate)) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) instanceof Deadline) {
+                if (((Deadline) list.get(i)).getBy().equals(timeAndDate)) {
                     return false;
                 }
-            } else if(list.get(i) instanceof Event) {
-                if(((Event) list.get(i)).getAt().equals(timeAndDate)) {
+            } else if (list.get(i) instanceof Event) {
+                if (((Event) list.get(i)).getAt().equals(timeAndDate)) {
                     return false;
                 }
             }
@@ -189,9 +189,9 @@ public class Parser {
      * @param laterInput description of the task.
      * @return string representation of task.
      */
-    public String checkTask (String command, String laterInput) {
+    public String checkTask(String command, String laterInput) {
         try {
-            if(command.equals("todo")) {
+            if (command.equals("todo")) {
                 checkToDo(laterInput);
             } else if (command.equals("deadline")) {
                 checkDeadline(laterInput);
@@ -207,8 +207,8 @@ public class Parser {
             /*System.out.println("Got it. I've added this task: ");
             System.out.println(" " + tasks.printLatest());
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");*/
-        } catch(Exception e) {
-            return(command + e.getMessage());
+        } catch (Exception e) {
+            return (command + e.getMessage());
         }
     }
 
@@ -216,34 +216,46 @@ public class Parser {
      * Parser reads in command from user.
      * @param input commands like done, delete, list.
      */
-    public String read (String input) {
+    public String read(String input) {
         this.input = input;
+        if (input.equals("bye")) {
+            System.exit(0);
+            return "bye. Hope to see you again soon!";
+        }
+        if (input.equals("hello")) {
+            return "Hello! I'm Duke. " + "\n" + "What can I do for you?";
+        }
         processCommand(input);
 
-        if(input.equals("hello")) {
-            return "Hello! I'm Duke. " + "\n" + "What can I do for you?";
-        } else if (input.equals("bye")) {
-            return "Bye. Hope to see you again soon!" + "\n" + "Bye. Hope to see you again soon!";
-        } else if (command.equals("done")) {
+        if (command.equals("done")) {
+            //processCommand(input);
             return checkDone(laterInput);
-        } else if(command.equals("delete")) {
+        } else if (command.equals("delete")) {
+            //processCommand(input);
             return checkDelete(laterInput);
-        } else if(command.equals("list")) {
-            if(tasks.printForListString().equals("")) {
+        } else if (command.equals("list")) {
+            //processCommand(input);
+            if (tasks.printForListString().equals("")) {
                 return "Empty List";
             } else {
                 return tasks.printForListString();
             }
-        } else if(command.equals("find")) {
+        } else if (command.equals("find")) {
+            //processCommand(input);
             return checkFind(laterInput);
         } else {
+            //processCommand(input);
             return checkTask(command, laterInput);
         }
     }
 
+    /**
+     * Processed the input into command and laterInput.
+     * @param input input from user.
+     */
     public void processCommand(String input) {
         this.input = input;
-        if(input.equals("list")) {
+        if (input.equals("list")) {
             command = "list";
         } else {
             String[] wordSeparator = input.split(" ", 2);

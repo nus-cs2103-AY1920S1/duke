@@ -1,5 +1,13 @@
-T, 0, water plants
-T, 1, eat lunch
-D, 0, watch webcasts, 27/9/2019 1800
 E, 0, team meeting, 24/9/2019 1600
 T, 0, run later
+T, 0, exercise later
+D, 0, cs2103t, 4/2/2019 1700
+E, 0, meet friend, 2/3/2019 1600
+T, 0, water plants
+T, 0, grow plants
+T, 0, water plants
+E, 0, team meeting, 3/3/2019 1700
+T, 0, practice papers
+D, 0, finish homework, 1/2/2019 1800
+T, 1, read textbooks
+T, 0, do work

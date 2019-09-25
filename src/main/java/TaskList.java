@@ -11,14 +11,14 @@ public class TaskList {
      * Constructor TaskList.
      * @param list List of Task objects.
      */
-    public TaskList (ArrayList<Task> list) {
+    public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
 
     /**
      * Constructor TaskList that creates a new ArrayList of Task.
      */
-    public TaskList () {
+    public TaskList() {
         this.list = new ArrayList<>();
     }
 
@@ -26,15 +26,19 @@ public class TaskList {
      * Prints the ArrayList when user enters list command.
      */
     public void printForList() {
-        for(int i = 1; i <= list.size(); i++) {
-            System.out.println(i + "." + list.get(i-1));
+        for (int i = 1; i <= list.size(); i++) {
+            System.out.println(i + "." + list.get(i - 1));
         }
     }
 
+    /**
+     * Returns a string representation of the tasks in list.
+     * @return string representation of tasks in list.
+     */
     public String printForListString() {
         String output = "";
-        for(int i = 1; i <= list.size(); i++) {
-            output += i + "." + list.get(i-1).toString();
+        for (int i = 1; i <= list.size(); i++) {
+            output += i + "." + list.get(i - 1).toString();
             output += "\n";
         }
         return output;
@@ -78,7 +82,7 @@ public class TaskList {
      * @param x index of Task to remove.
      */
     public void remove(int x) {
-         list.remove(x);
+        list.remove(x);
     }
 
     /**
@@ -94,7 +98,7 @@ public class TaskList {
      * @return last Task.
      */
     public Task getLast() {
-        return list.get(list.size() -1);
+        return list.get(list.size() - 1);
     }
 
     /**
@@ -105,10 +109,15 @@ public class TaskList {
         return list;
     }
 
+    /**
+     * Returns TaskList of tasks found by keyword.
+     * @param itemToFind keyword.
+     * @return TaskList with the keyword from existing task.
+     */
     public TaskList findByKeyword(String itemToFind) {
         ArrayList<Task> output = new ArrayList<>();
-        for(Task task : this.list) {
-            if(task.getDescription().contains(itemToFind)) {
+        for (Task task : this.list) {
+            if (task.getDescription().contains(itemToFind)) {
                 output.add(task);
             }
         }

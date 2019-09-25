@@ -40,10 +40,10 @@ public class Event extends Task {
 
     /**
      * Returns string representation of dateAndTime.
-     * @return at.
+     * @returni at.
      */
     public String getAt() {
-       return at;
+        return at;
     }
 
     /**
@@ -54,15 +54,6 @@ public class Event extends Task {
     public String toString() {
         return String.format("[E]%s (at: %s)", super.toString(), dateFormat.format(dateAndTime));
     }
-
-    /*public static Event outputAsEvent(String lineToRead) {
-        String[] descriptionNAt = lineToRead.split(",");
-        String desc = descriptionNAt[0];
-        String at = descriptionNAt[1];
-        System.out.println(desc);
-        System.out.println(at);
-        return new Event(desc, at);
-    }*/
 
     /**
      * Returns description of Event task.

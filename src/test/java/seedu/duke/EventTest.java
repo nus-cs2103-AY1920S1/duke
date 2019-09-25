@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.core.DukeException;
 import seedu.duke.task.Event;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,7 @@ public class EventTest {
      * Test how the attributes are initialized when a String description is supplied.
      */
     @Test
-    void initializeAttributes_stringDescription_correctAttributes() {
+    void initializeAttributes_stringDescription_correctAttributes() throws DukeException {
         assertEquals("[E][✘] description (at: location)", new Event("description",
                 "location").toString());
     }

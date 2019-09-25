@@ -1,6 +1,8 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.duke.core.DukeException;
 import seedu.duke.task.Todo;
 
 import java.time.LocalDateTime;
@@ -16,7 +18,7 @@ public class TodoTest {
      * Test how the attributes are initialized when a String description is supplied.
      */
     @Test
-    void initializeAttributes_stringDescription_correctAttributes() {
+    void initializeAttributes_stringDescription_correctAttributes() throws DukeException {
         assertEquals("[T][✘] description", new Todo("description").toString());
     }
 

@@ -42,13 +42,12 @@ public class Storage {
     public List<Task> load() throws IOException, DukeException {
 
         List<Task> tasks = new ArrayList<>(100);
-            if (!file.createNewFile()) {
+        if (!file.createNewFile()) {
 
-                //read file contents into List
-                FileReader fr = new FileReader(file);
-                BufferedReader br = new BufferedReader(fr);
-                String line;
-
+            //read file contents into List
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            String line;
                 while ((line = br.readLine()) != null) {
                     String[] lines = line.split(" \\| ");
                     boolean isDone;
@@ -67,10 +66,11 @@ public class Storage {
                         throw new DukeException("Corrupted data in file.");
                     }
                 }
-
-                br.close();
-                fr.close();
             }
+
+            br.close();
+            fr.close();
+        }
 
         return tasks;
     }
@@ -79,17 +79,17 @@ public class Storage {
      * Saves a list of tasks to a file.
      *
      * @param tasks a list of tasks.
-     * @throws DukeException If there has been IOException while performing an operation on the file.
+     * @throws IOException If there has been IOException while writing to the file.
      */
     public void saveDataToFile(List<Task> tasks) throws IOException {
         //write to a completely new file
-            FileWriter fw = new FileWriter(file, false);
-            for (Task task : tasks) {
-                String s = task.toDataFormat();
-                fw.write(s + "\n");
-            }
+        FileWriter fw = new FileWriter(file, false);
+        for (Task task : tasks) {
+            String s = task.toDataFormat();
+            fw.write(s + "\n");
+        }
 
-            fw.close();
+        fw.close();
     }
 
 }

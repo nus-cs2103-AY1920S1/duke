@@ -35,6 +35,12 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    /**
+     * Returns whether self's description contains the keyword.
+     *
+     * @param keyword search term.
+     * @return boolean whether description contains the search term.
+     */
     boolean hasKeywordsInDescription(String keyword) {
         return description.contains(keyword);
     }

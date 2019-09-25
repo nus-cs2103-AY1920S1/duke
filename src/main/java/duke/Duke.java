@@ -41,15 +41,12 @@ public class Duke extends Application {
     private Ui ui;
 
     /**
-     * Class constructor.
+     * Class constructor that initializes storage, tasks and ui fields.
      */
     public Duke() {
         ui = new Ui();
         storage = new Storage("/Users/stephenchua/duke/src/main/data/duke.txt");
-        initialize();
-    }
 
-    private void initialize() {
         String dukeText;
         try {
             tasks = new TaskList(storage.load());
@@ -61,15 +58,10 @@ public class Duke extends Application {
             dukeText = ui.showError(e.getMessage());
             tasks = new TaskList();
         }
-
-        //dont know how to show welcome
-        //return dukeText;
     }
 
     public String run(String command) {
-
         assert ui != null : "UI cannot be null when program is run";
-
         String fullCommand = ui.readCommand(command);
         try {
             Command c = Parser.parse(fullCommand);

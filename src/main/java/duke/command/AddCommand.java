@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
-import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -27,7 +26,7 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
-        if (!persistState(tasks, storage)) {
+        if (!isSaved(tasks, storage)) {
             return ui.showSaveError();
         }
         return ui.showAddTask(task,tasks.getSize());

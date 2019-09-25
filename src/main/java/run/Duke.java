@@ -1,17 +1,11 @@
 package run;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 
 
 import exception.DukeException;
@@ -52,7 +46,7 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("C:\\Users\\nisga\\OneDrive\\Desktop\\duke\\src\\main\\java\\data\\tasks.txt");
+        storage = new Storage(Storage.USER_DIRECTORY + Storage.FILE_SEPARATOR + "state.txt");
         tasks = new TaskList(storage.load());
     }
 

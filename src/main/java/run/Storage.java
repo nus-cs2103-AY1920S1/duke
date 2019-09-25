@@ -23,6 +23,9 @@ public class Storage {
     protected File state;
     protected StorageParser sp = new StorageParser();
 
+    public static final String FILE_SEPARATOR = System.getProperty("file.separator");
+    public static final String USER_DIRECTORY = System.getProperty("user.dir");
+
     /**
      * Constructor for Storage.
      * @param filepath filepath to state file

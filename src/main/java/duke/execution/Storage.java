@@ -38,54 +38,53 @@ public class Storage {
      */
     public ArrayList<Task> readFileContents() throws FileNotFoundException, IOException {
 
-            File currentFile = new File(this.filePath);
-            currentFile.getParentFile().mkdirs();
-            if(currentFile.createNewFile()) {
-                System.out.println("file created");
-            } else {
-                System.out.println("file exists");
+        File currentFile = new File(this.filePath);
+        currentFile.getParentFile().mkdirs();
+        if (currentFile.createNewFile()) {
+            System.out.println("file created");
+        } else {
+            System.out.println("file exists");
+        }
+        Scanner sc = new Scanner(currentFile);
+        ArrayList<Task> list = new ArrayList<>();
+
+        while (sc.hasNext()) {
+
+            String current = sc.nextLine();
+            char type = current.charAt(0);
+            int isDone = Integer.parseInt("" + current.charAt(4));
+            String des = current.substring(8).trim();
+
+            switch (type) {
+
+            case 'T':
+                ToDo newT = new ToDo(isDone, des);
+                list.add(newT);
+                break;
+
+            case 'D':
+                int index = des.indexOf('|');
+                String taskName = des.substring(0, index).trim();
+                String date = des.substring(index + 1).trim();
+                Deadline newD = new Deadline(isDone, taskName, date);
+                list.add(newD);
+                break;
+
+            case 'E':
+                int index1 = des.indexOf('|');
+                String taskName1 = des.substring(0, index1).trim();
+                String date1 = des.substring(index1 + 1).trim();
+                Event newE = new Event(isDone, taskName1, date1);
+                list.add(newE);
+                break;
+
+            default:
+                System.out.println("Error!");
+                break;
+
             }
-            Scanner sc = new Scanner(currentFile);
-            ArrayList<Task> list = new ArrayList<>();
-
-            while (sc.hasNext()) {
-
-                String current = sc.nextLine();
-                char type = current.charAt(0);
-                int isDone = Integer.parseInt("" + current.charAt(4));
-                String des = current.substring(8).trim();
-
-                switch (type) {
-
-                    case 'T':
-                        ToDo newT = new ToDo(isDone, des);
-                        list.add(newT);
-                        break;
-
-                    case 'D':
-                        int index = des.indexOf('|');
-                        String taskName = des.substring(0, index).trim();
-                        String date = des.substring(index + 1).trim();
-                        Deadline newD = new Deadline(isDone, taskName, date);
-                        list.add(newD);
-                        break;
-
-                    case 'E':
-                        int index1 = des.indexOf('|');
-                        String taskName1 = des.substring(0, index1).trim();
-                        String date1 = des.substring(index1 + 1).trim();
-                        Event newE = new Event(isDone, taskName1, date1);
-                        list.add(newE);
-                        break;
-
-                    default:
-                        System.out.println("Error!");
-                        break;
-
-                }
-            }
-            return list;
-
+        }
+        return list;
     }
 
     /**

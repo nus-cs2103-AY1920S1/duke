@@ -20,6 +20,8 @@ public class DialogBox extends HBox {
     private static final Image USER_AVATAR = new Image(DialogBox.class.getResourceAsStream("/images/User.png"));
     private static final Image DUKE_AVATAR = new Image(DialogBox.class.getResourceAsStream("/images/Duke.png"));
     @FXML
+    private HBox box;
+    @FXML
     private Label dialog;
     @FXML
     private ImageView avatar;
@@ -35,7 +37,7 @@ public class DialogBox extends HBox {
         }
 
         this.dialog.setText(dialog);
-        this.getStyleClass().add(styleClass);
+        this.box.getStyleClass().add(styleClass);
         this.avatar.setImage(avatar);
     }
 
@@ -46,7 +48,7 @@ public class DialogBox extends HBox {
      * @return a right-justified dialog with the given avatar
      */
     public static DialogBox getUserDialog(String dialog) {
-        return new DialogBox(dialog, DialogBox.USER_AVATAR, "user-dialog-box");
+        return new DialogBox(dialog, DialogBox.USER_AVATAR, "user-dialog");
     }
 
     /**
@@ -56,15 +58,15 @@ public class DialogBox extends HBox {
      * @return a left-justified dialog with the given avatar
      */
     public static DialogBox getDukeDialog(String dialog) {
-        return DialogBox.makeDukeDialog(dialog, "duke-message-dialog-box");
+        return DialogBox.makeDukeDialog(dialog, "duke-message-dialog");
     }
 
     public static DialogBox getDukeWarning(String dialog) {
-        return DialogBox.makeDukeDialog(dialog, "duke-warning-dialog-box");
+        return DialogBox.makeDukeDialog(dialog, "duke-warning-dialog");
     }
 
     public static DialogBox getDukeError(String dialog) {
-        return DialogBox.makeDukeDialog(dialog, "duke-error-dialog-box");
+        return DialogBox.makeDukeDialog(dialog, "duke-error-dialog");
     }
 
     private static DialogBox makeDukeDialog(String dialog, String type) {

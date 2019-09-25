@@ -1,20 +1,15 @@
-.dialog-box {
-    -fx-background-radius: 10;
-    -fx-background-insets: 8 8 8 8;
-}
-
-.user-dialog-box {
+.user-dialog {
     -fx-background-color: #8e8e93;
 }
 
-.duke-message-dialog-box {
+.duke-message-dialog {
     -fx-background-color: #8e8e93;
 }
 
-.duke-warning-dialog-box {
+.duke-warning-dialog {
     -fx-background-color: #ff9500;
 }
 
-.duke-error-dialog-box {
+.duke-error-dialog {
     -fx-background-color: #ff3b30;
 }

@@ -1,6 +1,5 @@
 # User Guide
 
-##### Table of Contents
  1. [Introduction](#introduction)
  2. [Quickstart](#quickstart)
  3. [Features](#features)

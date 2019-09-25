@@ -171,7 +171,7 @@ public class Duke extends Application {
 
         String[] commandTokens = command.split(" ");
 
-        assert commandTokens.length > 0 : "Command is null";
+        assert commandTokens.length > 0 : "There are no command tokens";
 
         if (!parser.isBye(command)) {
             try {

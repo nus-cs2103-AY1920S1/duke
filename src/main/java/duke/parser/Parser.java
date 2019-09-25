@@ -8,7 +8,7 @@ public class Parser {
      */
 
     public boolean isTodo(String[] tokens) {
-        return tokens[0].equals("todo") || tokens[0].equals("t");
+        return (tokens[0].equals("todo") || tokens[0].equals("t"));
     }
 
     /**
@@ -16,7 +16,7 @@ public class Parser {
      */
 
     public boolean isDeadline(String[] tokens) {
-        return tokens[0].equals("deadline") || tokens[0].equals("dl");
+        return (tokens[0].equals("deadline") || tokens[0].equals("dl"));
     }
 
     /**
@@ -24,7 +24,7 @@ public class Parser {
      */
 
     public boolean isEvent(String[] tokens) {
-        return tokens[0].equals("event") || tokens[0].equals("e");
+        return (tokens[0].equals("event") || tokens[0].equals("e"));
     }
 
     /**
@@ -32,7 +32,7 @@ public class Parser {
      */
 
     public boolean isDelete(String[] tokens) {
-        return tokens[0].equals("delete") || tokens[0].equals("dlt");
+        return (tokens[0].equals("delete") || tokens[0].equals("dlt"));
     }
 
     /**
@@ -40,7 +40,7 @@ public class Parser {
      */
 
     public boolean isDone(String[] tokens) {
-        return tokens[0].equals("done") || tokens[0].equals("d");
+        return (tokens[0].equals("done") || tokens[0].equals("d"));
     }
 
     /**

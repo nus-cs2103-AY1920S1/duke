@@ -27,7 +27,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, TextUi ui, Storage storage) {
-        String byeMessage = SpeechMaker.BYE_MESSAGE;
+        String byeMessage = SpeechMaker.MESSAGE_BYE;
         ui.showText(byeMessage);
         return byeMessage;
     }

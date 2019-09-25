@@ -192,11 +192,12 @@ Example:
 #### Saying Bye
 
 ##### `bye`
-* Displays a goodbye message from Snowball. 
-* Does not actually do anything useful. But it's always good manners to say bye before 
-  leaving a chat!
+* Closes the application after displaying a goodbye message from Snowball.
+* There should be no text after the command `bye`.
 * Example: `bye`
     >Bye. Hope to see you again soon!
+* Invalid example - extra input after the command word: `bye bye`
+    >Sorry, did you mean to type another command?
 
 ## Command Summary
 
@@ -209,4 +210,4 @@ Example:
 * `undone INDEX` - Mark the task with the given index number as undone.
 * `priority INDEX PRIORITY-LEVEL` - Mark the given task with the given priority level.
 * `delete INDEX` - Delete the task with the given index number.
-* `bye` - Tell Snowball goodbye before you exit the application.
+* `bye` - Close the application.

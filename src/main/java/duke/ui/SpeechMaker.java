@@ -7,28 +7,24 @@ package duke.ui;
 public class SpeechMaker {
 
     /** Message to introduce Snowball. */
-    public static final String SELF_INTRODUCTION_MESSAGE = "Hello! My name is Snowball. "
+    public static final String MESSAGE_SELF_INTRODUCTION = "Hello! My name is Snowball. "
             + "I'm here to help you organise your tasks!\n";
 
     /** Help message showing a list of basic commands. */
-    public static final String HELP_MESSAGE = "Here are some instructions you can give me:\n"
+    public static final String MESSAGE_HELP = "Here are some instructions you can give me:\n"
             + "~ list - show all tasks\n"
             + "~ todo [description] - make a new todo\n"
             + "~ event [description] /at DD-MM-YY hh:mm - add a new event at this time\n"
             + "~ deadline [description] /by DD-MM-YY hh:mm - add a new deadline to be completed by this time\n";
 
     /** Message to say goodbye. */
-    public static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
+    public static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
 
     /**
-     * Returns a welcome message consisting of Snowball's self-introduction
+     * A welcome message consisting of Snowball's self-introduction
      * and a help message.
-     *
-     * @return String containing a self-introduction and help message.
      */
-    public static String getWelcomeMessage() {
-        return SELF_INTRODUCTION_MESSAGE + "\n" + HELP_MESSAGE;
-    }
+    public static final String MESSAGE_WELCOME = MESSAGE_SELF_INTRODUCTION + "\n" + MESSAGE_HELP;
 
     /**
      * Returns an apology followed by the given message.
@@ -40,4 +36,14 @@ public class SpeechMaker {
         return "Sorry, " + message;
     }
 
+    /**
+     * Checks whether the given message is a bye message from Snowball.
+     *
+     * @param message String representing the message to be checked
+     * @return true if the given message is a Snowball bye message, and false
+     *         otherwise.
+     */
+    public static boolean isByeMessage(String message) {
+        return MESSAGE_BYE.equals(message);
+    }
 }

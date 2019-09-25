@@ -2,6 +2,7 @@ package duke.ui;
 
 import duke.Duke;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -35,7 +36,7 @@ public class MainWindow {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(SpeechMaker.getWelcomeMessage(), dukeImage)
+                DialogBox.getDukeDialog(SpeechMaker.MESSAGE_WELCOME, dukeImage)
         );
     }
 
@@ -62,5 +63,9 @@ public class MainWindow {
                 DialogBox.getDukeDialog(dukeText, dukeImage)
         );
         userInput.clear();
+
+        if (SpeechMaker.isByeMessage(dukeText)) {
+            Platform.exit();
+        }
     }
 }

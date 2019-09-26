@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 public class Event extends Task {
 
     private String at;
+    private String originalAt;
     //private Date dateAndTime;
     //private SimpleDateFormat dateFormat;
     //private String dateAndTime;
@@ -48,6 +49,7 @@ public class Event extends Task {
      */
     public Event(String description, String at) {
         super(description);
+        this.originalAt = at;
         this.at = at.trim();
 
         String[] arr = this.at.split(" ");
@@ -115,7 +117,7 @@ public class Event extends Task {
      * @returni at.
      */
     public String getAt() {
-        return at;
+        return originalAt;
     }
 
     /*/**

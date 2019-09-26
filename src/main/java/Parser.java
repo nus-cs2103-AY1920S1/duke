@@ -1,4 +1,6 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -37,16 +39,10 @@ public class Parser {
             String toOutput = "Nice! I've marked this task as done: " + "\n"
                         + tasks.taskPrint(taskNum - 1) + "\n"
                             + "Nice! I've marked this task as done: ";
-            /*System.out.println("IsDone?" + tasks.getList().get(taskNum-1).getIsDone());
-            System.out.println("Nice! I've marked this task as done: \n" + tasks.taskPrint(taskNum-1));
-            StringBuilder sb = new StringBuilder("Nice! I've marked this task as done: \n");
-            sb.append(tasks.taskPrint(taskNum-1).toString());
-             */
             storage.update(tasks.getList());
             return toOutput;
         } catch (Exception e) {
             return "Error, you have entered an invalid number";
-            //System.out.println("Error, you have entered an invalid number");
         }
     }
 
@@ -63,16 +59,11 @@ public class Parser {
             String toOutput = "Noted. I've removed this task: " + " \n"
                     + tasks.taskPrint(numToDelete - 1).toString() + "\n"
                         + "Now you have " + (tasks.size() - 1) + " tasks in the list. \n";
-            /*System.out.println("Noted. I've removed this task: ");
-            System.out.println(tasks.taskPrint(numToDelete -1));
-            System.out.println("Now you have " + (tasks.size() -1) + " tasks in the list. ");
-             */
             tasks.remove(numToDelete - 1);
             storage.update(tasks.getList());
             return toOutput;
         } catch (Exception e) {
             return "Error, you have entered an invalid number";
-            //System.out.println("Error, you have entered an invalid number");
         }
     }
 
@@ -81,13 +72,13 @@ public class Parser {
      * @param description description of todo.
      * @throws Exception if description is empty.
      */
-    public void checkToDo(String description) throws Exception {
+    public void checkToDo(String description) throws ArrayIndexOutOfBoundsException, IOException {
         assert !description.isEmpty();
         if (!description.isEmpty()) {
             tasks.add(new Todo(description));
             storage.append(tasks.getLast());
         } else {
-            throw new Exception();
+            throw new ArrayIndexOutOfBoundsException();
         }
     }
 
@@ -146,10 +137,7 @@ public class Parser {
             TaskList tasksFound = tasks.findByKeyword(itemToFind);
             if (tasksFound == null) {
                 output = "Sorry no tasks found with the keyword: " + itemToFind;
-                //System.out.println("Sorry no tasks found with the keyword: " + itemToFind);
             } else {
-                //StringBuilder output = new StringBuilder();
-                //output.append("Here are the matching tasks in your list:\n");
                 output = "Here are the matching tasks in your list:" + "\n" + tasksFound.printForListString();
             }
         }
@@ -166,6 +154,7 @@ public class Parser {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) instanceof  Event) {
                 if (((Event) list.get(i)).getAt().equals(timeAndDate)) {
+                    System.out.println("Anomaly detected. Schedule clash");
                     return false;
                 }
             }
@@ -194,11 +183,13 @@ public class Parser {
                     + " " + tasks.printLatest().toString() + "\n"
                         + "Now you have " + tasks.size() + " tasks in the list.";
             return output;
-            /*System.out.println("Got it. I've added this task: ");
-            System.out.println(" " + tasks.printLatest());
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");*/
+        } catch (IllegalArgumentException e) {
+            return "OOPS!!! I'm sorry, but I don't know what that means :-(";
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "OOPS! Description cannot be empty.";
         } catch (Exception e) {
-            return (command + e.getMessage());
+            return "OOPS! I'm sorry, but I don't know what that means :-(.";
+            //return (command + e.getMessage());
         }
     }
 

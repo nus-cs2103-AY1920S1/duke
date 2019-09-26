@@ -53,9 +53,32 @@ Finds a task which contains the specified phrase of keyword.
 Example: 
 'find books'
 
+### Check clashes in Event tasks 
+Checks if the event task to be added clashes with existing event tasks. 
+If there is a clash, task will not be added to tasklist. 
+Prints original task list. 
+
+### Exceptions 
+examples: 
+1. Incorrect format 
+
+example: deadline meeting 12/2/2019 1800 
+example: event friends meet up 12/2/2018
+example: deadline 
+exception message: OOPS! Description cannot be empty. 
+
+2. Incorrect input 
+
+example: done 100 
+example: delete 100 
+exception message: Error, you have entered an invalid number. 
+ 
+
 ### Exiting the program: 'bye'
 Exits the program. 
 
 Example: 
 'bye'
+
+
 

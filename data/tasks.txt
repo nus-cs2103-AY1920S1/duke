@@ -1,3 +1,8 @@
-T, 1, go krusty krab
-D, 1, make patties, 12th of October 2019, 12.15pm
-E, 0, serve burger, 13th of November 2019, 10.45am
+T, 0, finish up work
+E, 0, meeting, 12/2/2019 1200
+T, 0, go running
+T, 0, sleep
+T, 0, sleep
+T, 0, sleep
+T, 0, sleep
+D, 0, go jogging, 12th of February 2018, 12.29pm

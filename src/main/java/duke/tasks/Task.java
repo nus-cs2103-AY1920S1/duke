@@ -53,6 +53,10 @@ public abstract class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+    public String getStorageStatusIcon() {
+        return (isDone ? "1" : "0");
+    }
+
     /**
      * Returns the description of the task.
      *
@@ -70,6 +74,10 @@ public abstract class Task {
      */
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), getDescription());
+    }
+
+    public boolean getDoneStatus() {
+        return isDone;
     }
 
 

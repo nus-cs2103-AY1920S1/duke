@@ -69,14 +69,14 @@ public class Storage{
                 case TODO_TASK:
                     fw.write(Task.getTaskID(task) + " / " +
                             "ToDo" + " / " +
-                            task.getStatusIcon() + " / " +
+                            task.getStorageStatusIcon() + " / " +
                             task.getDescription() +
                             System.lineSeparator());
                     break;
                 case DEADLINE_TASK:
                     fw.write(Task.getTaskID(task) + " / " +
                             "Deadline" + " / " +
-                            task.getStatusIcon() + " / " +
+                            task.getStorageStatusIcon() + " / " +
                             task.getDescription() + " / " +
                             ((Deadline) task).getDate() +
                             System.lineSeparator());
@@ -84,7 +84,7 @@ public class Storage{
                 case EVENT_TASK:
                     fw.write(Task.getTaskID(task) + " / " +
                             "Event" + " / " +
-                            task.getStatusIcon() + " / " +
+                            task.getStorageStatusIcon() + " / " +
                             task.getDescription() + " / " +
                             ((Event) task).getDate() +
                             System.lineSeparator());
@@ -103,19 +103,19 @@ public class Storage{
         switch(tokens[1]){
             case "ToDo":
                 ToDo toDoTask = new ToDo(tokens[3]);
-                if (tokens[2].equals("\u2713")){
+                if (tokens[2].equals("1")){
                     toDoTask.setDone();
                 }
                 return toDoTask;
             case "Deadline":
                 Deadline deadlineTask = new Deadline(tokens[3], tokens[4]);
-                if (tokens[2].equals("\u2713")){
+                if (tokens[2].equals("1")){
                     deadlineTask.setDone();
                 }
                 return deadlineTask;
             case "Event":
                 Event eventTask = new Event(tokens[3], tokens[4]);
-                if (tokens[2].equals("\u2713")){
+                if (tokens[2].equals("1")){
                     eventTask.setDone();
                 }
                 return eventTask;

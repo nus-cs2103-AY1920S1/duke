@@ -30,7 +30,7 @@ public class Duke {
      * @throws DukeException Thrown when parts of the command cannot be executed.
      */
     public Duke() throws DukeException, IOException {
-        String filePath = "/Users/isaac/Desktop/CS2103T+CS2101/CS2103T/duke/data/duke.txt";
+        String filePath = "./data/duke.txt";
         this.ui = new Ui();
         Storage storage = new Storage(filePath);
         this.taskList = new TaskList(storage.load(), storage);

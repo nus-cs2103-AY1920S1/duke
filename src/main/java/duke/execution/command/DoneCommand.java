@@ -45,11 +45,11 @@ public class DoneCommand extends Command {
     }
 
     /**
+     * Checks how many expenses task there are before
+     * the tasks that is to be ticked off.
      *
-     *
-     * @param taskNum
-     * @return
-     * @throws IOException
+     * @param taskNum Task Number from User input.
+     * @return returns the number of expenses in front of the done task.
      */
     public static int getNumOfExpensesBeforeDoneTask(int taskNum) {
         try {

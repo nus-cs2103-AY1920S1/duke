@@ -161,6 +161,7 @@ public class Storage {
                             plans.substring(onIndex + 4));
                     taskList.add(expense);
                     ExpenseList.listOfExpenses.add(expense);
+                    break;
                 default:
                     break;
                 }

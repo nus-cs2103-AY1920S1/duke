@@ -79,7 +79,7 @@ public class Parser {
             }
         case "deadline":
             if (isValidDeadlineCommand(properInput) && isValidDateFormat(properInput)) {
-                    return new DeadlineCommand(description, formatDate(variable));
+                return new DeadlineCommand(description, formatDate(variable));
             } else {
                 Ui.printIndent();
                 throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct deadline format! :<\n"
@@ -87,7 +87,7 @@ public class Parser {
             }
         case "event":
             if (isValidEventCommand(properInput) && isValidDateFormat(properInput)) {
-                    return new EventCommand(description, formatDate(variable));
+                return new EventCommand(description, formatDate(variable));
             } else {
                 Ui.printIndent();
                 throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct event format! :<\n"
@@ -290,10 +290,10 @@ public class Parser {
             return true;
         } else {
             Ui.printIndent();
-            throw new DukeException("Invalid Date Format!\n" +
-                    "    There are at most 31 days, 12 months, 23 hours and 59 minutes! " +
-                    "And remember that the year is 2019!\n" +
-                    "    Please try again! Thank you! :)");
+            throw new DukeException("Invalid Date Format!\n"
+                    + "    There are at most 31 days, 12 months, 23 hours and 59 minutes! "
+                    + "And remember that the year is 2019!\n"
+                    + "    Please try again! Thank you! :)");
         }
     }
 
@@ -348,10 +348,10 @@ public class Parser {
      */
     public static boolean isValidTaskType(String taskType) {
         assert  taskType != null;
-        if (taskType.equals("todo") || taskType.equals("event") || taskType.equals("deadline") ||
-                taskType.equals("delete") || taskType.equals("done") || taskType.equals("find") ||
-                taskType.equals("list") || taskType.equals("bye") || taskType.equals("expenses") ||
-                taskType.equals("help")) {
+        if (taskType.equals("todo") || taskType.equals("event") || taskType.equals("deadline")
+                || taskType.equals("delete") || taskType.equals("done") || taskType.equals("find")
+                || taskType.equals("list") || taskType.equals("bye") || taskType.equals("expenses")
+                || taskType.equals("help")) {
             return true;
         } else {
             return false;
@@ -374,8 +374,8 @@ public class Parser {
                 || (text.contains("expenses") && isValidExpensesCommand(text))) {
             int slashIndex = text.indexOf("/");
             return text.substring(spaceIndex + 1, slashIndex - 1);
-        } else if (text.contains("todo") || text.contains("done") ||
-                text.contains("delete") || text.contains("find")) {
+        } else if (text.contains("todo") || text.contains("done")
+                || text.contains("delete") || text.contains("find")) {
             return text.substring(spaceIndex + 1);
         } else {
             return text;
@@ -447,7 +447,8 @@ public class Parser {
                 return text.contains(" ") || Integer.parseInt(text.substring(7)) <= CompleteList.listOfPlans.size();
             } else {
                 Ui.printIndent();
-                throw new DukeException("Wrong Format! Please add an 'all' or a valid number after the delete word! Thank You :)");
+                throw new DukeException("Wrong Format! Please add an 'all' or "
+                        + "a valid number after the delete word! Thank You :)");
             }
         }
     }
@@ -488,12 +489,12 @@ public class Parser {
                 }
             }
             if (isNumber && Integer.parseInt(text.substring(5)) > 0) {
-                return text.contains(" ") && Integer.parseInt(text.substring(5)) <= CompleteList.listOfPlans.size() &&
-                        isValidDoneNumberGiven(text.substring(5));
+                return text.contains(" ") && Integer.parseInt(text.substring(5)) <= CompleteList.listOfPlans.size()
+                        && isValidDoneNumberGiven(text.substring(5));
             } else {
                 Ui.printIndent();
-                throw new DukeException("Wrong Format! Please add a valid number that is a task " +
-                        "(and not an expenses!!) after the done word! Thank You :)");
+                throw new DukeException("Wrong Format! Please add a valid number that is a task "
+                        + "(and not an expenses!!) after the done word! Thank You :)");
             }
         }
     }

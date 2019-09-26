@@ -111,7 +111,7 @@ public class Ui {
         return "Noted. I've removed this task.";
     }
 
-     /**
+    /**
      * Prints the number of tasks in the list.
      *
      * @throws IOException If the named file exists but is a directory rather than a regular file,
@@ -157,6 +157,12 @@ public class Ui {
         System.out.println(error);
     }
 
+    /**
+     * Prints out a String that informs the user what functions
+     * are available on this application.
+     *
+     * @return Returns a String that lists out all the functions.
+     */
     public String printHelp() {
         printLine();
         printIndent();

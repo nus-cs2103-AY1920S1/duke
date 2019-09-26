@@ -49,12 +49,12 @@ public class DeleteCommand extends Command {
                     + "Add more tasks to get started again!!!";
         } else {
             int taskNumber = Integer.parseInt(variable);
-            String deleteOutput = ui.printRemove() + "\n" + Ui.printDelete(taskNumber) + "\n";
             CompleteList.listOfPlans.remove(taskNumber - 1);
             storage.writeToFile(Storage.file, "");
             for (Planner errand : CompleteList.listOfPlans) {
                 storage.addToFile(Storage.file, errand.toString());
             }
+            String deleteOutput = ui.printRemove() + "\n" + Ui.printDelete(taskNumber) + "\n";
             deleteOutput += Ui.printNumOfTasks();
             return deleteOutput;
         }

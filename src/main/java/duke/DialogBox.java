@@ -51,6 +51,14 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Sets the color of the dialog from the user.
+     *
+     * @param text User input.
+     * @param img Image that is linked to the user.
+     * @return Returns a DialogBox so that the user can use it to
+     *         interact with the bot.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox box = new DialogBox(text, img);
         box.setBackground(Background.EMPTY);
@@ -60,6 +68,14 @@ public class DialogBox extends HBox {
         return box;
     }
 
+    /**
+     * Flips the dialog for the bot and colors the bot.
+     *
+     * @param text Output from the bot.
+     * @param img Duke image link to the bot.
+     * @return Returns a DialogBox so that the user can interact with it
+     *         and see the dialog pop up.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

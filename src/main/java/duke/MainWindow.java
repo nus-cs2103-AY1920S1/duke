@@ -33,6 +33,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/ester.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/joshuaseet.jpg"));
 
+    /**
+     * Initializes the console that pops up when the application runs.
+     */
     @FXML
     public void initialize() {
         Ui ui = new Ui();

@@ -48,7 +48,9 @@ public class Command {
      *
      * @return Returns the newly changed boolean.
      */
-    public boolean exitSwitch() { return canExit = !canExit; }
+    public boolean exitSwitch() {
+        return canExit = !canExit;
+    }
 
     /**
      * Dummy return value as it is always overrided by child classes.

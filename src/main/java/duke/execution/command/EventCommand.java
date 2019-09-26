@@ -27,7 +27,7 @@ public class EventCommand extends Command {
      * tell the user that the deadline tasks has been added to
      * the list of tasks.
      *
-     * @param tasks Adds the deadline to the list of tasks.
+     * @param errands Adds the deadline to the list of tasks.
      * @param ui Prints out statements to indicate to user what
      *           has happened.
      * @param storage Stores the tasks inside another file so that

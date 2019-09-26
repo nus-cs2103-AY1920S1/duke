@@ -203,8 +203,15 @@ public class Parser {
             System.exit(0);
             return "bye. Hope to see you again soon!";
         }
+        if (input.equals("todo") | input.equals("deadline") | input.equals("event")) {
+            return "OOPS! Description cannot be empty";
+        }
         if (input.equals("hello")) {
             return "Hello! I'm Duke. " + "\n" + "What can I do for you?";
+        }
+        String[] arr = input.split(" ");
+        if (arr.length == 1 && (!input.equals("hello") && !input.equals("bye") && !input.equals("list"))) {
+            return "OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
         processCommand(input);
 

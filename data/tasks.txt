@@ -1,8 +1,2 @@
-T, 0, finish up work
-E, 0, meeting, 12/2/2019 1200
-T, 0, go running
-T, 0, sleep
-T, 0, sleep
-T, 0, sleep
-T, 0, sleep
-D, 0, go jogging, 12th of February 2018, 12.29pm
+T, 0, job at night
+D, 1, submit claim, 12th of April 2019, 5.37pm

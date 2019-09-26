@@ -32,8 +32,8 @@ Format: help
 ### 3.2. Adding a task: todo, deadline or event
 * Adds a task to the DukeBot.
     * todo TASK_NAME 
-    * event TASK_NAME /at dd/mm/yyyy hhmm hhmm  
-    * deadline TASK_NAME /by dd/mm/yyyy [hhmm]
+    * event TASK_NAME /at ddmmyyyy hhmm hhmm  
+    * deadline TASK_NAME /by ddmmyyyy [hhmm]
 * e.g. `event party /at 01/01/2011 0800 1900`
 * e.g. `t read book`
 
@@ -80,7 +80,7 @@ Format: bye
 
 ## 5. Command Summary <a name="Command Summary"></a>
 * Add : `TASK_TYPE TASK_NAME DATE [TIME]`  
-e.g. `event party /at 01/01/2011 0800 1900`   
+e.g. `event party /at 01012011 0800 1900`   
 e.g. `t read book`
 
 * Delete : `delete INDEX`

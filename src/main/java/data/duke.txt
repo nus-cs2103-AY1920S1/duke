@@ -1,5 +1,3 @@
-D // 0 // duke IP // 14/09/2019
-D // 1 // upload duke jar // 20/09/2019
-D // 0 // duke TP // 09/10/2019
+D // 0 // duke IP // 14092019
 T // 1 // read book #harry potter #chapter2
 T // 0 // revise UML diagrams

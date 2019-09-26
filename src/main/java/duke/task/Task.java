@@ -12,10 +12,9 @@ import java.text.SimpleDateFormat;
 public abstract class Task {
     protected String description;
     protected boolean isDone;
-    protected Date date;
 
     public Task(String description) {
-        this.description = description;
+        this.description = description.trim();
         this.isDone = false;
     }
 
@@ -51,7 +50,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description + "\n";
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
     public abstract String textFormat();

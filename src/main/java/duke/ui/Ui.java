@@ -24,6 +24,7 @@ public class Ui {
     public String showTask(Task task, TaskList tasks, String message) {
         StringBuilder sb = new StringBuilder(message);
         sb.append(task);
+        sb.append(System.lineSeparator());
         sb.append(taskCountMsg(tasks));
         return sb.toString();
     }

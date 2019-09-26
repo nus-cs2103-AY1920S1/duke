@@ -10,6 +10,7 @@ public class Message {
     public static final String DONE_MESSAGE = "Nice! I've marked this task as done: \n";
     public static final String EMPTY_LIST_MESSAGE = "There is no task in your list. Try to add some tasks!";
     public static final String INVALID_INPUT_ERROR = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n    Enter 'help' to see what you can do!";
+    public static final String NO_TASK_FOUND_MESSAGE = "There is no task found with this keyword.";
     private static final String COUNT_TASK_MESSAGE = "Now you have %d tasks in the list.\n";
 
     public static final String HELP_MESSAGE = "Here are a list of commands you can access: \n\n"

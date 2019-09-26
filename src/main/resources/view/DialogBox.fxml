@@ -15,6 +15,9 @@
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
+         <HBox.margin>
+            <Insets left="8.0" />
+         </HBox.margin>
       </Label>
         <ImageView fx:id="displayPicture" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
          <HBox.margin>

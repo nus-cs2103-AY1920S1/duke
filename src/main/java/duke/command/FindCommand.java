@@ -6,6 +6,8 @@ import duke.Storage;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+import static duke.ui.Message.NO_TASK_FOUND_MESSAGE;
+
 public class FindCommand extends Command {
     public FindCommand(String[] description) {
         super(description);
@@ -19,13 +21,30 @@ public class FindCommand extends Command {
         }
 
         String keyword = description[1];
-        StringBuilder sb = new StringBuilder();
+        return findTasks(tasks, keyword);
+
+    }
+
+    private String findTasks(TaskList tasks, String keyword) {
+        TaskList matchingTasks = new TaskList();
         for (Task task: tasks.getList()) {
             String d = task.getDescription();
             if (d.contains(keyword)) {
-                sb.append(task.toString());
+                matchingTasks.addTask(task);
             }
         }
+
+        int matchingNumber = matchingTasks.numberOfTasks();
+        if (matchingNumber == 0) {
+            return NO_TASK_FOUND_MESSAGE;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < matchingNumber - 1; i++) {
+            sb.append(matchingTasks.getList().get(i));
+            sb.append(System.lineSeparator());
+        }
+        sb.append(matchingTasks.getList().get(matchingNumber - 1));
         return sb.toString();
     }
 }

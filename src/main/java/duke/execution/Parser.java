@@ -69,87 +69,86 @@ public class Parser {
             }
         }
         switch (taskType) {
-            case "todo":
-                if (isValidToDoCommand(properInput)) {
-                    return new ToDoCommand(description);
-                } else {
-                    Ui.printIndent();
-                    throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct todo format! :<\n"
-                            + "    Todo \n" + "        Eg. todo __(task)__\n");
-                }
-            case "deadline":
-                if (isValidDeadlineCommand(properInput) && isValidDateFormat(properInput)) {
-                        return new DeadlineCommand(description, formatDate(variable));
-                } else {
-                    Ui.printIndent();
-                    throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct deadline format! :<\n"
-                            + "    Deadline \n" + "        Eg. deadline __(task)__ /by _(dd/MM/yyyy)_(hhmm)__\n");
-                }
-            case "event":
-                if (isValidEventCommand(properInput) && isValidDateFormat(properInput)) {
-                        return new EventCommand(description, formatDate(variable));
-                } else {
-                    Ui.printIndent();
-                    throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct event format! :<\n"
-                            + "    Event \n" + "        Eg. event __(task)__ /at _(dd/MM/yyyy)_(hhmm)__\n");
-                }
-            case "delete":
-                if (isValidDeleteCommand(properInput)) {
-                    return new DeleteCommand(taskType, description);
-                } else {
-                    Ui.printIndent();
-                    throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct delete format! :<\n"
-                            + "    Delete \n" + "        Eg. delete __(number)__ or delete all\n");
-                }
-            case "find":
-                if (isValidFindCommand(properInput)) {
-                    return new FindCommand(taskType, description);
-                } else {
-                    Ui.printIndent();
-                    throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct find format! :<\n"
-                            + "    Find \n" + "        Eg. find __(keyword)__\n");
-                }
-            case "done":
-                if (isValidDoneCommand(properInput)) {
-                    return new DoneCommand(taskType, description);
-                } else {
-                    Ui.printIndent();
-                    throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct done format! :<\n"
-                            + "    Done \n" + "        Eg. done __(number[make sure its a task and not an expense])__\n");
-                }
-            case "expenses":
-                if (isValidExpensesCommand(properInput)) {
-                    System.out.println("asda");
-                    return new ExpensesCommand(description, variable);
-                } else {
-                    Ui.printIndent();
-                    throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct done format! :<\n"
-                            + "    Expenses \n" + "        Eg. expenses __$(amount)__ /on __(category)__\n");
-                }
-            case "list":
-                return new ListCommand(description);
-            case "bye":
-                Command byeCommand = new ByeCommand(description);
-                byeCommand.exitSwitch();
-                return  byeCommand;
-            case "help":
-                Command helpCommand = new HelpCommand(description);
-                return helpCommand;
-            default:
+        case "todo":
+            if (isValidToDoCommand(properInput)) {
+                return new ToDoCommand(description);
+            } else {
                 Ui.printIndent();
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                        + "    I can only do these functions for now: \n \n"
-                        + "    Todo \n" + "        Eg. todo __(task)__\n"
-                        + "    Event \n" + "        Eg. event __(task)__\n"
-                        + "            /at _(dd/MM/yyyy)_(hhmm)__\n"
-                        + "    Deadline \n" + "        Eg. deadline __(task)__\n"
-                        + "            /by _(dd/MM/yyyy)_(hhmm)__\n"
-                        + "    Delete \n" + "        Eg. delete __(number)__ or delete all\n"
-                        + "    Done \n" + "        Eg. done __(number)__\n"
-                        + "    Find \n" + "        Eg. find __(keyword)__\n"
-                        + "    Expenses \n" + "        Eg. expenses __$(amount)__\n"
-                        + "            /on __(category)__\n"
-                        + "    List \n" + "    Help\n" + "    Bye\n");
+                throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct todo format! :<\n"
+                        + "    Todo \n" + "        Eg. todo __(task)__\n");
+            }
+        case "deadline":
+            if (isValidDeadlineCommand(properInput) && isValidDateFormat(properInput)) {
+                    return new DeadlineCommand(description, formatDate(variable));
+            } else {
+                Ui.printIndent();
+                throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct deadline format! :<\n"
+                        + "    Deadline \n" + "        Eg. deadline __(task)__ /by _(dd/MM/yyyy)_(hhmm)__\n");
+            }
+        case "event":
+            if (isValidEventCommand(properInput) && isValidDateFormat(properInput)) {
+                    return new EventCommand(description, formatDate(variable));
+            } else {
+                Ui.printIndent();
+                throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct event format! :<\n"
+                        + "    Event \n" + "        Eg. event __(task)__ /at _(dd/MM/yyyy)_(hhmm)__\n");
+            }
+        case "delete":
+            if (isValidDeleteCommand(properInput)) {
+                return new DeleteCommand(taskType, description);
+            } else {
+                Ui.printIndent();
+                throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct delete format! :<\n"
+                        + "    Delete \n" + "        Eg. delete __(number)__ or delete all\n");
+            }
+        case "find":
+            if (isValidFindCommand(properInput)) {
+                return new FindCommand(taskType, description);
+            } else {
+                Ui.printIndent();
+                throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct find format! :<\n"
+                        + "    Find \n" + "        Eg. find __(keyword)__\n");
+            }
+        case "done":
+            if (isValidDoneCommand(properInput)) {
+                return new DoneCommand(taskType, description);
+            } else {
+                Ui.printIndent();
+                throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct done format! :<\n"
+                        + "    Done \n" + "        Eg. done __(number[make sure its a task and not an expense])__\n");
+            }
+        case "expenses":
+            if (isValidExpensesCommand(properInput)) {
+                System.out.println("asda");
+                return new ExpensesCommand(description, variable);
+            } else {
+                Ui.printIndent();
+                throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct done format! :<\n"
+                        + "    Expenses \n" + "        Eg. expenses __$(amount)__ /on __(category)__\n");
+            }
+        case "list":
+            return new ListCommand(description);
+        case "bye":
+            Command byeCommand = new ByeCommand(description);
+            byeCommand.exitSwitch();
+            return  byeCommand;
+        case "help":
+            return new HelpCommand(description);
+        default:
+            Ui.printIndent();
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                    + "    I can only do these functions for now: \n \n"
+                    + "    Todo \n" + "        Eg. todo __(task)__\n"
+                    + "    Event \n" + "        Eg. event __(task)__\n"
+                    + "            /at _(dd/MM/yyyy)_(hhmm)__\n"
+                    + "    Deadline \n" + "        Eg. deadline __(task)__\n"
+                    + "            /by _(dd/MM/yyyy)_(hhmm)__\n"
+                    + "    Delete \n" + "        Eg. delete __(number)__ or delete all\n"
+                    + "    Done \n" + "        Eg. done __(number)__\n"
+                    + "    Find \n" + "        Eg. find __(keyword)__\n"
+                    + "    Expenses \n" + "        Eg. expenses __$(amount)__\n"
+                    + "            /on __(category)__\n"
+                    + "    List \n" + "    Help\n" + "    Bye\n");
         }
     }
 
@@ -165,11 +164,12 @@ public class Parser {
     }
 
     /**
+     * Gets the day numbers from the input.
      *
-     *
-     * @param text
-     * @return
-     * @throws DukeException
+     * @param text Date and Time.
+     * @return Returns the day numbers.
+     * @throws DukeException If the numbers are not valid, then a DukeException will
+     *                       be thrown to inform the user.
      */
     public static int getDayDateNumbers(String text) throws DukeException {
         assert text != null;
@@ -181,6 +181,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Gets the month numbers from the input.
+     *
+     * @param text Date and Time.
+     * @return Returns the month numbers.
+     * @throws DukeException If the numbers are not valid, then a DukeException will
+     *                       be thrown to inform the user.
+     */
     public static int getMonthDateNumbers(String text) throws DukeException {
         assert text != null;
         if ((text.length() > (getSlashIndex(text) + 7)) && (text.length() > (getSlashIndex(text) + 9))) {
@@ -191,6 +199,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Gets the year numbers from the input.
+     *
+     * @param text Date and Time.
+     * @return Returns the year numbers.
+     * @throws DukeException If the numbers are not valid, then a DukeException will
+     *                       be thrown to inform the user.
+     */
     public static int getYearDateNumbers(String text) throws DukeException {
         assert text != null;
         if ((text.length() > (getSlashIndex(text) + 10)) && (text.length() > (getSlashIndex(text) + 14))) {
@@ -201,6 +217,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Gets the hour numbers from the input.
+     *
+     * @param text Date and Time.
+     * @return Returns the hour numbers.
+     * @throws DukeException If the numbers are not valid, then a DukeException will
+     *                       be thrown to inform the user.
+     */
     public static int getHourDateNumbers(String text) throws DukeException {
         assert text != null;
         if ((text.length() > (getSlashIndex(text) + 15)) && (text.length() > (getSlashIndex(text) + 17))) {
@@ -212,6 +236,14 @@ public class Parser {
     }
 
 
+    /**
+     * Gets the minute numbers from the input.
+     *
+     * @param text Date and Time.
+     * @return Returns the minute numbers.
+     * @throws DukeException If the numbers are not valid, then a DukeException will
+     *                       be thrown to inform the user.
+     */
     public static int getMinuteDateNumbers(String text) throws DukeException {
         assert text != null;
         if (text.length() >= (getSlashIndex(text) + 17)) {
@@ -223,6 +255,15 @@ public class Parser {
     }
 
 
+    /**
+     * Checks whether the numbers are within the limit of days,
+     * months, years, hours and minutes.
+     *
+     * @param text Date and Time.
+     * @return Returns a boolean that checks whether the numbers are valid or not.
+     * @throws DukeException If the numbers are not valid, then a DukeException will
+     *                       be thrown to inform the user.
+     */
     public static boolean isValidDateNumbers(String text) throws DukeException {
         assert text != null;
         int dayDate = getDayDateNumbers(text);
@@ -235,6 +276,14 @@ public class Parser {
                 && yearDate >= 2019;
     }
 
+    /**
+     * Checks whether the dates and numbers given are valid or not.
+     *
+     * @param text Dates and Time.
+     * @return Returns a boolean that checks whether the numbers are valid or not.
+     * @throws DukeException If the numbers are not valid, then a DukeException will
+     *                       be thrown to inform the user.
+     */
     public static boolean isValidDateFormat(String text) throws DukeException {
         assert text != null;
         if (isValidDateNumbers(text)) {
@@ -291,6 +340,12 @@ public class Parser {
         return formatted;
     }
 
+    /**
+     * Checks whether the task type is at least one of the functions available.
+     *
+     * @param taskType User input.
+     * @return Returns a boolean that checks whether the task type is valid or not.
+     */
     public static boolean isValidTaskType(String taskType) {
         assert  taskType != null;
         if (taskType.equals("todo") || taskType.equals("event") || taskType.equals("deadline") ||
@@ -303,6 +358,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Sieves out the description of the task and returns it.
+     *
+     * @param text User input.
+     * @return Returns the description of the task without task type and dates/variables.
+     * @throws DukeException Throws out a DukeException if the text doesnt follow any of the
+     *                       task formats.
+     */
     public static String getDescriptionOfTask(String text) throws DukeException {
         assert text != null;
         int spaceIndex = text.indexOf(" ");
@@ -319,21 +382,53 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks whether the to do command input given is valid
+     * and follows the format that is provided.
+     *
+     * @param text User input.
+     * @return Returns a boolean that tells us whether the to do command is valid.
+     */
     public static boolean isValidToDoCommand(String text) {
         assert text != null;
         return text.contains(" ") && text.length() > 5;
     }
 
+    /**
+     * Checks whether the deadline command input given is valid
+     * and follows the format that is provided.
+     *
+     * @param text User input.
+     * @return Returns a boolean that tells us whether the deadline command is valid.
+     */
     public static boolean isValidDeadlineCommand(String text) {
         assert text != null;
         return text.contains(" ") && text.contains("/") && text.contains("by");
     }
 
+    /**
+     * Checks whether the event command input given is valid
+     * and follows the format that is provided.
+     *
+     * @param text User input.
+     * @return Returns a boolean that tells us whether the event command is valid.
+     */
     public static boolean isValidEventCommand(String text) {
         assert text != null;
         return text.contains(" ") && text.contains("/") && text.contains("at");
     }
 
+    /**
+     * Checks whether the delete command input given is valid
+     * and follows the format that is provided.
+     *
+     * @param text User input.
+     * @return Returns a boolean that tells us whether the delete command is valid.
+     * @throws DukeException If the format is wrong, a DukeException will be thrown
+     *                       to inform the user and to retype it properly again.
+     * @throws NumberFormatException If the user types in a character that is not a number,
+     *                               an exception will be thrown to inform the user.
+     */
     public static boolean isValidDeleteCommand(String text) throws DukeException, NumberFormatException {
         assert text != null;
         if (text.length() < 7) {
@@ -357,11 +452,27 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks whether the find command input given is valid
+     * and follows the format that is provided.
+     *
+     * @param text User input.
+     * @return Returns a boolean that tells us whether the find command is valid.
+     */
     public static boolean isValidFindCommand(String text) {
         assert text != null;
         return text.contains(" ") && text.length() > 5;
     }
 
+    /**
+     * Checks whether the done command input given is valid
+     * and follows the format that is provided.
+     *
+     * @param text User input.
+     * @return Returns a boolean that tells us whether the done commmand is valid.
+     * @throws DukeException If the format is wrong, a DukeException will be thrown
+     *                       to inform the user and to retype it properly again.
+     */
     public static boolean isValidDoneCommand(String text) throws DukeException {
         assert text != null;
         if (text.length() < 5) {
@@ -387,29 +498,27 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks whether the expenses command given is valid
+     * and follows the format provided.
+     *
+     * @param text User input
+     * @return Returns a boolean that tells us if the input is valid.
+     */
     public static boolean isValidExpensesCommand(String text) {
         assert text != null;
         return text.contains(" ") && text.contains("/") && text.contains("on") && text.length() > 20;
     }
 
-    public static String findWord(String text) {
-        assert text != null;
-        int spaceIndex = text.indexOf(" ");
-        return text.substring(spaceIndex + 1);
-    }
-
-    public static String findToDelete(String text) {
-        assert text != null;
-        int spaceIndex = text.indexOf(" ");
-        return text.substring(spaceIndex + 1);
-    }
-
-    public static String findTaskNumber(String text) {
-        assert text != null;
-        int spaceIndex = text.indexOf(" ");
-        return text.substring(spaceIndex + 1);
-    }
-
+    /**
+     * Checks whether the done number given is valid. In other
+     * words, checks if done number is given to either todo, event
+     * or deadline.
+     *
+     * @param num Number given by the user.
+     * @return Returns a boolean that tells the user whether the number given
+     *         satisfies the conditions.
+     */
     public static boolean isValidDoneNumberGiven(String num) {
         int taskNumber = Integer.parseInt(num);
         try {

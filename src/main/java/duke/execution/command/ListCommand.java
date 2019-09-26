@@ -11,7 +11,7 @@ import duke.execution.Ui;
 public class ListCommand extends Command {
 
     /**
-     * Constructor for ListCommand
+     * Constructor for ListCommand.
      *
      * @param action List Command word.
      */
@@ -20,7 +20,8 @@ public class ListCommand extends Command {
     }
 
     /**
-     *
+     * Executes the list command and prints out all the
+     * tasks in the list.
      *
      * @param errands Not needed in this case.
      * @param ui Not needed in this case.

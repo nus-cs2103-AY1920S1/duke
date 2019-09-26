@@ -1,5 +1,6 @@
 package duke.frontend;
 
+import duke.exception.CompleteTaskException;
 import duke.exception.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -67,6 +68,8 @@ public class MainWindow extends AnchorPane {
             response = duke.getResponse(input);
         } catch (DukeException e) {
             response = e.getMessage();
+        } catch (NumberFormatException e) {
+            response = "Sorry! The format of your command is wrong.";
         }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

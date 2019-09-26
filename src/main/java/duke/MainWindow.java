@@ -97,7 +97,8 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     void minimize(MouseEvent event) {
-        ((Stage) ((Node)event.getSource()).getScene().getWindow()).setIconified(true);
+        Stage stage = ((Stage) ((Node)event.getSource()).getScene().getWindow());
+        stage.setIconified(true);
     }
 
     @FXML

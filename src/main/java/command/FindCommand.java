@@ -16,6 +16,7 @@ public class FindCommand extends Command {
 
     @Override
     public void executeCommand(TaskList taskList, Storage storage) {
+        assert (!command.isEmpty()) : "Input command cannot be empty";
         String desc;
         List<Task> searchList = new ArrayList<>();
         if (command.substring(4).isEmpty()) {

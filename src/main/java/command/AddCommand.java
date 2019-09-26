@@ -16,7 +16,7 @@ public class AddCommand extends Command {
     @Override
     public void executeCommand(TaskList taskList, Storage storage) {
         String desc;
-        assert (command == null) : "Input command cannot be null";
+        assert (!command.isEmpty()) : "Input command cannot empty";
         if (command.startsWith(Instruction.TODO.toString())) {
             if (command.substring(4).isEmpty()) {
                 Ui.emptyTaskMsg(Instruction.TODO.toString());

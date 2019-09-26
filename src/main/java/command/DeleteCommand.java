@@ -12,6 +12,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public void executeCommand(TaskList taskList, Storage storage) {
+        assert (!command.isEmpty()) : "Input command cannot empty";
         if (command.substring(6).isEmpty()) {
             Ui.deleteEmptyMsg();
         } else {

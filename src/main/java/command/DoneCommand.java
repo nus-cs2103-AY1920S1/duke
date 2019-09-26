@@ -12,6 +12,7 @@ public class DoneCommand extends Command {
 
     @Override
     public void executeCommand(TaskList taskList, Storage storage) {
+        assert (!command.isEmpty()) : "Input command cannot be empty";
         if (command.substring(4).isEmpty()) {
             Ui.doneErrorMsg();
         } else {

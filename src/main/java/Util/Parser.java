@@ -19,6 +19,7 @@ public class Parser {
      * @return parse to corresponding command
      */
     public static Command parse(String command) {
+        assert(!command.isEmpty()): "Cannot parse an empty string";
         if (command.contains(Instruction.BYE.toString())) {
             return new ExitCommand(command);
         } else if (command.contains(Instruction.TODO.toString()) || command.contains(Instruction.EVENT.toString())

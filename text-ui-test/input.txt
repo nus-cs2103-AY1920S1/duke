@@ -1,0 +1,9 @@
+todo borrow books
+deadline return books /by 2/12/2019 1800
+event unicon /at 7/12/2019 1900-2000
+list
+done 1
+list
+delete 2
+list
+bye

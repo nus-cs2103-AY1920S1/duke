@@ -1,0 +1,35 @@
+Hello from
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+Hello! I'm duke.Duke
+What can I do for you?
+Got it. I've added this task:
+	[T][✘] borrow books
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+	[D][✘] return books (by: 2nd of December 2019, 6PM)
+Now you have 2 tasks in the list.
+Got it. I've added this task:
+	[E][✘] unicon (at: 7th of December 2019, 7-8PM)
+Now you have 3 tasks in the list.
+Here are the tasks in your list:
+1. [T][✘] borrow books
+2. [D][✘] return books (by: 2nd of December 2019, 6PM)
+3. [E][✘] unicon (at: 7th of December 2019, 7-8PM)
+Nice! I've marked this task as done:
+	[T][✓] borrow books
+Here are the tasks in your list:
+1. [T][✓] borrow books
+2. [D][✘] return books (by: 2nd of December 2019, 6PM)
+3. [E][✘] unicon (at: 7th of December 2019, 7-8PM)
+Noted. I've removed this task:
+	[D][✘] return books (by: 2nd of December 2019, 6PM)
+Now you have 2 tasks in the list.
+Here are the tasks in your list:
+1. [T][✓] borrow books
+2. [E][✘] unicon (at: 7th of December 2019, 7-8PM)
+Bye. Hope to see you again soon!

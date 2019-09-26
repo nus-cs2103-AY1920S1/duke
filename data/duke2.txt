@@ -1,0 +1,2 @@
+T | 0 | CS2100 Tutorial
+T | 1 | CS2100 Lab

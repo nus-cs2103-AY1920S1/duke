@@ -1,0 +1,26 @@
+.sendButton {
+    -fx-background-color: white;
+    -fx-background-image: url("../images/send.png");
+    -fx-background-size: 100% 100%;
+    -fx-rotate: 45;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.chat-bubble {
+    -fx-border-style: solid;
+    -fx-border-radius: 8px;
+    -fx-label-padding: 5px;
+}
+
+.changeSourceButton {
+    -fx-background-color: #F4F4F4;
+    -fx-background-image: url("../images/open_folder.png");
+    -fx-background-size: 100% 100%;
+}

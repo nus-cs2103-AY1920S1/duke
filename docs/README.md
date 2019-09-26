@@ -5,17 +5,18 @@ Project Duke is an interactive program designed to help users manage their
 everyday simple task list. With an easy-to-use command line interface, Duke 
 supports many features to help users keep track of their everyday tasks, be it 
 something the user wants to do, an event to attend, or a deadline to meet.
+![](Ui.png)
 
 ## 2 Quick Start
 To launch the Duke application, follow these steps:
 1. Ensure you have Java version 11 or later installed on your computer.
-1. Download the latest version of Duke [here](https://github.com/zhangxuan97/duke/releases/tag/A-Release).
+1. Download the latest version `duke-0.2.jar` [here](https://github.com/zhangxuan97/duke/releases/tag/A-Release).
 1. To run the application:
     * For Mac OS users: Navigate to the folder which contains the jar file (latest `v0.2.jar`) 
-    in terminal and enter the command `java -jar v0.2.jar`.
-    * For Windows users: Run the application by double clicking the `v0.2.jar` file.
+    in terminal and enter the command `java -jar duke-0.2.jar`.
+    * For Windows users: Run the application by double clicking the `duke-0.2.jar` file.
 
-The application should be open in a few seconds.
+The application should be open in a few seconds. 
 
 ## 3 Features and Usages
 

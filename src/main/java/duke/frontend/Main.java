@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     // Constructs a Duke.
-    String dir = "../dukeData.txt";
+    String dir = "./dukeData.txt";
     Duke duke = new Duke(dir);
 
     /**

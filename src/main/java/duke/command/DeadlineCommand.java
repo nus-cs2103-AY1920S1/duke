@@ -45,7 +45,7 @@ public class DeadlineCommand extends Command {
      * @throws DukeException If description and time of deadline is empty.
      */
     public static String deadline(String data, TaskList tasks) throws DukeException {
-        StringBuilder reply = new StringBuilder();
+        final StringBuilder reply = new StringBuilder();
 
         if (data.isEmpty()) {
             throw new DukeException("OOPS !!! "

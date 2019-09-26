@@ -47,7 +47,7 @@ public class EventCommand extends Command {
      * @throws DukeException If data is empty and event time is not entered.
      */
     public static String event(String data, TaskList tasks) throws DukeException {
-        StringBuilder reply = new StringBuilder();
+        final StringBuilder reply = new StringBuilder();
 
         if (data.isEmpty()) {
             throw new DukeException("OOPS !!! "
@@ -77,7 +77,7 @@ public class EventCommand extends Command {
             throw new DukeException("OOPS !!! " + "Duplicate Task Detected.");
         }
 
-        reply.append("Got it. I've added this task: ");
+        reply.append("Got it. I've added this task:  ");
         reply.append("\n");
         reply.append(tasks.getTask().get(tasks.getItemNo()));
         reply.append("\n");

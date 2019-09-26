@@ -11,11 +11,27 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    public void setStatus(String status) {
+        this.isDone = (status.equals("1")) ? true : false;
+    }
+
     public String toString() {
         return description;
     }
 
     public void setIsDone() {
-        this.isDone = !isDone;
+        this.isDone = true;
+    }
+
+    public char getTaskType() {
+        return 'n';
+    }
+
+    public String getDate() {
+        return "";
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

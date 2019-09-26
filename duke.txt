@@ -1,0 +1,7 @@
+T | 0 | eat lunch
+D | 0 | project | tomorrow
+E | 0 | hackathon | orchard central
+E | 0 | school trip | sentosa
+D | 0 | work | tomorrow
+E | 1 | tomorrowland | korea
+T | 1 | workout crossfit

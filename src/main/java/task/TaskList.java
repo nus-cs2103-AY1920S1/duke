@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
+
     private List<Task> tasks;
 
     public TaskList() {
@@ -25,6 +26,7 @@ public class TaskList {
 
     /**
      * add a task to the taskList
+     *
      * @param task task
      */
     public void addTask(Task task) {
@@ -37,6 +39,7 @@ public class TaskList {
 
     /**
      * delete a task from the taskList
+     *
      * @param task
      */
     public void deleteTask(Task task) {
@@ -46,7 +49,9 @@ public class TaskList {
     }
 
 
-    /** delete a task according to index
+    /**
+     * delete a task according to index
+     *
      * @param index index of task
      */
     public void deleteTask(int index) {

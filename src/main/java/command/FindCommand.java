@@ -35,7 +35,7 @@ public class FindCommand extends Command {
             Ui.findMsg();
             int index = 0;
             for (Task task : searchList) {
-                index ++;
+                index++;
                 System.out.println(index + "." + task.toString());
             }
         }

@@ -12,7 +12,9 @@ import command.UnknownCommand;
 
 public class Parser {
 
-    /** Parse the command according to user input
+    /**
+     * Parse the command according to user input.
+     *
      * @param command user input
      * @return parse to corresponding command
      */

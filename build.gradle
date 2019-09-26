@@ -16,18 +16,21 @@ shadowJar {
     archiveAppendix = null
 }
 
+checkstyle {
+    toolVersion = '8.23'
+}
+
 repositories {
     mavenCentral()
 }
 
 javafx {
     version = "11.0.2"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
+    modules = ['javafx.controls', 'javafx.fxml']
 }
 
 application {
-    // Change this to your main class.
-    mainClassName = "Duke"
+    mainClassName = "duke.Duke"
 }
 
 dependencies {

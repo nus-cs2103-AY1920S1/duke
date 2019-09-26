@@ -28,7 +28,7 @@ public class DeleteCommandTest {
         TaskList taskList = new TaskList();
         DeleteCommand deleteCommand = new DeleteCommand("delete");
         deleteCommand.executeCommand(taskList, null);
-        assert(outContent.toString().contains("☹ OOPS!!! You cannot delete an empty entry.\n"));
+        assertTrue(outContent.toString().contains("☹ OOPS!!! You cannot delete an empty entry.\n"));
     }
 
     @Test
@@ -39,7 +39,7 @@ public class DeleteCommandTest {
         taskList.addTask(new Task("todo borrow book"));
         DeleteCommand deleteCommand = new DeleteCommand("delete 2");
         deleteCommand.executeCommand(taskList, null);
-        assert(outContent.toString().contains("☹ OOPS!!! Out of range, the task does not exist\n"));
+        assertTrue(outContent.toString().contains("☹ OOPS!!! Out of range, the task does not exist\n"));
     }
 
 }

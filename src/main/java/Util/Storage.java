@@ -21,7 +21,9 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    /** load an existing taskList from a filepath
+    /**
+     * load an existing taskList from a filepath.
+     *
      * @return reformat the file and add them to a new taskList
      */
     public List<Task> load() {
@@ -52,7 +54,9 @@ public class Storage {
         return tasks;
     }
 
-    /** Save the current taskList to a file
+    /**
+     * Save the current taskList to a file.
+     *
      * @param tasks current taskList
      * @throws DukeException
      * @throws IOException

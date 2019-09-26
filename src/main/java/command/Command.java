@@ -26,8 +26,9 @@ public abstract class Command {
 
     /**
      * Abstract method to execute command
+     *
      * @param taskList the list of tasks
-     * @param storage storage for saving and loading from file
+     * @param storage  storage for saving and loading from file
      * @throws DukeException
      * @throws IOException
      */
@@ -36,6 +37,7 @@ public abstract class Command {
 
     /**
      * For level8 to transform a given string to a date
+     *
      * @param date given string
      * @return converted date
      */

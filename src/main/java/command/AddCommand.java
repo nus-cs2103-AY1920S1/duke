@@ -12,9 +12,11 @@ public class AddCommand extends Command {
     public AddCommand(String command) {
         this.command = command;
     }
+
     @Override
     public void executeCommand(TaskList taskList, Storage storage) {
         String desc;
+        assert (command == null) : "Input command cannot be null";
         if (command.startsWith(Instruction.TODO.toString())) {
             if (command.substring(4).isEmpty()) {
                 Ui.emptyTaskMsg(Instruction.TODO.toString());

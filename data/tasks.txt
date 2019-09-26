@@ -1,5 +1,13 @@
-T : 0 : eat
-T : 0 : drink water
-D : 0 : work : 19/09/2019 1500
-D : 0 : do homework : 20/09/2019 1842
-D : 0 : do homework : 20052019 0500
+-----
+food
+5.0 : 1
+8.0 : tff
+transport
+education
+household
+apparel
+50.0 : ttt
+beauty
+health
+social
+others

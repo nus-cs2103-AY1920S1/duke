@@ -1,5 +1,6 @@
 package duke.logic;
 
+import duke.extension.expense.Expense;
 import duke.task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -135,5 +136,13 @@ public class Ui {
         tasksBuilder.append(this.showBlankLine());
         return tasksBuilder.toString();
     }
-
+    public String showAddedExpense(Expense expense) {
+        StringBuilder expenseBuilder = new StringBuilder();
+        expenseBuilder.append(this.showSeparationLine());
+        expenseBuilder.append("      Got it. I've added this expense:\n       ");
+        expenseBuilder.append(expense);
+        expenseBuilder.append(this.showSeparationLine());
+        expenseBuilder.append(this.showBlankLine());
+        return expenseBuilder.toString();
+    }
 }

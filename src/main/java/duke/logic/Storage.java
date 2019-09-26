@@ -1,5 +1,8 @@
 package duke.logic;
 
+import duke.extension.expense.Expense;
+import duke.extension.expense.ExpenseCategory;
+import duke.extension.expense.ExpenseList;
 import duke.task.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -48,16 +51,17 @@ public class Storage {
     /**
      * Rewrites the file data with new data from an ArrayList<Task> </Task>.
      *
-     * @param list the ArrayList<Task> </Task> to be used.
+     * @param taskList the ArrayList<Task> </Task> to be used.
+     * @param expensesList the ArrayList<ExpenseCategory> </ExpenseCategory> to be used.
      */
-    public void write(ArrayList<Task> list) {
+    public void write(ArrayList<Task> taskList, ArrayList<ExpenseCategory> expensesList) {
         //Store all the latest data from the ArrayList
         try {
             rewriteFile(this.filePath, "");
         } catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
         }
-        for(Task task : list) {
+        for (Task task : taskList) {
             StringBuilder dataBuilder = new StringBuilder();
             dataBuilder.append(task.getTaskType());
             dataBuilder.append(" : ");
@@ -82,6 +86,31 @@ public class Storage {
                 System.err.println("Error: " + e.getMessage());
             }
         }
+        try {
+            appendToFile(this.filePath, "-----" + System.lineSeparator());
+        } catch (IOException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+        for (ExpenseCategory expenseCategory : expensesList) {
+            StringBuilder dataBuilder = new StringBuilder();
+            dataBuilder.append(expenseCategory.getCategoryName());
+            try {
+                appendToFile(this.filePath, dataBuilder.toString() + System.lineSeparator());
+            } catch (IOException e) {
+                System.err.println("Error: " + e.getMessage());
+            }
+            for(Expense expense : expenseCategory.getExpenses()) {
+                StringBuilder dataBuilder1 = new StringBuilder();
+                dataBuilder1.append(expense.getAmount());
+                dataBuilder1.append(" : ");
+                dataBuilder1.append(expense.getDescription());
+                try {
+                    appendToFile(this.filePath, dataBuilder1.toString() + System.lineSeparator());
+                } catch (IOException e) {
+                    System.err.println("Error: " + e.getMessage());
+                }
+            }
+        }
     }
 
     /**
@@ -91,30 +120,54 @@ public class Storage {
      * @throws FileNotFoundException If file cannot be found.
      */
     public ArrayList<Task> load() throws FileNotFoundException {
-        ArrayList<Task> listToBeLoaded = new ArrayList<>();
+        ArrayList<Task> taskListToBeLoaded = new ArrayList<>();
+        ArrayList<ExpenseCategory> expenseListToBeLoaded = new ArrayList<>();
         File f = new File(this.filePath);
         Scanner s = new Scanner(f);
-        while(s.hasNext()) {
-            String[] temp = s.nextLine().split(" : ");
-            String task = (String) Array.get(temp, 0);
-            for(int i = 0; i < temp.length; i++) {
-                System.out.println((String)Array.get(temp,i));
+        String nextDataLine;
+        while(s.hasNextLine()) {
+            nextDataLine = s.nextLine();
+            if(nextDataLine.equals("-----")) {
+                break;
             }
-            Task newTask;
-            if (task.equals("T")) {
-                newTask = new Todo((String)Array.get(temp,2));
-            } else if (task.equals("D")) {
-                newTask = new Deadline((String)Array.get(temp,2),
-                        (String)Array.get(temp, 3));
-            } else {
-                newTask = new Event((String)Array.get(temp,2),
-                        (String)Array.get(temp, 3));
-            }
-            if (((String) Array.get(temp, 1)).equals("1")) {
-                newTask.setDone();
-            }
-            listToBeLoaded.add(newTask);
+                String[] temp = nextDataLine.split(" : ");
+                String task = (String) Array.get(temp, 0);
+                for (int i = 0; i < temp.length; i++) {
+                    System.out.println((String) Array.get(temp, i));
+                }
+                Task newTask;
+                if (task.equals("T")) {
+                    newTask = new Todo((String) Array.get(temp, 2));
+                } else if (task.equals("D")) {
+                    newTask = new Deadline((String) Array.get(temp, 2),
+                            (String) Array.get(temp, 3));
+                } else {
+                    newTask = new Event((String) Array.get(temp, 2),
+                            (String) Array.get(temp, 3));
+                }
+                if (((String) Array.get(temp, 1)).equals("1")) {
+                    newTask.setDone();
+                }
+                taskListToBeLoaded.add(newTask);
         }
-        return listToBeLoaded;
+        while(s.hasNextLine()) {
+            s.nextLine(); //"food"
+            for (int i = 0; i < ExpenseList.EXPENSECATEGORIES.size(); i++) {
+                ExpenseCategory category = ExpenseList.EXPENSECATEGORIES.get(i);
+                while (s.hasNextLine()) {
+                    nextDataLine = s.nextLine();
+                    String[] temp = nextDataLine.split(" : ");
+                    String nextString = (String) Array.get(temp, 0);
+                    if (nextString.equals(ExpenseList.EXPENSECATEGORIES.get(i + 1).getCategoryName())) { //need to change this to the next category name
+                        break;
+                    } else {
+                        double amount = Double.parseDouble(nextString);
+                        String description = (String) Array.get(temp, 1);
+                        category.add(new Expense(amount, description));
+                    }
+                }
+            }
+        }
+        return taskListToBeLoaded;
     }
 }

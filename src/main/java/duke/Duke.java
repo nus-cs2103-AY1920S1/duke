@@ -1,5 +1,8 @@
 package duke;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+import duke.extension.expense.Expense;
+import duke.extension.expense.ExpenseList;
 import duke.logic.*;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -36,6 +39,7 @@ public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
+    private ExpenseList listOfAllExpenses = new ExpenseList();
     private Ui ui;
 
     public Duke() {
@@ -76,14 +80,14 @@ public class Duke extends Application {
             int taskNumber = Integer.parseInt(taskDetails);
             Task newlyDoneTask = tasks.getTask(taskNumber - 1);
             tasks.setTaskAsDone(taskNumber - 1);
-            storage.write(tasks.getListOfTasks());
+            storage.write(tasks.getListOfTasks(), listOfAllExpenses.getExpenseCategories());
             return ui.showDone(newlyDoneTask);
         } else if (command.equals("delete")) {
             int taskNumber = Integer.parseInt(taskDetails);
             Task taskToBeDeleted = tasks.getTask(taskNumber - 1);
             tasks.deleteTask(taskNumber - 1);
             int newSizeOfList = tasks.getListOfTasks().size();
-            storage.write(tasks.getListOfTasks());
+            storage.write(tasks.getListOfTasks(), listOfAllExpenses.getExpenseCategories());
             return ui.showDelete(taskToBeDeleted, newSizeOfList);
         } else if(command.equals("find")) {
             String keyword = taskDetails;
@@ -96,28 +100,28 @@ public class Duke extends Application {
                             command + " cannot be empty.");
                 }
                 switch (command) {
-                    case "todo":
-                        newTask = new Todo(taskDetails);
-                        break;
-                    case "deadline":
-                    case "event":
-                        //replace the first / so that the dates will not be split up
-                        taskDetails = taskDetails.replaceFirst("/", ":");  //need to assign this to tempString so it is re-recorded
-                        String[] tempStringArr = taskDetails.split(":");
-                        String description = ((String) Array.get(tempStringArr, 0)).trim();  //to remove ending whitespace
-                        String secondString = ((String) Array.get(tempStringArr, 1)).substring(3);
-                        if (command.equals("deadline")) {
-                            newTask = new Deadline(description, secondString);
-                        } else {
-                            newTask = new Event(description, secondString);
-                        }
-                        break;
-                    default: //all other keywords not part of Duke's task handling schedule
-                        throw new DukeException("      OOPS!!! I'm sorry, but I don't know what that means :-(");
+                case "todo":
+                    newTask = new Todo(taskDetails);
+                    break;
+                case "deadline":
+                case "event":
+                    //replace the first / so that the dates will not be split up
+                    taskDetails = taskDetails.replaceFirst("/", ":");  //need to assign this to tempString so it is re-recorded
+                    String[] tempStringArr = taskDetails.split(":");
+                    String description = ((String) Array.get(tempStringArr, 0)).trim();  //to remove ending whitespace
+                    String secondString = ((String) Array.get(tempStringArr, 1)).substring(3);
+                    if (command.equals("deadline")) {
+                        newTask = new Deadline(description, secondString);
+                    } else {
+                        newTask = new Event(description, secondString);
+                    }
+                    break;
+                default: //all other keywords not part of Duke's task handling schedule
+                    throw new DukeException("      OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
                 tasks.addTask(newTask);
                 int newSizeOfList = tasks.getListOfTasks().size();
-                storage.write(tasks.getListOfTasks());
+                storage.write(tasks.getListOfTasks(), listOfAllExpenses.getExpenseCategories());
                 return ui.showAdd(newTask, newSizeOfList);
             } catch (DukeException de) {
                 return ui.showSeparationLine() + de.getMessage() + ui.showSeparationLine() + ui.showBlankLine();
@@ -125,6 +129,25 @@ public class Duke extends Application {
                 return ui.showSeparationLine() + "      :( OOPS!!! You need to specify the " + command +
                         " time through a /by (deadline) and /at (event)\n" + ui.showSeparationLine() + ui.showBlankLine();
             }
+        } else if (command.equals("spending")) {
+            //Format: Finance {category} {amount} {description}
+            taskDetails = taskDetails.replaceFirst(" ", ":");
+            System.out.println(taskDetails);
+            taskDetails = taskDetails.replaceFirst(" ", ":");
+            System.out.println(taskDetails);
+            String[] tempStringArr = taskDetails.split(":");
+            String category = ((String) Array.get(tempStringArr, 0));
+            System.out.println(category);
+            String amountInString = ((String) Array.get(tempStringArr, 1));
+            System.out.println(amountInString);
+            String description = ((String) Array.get(tempStringArr, 2));
+            System.out.println(description);
+            Expense newExpense = new Expense(Double.parseDouble(amountInString), description);
+            listOfAllExpenses.addExpense(category, newExpense);
+            storage.write(tasks.getListOfTasks(), listOfAllExpenses.getExpenseCategories());
+            return ui.showAddedExpense(newExpense);
+        } else if (command.equals("expenses")){
+            return listOfAllExpenses.printList();
         } else {//all other keywords not part of Duke's task handling schedule
             try {
                 throw new DukeException("      OOPS!!! I'm sorry, but I don't know what that means :-(");

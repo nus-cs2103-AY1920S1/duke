@@ -7,9 +7,9 @@ public class Expense {
     private double amount;
     private String description;
 
-    public Expense(String description, double amount) {
-        this.amount = amount;
+    public Expense(double amount, String description) {
         this.description = description;
+        this.amount = amount;
     }
 
     public double getAmount() {
@@ -27,8 +27,8 @@ public class Expense {
     @Override
     public String toString() {
        StringBuilder expenseBuilder = new StringBuilder();
-       expenseBuilder.append(": ");
-       expenseBuilder.append(String.format("%2f", amount));
+       expenseBuilder.append("SGD ");
+       expenseBuilder.append(String.format("%.2f", amount));
        expenseBuilder.append("     ");
        expenseBuilder.append(description);
        return expenseBuilder.toString();

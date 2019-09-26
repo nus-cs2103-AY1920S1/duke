@@ -24,6 +24,7 @@ public class FindCommand implements Command {
                 if (nameComponent.equalsIgnoreCase(searchTerm)) {
                     System.out.println("     " + counter + "." + task);
                     counter++;
+                    break;
                 }
             }
         }

@@ -15,9 +15,6 @@ import tool.Parser;
 import tool.Storage;
 import tool.TaskList;
 import tool.Ui;
-
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 
@@ -50,6 +47,7 @@ public class Duke extends Application {
 //            }
 //
 //        }
+        System.out.println("testing");
     }
 
     @Override
@@ -131,19 +129,11 @@ public class Duke extends Application {
     private void handleUserInput() {
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
-        if (dukeText.equals("Bye. Hope to see you again soon!")) {
-//            dialogContainer.getChildren().addAll(
-//                    DialogBox.getUserDialog(userText, user),
-//                    DialogBox.getDukeDialog(dukeText, duke)
-//            );
-            Platform.exit();
-        } else {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(userText, user),
-                    DialogBox.getDukeDialog(dukeText, duke)
-            );
-            userInput.clear();
-        }
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, user),
+                DialogBox.getDukeDialog(dukeText, duke)
+        );
+        userInput.clear();
     }
 
     /**
@@ -151,9 +141,7 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-//        Storage storage = new Storage("src/main/java/data/duke.txt");
         Ui ui = new Ui();
-//        ui.hi();
         TaskList commands = new TaskList(storage.load(new ArrayList<Task>())); //TODO
         Parser p = new Parser(commands, storage, ui);
         String xx = p.parse(input);

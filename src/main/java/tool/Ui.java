@@ -31,7 +31,6 @@ public class Ui {
             count++;
         }
         return str;
-//        return "Here are the tasks in your list:\n";
     }
 
     /**

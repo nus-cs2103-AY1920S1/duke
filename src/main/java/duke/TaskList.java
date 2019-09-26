@@ -7,7 +7,6 @@ import tasks.Task;
 
 public class TaskList {
     ArrayList<Task> list;
-    int test = 2;
 
     /**
      * This is a constructor for duke.TaskList.

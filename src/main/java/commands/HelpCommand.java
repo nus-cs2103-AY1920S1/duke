@@ -4,6 +4,8 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+import java.io.*;
+
 public class HelpCommand extends Command {
 
     public HelpCommand() {
@@ -18,7 +20,18 @@ public class HelpCommand extends Command {
      * @return duke opens the help file.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return new Storage("C:\\duke\\src\\main\\java\\data\\help.txt").accessHelp();
+        InputStream in = getClass().getResourceAsStream("help.txt");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        String output = "";
+        String line;
+        try {
+            while ((line = reader.readLine()) != null) {
+                output += (line + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return output;
     }
 
 }

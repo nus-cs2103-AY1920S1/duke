@@ -32,6 +32,7 @@ public class Duke {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
             tasks = new TaskList();
+            storage.createNew();
         }
     }
     public static void main(String[] args) {
@@ -48,7 +49,6 @@ public class Duke {
             System.exit(0);
             return null;
         } else {
-            //Duke duke = new Duke("C:\\duke\\src\\main\\java\\data\\duke.txt");
             return Parser.parse(input).execute(tasks, ui, storage);
         }
     }

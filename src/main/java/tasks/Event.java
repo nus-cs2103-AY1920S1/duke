@@ -32,7 +32,7 @@ public class Event extends Task {
      */
     public void getDate() {
         String[] dateArray = at.split(" ");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
         LocalDate d1 = LocalDate.parse(dateArray[0], formatter);
         LocalDate d2 = LocalDate.parse(dateArray[0], formatter);
         date1 = d1.atTime(Integer.parseInt(dateArray[1]) / 100, Integer.parseInt(dateArray[1]) % 100);

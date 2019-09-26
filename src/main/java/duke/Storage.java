@@ -1,8 +1,6 @@
 package duke;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -17,27 +15,14 @@ public class Storage {
 
     public Storage(String filePath) {
         this.file = new File(filePath);
-        System.out.println(file.getAbsolutePath());
     }
 
-    /**
-     * This method is used to read the content of a help file.
-     *
-     * @return the help file's content as a String
-     */
-    public String accessHelp() {
-        Scanner sc = null;
+    public void createNew() {
         try {
-            sc = new Scanner(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            file.createNewFile();
+        } catch (Exception e) {
+
         }
-        String output = "";
-        assert sc != null;
-        while (sc.hasNextLine()) {
-            output += (sc.nextLine() + "\n");
-        }
-        return output;
     }
 
     /**

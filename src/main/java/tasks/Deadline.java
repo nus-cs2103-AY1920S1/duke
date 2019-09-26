@@ -29,7 +29,7 @@ public class Deadline extends Task {
      */
 
     public void getDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
         if (!by.contains(" ")) {
             LocalDate d1 = LocalDate.parse(by, formatter);
             date1 = d1.atTime(23, 59);

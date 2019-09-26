@@ -13,7 +13,7 @@ import javafx.scene.layout.AnchorPane;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("src/main/java/data/duke.txt");
+    private Duke duke = new Duke("./duke.txt");
 
     @Override
     public void start(Stage stage) {

@@ -54,52 +54,52 @@ Command | Example | Description
 #### Todo: `todo`
 Expected Outcome:
 
-<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/todo.jpg" width="291" height="71">
+<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/todo.jpg" width="291" height="100">
 
 
 #### Event: `event`
 Expected Outcome:
 
-<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/event.jpg" width="291" height="71">
+<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/event.jpg" width="291" height="100">
 
 
 #### Deadline: `deadline`
 Expected Outcome:
 
-<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/deadline.jpg" width="291" height="71">
+<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/deadline.jpg" width="291" height="100">
 
 
 #### Done: `done`
 Expected Outcome:
 
-<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/done.jpg" width="291" height="71">
+<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/done.jpg" width="291" height="100">
 
 
 #### Delete: `delete`
 Expected Outcome:
 
-<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/delete.jpg" width="291" height="71">
+<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/delete.jpg" width="291" height="100">
 
 
 #### Find: `find`
 Expected Outcome:
 
-<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/find.jpg" width="291" height="71">
+<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/find.jpg" width="291" height="100">
 
 
 #### Expenses: `expenses`
 Expected Outcome:
 
-<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/expenses.jpg" width="291" height="71">
+<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/expenses.jpg" width="291" height="100">
 
 
 #### List: `list`
 Expected Outcome:
 
-<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/list.jpg" width="291" height="71">
+<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/list.jpg" width="291" height="100">
 
 
 #### Help: `help`
 Expected Outcome:
 
-<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/help.jpg" width="291" height="71">
+<img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/help.jpg" width="291" height="300">

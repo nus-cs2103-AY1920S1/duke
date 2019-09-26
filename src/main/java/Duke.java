@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -130,11 +131,19 @@ public class Duke extends Application {
     private void handleUserInput() {
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, user),
-                DialogBox.getDukeDialog(dukeText, duke)
-        );
-        userInput.clear();
+        if (dukeText.equals("Bye. Hope to see you again soon!")) {
+//            dialogContainer.getChildren().addAll(
+//                    DialogBox.getUserDialog(userText, user),
+//                    DialogBox.getDukeDialog(dukeText, duke)
+//            );
+            Platform.exit();
+        } else {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userText, user),
+                    DialogBox.getDukeDialog(dukeText, duke)
+            );
+            userInput.clear();
+        }
     }
 
     /**
@@ -145,10 +154,10 @@ public class Duke extends Application {
 //        Storage storage = new Storage("src/main/java/data/duke.txt");
         Ui ui = new Ui();
 //        ui.hi();
-        TaskList commands = new TaskList(this.storage.load(new ArrayList<Task>())); //TODO
-        Parser p = new Parser(commands, this.storage, ui);
+        TaskList commands = new TaskList(storage.load(new ArrayList<Task>())); //TODO
+        Parser p = new Parser(commands, storage, ui);
         String xx = p.parse(input);
-        this.storage.close(commands);
+        storage.close(commands);
         assert xx.isEmpty() : "Response cannot be empty";
         return xx;
     }

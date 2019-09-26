@@ -3,6 +3,12 @@
 /out/
 /*.iml
 
+#data files
+/data/
+
+# java classes
+*.class
+
 # Gradle build files
 /.gradle/
 /build/
@@ -12,3 +18,6 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+/.classpath
+/.project
+/.settings/

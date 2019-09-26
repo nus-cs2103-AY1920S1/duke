@@ -1,9 +1,9 @@
 # Soviet Comrade User Guide
-![alt text](Ui_ss1.JPG)
+![alt text](Ui.png.JPG)
 ## Features 
 
 Have you ever wanted a personal assistant, 
-but also wanted to roleplay in the Soviet Union? Me neither! 
+but also wanted to roleplay being in the Soviet Union? Me neither! 
 But anyway, if so, then **Soviet Comrade** is the chat bot for you!
 He stores all the chores you need to do to 
 help kick capitalism's butt! With him, 

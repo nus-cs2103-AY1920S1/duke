@@ -101,6 +101,14 @@ public class ListManager {
         return output;
     }
 
+    public String help() {
+        String output = "COMMAND LIST\nt [taskname] : creates a todo \nd [taskname] /by [dd/mm/yyyy hhmm]: creates a new deadline\n" +
+                "e [taskname] /at [dd/mm/yyy hhmm]: creates a new event\nlist: displays list of tasks\n" +
+                "find [query]: searches for all tasks containing query in taskname\ndelete [index]: deletes task of that index\n" +
+                "done [index]: sets task of that index to done\nbye: terminate the program";
+        return output;
+    }
+
     /**
      * Sets a task within the list (of given index) as completed.
      * @param index index of task stored within the list.

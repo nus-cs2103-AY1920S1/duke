@@ -1,12 +1,6 @@
 package duke.parser;
 
-import duke.command.Command;
-import duke.command.DoneCommand;
-import duke.command.FindCommand;
-import duke.command.AddCommand;
-import duke.command.ListCommand;
-import duke.command.ExitCommand;
-import duke.command.DeleteCommand;
+import duke.command.*;
 
 public class Parser {
 
@@ -18,21 +12,25 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws IllegalArgumentException {
         String[] splitCommand = fullCommand.split(" ", 0);
-        if (splitCommand[0].equals("t") || splitCommand[0].equals("d")
-                || splitCommand[0].equals("e")) {
-            return new AddCommand(fullCommand, splitCommand);
-        } else if (splitCommand[0].equals("done")) {
-            return new DoneCommand(fullCommand, splitCommand);
-        } else if (splitCommand[0].equals("list")) {
-            return new ListCommand(fullCommand, splitCommand);
-        } else if (splitCommand[0].equals("bye")) {
-            return new ExitCommand(fullCommand, splitCommand);
-        } else if (splitCommand[0].equals("delete")) {
-            return new DeleteCommand(fullCommand, splitCommand);
-        } else if (splitCommand[0].equals("find")) {
-            return new FindCommand(fullCommand, splitCommand);
-        } else {
-            throw new IllegalArgumentException("Invalid Command");
+        switch (splitCommand[0]) {
+            case "t":
+            case "d":
+            case "e":
+                return new AddCommand(fullCommand, splitCommand);
+            case "done":
+                return new DoneCommand(fullCommand, splitCommand);
+            case "list":
+                return new ListCommand(fullCommand, splitCommand);
+            case "bye":
+                return new ExitCommand(fullCommand, splitCommand);
+            case "delete":
+                return new DeleteCommand(fullCommand, splitCommand);
+            case "find":
+                return new FindCommand(fullCommand, splitCommand);
+            case "help":
+                return new HelpCommand(fullCommand, splitCommand);
+            default:
+                throw new IllegalArgumentException("Invalid Command");
         }
     }
 }

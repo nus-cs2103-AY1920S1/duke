@@ -12,7 +12,7 @@ public class Task {
 
 
     /**
-     * @return the description of the task
+     * @return the description of the task.
      */
     public String getDesc() {
         return this.desc;
@@ -20,7 +20,7 @@ public class Task {
 
 
     /**
-     * @return the status of a task ([✘] or [✓])
+     * @return the status of a task ([✘] or [✓]).
      */
     private String getStatus() {
         return (isDone ? "\u2713" : "\u2718");
@@ -28,7 +28,7 @@ public class Task {
 
 
     /**
-     * @return the status of a task(0 or 1)
+     * @return the status of a task(0 or 1).
      */
     public int getDone() {
         return isDone ? 1 : 0;
@@ -36,7 +36,7 @@ public class Task {
 
 
     /**
-     * mark a task as done
+     * mark a task as done.
      */
     public void markAsDone() {
         isDone = true;

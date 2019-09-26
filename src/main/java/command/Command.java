@@ -8,9 +8,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- *
- */
 public abstract class Command {
 
     boolean isExit;
@@ -25,7 +22,7 @@ public abstract class Command {
     }
 
     /**
-     * Abstract method to execute command
+     * Abstract method to execute command.
      *
      * @param taskList the list of tasks
      * @param storage  storage for saving and loading from file
@@ -36,7 +33,7 @@ public abstract class Command {
 
 
     /**
-     * For level8 to transform a given string to a date
+     * For level8 to transform a given string to a date.
      *
      * @param date given string
      * @return converted date

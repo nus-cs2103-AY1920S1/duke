@@ -30,6 +30,7 @@ public class TaskList {
      * @param task task
      */
     public void addTask(Task task) {
+        assert (task != null) : "A given task cannot be null";
         tasks.add(task);
         System.out.println("Got it. I've added this task: ");
         System.out.println("  " + task.toString());
@@ -43,6 +44,7 @@ public class TaskList {
      * @param task
      */
     public void deleteTask(Task task) {
+        assert (task != null) : "A given task cannot be null";
         tasks.remove(task);
         System.out.println("Noted. I've removed this task: ");
         System.out.println(" " + task.toString());

@@ -22,7 +22,7 @@ public class FindCommand extends Command {
      * Initialises the find command
      */
     private FindCommand(String keyword) {
-        super(CommandType.FIND);
+        super(CommandType.COMMAND_FIND_TASK);
         this.keyword = keyword;
         assert keyword != null;
     }
@@ -34,7 +34,7 @@ public class FindCommand extends Command {
      */
     public static FindCommand createFindCommandIfValid(String[] tokens) throws DukeException{
         if (tokens.length > 2) {
-            throw new DukeException("Must be a single keyword", DukeExceptionType.NOTSINGLEWORD);
+            throw new DukeException("Must be a single keyword", DukeExceptionType.NOT_SINGLE_WORD);
         }
         return new FindCommand(tokens[1]);
     }

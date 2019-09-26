@@ -16,7 +16,7 @@ public class NullCommand extends Command{
      * Initialises the null command
      */
     public NullCommand(){
-        super(CommandType.NULL);
+        super(CommandType.COMMAND_NULL);
     }
 
     /**
@@ -29,7 +29,7 @@ public class NullCommand extends Command{
      */
     @Override
     public String execute(TaskList taskList, Ui ui) throws DukeException {
-        throw new DukeException("Invalid Command! Please try again.", DukeExceptionType.INVALIDCOMMAND);
+        throw new DukeException("Invalid Command! Please try again.", DukeExceptionType.INVALID_COMMAND);
     }
 
 }

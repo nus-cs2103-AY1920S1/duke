@@ -30,6 +30,16 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    private static final Color DIALOGBOX_BACKGROUND_RED = Color.rgb(200,0,0);
+    private static final Color DIALOGBOX_BACKGROUND_BLUE = Color.rgb(0,0,200);
+    private static final Color DIALOGBOX_BACKGROUND_GREEN = Color.rgb(0,150,0);
+
+    private static final CornerRadii DIALOGBOX_BACKGROUND_RADII = new CornerRadii(10);
+
+    private static final Insets LABEL_PADDING = new Insets(10, 10, 10, 10);
+    private static final Insets DIALOGBOX_BACKGROUND_INSET = new Insets(5,37.5,5,37.5);
+    //try
+
 
     private DialogBox(String text, Image img) {
         try {
@@ -42,10 +52,11 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setWrapText(true);
 
         displayPicture.setImage(img);
-        displayPicture.setClip(new Circle(50, 50, 50));//img set to circle
-        dialog.setPadding(new Insets(10, 10, 10, 10));
+        displayPicture.setClip(new Circle(50, 50, 50));
+        dialog.setPadding(LABEL_PADDING);
 
     }
 
@@ -66,9 +77,9 @@ public class DialogBox extends HBox {
         user.setBackground(
                 new Background(
                         new BackgroundFill(
-                                Color.rgb(0,0, 100),
-                                new CornerRadii(10),
-                                new Insets(5,37.5,5,37.5))));
+                                DIALOGBOX_BACKGROUND_BLUE,
+                                DIALOGBOX_BACKGROUND_RADII,
+                                DIALOGBOX_BACKGROUND_INSET)));
         return user;
     }
 
@@ -76,15 +87,15 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img, int errorStatus) {
         DialogBox duke = new DialogBox(text, img);
 
-        Color[] colours =  new Color[]{Color.rgb(0,100, 0),
-                Color.rgb(100,0,0)};
+        Color[] colours =  new Color[]{DIALOGBOX_BACKGROUND_GREEN,
+                DIALOGBOX_BACKGROUND_RED};
         Color correctColor = colours[errorStatus];
         duke.setBackground(
                 new Background(
                         new BackgroundFill(
                                 correctColor,
-                                new CornerRadii(10),
-                                new Insets(5,37.5,5,37.5))));
+                                DIALOGBOX_BACKGROUND_RADII,
+                                DIALOGBOX_BACKGROUND_INSET)));
 
 
         duke.flip();

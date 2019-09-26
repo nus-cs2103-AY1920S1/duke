@@ -21,21 +21,26 @@ public class DukeException extends Exception {
 	 */
     public String getMessage() {
     	switch (type) {
-    		case INVALIDCOMMAND:
+    		case INVALID_COMMAND:
     			return "OOPS!!! I'm sorry, but I don't know what that means :-(";
-    		case NOTINTEGER:
+    		case NOT_INTEGER:
     			return "Invalid input, must be an integer!!";
-    		case MISSINGTASK:
+    		case MISSING_TASK:
     			return "No such task";
-    		case GENERALMISTAKE:
-    			return super.getMessage();
-            case FILENOTFOUND: 
+    		case GENERAL_MISTAKE:
+			case INVALID_DATE_TIME_FORMAT:
+				return super.getMessage();
+            case FILE_NOT_FOUND:
                 return "File not found!!";
-			case TASKNOTFOUND:
+			case TASK_NOT_FOUND:
 				return "Task not found!!";
-			case NOTSINGLEWORD:
+			case NOT_SINGLE_WORD:
 				return "Must be a single keyword";
-    		default:
+			case TASK_ALREADY_DONE:
+				return "Task already done!";
+			case DESCRIPTION_NOT_FOUND:
+				return "Please input task description";
+			default:
     			return "Unknown error! Please try again.";
     	}
     }

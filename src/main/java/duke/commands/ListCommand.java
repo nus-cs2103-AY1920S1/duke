@@ -15,7 +15,7 @@ public class ListCommand extends Command {
      * Initialises the list command
      */
     public ListCommand(){
-        super(CommandType.LIST);
+        super(CommandType.COMMAND_SHOW_LIST);
     }
 
     /**

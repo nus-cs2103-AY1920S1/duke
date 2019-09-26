@@ -17,7 +17,7 @@ public class ExitCommand extends Command {
      * Initialises the exit command
      */
     public ExitCommand(){
-        super(CommandType.EXIT);
+        super(CommandType.COMMAND_EXIT);
     }
 
     /**

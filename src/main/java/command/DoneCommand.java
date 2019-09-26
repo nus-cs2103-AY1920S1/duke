@@ -7,23 +7,25 @@ import util.Ui;
 public class DoneCommand extends Command {
 
     public DoneCommand(String command) {
-        this.command = command;
+        this.inputCommand = command;
     }
 
     @Override
     public void executeCommand(TaskList taskList, Storage storage) {
-        assert (!command.isEmpty()) : "Input command cannot be empty";
-        if (command.substring(4).isEmpty()) {
+        assert (!inputCommand.isEmpty()) : "Input inputCommand cannot be empty";
+        if (inputCommand.substring(4).isEmpty()) {
             Ui.doneErrorMsg();
         } else {
             try {
-                String desc = command.substring(5);
+                String desc = inputCommand.substring(5);
                 int index = Integer.parseInt(desc);
                 if (index < 0 || index >= taskList.getTasks().size()) {
                     Ui.outOfBoundMsg();
+                    return;
                 }
-                taskList.getTask(index).markAsDone();
+                taskList.getTask(index - 1).markAsDone();
                 Ui.doneMsg();
+                System.out.println(taskList.getTask(index - 1).toString());
             } catch (NumberFormatException e) {
                 Ui.invalidNumMsg();
             }

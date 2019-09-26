@@ -8,7 +8,7 @@ import util.Ui;
 public class ListCommand extends Command {
 
     public ListCommand(String command) {
-        this.command = command;
+        this.inputCommand = command;
     }
 
     @Override

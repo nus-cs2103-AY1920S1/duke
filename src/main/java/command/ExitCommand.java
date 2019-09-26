@@ -10,12 +10,12 @@ import java.io.IOException;
 public class ExitCommand extends Command {
 
     public ExitCommand(String command) {
-        this.command = command;
+        this.inputCommand = command;
     }
 
     @Override
     public void executeCommand(TaskList taskList, Storage storage) throws DukeException, IOException {
-        isExit = true;
+        setExit(true);
         storage.save(taskList.getTasks());
         Ui.byeMsg();
     }

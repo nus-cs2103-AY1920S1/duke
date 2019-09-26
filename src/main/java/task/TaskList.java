@@ -23,7 +23,6 @@ public class TaskList {
         return tasks.get(index);
     }
 
-
     /**
      * add a task to the taskList
      *
@@ -37,7 +36,6 @@ public class TaskList {
         System.out.println("Now you have " + tasks.size() + (tasks.size() == 1 ? " task" : " tasks") + " in the list");
     }
 
-
     /**
      * delete a task from the taskList
      *
@@ -50,7 +48,6 @@ public class TaskList {
         System.out.println(" " + task.toString());
     }
 
-
     /**
      * delete a task according to index
      *
@@ -61,7 +58,6 @@ public class TaskList {
         printTask(index);
         tasks.remove(index);
     }
-
 
     private void printTask(int index) {
         System.out.println(" " + tasks.get(index).toString());

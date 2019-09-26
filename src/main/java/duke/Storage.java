@@ -17,6 +17,7 @@ public class Storage {
 
     public Storage(String filePath) {
         this.file = new File(filePath);
+        System.out.println(file.getAbsolutePath());
     }
 
     /**

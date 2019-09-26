@@ -50,7 +50,7 @@ public class Storage{
             }
             return taskList;
         } catch (FileNotFoundException e) {
-            throw new DukeException("Load failed", DukeExceptionType.FILENOTFOUND);
+            throw new DukeException("Load failed", DukeExceptionType.FILE_NOT_FOUND);
         }
     }
 
@@ -66,14 +66,14 @@ public class Storage{
         FileWriter fw = new FileWriter(this.file);
         for (Task task: taskList){
             switch (task.getType()) {
-                case TODO:
+                case TODO_TASK:
                     fw.write(Task.getTaskID(task) + " / " +
                             "ToDo" + " / " +
                             task.getStatusIcon() + " / " +
                             task.getDescription() +
                             System.lineSeparator());
                     break;
-                case DEADLINE:
+                case DEADLINE_TASK:
                     fw.write(Task.getTaskID(task) + " / " +
                             "Deadline" + " / " +
                             task.getStatusIcon() + " / " +
@@ -81,7 +81,7 @@ public class Storage{
                             ((Deadline) task).getDate() +
                             System.lineSeparator());
                     break;
-                case EVENT:
+                case EVENT_TASK:
                     fw.write(Task.getTaskID(task) + " / " +
                             "Event" + " / " +
                             task.getStatusIcon() + " / " +
@@ -120,7 +120,8 @@ public class Storage{
                 }
                 return eventTask;
             default:
-                throw new DukeException("Unknown task detected? Something is wrong.", DukeExceptionType.TASKNOTFOUND);
+                throw new DukeException("Unknown task detected? Something is wrong.",
+                        DukeExceptionType.TASK_NOT_FOUND);
         }
     }
 

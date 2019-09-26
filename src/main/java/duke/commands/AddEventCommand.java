@@ -29,7 +29,7 @@ public class AddEventCommand extends Command{
      * @param date date description
      */
     public AddEventCommand(String description, String date) {
-        super(CommandType.ADDEVENT);
+        super(CommandType.COMMAND_ADD_EVENT);
         this.description = description;
         this.date = date;
 

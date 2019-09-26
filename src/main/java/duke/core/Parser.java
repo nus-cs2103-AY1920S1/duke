@@ -87,7 +87,7 @@ public class Parser {
         List<String> validCommands = List.of("todo", "deadline", "event");
 
         if (!validCommands.contains(tokens[0])) {
-            throw new DukeException("Command doesn't exist", DukeExceptionType.INVALIDCOMMAND);
+            throw new DukeException("Command doesn't exist", DukeExceptionType.INVALID_COMMAND);
         }
         if (tokens[0].equals("todo")) {
             return new AddToDoCommand(tokens);
@@ -144,7 +144,7 @@ public class Parser {
             return dateTime.toString();
         } catch (DateTimeParseException exception) {
             throw new DukeException(dateTimeString + " is not in valid dd/MM/yyyy HHmm format.",
-                    DukeExceptionType.GENERALMISTAKE);
+                    DukeExceptionType.INVALID_DATE_TIME_FORMAT);
         }
     }
 
@@ -226,7 +226,7 @@ public class Parser {
     private static void checkTaskDescription(int index) throws DukeException {
         if (index -1 <=0) {
             throw new DukeException("Please input task description",
-                    DukeExceptionType.GENERALMISTAKE);
+                    DukeExceptionType.DESCRIPTION_NOT_FOUND);
         }
 
     }

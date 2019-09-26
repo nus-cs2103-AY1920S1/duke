@@ -28,7 +28,7 @@ public class DoneCommand extends Command{
      * @param index the index of the task to be deleted
      */
     private DoneCommand(int index){
-        super(CommandType.DONE);
+        super(CommandType.COMMAND_DONE_TASK);
         this.index = index;
         assert index >= 0;
     }
@@ -45,7 +45,7 @@ public class DoneCommand extends Command{
             int index = Integer.parseInt(tokens[1])-1;
             return new DoneCommand(index);
         } catch (NumberFormatException error) {
-            throw new DukeException("Must be integer", DukeExceptionType.NOTINTEGER);
+            throw new DukeException("Must be integer", DukeExceptionType.NOT_INTEGER);
         }
     }
 
@@ -74,9 +74,9 @@ public class DoneCommand extends Command{
             return ui.printInput(inst);
 
         } catch (IndexOutOfBoundsException error3) {
-            return ui.printOneLine(new DukeException("No such task", DukeExceptionType.MISSINGTASK).getMessage());
+            return ui.printOneLine(new DukeException("No such task", DukeExceptionType.MISSING_TASK).getMessage());
         } catch (IllegalArgumentException error2) {
-            return ui.printOneLine(new DukeException(error2.getMessage(), DukeExceptionType.GENERALMISTAKE).getMessage());
+            return ui.printOneLine(new DukeException(error2.getMessage(), DukeExceptionType.TASK_ALREADY_DONE).getMessage());
         }
     }
 

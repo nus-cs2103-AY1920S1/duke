@@ -24,7 +24,7 @@ public class AddToDoCommand extends Command{
      * @param tokens user input split by space, required for creating a to-do task
      */
     public AddToDoCommand(String [] tokens) {
-        super(CommandType.ADDTODO);
+        super(CommandType.COMMAND_ADD_TODO);
         this.tokens = tokens;
 
     }

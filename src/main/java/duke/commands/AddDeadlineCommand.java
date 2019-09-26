@@ -27,7 +27,7 @@ public class AddDeadlineCommand extends Command {
      * @param date date description
      */
     public AddDeadlineCommand(String description, String date) {
-        super(CommandType.ADDDEADLINE);
+        super(CommandType.COMMAND_ADD_DEADLINE);
         this.description = description;
         this.date = date;
 

@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
      * @param index the index of the task to be deleted
      */
     private DeleteCommand(int index){
-        super(CommandType.DELETE);
+        super(CommandType.COMMAND_DELETE_TASK);
         this.index = index;
 
         assert index >= 0;
@@ -43,7 +43,7 @@ public class DeleteCommand extends Command {
             int index = Integer.parseInt(tokens[1])-1;
             return new DeleteCommand(index);
         } catch (NumberFormatException error) {
-            throw new DukeException("Must be integer", DukeExceptionType.NOTINTEGER);
+            throw new DukeException("Must be integer", DukeExceptionType.NOT_INTEGER);
         }
     }
 
@@ -64,7 +64,7 @@ public class DeleteCommand extends Command {
             taskList.removeFromList(task);
             return ui.printDeletion(task, taskList);
         } catch (IndexOutOfBoundsException error3) {
-            return ui.printOneLine(new DukeException("No such task", DukeExceptionType.MISSINGTASK).getMessage());
+            return ui.printOneLine(new DukeException("No such task", DukeExceptionType.MISSING_TASK).getMessage());
         }
     }
 

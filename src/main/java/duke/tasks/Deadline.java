@@ -15,7 +15,7 @@ public class Deadline extends Task {
      * @param date Date description
      */
     public Deadline(String description, String date) {
-        super(description, TaskType.DEADLINE);
+        super(description, TaskType.DEADLINE_TASK);
         this.date = date;
 
         assert date != null;

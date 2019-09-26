@@ -1,6 +1,10 @@
 package command;
 
-import main.*;
+import main.Archive;
+import main.DukeException;
+import main.Storage;
+import main.TaskList;
+import main.Ui;
 import task.Task;
 
 import java.util.ArrayList;
@@ -23,7 +27,7 @@ public class FindCommand extends Command {
             throw new DukeException("Please enter a keyword to find!");
         }
         this.keyword = keyword;
-        assert keyword.length() > 0: "There should be a keyword to find";
+        assert keyword.length() > 0 : "There should be a keyword to find";
     }
 
     /**
@@ -32,7 +36,7 @@ public class FindCommand extends Command {
      * @param tasks     The existing task list
      * @param ui        The Ui object which interacts with the current user
      * @param storage   The Storage object which reads and writes to a specified file
-     * @param archive
+     * @param archive   The Archive object for archiving purposes
      * @return          The message to be displayed upon successful execution
      */
     @Override

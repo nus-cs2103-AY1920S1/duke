@@ -29,8 +29,7 @@ public class Archive {
     /**
      * Creates a default Archive object with predetermined file path.
      *
-     * @throws DukeException if there is an error in creating the file at the
-     * predetermined file path
+     * @throws DukeException if there is an error in creating the file at the file path
      */
     public Archive() throws DukeException {
         try {
@@ -82,6 +81,11 @@ public class Archive {
         }
     }
 
+    /**
+     * Adds a task to the archive.
+     * @param task The Task to be archived.
+     * @throws IOException if there is an error appending to the archive.
+     */
     public void addTaskToArchive(Task task) throws IOException {
         if (!isValidFilePath) {
             return;

@@ -19,7 +19,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Creates a new Duke object
+     * Creates a new Duke object.
      */
     public Duke() {
 

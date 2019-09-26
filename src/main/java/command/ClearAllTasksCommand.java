@@ -1,6 +1,10 @@
 package command;
 
-import main.*;
+import main.Archive;
+import main.DukeException;
+import main.Storage;
+import main.TaskList;
+import main.Ui;
 
 /**
  * A ClearAllTasksCommand object to deal with clearing tasks from the task list.
@@ -20,7 +24,7 @@ public class ClearAllTasksCommand extends Command {
      * @param tasks     The existing task list
      * @param ui        The Ui object which interacts with the current user
      * @param storage   The Storage object which reads and writes to a specified file
-     * @param archive
+     * @param archive   The Archive object for archiving purposes
      * @return          The message to be displayed upon successful execution
      * @throws DukeException    If there is an error in clearing the file which stores the task list.
      */

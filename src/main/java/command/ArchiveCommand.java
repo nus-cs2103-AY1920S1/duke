@@ -1,6 +1,10 @@
 package command;
 
-import main.*;
+import main.Archive;
+import main.DukeException;
+import main.Storage;
+import main.TaskList;
+import main.Ui;
 import task.Task;
 
 import java.io.IOException;
@@ -21,7 +25,7 @@ public class ArchiveCommand extends Command {
      * @param tasks   The existing task list
      * @param ui      The Ui object which interacts with the current user
      * @param storage The Storage object which reads and writes to a specified file
-     * @param archive The Archive object
+     * @param archive The Archive object for archiving purposes
      * @return The message to be displayed upon successful execution
      * @throws DukeException If command is invalid
      */
@@ -37,7 +41,7 @@ public class ArchiveCommand extends Command {
             //Do nothing. It means command is one of the other formats.
         }
 
-        switch (archiveCommand){
+        switch (archiveCommand) {
         case "all":
             archiveAllTasks(tasks, storage, archive);
             return "Alright, I have archived all existing tasks.";
@@ -56,7 +60,7 @@ public class ArchiveCommand extends Command {
     }
 
     private Task archiveByTaskId(TaskList tasks, Storage storage, Archive archive) throws DukeException {
-        assert taskNum > -1: "Archive task at " + taskNum;
+        assert taskNum > -1 : "Archive task at " + taskNum;
         if (taskNum <= 0 || taskNum > tasks.size()) {
             throw new DukeException("I can only archive tasks from 1 to " + tasks.size());
         }
@@ -70,7 +74,7 @@ public class ArchiveCommand extends Command {
         return archivedTask;
     }
 
-    private void archiveCompletedTasks(TaskList tasks, Storage storage, Archive archive) throws DukeException{
+    private void archiveCompletedTasks(TaskList tasks, Storage storage, Archive archive) throws DukeException {
         ArrayList<Task> completedTasks = tasks.removeCompletedTasks();
         try {
             for (Task task : completedTasks) {

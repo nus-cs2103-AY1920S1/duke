@@ -7,7 +7,6 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    public static final String DIVIDER = "    ____________________________________________________________";
     public static final String BLANKSPACE = "     ";
     private Scanner sc;
 
@@ -16,7 +15,7 @@ public class Ui {
     }
 
     /**
-     * Returns a welcome message from duke
+     * Returns a welcome message from duke.
      *
      * @return a welcome message from duke
      */
@@ -67,7 +66,7 @@ public class Ui {
      *                 dukeEcho("This is message 1", "Message 2 is on the next line");
      */
     public String dukeEchoString(String... messages) {
-        if (messages.length==0) {
+        if (messages.length == 0) {
             return "";
         }
         StringBuilder sb = new StringBuilder();

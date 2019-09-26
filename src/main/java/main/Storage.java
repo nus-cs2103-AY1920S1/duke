@@ -37,8 +37,7 @@ public class Storage {
     /**
      * Creates a default Storage object with predetermined file path.
      *
-     * @throws DukeException if there is an error in createing the file at the
-     * predetermined file path
+     * @throws DukeException if there is an error in creating the file at the file path
      */
     public Storage() throws DukeException {
         try {

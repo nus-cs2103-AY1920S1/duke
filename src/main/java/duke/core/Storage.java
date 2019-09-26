@@ -24,7 +24,7 @@ public class Storage{
 
 
     /**
-     * Initialises the Storage with the filepath of the file
+     * Initialises the Storage with the file path of the file
      *
      * @param filePath String of the directory the file is in.
      */

@@ -37,7 +37,7 @@ public class DoneCommand extends Command{
     /**
      * Service for creating a done command that checks for number formatting errors
      *
-     * @param tokens user input split by space, required for creating a done command
+     * @param tokens User input split by space, required for creating a done command
      * @throws DukeException Thrown when the parameters does not specify the index of  the task
      */
     public static DoneCommand createDoneIfValid(String [] tokens) throws DukeException {
@@ -52,8 +52,8 @@ public class DoneCommand extends Command{
     /**
      * Executes by marking a particular task as done and prints to the user
      *
-     * @param taskList list containing current tasks
-     * @param ui user interface
+     * @param taskList The main task list of the application.
+     * @param ui The main user interface of the application.
      * @throws IOException Thrown when the file update fails.
      */
     @Override

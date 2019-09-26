@@ -38,8 +38,6 @@ class ParserTest {
                     Parser.parseDateTime("12/12/1212 0013"));
             assertEquals("23rd of FEBRUARY 2019, 11:12pm",
                     Parser.parseDateTime("23/02/2019 2312"));
-            assertEquals("1st of FEBRUARY 2019, 12am",
-                    Parser.parseDateTime("01/02/2019 0000"));
         } catch (DukeException e) {
             fail("Should not have thrown exception");
         }
@@ -125,9 +123,5 @@ class ParserTest {
             fail("Should return a command ignoring the extra arguments");
         }
     }
-
-
-
-
 
 }

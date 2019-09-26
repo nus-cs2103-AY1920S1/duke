@@ -10,7 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,11 +17,13 @@ import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-
 import java.util.Collections;
 
-
+/**
+ * An example of a custom control using FXML.
+ * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * containing text from the speaker.
+ */
 public class DialogBox extends HBox {
 
     @FXML
@@ -36,10 +37,7 @@ public class DialogBox extends HBox {
 
     private static final CornerRadii DIALOGBOX_BACKGROUND_RADII = new CornerRadii(10);
 
-    private static final Insets LABEL_PADDING = new Insets(10, 10, 10, 10);
-    private static final Insets DIALOGBOX_BACKGROUND_INSET = new Insets(5,37.5,5,37.5);
-    //try
-
+    private static final Insets DIALOGBOX_BACKGROUND_INSET = new Insets(0,0,0,0);
 
     private DialogBox(String text, Image img) {
         try {
@@ -52,12 +50,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.setWrapText(true);
-
         displayPicture.setImage(img);
-        displayPicture.setClip(new Circle(50, 50, 50));
-        dialog.setPadding(LABEL_PADDING);
-
     }
 
     /**
@@ -70,10 +63,9 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    // sets the background to a blue rounded corner box
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox user = new DialogBox(text, img);
-
-        // sets the background to a blue rounded corner box
         user.setBackground(
                 new Background(
                         new BackgroundFill(

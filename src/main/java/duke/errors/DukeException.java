@@ -27,7 +27,6 @@ public class DukeException extends Exception {
     			return "Invalid input, must be an integer!!";
     		case MISSING_TASK:
     			return "No such task";
-    		case GENERAL_MISTAKE:
 			case INVALID_DATE_TIME_FORMAT:
 				return super.getMessage();
             case FILE_NOT_FOUND:
@@ -38,8 +37,6 @@ public class DukeException extends Exception {
 				return "Must be a single keyword";
 			case TASK_ALREADY_DONE:
 				return "Task already done!";
-			case DESCRIPTION_NOT_FOUND:
-				return "Please input task description";
 			default:
     			return "Unknown error! Please try again.";
     	}

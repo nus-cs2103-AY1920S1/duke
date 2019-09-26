@@ -6,9 +6,10 @@ import duke.errors.DukeAssertions;
 
 /**
  * Represents a task in the application. A task has two private fields, the description of the task and
- * the state of completion of the task. The type of task is package-private andd taskList is a
- * class attribute. The Task class provides the getters to type, description, the task list as well as
- * getting the icon (tick and cross) which corresponds to the isDone field. Task class also
+ * the state of completion of the task. The type of task is package-private and taskList is a
+ * class attribute. The Task class provides the getters to type, description, completion status,
+ * the task list as well as getting the icon (tick and cross, or 1 and 0)
+ * which corresponds to the isDone field. Task class also
  * supports a setDone method which sets isDone field  to true and a setTaskList method which sets
  * taskList field to the main task list of the application.
  */
@@ -19,11 +20,11 @@ public abstract class Task {
 
     public static TaskList taskList;
 
-
     /**
      * Initialises a Task that has a default isDone field of false.
      *
      * @param description Description of the task.
+     * @param type Type of the task.
      */
     public Task(String description, TaskType type) {
         this.description = description;
@@ -53,6 +54,12 @@ public abstract class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+
+    /**
+     * Returns a 1 or 0 depending on the field isDone, used for Storage purposes.
+     *
+     * @return String number which is 1 or 0.
+     */
     public String getStorageStatusIcon() {
         return (isDone ? "1" : "0");
     }
@@ -76,6 +83,12 @@ public abstract class Task {
         return String.format("[%s] %s", getStatusIcon(), getDescription());
     }
 
+
+    /**
+     * Returns the type of Task
+     *
+     * @return Completion status of the task
+     */
     public boolean getDoneStatus() {
         return isDone;
     }

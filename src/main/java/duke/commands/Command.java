@@ -15,6 +15,11 @@ import duke.core.Ui;
 public abstract class Command {
     private CommandType commandType;
 
+    /**
+     * Initialises the command of a specific command type
+     *
+     * @param commandType The type of command to be created.
+     */
     public Command(CommandType commandType) {
         this.commandType = commandType;
 
@@ -24,6 +29,7 @@ public abstract class Command {
 
     /**
      * getter for type of command
+     *
      * @return type of command
      */
     public CommandType getCommandType() {

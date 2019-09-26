@@ -29,13 +29,14 @@ public class Duke {
      * @throws IOException Thrown when writing to file fails.
      * @throws DukeException Thrown when parts of the command cannot be executed.
      */
-    public Duke() throws DukeException, IOException {
+    Duke() throws DukeException, IOException {
         String filePath = "./data/duke.txt";
         this.ui = new Ui();
         Storage storage = new Storage(filePath);
         this.taskList = new TaskList(storage.load(), storage);
         Task.setTaskList(taskList);
     }
+
 
     Response getResponse(String input) {
         try {

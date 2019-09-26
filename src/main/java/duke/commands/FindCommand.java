@@ -18,8 +18,14 @@ public class FindCommand extends Command {
 
     private String keyword;
 
+
+
+
     /**
-     * Initialises the find command
+     * Initialises the find command which contains the keyword
+     * where the tasks will be searched against
+     *
+     * @param keyword Keyword to be searched against
      */
     private FindCommand(String keyword) {
         super(CommandType.COMMAND_FIND_TASK);
@@ -29,7 +35,7 @@ public class FindCommand extends Command {
 
     /**
      * Service for creating a find command that checks for multiple keywords
-     * @param tokens user input split by space, required for creating a find command
+     * @param tokens User input split by space, required for creating a find command
      * @throws DukeException Thrown when the parameters contains multiple keywords
      */
     public static FindCommand createFindCommandIfValid(String[] tokens) throws DukeException{
@@ -42,8 +48,8 @@ public class FindCommand extends Command {
     /**
      * Executes by storing all tasks with descriptions containing the keyword
      * and prints to the user
-     * @param taskList list containing current tasks
-     * @param ui user interface
+     * @param taskList The main task list of the application.
+     * @param ui The main user interface of the application.
      */
     public String execute(TaskList taskList, Ui ui) {
         DukeAssertions.assertNotNull(taskList, ui);

@@ -1,15 +1,6 @@
 package duke.core;
 
-import duke.commands.Command;
-import duke.commands.ExitCommand;
-import duke.commands.ListCommand;
-import duke.commands.DoneCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.NullCommand;
-import duke.commands.AddToDoCommand;
-import duke.commands.AddDeadlineCommand;
-import duke.commands.AddEventCommand;
-import duke.commands.FindCommand;
+import duke.commands.*;
 
 import duke.errors.DukeAssertions;
 import duke.errors.DukeException;
@@ -36,7 +27,8 @@ public class Parser {
      *
      * @param input String that contains user input
      * @return A command that execute a set of instructions.
-     * @throws DukeException Thrown when there is a Duke exception.
+     * @throws IllegalArgumentException Thrown when the length of the command is not sufficient
+     * @throws DukeException Thrown when exceptions occur due to non-length checks
      */
     public static Command parseCommand(String input) throws DukeException, IllegalArgumentException {
         String[] tokens = input.split(" ");
@@ -44,6 +36,8 @@ public class Parser {
             return new ExitCommand();
         } else if (tokens[0].equals("list")) {
             return new ListCommand();
+        } else if (tokens[0].equals("help")) {
+            return new HelpCommand();
         }
         checkValidLength(tokens);
 
@@ -109,7 +103,7 @@ public class Parser {
      * @return The formatted date and time, if it can be formatted
      * @throws DukeException Thrown when the input cannot be formatted
      */
-    private static String parseDateTime(String dateTimeString) throws DukeException {
+    public static String parseDateTime(String dateTimeString) throws DukeException {
         assert dateTimeString != null;
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
@@ -172,7 +166,8 @@ public class Parser {
 
     // helper method to check if the given date and time of a deadline or event task
     // can be recognised as a DateTime format.
-    private static Command createDateCommandIfValid(String[] tokens, String fullCommand, int mode) throws DukeException {
+    private static Command createDateCommandIfValid(String[] tokens, String fullCommand, int mode)
+            throws DukeException, IllegalArgumentException {
         DukeAssertions.assertArrayNotEmpty(tokens);
         assert fullCommand != null;
 
@@ -205,6 +200,7 @@ public class Parser {
         }
     }
 
+    //helper method to verify that the date is actually in dd/MM/yyyy HHmm format
     private static boolean isDate(String dateDescription){
         assert dateDescription != null;
         String[] dateSplit = dateDescription.split(" ");
@@ -223,21 +219,21 @@ public class Parser {
                 .count() != 2;
     }
 
-    private static void checkTaskDescription(int index) throws DukeException {
+    //helper method to check if the datetime task can have a description
+    private static void checkTaskDescription(int index) throws IllegalArgumentException {
         if (index -1 <=0) {
-            throw new DukeException("Please input task description",
-                    DukeExceptionType.DESCRIPTION_NOT_FOUND);
+            throw new IllegalArgumentException("Please input task description for DateCommand");
         }
 
     }
 
-    private static void checkDeadline(String [] datedTaskSplit) {
+    //helper method to check if the datetime task is given a deadline
+    private static void checkDeadline(String [] datedTaskSplit) throws IllegalArgumentException {
         if (datedTaskSplit.length > 2) {
             throw new IllegalArgumentException("Multiple keyword detected!!");
         }
-
         if (datedTaskSplit.length < 2) {
-            throw new IllegalArgumentException("Please insert a deadline!!!");
+            throw new IllegalArgumentException("Please insert a due date!!!");
         }
     }
 

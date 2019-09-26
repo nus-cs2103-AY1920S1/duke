@@ -1,12 +1,7 @@
 package duke.commands;
 
-import java.io.IOException;
-
 import duke.core.TaskList;
 import duke.core.Ui;
-
-import duke.errors.DukeException;
-
 
 /**
  * Represents a command which contains an execute method to exit the application.

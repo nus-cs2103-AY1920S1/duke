@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Initialises the command which contains the index of the task to be deleted
-     * @param index the index of the task to be deleted
+     * @param index The index of the task to be deleted
      */
     private DeleteCommand(int index){
         super(CommandType.COMMAND_DELETE_TASK);
@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
     /**
      * Service for creating a delete command that checks for number formatting errors
      * @param tokens User input split by space, required for creating a delete command
-     * @throws DukeException Thrown when the parameters does not specify the index of  the task
+     * @throws DukeException Thrown when the parameters does not specify the index of the task
      */
     public static DeleteCommand createDeleteIfValid(String [] tokens) throws DukeException {
         try {

@@ -12,6 +12,7 @@ public enum CommandType {
     COMMAND_DONE_TASK,
     COMMAND_NULL,
     COMMAND_EXIT,
-    COMMAND_FIND_TASK
+    COMMAND_FIND_TASK,
+    COMMAND_HELP
 }
 

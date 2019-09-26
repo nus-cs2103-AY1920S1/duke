@@ -5,7 +5,11 @@ package duke.ui;
  */
 public class SpeechMaker {
 
-    /** A template to display tasks with indentation using String.format. */
+    /**
+     * A template to display tasks with indentation using String.format.
+     * The task to be displayed should always be the second argument in the
+     * function (i.e. first argument after {@code TEMPLATE_SHOW_TASK}).
+     */
     private static final String TEMPLATE_SHOW_TASK = "  %1$s\n";
 
     /** Message to introduce Snowball. */
@@ -31,6 +35,7 @@ public class SpeechMaker {
             "Nice! I've marked this task as done:\n" + TEMPLATE_SHOW_TASK;
     public static final String MESSAGE_TASK_UNDONE =
             "Oh dear. I've marked this task as undone:\n" + TEMPLATE_SHOW_TASK;
+    /** Message indicating that a task's priority has been set. */
     public static final String MESSAGE_SET_PRIORITY =
             "Okay! I've set this task's priority to %2$s:\n" + TEMPLATE_SHOW_TASK;
 

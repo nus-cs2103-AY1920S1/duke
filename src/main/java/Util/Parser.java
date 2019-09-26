@@ -2,7 +2,6 @@ package util;
 
 import command.Command;
 import command.FindCommand;
-import command.Instruction;
 import command.ExitCommand;
 import command.AddCommand;
 import command.DeleteCommand;
@@ -13,29 +12,33 @@ import command.UnknownCommand;
 public class Parser {
 
     /**
-     * Parse the command according to user input.
+     * Parse the inputCommand according to user input.
      *
      * @param command user input
-     * @return parse to corresponding command
+     * @return parse to corresponding inputCommand
      */
     public static Command parse(String command) {
-        assert(!command.isEmpty()): "Cannot parse an empty string";
-        if (command.contains(Instruction.BYE.toString())) {
-            return new ExitCommand(command);
-        } else if (command.contains(Instruction.TODO.toString()) || command.contains(Instruction.EVENT.toString())
-                || command.contains(Instruction.DEADLINE.toString())) {
-            return new AddCommand(command);
-        } else if (command.contains(Instruction.DELETE.toString())) {
-            return new DeleteCommand(command);
-        } else if (command.contains(Instruction.LIST.toString())) {
-            return new ListCommand(command);
-        } else if (command.contains(Instruction.DONE.toString())) {
-            return new DoneCommand(command);
-        } else if (command.contains(Instruction.FIND.toString())) {
-            return new FindCommand(command);
-        } else {
-            return new UnknownCommand(command);
+        assert (!command.isEmpty()) : "Cannot parse an empty string";
+        String[] op = command.split(" ");
+        switch (op[0]) {
+            case "bye":
+                return new ExitCommand(command);
+            case "todo":
+            case "event":
+            case "deadline":
+                return new AddCommand(command);
+            case "delete":
+                return new DeleteCommand(command);
+            case "list":
+                return new ListCommand(command);
+            case "done":
+                return new DoneCommand(command);
+            case "find":
+                return new FindCommand(command);
+            default:
+                return new UnknownCommand(command);
         }
+
     }
 }
 

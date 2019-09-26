@@ -2,6 +2,7 @@ package task;
 
 public class Deadline extends Task {
 
+
     private String ddl;
 
     public Deadline(String desc, String ddl) {
@@ -15,8 +16,13 @@ public class Deadline extends Task {
         isDone = (status == 1);
     }
 
+
     public String getDdl() {
         return ddl;
+    }
+
+    public void setDdl(String ddl) {
+        this.ddl = ddl;
     }
 
     @Override

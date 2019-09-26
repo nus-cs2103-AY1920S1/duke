@@ -7,7 +7,7 @@ import util.Ui;
 public class UnknownCommand extends Command {
 
     public UnknownCommand(String command) {
-        this.command = command;
+        this.inputCommand = command;
     }
 
     @Override

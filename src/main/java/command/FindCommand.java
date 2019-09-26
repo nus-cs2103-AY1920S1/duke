@@ -11,26 +11,32 @@ import java.util.List;
 public class FindCommand extends Command {
 
     public FindCommand(String command) {
-        this.command = command;
+        this.inputCommand = command;
     }
 
+    /**
+     * Find a task by searching for a keyword.
+     * Date and status not included in searching
+     * @param taskList the list of tasks
+     * @param storage  storage for saving and loading from file
+     */
     @Override
     public void executeCommand(TaskList taskList, Storage storage) {
-        assert (!command.isEmpty()) : "Input command cannot be empty";
+        assert (!inputCommand.isEmpty()) : "Input inputCommand cannot be empty";
         String desc;
         List<Task> searchList = new ArrayList<>();
-        if (command.substring(4).isEmpty()) {
+        if (inputCommand.substring(4).isEmpty()) {
             Ui.findErrorMsg();
             return;
         } else {
-            desc = command.substring(5);
+            desc = inputCommand.substring(5);
             for (Task task : taskList.getTasks()) {
                 if (task.getDesc().contains(desc)) {
                     searchList.add(task);
                 }
             }
         }
-        if (searchList.size() <= 0) {
+        if (searchList.isEmpty()) {
             Ui.findEmptyMsg();
         } else {
             Ui.findMsg();

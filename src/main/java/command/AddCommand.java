@@ -7,49 +7,85 @@ import task.ToDo;
 import util.Storage;
 import util.Ui;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class AddCommand extends Command {
 
     public AddCommand(String command) {
-        this.command = command;
+        this.inputCommand = command;
     }
 
     @Override
     public void executeCommand(TaskList taskList, Storage storage) {
         String desc;
-        assert (!command.isEmpty()) : "Input command cannot empty";
-        if (command.startsWith(Instruction.TODO.toString())) {
-            if (command.substring(4).isEmpty()) {
-                Ui.emptyTaskMsg(Instruction.TODO.toString());
+        assert (!inputCommand.isEmpty()) : "Input inputCommand cannot empty";
+        String op = inputCommand.split(" ")[0];
+        if (op.equals("todo")) {
+            if (inputCommand.substring(4).isEmpty()) {
+                Ui.emptyTaskMsg("todo");
             } else {
-                desc = command.substring(5);
+                desc = inputCommand.substring(5);
                 taskList.addTask(new ToDo(desc));
             }
-        } else if (command.startsWith(Instruction.DEADLINE.toString())) {
-            if (command.substring(8).isEmpty()) {
-                Ui.emptyTaskMsg(Instruction.DEADLINE.toString());
-            } else if (!command.contains("/by")) {
+        } else if (op.equals("deadline")) {
+            if (inputCommand.substring(8).isEmpty()) {
+                Ui.emptyTaskMsg("deadline");
+            } else if (!inputCommand.contains("/by")) {
                 Ui.missingDeadlineMsg();
             } else {
-                int dateStartIndex = command.lastIndexOf("/by");
-                desc = command.substring(9, dateStartIndex - 1);
-                String ddl = convertDate(command.substring(dateStartIndex + 4));
+                int dateStartIndex = inputCommand.lastIndexOf("/by");
+                desc = inputCommand.substring(9, dateStartIndex - 1);
+                String ddl = convertDate(inputCommand.substring(dateStartIndex + 4));
                 taskList.addTask(new Deadline(desc, ddl));
             }
-        } else if (command.startsWith(Instruction.EVENT.toString())) {
-            if (command.substring(5).isEmpty()) {
-                Ui.emptyTaskMsg(Instruction.EVENT.toString());
-            } else if (!command.contains("/at")) {
+        } else if (op.equals("event")) {
+            if (inputCommand.substring(5).isEmpty()) {
+                Ui.emptyTaskMsg("event");
+            } else if (!inputCommand.contains("/at")) {
                 Ui.missingEventMsg();
             } else {
-                int dateStartIndex = command.indexOf("/at");
-                desc = command.substring(6, dateStartIndex - 1);
-                String date = convertDate(command.substring(dateStartIndex + 4));
+                int dateStartIndex = inputCommand.indexOf("/at");
+                desc = inputCommand.substring(6, dateStartIndex - 1);
+                String date = convertDate(inputCommand.substring(dateStartIndex + 4));
                 taskList.addTask(new Event(desc, date));
             }
         } else {
             Ui.unknownMsg();
         }
+    }
 
-
+    /**
+     * For level8 to transform a given string to a date
+     * Supported format: dd/MM/yyyy Hmm or dd/MM/yyyy or d/MM/yyyy Hmm or d/MM/yyyy
+     * e.g. 1/12/2019, 1/12/2019 1845, 10/12/2019, 10/12/2019 1845
+     *
+     * @param date given string
+     * @return converted date
+     */
+    private String convertDate(String date) {
+        if (date.indexOf('/') > 1) {
+            if (date.indexOf(' ') > -1) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy Hmm");
+                LocalDateTime newDate = LocalDateTime.parse(date, formatter);
+                return newDate.format(DateTimeFormatter.ofPattern("MMM dd H:mma, yyyy"));
+            } else {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate newDate = LocalDate.parse(date, formatter);
+                return newDate.format(DateTimeFormatter.ofPattern("MMM dd, yyyy"));
+            }
+        } else if (date.indexOf('/') <= 1 && date.indexOf('/') > -1) {
+            if (date.indexOf(' ') > -1) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy Hmm");
+                LocalDateTime newDate = LocalDateTime.parse(date, formatter);
+                return newDate.format(DateTimeFormatter.ofPattern("MMM dd H:mma, yyyy"));
+            } else {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+                LocalDate newDate = LocalDate.parse(date, formatter);
+                return newDate.format(DateTimeFormatter.ofPattern("MMM dd, yyyy"));
+            }
+        }
+        return date;
     }
 }

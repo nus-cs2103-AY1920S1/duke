@@ -3,13 +3,12 @@ package task;
 public class Task {
 
     private String desc;
-    Boolean isDone;
+    protected Boolean isDone;
 
     public Task(String desc) {
         this.desc = desc;
         this.isDone = false;
     }
-
 
     /**
      * @return the description of the task.
@@ -18,7 +17,6 @@ public class Task {
         return this.desc;
     }
 
-
     /**
      * @return the status of a task ([✘] or [✓]).
      */
@@ -26,14 +24,12 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
-
     /**
      * @return the status of a task(0 or 1).
      */
     public int getDone() {
         return isDone ? 1 : 0;
     }
-
 
     /**
      * mark a task as done.

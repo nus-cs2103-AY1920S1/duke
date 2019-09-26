@@ -32,8 +32,8 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userPng = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image dukePng = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     public Duke() {
     }
@@ -53,8 +53,9 @@ public class Duke extends Application {
                 Ui.showLine();
                 Command c = Parser.parse(fullCommand);
                 c.executeCommand(tasks, storage);
-                isExit = c.isExit();
+                isExit = c.checkExit();
             } catch (Exception e) {
+                System.out.println("Something went wrong!");
             } finally {
                 Ui.showLine();
             }
@@ -76,8 +77,8 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
 
+        //Step 1. Setting up required components
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -123,7 +124,7 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        //Step 3. Add functionality to handle user input.
+        //Step 3. Add functionality to handle userPng input.
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
@@ -162,21 +163,21 @@ public class Duke extends Application {
 
     /**
      * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing userPng input and the other containing duke.Duke's reply and then appends them to
+     * the dialog container. Clears the userPng input after processing.
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
+                new DialogBox(userText, new ImageView(userPng)),
+                new DialogBox(dukeText, new ImageView(dukePng))
         );
         userInput.clear();
     }
 
     /**
-     * You should have your own function to generate a response to user input.
+     * You should have your own function to generate a response to userPng input.
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {

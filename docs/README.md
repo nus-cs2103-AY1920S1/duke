@@ -63,14 +63,19 @@ examples:
 1. Incorrect format 
 
 example: deadline meeting 12/2/2019 1800 
+
 example: event friends meet up 12/2/2018
+
 example: deadline 
+
 exception message: OOPS! Description cannot be empty. 
 
 2. Incorrect input 
 
 example: done 100 
+
 example: delete 100 
+
 exception message: Error, you have entered an invalid number. 
  
 

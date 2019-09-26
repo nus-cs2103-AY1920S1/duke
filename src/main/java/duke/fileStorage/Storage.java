@@ -27,8 +27,8 @@ public class Storage {
      * file path is hardcoded
      */
     public Storage() {
-        file = new File("data/duke.txt");
-        triviaFile = new File("data/trivia.txt");
+        file = new File("duke.txt");
+        triviaFile = new File("trivia.txt");
     }
     /**
      * reads in tasks from the file if it exists and populates the task list

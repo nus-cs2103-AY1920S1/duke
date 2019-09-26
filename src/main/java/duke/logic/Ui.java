@@ -30,7 +30,7 @@ public class Ui {
      * @param list task list to get the added task
      */
     public String taskAdded(TaskList list) {
-        return "Got it. I've added this task: \n" + list.get(list.list.size() - 1) + "\nNow you have "
+        return "Got it. I've added this task: \n" + list.get(list.list.size()) + "\nNow you have "
                 + list.list.size() + " tasks in the list.";
     }
 

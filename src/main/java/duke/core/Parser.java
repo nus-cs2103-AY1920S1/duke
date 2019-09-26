@@ -103,6 +103,9 @@ public class Parser {
      * @return The formatted date and time, if it can be formatted
      * @throws DukeException Thrown when the input cannot be formatted
      */
+
+    //@@author qweiping31415-reused
+    //Reused from @briyanii with minor modifications
     public static String parseDateTime(String dateTimeString) throws DukeException {
         assert dateTimeString != null;
         try {
@@ -162,8 +165,10 @@ public class Parser {
             }
         }
     }
+    //@@author
 
 
+    
     // helper method to check if the given date and time of a deadline or event task
     // can be recognised as a DateTime format.
     private static Command createDateCommandIfValid(String[] tokens, String fullCommand, int mode)

@@ -1,6 +1,15 @@
 package main;
 
-import command.*;
+import command.AddCommand;
+import command.ArchiveCommand;
+import command.ClearAllTasksCommand;
+import command.Command;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.ExitCommand;
+import command.FindCommand;
+import command.HelpCommand;
+import command.ListCommand;
 
 /**
  * Deals with making sense of the user command.

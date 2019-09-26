@@ -2,6 +2,8 @@
 
 <img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/currents.jpg" width="291" height="71">
 
+### Plan your personal timetable!
+
 ## Features of Currents
 
 #### Todo: `todo`
@@ -47,4 +49,4 @@ Command | Example | Expected Outcome | Description
 `find <keyword>` | find essay | <img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/find.jpg" width="291" height="71"> | Find the words that match with your input and prints out corresponding tasks.
 `expenses $<amount> /on <description>` | expenses $45.20 /on steak | <img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/expenses.jpg" width="291" height="71"> | Adds an expense to the list.
 `list` | list | <img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/list.jpg" width="291" height="71"> | Prints out everything that you have added to your list.
-`help` | help |  | Prints out all the command that you can use in the application.
+`help` | help | <img src = "https://github.com/caesarpjz/duke/blob/master/docs/images/help.jpg" width="291" height="71"> | Prints out all the command that you can use in the application.

@@ -1,3 +1,10 @@
-[E][?] party (at: 20th of June 2021, 5:00 pm)
-[D][?] essay (by: 30th of May 2023, 11:59 pm)
-[Expenses] $45.20 (on: steak)
+[T][?] hello
+[T][?] hi
+[T][?] go gym
+[Expenses] @132.50 (on: hotel)
+[T][?] go gym
+[T][?] go gym
+[E][?] party (at: 2nd of May 2020, 6:00 pm)
+[Expenses] $312.50 (on: hotel)
+[T][?] go gym
+[E][?] party (at: 3rd of May 2020, 6:00 pm)

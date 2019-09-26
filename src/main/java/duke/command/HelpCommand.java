@@ -12,11 +12,6 @@ public class HelpCommand extends Command {
 
     /**
      * Check if the argument is correct. If is correct then execute throws a DukeException.
-     * @param list task list
-     * @param ui UiText
-     * @param storage Storage
-     * @return
-     * @throws DukeException
      */
     @Override
     public String execute(TaskList list, UiText ui, Storage storage) throws DukeException {
@@ -30,12 +25,12 @@ public class HelpCommand extends Command {
         } else {
             assert super.command.length == 2;
             String[] keyword = super.command[1].trim().split(" ");
-            if (keyword.length >1) {
+            if (keyword.length > 1) {
                 throw new DukeException("OOPS!! I\'m sorry, but "
                         + super.command[1] + " is not a valid keyword. You may key in help for list of commands");
             }
             assert keyword.length == 1;
-             return UiText.helpForKeyword(keyword[0].trim());
-            }
+            return UiText.helpForKeyword(keyword[0].trim());
         }
+    }
 }

@@ -20,8 +20,8 @@ import java.io.FileReader;
 
 public class Storage {
     private static File file;
-    public static final String DEFAULT_PATH = "src" + UiText.fileSeparator + "main" +
-            UiText.fileSeparator + "data" + UiText.fileSeparator + "duke.txt";
+    public static final String DEFAULT_PATH = "src" + UiText.fileSeparator + "main"
+            + UiText.fileSeparator + "data" + UiText.fileSeparator + "duke.txt";
 
     /**
      * Constructor to construct a Storage with given file path.
@@ -29,7 +29,7 @@ public class Storage {
      */
     public Storage(String filePath) {
         File tempFile = new File(filePath);
-        if (tempFile.exists()){
+        if (tempFile.exists()) {
             this.file = tempFile;
         } else {
             File dir = new File("data");

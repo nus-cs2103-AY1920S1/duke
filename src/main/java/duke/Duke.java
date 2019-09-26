@@ -1,5 +1,9 @@
 package duke;
 
+import static duke.ui.UiText.GREETING;
+import static duke.ui.UiText.LOADING_ERROR;
+import static duke.ui.UiText.SHOW_LINE;
+
 import duke.command.Command;
 import duke.dukeexception.DukeException;
 import duke.parser.Parser;
@@ -66,18 +70,18 @@ public class Duke {
         try {
             return storage.fileContents();
         } catch (FileNotFoundException ex) {
-            return UiText.loadingError();
+            return LOADING_ERROR;
         }
     }
 
     private void run() {
         ui.printlnMsg(getDataFromStorage());
-        ui.printlnMsg(UiText.greeting());
-        ui.printlnMsg(UiText.showLine());
+        ui.printlnMsg(GREETING);
+        ui.printlnMsg(SHOW_LINE);
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.printlnMsg(UiText.showLine());
+                ui.printlnMsg(SHOW_LINE);
                 Command c = Parser.parse(fullCommand);
                 String commandResult = c.execute(tasks, ui, storage);
                 ui.printlnMsg(commandResult);
@@ -85,7 +89,7 @@ public class Duke {
             } catch (DukeException e) {
                 ui.printlnMsg(e.getMessage());
             } finally {
-                ui.printlnMsg(UiText.showLine());
+                ui.printlnMsg(SHOW_LINE);
             }
         }
 

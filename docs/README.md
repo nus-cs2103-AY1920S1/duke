@@ -28,7 +28,7 @@ Creates a new deadline task with given discription.
 
 Example of usage: 
 
-`dealine [description] /by [dd/mm/yyyy xx:xx(24hr)]/[dd/mm/yyyy]`
+`dealine [description] /by [dd/mm/yyyy xx:xx(24hr)]or[dd/mm/yyyy]`
 
 Expected outcome:
 
@@ -40,7 +40,7 @@ Creates a new event task with given description.
 
 Example of usage: 
 
-`event [description] /at [dd/mm/yyyy xx:xx(24hr)]/[dd/mm/yyyy]`
+`event [description] /at [dd/mm/yyyy xx:xx(24hr)]or[dd/mm/yyyy]`
 
 Expected outcome:
 

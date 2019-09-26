@@ -1,8 +1,6 @@
-package duke.gui;
 
-import java.io.FileInputStream;
+
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collections;
 
 import javafx.collections.FXCollections;
@@ -31,11 +29,10 @@ public class DialogLineController extends HBox {
     }
     private DialogLineController(String text, Image img) {
         try {
-            InputStream fxmlStream = new FileInputStream("src/main/java/duke/views/DialogLine.fxml");
-            FXMLLoader fxmlLoader = new FXMLLoader();
+            FXMLLoader fxmlLoader = new FXMLLoader(ChatScreenController.class.getResource("DialogLine.fxml"));
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
-            fxmlLoader.load(fxmlStream);
+            fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }

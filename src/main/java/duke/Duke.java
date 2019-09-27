@@ -11,8 +11,6 @@ import duke.parser.Parser;
 
 import duke.storage.Storage;
 
-import duke.ui.TextUi;
-
 /**
  * Implements the Duke chat bot.
  * @author Lim Yong Shen, Kevin
@@ -23,19 +21,16 @@ public class Duke {
 
     private Storage storage;
     private TaskList tasks;
-    private TextUi ui;
 
     /**
      * Constructs a new Duke chat bot with the specified data file name.
      * @param fileName The specified data file name.
      */
     private Duke(String fileName) {
-        ui = new TextUi();
         storage = new Storage(fileName);
         try {
             tasks = storage.load();
         } catch (DukeException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }

@@ -100,10 +100,24 @@ public class DateTime {
                     + " of " + monthStrings[this.localDateTime.getMonthValue()]
                     + " " + this.localDateTime.getYear() + ", "
                     + hourSuffixes[this.localDateTime.getHour()] + "."
-                    + this.localDateTime.getMinute() + timeSuffixes[this.localDateTime.getHour()];
+                    + this.getMinute(this.localDateTime.getMinute()) + timeSuffixes[this.localDateTime.getHour()];
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidDateException();
         }
         return result;
+    }
+
+    /**
+     * Get minute in proper String format.
+     *
+     * @param minute Minute in int from LDT.
+     * @return Formatted string for minute.
+     */
+    private String getMinute(int minute) {
+        if (minute < 10) {
+            return "0" + minute;
+        } else {
+            return Integer.toString(minute);
+        }
     }
 }

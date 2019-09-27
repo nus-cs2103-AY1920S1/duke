@@ -43,9 +43,9 @@ public class Ui {
      */
     public String showHelpMessage() {
         String message = "Commands:\n"
-                + "     todo <task description> : To add task to list\n"
-                + "     event <task description> /at <date> : To add event to list\n"
-                + "     deadline <task description> /by <date> : To add deadline to list\n"
+                + "     todo <task description> /t <tags>: To add task to list\n"
+                + "     event <task description> /at <date> /t <tags> : To add event to list\n"
+                + "     deadline <task description> /by <date> /t <tags> : To add deadline to list\n"
                 + "     list : Retrieves all the tasks you have so far\n"
                 + "     done <task index> : Checks task as done\n"
                 + "     delete <task index> : Deletes task at a particular index\n"

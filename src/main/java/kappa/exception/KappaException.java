@@ -11,7 +11,7 @@ public abstract class KappaException extends Exception {
      * @param message Error message.
      */
     public KappaException(String message) {
-        super(message + " The Slave is sad.");
+        super(message + " Kappa is sad.");
     }
 
 }

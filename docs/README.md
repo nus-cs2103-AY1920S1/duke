@@ -55,6 +55,18 @@ Lists all the tasks stored by Duke. Includes completed tasks.
 2. [Deadline] [✘] Return Book (by: 28-09-2019 2359)
 ```
 
-### Todo - `[description]`
+### Todo `[description]`
 
+Adds a general task to be done. To-dos have no specified completion time.
 
+*Usage:*
+
+`todo buy book`
+
+*Output:*
+
+```
+Nice! I've added this task to the list:-
+  [Todo] [✘] buy book
+You now have 1 task in the list.
+```

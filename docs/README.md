@@ -67,7 +67,7 @@ Expected outcome:
 
 `Adds a ToDo Task to your list.`
 
-### `deadline` - Add a Deadline task to your list
+### <a name="deadline-commands"></a>`deadline` - Add a Deadline task to your list
 
 Syntax:
 
@@ -87,7 +87,7 @@ Expected outcome:
 
 `Adds a Deadline Task to your list.`
 
-### `event` - Add an Event task to your list
+### <a name="event-commands"></a>`event` - Add an Event task to your list
 
 Syntax:
 
@@ -107,7 +107,7 @@ Expected outcome:
 
 `Adds an Event Task to your list.`
 
-### `list` - Display your tasks
+### <a name="list-commands"></a>`list` - Display your tasks
 
 Syntax:
 
@@ -117,7 +117,7 @@ Expected outcome:
 
 `Displays all your tasks stored thurs far.`
 
-### `delete` - Delete your task
+### <a name="delete-commands"></a>`delete` - Delete your task
 
 Syntax:
 
@@ -131,7 +131,7 @@ Expected outcome:
 
 `Deletes task based on specified index.`
 
-### `find` - Find your task
+### <a name="find-commands"></a>`find` - Find your task
 
 Syntax:
 
@@ -145,7 +145,7 @@ Expected outcome:
 
 `Finds task by searching description based on specified search term.`
 
-### `clear` - Clear your tasks
+### <a name="clear-commands"></a>`clear` - Clear your tasks
 
 Syntax:
 
@@ -155,7 +155,7 @@ Expected outcome:
 
 `Clears storage of all tasks.`
 
-### `done` - Mark your task as done
+### <a name="done-commands"></a>`done` - Mark your task as done
 
 Syntax:
 
@@ -169,7 +169,7 @@ Expected outcome:
 
 `Marks the task at specified index as done.`
 
-### `exit` - Exit application
+### <a name="exit-commands"></a>`exit` - Exit application
 
 Syntax:
 
@@ -179,7 +179,7 @@ Expected outcome:
 
 `Terminates application with a goodbye popup message.`
 
-### `help` - Shows list of commands
+### <a name="help-commands"></a>`help` - Shows list of commands
 
 Syntax:
 

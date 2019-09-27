@@ -35,19 +35,19 @@ a Command Line Interface (CLI) while still having the benefits of a Graphical Us
 
 3. Copy the file to the folder you want to use as the folder for your Duke application.
 
-4. Create a new folder named `data` within the current folder.
 
+4. Double-click the file to run the app. The GUI should appear in a few seconds. A new folder named `data` will be 
+created within the current folder if there is no existing `data` folder. This folder contains `tasks.txt`.
+    
     ![Folder-example](folder-example.png)
-
-5. Double-click the file to run the app. The GUI should appear in a few seconds. If unable to run, check the following: 
-    - Ensure that there is a folder named `data` as per step 4.
-    - Try `java -jar duke-v0.2.jar` from the terminal.
+    
+    If unable to run, type `java -jar duke-v0.2.jar` in the terminal / command line.
 
     ![User interface](Ui.png)
 
-6. Type the command in the text box and press Enter to execute it.
+5. Type the command in the text box and press Enter to execute it.
 
-7. Some sample commands you can try:
+6. Some sample commands you can try:
 
     `list` : lists all tasks.
 

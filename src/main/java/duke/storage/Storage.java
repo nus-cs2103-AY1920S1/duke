@@ -28,12 +28,18 @@ public class Storage {
     private final String filePath;
 
     /**
-     * Constructor of data storage at a given file.
+     * Constructor of data storage at a given file. Creates new directory for file according to this file path if there
+     * is no existing directory.
      *
      * @param filePath path of storage file.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
+        File file = new File(filePath);
+        File directory = new File(file.getParent());
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
     }
 
     /**
@@ -73,6 +79,7 @@ public class Storage {
         while (scanner.hasNextLine()) {
             storageLines.add(scanner.nextLine());
         }
+        scanner.close();
         return storageLines;
     }
 

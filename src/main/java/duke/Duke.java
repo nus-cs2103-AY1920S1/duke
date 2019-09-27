@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -17,7 +18,7 @@ import duke.task.TaskList;
 public class Duke {
     private Storage storage;
     private TaskList taskList;
-    private static final String DEFAULT_STORAGE_FILEPATH = "data/tasks.txt";
+    private static final String DEFAULT_STORAGE_FILEPATH = "data" + File.separator + "tasks.txt";
 
     /**
      * Constructor for instantiating a Duke session.

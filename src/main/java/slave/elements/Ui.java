@@ -32,7 +32,7 @@ public class Ui {
      * Displays goodbye message when exiting program.
      */
     public static String showByeMessage() {
-        String message = "Bye! Thanks for using me! Will be right here when you need me.";
+        String message = "Bye! Ribbit";
         String formattedMessage = Formatter.formatMessage(message);
         System.out.println(formattedMessage);
         return formattedMessage;

@@ -30,6 +30,7 @@ public class Storage {
      * @return ArrayList of Tasks with all past inputted tasks.
      */
     public ArrayList<Task> load()  {
+        //Solution below adapted from Joshua Seet
         ArrayList<Task> list = new ArrayList<>();
         FileReader fileReader;
         try {

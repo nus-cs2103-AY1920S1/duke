@@ -79,6 +79,7 @@ public class Parser {
      * @throws DukeException if string to be formatted not in correct syntax.
      */
     public static String getFormattedDate(String input) throws DukeException {
+        //Solution below adapted from Lee Wei Gen
         String parsedDate = "";
         try {
             dateFormatter.parse(input);

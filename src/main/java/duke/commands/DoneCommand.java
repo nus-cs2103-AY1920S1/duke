@@ -15,6 +15,7 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage store) throws DukeException {
         int toDone = Integer.parseInt(this.input);
+        assert toDone <= tasks.count();
         if (toDone > tasks.count()) {
             throw new DukeException("☹ OOPS!!! No such item in the list!");
         }

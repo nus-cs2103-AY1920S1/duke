@@ -30,10 +30,11 @@ public class ExpenseCategory {
         sumOfExpenses += expense.getAmount();
     }
 
-    public void delete(int index) {
+    public Expense delete(int index) {
         Expense expenseRemoved = this.expenses.get(index);
         sumOfExpenses -= expenseRemoved.getAmount();
         this.expenses.remove(index);
+        return expenseRemoved;
     }
 
 
@@ -43,14 +44,15 @@ public class ExpenseCategory {
         expensesBuilder.append(categoryName);
         expensesBuilder.append(":\n");
         for (Expense expense : expenses) {
-            expensesBuilder.append("    ");
             expensesBuilder.append(expenseId);
             expensesBuilder.append(". ");
             expensesBuilder.append(expense);
             expensesBuilder.append("\n");
+            expenseId++;
         }
-        expensesBuilder.append("Total: ");
-        expensesBuilder.append(sumOfExpenses);
+        expensesBuilder.append("\n");
+        expensesBuilder.append("Sum:    $ ");
+        expensesBuilder.append(String.format("%.2f", sumOfExpenses));
         expensesBuilder.append("\n");
         return expensesBuilder.toString();
     }

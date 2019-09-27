@@ -136,37 +136,55 @@ public class Ui {
         tasksBuilder.append(this.showBlankLine());
         return tasksBuilder.toString();
     }
-    public String showAddedExpense(Expense expense) {
+    public String showAddedExpense(Expense addedExpense) {
         StringBuilder expenseBuilder = new StringBuilder();
         expenseBuilder.append(this.showSeparationLine());
         expenseBuilder.append("      Got it. I've added this expense:\n       ");
-        expenseBuilder.append(expense);
+        expenseBuilder.append(addedExpense);
+        expenseBuilder.append(this.showSeparationLine());
+        expenseBuilder.append(this.showBlankLine());
+        return expenseBuilder.toString();
+    }
+    public String showDeletedExpense(Expense deletedExpense) {
+        StringBuilder expenseBuilder = new StringBuilder();
+        expenseBuilder.append(this.showSeparationLine());
+        expenseBuilder.append("      Okay. I've deleted this expense:\n       ");
+        expenseBuilder.append(deletedExpense);
         expenseBuilder.append(this.showSeparationLine());
         expenseBuilder.append(this.showBlankLine());
         return expenseBuilder.toString();
     }
     public String showGlossary() {
         StringBuilder glossaryBuilder = new StringBuilder();
-        glossaryBuilder.append(this.showSeparationLine());
-        glossaryBuilder.append(this.showSeparationLine());
-        glossaryBuilder.append("Hi! Below is the list of all commands that you will find helpful :) Have Fun!!! \n");
-        glossaryBuilder.append("Remember to type it in the correct syntax as shown in the GLOSSARY!\n.....\n");
-        glossaryBuilder.append("bye: Termination of programme\n.....\n");
-        glossaryBuilder.append("list: shows a list of all available tasks and task status stored\n.....\n");
-        glossaryBuilder.append("done {index}: marks the task at the index as done\n.....\n");
-        glossaryBuilder.append("delete {index}: deletes the task at the index\n.....\n");
-        glossaryBuilder.append("find {keyword}: displays a list of tasks that contains the given keyword or phrase" +
-                "\n.....\n");
-        glossaryBuilder.append("find {keyword}: displays a list of tasks that contains the given keyword or phrase" +
-                "\n.....\n");
-        glossaryBuilder.append("todo {task}: add a 'todo' style task to list\n.....\n");
-        glossaryBuilder.append("deadline (task} /by {time}: add a 'deadline' style task to list\n.....\n");
-        glossaryBuilder.append("event (task} /at {time}: add an 'event' style task to list\n.....\n");
-        glossaryBuilder.append("spending {category} {amount} {brief description}: add a spending\n.....\n");
-        glossaryBuilder.append("expenses: shows a list of all expenses stored\n.....\n");
-        glossaryBuilder.append("glossary: just shows the glossary, duh!\n.....\n");
-        glossaryBuilder.append(this.showSeparationLine());
-        glossaryBuilder.append(this.showSeparationLine());
+        glossaryBuilder.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        glossaryBuilder.append("Hi! Check out these commands that you will find helpful!\n");
+        glossaryBuilder.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        glossaryBuilder.append("bye: Termination of programme\n");
+        glossaryBuilder.append("~~~~~~~~~~~~~~~~~~~~\n");
+        glossaryBuilder.append("list: Shows all available tasks and their status\n");
+        glossaryBuilder.append("~~~~~~~~~~~~~~~~~~~~\n");
+        glossaryBuilder.append("done {index}: Marks the task at the index as done\n");
+        glossaryBuilder.append("~~~~~~~~~~~~~~~~~~~~\n");
+        glossaryBuilder.append("delete {index}: Deletes the task at the index\n");
+        glossaryBuilder.append("~~~~~~~~~~~~~~~~~~~~\n");
+        glossaryBuilder.append("find {keyword}: Displays a list of tasks that contains the given keyword or phrase\n");
+        glossaryBuilder.append("~~~~~~~~~~~~~~~~~~~~\n");
+        glossaryBuilder.append("find {keyword}: Displays a list of tasks that contains the given keyword or phrase\n");
+        glossaryBuilder.append("~~~~~~~~~~~~~~~~~~~~\n");
+        glossaryBuilder.append("todo {task}: Adds a 'todo' style task\n");
+        glossaryBuilder.append("~~~~~~~~~~~~~~~~~~~~\n");
+        glossaryBuilder.append("deadline (task} /by {time}: Adds a 'deadline' style task\n");
+        glossaryBuilder.append("~~~~~~~~~~~~~~~~~~~~\n");
+        glossaryBuilder.append("event (task} /at {time}: Adds an 'event' style task\n");
+        glossaryBuilder.append("~~~~~~~~~~~~~~~~~~~~\n");
+        glossaryBuilder.append("spending {category} {amount} {brief description}: Adds a spending\n");
+        glossaryBuilder.append("~~~~~~~~~~~~~~~~~~~~\n");
+        glossaryBuilder.append("expenses: Shows all expenses\n");
+        glossaryBuilder.append("~~~~~~~~~~~~~~~~~~~~\n");
+        glossaryBuilder.append("delexp {category} {index}: Deletes the expense at the given index of the category\n");
+        glossaryBuilder.append("~~~~~~~~~~~~~~~~~~~~\n");
+        glossaryBuilder.append("glossary: Just shows the glossary, duh!\n");
+        glossaryBuilder.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         return glossaryBuilder.toString();
     }
 }

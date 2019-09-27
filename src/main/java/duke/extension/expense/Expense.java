@@ -27,9 +27,9 @@ public class Expense {
     @Override
     public String toString() {
        StringBuilder expenseBuilder = new StringBuilder();
-       expenseBuilder.append("SGD ");
+       expenseBuilder.append("$ ");
        expenseBuilder.append(String.format("%.2f", amount));
-       expenseBuilder.append("     ");
+       expenseBuilder.append("\n    ");
        expenseBuilder.append(description);
        return expenseBuilder.toString();
     }

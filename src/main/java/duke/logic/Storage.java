@@ -17,6 +17,7 @@ import java.util.Scanner;
  */
 public class Storage {
     private String filePath;
+    private ExpenseList tempExpenseList; //might wanna find a better way to do this
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -121,7 +122,7 @@ public class Storage {
      */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> taskListToBeLoaded = new ArrayList<>();
-        ArrayList<ExpenseCategory> expenseListToBeLoaded = new ArrayList<>();
+        ExpenseList expenseListToBeLoaded = new ExpenseList();
         File f = new File(this.filePath);
         Scanner s = new Scanner(f);
         String nextDataLine;
@@ -151,14 +152,14 @@ public class Storage {
                 taskListToBeLoaded.add(newTask);
         }
         while(s.hasNextLine()) {
-            s.nextLine(); //"food"
-            for (int i = 0; i < ExpenseList.EXPENSECATEGORIES.size(); i++) {
-                ExpenseCategory category = ExpenseList.EXPENSECATEGORIES.get(i);
+            s.nextLine(); //"Food"
+            for (int i = 0; i < expenseListToBeLoaded.getExpenseCategories().size(); i++) {
+                ExpenseCategory category = expenseListToBeLoaded.getExpenseCategories().get(i);
                 while (s.hasNextLine()) {
                     nextDataLine = s.nextLine();
                     String[] temp = nextDataLine.split(" : ");
                     String nextString = (String) Array.get(temp, 0);
-                    if (nextString.equals(ExpenseList.EXPENSECATEGORIES.get(i + 1).getCategoryName())) { //need to change this to the next category name
+                    if (nextString.equals(expenseListToBeLoaded.getExpenseCategories().get(i + 1).getCategoryName())) {
                         break;
                     } else {
                         double amount = Double.parseDouble(nextString);
@@ -168,6 +169,11 @@ public class Storage {
                 }
             }
         }
+        tempExpenseList = expenseListToBeLoaded;
         return taskListToBeLoaded;
+    }
+
+    public ExpenseList getTempExpenseList() {
+        return tempExpenseList;
     }
 }

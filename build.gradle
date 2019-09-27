@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.7'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 group 'duke'
@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-        String javaFxVersion = '11'
+        String javaFxVersion = '11.0.1'
         implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
         implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
         implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
@@ -48,11 +48,13 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-javafx {
-    version = "11.0.2"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
-}
-
 run {
     standardInput = System.in
+}
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.1.3"
+    archiveClassifier = null
+    archiveAppendix = null
 }

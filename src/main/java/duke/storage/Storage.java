@@ -4,12 +4,8 @@ import duke.initials.Task;
 import duke.initials.Todo;
 import duke.initials.Deadline;
 import duke.initials.Event;
-import java.io.FileWriter;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.io.BufferedWriter;
+
+import java.io.*;
 import java.util.ArrayList;
 
 public class Storage {
@@ -25,7 +21,7 @@ public class Storage {
     /**
      * Returns an ArrayList<duke.task.Task> that will be taken in by a TaskList object
      */
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws IOException {
         readData();
         return taskArrayList;
     }
@@ -35,9 +31,9 @@ public class Storage {
      * file, it adds them into the taskArrayList and updates the list every time the program
      * is loaded
      */
-    public void readData() {
+    public void readData() throws IOException {
         try {
-            FileReader fileReader = new FileReader("/Users/lawnce/Desktop/duke/data/duke.txt");
+            FileReader fileReader = new FileReader("./duke.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line = null;
             try {
@@ -49,7 +45,13 @@ public class Storage {
                 System.out.println(e.getMessage());
             }
         } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
+            File currentFile = new File(this.filePath);
+            currentFile.getParentFile().mkdirs();
+            if (currentFile.createNewFile()) {
+                System.out.println("file created");
+            } else {
+                System.out.println("file exists");
+            }
         }
     }
 
@@ -58,7 +60,7 @@ public class Storage {
      */
     public void writeData() {
         try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("/Users/lawnce/Desktop/duke/data/duke.txt"));
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("./duke.txt"));
             for (Task task : taskArrayList) {
                 bufferedWriter.write(task.getData());
                 bufferedWriter.newLine();

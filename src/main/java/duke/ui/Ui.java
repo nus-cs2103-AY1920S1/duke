@@ -13,6 +13,21 @@ public class Ui {
     }
 
     /**
+     * Shows welcome message
+     */
+     public String showWelcomeMessage() {
+         String output = "";
+         output += "Hello from \n";
+         output += " ____        _        \n"
+                 + "|  _ \\ _   _| | _____ \n"
+                 + "| | | | | | | |/ / _ \\\n"
+                 + "| |_| | |_| |   <  __/\n"
+                 + "|____/ \\__,_|_|\\_\\___|\n \n ";
+         output += "What can I do for you?";
+         return output;
+     }
+
+    /**
      * Prints out the divider that is to be used for each command or output
      */
     public static void showLine() {

@@ -13,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 
 /**
@@ -53,14 +54,21 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         assert img!=null : "Image should be valid";
         assert text!=null : "Text shouldn't be empty";
-        return new DialogBox(text, img);
+        DialogBox current = new DialogBox(text, img);
+        current.setBackground(Background.EMPTY);
+        String style = "-fx-background-color: rgba(28, 97, 176, 1);"
+                + "-fx-text-fill: white";
+        current.dialog.setStyle(style);
+        return current;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        assert img!=null : "Image should be valid";
-        assert text!=null : "Text shouldn't be empty";
+        assert img != null : "Image should be valid";
+        assert text != null : "Text shouldn't be empty";
         var db = new DialogBox(text, img);
         db.flip();
+        String style = "-fx-background-color: rgba(203, 207, 215, 1);";
+        db.dialog.setStyle(style);
         return db;
     }
 }

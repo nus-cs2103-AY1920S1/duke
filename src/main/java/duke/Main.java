@@ -15,8 +15,10 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("/Users/lawnce/Desktop/duke/data/duke.txt");
+    private Duke duke = new Duke("./duke.txt");
 
+    public Main() throws IOException {
+    }
 
     /**
      * Starts the whole program
@@ -24,18 +26,13 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage stage) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n ";
-        System.out.println("Hello from\n" + logo);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle("duke by Lawnce");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

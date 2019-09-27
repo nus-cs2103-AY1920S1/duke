@@ -2,6 +2,7 @@ package duke.controllers;
 
 import duke.main.DialogBox;
 import duke.main.Duke;
+import duke.ui.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -30,7 +31,16 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        Ui ui = new Ui();
+
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String style = "-fx-background-color: rgb(102, 0, 26);";
+        this.dialogContainer.setStyle(style);
+
+        //duke welcome message upon opening GUI
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(ui.showWelcomeMessage(), dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {

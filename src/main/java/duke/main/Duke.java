@@ -9,6 +9,7 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,7 +21,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import java.io.IOException;
 import java.text.ParseException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Duke {
 
@@ -28,7 +33,7 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) {
+    public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -68,5 +73,20 @@ public class Duke {
          }
      }
  }
+
+    /**
+     * Closes the application upon user input of bye
+     */
+    public static void exit() {
+        Timer countdown = new Timer();
+        TimerTask onExit = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.exit();
+            }
+        };
+
+        countdown.schedule(onExit, 2500);
+    }
 
 }

@@ -1,14 +1,20 @@
-import java.io.*;
+package duke.utility;
+
+
+import duke.errands.Deadline;
+import duke.errands.Event;
+import duke.errands.Task;
+import duke.errands.Todo;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.nio.file.FileAlreadyExistsException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
-/** 
-* Storage class used to store and write events to file.
-*/ 
 
 public class Storage {
 
@@ -18,18 +24,24 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    //load file contents into arraylist
-    public ArrayList<Task> load() throws FileNotFoundException {
+    /**
+     * Method to read .txt file and load its contents into Duke's TaskList on startup.
+     *
+     * @return ArrayList of Tasks with all past inputted tasks.
+     */
+    public ArrayList<Task> load()  {
         ArrayList<Task> list = new ArrayList<>();
+        FileReader fileReader;
         try {
-        File currentFile = new File(this.filePath);
-        Scanner sc = new Scanner(currentFile);
-        while(sc.hasNext()) {
-            String current = sc.nextLine();
-            char type = current.charAt(0);
-            int isDone = Character.getNumericValue(current.charAt(4));
-            String description = current.substring(8).trim();
-            switch(type) {
+            File currentFile = new File(this.filePath);
+            fileReader = new FileReader(currentFile);
+            Scanner sc = new Scanner(currentFile);
+            while (sc.hasNext()) {
+                String current = sc.nextLine();
+                char type = current.charAt(0);
+                int isDone = Character.getNumericValue(current.charAt(4));
+                String description = current.substring(8).trim();
+                switch (type) {
                 case 'T':
                     Todo newTask = new Todo(description);
                     if (isDone == 1) {
@@ -61,27 +73,31 @@ public class Storage {
                     break;
 
                 default:
+                }
             }
-        }
-       
         } catch (FileNotFoundException err) {
-            System.out.println(err.getMessage());
+            File currentFile = new File(this.filePath);
+            currentFile.createNewFile();
         } finally {
             return list;
         }
         
     }
 
-    //write arraylist contents to file
+    /**
+     * Method to save contents of Duke's TaskList into .txt file for future loads.
+     *
+     * @param taskList Duke's current updated taskList.
+     */
     public void write(TaskList taskList) {
         try {
-            BufferedWriter bWrite = new BufferedWriter(new FileWriter(this.filePath));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(this.filePath));
             for (Task task: taskList.list) {
                 String taskData = task.getStatus();
-                bWrite.write(taskData);
-                bWrite.newLine();
+                writer.write(taskData);
+                writer.newLine();
             }
-            bWrite.close();
+            writer.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

@@ -1,9 +1,7 @@
-/** 
-* Parent task class for all events, deadlines and todos
-*/ 
+package duke.errands;
 
 public abstract class Task {
-    protected String description;
+    public String description;
     protected boolean isDone;
 
     public Task(String description) {

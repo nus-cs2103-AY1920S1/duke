@@ -1,4 +1,8 @@
+package duke.utility;
+
+import duke.errands.Task;
 import java.util.ArrayList;
+
 
 /** 
 * Represents a list of tasks. Stores all tasks.
@@ -21,7 +25,7 @@ public class TaskList {
     }
 
     public void delete(int index) {
-        this.list.remove(index);
+        this.list.remove(index - 1);
     }
 
     public int count() {
@@ -29,19 +33,20 @@ public class TaskList {
     }
 
     public Task fetch(int index) {
-        return this.list.get(index);
+        return this.list.get(index - 1);
     }
 
-    /** 
-    * find method to search for tasks with the specified keyword in them.
-    * @returns ArrayList<Task> of relevant tasks.
-    */ 
-
+    /**
+     * Method to find all tasks that match a specified keyword from the user.
+     *
+     * @param keyword The keyword to search for in Duke's tasks based on their description.
+     * @return ArrayList of tasks will all matching tasks.
+     */
     public ArrayList<Task> find(String keyword) {
         ArrayList<Task> search = new ArrayList<>();
-        for(Task current : this.list) {
+        for (Task current : this.list) {
             String toSearch = current.description;
-            if(toSearch.toLowerCase().contains(keyword.toLowerCase())){
+            if (toSearch.toLowerCase().contains(keyword.toLowerCase())) {
                 search.add(current);
             }
         }

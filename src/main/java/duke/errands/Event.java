@@ -1,6 +1,4 @@
-/** 
-* Represents an Event
-*/ 
+package duke.errands;
 
 public class Event extends Task {
 

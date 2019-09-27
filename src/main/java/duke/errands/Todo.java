@@ -1,15 +1,14 @@
-public class Deadline extends Task {
+package duke.errands;
 
-    protected String by;
+public class Todo extends Task {
 
-    public Deadline(String description, String by) {
+    public Todo(String description) {
         super(description);
-        this.by = by;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[T]" + super.toString();
     }
 
     @Override
@@ -20,7 +19,7 @@ public class Deadline extends Task {
         } else {
             completion = "0";
         }
-
-        return "D | " + completion + " | " + this.description + " | " + this.by;
+        return "T | " + completion + " | " + this.description;
     }
+
 }

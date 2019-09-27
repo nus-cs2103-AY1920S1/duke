@@ -48,17 +48,7 @@ public class Parser {
             return new AddCommand(words[0], argumentBuilder.toString(), option, optionArgumentBuilder.toString());
         case "list":
             if (rawCommand.length() > words[0].length() + 1) {
-                String typeName = rawCommand.substring(words[0].length() + 1);
-                switch (typeName) {
-                case "todo":
-                    return new ListCommand(Todo.class);
-                case "deadline":
-                    return new ListCommand(Deadline.class);
-                case "event":
-                    return new ListCommand(Event.class);
-                default:
-                    throw new DukeException("I'm sorry, but I don't know what that means ╥﹏╥");
-                }
+                return new ListCommand(rawCommand.substring(words[0].length() + 1));
             } else {
                 return new ListCommand();
             }

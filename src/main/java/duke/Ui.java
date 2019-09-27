@@ -101,9 +101,13 @@ public class Ui {
      * @param tasks the task list.
      */
     public void printListTasks(TaskList tasks) {
-        StringBuilder myBuilder = new StringBuilder();
-        myBuilder.append("Here are the tasks in your list:\n").append(tasks.toString());
-        printGuiMessage(myBuilder.toString());
+        if (tasks.getSize() > 0) {
+            StringBuilder myBuilder = new StringBuilder();
+            myBuilder.append("Here are the tasks in your list:\n").append(tasks.toString());
+            printGuiMessage(myBuilder.toString());
+        } else {
+            printGuiMessage("There is no task in your list.");
+        }
     }
 
     /**

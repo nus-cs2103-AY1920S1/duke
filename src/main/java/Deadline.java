@@ -1,48 +1,22 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Deadline extends Task {
 
     private char taskType = 'D';
-    private SimpleDateFormat simpleDateParser = new SimpleDateFormat("dd/MM/yyyy, HHmm");
-    private SimpleDateFormat simpleDateFormatter = new SimpleDateFormat("dd MMMM yyyy, h.mma");
-    protected Date by;
+    protected String by;
 
     public Deadline(String description, String by) {
         super(description);
-        try {
-            Date dateTime;
-            if (by.contains("/")) {
-                dateTime = simpleDateParser.parse(by);
-            } else {
-                dateTime = simpleDateFormatter.parse(by);
-            }
-            this.by = dateTime;
-        } catch (ParseException e) {
-            System.out.println(e.getMessage());
-        }
+        this.by = by;
     }
 
     public Deadline(String status, String description, String by) {
         super(description);
         this.setStatus(status);
-        try {
-            Date dateTime;
-            if (by.contains("/")) {
-                dateTime = simpleDateParser.parse(by);
-            } else {
-                dateTime = simpleDateFormatter.parse(by);
-            }
-            this.by = dateTime;
-        } catch (ParseException e) {
-            System.out.println(e.getMessage());
-        }
+        this.by = by;
     }
 
     @Override
     public String toString() {
-        return String.format("[D][%s] " + super.toString() + " (by: " + getDate() + ")", super.getStatusIcon());
+        return String.format("[D][%s] " + super.toString() + " (by: " + by + ")", super.getStatusIcon());
     }
 
     @Override
@@ -52,6 +26,6 @@ public class Deadline extends Task {
 
     @Override
     public String getDate() {
-        return simpleDateFormatter.format(by);
+        return by;
     }
 }

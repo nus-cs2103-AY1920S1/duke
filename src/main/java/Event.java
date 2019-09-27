@@ -1,48 +1,22 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Event extends Task {
 
     private char taskType = 'E';
-    private SimpleDateFormat simpleDateParser = new SimpleDateFormat("dd/MM/yyyy, HHmm");
-    private SimpleDateFormat simpleDateFormatter = new SimpleDateFormat("dd MMMM yyyy, h.mma");
-    protected Date at;
+    protected String at;
 
     public Event(String description, String at) {
         super(description);
-        try {
-            Date dateTime;
-            if (at.contains("/")) {
-                dateTime = simpleDateParser.parse(at);
-            } else {
-                dateTime = simpleDateFormatter.parse(at);
-            }
-            this.at = dateTime;
-        } catch (ParseException e) {
-            System.out.println(e.getMessage());
-        }
+        this.at = at;
     }
 
     public Event(String status, String description, String at) {
         super(description);
         this.setStatus(status);
-        try {
-            Date dateTime;
-            if (at.contains("/")) {
-                dateTime = simpleDateParser.parse(at);
-            } else {
-                dateTime = simpleDateFormatter.parse(at);
-            }
-            this.at = dateTime;
-        } catch (ParseException e) {
-            System.out.println(e.getMessage());
-        }
+        this.at = at;
     }
 
     @Override
     public String toString() {
-        return String.format("[E][%s] " + super.toString() + " (at: " + getDate() + ")", super.getStatusIcon());
+        return String.format("[E][%s] " + super.toString() + " (at: " + at + ")", super.getStatusIcon());
     }
 
     @Override
@@ -52,6 +26,6 @@ public class Event extends Task {
 
     @Override
     public String getDate() {
-        return simpleDateFormatter.format(at);
+        return at;
     }
 }

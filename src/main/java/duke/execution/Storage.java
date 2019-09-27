@@ -21,7 +21,7 @@ import duke.exceptions.DukeException;
 public class Storage {
 
     protected static ArrayList<Planner> taskList = new ArrayList<Planner>();
-    public static String file = "./src/main/java/data/todo.txt";;
+    public static String file = "./src/main/java/data/todo.txt";
 
     /**
      * Constructor for Storage.

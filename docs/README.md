@@ -1,6 +1,6 @@
 # User Guide
 
-##Introduction
+## Introduction
 Duke is an offline application for managing various tasks. It is optimised for those 
 who prefer to work with a Command Line Interface (CLI) while still having the benefits of
 a Graphical User Interface (GUI).
@@ -44,12 +44,12 @@ Examples:
          Now you have 6 tasks in the list.
     
     
-###List tasks
+### List tasks
 To list all the tasks in Duke:
 
     list
 
-###Completing a task
+### Complete a task
 The default status of a task added on Duke is *incomplete*: [✘]
 To mark a task as done:
     
@@ -97,11 +97,11 @@ Example:
            [E][✗] project meeting (at: 9/12/2020 1330hrs)
     Now you have 4 tasks in the list.
 
-###Save a task
+### Save a task
 Duke saves tasks in a hard disk automatically whenever the task list changes.
 It loads the data from the hard disk when it starts up.
 
-###Find a task
+### Find a task
 To look for a task by keyword in Duke:
 
     find KEYWORD
@@ -114,7 +114,7 @@ Example:
          1.[T][✓] read book
          2.[D][✓] return book (by: 18/09/2018 1735hrs)
     
-###Edit a task
+### Edit a task
 The editable attributes of a task are:
   1. `des` : the description of a task
   2. `date` : the date of `event` and `deadline` tasks 
@@ -146,12 +146,12 @@ The editable attributes of a task are:
      to this:
      [T][✓] join arts club
 
-###Help
+### Help
 To view a help page with a list of all commands:
 
     help
 
-###Exiting Duke
+### Exit Duke
 To exit Duke and close the programme:
     
     bye

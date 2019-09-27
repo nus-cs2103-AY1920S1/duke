@@ -30,11 +30,16 @@ public class TimeFormatter {
      * @return String format of date for easier reading
      */
 
-   public static String convertToString(Date idea) {
+   public static String convertToStringStore(Date idea) {
        SimpleDateFormat myFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
        return myFormatter.format(idea);
-
    }
+
+    public static String convertToStringPrint(Date idea) {
+        SimpleDateFormat myFormatter = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss z");
+        return myFormatter.format(idea);
+    }
+
 
    }
 

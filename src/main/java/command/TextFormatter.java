@@ -18,11 +18,11 @@ public class TextFormatter {
          */
 
 
-    public static String listFormat(ArrayList<Task> input) {
+ static String listFormat(ArrayList<Task> input) {
         String listMessageTitle = "    Here are the tasks in your list:\n";
         StringBuilder myTasks = new StringBuilder();
         for (int i = 0; i < input.size(); i++) {
-            String temp = "    " + (i + 1) + "." + input.get(i) + "\n";
+            String temp = "    " + (i + 1) + ". " + input.get(i) + "\n";
             myTasks.append(temp);
         }
         String tasks = myTasks.toString();
@@ -39,7 +39,7 @@ public class TextFormatter {
          * @return String of the deleted task
          */
 
-    public static String deleteFormat(Task removed, int size) {
+  static String deleteFormat(Task removed, int size) {
         String removingTask = "    Noted. I've removed this task:";
         String converted = "      "+ removed;
         String taskTracking = "    Now you have " + size + " tasks in the list.";
@@ -59,7 +59,7 @@ public class TextFormatter {
          */
 
 
-        public static String doneFormat(Task done) {
+     static String doneFormat(Task done) {
         String firstLine = "Nice! I've marked this task as done:\n";
         String secondLine = "      " + done;
         String answer =  firstLine + secondLine;
@@ -77,7 +77,7 @@ public class TextFormatter {
          */
 
 
-    public static String errorFormat(Exception error) {
+    static String errorFormat(Exception error) {
      String err = "    " + error.getMessage();
         System.out.println(err + "\n");
 
@@ -92,7 +92,7 @@ public class TextFormatter {
          * @return String of the added task
          */
 
-    public static String addFormat(Task inputTask, int size) {
+   static String addFormat(Task inputTask, int size) {
         String addingTask = "    Got it. I've added this task:\n";
         String converted = "        "+ inputTask.toString() + "\n";
         String taskTracking = "    Now you have " + size + " tasks in the list.\n";
@@ -107,7 +107,7 @@ public class TextFormatter {
          * @return String saying bye
          */
 
-    public static String byeFormat() {
+    static String byeFormat() {
         String end = "Bye. Hope to see you again soon!";
         String converted = "    " + end + "\n";
         System.out.println(converted);
@@ -121,7 +121,7 @@ public class TextFormatter {
          * @return String saying hello
          */
 
-    public static String helloFormat() {
+     static String helloFormat() {
         String start = "Hello! I'm Duke\n    What can I do for you?";
         String converted = "    " + start + "\n";
         System.out.println(converted);
@@ -137,7 +137,7 @@ public class TextFormatter {
          */
 
 
-    public static String searchFormat(ArrayList<Task> input) {
+    static String searchFormat(ArrayList<Task> input) {
        String listMessageTitle = "    Here are the matching tasks in your list:\n";
         StringBuilder myTasks = new StringBuilder();
         for (int i = 0; i < input.size(); i++) {
@@ -158,7 +158,7 @@ public class TextFormatter {
          * @return String of statistics
          */
 
-    public static String statsFormat(int[] stats) {
+     static String statsFormat(int[] stats) {
         String statsMessageTitle = "    Here are your statistics: \n";
         StringBuilder myTasks = new StringBuilder();
         myTasks.append("Total Tasks : " + stats[0] + "\n");

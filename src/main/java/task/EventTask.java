@@ -42,8 +42,8 @@ public class EventTask extends Task {
         super(i);
         type = "E";
         completed= c;
-        start= s;
-        end  =e;
+        start = s;
+        end  = e;
     }
 
 
@@ -64,12 +64,12 @@ public class EventTask extends Task {
     public String toString() {
         if(completed) {
             return "[" + type  + "]" + "[\u2713] " + name +
-                    "(from: " + TimeFormatter.convertToString(start) +
-                    " to " + TimeFormatter.convertToString(end) + ")";
+                    "(from: " + TimeFormatter.convertToStringPrint(start) +
+                    " to " + TimeFormatter.convertToStringPrint(end) + ")";
         } else {
             return "[" + type  + "]" + "[\u2718] " + name +
-                    "(from: " + TimeFormatter.convertToString(start) +
-                    " to " + TimeFormatter.convertToString(end) + ")";
+                    "(from: " + TimeFormatter.convertToStringPrint(start) +
+                    " to " + TimeFormatter.convertToStringPrint(end) + ")";
         }
     }
 }

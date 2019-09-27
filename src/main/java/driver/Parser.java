@@ -16,7 +16,7 @@ import java.text.ParseException;
  * Parser checks the user input and converts it into command format so that Duke can execute the program
  */
 
-public class Parser {
+class Parser {
 
     /**
      * Returns Command to execute based on user input
@@ -26,7 +26,7 @@ public class Parser {
      */
 
 
-    public static Command parse(String userInput) {
+    static Command parse(String userInput) {
             String trimmed = userInput.trim();
             try {
                 if (trimmed.equalsIgnoreCase("list")) {

@@ -96,6 +96,17 @@ public class Ui {
     }
 
     /**
+     * Prints a message when a task is restored.
+     *
+     * @param task the task restored from archive.
+     * @param tasks the task list before deletion.
+     */
+    public void printTaskRestored(Task task, TaskList tasks) {
+        printGuiMessage("Got it (ﾟ▽ﾟ)/ \nI've restored this task: \n  " + task
+                + "\nNow you have " + Ui.pluralize("task", tasks.getSize()) + " in the list.");
+    }
+
+    /**
      * Prints all tasks in the task list.
      *
      * @param tasks the task list.

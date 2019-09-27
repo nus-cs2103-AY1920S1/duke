@@ -2,7 +2,7 @@
 
 ## Application Screenshot
 
-![](full.png)
+![](Ui.png)
 
 ## Features 
 
@@ -31,11 +31,11 @@ Add a todo task to the list with the description of the task, followed by the to
 
 * Format:
 
-`todo [DESCRIPTION]`
+   `todo [DESCRIPTION]`
 
 * Example of usage: 
 
-`todo homework`
+   `todo homework`
 
 * Expected outcome:
 
@@ -47,11 +47,11 @@ Add a deadline task to the list with the description of the task and time, follo
 
 * Format:
 
-`deadline [DESCRIPTION] /by [DD/MM/YYYY HHmm]`
+   `deadline [DESCRIPTION] /by [DD/MM/YYYY HHmm]`
 
 * Example of usage: 
 
-`deadline assignment submission /by 21/09/2019 2359`
+   `deadline assignment submission /by 21/09/2019 2359`
 
 * Expected outcome:
 
@@ -63,11 +63,11 @@ Add an event task to the list with the description of the task and time, followe
 
 * Format:
 
-`event [DESCRIPTION] /at [DD/MM/YYYY HHmm]`
+   `event [DESCRIPTION] /at [DD/MM/YYYY HHmm]`
 
 * Example of usage: 
 
-`event workshop /at 08/10/2019 1400`
+   `event workshop /at 08/10/2019 1400`
 
 * Expected outcome:
 
@@ -79,11 +79,11 @@ Delete a task specified by its index.
 
 * Format:
 
-`delete [INDEX]`
+   `delete [INDEX]`
 
 * Example of usage:
 
-`delete 3`
+   `delete 3`
 
 * Expected outcome:
 
@@ -96,11 +96,11 @@ Mark a task specified by its index as done.
 
 * Format:
 
-`done [INDEX]`
+   `done [INDEX]`
 
 * Example of usage:
 
-`done 4`
+   `done 4`
 
 * Expected outcome:
 
@@ -112,11 +112,11 @@ Find a task by keyword search.
 
 * Format:
 
-`find [KEYWORD]`
+   `find [KEYWORD]`
 
 * Example of usage:
 
-`find meeting`
+   `find meeting`
 
 * Expected outcome:
 
@@ -128,7 +128,7 @@ View the list of all tasks with respective fields.
 
 * Format:
 
-`list`
+   `list`
 
 * Expected outcome:
 
@@ -140,7 +140,7 @@ Access the help feature to view all commands.
 
 * Format:
 
-`help`
+   `help`
 
 * Expected outcome:
 
@@ -152,7 +152,7 @@ Exit the program after the exit message is shown.
 
 * Format:
 
-`bye`
+   `bye`
 
 * Expected outcome:
 

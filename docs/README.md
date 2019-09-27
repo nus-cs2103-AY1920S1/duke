@@ -10,9 +10,9 @@ Duke allows you to note down important tasks that you need to complete in your d
 
 When you finish your tasks, you can mark them as completed in Duke. 
 
-### Loading Tasks
+### Loading Different List of Tasks
 
-My implementation of Duke allows you to open different lists of tasks at different file paths when you first start up the Duke program. 
+My implementation of Duke allows you to open different lists of tasks at different file paths when you first start up the Duke program. **Note: when first starting up Duke, you MUST specify a file path to load from, if file path does not exist, a new file will be created** 
 
 ## Usage
 
@@ -29,7 +29,7 @@ Expected outcome:
 3.[E][✓] project meeting (at: 6th of August 2019, 12am)
 4.[T][✕] join sports club`
 ```
-### `done` - Marks a specified task as completed. 
+### `done <index-of-task>` - Marks a specified task as completed. 
 
 Example of usage: 
 
@@ -40,7 +40,7 @@ Expected outcome:
 Nice! I've marked this task as done:
 [T][✓] Cook Noodles
 ```
-### `todo` - Creates a task to be completed with label "T". (Todo)
+### `todo <description>` - Creates a task to be completed with label "T". (Todo)
 
 Example of usage: 
 
@@ -52,7 +52,7 @@ Got it. I've added this task:
  [T][✕] Buy Groceries
 Now you have 6 tasks in the list.
 ```
-### `event` - Creates a task to be completed with label "E". (Event)
+### `event <description> /at <DD/MM/YYYY> <HHMM>` - Creates a task to be completed with label "E". (Event)
 
 Example of usage: 
 
@@ -65,7 +65,7 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.
 ```
 
-### `deadline` - Creates a task to be completed with label "D". (Deadline)
+### `deadline <description> /by <DD/MM/YYYY> <HHMM>` - Creates a task to be completed with label "D". (Deadline)
 
 Example of usage: 
 
@@ -77,7 +77,7 @@ Got it. I've added this task:
  [D][✕] Submit Essay (by: 20th of September 2019, 11.59pm)
 Now you have 2 tasks in the list.
 ```
-### `find` - Search for tasks in your list that match a given keyword.
+### `find <keyword>` - Search for tasks in your list that match a given keyword.
 
 Example of usage: 
 
@@ -90,7 +90,7 @@ Here are your matching tasks in your list
 2.[D][✓] Finish Math Quiz (by: 11th of November 2020, 11.59pm)
 3.[E][✕] Math for AI Symposium (at: 6th of December 2020, 10.30am)
 ```
-### `delete` - Deletes a specified task from your list. 
+### `delete <index-of-task>` - Deletes a specified task from your list. 
 
 Example of usage: 
 

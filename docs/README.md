@@ -5,7 +5,7 @@ Duke is for those who prefer to use a desktop chat bot for managing their tasks.
 
 ## 2. Quick Start
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the latest duke.jar here.
+2. Download the latest duke.jar [here](https://github.com/scwaterbear/duke/releases/tag/v0.2).
 3. Copy the file to the folder you want to use as the home folder for your task list.
 4. Double-click the file to start the chat bot. The GUI should appear in a few seconds.
 ![Image of Ui](./Ui.png)

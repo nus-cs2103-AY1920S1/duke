@@ -15,24 +15,16 @@ checkstyle {
     toolVersion = '8.23'
 }
 
-javadoc {
-    source += sourceSets.main.allJava
-    classpath += configurations.compile
-}
-
 shadowJar {
     archiveBaseName = "duke"
-    archiveVersion = "v0.8"
+    archiveVersion = "v0.10"
     archiveClassifier = null
     archiveAppendix = null
 }
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
-
-    String jUnitVersion = '5.4.0'
     String javaFxVersion = '11'
-
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
@@ -49,7 +41,6 @@ dependencies {
 
 run{
     standardInput = System.in
-    enableAssertions = true
 }
 
 test {

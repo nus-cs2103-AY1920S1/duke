@@ -27,27 +27,31 @@ public class Parser {
      * @return Command object based on user input.
      * @throws DukeException if no matching command found.
      */
-    public static Command parseCommand(String userInput) throws DukeException {
+    public static Command parseCommand(String userInput) throws DukeException, ArrayIndexOutOfBoundsException {
         String[] splittedInput = userInput.split(" ", 2);
-        switch (splittedInput[0]) {
-        case "bye":
-            return new ExitCommand();
-        case "list":
-            return new ListCommand();
-        case "done":
-            return new DoneCommand(splittedInput[1]);
-        case "todo":
-            return new TodoCommand(splittedInput[1]);
-        case "deadline":
-            return new DeadlineCommand(splittedInput[1]);
-        case "event":
-            return new EventCommand(splittedInput[1]);
-        case "delete":
-            return new DeleteCommand(splittedInput[1]);
-        case "find":
-            return new FindCommand(splittedInput[1]);
-        default:
-            throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        try {
+            switch (splittedInput[0]) {
+                case "bye":
+                    return new ExitCommand();
+                case "list":
+                    return new ListCommand();
+                case "done":
+                    return new DoneCommand(splittedInput[1]);
+                case "todo":
+                    return new TodoCommand(splittedInput[1]);
+                case "deadline":
+                    return new DeadlineCommand(splittedInput[1]);
+                case "event":
+                    return new EventCommand(splittedInput[1]);
+                case "delete":
+                    return new DeleteCommand(splittedInput[1]);
+                case "find":
+                    return new FindCommand(splittedInput[1]);
+                default:
+                    throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(" ☹ OOPS!!! Please enter something to do!");
         }
     }
 
@@ -84,7 +88,7 @@ public class Parser {
 
             parsedDate = correctedDay + postfix + " of " + month + " " + year + ", " + time;
         } catch (ParseException e) {
-            throw new DukeException("Wrong date format! Please specify date correctly in DD/MM/YYYY HHMM format!");
+            throw new DukeException("Wrong date format! Please specify date correctly in /by DD/MM/YYYY HHMM format!");
         }
         return parsedDate;
     }

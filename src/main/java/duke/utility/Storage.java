@@ -52,7 +52,7 @@ public class Storage {
 
                 case 'D':
                     int index = description.indexOf('|');
-                    String deadlineName = description.substring(0, index);
+                    String deadlineName = description.substring(0, index).trim();
                     String by = description.substring(index + 1).trim();
                     Deadline newDeadline = new Deadline(deadlineName, by.trim());
                     if (isDone == 1) {

@@ -76,6 +76,24 @@ Duke is the ultimate task tracker and manager.
   * Format: statistics
   * Eg: statistics
   * Returns a summary of all your statistics
+  
+  ## Feature 6: Help
+
+### Shows you a summary of all commands**
+
+1. **How to get statistics?**
+  * Format: help
+  * Eg: help
+  * Returns a summary of all commands
+  
+    ## Feature 7: Refresh
+
+### Deletes all stored tasks**
+
+1. **How to get refresh?**
+  * Format: refresh
+  * Eg: refresh
+  * Deletes everything
 
 
 
@@ -87,7 +105,7 @@ bye ends the program for you
 
 # End
 
-And thats all for now folks! I'll be adding new features soon so stay tuned!
+And thats all for now folks! 
 
 
 

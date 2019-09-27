@@ -37,7 +37,7 @@ public class AddDeadlineCommand extends AddTaskCommand {
             tasks.add(newTask);
         } catch (NoSuchElementException e) {
             // user input after task type is blank
-            System.out.println("Oops! You did not enter a description or deadline!");
+            ui.showError("Oops! You did not enter a description or deadline!");
         }
     }
 }

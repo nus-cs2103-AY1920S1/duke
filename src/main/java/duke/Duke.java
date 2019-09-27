@@ -1,4 +1,4 @@
-//package duke;
+package duke;
 
 import duke.command.Command;
 import duke.task.TaskList;
@@ -33,7 +33,7 @@ public class Duke {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (Exception e) {
-                // temporary haxx
+                // todo: proper exception handling
                 System.out.println(e);
             } finally {
                 ui.showLine();

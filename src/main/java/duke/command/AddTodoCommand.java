@@ -33,8 +33,8 @@ public class AddTodoCommand extends AddTaskCommand {
             Task newTask = tasks.newTask(TaskList.TaskType.TODO, getDescription(), getDeadline());
             tasks.add(newTask);
         } catch (NoSuchElementException e) {
-            // user imput after task type is blank
-            System.out.println("Oops! You did not enter a description!");
+            // user input after task type is blank
+            ui.showError("Oops! You did not enter a description!");
         }
     }
 }

@@ -20,15 +20,12 @@ public class DeleteCommand implements Command {
         try {
             Task task = tasks.getTask(taskId);
             tasks.deleteTask(task); // mark task as done
-        } catch (InputMismatchException e) {
-            // user input after "done" is not an int
-            System.out.println("Oops! You entered an invalid task ID!");
+        } catch (InputMismatchException | IndexOutOfBoundsException e) {
+            // user input after "done" is not an int, or is an invalid task ID
+            ui.showError("Oops! You entered an invalid task ID!");
         } catch (NoSuchElementException e) {
             // user input after "done" is blank
-            System.out.println("Oops! You did not enter a task ID!");
-        } catch (IndexOutOfBoundsException e) {
-            // user input after "done" is an invalid task ID
-            System.out.println("Oops! You entered an invalid task ID!");
+            ui.showError("Oops! You did not enter a task ID!");
         }
     }
 }

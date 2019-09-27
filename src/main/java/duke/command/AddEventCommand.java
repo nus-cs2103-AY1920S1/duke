@@ -36,8 +36,8 @@ public class AddEventCommand extends AddTaskCommand {
             Task newTask = tasks.newTask(TaskList.TaskType.EVENT, getDescription(), getDeadline());
             tasks.add(newTask);
         } catch (NoSuchElementException e) {
-            // user imput after task type is blank
-            System.out.println("Oops! You did not enter a description or deadline!");
+            // user input after task type is blank
+            ui.showError("Oops! You did not enter a description or deadline!");
         }
     }
 }

@@ -10,7 +10,6 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     private String welcomeMessage = "Hello from \n" + logo + "What can I do for you?";
-    private String line = "____________________________________________________________";
     private String goodbyeMessage = "Bye. Hope to see you again soon!";
 
     public Ui() {
@@ -30,17 +29,14 @@ public class Ui {
     }
 
     public void showLine() {
+        String line = "____________________________________________________________";
         System.out.println(line);
     }
 
     public void showError(String message) {
+        // todo: use exceptions to abstract out error messages from command classes?
         System.out.println(message);
     }
-
-    // probably would want to abstract these messages out into Ui class
-//    public void showTasks() {
-//        System.out.println()
-//    }
 
     public void showGoodbye() {
         System.out.println(goodbyeMessage);

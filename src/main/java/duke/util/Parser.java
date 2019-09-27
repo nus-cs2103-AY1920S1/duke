@@ -27,8 +27,8 @@ public class Parser {
             String restOfCommand = commandReader.nextLine();
             return new AddEventCommand(restOfCommand);
         } else if (command.equals("deadline")) {
-            String restofCommand = commandReader.nextLine();
-            return new AddDeadlineCommand(restofCommand);
+            String restOfCommand = commandReader.nextLine();
+            return new AddDeadlineCommand(restOfCommand);
         } else if (command.equals("find")) {
             String keyword = commandReader.nextLine();
             return new FindCommand(keyword);

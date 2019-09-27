@@ -1,5 +1,6 @@
-#Kappa - User Guide
-##Brief Overview
+# Kappa - User Guide
+
+## Brief Overview
 
 Kappa is a CLI-based application on your Desktop with GUI-like features to help you track your tasks. This application is for people who prefers keep tracking of tasks on their Desktop.
 
@@ -7,23 +8,23 @@ Kappa is a CLI-based application on your Desktop with GUI-like features to help 
 
 ## Features
 
-####1. Keep track of your tasks
+#### 1. Keep track of your tasks
 
 Kappa helps you to keep track of various kinds of tasks which includes ToDos, Deadlines and Events and display them.
 
-####2. Marking your tasks as done
+#### 2. Marking your tasks as done
 
 Kappa can help you mark your tasks as Done through the Done Command so that you can keep track of what tasks are completed.
 
-####3. Tagging your tasks
+#### 3. Tagging your tasks
 
 Your tasks can also be tagged which helps you to customise your own task categories which makes tracking and searching so much easier!
 
-####4. View all your tasks
+#### 4. View all your tasks
 
 The list command that Kappa provides can display all the tasks that you are currently tracking.
 
-####5. Auto-save and store your tasks
+#### 5. Auto-save and store your tasks
 
 Kappa has an auto-save feature which stores your tasks every time you add or modify them. With the storage feature, you can always close the application and come back another time, and your currently tracking tasks will still be there.
 
@@ -39,7 +40,7 @@ Kappa has an auto-save feature which stores your tasks every time you add or mod
 * [Exit](#exit-commands)
 * [Help](#help-commands)
 
-##Command Format
+## Command Format
 Words that are enclosed with `<` and `>` are the parameters to be supplied by you.
 Words that are enclosed with `[` and `]` are optional parameters to be supplied by you.
 `...` represents one or more argument

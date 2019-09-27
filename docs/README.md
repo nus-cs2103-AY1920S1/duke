@@ -100,7 +100,7 @@ Mark a task specified by its index as done.
 
 * Example of usage:
 
-   `done 4`
+   `done 7`
 
 * Expected outcome:
 

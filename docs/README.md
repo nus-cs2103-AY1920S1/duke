@@ -74,3 +74,13 @@ Example of usage:
 
 Expected outcome:
 ![](Sort.png)
+
+### `find` - finds the task(s) using the keyword input
+
+Example of usage:
+
+`find`
+
+
+Expected outcome:
+![](Find.png)

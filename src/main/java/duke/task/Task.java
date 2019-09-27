@@ -38,9 +38,9 @@ public class Task {
      */
     public StringBuilder saveData() {
         if (isDone) {
-            return new StringBuilder("1 | ").append(description);
+            return new StringBuilder("1|").append(description);
         }
-        return new StringBuilder("0 | ").append(description);
+        return new StringBuilder("0|").append(description);
     }
 
     /**

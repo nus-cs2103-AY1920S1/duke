@@ -29,6 +29,7 @@ public class Duke {
             ui.showLoadingError(e.getMessage());
             tasks = new TaskList();
         }
+        ui.showWelcome();
     }
 
     /**

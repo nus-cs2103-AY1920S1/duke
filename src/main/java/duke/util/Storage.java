@@ -27,8 +27,19 @@ public class Storage {
      * @param filepath path to the file for storage
      */
     public Storage(String filepath) {
+        File storage = new File(filepath);
+        if (!storage.exists()) {
+            File dir = new File("data");
+            try {
+                if (dir.mkdir()) {
+                    storage = new File("data", "duke.txt");
+                }
+            } catch (SecurityException se) {
+                //do something
+            }
+        }
+        this.storage = storage;
         this.filepath = filepath;
-        storage = new File(filepath);
     }
 
     /**

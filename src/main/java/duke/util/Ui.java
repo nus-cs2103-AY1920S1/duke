@@ -63,9 +63,8 @@ public class Ui {
      * @param numOfTasks number of tasks left on the list
      */
     String showDeleted(Task task, int numOfTasks) {
-        return TAB +
-                "Noted. I've removed this task: \n       " + task
-                        + "\n     Now you have " + numOfTasks + " tasks in the list.";
+        return TAB + "Noted. I've removed this task: \n       " + task
+                + "\n     Now you have " + numOfTasks + " tasks in the list.";
     }
 
     /**

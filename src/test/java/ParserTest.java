@@ -14,7 +14,7 @@ class ParserTest {
             Parser.parse("hello");
             fail();
         } catch (DukeException e) {
-            assertEquals("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
+            assertEquals("          ☹ OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
         }
     }
 

@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -17,15 +19,20 @@ public class Event extends Task {
      * @param description description of the event
      * @param at time and date of the event
      */
-    public Event(String description, String at) {
+    public Event(String description, String at) throws DukeException {
         super(description);
         this.at = at;
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-            time = LocalDateTime.parse(at, formatter);
-        } catch (Exception err) {
-            System.err.println(err.getMessage());
+        String[] dateFormats = {"dd/MM/yyyy HHmm", "ddMMyy HHmm", "dd/MM/yy HHmm"};
+        for (String format : dateFormats) {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+                time = LocalDateTime.parse(at, formatter);
+                return;
+            } catch (Exception err) {
+                // try next format
+            }
         }
+        throw new DukeException("Please enter your date/time format in \"dd/MM/yy HHmm\"");
     }
 
     /**

@@ -23,14 +23,17 @@ public class Deadline extends Task {
     public Deadline(String description, String by) throws DukeException {
         super(description);
         this.by = by;
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-            time = LocalDateTime.parse(by, formatter);
-        } catch (IllegalArgumentException | DateTimeParseException e) {
-            throw new DukeException(e.getMessage());
-        } catch (Exception err) {
-            System.err.println(err.getMessage());
+        String[] dateFormats = {"dd/MM/yyyy HHmm", "ddMMyy HHmm", "dd/MM/yy HHmm"};
+        for (String format : dateFormats) {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+                time = LocalDateTime.parse(by, formatter);
+                return;
+            } catch (IllegalArgumentException | DateTimeParseException e) {
+                // try next format
+            }
         }
+        throw new DukeException("Please enter your date/time format in \"dd/MM/yy HHmm\"");
     }
 
     /**

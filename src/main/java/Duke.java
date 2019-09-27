@@ -27,6 +27,11 @@ import slave.elements.Ui;
 
 import slave.exception.DukeException;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /**
  * <h1>
  *     Welcome to Slave.
@@ -62,7 +67,7 @@ public class Duke {
      * @param args Placeholder
      * @throws DukeException Throws any exception that arises with running the application
      */
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, IOException {
         new Duke().run();
     }
 
@@ -71,8 +76,12 @@ public class Duke {
      *
      * @throws DukeException In case storage cannot be loaded
      */
-    public Duke() throws DukeException {
+    public Duke() throws DukeException, IOException {
         this.ui = new Ui();
+        Path path = Paths.get("./data");
+        if (!Files.exists(path)) {
+            Files.createDirectories(path);
+        }
         Storage storage = new Storage("./data/duke.txt");
         this.taskList = new TaskList(storage.load(), storage);
     }

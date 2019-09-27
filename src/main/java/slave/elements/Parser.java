@@ -73,7 +73,7 @@ public class Parser {
     private static Command getValidEventCommand(String eventDesc, String eventDate) throws DukeException {
         if (isDate(eventDate)) {
             String[] eventSplitTokens = eventDate.split(" ");
-            Date validEventDate = new Date(eventSplitTokens[0], eventSplitTokens[1]);
+            DateTime validEventDate = new DateTime(eventSplitTokens[0], eventSplitTokens[1]);
             return new AddEventCommand(eventDesc, validEventDate);
         }
         return new AddEventCommand(eventDesc, eventDate);
@@ -82,7 +82,7 @@ public class Parser {
     private static Command getValidDeadlineCommand(String deadlineDesc, String deadlineDate) throws DukeException {
         if (isDate(deadlineDate)) {
             String[] dateSplitTokens = deadlineDate.split(" ");
-            Date validDeadlineDate = new Date(dateSplitTokens[0], dateSplitTokens[1]);
+            DateTime validDeadlineDate = new DateTime(dateSplitTokens[0], dateSplitTokens[1]);
             return new AddDeadlineCommand(deadlineDesc, validDeadlineDate);
         }
         return new AddDeadlineCommand(deadlineDesc, deadlineDate);

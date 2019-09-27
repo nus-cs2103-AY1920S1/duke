@@ -1,6 +1,6 @@
 package slave.command;
 
-import slave.elements.Date;
+import slave.elements.DateTime;
 import slave.elements.Ui;
 import slave.elements.TaskList;
 
@@ -35,7 +35,7 @@ public class AddEventCommand extends Command {
      * @param date Date description.
      * @throws DukeException Throws invalid date exception of DD/MM/YYYY HHMM format.
      */
-    public AddEventCommand(String task, Date date) throws DukeException {
+    public AddEventCommand(String task, DateTime date) throws DukeException {
         this.commandType = CommandType.ADDEVENT;
         this.task = task;
         this.date = date.convertToString();

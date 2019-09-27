@@ -14,7 +14,7 @@ import slave.command.ListCommand;
 import slave.command.AddToDoCommand;
 import slave.command.HelpCommand;
 
-import slave.elements.Date;
+import slave.elements.DateTime;
 import slave.elements.Parser;
 
 import slave.exception.DukeException;
@@ -36,7 +36,7 @@ class DukeTest {
      */
     @Test
     void testDate() throws DukeException {
-        Date date = new Date("1/12/2000","0033");
+        DateTime date = new DateTime("1/12/2000","0033");
         assertEquals("1st of December 2000, 12.33am", date.convertToString());
     }
 

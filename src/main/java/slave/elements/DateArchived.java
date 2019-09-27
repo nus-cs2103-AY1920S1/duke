@@ -6,7 +6,7 @@ import slave.exception.InvalidDateException;
 /**
  * Date object that represents a DD/MM/YYYY HHMM format.
  */
-public class Date {
+public class DateArchived {
 
     private String dateFormat;
     private String time;
@@ -39,7 +39,7 @@ public class Date {
      * @param time Takes in time in the form HHMM.
      * @throws DukeException If date / time given is invalid and cannot be represented properly.
      */
-    public Date(String dateFormat, String time) throws DukeException {
+    public DateArchived(String dateFormat, String time) throws DukeException {
         this.dateFormat = dateFormat;
         this.time = time;
         assert time.length() == 4 : "Invalid Time Format";

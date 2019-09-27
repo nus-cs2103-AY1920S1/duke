@@ -25,11 +25,11 @@ This section documents the entire set of commands supported by Duke.
 
 ### List
 
-**Usage: **
+*Usage:*
 
 `list`
 
-**Output:**
+*Output:*
 ```
 1. [Todo] [✔] Buy book
 2. [Deadline] [✘] Return Book (by: 28-09-2019 2359)

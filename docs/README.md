@@ -11,13 +11,13 @@ Conveniently schedules tasks to be done in no particular time or order!
 Add tasks that you have to complete by a particular deadline.
 
 ### Schedule Events
-Schedule events occurring in a fixed time slot!
+Plan and attend events scheduled in the future.
 
 ### Keep Track of Completion
 Mark tasks as done as and when you complete them.
 
 ### Remove Tasks
-Delete complete and redundant tasks from task list!
+Delete completed and redundant tasks from task list!
 
 ## Usage
 

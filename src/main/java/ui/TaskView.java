@@ -2,17 +2,11 @@ package ui;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 import tasklist.Task;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -31,7 +25,9 @@ public class TaskView extends DateTable {
     private TableColumn<Task, String> descriptionCol;
     @FXML
     private TableColumn<Task, LocalDateTime> dateDueCol;
-    private DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
+    @FXML
+    private TableColumn<Task, LocalDateTime> dateCreatedCol;
+    private DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
 
     TaskView(String filepath) {
@@ -41,8 +37,11 @@ public class TaskView extends DateTable {
         statusCol.setCellValueFactory(new PropertyValueFactory<>("isDone"));
         statusCol.setCellFactory(tc -> new CheckBoxTableCell<>());
         descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        descriptionCol.setCellFactory(new TextWrapFormatter<>());
         dateDueCol.setCellValueFactory(new PropertyValueFactory<>("dateDue"));
         dateDueCol.setCellFactory(new ColumnFormatter<>(outputFormat));
+        dateCreatedCol.setCellValueFactory(new PropertyValueFactory<>("dateCreated"));
+        dateCreatedCol.setCellFactory(new ColumnFormatter<>(outputFormat));
     }
 
     TableView<Task> getTable() {
@@ -52,6 +51,8 @@ public class TaskView extends DateTable {
     void setTable(ObservableList<Task> tasks) {
         taskView.setItems(tasks);
     }
+
+
 
 }
 

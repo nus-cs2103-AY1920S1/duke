@@ -5,7 +5,7 @@
 
 <fx:root fx:id="taskNoteBook" type="TableView" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <columns>
-      <TableColumn fx:id="indexCol" prefWidth="75.0" text="Index" />
+      <TableColumn fx:id="indexCol" prefWidth="75.0" text="Note Index" />
       <TableColumn fx:id="sourceCol" editable="false" prefWidth="75.0" text="Source" />
     <TableColumn fx:id="categoryCol" editable="false" prefWidth="180.0" text="Category" />
     <TableColumn fx:id="descriptionCol" editable="false" minWidth="0.0" prefWidth="136.0" text="Description" />

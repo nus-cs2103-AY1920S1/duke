@@ -6,7 +6,10 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
-import javafx.beans.property.*;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import notes.Note;
 import ui.TextUi;
 
@@ -15,7 +18,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-
+//Json storage method for abstract classes adapted from http://www.davismol.net/2015/03/05/jackson-json-deserialize-a-list-of-objects-of-subclasses-of-an-abstract-class/
 @JsonTypeInfo(use = Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
         property = "type")
@@ -36,9 +39,11 @@ public abstract class Task {
     protected SimpleBooleanProperty isDone;
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm", timezone = "UTC")
     protected ObjectProperty<LocalDateTime> dateDue;
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm", timezone = "UTC")
+    protected ObjectProperty<LocalDateTime> dateCreated;
     protected ArrayList<Note> notes = new ArrayList<>();
     protected TextUi ui = new TextUi();
-    protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMMM hhmm a");
+    protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     /**
      * First of two constructors for deadline and event tasks.
@@ -48,6 +53,7 @@ public abstract class Task {
         this.description = new SimpleStringProperty(description);
         this.isDone = new SimpleBooleanProperty(completionStatus);
         this.dateDue = new SimpleObjectProperty<>(date);
+        this.dateCreated = new SimpleObjectProperty<>(LocalDateTime.now());
     }
 
     /**
@@ -83,7 +89,7 @@ public abstract class Task {
     public void addNote(String category, String description,LocalDateTime date) {
         int index = notes.size() + 1;
         notes.add(new Note(index,getSourceName(),category, description, date));
-        ui.printAddedItem(category + " " + description + " " + date, notes.size());
+        ui.printAddedItem(category + " " + description, notes.size());
     }
 
     /**
@@ -102,7 +108,11 @@ public abstract class Task {
             updateNoteIndex();
         }
     }
-    public void updateNoteIndex(){
+
+    /**
+     * Method to update the indexes of all the notes with the correct index.
+      */
+    public void updateNoteIndex() {
         if (!notes.isEmpty()) {
             int i = 1;
             for (Note note : notes) {
@@ -114,8 +124,8 @@ public abstract class Task {
     }
 
     @JsonIgnore
-    public String getSourceName(){
-        return "[" + index + "] " + description.get() ;
+    public String getSourceName() {
+        return "[" + index + "] " + description.get();
     }
 
 
@@ -179,5 +189,15 @@ public abstract class Task {
         this.index = index;
     }
 
+    public LocalDateTime getDateCreated() {
+        return dateCreated.get();
+    }
 
+    public ObjectProperty<LocalDateTime> dateCreatedProperty() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(LocalDateTime dateCreated) {
+        this.dateCreated.set(dateCreated);
+    }
 }

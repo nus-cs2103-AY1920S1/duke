@@ -3,12 +3,14 @@ package core;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import notes.Note;
-import Task.JsonParser;
+import storage.JsonParser;
 import tasklist.Task;
 import tasklist.TaskList;
 import parser.Parser;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 
-import java.io.*;
 
 /**
  * Main class of the program.
@@ -44,5 +46,8 @@ public class Duke {
     public ObservableList<Task> getUiTasks() {
         return FXCollections.observableArrayList(tasks.getUiTaskList());
     }
-    public ObservableList<Note> getNotes(){ return FXCollections.observableArrayList(tasks.getUiNoteList());}
+
+    public ObservableList<Note> getNotes() {
+        return FXCollections.observableArrayList(tasks.getUiNoteList());
+    }
 }

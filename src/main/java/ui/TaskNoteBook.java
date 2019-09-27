@@ -36,6 +36,7 @@ public class TaskNoteBook extends DateTable {
         sourceCol.setCellValueFactory(new PropertyValueFactory<>("source"));
         categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
         descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        descriptionCol.setCellFactory(new TextWrapFormatter<>());
         dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
         dateCol.setCellFactory(new ColumnFormatter<>(outputFormat));
         dateCreatedCol.setCellValueFactory(new PropertyValueFactory<>("dateCreated"));

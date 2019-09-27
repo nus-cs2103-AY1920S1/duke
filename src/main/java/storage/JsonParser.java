@@ -1,4 +1,4 @@
-package Task;
+package storage;
 
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,6 +17,11 @@ public class JsonParser {
     private String filepath;
     private TaskList taskList;
 
+    /**
+     * Constructor that checks if the file exists and creates a new json formatted file if it.
+     * @param filepath for the location of the storage file
+     * @throws IOException in the case of a missing file
+     */
     public JsonParser(String filepath) throws IOException {
         this.filepath = filepath;
         File file = new File(filepath);

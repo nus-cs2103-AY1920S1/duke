@@ -16,6 +16,9 @@ public class TaskList {
     private ArrayList<Task> uiTaskList;
     private ArrayList<Note> uiNoteList;
 
+    /**
+     * Constructor for tasklist that initializes all the variables.
+     */
     public TaskList() {
         tasks = new ArrayList<Task>();
         ui = new TextUi();
@@ -38,9 +41,9 @@ public class TaskList {
         resetUiTasks();
     }
 
-    public void shownotes (Integer tasknum){
+    public void shownotes(Integer tasknum) {
         uiNoteList = tasks.get(tasknum).getNotes();
-        ui.printNoteList(tasks.get(tasknum).getSourceName()+ " " + tasks.get(tasknum).getDescription());
+        ui.printNoteList(tasks.get(tasknum).getSourceName());
     }
 
     /**
@@ -80,7 +83,7 @@ public class TaskList {
                 // not necessary as tasktype can only be the above 3
             }
             resetUiTasks();
-        }else {
+        } else {
             ui.printDescriptionError();
             clearUI();
         }
@@ -91,7 +94,7 @@ public class TaskList {
      * @param index determines the task to be deleted
      */
     public void removeTask(int index) {
-        if (index==-1) {
+        if (index == -1) {
             tasks.clear();
             ui.printRemovedItem("All tasks", 0);
         } else {
@@ -102,7 +105,7 @@ public class TaskList {
         resetUiTasks();
     }
 
-    public void resetUiTasks(){
+    public void resetUiTasks() {
         uiTaskList = tasks;
     }
 
@@ -112,18 +115,22 @@ public class TaskList {
 
     public void findTasks(String search) {
         uiTaskList = new ArrayList<>();
-        for (Task task : tasks){
-            if (task.getDescription().contains(search)){
+        for (Task task : tasks) {
+            if (task.getDescription().contains(search)) {
                 uiTaskList.add(task);
             }
         }
         ui.printFoundTasks(uiTaskList.size());
     }
 
-    public void findNotes(String description){
+    /**
+     * Method to find matching notes with  descriptions matching a key string.
+     * @param description contains the string to match
+     */
+    public void findNotes(String description) {
         uiNoteList = new ArrayList<>();
-        for (Task task : tasks){
-            for (Note notes : task.getNotes()){
+        for (Task task : tasks) {
+            for (Note notes : task.getNotes()) {
                 if (notes.getDescription().contains(description)) {
                     uiNoteList.add(notes);
                 }
@@ -132,7 +139,10 @@ public class TaskList {
         ui.printFoundTasks(uiNoteList.size());
     }
 
-    public void updateTaskIndex(){
+    /**
+     * method to update the index of the tasks after a deletion.
+     */
+    public void updateTaskIndex() {
         int i = 1;
         if (!tasks.isEmpty()) {
             for (Task task : tasks) {
@@ -156,7 +166,7 @@ public class TaskList {
         return uiNoteList;
     }
 
-    public void clearUI(){
+    public void clearUI() {
         uiTaskList = new ArrayList<>();
         uiNoteList = new ArrayList<>();
     }

@@ -54,15 +54,18 @@ public class NewGui extends VBox {
 
     }
 
+    /**
+     * Switches the table type depending on the command .
+     * @param input contains the full command
+     */
     private void chooseTableView(String input) {
-        if (input.contains("list")) {
-            tableArea.getChildren().clear();
-            tableArea.getChildren().addAll(taskView.getTable());
-        }
-        str = input.contains(" ") ? input.split(" ")[0]:input;
-        if (str.contains("note")){
+        str = input.contains(" ") ? input.split(" ")[0] : input;
+        if (str.toLowerCase().contains("notes")) {
             tableArea.getChildren().clear();
             tableArea.getChildren().addAll(taskNoteBook.getTaskNoteBook());
+        } else {
+            tableArea.getChildren().clear();
+            tableArea.getChildren().addAll(taskView.getTable());
         }
         taskView.setTable(duke.getUiTasks());
         taskNoteBook.setTaskNoteBook(duke.getNotes());

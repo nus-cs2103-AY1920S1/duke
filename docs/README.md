@@ -1,20 +1,123 @@
-# User Guide
+# Task Book - User Guide
 
-## Features 
+## Table of contents
+ 1. [Introduction](#introduction)
+ 2. [Quick Start](#QuickStart)
+ 3. [Features](#Features)
+    1. [Adding a Todo task](#Todo)
+    2. [Adding a Deadline task](#Deadline)
+    3. [Adding an Event task](#iii-adding-a-event-task-a-nameeventa)
+    4. [Adding a NoteBook](#iv-adding-a-notebook)
+    5. [Finding a task/notebook](#v-finding-a-tasknotebook)
+    6. [Mark a task/notebook as completed](#vi-mark-a-tasknotebook-as-completed)
+    7. [Deleting a task/notebook](#vii-deleting-a-tasknotebook)
+    8. [Adding a note to a task/notebook](#viii-adding-a-note-to-a-tasknotebook)
+    9. [Finding a note from](#x-finding-a-note)
+    10. [Listing all task/notebooks](#xi-listing-all-tasksnotebooks)
+    11. [Listing all notes from a task/notebook](#xii-listing-all-notes-from-a-tasknotebook)
 
-### Feature 1 
-Description of feature.
+																																																																										 
 
-## Usage
+## 1.Introduction <a name="introduction"></a>
+Task Book is a simple scheduler with a built in note taking function. It features a command line interface and a helpful chatbot for those who like a more interactive experience. The table formatted data also provides an easy and intuitive way to sort and view the items.
 
-### `Keyword` - Describe action
+## 2. Quick Start <a name="QuickStart"></a>
+1.  Ensure you have Java 11 or above installed in your Computer.
+2.  Download the latest ```TaskBook.jar``` [here]([https://github.com/lzw12345/duke/releases](https://github.com/lzw12345/duke/releases))
+3.  Copy the file to the folder where you want to store Task book (note the save file will be store here too)
+4.  Double-click the file to start the app. The GUI should appear in a few seconds.
+5.  Some sample commands you can try 
+	- ```list``` : lists all tasks and notebooks
+	- ```todo meet john``` adds a to do task to the task list
+	-  ```done [1] ``` marks the task with the index 1 as done
 
-Describe action and its outcome.
+## 3. Features  <a name="Features"></a>
 
-Example of usage: 
+Command Format
+ - the first phrase (with no space) is the command phrase e.g. ```findnotes test``` searches for notes with descriptions containing test.
+ - numbers in square brackets [1] immediately after the command word indicate the task/notebook to be referenced. e.g. ``` addnotes [1] [1] | test 1 ``` creates a note for item 1 with category [1] and description test 1.
+ - numbers in curly brackets immediately after the task reference are used to indicate the note to be referenced. e.g. ```deletenotes [1] {2}``` deletes the note with index 2 in the task/notebook with index 1  
+ - Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `todo DESCRIPTION`, `description` is a parameter which can be used as `todo meet with a friend`.
+ - All DATE inputs should be input in this format: d/M/yyyy HHmm e.g. `2/2/2019 2345` or `02/02/2019 0945`
 
-`keyword (optional arguments)`
+### i. Adding  a Todo task <a name="Todo"></a>
+Adds a to do task to the task list (note **DO NOT** use / characters in description) 
+<br>Format: `todo DESCRIPTION`
+<br>Examples:
+ - `todo check the weather`
+ - `todo wash dishes`
+ 
+ 
+### ii. Adding a deadline task <a name="Deadline"></a>
+Adds a deadline task to the task list (note **DO NOT** use / characters in description) 
+<br>Format: `deadline DESCRIPTION /by DATE`
+<br>Examples: 
+ - `deadline hand up homework for CS2103 /by 22/2/2019 `
+ - `deadline finish eating cereal before expiry /by 1/12/2019`
 
-Expected outcome:
 
-`outcome`
+### iii. Adding a event task <a name="Event"></a>
+Adds an event task to the task list (note **DO NOT** use / characters in description) 
+<br>Format: `event DESCRIPTION /at DATE`
+<br>Examples:
+ - `event john's birthday /at 22/12/2019`
+ - `event 9.9 lazada sale /at 9/9/2019 0000`
+
+### iv. Adding a notebook
+Adds a notebook to the list (note **DO NOT** use / characters in description) 
+<br>Format: 'notebook DESCRIPTION'
+<br>Examples:
+ - `notebook weight management`
+ - `notebook CS2103 lecture notes`
+
+### v. Finding a task/notebook
+Finds a task/notebook with a description matching a keyword or phrase exactly
+<br>Format: `find KEYWORD(S)`
+<br>Examples 
+ - `find test`
+ - `find grocery list`
+
+### vi. mark a task/notebook as completed
+Marks a task/notebook as done 
+<br>Format: `done [TASKINDEX]`
+<br>Examples
+ - `done [2]`
+
+### vii. Deleting a task/notebook
+Deletes a task/notebook from the list (inputting TASKINDEX as 0 will delete all tasks)
+<br>Format: `delete [TASKINDEX]`
+<br>Examples:
+ - `delete [1]` 
+
+### viii. Adding a note to a task/notebook
+Adds a note to the indicated task/notebook
+<br>Format: 
+ - `addnotes [TASKINDEX] CATEGORY | DESCRIPTION `
+ - `addnotes [TASKINDEX] CATEGORY | DESCRIPTION /by DATE`
+ - `addnotes [TASKINDEX] CATEGORY | DESCRIPTION /at DATE`
+<br>Examples:
+ - `addnotes [1] addition |  a+x` 
+ - `addnotes [2] new version was created /at 2/2/2019 2344`
+
+
+### ix. Deleting a note from a task/notebook
+Deletes a note from the indicated task/notebook (inputting NOTEINDEX as 0 will delete all notes)
+<br> Format: `deletenotes [TASKINDEX] {NOTEINDEX}`
+<br> Examples:
+ - `deletenotes [1]{1}`
+### x. finding a note
+Finds a note from all tasks/notebooks with a description matching a keyword or phrase exactly
+<br> Format: `findnotes KEYWORD(S)`
+<br> Examples:
+ - `find mitochondria`
+ - `find power house`
+
+### xi. Listing all tasks/notebooks
+lists all the tasks/notebooks 
+<br> Format: `list`
+
+### xii. Listing all notes from a task/notebook
+lists all the notes in a indicated task/notebook
+<br> Format: `shownotes [TASKINDEX]`
+<br> Examples: 
+ - `shownotes [1]`

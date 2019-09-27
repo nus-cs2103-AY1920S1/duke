@@ -39,7 +39,11 @@ public class TextUi {
         System.out.println(DIVIDER);
     }
 
-    public void printNoteList(String itemName){
+    /**
+     * prints out the notes in the specified item.
+     * @param itemName name of the parent item
+     */
+    public void printNoteList(String itemName) {
         System.out.println(DIVIDER + "\n"
                 + "     Here are the items in " + itemName + ":");
         System.out.println(DIVIDER);
@@ -82,7 +86,7 @@ public class TextUi {
      */
     public void printErrorMsg2() {
         System.out.println(DIVIDER + "\n"
-                + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                + "     OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                 + DIVIDER);
     }
 
@@ -111,15 +115,24 @@ public class TextUi {
         }
     }
 
-    public void printNoteRemoved(String note , String source, int size){
+    /**
+     * message for removal of notes.
+     * @param note note removed
+     * @param source item that the removed note was from
+     * @param size the remaining number of notes
+     */
+    public void printNoteRemoved(String note, String source, int size) {
         System.out.println(DIVIDER + "\n"
                 + "     Noted. I've removed this item: \n"
-                + "       " + note + " from " + source +"\n"
+                + "       " + note + " from " + source + "\n"
                 + "     Now you have " + (size) + " items in the list.\n"
                 + DIVIDER);
     }
 
-    public void printDescriptionError (){
+    /**
+     * Message for empty descriptions.
+     */
+    public void printDescriptionError() {
         System.out.println(DIVIDER + "\n"
                 + "     OOPS!!! I'm sorry but Description should not be empty");
         System.out.println(DIVIDER);

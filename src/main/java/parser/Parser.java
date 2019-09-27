@@ -2,8 +2,6 @@ package parser;
 
 import ui.TextUi;
 import tasklist.TaskList;
-
-import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -28,11 +26,11 @@ public class Parser {
     private String noteDescription;
     public static final Pattern COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\w+)"
             + "\\s*(\\[(?<taskIndex>[\\d]+)\\])?"
-            + "\\s*(?<description>([\\w\\s\\d{}.|]+)?)"
+            + "\\s*(?<description>([^/]+)?)"
             + "(?:(/by|/at))?(?<date>([\\w\\s\\d/]+)?)");
     public static final Pattern NOTE_FORMAT = Pattern.compile("(\\{(?<noteIndex>[\\d]+)\\})?"
             + "\\s*(?<category>([\\w\\s\\d]+)?)"
-            + "\\|?\\s*(?<description>([\\w\\s\\d]+)?)");
+            + "\\|?\\s*(?<description>([^/]+)?)");
 
     public Parser() {
         ui = new TextUi();
@@ -64,7 +62,7 @@ public class Parser {
     public void splitNotesCommand(String noteCommand) {
         Matcher matcher = NOTE_FORMAT.matcher(noteCommand);
         if (matcher.find()) {
-            if(matcher.group("noteIndex")==null) {
+            if (matcher.group("noteIndex") == null) {
                 noteIndex = null;
             } else {
                 noteIndex = Integer.parseInt(matcher.group("noteIndex")) - 1;
@@ -86,7 +84,7 @@ public class Parser {
         command = matcher.group("commandWord");
         if (matcher.group("taskIndex") == null) {
             taskindex = null;
-        }else {
+        } else {
             taskindex = Integer.parseInt(matcher.group("taskIndex")) - 1;
         }
         description = matcher.group("description").trim();
@@ -134,12 +132,12 @@ public class Parser {
             case "findnotes":
                 scheduler.findNotes(description);
                 break;
-            case "addnote":
+            case "addnotes":
                 splitNotesCommand(description);
                 scheduler.getTasks().get(taskindex).addNote(category, noteDescription, date);
                 scheduler.shownotes(taskindex);
                 break;
-            case "deletenote":
+            case "deletenotes":
                 splitNotesCommand(description);
                 scheduler.getTasks().get(taskindex).removeNote(noteIndex);
                 scheduler.shownotes(taskindex);
@@ -148,10 +146,10 @@ public class Parser {
                 ui.printErrorMsg1();
                 scheduler.clearUI();
             }
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             ui.printErrorMsg2();
             scheduler.clearUI();
-        }catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("no such items exists!");
             scheduler.clearUI();
         }

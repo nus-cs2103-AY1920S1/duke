@@ -1,5 +1,7 @@
 # User Guide
 
+[![Build Status](https://travis-ci.com/tohcejasmine/duke.svg?branch=master)](https://travis-ci.com/tohcejasmine/duke)
+
 _Duke_ is like a personal assistant that helps you keep track of things.
 
 This user guide gives summary of features and commands available in _Duke_.

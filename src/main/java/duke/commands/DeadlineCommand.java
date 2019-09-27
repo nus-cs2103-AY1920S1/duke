@@ -17,6 +17,7 @@ public class DeadlineCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage store) throws DukeException {
         int position = this.input.indexOf("/");
+        assert position != -1;
         if (position == -1) {
             throw new DukeException("☹ OOPS!!! Not a valid deadline command");
         }

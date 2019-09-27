@@ -15,7 +15,7 @@ Example of usage:
 
 `list (optional argument)`
 
-`optional arugment` can be `todo`, `event` or `deadline`.
+`optional arugment` can be `todo`, `event`, `deadline`, or `archive`.
 
 Expected outcome:
 
@@ -111,6 +111,21 @@ Expected outcome:
 
 ```
 Noted. I've archived this task:
+  [task type][status] task description
+Now you have n tasks in your list.
+```
+
+### `restore` - Restore tasks
+Restore a specific task from the archive. 
+
+Example of usage:
+
+`restore index_number`
+
+Expected outcome:
+
+```
+Got it. I've restored this task:
   [task type][status] task description
 Now you have n tasks in your list.
 ```

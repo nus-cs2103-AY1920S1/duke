@@ -111,6 +111,13 @@ public class TaskList {
     }
 
     /**
+     * Resets the entire list and start fresh.
+     */
+    public void reset(){
+        schedule = new ArrayList<Task>();
+    }
+
+    /**
      * Used to get ArrayList schedule from TaskList.
      * Called when execute method of FindCommand is called.
      * @return ArrayList
@@ -129,6 +136,23 @@ public class TaskList {
             for (int index = 0; index < taskNum; index++) {
                 Task task = schedule.get(index);
                 output += ("     " + (index + 1) + "." + task.toString() + "\n");
+            }
+            return output.substring(0, output.length() - 1);
+        } else {
+            return output;
+        }
+    }
+
+    /**
+     * Converts data in taskList to the appropriate String format to be stored in text file.
+     * @return String text.
+     */
+    public String toText(){
+        String output = "";
+        if (taskNum != 0) {
+            for (int index = 0; index < taskNum; index++) {
+                Task task = getTask(index);
+                output += (task.toString() + "\n");
             }
             return output.substring(0, output.length() - 1);
         } else {

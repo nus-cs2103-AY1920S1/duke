@@ -46,6 +46,7 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
+
 run {
     enableAssertions = true
     standardInput = System.in

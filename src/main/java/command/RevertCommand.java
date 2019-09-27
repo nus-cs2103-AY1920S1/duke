@@ -5,23 +5,24 @@ import filewriter.Storage;
 import task.Recurrence;
 import task.Task;
 import task.TaskList;
+import task.Todo;
 import ui.Ui;
 
-public class EditCommand extends Command {
+public class RevertCommand extends Command{
     int index;
 
     /**
      * Constructor for EditCommand.
-     * @param index index of Task in TaskList to mark as done.
+     * @param index include index of Task in TaskList to revert back to non-recurring.
      */
-    public EditCommand(int index) {
-        super.type = FullCommand.DONE;
+    public RevertCommand(int index) {
+        super.type = FullCommand.REVERT;
         this.index = index;
     }
 
     /**
      * Used tp check if command is an ExitCommand.
-     * @return false as command is an EditCommand.
+     * @return false as command is an RevertCommand.
      */
     public boolean isExit() {
         assert(!super.type.getName().equals("bye"));
@@ -38,18 +39,18 @@ public class EditCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            if (index == -1) {
-                throw new IndexOutOfBoundsException();
+            Task task = tasks.getTask(index);
+            if (task instanceof Todo) {
+                throw new DukeException("Todo tasks are not recurring.");
             }
-            Task completedTask = tasks.complete(index);
-            ui.readDone(completedTask);
-            if (completedTask instanceof Recurrence) {
-                if (((Recurrence) completedTask).isRecurring) {
-                    Task nextTask = ((Recurrence) completedTask).getRecurrence();
-                    tasks.addTask(nextTask);
-                    ui.showUpdateMessage(nextTask);
+            if (task instanceof Recurrence) {
+                if (!((Recurrence) task).isRecurring) {
+                    throw new DukeException("Task is not recurring.");
                 }
             }
+            Recurrence recurrence = (Recurrence) task;
+            recurrence.revert();
+            ui.showRevertMessage(task);
         } catch (NullPointerException | IndexOutOfBoundsException e) {
             throw new DukeException("Index out of bounds.");
         } catch (NumberFormatException e) {

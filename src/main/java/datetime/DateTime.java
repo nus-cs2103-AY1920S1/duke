@@ -113,24 +113,24 @@ public class DateTime  implements Cloneable {
         try{
             DateTime newTime = (DateTime) this.clone();
             switch (unitTime) {
-            case "days":
+            case "day": case "days":
                 newTime.start = newTime.start.plusDays(quantity);
                 newTime.updateDisplay();
                 return newTime;
-            case "weeks":
+            case "week": case "weeks":
                 newTime.start = newTime.start.plusDays(quantity * 7);
                 newTime.updateDisplay();
                 return newTime;
-            case "months":
+            case "month": case "months":
                 newTime.start = newTime.start.plusMonths(quantity);
                 newTime.updateDisplay();
                 return newTime;
-            case "years":
+            case "year": case"years":
                 newTime.start = newTime.start.plusYears(quantity);
                 newTime.updateDisplay();
                 return newTime;
             default:
-                throw new DukeException("Event can only be set to recur every n days/ weeks/ months/ years");
+                throw new DukeException("Event can only be set to recur every n days/ weeks/ months/ years, not " + unitTime);
             }
         } catch (CloneNotSupportedException e){
             throw new DukeException("Error cloning DateTime");

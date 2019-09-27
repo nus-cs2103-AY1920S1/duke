@@ -30,6 +30,6 @@ public class ExitCommand extends Command {
      * @throws DukeException if invalid filepath. (Directory tampered with when program is running)
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        storage.closeWriter();
+        storage.write(tasks);
     }
 }

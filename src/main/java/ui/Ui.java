@@ -13,25 +13,10 @@ public class Ui {
     Scanner sc = new Scanner(System.in);
 
     /**
-     * Called at the start of program.
-     */
-    public void showWelcome() {
-        String logo = "     ____        _        \n"
-                + "    |  _ \\ _   _| | _____ \n"
-                + "    | | | | | | | |/ / _ \\\n"
-                + "    | |_| | |_| |   <  __/\n"
-                + "    |____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("    Hello! I'm \n" + logo + "\n    What can I do for you?");
-        showLine();
-    }
-
-    /**
      * Called when execute method of ExitCommand is called.
      */
     public void showGoodbye() {
-        showLine();
         System.out.println("    Bye. Hope to see you again soon!");
-        showLine();
     }
 
     /**
@@ -45,14 +30,6 @@ public class Ui {
         System.out.println(output);
     }
 
-    /**
-     * reads user input.
-     *
-     * @return String to be parsed by parser.
-     */
-    public String readCommand() {
-        return sc.nextLine();
-    }
 
     /**
      * Called when a task is entered by user.
@@ -62,11 +39,9 @@ public class Ui {
      * @param taskNum  number of tasks in Task List.
      */
     public void readTask(Task newTask, int taskNum) {
-        showLine();
         System.out.println("     Got it. I've added this task:");
         System.out.println("       " + newTask.toString());
         System.out.println("     Now you have " + taskNum + " tasks in the list.");
-        showLine();
     }
 
     /**
@@ -77,11 +52,9 @@ public class Ui {
      * @param taskNum      Number of Task(s) left in the Task List.
      */
     public void readDelete(Task removedTask, int taskNum) {
-        showLine();
         System.out.println("     Noted. I've removed this task:");
         System.out.println("       " + removedTask.toString());
         System.out.println("     Now you have " + taskNum + " tasks in the list.");
-        showLine();
     }
 
     /**
@@ -91,10 +64,8 @@ public class Ui {
      * @param completedTask Task which has been marked as done.
      */
     public void readDone(Task completedTask) {
-        showLine();
         System.out.println("     Nice! I've marked this task as done:");
         System.out.println("       " + completedTask.toString());
-        showLine();
     }
 
     /**
@@ -104,10 +75,16 @@ public class Ui {
      * @param tasks TaskList
      */
     public void readList(TaskList tasks) {
-        showLine();
         System.out.println("     Here are the task(s) in your list: ");
         System.out.println(tasks);
-        showLine();
+    }
+
+    public void readClear(TaskList tasks){
+        if (tasks.taskNum < 5) {
+            System.out.println("Got it. Starting fresh.");
+        } else {
+            System.out.println("Yeah just sweep it under the rug. That's going to help.");
+        }
     }
 
 
@@ -125,10 +102,13 @@ public class Ui {
     }
 
     public void showRecurMessage(Recurrence task){
-        showLine();
         System.out.println(" Got it. Setting this event to recurring:");
         System.out.println(task);
-        showLine();
+    }
+
+    public void showRevertMessage(Task task){
+        System.out.println(" Got it. Setting this event to non-recurring:");
+        System.out.println(task);
     }
 
     /**
@@ -137,7 +117,6 @@ public class Ui {
     public void showUpdateMessage(Task task){
         System.out.println("I've updated your schedule with the timing for next session."
                 + System.lineSeparator() + task);
-        showLine();
     }
 
 
@@ -146,10 +125,7 @@ public class Ui {
      *
      * @param errorMsg DukeException e.getMessage()
      */
-    public void showError(String errorMsg) {
-        showLine();
-        System.out.println("     ☹ OOPS!!! " + errorMsg);
-        showLine();
+    public String showError(String errorMsg) { return("      OOPS!!! " + errorMsg);
     }
 
     /**
@@ -157,8 +133,6 @@ public class Ui {
      * Called by run method in Duke class.
      */
     public void showLoadingError() {
-        showLine();
-        System.out.println("     ☹ OOPS!!! Loading Error");
-        showLine();
+        System.out.println("      OOPS!!! Loading Error");
     }
 }

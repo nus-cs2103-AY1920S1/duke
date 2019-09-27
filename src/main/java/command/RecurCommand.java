@@ -18,7 +18,6 @@ public class RecurCommand extends Command{
      * @param details include index of Task in TaskList to set as recurring, type of unit time, and amount of unit time.
      */
     public RecurCommand(String details) throws DukeException {
-        System.out.println("initiating recur");
         try {
             super.type = FullCommand.RECUR;
             String[] detailsArr = details.split(" ");
@@ -55,10 +54,5 @@ public class RecurCommand extends Command{
         Recurrence recurrence = (Recurrence) task;
         recurrence.setAsRecurring(unitTime, quantity);
         ui.showRecurMessage(recurrence);
-        /*int recDivider = (recurrence.toString()).indexOf("every: ");
-        String[] arr = (recurrence.toString()).substring(recDivider + 7, recurrence.toString().length() - 4).split(" ");
-        System.out.println("(" + arr[0]);
-        System.out.println(arr[1] + ")");*/
-        storage.editFile(tasks);
     }
 }

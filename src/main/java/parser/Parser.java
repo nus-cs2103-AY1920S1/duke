@@ -1,14 +1,6 @@
 package parser;
 
-import command.AddCommand;
-import command.Command;
-import command.DeleteCommand;
-import command.EditCommand;
-import command.ExitCommand;
-import command.FindCommand;
-import command.FullCommand;
-import command.ListCommand;
-import command.RecurCommand;
+import command.*;
 import exception.DukeException;
 
 /**
@@ -39,6 +31,10 @@ public class Parser {
                 return new FindCommand(wordArr[1]);
             case RECUR:
                 return new RecurCommand(wordArr[1]);
+            case REVERT:
+                return new RevertCommand(Integer.parseInt(wordArr[1]) - 1);
+            case CLEAR:
+                return new ClearCommand();
             default:
                 if (wordArr[1].equals("")) {
                     throw new DukeException("");
@@ -48,7 +44,11 @@ public class Parser {
         } catch (IndexOutOfBoundsException | DukeException e) {
             throw new DukeException("Give instructions in the format: (instruction type) (details)");
         } catch (NumberFormatException e) {
-            throw new DukeException("'done' and 'delete' must be followed by an integer index.");
+            if (command.equals(FullCommand.RECUR)){
+                throw new DukeException("Give instructions in the format: Recur (index) (unit_time) (quantity)");
+            } else {
+                throw new DukeException("'done' and 'delete' must be followed by an integer index.");
+            }
         }
     }
 }

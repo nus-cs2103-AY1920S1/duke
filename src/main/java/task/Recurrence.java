@@ -18,9 +18,23 @@ public abstract class Recurrence extends Task{
 
     public abstract Task getRecurrence() throws DukeException;
 
+    /**
+     * Set task as recurring
+     * @param unitTime Recurrence cycle measured in unitTime.
+     * @param quantity Amount of unit time per cycle.
+     */
     public void setAsRecurring(String unitTime, int quantity){
         isRecurring = true;
         this.unitTime = unitTime;
         this.quantity = quantity;
+    }
+
+    /**
+     * Reverts task to non recurring.
+     */
+    public void revert(){
+        isRecurring = false;
+        this.unitTime = null;
+        this.quantity = 0;
     }
 }

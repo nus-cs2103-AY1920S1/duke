@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collections;
 
 import javafx.collections.FXCollections;
@@ -11,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 
 /**
  * An example of a custom control using FXML.
@@ -48,13 +50,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    public void getFont(String fName) {
+        InputStream is = Main.class.getResourceAsStream(fName);
+        Font font =  Font.loadFont(getClass().getResourceAsStream(fName), 20);
+        this.dialog.setFont(font);
+    }
+
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.getFont("/fonts/Dudu_Calligraphy.ttf");
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.getFont("/fonts/Faraco_Hand.ttf");
         return db;
     }
 }

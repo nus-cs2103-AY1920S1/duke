@@ -20,7 +20,6 @@ public class UiTest {
         String expectedMessage = "     Got it. I've added this task:" + System.lineSeparator()
                                + "       Task Message" + System.lineSeparator()
                                + "     Now you have 1 tasks in the list." + System.lineSeparator()
-                               + "    ________________________________________________________________________________"
                                + System.lineSeparator();
         assertEquals(expectedMessage, outContent.toString());
     }
@@ -33,7 +32,6 @@ public class UiTest {
         String expectedMessage = "     Noted. I've removed this task:" + System.lineSeparator()
                 + "       Task Message" + System.lineSeparator()
                 + "     Now you have 0 tasks in the list." + System.lineSeparator()
-                + "    ________________________________________________________________________________"
                 + System.lineSeparator();
         assertEquals(expectedMessage, outContent.toString());
     }
@@ -45,7 +43,6 @@ public class UiTest {
         new Ui().readDone(test);
         String expectedMessage = "     Nice! I've marked this task as done:" + System.lineSeparator()
                 + "       Completed Task Message" + System.lineSeparator()
-                + "    ________________________________________________________________________________"
                 + System.lineSeparator();
         assertEquals(expectedMessage, outContent.toString());
     }

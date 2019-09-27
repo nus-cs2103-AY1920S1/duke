@@ -57,11 +57,5 @@ public class AddCommand extends Command {
         }
         tasks.addTask(newTask);
         ui.readTask(newTask, tasks.taskNum);
-        if (tasks.isFirst) {
-            tasks.isFirst = !tasks.isFirst;
-        } else {
-            storage.writeToFile(System.lineSeparator());
-        }
-        storage.writeToFile(newTask.toString());
     }
 }

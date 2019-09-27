@@ -2,6 +2,9 @@ package task;
 
 import exception.DukeException;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+
 /**
  * Abstract class which all other Task classes extend. (Event etc...)
  */
@@ -43,7 +46,7 @@ public abstract class Task {
      * @return tick if task is completed, and cross otherwise.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "+" : "-");
     }
 
     /**

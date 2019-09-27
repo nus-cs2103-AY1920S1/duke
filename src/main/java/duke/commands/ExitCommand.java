@@ -18,13 +18,4 @@ public class ExitCommand extends Command {
         return new CommandResult(exitMessage);
     }
 
-    /**
-     * Returns true.
-     * @return true.
-     */
-    @Override
-    public boolean isExit() {
-        return true;
-    }
-
 }

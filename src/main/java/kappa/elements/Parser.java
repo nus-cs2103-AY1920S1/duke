@@ -13,10 +13,13 @@ import kappa.command.Command;
 import kappa.command.AddDeadlineCommand;
 import kappa.command.FindCommand;
 
-import kappa.exception.*;
+import kappa.exception.KappaException;
+import kappa.exception.MissingDateException;
+import kappa.exception.MissingTaskException;
+import kappa.exception.InvalidTagException;
+import kappa.exception.MissingDescriptionException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -92,7 +95,7 @@ public class Parser {
             }
 
             List<String> tagsList = new ArrayList<>(Stream.of(splitByHash)
-                    .map(s -> s.trim())
+                    .map(String::trim)
                     .collect(Collectors.toList())
                     .subList(1, splitByHash.length));
             return new Tags(tagsList);
@@ -126,7 +129,8 @@ public class Parser {
      * @return Valid AddDeadlineCommand.
      * @throws KappaException Throws if Deadline Command is not valid.
      */
-    private static Command getValidDeadlineCommand(String deadlineDesc, String deadlineDate, Tags tags) throws KappaException {
+    private static Command getValidDeadlineCommand(
+            String deadlineDesc, String deadlineDate, Tags tags) throws KappaException {
         if (isDate(deadlineDate)) {
             String[] dateSplitTokens = deadlineDate.split(" ");
             DateTime validDeadlineDate = new DateTime(dateSplitTokens[0], dateSplitTokens[1]);
@@ -175,7 +179,7 @@ public class Parser {
         case "delete":
             checkDoneDelete(tokens);
             return;
-            default:
+        default:
         }
     }
 
@@ -211,7 +215,8 @@ public class Parser {
      * @throws MissingDescriptionException Throws if description is missing.
      * @throws MissingDateException Throws if date is missing.
      */
-    private static void checkEvent(String input, String[] tokens) throws MissingDescriptionException, MissingDateException {
+    private static void checkEvent(
+            String input, String[] tokens) throws MissingDescriptionException, MissingDateException {
         if (tokens.length <= 1) {
             throw new MissingDescriptionException();
         } else if (!input.contains(" /at ")) {
@@ -227,7 +232,8 @@ public class Parser {
      * @throws MissingDescriptionException Throws if description is missing.
      * @throws MissingDateException Throws if date is missing.
      */
-    private static void checkDeadline(String input, String[] tokens) throws MissingDescriptionException, MissingDateException {
+    private static void checkDeadline(
+            String input, String[] tokens) throws MissingDescriptionException, MissingDateException {
         if (tokens.length <= 1) {
             throw new MissingDescriptionException();
         } else if (!input.contains(" /by ")) {

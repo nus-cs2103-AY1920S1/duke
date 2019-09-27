@@ -16,6 +16,7 @@ public class Deadline extends Task {
      * @param description Description of deadline.
      * @param id Id of deadline task.
      * @param by Deadline date.
+     * @param tags Tags.
      */
     public Deadline(String description, int id, String by, Tags tags) {
         super(description, id, tags);

@@ -1,6 +1,7 @@
 package kappa.elements;
 
 import kappa.exception.KappaException;
+
 import kappa.task.Deadline;
 import kappa.task.Event;
 import kappa.task.Task;
@@ -20,7 +21,7 @@ public class Ui {
      * Prints welcome Message on application start-up.
      */
     public static String showWelcomeMessage() {
-        String message = "Hello! I'm Slave! Your very own productivity application.\n"
+        String message = "Hello! I'm Kappa! Your very own productivity application.\n"
                 + "     What can I do for you? Type 'help' for commands!";
         String formattedMessage = Formatter.formatMessage(message);
         System.out.println(formattedMessage);

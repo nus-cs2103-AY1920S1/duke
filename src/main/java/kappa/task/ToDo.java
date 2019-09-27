@@ -12,6 +12,7 @@ public class ToDo extends Task {
      *
      * @param description Description of to-do task.
      * @param id Id of to-do task.
+     * @param tags Tags.
      */
     public ToDo(String description, int id, Tags tags) {
         super(description, id, tags);

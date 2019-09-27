@@ -18,21 +18,25 @@ public class DateTime {
     private int hour;
     private int minute;
 
-    private static String[] daySuffixes = { "th", "st", "nd", "rd", "th", "th", "th", "th",
-            "th", "th", "th", "th", "th", "th", "th", "th",
-            "th", "th", "th", "th", "th", "st", "nd", "rd",
-            "th", "th", "th", "th", "th", "th", "th", "st" };
+    private static String[] daySuffixes = {
+        "th", "st", "nd", "rd", "th", "th", "th", "th",
+        "th", "th", "th", "th", "th", "th", "th", "th",
+        "th", "th", "th", "th", "th", "st", "nd", "rd",
+        "th", "th", "th", "th", "th", "th", "th", "st" };
 
-    private static String[] hourSuffixes = {"12", "1", "2", "3", "4", "5", "6", "7",
-            "8", "9", "10", "11", "12", "1", "2", "3",
-            "4", "5", "6", "7", "8", "9", "10", "11"};
+    private static String[] hourSuffixes = {
+        "12", "1", "2", "3", "4", "5", "6", "7",
+        "8", "9", "10", "11", "12", "1", "2", "3",
+        "4", "5", "6", "7", "8", "9", "10", "11"};
 
-    private static String[] monthStrings = { "Month", "January", "February", "March", "April", "May", "June", "July",
-            "August", "September", "October", "November", "December" };
+    private static String[] monthStrings = {
+        "Month", "January", "February", "March", "April", "May", "June", "July",
+        "August", "September", "October", "November", "December" };
 
-    private static String[] timeSuffixes = {"am", "am", "am", "am", "am", "am", "am", "am",
-            "am", "am", "am", "am", "pm", "pm", "pm", "pm",
-            "pm", "pm", "pm", "pm", "pm", "pm", "pm", "pm"};
+    private static String[] timeSuffixes = {
+        "am", "am", "am", "am", "am", "am", "am", "am",
+        "am", "am", "am", "am", "pm", "pm", "pm", "pm",
+        "pm", "pm", "pm", "pm", "pm", "pm", "pm", "pm"};
 
     /**
      * Constructor that creates an immutable LocalDateTime object.

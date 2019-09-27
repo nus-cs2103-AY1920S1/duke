@@ -16,6 +16,7 @@ public class Event extends Task {
      * @param description Description of event.
      * @param id Id of event task.
      * @param at Event date.
+     * @param tags Tags.
      */
     public Event(String description, int id, String at, Tags tags) {
         super(description, id, tags);

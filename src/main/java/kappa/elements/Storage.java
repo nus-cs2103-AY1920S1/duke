@@ -190,7 +190,7 @@ public class Storage {
         case "Event":
             return formatEvent(tokens);
         default:
-        throw new UnableToReadFileException(index);
+            throw new UnableToReadFileException(index);
         }
     }
 

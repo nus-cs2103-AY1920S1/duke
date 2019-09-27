@@ -17,7 +17,7 @@ public abstract class Task {
      * Constructor for task.
      *  @param description Task description.
      * @param id Task id.
-     * @param tags
+     * @param tags Tags.
      */
     public Task(String description, int id, Tags tags) {
         this.description = description;
@@ -90,6 +90,11 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    /**
+     * Gets tags.
+     *
+     * @return Tags.
+     */
     public Tags getTags() {
         return this.tags;
     }

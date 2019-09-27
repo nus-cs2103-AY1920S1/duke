@@ -15,10 +15,15 @@ public class Tags {
         this.tagSet.addAll(tagList);
     }
 
-    public Tags(){
+    public Tags() {
         this.tagSet = new HashSet<>();
     }
 
+    /**
+     * Returns a formatted string to display all the tags.
+     *
+     * @return Tags in Formatted String.
+     */
     public String toString() {
         if (tagSet.size() == 0) {
             return "None";

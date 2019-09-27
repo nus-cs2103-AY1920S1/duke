@@ -2,12 +2,13 @@ package driver;
 
 
 
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.IOException;
-import response.ErrorResponse;
-import response.ExitResponse;
-import response.StandardResponse;
+import command.ByeCommand;
+import command.ErrorCommand;
+import command.Command;
 import task.TaskList;
+
 
 
     /**
@@ -31,59 +32,36 @@ public class Duke {
     public Duke() {
         //Create TaskList for Duke
         myTaskList = new TaskList();
-        myTaskManager = new Storage("src/main/java/data/loggedData.txt");
-
+        myTaskManager = new Storage("data" + File.separator+ "loggedData.txt");
+        myTaskManager.loadTasks(myTaskList);
     }
 
-    /**
-     * Starts the Duke program by loading tasks from storage
-     *
-     * @param x  X coordinate of position.
-     * @param y Y coordinate of position.
-     * @param zone Zone of position.
-     * @return Lateral location.
-     * @throws IllegalArgumentException  If zone is <= 0.
-     */
-    public void startProcess() {
-        try {
-            myTaskManager.loadTasks(myTaskList);
-        } catch (FileNotFoundException err) {
-                ErrorResponse myError = new ErrorResponse(err);
-                myError.returnResponse();
-            }
-    }
 
     /**
-     * Returns the reponse from the Duke program (to the user Input) as a String
+     * Returns the response from the Duke program (to the user Input) as a String
      *
      * @param temp  String of user input
      * @return String of response
      */
 
     public String getResponse(String temp)  {
-        if (temp.equalsIgnoreCase("bye"))
+        if (temp.equalsIgnoreCase("bye")) {
             try {
                 myTaskManager.updateTasks(myTaskList);
-                ExitResponse sayBye = new ExitResponse();
-                return sayBye.returnResponse();
+                ByeCommand sayBye = new ByeCommand();
+                return sayBye.executeCommand();
             } catch (IOException err) {
-                ErrorResponse myError = new ErrorResponse(err);
-                return myError.returnResponse();
-            } finally {
-                System.exit(0);
+                ErrorCommand myError = new ErrorCommand(err);
+                return myError.executeCommand();
             }
-
-            try {
-                StandardResponse myResponse = new StandardResponse(temp,myTaskList);
-                return myResponse.returnResponse();
-            } catch (Exception err) {
-                ErrorResponse myError = new ErrorResponse(err);
-                return myError.returnResponse();
-                }
         }
+        Command myResponse = Parser.parse(temp);
+        return myResponse.executeCommand(myTaskList);
+        }
+}
 
 
-    }
+
 
 
 

@@ -9,29 +9,52 @@ import formatter.TimeFormatter;
 
 public class EventTask extends Task {
     //Add variable for eventTask
-    Date timeSlot;
+    Date start;
+    Date end;
 
     /**
      * Sets the initial params for the task and sets type to E for event
      *
      * @param taskInput  String of the actual task
-     * @param complete Boolean is initially set to false
-     * @param timing Date is the date and time that this task should be completed within
+     * @param s start time
+     * @param e end time
      */
 
-    public EventTask(String taskInput, boolean complete, Date timing) {
-        super(taskInput,complete);
+    public EventTask(String taskInput, Date s, Date e) {
+        super(taskInput);
         type = "E";
-        timeSlot = timing;
+        start = s;
+        end = e;
+
     }
+
+    /**
+     * Overloaded constructor for reading from file
+     *
+     * @param i  String of the actual task
+     * @param c is the completion status
+     * @param s Date is the date and time that this task is starting
+     * @param e Date is the date and time that this task is ending
+     *
+     */
+
+    public EventTask(String i, boolean c, Date s, Date e) {
+        super(i);
+        type = "E";
+        completed= c;
+        start= s;
+        end  =e;
+    }
+
 
     /**
      *
      */
 
-    public Date getTime() {
-        return timeSlot;
+    public Date getStartTime() {
+        return start;
     }
+    public Date getEndTime() { return end;}
 
     /**
      *
@@ -40,9 +63,13 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         if(completed) {
-            return "[" + type  + "]" + "[\u2713] " + name + "(at: " + TimeFormatter.convertToString(timeSlot) + ")";
+            return "[" + type  + "]" + "[\u2713] " + name +
+                    "(from: " + TimeFormatter.convertToString(start) +
+                    " to " + TimeFormatter.convertToString(end) + ")";
         } else {
-            return "[" + type + "]" + "[\u2718] " + name + "(at: " + TimeFormatter.convertToString(timeSlot) + ")";
+            return "[" + type  + "]" + "[\u2718] " + name +
+                    "(from: " + TimeFormatter.convertToString(start) +
+                    " to " + TimeFormatter.convertToString(end) + ")";
         }
     }
 }

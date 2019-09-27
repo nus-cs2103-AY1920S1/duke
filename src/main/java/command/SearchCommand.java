@@ -29,7 +29,7 @@ public class SearchCommand extends Command {
 
         /**
          * Searches for the specified String and returns a list of matching tasks
-         * Also formats the searvh String
+         * Also formats the search String
          *
          * @param reference is the tasklist being used by the program
          * @return String the formatted output, after running through formatOutput()

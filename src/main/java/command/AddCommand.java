@@ -12,18 +12,16 @@ import task.TaskList;
  */
 
 public class AddCommand extends Command {
-    String addedTask;
     Task added;
 
     /**
      * Constructor for AddCommand Object
      * Stores new task as <param>added</param>
      *
-     * @param x String new task in String formate
      */
 
-    public AddCommand(String x) {
-        addedTask = x;
+    public AddCommand(Task x) {
+        added = x;
     }
 
     /**
@@ -36,7 +34,7 @@ public class AddCommand extends Command {
     @Override
     public String executeCommand(TaskList reference) {
         this.reference = reference;
-        added = reference.addTasks(addedTask);
+        added = reference.addTasks(added);
         return this.formatOutput();
     }
 

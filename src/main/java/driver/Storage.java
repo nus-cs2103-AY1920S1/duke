@@ -6,6 +6,7 @@ import task.TodoTask;
 import task.DeadlineTask;
 import task.EventTask;
 import formatter.TimeFormatter;
+import command.ErrorCommand;
 
 //File object serves as your reference to the hard drive file
 import java.io.File;
@@ -13,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 //Read input
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -26,11 +28,11 @@ public class Storage {
     /**
      * Constructor for Storage stores filepath specified by user
      *
-     * @param x  String of filepath
+     * @param x String of filepath
      */
 
     public Storage(String x) {
-    filePath =x;
+        filePath = x;
     }
 
     /**
@@ -41,25 +43,54 @@ public class Storage {
      * @throws FileNotFoundException if filepath is invalid
      */
 
-    protected void loadTasks(TaskList myList) throws FileNotFoundException {
+    protected void loadTasks(TaskList myList) {
         ArrayList<Task> myTasksStore = myList.getList();
         File f = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        while (s.hasNextLine()) {
-            String current = s.nextLine();
-            String[] splitTask = current.split(",");
-            if (splitTask[0].equalsIgnoreCase("T")) {
-                myTasksStore.add(new TodoTask(splitTask[2], Boolean.parseBoolean(splitTask[1])));
-            } else if (splitTask[0].equalsIgnoreCase("D")) {
-                myTasksStore.add(new DeadlineTask(splitTask[2], Boolean.parseBoolean(splitTask[1]), TimeFormatter.convertToDate(splitTask[3])));
-            } else if (splitTask[0].equalsIgnoreCase("E")) {
-                myTasksStore.add(new DeadlineTask(splitTask[2], Boolean.parseBoolean(splitTask[1]), TimeFormatter.convertToDate(splitTask[3])));
-            } else {
-                assert false:"Wrong input: " + current;
+
+
+        try {
+            f.getParentFile().mkdir();
+            f.createNewFile();
+            Scanner s = new Scanner(f); // create a Scanner using the File as the source
+            while (s.hasNextLine()) {
+                String current = s.nextLine();
+                String[] splitTask = current.split(",");
+
+                switch (splitTask[0]) {
+                    case "T": {
+                        myTasksStore.add(
+                                new TodoTask(splitTask[2],
+                                        Boolean.parseBoolean(splitTask[1])));
+                        break;
+                    }
+
+                    case "E": {
+                        myTasksStore.add(
+                                new EventTask(splitTask[2], Boolean.parseBoolean(splitTask[1]),
+                                        TimeFormatter.convertToDate(splitTask[3]),
+                                        TimeFormatter.convertToDate(splitTask[4])));
+                        break;
+                    }
+
+                    case "D": {
+                        myTasksStore.add(
+                                new DeadlineTask(splitTask[2],
+                                        Boolean.parseBoolean(splitTask[1]),
+                                        TimeFormatter.convertToDate(splitTask[3])));
+                        break;
+                    }
+                }
             }
+            s.close();
+        } catch (IOException noFile) {
+            ErrorCommand myErr = new ErrorCommand(noFile);
+            System.out.printf(myErr.executeCommand());
+        } catch (ParseException parseError) {
+            System.out.println("This is impossible");
         }
-        s.close();
+
     }
+
 
     /**
      * updateTasks take in a taskList and stores all tasks read from the tasklist
@@ -73,32 +104,46 @@ public class Storage {
     protected void updateTasks(TaskList myList) throws IOException {
         ArrayList<Task> myTasksStore = myList.getList();
         FileWriter fw = new FileWriter(filePath);
-        for(Task current:myTasksStore) {
 
-            if((current.getType()).equalsIgnoreCase("T")) {
-                  String task = String.format("%s,%b,%s", current.getType(),current.getDoneStatus(), current.getName());
-                  fw.write(task+ System.lineSeparator());
+        for (Task current : myTasksStore) {
+            String task= "";
+            switch (current.getType()) {
+                case "T": {
+                    TodoTask todo = (TodoTask) current;
 
-            } else if ((current.getType()).equalsIgnoreCase("E")) {
-                    EventTask event = (EventTask)current;
-                    String task = String.format("%s,%b,%s,%s", event.getType(),event.getDoneStatus(),event.getName(),TimeFormatter.convertToString(event.getTime()));
-                    fw.write(task+ System.lineSeparator());
-
-            } else if ((current.getType()).equalsIgnoreCase("D")) {
-                DeadlineTask deadline = (DeadlineTask) current;
-                String task = String.format("%s,%b,%s,%s", deadline.getType(), deadline.getDoneStatus(), deadline.getName(), TimeFormatter.convertToString(deadline.getTime()));
-                fw.write(task + System.lineSeparator());
-
-            } else {
-                assert false:current + " Something is wrong with your command";
+                    task = String.format("%s,%b,%s",
+                            todo.getType(),
+                            todo.getDoneStatus(),
+                            todo.getName());
+                    break;
                 }
+                case "E": {
+                    EventTask event = (EventTask) current;
+
+                    task = String.format("%s,%b,%s,%s,%s",
+                            event.getType(),
+                            event.getDoneStatus(),
+                            event.getName(),
+                            TimeFormatter.convertToString(event.getStartTime()),
+                            TimeFormatter.convertToString(event.getEndTime()));
+                    break;
+                }
+                case "D": {
+                    DeadlineTask deadline = (DeadlineTask) current;
+
+                    task = String.format("%s,%b,%s,%s",
+                            deadline.getType(),
+                            deadline.getDoneStatus(),
+                            deadline.getName(),
+                            TimeFormatter.convertToString(deadline.getTime()));
+                    break;
+                }
+            }
+            fw.write(task + System.lineSeparator());
         }
-
-fw.close();
-        }
-
-
+        fw.close();
     }
+}
 
 
 

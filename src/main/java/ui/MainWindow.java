@@ -14,8 +14,13 @@ import javafx.scene.layout.VBox;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
+ * AnchorPane holds all other features:
+ * -->Scrollpane, which is a Vbox containing each Label (text) and ImageView(Picture)
+ * -->Textfield, where the user inputs tect
+ * --> Button to press enter
  */
 public class MainWindow extends AnchorPane {
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -38,20 +43,15 @@ public class MainWindow extends AnchorPane {
 
     public void sayHello() {
         HelloCommand hi = new HelloCommand();
-
         String response = hi.executeCommand();
-        duke.startProcess();
-
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+                DialogBox.getDukeDialog(response, dukeImage));
     }
 
 
     public void setDuke(Duke d) {
         duke = d;
         sayHello();
-
     }
 
     /**
@@ -61,11 +61,13 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+                DialogBox.getUserDialog(input, userImage));
+        String response = duke.getResponse(input);
+       // dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        dialogContainer.getChildren().addAll(
+        DialogBox.getDukeDialog(response, dukeImage));
+
         userInput.clear();
     }
 }

@@ -18,16 +18,9 @@ public class TimeFormatter {
      * @return Date specified by user.
      */
 
-   public static Date convertToDate(String str) {
+   public static Date convertToDate(String str) throws ParseException {
        SimpleDateFormat myFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
-       try {
            return myFormatter.parse(str);
-
-       } catch (ParseException err) {
-           System.out.println(err);
-
-       }
-       return null;
    }
 
     /**

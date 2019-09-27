@@ -7,17 +7,15 @@ package task;
  */
 public abstract class Task {
     String name;
-    boolean completed;
-    String type;
+    boolean completed = false;
+    String type = null;
 
     /**
      *
      */
 
-    public Task(String taskInput, boolean complete) {
+    public Task(String taskInput) {
         name = taskInput;
-        completed = complete;
-        type = null;
     }
 
     /**

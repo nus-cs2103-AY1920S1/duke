@@ -1,5 +1,4 @@
 package task;
-import formatter.TimeFormatter;
 import java.util.ArrayList;
 
 
@@ -48,45 +47,32 @@ public class TaskList {
 
 
     /**
-     * Searches for tasks which match the input String
+     * Adds task to list
      *
-     * @param addedTask String input by user which is being searched for
-     * @return ArrayList of the tasks that matched the input string
+     * @param input Task to list
+     * @return Task which was added
      */
 
     //Add and print the added notes
-    public Task addTasks(String addedTask) {
-        Task temp;
-        if (addedTask.contains("todo")) {
-            String replaced = addedTask.replace("todo ", "");
-            temp = new TodoTask(replaced, false);
-            myTaskList.add(temp);
-            todoTasks++;
-            totalTasks++;
-            return temp;
-        } else if (addedTask.contains("deadline")) {
-            String replaced = addedTask.replace("deadline ", "");
-            String[] deadLines = replaced.split("by");
-            String endTime = deadLines[1];
-            temp = new DeadlineTask(deadLines[0].replace("/", ""), false, TimeFormatter.convertToDate(endTime));
-            myTaskList.add(temp);
-            deadLineTasks++;
-            totalTasks++;
-            return temp;
-        } else if (addedTask.contains("event")) {
-            String replaced = addedTask.replace("event ", "");
-            String[] events = replaced.split("at");
-            String eventTime = events[1];
-            temp = new EventTask(events[0].replace("/", ""), false, TimeFormatter.convertToDate(eventTime));
-            myTaskList.add(temp);
-            eventTasks++;
-            totalTasks++;
-            return temp;
-        }
-        assert false : "No possible tasks";
-        return null;
+    public Task addTasks(Task input) {
 
-}
+        switch(input.getType()) {
+            case "T": {
+                todoTasks++;
+            }
+
+            case "D": {
+                deadLineTasks++;
+            }
+
+            case "E": {
+                eventTasks++;
+            }
+        }
+            myTaskList.add(input);
+            totalTasks++;
+            return input;
+        }
 
 
     /**
@@ -97,18 +83,26 @@ public class TaskList {
      */
 
     public Task taskDone(int index) {
-        assert index>0: "You cant do this guy";
-        Task curr =  myTaskList.get(index).taskComplete();
-        if(curr.getType().equalsIgnoreCase("T")) {
-            totalTasksDone++;
-            todoTasksDone++;
-        } else if (curr.getType().equalsIgnoreCase("D")) {
-            totalTasksDone++;
-            deadLineTasksDone++;
-        } else if (curr.getType().equalsIgnoreCase("E")) {
-            totalTasksDone++;
-            eventTasksDone++;
+        assert index<=myTaskList.size()+1: "Cant do something that is bigger than the size of the taskList";
+        assert index>0: "Cant do something that is smaller than the size of the taskList";
+
+
+        Task curr = myTaskList.get(index).taskComplete();
+
+        switch (curr.getType()) {
+            case "T": {
+                todoTasksDone++;
+            }
+
+            case "D": {
+                deadLineTasksDone++;
+            }
+
+            case "E": {
+                eventTasksDone++;
+            }
         }
+        totalTasksDone++;
         return curr;
     }
 
@@ -121,30 +115,38 @@ public class TaskList {
      */
 
     public Task deleteTask(int index) {
-        assert index>0: "You cant delete this guy";
+        assert index<=myTaskList.size()+1: "Cant delete something that is bigger than the size of the taskList";
+        assert index>0: "Cant delete something that is smaller than the size of the taskList";
 
         Task removed = myTaskList.remove(index);
         totalTasks--;
-        if(removed.getType().equalsIgnoreCase("T")) {
-            todoTasks--;
-            if(removed.getDoneStatus()) {
-                todoTasksDone--;
-            }
-        } else if (removed.getType().equalsIgnoreCase("D")) {
-            deadLineTasks--;
-            if(removed.getDoneStatus()) {
-                deadLineTasksDone--;
+
+        switch (removed.getType()) {
+            case "T": {
+                todoTasks--;
+                if (removed.getDoneStatus()) {
+                    todoTasksDone--;
+                }
             }
 
-        } else if (removed.getType().equalsIgnoreCase("E")) {
-            deadLineTasks--;
-            if(removed.getDoneStatus()) {
-                eventTasksDone--;
+            case "D": {
+                deadLineTasks--;
+                if (removed.getDoneStatus()) {
+                    deadLineTasksDone--;
+                }
+
+            }
+
+            case "E": {
+                eventTasks--;
+                if (removed.getDoneStatus()) {
+                    eventTasksDone--;
+                }
             }
         }
-
         return removed;
     }
+
 
     /**
      * Gives the stats of all the tasks

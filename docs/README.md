@@ -3,10 +3,7 @@ _Duke is a command-line-based task manager._
 
 ## _Features_
 
-### 1. Display help
-Display the list of commands and their format.
-
-### 2. Add a task
+### 1. Add a task
 Add a task either of type Todo, Deadline or Event.
 * __Todo__ 
   * format: todo <TASK_NAME>
@@ -44,7 +41,7 @@ Got it. I've added this task:
 3 tasks to go
 ```
 
-### 3. Mark a task as done
+### 2. Mark a task as done
 Mark an existing task as complete. 
 Incomplete tasks have a "-" status symbol left of their task name, while completed tasks have a "+" status symbol.
 
@@ -59,7 +56,7 @@ I've marked this task as done:
 [T][+]borrow_book
 ```
 
-### 4. Delete a task
+### 3. Delete a task
 Delete an existing task from the task list.
 * format: done <index>
   * index indicates the position of the task on the list to mark as done.
@@ -72,7 +69,7 @@ Ok. I've removed the task:
 2 tasks left
 ```
 
-### 5. Delete all tasks
+### 4. Delete all tasks
 Delete every task from the task list and starting fresh.
 * format: clear
 * Example:
@@ -82,7 +79,7 @@ Delete every task from the task list and starting fresh.
 Got it. Starting fresh.
 ```
 
-### 6. Find tasks using keywords
+### 5. Find tasks using keywords
 Find a task or certain tasks using given keyword(s).
 * format: search <keyword>
 * Example: search book
@@ -93,7 +90,7 @@ Here are the matching task(s) in your list:
 1.[D][-]return_book (by: 30/9/2019 2359)
 ```
 
-### 7. Display the task list
+### 6. Display the task list
 Display the full list of tasks.
 * format: list
 * Example: list
@@ -106,7 +103,7 @@ Here are the task(s) in your list:
 2.[E][-] CS2103_lecture (at: 20/09/2019 1200-1400)
 ```
 
-### 8. Set task as recurssive.
+### 7. Set task as recurssive.
 Set a task to recur once every specified time period
 * format: recur <index>
 * Example: recur 2 days 2
@@ -115,7 +112,7 @@ Set a task to recur once every specified time period
 Got it. Starting fresh.
 ```
 
-### 9. Set recurssive task as non-recurssive.
+### 8. Set recurssive task as non-recurssive.
 Set a task to ocue only once at the specified time.
 * format: revert <index>
 * Example: revert 2
@@ -125,7 +122,7 @@ Got it.
 Setting this event to non-recurring:
 2.[E][-] CS2103_lecture (at: 20/09/2019 1200-1400)
 ```
-### 10. exit
+### 9. exit
 Application closes after displaying farewell message.
 * format: bye
 * Example: bye

@@ -28,7 +28,7 @@ Adds **ToDo** to Duke.
 
 Example of usage:
 
-`todo Finish Kingdom Hearts 3 DLC`
+`todo Meet Rachel`
 
 Expected Outcome:
 
@@ -45,7 +45,7 @@ Add **Deadline** with *DATE_TIME* (format DD/MM/YYYY HH/MM) to Duke.
 
 Example of usage:
 
-`deadline CS2103 Post Lecture Quiz /by 19/09/2019 2359`
+`deadline CS2106 Lab 2 /by 25/09/2019 1500`
 
 Expected Outcome:
 
@@ -62,7 +62,7 @@ Add **DoAfter** task with *DATE_TIME* (format DD/MM/YYYY HH/MM) to Duke.
 
 Example of usage:
 
-`doafter Feed Bruno /after 18/09/2019 1800`
+`doafter Feed Bruno /after 26/09/2019 1800`
 
 Example Outcome:
 
@@ -79,7 +79,7 @@ Add **Event** with *DATE_TIME* (format DD/MM/YYYY HH/MM) to Duke.
 
 Example of usage:
 
-`event Rachel's birthday /at 04/07/2019 0000`
+`event CS2105 Midterms /at 07/10/2019 1400`
 
 Example Outcome:
 
@@ -105,7 +105,7 @@ Marks a task at index *INDEX_OF_TASK* as **done** in Duke.
 
 Example of usage:
 
-`done 2`
+`done 1`
 
 Expected Outcome:
 
@@ -122,7 +122,7 @@ Usage
 
 Example of usage:
 
-`delete 4`
+`delete 1`
 
 Expected Outcome:
 
@@ -139,7 +139,7 @@ Usage
 
 Example of usage:
 
-`find CS2103`
+`find Bruno`
 
 Expected Outcome:
 

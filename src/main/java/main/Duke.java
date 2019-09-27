@@ -58,25 +58,6 @@ public class Duke {
     }
 
     /**
-     * Collects input from users and executes relevant command.
-     */
-    public void run() {
-        boolean canEnd = false;
-        while (!canEnd) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command command = new Parser().parse(fullCommand);
-                command.execute(tasks, ui, storage);
-                canEnd = command.canEnd();
-            } catch (DukeException e) {
-                ui.showLoadingError(e.getMessage());
-            } finally {
-                ui.printNonGuiDisplayMsg();
-            }
-        }
-    }
-
-    /**
      * Collects input from command and executes relevant command
      * in GUI.
      *
@@ -94,8 +75,4 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke("data/duke.txt", false);
-        duke.run();
-    }
 }

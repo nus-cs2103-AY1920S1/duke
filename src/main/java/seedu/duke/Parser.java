@@ -74,6 +74,8 @@ public class Parser {
             case "T":
                 return Optional.of(ToDo.fromFormattedString(tokens));
             default:
+                // impossible.
+                assert false;
                 return Optional.empty();
             }
         } catch (Exception ex) {
@@ -98,6 +100,7 @@ public class Parser {
         case "event":
             return parseNewEventCommand(fullCommand);
         default:
+            assert false;
             throw new DukeException("Neither todo, event nor deadline.");
         }
     }

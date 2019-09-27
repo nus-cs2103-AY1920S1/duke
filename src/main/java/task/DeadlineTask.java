@@ -47,9 +47,9 @@ public class DeadlineTask extends Task {
     @Override
     public String toString() {
         if(completed) {
-            return "[" + type  + "]" + "[\u2713] " + name + "(by: " + TimeFormatter.convertToString(deadline) + ")";
+            return "[" + type  + "]" + "[\u2713] " + name + "(by: " + TimeFormatter.convertToStringPrint(deadline) + ")";
         } else {
-            return "[" + type + "]" + "[\u2718] " + name + "(by: " + TimeFormatter.convertToString(deadline) + ")";
+            return "[" + type + "]" + "[\u2718] " + name + "(by: " + TimeFormatter.convertToStringPrint(deadline) + ")";
         }
     }
 

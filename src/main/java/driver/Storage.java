@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * Storage class controls the file reading and file writing functions of Duke
  */
 
-public class Storage {
+class Storage {
     String filePath;
 
     /**
@@ -31,7 +31,7 @@ public class Storage {
      * @param x String of filepath
      */
 
-    public Storage(String x) {
+     Storage(String x) {
         filePath = x;
     }
 
@@ -43,7 +43,7 @@ public class Storage {
      * @throws FileNotFoundException if filepath is invalid
      */
 
-    protected void loadTasks(TaskList myList) {
+    void loadTasks(TaskList myList) {
         ArrayList<Task> myTasksStore = myList.getList();
         File f = new File(filePath); // create a File for the given file path
 
@@ -101,7 +101,7 @@ public class Storage {
      */
 
     //Write new tasks at the end of the process
-    protected void updateTasks(TaskList myList) throws IOException {
+     void updateTasks(TaskList myList) throws IOException {
         ArrayList<Task> myTasksStore = myList.getList();
         FileWriter fw = new FileWriter(filePath);
 
@@ -124,8 +124,8 @@ public class Storage {
                             event.getType(),
                             event.getDoneStatus(),
                             event.getName(),
-                            TimeFormatter.convertToString(event.getStartTime()),
-                            TimeFormatter.convertToString(event.getEndTime()));
+                            TimeFormatter.convertToStringStore(event.getStartTime()),
+                            TimeFormatter.convertToStringStore(event.getEndTime()));
                     break;
                 }
                 case "D": {
@@ -135,7 +135,7 @@ public class Storage {
                             deadline.getType(),
                             deadline.getDoneStatus(),
                             deadline.getName(),
-                            TimeFormatter.convertToString(deadline.getTime()));
+                            TimeFormatter.convertToStringStore(deadline.getTime()));
                     break;
                 }
             }

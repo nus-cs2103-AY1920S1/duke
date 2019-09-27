@@ -100,7 +100,7 @@ public abstract class Task {
      * @return Formatted string.
      */
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description + this.tags.toString();
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
 }

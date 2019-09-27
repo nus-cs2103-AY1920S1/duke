@@ -40,7 +40,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String formattedString = "[E]" + super.toString() + " (at: " + at + ") ";
+        String formattedString = "[E]" + super.toString() + " (at: " + at + ") " + "(Tags: " + this.tags + ")";
         return formattedString;
     }
 }

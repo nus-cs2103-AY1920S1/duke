@@ -175,7 +175,12 @@ public class Storage {
     }
 
     private Task formatEvent(String[] tokens) {
-        Tags tags = formatTags(tokens[5]);
+        Tags tags;
+        if (tokens.length == 6) {
+            tags = formatTags(tokens[5]);
+        } else {
+            tags = new Tags();
+        }
         Event eventTask = new Event(tokens[3], Integer.parseInt(tokens[0]), tokens[4], tags);
         if (tokens[2].equals("Done")) {
             eventTask.setDone();
@@ -184,7 +189,12 @@ public class Storage {
     }
 
     private Task formatDeadline(String[] tokens) {
-        Tags tags = formatTags(tokens[5]);
+        Tags tags;
+        if (tokens.length == 6) {
+            tags = formatTags(tokens[5]);
+        } else {
+            tags = new Tags();
+        }
         Deadline deadlineTask = new Deadline(tokens[3], Integer.parseInt(tokens[0]), tokens[4], tags);
         if (tokens[2].equals("Done")) {
             deadlineTask.setDone();
@@ -193,7 +203,12 @@ public class Storage {
     }
 
     private Task formatToDo(String[] tokens) {
-        Tags tags = formatTags(tokens[4]);
+        Tags tags;
+        if (tokens.length == 5) {
+            tags = formatTags(tokens[4]);
+        } else {
+            tags = new Tags();
+        }
         ToDo toDoTask = new ToDo(tokens[3], Integer.parseInt(tokens[0]), tags);
         if (tokens[2].equals("Done")) {
             toDoTask.setDone();

@@ -7,3 +7,6 @@ T | 1 | ba
 T | 1 | bad
 T | 1 | tea
 T | 1 | music
+T | 1 | make coffee
+T | 1 | make tea
+D | 1 | return book | 2nd of December 2019, 6pm

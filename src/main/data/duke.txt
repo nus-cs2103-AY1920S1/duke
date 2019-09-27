@@ -1,1 +1,2 @@
-T | 0 | coffee
+T | 0 | eat healthy
+E | 0 | club activities | 6th of November 2019, 8am

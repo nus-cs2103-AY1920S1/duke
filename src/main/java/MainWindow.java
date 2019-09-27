@@ -14,7 +14,7 @@ import javafx.scene.text.Text;
 
 import javafx.stage.Stage;
 
-import slave.elements.Ui;
+import kappa.elements.Ui;
 
 import java.util.Timer;
 import java.util.TimerTask;

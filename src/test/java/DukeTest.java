@@ -3,25 +3,25 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import slave.command.FindCommand;
-import slave.command.AddDeadlineCommand;
-import slave.command.AddEventCommand;
-import slave.command.ClearCommand;
-import slave.command.DeleteCommand;
-import slave.command.DoneCommand;
-import slave.command.ExitCommand;
-import slave.command.ListCommand;
-import slave.command.AddToDoCommand;
-import slave.command.HelpCommand;
+import kappa.command.FindCommand;
+import kappa.command.AddDeadlineCommand;
+import kappa.command.AddEventCommand;
+import kappa.command.ClearCommand;
+import kappa.command.DeleteCommand;
+import kappa.command.DoneCommand;
+import kappa.command.ExitCommand;
+import kappa.command.ListCommand;
+import kappa.command.AddToDoCommand;
+import kappa.command.HelpCommand;
 
-import slave.elements.DateTime;
-import slave.elements.Parser;
+import kappa.elements.DateTime;
+import kappa.elements.Parser;
 
-import slave.exception.KappaException;
-import slave.exception.MissingDescriptionException;
-import slave.exception.MissingTaskException;
-import slave.exception.MissingDateException;
-import slave.exception.InvalidDateException;
+import kappa.exception.KappaException;
+import kappa.exception.MissingDescriptionException;
+import kappa.exception.MissingTaskException;
+import kappa.exception.MissingDateException;
+import kappa.exception.InvalidDateException;
 
 
 /**

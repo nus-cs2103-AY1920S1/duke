@@ -6,16 +6,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
-import slave.command.Command;
-import slave.command.CommandType;
+import kappa.command.Command;
+import kappa.command.CommandType;
 
-import slave.elements.Parser;
-import slave.elements.Storage;
-import slave.elements.TaskList;
-import slave.elements.Ui;
+import kappa.elements.Parser;
+import kappa.elements.Storage;
+import kappa.elements.TaskList;
+import kappa.elements.Ui;
 
-import slave.exception.InOutWentWrongException;
-import slave.exception.KappaException;
+import kappa.exception.InOutWentWrongException;
+import kappa.exception.KappaException;
 
 import java.io.IOException;
 

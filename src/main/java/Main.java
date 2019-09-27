@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 
 import javafx.stage.Stage;
 
-import slave.exception.KappaException;
+import kappa.exception.KappaException;
 
 /**
  * A GUI for Kappa using FXML.

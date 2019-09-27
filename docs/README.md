@@ -109,7 +109,9 @@ Set a task to recur once every specified time period
 * Example: recur 2 days 2
 *Expected Outcome:
 ```
-Got it. Starting fresh.
+Got it.
+Setting this event to recurssive:
+2.[E][-] CS2103_lecture (at: 20/09/2019 1200-1400) every: 2 day(s)
 ```
 
 ### 8. Set recurssive task as non-recurssive.

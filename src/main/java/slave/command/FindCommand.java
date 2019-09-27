@@ -4,7 +4,7 @@ import slave.elements.TaskList;
 import slave.elements.Ui;
 
 import slave.exception.CannotBeFoundException;
-import slave.exception.DukeException;
+import slave.exception.KappaException;
 
 import slave.task.Task;
 
@@ -33,10 +33,10 @@ public class FindCommand extends Command {
      *
      * @param tasks List containing current tasks.
      * @param ui User interface.
-     * @throws DukeException Throws if searched term isn't in any of the task descriptions.
+     * @throws KappaException Throws if searched term isn't in any of the task descriptions.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Ui ui) throws KappaException {
         ArrayList<Task> findList = new ArrayList<>();
         for (Task task: tasks.getList()) {
             if (task.getDescription().contains(this.term)) {

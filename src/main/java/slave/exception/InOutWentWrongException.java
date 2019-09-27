@@ -3,7 +3,7 @@ package slave.exception;
 /**
  * Represents IO Exception.
  */
-public class InOutWentWrongException extends DukeException {
+public class InOutWentWrongException extends KappaException {
 
     /**
      * Constructor for IOWentWrongException.

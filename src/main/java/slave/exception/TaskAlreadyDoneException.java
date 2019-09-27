@@ -3,7 +3,7 @@ package slave.exception;
 /**
  * Exception for when task in list has already been marked as done.
  */
-public class TaskAlreadyDoneException extends DukeException {
+public class TaskAlreadyDoneException extends KappaException {
 
     /**
      * Constructor for TaskAlreadyDoneException.

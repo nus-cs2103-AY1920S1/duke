@@ -5,7 +5,7 @@ import slave.elements.Tags;
 import slave.elements.Ui;
 import slave.elements.TaskList;
 
-import slave.exception.DukeException;
+import slave.exception.KappaException;
 
 import slave.task.Deadline;
 
@@ -36,9 +36,9 @@ public class AddDeadlineCommand extends Command {
      *
      * @param task Task description
      * @param date Date description
-     * @throws DukeException Throws invalid date exception of DD/MM/YYYY HHMM format.
+     * @throws KappaException Throws invalid date exception of DD/MM/YYYY HHMM format.
      */
-    public AddDeadlineCommand(String task, DateTime date, Tags tags) throws DukeException {
+    public AddDeadlineCommand(String task, DateTime date, Tags tags) throws KappaException {
         this.commandType = CommandType.ADDDEADLINE;
         this.task = task;
         this.date = date.convertToString();
@@ -50,10 +50,10 @@ public class AddDeadlineCommand extends Command {
      *
      * @param tasks List containing current tasks.
      * @param ui User interface.
-     * @throws DukeException For error in adding to TaskList.
+     * @throws KappaException For error in adding to TaskList.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Ui ui) throws KappaException {
         Deadline deadlineTask = new Deadline(this.task, tasks.getSize() + 1, this.date, this.tags);
         tasks.addToList(deadlineTask);
         return ui.printAddDeadlineCommand(deadlineTask, tasks);

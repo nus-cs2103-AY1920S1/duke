@@ -3,7 +3,7 @@ package slave.command;
 import slave.elements.TaskList;
 import slave.elements.Ui;
 
-import slave.exception.DukeException;
+import slave.exception.KappaException;
 
 /**
  * Command that clears storage and taskList.
@@ -22,10 +22,10 @@ public class ClearCommand extends Command {
      *
      * @param tasks List containing current tasks.
      * @param ui User interface.
-     * @throws DukeException If list is not found.
+     * @throws KappaException If list is not found.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Ui ui) throws KappaException {
         tasks.clearList();
         return ui.printClearCommand();
     }

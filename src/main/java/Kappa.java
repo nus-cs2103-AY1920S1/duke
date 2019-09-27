@@ -1,21 +1,10 @@
-import javafx.application.Application;
-
-import javafx.application.Platform;
 import javafx.scene.Scene;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
-
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.Region;
-
-import javafx.stage.Stage;
 
 import slave.command.Command;
 import slave.command.CommandType;
@@ -25,29 +14,37 @@ import slave.elements.Storage;
 import slave.elements.TaskList;
 import slave.elements.Ui;
 
-import slave.exception.DukeException;
+import slave.exception.InOutWentWrongException;
+import slave.exception.KappaException;
 
 import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
  * <h1>
- *     Welcome to Slave.
+ *     Welcome to Kappa.
  * </h1>
  * <p>
- *     This Slave Program is a productivity application which helps
+ *     This Kappa Program is a productivity application which helps
  * you to store and load tasks as well as letting you mark them
  * as done as you go about your daily routine!
  * </p>
+ * <p>
+ *     Image rights for doge.png and kermit.png goes to their respective owners. No profit is made from
+ *     the creation of this productivity application.
+ *     Link for doge.png: https://www.stickpng.com/img/memes/doge/doge-full-smiling
+ *     Link for kermit.png: https://www.pngix.com/viewpng/mbiRi_kermit-the-frog-png-clipart-kermit-the-frog/
+ * </p>
  *
  * @author Kalsyc
- * @version 1.0
+ * @version 2.0
  * @since 28 August 2019
  *
  */
-public class Duke {
+public class Kappa {
 
     private Ui ui;
     private TaskList taskList;
@@ -59,45 +56,48 @@ public class Duke {
     private Scene scene;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/doge.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/kermit.png"));
+    private Image kappa = new Image(this.getClass().getResourceAsStream("/images/kermit.png"));
 
     /**
      * Drives the application. Main method.
      *
      * @param args Placeholder
-     * @throws DukeException Throws any exception that arises with running the application
+     * @throws KappaException Throws any exception that arises with running the application
      */
-    public static void main(String[] args) throws DukeException, IOException {
-        new Duke().run();
+    public static void main(String[] args) throws KappaException, IOException {
+        new Kappa().run();
     }
 
     /**
-     * Constructor which initialises storage and taskList.
+     * Constructor which initialises storage and taskList. Creates new directory to store text if missing.
      *
-     * @throws DukeException In case storage cannot be loaded
+     * @throws KappaException In case storage cannot be loaded or Error in creating directory.
      */
-    public Duke() throws DukeException, IOException {
+    public Kappa() throws KappaException {
         this.ui = new Ui();
         Path path = Paths.get("./data");
-        if (!Files.exists(path)) {
-            Files.createDirectories(path);
+        try {
+            if (!Files.exists(path)) {
+                Files.createDirectories(path);
+            }
+        } catch (IOException error) {
+            throw new InOutWentWrongException();
         }
-        Storage storage = new Storage("./data/duke.txt");
+        Storage storage = new Storage("./data/store.txt");
         this.taskList = new TaskList(storage.load(), storage);
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates response based on user input.
      */
-    String getResponse(String input) throws InterruptedException {
+    String getResponse(String input) {
         try {
             Command command = Parser.parse(input);
             if (command.getCommandType().equals(CommandType.EXIT)) {
                 return command.execute(this.taskList, this.ui);
             }
             return command.execute(this.taskList, this.ui);
-        } catch (DukeException e) {
+        } catch (KappaException e) {
             return ui.showErrorMessage(e);
         }
     }
@@ -105,25 +105,14 @@ public class Duke {
     /**
      * Runs the logic of the application. It takes in user input
      * and parses the command before determining what type of command and execute
-     * the command accordingly.
+     * the command accordingly.s
      */
-    private void run() {
+    private void run() throws KappaException {
         Ui.showWelcomeMessage();
         while (true) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command command = Parser.parse(fullCommand);
-                command.execute(this.taskList, this.ui);
-                if (command.getCommandType().equals(CommandType.EXIT)) {
-                    Platform.exit();
-                    System.exit(0);
-                    break;
-                }
-            } catch (DukeException e) {
-                ui.showErrorMessage(e);
-            }
+            String fullCommand = ui.readCommand();
+            Command command = Parser.parse(fullCommand);
+            command.execute(this.taskList, this.ui);
         }
-
     }
-
 }

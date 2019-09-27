@@ -5,7 +5,7 @@ import slave.elements.Tags;
 import slave.elements.Ui;
 import slave.elements.TaskList;
 
-import slave.exception.DukeException;
+import slave.exception.KappaException;
 
 import slave.task.Event;
 
@@ -36,9 +36,9 @@ public class AddEventCommand extends Command {
      *
      * @param task Event description.
      * @param date Date description.
-     * @throws DukeException Throws invalid date exception of DD/MM/YYYY HHMM format.
+     * @throws KappaException Throws invalid date exception of DD/MM/YYYY HHMM format.
      */
-    public AddEventCommand(String task, DateTime date, Tags tags) throws DukeException {
+    public AddEventCommand(String task, DateTime date, Tags tags) throws KappaException {
         this.commandType = CommandType.ADDEVENT;
         this.task = task;
         this.date = date.convertToString();
@@ -50,11 +50,11 @@ public class AddEventCommand extends Command {
      *
      * @param tasks List containing current tasks.
      * @param ui User interface.
-     * @throws DukeException For error in adding to TaskList.
+     * @throws KappaException For error in adding to TaskList.
      * @return
      */
     @Override
-    public String execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Ui ui) throws KappaException {
         Event eventTask = new Event(this.task, tasks.getSize() + 1, this.date, this.tags);
         tasks.addToList(eventTask);
         return ui.printAddEventCommand(eventTask, tasks);

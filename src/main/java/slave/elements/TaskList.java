@@ -1,6 +1,6 @@
 package slave.elements;
 
-import slave.exception.DukeException;
+import slave.exception.KappaException;
 
 import slave.task.Task;
 
@@ -39,9 +39,9 @@ public class TaskList {
      * Adds task to list.
      *
      * @param task Task to be added.
-     * @throws DukeException Throws when there's error in adding task to storage.
+     * @throws KappaException Throws when there's error in adding task to storage.
      */
-    public void addToList(Task task) throws DukeException {
+    public void addToList(Task task) throws KappaException {
         this.taskList.add(task);
         this.storage.addTask(task);
     }
@@ -69,9 +69,9 @@ public class TaskList {
      * Removes task from list and storage.
      *
      * @param index Index of task to be removed.
-     * @throws DukeException Throws when there is error in removing task from storage.
+     * @throws KappaException Throws when there is error in removing task from storage.
      */
-    public void removeFromList(int index) throws DukeException {
+    public void removeFromList(int index) throws KappaException {
         this.taskList.remove(index - 1);
         if (this.getSize() == index - 1) {
             this.storage.refreshStorage(taskList);
@@ -85,9 +85,9 @@ public class TaskList {
      * Sets task of input index to done.
      *
      * @param index Task to be set as done.
-     * @throws DukeException Throws when there is error in setting task done in storage.
+     * @throws KappaException Throws when there is error in setting task done in storage.
      */
-    public void setDoneInList(int index) throws DukeException {
+    public void setDoneInList(int index) throws KappaException {
         this.taskList.get(index - 1).setDone();
         this.storage.refreshStorage(taskList);
     }
@@ -104,9 +104,9 @@ public class TaskList {
     /**
      * Clears and wipes list and storage of tasks.
      *
-     * @throws DukeException Throws if storage cannot be wiped.
+     * @throws KappaException Throws if storage cannot be wiped.
      */
-    public void clearList() throws DukeException {
+    public void clearList() throws KappaException {
         this.taskList.clear();
         this.storage.clearStorage();
     }

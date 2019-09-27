@@ -5,7 +5,7 @@ import slave.task.Deadline;
 import slave.task.Event;
 import slave.task.ToDo;
 
-import slave.exception.DukeException;
+import slave.exception.KappaException;
 import slave.exception.InOutWentWrongException;
 import slave.exception.NoStorageFileDetectedException;
 import slave.exception.UnableToReadFileException;
@@ -55,9 +55,9 @@ public class Storage {
      * Loads tasks from .txt file.
      *
      * @return An ArrayList of tasks parsed from .txt file.
-     * @throws DukeException Throws if file cannot be found or input went wrong.
+     * @throws KappaException Throws if file cannot be found or input went wrong.
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws KappaException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
             List<String> list = Files.readAllLines(this.file.toPath());
@@ -77,9 +77,9 @@ public class Storage {
      * Refreshes storage and updates list of tasks to the stored local .txt file.
      *
      * @param taskList Current task list.
-     * @throws DukeException Throws if file cannot be found.
+     * @throws KappaException Throws if file cannot be found.
      */
-    void refreshStorage(ArrayList<Task> taskList) throws DukeException {
+    void refreshStorage(ArrayList<Task> taskList) throws KappaException {
         try {
             PrintWriter writer = new PrintWriter(this.file);
             writer.close();
@@ -95,10 +95,10 @@ public class Storage {
      * Encodes task and add it to .txt file.
      *
      * @param task Task to store in .txt file.
-     * @throws DukeException Throws if input went wrong in writing file.
+     * @throws KappaException Throws if input went wrong in writing file.
      */
 
-    void addTask(Task task) throws DukeException {
+    void addTask(Task task) throws KappaException {
         try {
             FileWriter fw = new FileWriter(this.file, true);
             switch (task.getType()) {
@@ -157,10 +157,10 @@ public class Storage {
      * @param line Line to parse.
      * @param index Current line of file.
      * @return Task that has been parsed.
-     * @throws DukeException Throws error in reading file.
+     * @throws KappaException Throws error in reading file.
      */
 
-    private Task formatFileToTask(String line, int index) throws DukeException {
+    private Task formatFileToTask(String line, int index) throws KappaException {
         String[] tokens = line.split(" ~ ");
         switch (tokens[1]) {
         case "ToDo":

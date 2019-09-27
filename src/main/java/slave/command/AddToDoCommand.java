@@ -4,7 +4,7 @@ import slave.elements.Tags;
 import slave.elements.Ui;
 import slave.elements.TaskList;
 
-import slave.exception.DukeException;
+import slave.exception.KappaException;
 
 import slave.task.ToDo;
 
@@ -33,10 +33,10 @@ public class AddToDoCommand extends Command {
      *
      * @param tasks List containing current tasks.
      * @param ui User interface.
-     * @throws DukeException For error in adding to taskList.
+     * @throws KappaException For error in adding to taskList.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Ui ui) throws KappaException {
         ToDo toDoTask = new ToDo(this.task, tasks.getSize() + 1, this.tags);
         tasks.addToList(toDoTask);
         return ui.printAddToDoCommand(toDoTask, tasks);

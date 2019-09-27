@@ -1,24 +1,23 @@
 import javafx.application.Platform;
+
 import javafx.fxml.FXML;
-import javafx.scene.Group;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
+
 import javafx.stage.Stage;
+
 import slave.elements.Ui;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -34,48 +33,51 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Kappa kappa;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/doge.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/kermit.png"));
+    private Image kappaImage = new Image(this.getClass().getResourceAsStream("/images/kermit.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(Ui.showWelcomeMessage(), dukeImage)
+                DialogBox.getKappaDialog(Ui.showWelcomeMessage(), kappaImage)
         );
     }
 
-    void setDuke(Duke d) {
-        duke = d;
+    void setDuke(Kappa d) {
+        kappa = d;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Kappa's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() throws InterruptedException {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = kappa.getResponse(input);
         if (input.substring(0,3).equals("bye")){
             createExitPopup();
             new ExitProgram();
         }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getKappaDialog(response, kappaImage)
         );
         userInput.clear();
     }
 
+    /**
+     * Creates exit popup box to say goodbye to the user.
+     */
     private void createExitPopup() {
         Stage popup = new Stage();
         popup.setWidth(400);
         popup.setHeight(300);
-        ImageView imageView = new ImageView(dukeImage);
-        Text text = new Text("Dont worry. I'll keep your tasks safe hehe");
+        ImageView imageView = new ImageView(kappaImage);
+        Text text = new Text("Dont worry. I'll keep your tasks safe heheh");
         VBox vbox = new VBox(text, imageView);
         Scene scene = new Scene(vbox, 600, 300);
         popup.setScene(scene);
@@ -83,16 +85,19 @@ public class MainWindow extends AnchorPane {
         popup.show();
     }
 
-    private static class ExitProgram {
+    /**
+     * Private static class that delays the closing of the application until the exit message has been loaded.
+     */
+    static class ExitProgram {
 
         Timer timer;
 
-        public ExitProgram() {
+        ExitProgram() {
             timer = new Timer();
             timer.schedule(new RemindTask(), 3000);
         }
 
-        class RemindTask extends TimerTask {
+        private class RemindTask extends TimerTask {
             public void run() {
                 Platform.exit();
                 timer.cancel(); //Terminate the timer thread

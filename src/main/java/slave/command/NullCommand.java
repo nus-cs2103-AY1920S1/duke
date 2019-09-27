@@ -3,7 +3,7 @@ package slave.command;
 import slave.elements.TaskList;
 import slave.elements.Ui;
 
-import slave.exception.DukeException;
+import slave.exception.KappaException;
 import slave.exception.InvalidCommandException;
 
 /**
@@ -28,10 +28,10 @@ public class NullCommand extends Command {
      *
      * @param tasks List containing current tasks.
      * @param ui User interface.
-     * @throws DukeException For invalid commands by user.
+     * @throws KappaException For invalid commands by user.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Ui ui) throws KappaException {
         throw new InvalidCommandException(command);
     }
 }

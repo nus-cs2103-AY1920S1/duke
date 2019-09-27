@@ -3,7 +3,7 @@ package slave.exception;
 /**
  * Missing Task exception, for when task is missing from input.
  */
-public class MissingTaskException extends DukeException {
+public class MissingTaskException extends KappaException {
 
     /**
      * Constructor for MissingTaskException.

@@ -3,7 +3,7 @@ package slave.exception;
 /**
  * Represents an invalid command exception.
  */
-public class InvalidCommandException extends DukeException {
+public class InvalidCommandException extends KappaException {
 
     /**
      * Constructor.

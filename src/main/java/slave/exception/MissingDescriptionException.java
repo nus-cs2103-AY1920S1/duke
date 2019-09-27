@@ -3,7 +3,7 @@ package slave.exception;
 /**
  * Missing Description Exception.
  */
-public class MissingDescriptionException extends DukeException {
+public class MissingDescriptionException extends KappaException {
 
     /**
      * Constructor for MissingDescriptionException.

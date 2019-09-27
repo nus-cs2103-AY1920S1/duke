@@ -1,12 +1,11 @@
 package slave.elements;
 
-import slave.exception.DukeException;
+import slave.exception.KappaException;
 import slave.task.Deadline;
 import slave.task.Event;
 import slave.task.Task;
 import slave.task.ToDo;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -64,7 +63,7 @@ public class Ui {
      *
      * @param e Error to be printed.
      */
-    public String showErrorMessage(DukeException e) {
+    public String showErrorMessage(KappaException e) {
         String formattedMessage = Formatter.formatMessage(e.getMessage());
         System.out.println(formattedMessage);
         return formattedMessage;

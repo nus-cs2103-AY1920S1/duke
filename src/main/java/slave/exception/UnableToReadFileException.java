@@ -3,7 +3,7 @@ package slave.exception;
 /**
  * Exception for when file cannot be read properly.
  */
-public class UnableToReadFileException extends DukeException {
+public class UnableToReadFileException extends KappaException {
 
     /**
      * Constructor for UnableToReadFileException.

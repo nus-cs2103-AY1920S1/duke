@@ -3,7 +3,7 @@ package slave.command;
 import slave.elements.TaskList;
 import slave.elements.Ui;
 
-import slave.exception.DukeException;
+import slave.exception.KappaException;
 
 /**
  * Abstract class Command that represents an action by the user.
@@ -26,7 +26,7 @@ public abstract class Command {
      *
      * @param tasks List containing current tasks.
      * @param ui User interface.
-     * @throws DukeException Throws exception with error message in case anything goes wrong.
+     * @throws KappaException Throws exception with error message in case anything goes wrong.
      */
-    public abstract String execute(TaskList tasks, Ui ui) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui) throws KappaException;
 }

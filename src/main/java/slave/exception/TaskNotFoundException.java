@@ -3,7 +3,7 @@ package slave.exception;
 /**
  * Exception for when task cannot be found in list.
  */
-public class TaskNotFoundException extends DukeException {
+public class TaskNotFoundException extends KappaException {
 
     /**
      * Constructor for TaskNotFoundException.

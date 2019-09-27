@@ -17,7 +17,7 @@ import slave.command.HelpCommand;
 import slave.elements.DateTime;
 import slave.elements.Parser;
 
-import slave.exception.DukeException;
+import slave.exception.KappaException;
 import slave.exception.MissingDescriptionException;
 import slave.exception.MissingTaskException;
 import slave.exception.MissingDateException;
@@ -32,10 +32,10 @@ class DukeTest {
     /**
      * Tests if the date has been converted properly as intended.
      *
-     * @throws DukeException For invalid dates.
+     * @throws KappaException For invalid dates.
      */
     @Test
-    void testDate() throws DukeException {
+    void testDate() throws KappaException {
         DateTime date = new DateTime("1/12/2000","0033");
         assertEquals("1st of December 2000, 12.33am", date.convertToString());
     }
@@ -43,10 +43,10 @@ class DukeTest {
     /**
      * Tests if the commands return the appropriate command type.
      *
-     * @throws DukeException Any exception that is thrown from doing any valid commands.
+     * @throws KappaException Any exception that is thrown from doing any valid commands.
      */
     @Test
-    void testCommands() throws DukeException {
+    void testCommands() throws KappaException {
 
         final String command1 = "list";
         final String command2 = "delete 1";
@@ -74,10 +74,10 @@ class DukeTest {
     /**
      * Tests if the correct exceptions are thrown for invalid inputs.
      *
-     * @throws DukeException Any exceptions that are thrown from doing any invalid commands.
+     * @throws KappaException Any exceptions that are thrown from doing any invalid commands.
      */
     @Test
-    void testExceptions() throws DukeException {
+    void testExceptions() throws KappaException {
         String command1 = "todo";
         String command2 = "event";
         String command3 = "deadline";

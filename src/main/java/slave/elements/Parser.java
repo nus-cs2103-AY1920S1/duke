@@ -13,7 +13,7 @@ import slave.command.Command;
 import slave.command.AddDeadlineCommand;
 import slave.command.FindCommand;
 
-import slave.exception.DukeException;
+import slave.exception.KappaException;
 import slave.exception.MissingDateException;
 import slave.exception.MissingDescriptionException;
 import slave.exception.MissingTaskException;
@@ -31,9 +31,9 @@ public class Parser {
      *
      * @param fullCommand Input by user.
      * @return Corresponding command based on user input.
-     * @throws DukeException For invalid input.
+     * @throws KappaException For invalid input.
      */
-    public static Command parse(String fullCommand) throws DukeException {
+    public static Command parse(String fullCommand) throws KappaException {
         String[] tokens = fullCommand.split(" ");
         String firstWord = tokens[0];
         switch (firstWord) {
@@ -89,7 +89,7 @@ public class Parser {
         }
     }
 
-    private static Command getValidEventCommand(String eventDesc, String eventDate, Tags tags) throws DukeException {
+    private static Command getValidEventCommand(String eventDesc, String eventDate, Tags tags) throws KappaException {
         if (isDate(eventDate)) {
             String[] eventSplitTokens = eventDate.split(" ");
             DateTime validEventDate = new DateTime(eventSplitTokens[0], eventSplitTokens[1]);
@@ -98,7 +98,7 @@ public class Parser {
         return new AddEventCommand(eventDesc, eventDate, tags);
     }
 
-    private static Command getValidDeadlineCommand(String deadlineDesc, String deadlineDate, Tags tags) throws DukeException {
+    private static Command getValidDeadlineCommand(String deadlineDesc, String deadlineDate, Tags tags) throws KappaException {
         if (isDate(deadlineDate)) {
             String[] dateSplitTokens = deadlineDate.split(" ");
             DateTime validDeadlineDate = new DateTime(dateSplitTokens[0], dateSplitTokens[1]);
@@ -130,9 +130,9 @@ public class Parser {
      * @param check What command to check.
      * @param input Input from user.
      * @param tokens Input split by space.
-     * @throws DukeException Throws exception if date or description is missing.
+     * @throws KappaException Throws exception if date or description is missing.
      */
-    private static void checkValidity(String check, String input, String[] tokens) throws DukeException {
+    private static void checkValidity(String check, String input, String[] tokens) throws KappaException {
         switch (check) {
         case "deadline":
             checkDeadline(input, tokens);

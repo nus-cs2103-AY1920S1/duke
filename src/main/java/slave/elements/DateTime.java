@@ -1,6 +1,6 @@
 package slave.elements;
 
-import slave.exception.DukeException;
+import slave.exception.KappaException;
 import slave.exception.InvalidDateException;
 
 import java.time.LocalDateTime;
@@ -63,7 +63,7 @@ public class DateTime {
         assert this.day <= 31 : "Invalid Day";
     }
 
-    public String convertToString() throws DukeException {
+    public String convertToString() throws KappaException {
         String result;
         try {
             result = this.localDateTime.getDayOfMonth() + daySuffixes[this.localDateTime.getDayOfMonth()]

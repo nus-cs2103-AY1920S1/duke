@@ -3,7 +3,7 @@ package slave.command;
 import slave.elements.TaskList;
 import slave.elements.Ui;
 
-import slave.exception.DukeException;
+import slave.exception.KappaException;
 import slave.exception.TaskAlreadyDoneException;
 import slave.exception.TaskNotFoundException;
 
@@ -31,10 +31,10 @@ public class DoneCommand extends Command {
      *
      * @param tasks List containing current tasks.
      * @param ui User interface.
-     * @throws DukeException For tasks that cannot be found or have already been done.
+     * @throws KappaException For tasks that cannot be found or have already been done.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Ui ui) throws KappaException {
         try {
             tasks.getTaskByIndex(this.index);
         } catch (IndexOutOfBoundsException error) {

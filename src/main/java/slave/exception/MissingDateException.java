@@ -3,7 +3,7 @@ package slave.exception;
 /**
  * Missing date exception, for when date is missing from input.
  */
-public class MissingDateException extends DukeException {
+public class MissingDateException extends KappaException {
     /**
      * Constructor for MissingDateException.
      */

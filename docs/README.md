@@ -140,6 +140,7 @@ Expected outcome:
 `Deletes task based on specified index.`
 
 ![Overview of Delete1](./images/DeleteEx1.png)
+
 ![Overview of Delete2](./images/DeleteEx2.png)
 
 ### <a name="find-commands"></a>`find` - Find your task
@@ -169,6 +170,7 @@ Expected outcome:
 `Clears storage of all tasks.`
 
 ![Overview of Clear1](./images/ClearEx1.png)
+
 ![Overview of Clear2](./images/ClearEx2.png)
 
 ### <a name="done-commands"></a>`done` - Mark your task as done
@@ -186,6 +188,7 @@ Expected outcome:
 `Marks the task at specified index as done.`
 
 ![Overview of Done1](./images/DoneEx1.png)
+
 ![Overview of Done2](./images/DoneEx2.png)
 
 ### <a name="exit-commands"></a>`exit` - Exit application

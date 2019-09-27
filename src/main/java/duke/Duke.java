@@ -5,6 +5,7 @@ import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
+import java.util.InputMismatchException;
 
 public class Duke {
     private Storage storage;
@@ -32,9 +33,8 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (Exception e) {
-                // todo: proper exception handling
-                System.out.println(e);
+            } catch (InputMismatchException e) {
+                ui.showError("Command not recognised!");
             } finally {
                 ui.showLine();
             }

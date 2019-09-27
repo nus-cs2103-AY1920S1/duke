@@ -67,7 +67,7 @@ public class Storage {
                 index++;
             }
         } catch (IOException e) {
-            this.file = new File("./data/duke.txt");
+            this.file = new File("./data/store.txt");
             return taskList;
         }
         return taskList;

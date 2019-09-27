@@ -20,6 +20,7 @@ public class HelpCommand extends Command {
      *
      * @param tasks List containing current tasks.
      * @param ui User interface.
+     * @return String containing Kappa's formatted dialog.
      */
     @Override
     public String execute(TaskList tasks, Ui ui) {

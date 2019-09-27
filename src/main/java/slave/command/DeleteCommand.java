@@ -31,6 +31,7 @@ public class DeleteCommand extends Command {
      * @param tasks List containing current tasks.
      * @param ui User interface.
      * @throws KappaException For error in retrieving task from list due to invalid index.
+     * @return String containing Kappa's formatted dialog.
      */
     @Override
     public String execute(TaskList tasks, Ui ui) throws KappaException {

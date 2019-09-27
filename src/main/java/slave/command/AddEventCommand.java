@@ -21,8 +21,9 @@ public class AddEventCommand extends Command {
     /**
      * Constructor (date doesn't fit the DD/MM/YYYY HHMM format).
      *
-     * @param task Event description
-     * @param date Date description
+     * @param task Event description.
+     * @param date Date description.
+     * @param tags Tags.
      */
     public AddEventCommand(String task, String date, Tags tags) {
         this.commandType = CommandType.ADDEVENT;
@@ -36,6 +37,7 @@ public class AddEventCommand extends Command {
      *
      * @param task Event description.
      * @param date Date description.
+     * @param tags Tags.
      * @throws KappaException Throws invalid date exception of DD/MM/YYYY HHMM format.
      */
     public AddEventCommand(String task, DateTime date, Tags tags) throws KappaException {
@@ -51,7 +53,7 @@ public class AddEventCommand extends Command {
      * @param tasks List containing current tasks.
      * @param ui User interface.
      * @throws KappaException For error in adding to TaskList.
-     * @return
+     * @return String containing Kappa's formatted dialog.
      */
     @Override
     public String execute(TaskList tasks, Ui ui) throws KappaException {

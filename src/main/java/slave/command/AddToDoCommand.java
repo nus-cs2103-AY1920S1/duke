@@ -21,6 +21,7 @@ public class AddToDoCommand extends Command {
      * Constructor.
      *
      * @param task To-do description.
+     * @param tags Tags.
      */
     public AddToDoCommand(String task, Tags tags) {
         this.commandType = CommandType.ADDTODO;
@@ -34,6 +35,7 @@ public class AddToDoCommand extends Command {
      * @param tasks List containing current tasks.
      * @param ui User interface.
      * @throws KappaException For error in adding to taskList.
+     * @return String containing Kappa's formatted dialog.
      */
     @Override
     public String execute(TaskList tasks, Ui ui) throws KappaException {

@@ -23,6 +23,7 @@ public class AddDeadlineCommand extends Command {
      *
      * @param task Deadline description.
      * @param date Date description.
+     * @param tags Tags.
      */
     public AddDeadlineCommand(String task, String date, Tags tags) {
         this.commandType = CommandType.ADDDEADLINE;
@@ -34,8 +35,9 @@ public class AddDeadlineCommand extends Command {
     /**
      * Constructor (date fits into DD/MM/YYYY HHMM format).
      *
-     * @param task Task description
-     * @param date Date description
+     * @param task Task description.
+     * @param date Date description.
+     * @param tags Tags.
      * @throws KappaException Throws invalid date exception of DD/MM/YYYY HHMM format.
      */
     public AddDeadlineCommand(String task, DateTime date, Tags tags) throws KappaException {
@@ -51,6 +53,7 @@ public class AddDeadlineCommand extends Command {
      * @param tasks List containing current tasks.
      * @param ui User interface.
      * @throws KappaException For error in adding to TaskList.
+     * @return String containing Kappa's formatted dialog.
      */
     @Override
     public String execute(TaskList tasks, Ui ui) throws KappaException {

@@ -29,11 +29,12 @@ public class FindCommand extends Command {
 
     /**
      * Executes by searching for task with the user input term,
-     * storing into a temp arraylist and then printing it to user interface.
+     * storing into a temp ArrayList and then printing it to user interface.
      *
      * @param tasks List containing current tasks.
      * @param ui User interface.
      * @throws KappaException Throws if searched term isn't in any of the task descriptions.
+     * @return String containing Kappa's formatted dialog.
      */
     @Override
     public String execute(TaskList tasks, Ui ui) throws KappaException {

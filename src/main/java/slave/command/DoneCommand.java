@@ -32,6 +32,7 @@ public class DoneCommand extends Command {
      * @param tasks List containing current tasks.
      * @param ui User interface.
      * @throws KappaException For tasks that cannot be found or have already been done.
+     * @return String containing Kappa's formatted dialog.
      */
     @Override
     public String execute(TaskList tasks, Ui ui) throws KappaException {

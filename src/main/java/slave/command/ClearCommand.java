@@ -11,7 +11,7 @@ import slave.exception.KappaException;
 public class ClearCommand extends Command {
 
     /**
-     * Constructor.
+     * Constructor for Clear Command.
      */
     public ClearCommand() {
         this.commandType = CommandType.CLEAR;
@@ -23,6 +23,7 @@ public class ClearCommand extends Command {
      * @param tasks List containing current tasks.
      * @param ui User interface.
      * @throws KappaException If list is not found.
+     * @return String containing Kappa's formatted dialog.
      */
     @Override
     public String execute(TaskList tasks, Ui ui) throws KappaException {

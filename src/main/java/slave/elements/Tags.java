@@ -17,7 +17,7 @@ public class Tags {
 
     public String toString() {
         if (tagSet.size() == 0) {
-            return "";
+            return "None";
         }
         StringBuilder formattedString = new StringBuilder();
         for (String tag: tagSet) {

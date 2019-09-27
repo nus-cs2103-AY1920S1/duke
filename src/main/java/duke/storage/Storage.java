@@ -33,7 +33,7 @@ public class Storage {
     private static final String FILE_INPUT_ERROR_MESSAGE = "The hard disk file could not be read."
             + " Creating an empty task list.";
     private static final String SAVE_FAIL_MESSAGE = "Data could not be saved."
-            + "Please check the hard disk file.\n";
+            + " Please check the hard disk file.\n";
 
     /**
      * Constructs a Storage class that is connected to the specified file path.

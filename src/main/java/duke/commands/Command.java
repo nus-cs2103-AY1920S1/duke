@@ -17,14 +17,6 @@ public abstract class Command {
     public abstract CommandResult execute();
 
     /**
-     * Returns true if this command is an exit command.
-     * @return true if this command is an exit command.
-     */
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Sets this command to execute on the specified task list.
      * @param tasks The specified task list.
      */

@@ -7,13 +7,6 @@ package duke.exceptions;
 public class DukeException extends Exception {
 
     /**
-     * Constructs a Duke exception.
-     */
-    public DukeException() {
-        super();
-    }
-
-    /**
      * Constructs a Duke exception with the specified error message.
      * @param errorMessage The specified error message.
      */

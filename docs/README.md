@@ -25,7 +25,25 @@ Delete completed and redundant tasks from task list!
 
 This section documents the entire set of commands supported by Duke.
 
-### List
+## Help
+
+This command lists all the commands supported by Duke and their respective formats.
+
+*Usage:*
+
+`help`
+
+*Output:*
+
+```
+Here is a list of commands I can respond to: -
+ (*) list
+  ...
+```
+
+## List
+
+Lists all the tasks stored by Duke. Includes completed tasks.
 
 *Usage:*
 
@@ -36,6 +54,7 @@ This section documents the entire set of commands supported by Duke.
 1. [Todo] [✔] Buy book
 2. [Deadline] [✘] Return Book (by: 28-09-2019 2359)
 ```
-`
+
+## Todo - `[description]`
 
 

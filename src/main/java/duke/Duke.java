@@ -148,6 +148,8 @@ public class Duke extends Application {
             return ui.showAddedExpense(newExpense);
         } else if (command.equals("expenses")){
             return listOfAllExpenses.printList();
+        } else if (command.equals("glossary")) {
+            return ui.showGlossary();
         } else {//all other keywords not part of Duke's task handling schedule
             try {
                 throw new DukeException("      OOPS!!! I'm sorry, but I don't know what that means :-(");

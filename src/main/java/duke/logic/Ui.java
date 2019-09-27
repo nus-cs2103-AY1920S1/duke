@@ -145,4 +145,28 @@ public class Ui {
         expenseBuilder.append(this.showBlankLine());
         return expenseBuilder.toString();
     }
+    public String showGlossary() {
+        StringBuilder glossaryBuilder = new StringBuilder();
+        glossaryBuilder.append(this.showSeparationLine());
+        glossaryBuilder.append(this.showSeparationLine());
+        glossaryBuilder.append("Hi! Below is the list of all commands that you will find helpful :) Have Fun!!! \n");
+        glossaryBuilder.append("Remember to type it in the correct syntax as shown in the GLOSSARY!\n.....\n");
+        glossaryBuilder.append("bye: Termination of programme\n.....\n");
+        glossaryBuilder.append("list: shows a list of all available tasks and task status stored\n.....\n");
+        glossaryBuilder.append("done {index}: marks the task at the index as done\n.....\n");
+        glossaryBuilder.append("delete {index}: deletes the task at the index\n.....\n");
+        glossaryBuilder.append("find {keyword}: displays a list of tasks that contains the given keyword or phrase" +
+                "\n.....\n");
+        glossaryBuilder.append("find {keyword}: displays a list of tasks that contains the given keyword or phrase" +
+                "\n.....\n");
+        glossaryBuilder.append("todo {task}: add a 'todo' style task to list\n.....\n");
+        glossaryBuilder.append("deadline (task} /by {time}: add a 'deadline' style task to list\n.....\n");
+        glossaryBuilder.append("event (task} /at {time}: add an 'event' style task to list\n.....\n");
+        glossaryBuilder.append("spending {category} {amount} {brief description}: add a spending\n.....\n");
+        glossaryBuilder.append("expenses: shows a list of all expenses stored\n.....\n");
+        glossaryBuilder.append("glossary: just shows the glossary, duh!\n.....\n");
+        glossaryBuilder.append(this.showSeparationLine());
+        glossaryBuilder.append(this.showSeparationLine());
+        return glossaryBuilder.toString();
+    }
 }

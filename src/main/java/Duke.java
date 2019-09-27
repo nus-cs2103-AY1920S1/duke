@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
     public static void main(String[] args) throws DukeException,IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -92,7 +93,9 @@ public class Duke {
         writeDataToFile(tasks);
         scanner.close();
     }
-    
+
+
+
     public static void informUserOfUpdate(ArrayList<Task> tasks, Task newTask) {
         tasks.add(newTask);
         System.out.println("Got it. I've added this task:");

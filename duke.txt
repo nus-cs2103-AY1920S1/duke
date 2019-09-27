@@ -1,7 +1,5 @@
-T | 0 | eat lunch
-D | 0 | project | tomorrow
-E | 0 | hackathon | orchard central
-E | 0 | school trip | sentosa
-D | 0 | work | tomorrow
-E | 1 | tomorrowland | korea
-T | 1 | workout crossfit
+T | 1 | workout
+D | 0 | cs2103 | 30 September 2019, 11.59PM
+E | 1 | hackathon | 30 September 2019, 12.00PM
+E | 0 | conference | 01 October 2019, 12.11PM
+E | 0 | meeting | 12 October 2019, 9.15AM

@@ -1,10 +1,9 @@
 package command;
+
 import task.Task;
 import task.TaskList;
 
-/**
- *<h1> DeleteCommand</h1>
- * The DeleteCommand class
+/**The DeleteCommand class.
  * 1) Instructs the relevant TaskList to delete the indexed task
  * 2) Instructs the Textformatter to return a message for the user
  *
@@ -14,7 +13,7 @@ public class DeleteCommand extends Command {
     Task removed;
 
     /**
-     * Constructor for DeleteCommand Object and stores new task
+     * Constructor for DeleteCommand Object and stores new task.
      *
      * @param number String format of new task
      */
@@ -23,7 +22,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes the indexed task from tasklist using deleteTask and formats delete String
+     * Deletes the indexed task from tasklist using deleteTask and formats delete String.
      *
      * @param reference is the tasklist being used by the program
      * @return String the formatted output, after running through formatOutput()
@@ -36,7 +35,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Returns the formatted command as a formatted string
+     * Returns the formatted command as a formatted string.
      *
      *@return String formatted
      */

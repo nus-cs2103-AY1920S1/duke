@@ -1,18 +1,16 @@
 package command;
 
-/**
- *<h1> ErrorCommand</h1>
- * The ErrorCommand class
+/**The ErrorCommand class.
  * 1) Instructs the Textformatter to return an error message for the user
  *
  */
 
 public class ErrorCommand extends Command {
-    Exception err;
+    private Exception err;
 
     /**
-     * Constructor for ErrorCommand Object
-     * Stores new error as <param>err</param>
+     * Constructor for ErrorCommand Object.
+     * Stores new error as err
      *
      * @param x new error
      */
@@ -22,7 +20,7 @@ public class ErrorCommand extends Command {
     }
 
     /**
-     * Returns the error as a formatted String
+     * Returns the error as a formatted String.
      *
      * @return String the formatted output, after running through formatOutput()
      */
@@ -33,7 +31,7 @@ public class ErrorCommand extends Command {
     }
 
     /**
-     * Returns the formatted command as a formatted string
+     * Returns the formatted command as a formatted string.
      *
      *@return String formatted
      */

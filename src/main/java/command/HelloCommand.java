@@ -1,8 +1,6 @@
 package command;
 
-/**
- *<h1> HelloCommand</h1>
- * The HelloCommand class
+/**The HelloCommand class.
  * 1) Instructs the Textformatter to return a Hello message for the user
  *
  */
@@ -10,7 +8,7 @@ package command;
 public class HelloCommand extends Command {
 
     /**
-     * Returns the hello message as a formatted String
+     * Returns the hello message as a formatted String.
      *
      * @return String the formatted output, after running through formatOutput()
      */
@@ -21,7 +19,7 @@ public class HelloCommand extends Command {
 
 
     /**
-     * Returns the formatted command as a formatted string
+     * Returns the formatted command as a formatted string.
      *
      *@return String formatted
      */

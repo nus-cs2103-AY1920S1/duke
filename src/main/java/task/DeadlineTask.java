@@ -4,7 +4,7 @@ import java.util.Date;
 import formatter.TimeFormatter;
 
 /**
- * Represents a task with a deadline <param>deadline</param> as a Date
+ * Represents a task with a deadline as a Date.
  */
 
 public class DeadlineTask extends Task {
@@ -12,7 +12,7 @@ public class DeadlineTask extends Task {
     Date deadline;
 
     /**
-     * Sets the initial params for the task and sets type to D for deadline
+     * Sets the initial params for the task and sets type to D for deadline.
      *
      * @param inputTask  String of the actual task
      * @param endTime Date is the date and time that this task should be completed by
@@ -25,7 +25,7 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * Overloaded constructor for reading from file
+     * Overloaded constructor for reading from file.
      *
      * @param i  String of the actual task
      * @param c is the completion status
@@ -35,8 +35,8 @@ public class DeadlineTask extends Task {
     public DeadlineTask(String i, boolean c, Date d) {
         super(i);
         type = "D";
-        completed= c;
-        deadline= d;
+        completed = c;
+        deadline = d;
     }
 
     public Date getTime() {
@@ -46,10 +46,12 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toString() {
-        if(completed) {
-            return "[" + type  + "]" + "[\u2713] " + name + "(by: " + TimeFormatter.convertToStringPrint(deadline) + ")";
+        if (completed) {
+            return "[" + type  + "]" + "[" + tick + "] " + name + "(BY: "
+                    + TimeFormatter.convertToStringPrint(deadline) + ")";
         } else {
-            return "[" + type + "]" + "[\u2718] " + name + "(by: " + TimeFormatter.convertToStringPrint(deadline) + ")";
+            return "[" + type + "]" + "[" + cross + "] " + name + "(BY: "
+                    + TimeFormatter.convertToStringPrint(deadline) + ")";
         }
     }
 

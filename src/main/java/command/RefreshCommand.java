@@ -2,24 +2,22 @@ package command;
 
 import task.TaskList;
 
-/**The StatsCommand class.
- * 1) Instructs the tasklist to output the latest stats (Stored as an array)
+/**The RefreshCommand class.
+ * 1) Deletes all tasks
  *
  */
-
-public class StatisticsCommand extends Command {
-    private int[] myStats;
+public class RefreshCommand extends Command {
 
     /**
-     * Checks statistics from the relevant tasklist and return the formatted statistics String.
+     * Deletes all tasks from the taskList.
      *
      * @param reference is the tasklist being used by the program
      * @return String the formatted output, after running through formatOutput()
      */
-
+    @Override
     public String executeCommand(TaskList reference) {
         this.reference = reference;
-        myStats = reference.getStats();
+        reference.refreshTasks();
         return this.formatOutput();
     }
 
@@ -30,7 +28,8 @@ public class StatisticsCommand extends Command {
      */
 
     public String formatOutput() {
-        return TextFormatter.statsFormat(myStats);
+        return TextFormatter.refreshFormat();
     }
+
 
 }

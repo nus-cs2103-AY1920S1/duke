@@ -1,7 +1,5 @@
 package ui;
 
-import command.HelloCommand;
-import driver.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import driver.Duke;
 
 
 
@@ -20,7 +19,6 @@ import javafx.scene.layout.VBox;
  * --> Button to press enter
  */
 public class MainWindow extends AnchorPane {
-
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -41,17 +39,15 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void sayHello() {
-        HelloCommand hi = new HelloCommand();
-        String response = hi.executeCommand();
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(response, dukeImage));
-    }
-
+    /**
+     * Connects Duke to the main window and says hi.
+     */
 
     public void setDuke(Duke d) {
         duke = d;
-        sayHello();
+        String response = duke.sayHello();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(response, dukeImage));
     }
 
     /**
@@ -61,13 +57,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage));
         String response = duke.getResponse(input);
-       // dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
         dialogContainer.getChildren().addAll(
-        DialogBox.getDukeDialog(response, dukeImage));
-
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
         userInput.clear();
     }
 }

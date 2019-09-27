@@ -4,7 +4,7 @@ import java.util.Date;
 import formatter.TimeFormatter;
 
 /**
- * Represents a task with a deadline <param>timeSlot</param> as a Date
+ * Represents a task with a deadline timeSlot as a Date.
  */
 
 public class EventTask extends Task {
@@ -13,7 +13,7 @@ public class EventTask extends Task {
     Date end;
 
     /**
-     * Sets the initial params for the task and sets type to E for event
+     * Sets the initial params for the task and sets type to E for event.
      *
      * @param taskInput  String of the actual task
      * @param s start time
@@ -29,7 +29,7 @@ public class EventTask extends Task {
     }
 
     /**
-     * Overloaded constructor for reading from file
+     * Overloaded constructor for reading from file.
      *
      * @param i  String of the actual task
      * @param c is the completion status
@@ -41,35 +41,32 @@ public class EventTask extends Task {
     public EventTask(String i, boolean c, Date s, Date e) {
         super(i);
         type = "E";
-        completed= c;
+        completed = c;
         start = s;
         end  = e;
     }
 
 
-    /**
-     *
-     */
 
     public Date getStartTime() {
         return start;
     }
-    public Date getEndTime() { return end;}
 
-    /**
-     *
-     */
+    public Date getEndTime() {
+        return end;
+    }
+
 
     @Override
     public String toString() {
-        if(completed) {
-            return "[" + type  + "]" + "[\u2713] " + name +
-                    "(from: " + TimeFormatter.convertToStringPrint(start) +
-                    " to " + TimeFormatter.convertToStringPrint(end) + ")";
+        if (completed) {
+            return "[" + type  + "]" + "[" + tick + "] " + name
+                    + "(FROM: " + TimeFormatter.convertToStringPrint(start)
+                    + " TO: " + TimeFormatter.convertToStringPrint(end) + ")";
         } else {
-            return "[" + type  + "]" + "[\u2718] " + name +
-                    "(from: " + TimeFormatter.convertToStringPrint(start) +
-                    " to " + TimeFormatter.convertToStringPrint(end) + ")";
+            return "[" + type  + "]" + "[" + cross + "] " + name
+                    + "(FROM: " + TimeFormatter.convertToStringPrint(start)
+                    + " TO: " + TimeFormatter.convertToStringPrint(end) + ")";
         }
     }
 }

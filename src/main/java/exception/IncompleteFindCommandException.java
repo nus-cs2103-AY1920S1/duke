@@ -1,13 +1,12 @@
 package exception;
 
 /**
- * IncompleteFindCommandException serves as the specialised error for
- * any find tasks that are input in the wrong format
+ * IncompleteFindCommandException serves as the specialised error for any find tasks with missing user input.
  */
 
 public class IncompleteFindCommandException extends Exception {
     /**
-     * Constructor giver the error message based on each task from Parser
+     * Constructor gives the error message based on each task from Parser.
      */
 
     public IncompleteFindCommandException() {

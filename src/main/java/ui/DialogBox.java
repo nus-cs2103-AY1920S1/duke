@@ -12,11 +12,15 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.paint.Paint;
-import javafx.scene.paint.Color;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.TextAlignment;
+
+import static javafx.scene.paint.Color.WHITESMOKE;
 
 
 /**
@@ -41,6 +45,9 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setWrapText(true);
+        dialog.setTextAlignment(TextAlignment.JUSTIFY);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
         displayPicture.setImage(img);
     }
 
@@ -54,18 +61,34 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Get a specially customised user DialogBox.
+     *
+     * @param text is the input from the user
+     * @param img is the predefined icon for the user
+     * @return DialogBox
+     */
+
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setTextColour(Color.BLACK);
+        db.setTextColor(Color.BLACK);
         BackgroundFill myTemp = new BackgroundFill(Color.GOLDENROD,null,null);
         Background b = new Background(myTemp);
         db.setBackground(b);
         return db;
     }
 
+    /**
+     * Get a specially customised duke DialogBox.
+     *
+     * @param text is the response from Duke
+     * @param img is the predefined icon for the Duke
+     * @return DialogBox
+     */
+
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setTextColour(Color.WHITESMOKE);
+        db.setTextColor(WHITESMOKE);
         BackgroundFill myTemp = new BackgroundFill(Color.BLACK,null,null);
         Background b = new Background(myTemp);
         db.setBackground(b);
@@ -73,7 +96,10 @@ public class DialogBox extends HBox {
         return db;
     }
 
-    public void setTextColour(Paint x) {
+    public void setTextColor(Paint x) {
         dialog.setTextFill(x);
     }
+
+
+
 }

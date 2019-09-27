@@ -67,6 +67,8 @@ Expected outcome:
 
 `Adds a ToDo Task to your list.`
 
+![Overview of Todo](./images/ToDoEx.png)
+
 ### <a name="deadline-commands"></a>`deadline` - Add a Deadline task to your list
 
 Syntax:
@@ -86,6 +88,8 @@ Example:
 Expected outcome:
 
 `Adds a Deadline Task to your list.`
+
+![Overview of Deadline](./images/DeadlineEx.png)
 
 ### <a name="event-commands"></a>`event` - Add an Event task to your list
 
@@ -107,6 +111,8 @@ Expected outcome:
 
 `Adds an Event Task to your list.`
 
+![Overview of Event](./images/EventEx.png)
+
 ### <a name="list-commands"></a>`list` - Display your tasks
 
 Syntax:
@@ -116,6 +122,8 @@ Syntax:
 Expected outcome:
 
 `Displays all your tasks stored thurs far.`
+
+![Overview of List](./images/ListEx.png)
 
 ### <a name="delete-commands"></a>`delete` - Delete your task
 
@@ -131,6 +139,9 @@ Expected outcome:
 
 `Deletes task based on specified index.`
 
+![Overview of Delete1](./images/DeleteEx1.png)
+![Overview of Delete2](./images/DeleteEx2.png)
+
 ### <a name="find-commands"></a>`find` - Find your task
 
 Syntax:
@@ -145,6 +156,8 @@ Expected outcome:
 
 `Finds task by searching description based on specified search term.`
 
+![Overview of Find](./images/FindEx.png)
+
 ### <a name="clear-commands"></a>`clear` - Clear your tasks
 
 Syntax:
@@ -154,6 +167,9 @@ Syntax:
 Expected outcome:
 
 `Clears storage of all tasks.`
+
+![Overview of Clear1](./images/ClearEx1.png)
+![Overview of Clear2](./images/ClearEx2.png)
 
 ### <a name="done-commands"></a>`done` - Mark your task as done
 
@@ -169,6 +185,9 @@ Expected outcome:
 
 `Marks the task at specified index as done.`
 
+![Overview of Done1](./images/DoneEx1.png)
+![Overview of Done2](./images/DoneEx2.png)
+
 ### <a name="exit-commands"></a>`exit` - Exit application
 
 Syntax:
@@ -179,6 +198,8 @@ Expected outcome:
 
 `Terminates application with a goodbye popup message.`
 
+![Overview of Exit](./images/ByeEx.png)
+
 ### <a name="help-commands"></a>`help` - Shows list of commands
 
 Syntax:
@@ -188,3 +209,5 @@ Syntax:
 Expected outcome:
 
 `Gives an overview of all the commands in Kappa.`
+
+![Overview of Help](./images/HelpEx.png)

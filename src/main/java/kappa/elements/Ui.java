@@ -7,6 +7,7 @@ import kappa.task.Event;
 import kappa.task.Task;
 import kappa.task.ToDo;
 
+import java.text.Format;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -175,6 +176,11 @@ public class Ui {
      * @param tasks Current task list.
      */
     public String printListCommand(TaskList tasks) {
+        if (tasks.getList().isEmpty()) {
+            return Formatter.getLine()
+                    + Formatter.indentLine("You have no tasks!")
+                    + Formatter.getLine();
+        }
         StringBuilder formattedMessage = new StringBuilder(Formatter.getLine()
                 + Formatter.indentLine("Here are the tasks in your list:"));
         for (Task task: tasks.getList()) {

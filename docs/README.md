@@ -21,11 +21,11 @@ Delete completed and redundant tasks from task list!
 
 ## Usage
 
-### `Command` - Parameters
+This section documents the entire set of commands supported by Duke. The commands follow a common format. The user must enter the name of the command followed by the parameter(s).
 
-This section documents the entire set of commands supported by Duke.
+`command [parameters]`
 
-## Help
+### Help
 
 This command lists all the commands supported by Duke and their respective formats.
 
@@ -41,7 +41,7 @@ Here is a list of commands I can respond to: -
   ...
 ```
 
-## List
+### List
 
 Lists all the tasks stored by Duke. Includes completed tasks.
 
@@ -55,6 +55,6 @@ Lists all the tasks stored by Duke. Includes completed tasks.
 2. [Deadline] [✘] Return Book (by: 28-09-2019 2359)
 ```
 
-## Todo - `[description]`
+### Todo - `[description]`
 
 

@@ -31,24 +31,24 @@ public class Parser {
         String[] splittedInput = userInput.split(" ", 2);
         try {
             switch (splittedInput[0]) {
-                case "bye":
-                    return new ExitCommand();
-                case "list":
-                    return new ListCommand();
-                case "done":
-                    return new DoneCommand(splittedInput[1]);
-                case "todo":
-                    return new TodoCommand(splittedInput[1]);
-                case "deadline":
-                    return new DeadlineCommand(splittedInput[1]);
-                case "event":
-                    return new EventCommand(splittedInput[1]);
-                case "delete":
-                    return new DeleteCommand(splittedInput[1]);
-                case "find":
-                    return new FindCommand(splittedInput[1]);
-                default:
-                    throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            case "bye":
+                return new ExitCommand();
+            case "list":
+                return new ListCommand();
+            case "done":
+                return new DoneCommand(splittedInput[1]);
+            case "todo":
+                return new TodoCommand(splittedInput[1]);
+            case "deadline":
+                return new DeadlineCommand(splittedInput[1]);
+            case "event":
+                return new EventCommand(splittedInput[1]);
+            case "delete":
+                return new DeleteCommand(splittedInput[1]);
+            case "find":
+                return new FindCommand(splittedInput[1]);
+            default:
+                throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(" ☹ OOPS!!! Please enter something to do!");

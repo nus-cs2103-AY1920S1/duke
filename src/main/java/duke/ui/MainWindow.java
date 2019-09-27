@@ -15,8 +15,10 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends AnchorPane {
 
-    private static final String USER_IMAGE_PATH = "/images/cat.jpeg";
+    private static final String GREETING_MESSAGE = "The mitochondria is the powerhouse of the cell.\n\n"
+            + "Enter \"help\" (without \"\") for a list of commands.";
     private static final String DUKE_IMAGE_PATH = "/images/woman.jpeg";
+    private static final String USER_IMAGE_PATH = "/images/cat.jpeg";
 
     @FXML
     private ScrollPane scrollPane;
@@ -33,6 +35,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(GREETING_MESSAGE, dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {

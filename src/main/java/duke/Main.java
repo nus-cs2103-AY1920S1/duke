@@ -1,6 +1,6 @@
 package duke;
 
-import duke.storage.Storage;
+import duke.ui.DialogBox;
 import duke.ui.MainWindow;
 
 import java.io.IOException;
@@ -16,6 +16,8 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    private static final String TITLE = "Duke Chatbot";
+
     private Duke duke = new Duke();
 
     @Override
@@ -25,6 +27,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle(TITLE);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

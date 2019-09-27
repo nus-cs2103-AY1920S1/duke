@@ -4,18 +4,23 @@ import duke.exceptions.DukeException;
 
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import duke.execution.command.ByeCommand;
 import duke.execution.command.Command;
 import duke.execution.Parser;
 import duke.execution.Storage;
 import duke.execution.CompleteList;
 import duke.execution.Ui;
+import javafx.application.Platform;
 
 public class Duke {
 
     private Storage storage;
     private CompleteList errands;
     private Ui ui;
+    private boolean byeBye = false;
 
     /**
      * Constructor for Duke.
@@ -25,7 +30,7 @@ public class Duke {
      */
     public Duke() throws IOException {
         ui = new Ui();
-        storage = new Storage(Storage.file);
+        storage = new Storage("./todo.txt");
         try {
             errands = new CompleteList(storage.load());
         } catch (DukeException | FileNotFoundException e) {
@@ -90,10 +95,33 @@ public class Duke {
         try {
             String fullCommand = input;
             Command c = Parser.parse(fullCommand);
+            if (c instanceof ByeCommand) {
+                byeBye = true;
+            }
             return (c.execute(errands, ui, storage));
         } catch (DukeException | IOException e) {
             ui.showError(e.getMessage());
             return e.getMessage();
+        } finally {
+            if (byeBye) {
+                closeApplication();
+            }
         }
+    }
+
+    /**
+     * Closes the application.
+     */
+    private void closeApplication() {
+        Timer countdown = new Timer();
+        TimerTask onExit = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.exit();
+                System.exit(0);
+            }
+        };
+
+        countdown.schedule(onExit, 2000);
     }
 }

@@ -33,7 +33,7 @@ public class Task extends Planner {
      * @return A tick or cross to symbolize whether the task has been done.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "done" : "not done"); //return tick or X symbols
     }
 
     /**

@@ -40,7 +40,8 @@ public class Parser {
         assert taskType != null;
         if (!isValidTaskType(taskType)) {
             Ui.printIndent();
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't \n"
+                    + "know what that means :-(\n"
                     + "    I can only do these functions for now: \n \n"
                     + "    Todo \n" + "        Eg. todo __(task)__\n"
                     + "    Event \n" + "        Eg. event __(task)__\n"
@@ -65,7 +66,7 @@ public class Parser {
             if (properInput.length() > variableIndex) {
                 variable = properInput.substring(variableIndex);
             } else {
-                throw new DukeException("    Wrong Format! Please follow the correct format! :)))");
+                throw new DukeException("Sorry! Please follow the correct format! :)))");
             }
         }
         switch (taskType) {
@@ -74,39 +75,49 @@ public class Parser {
                 return new ToDoCommand(description);
             } else {
                 Ui.printIndent();
-                throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct todo format! :<\n"
-                        + "    Todo \n" + "        Eg. todo __(task)__\n");
+                throw new DukeException("☹ OOPSY DAISY!!! Please follow \n"
+                        + "the correct todo format! :<\n"
+                        + "    Todo \n"
+                        + "        Eg. todo __(task)__\n");
             }
         case "deadline":
             if (isValidDeadlineCommand(properInput) && isValidDateFormat(properInput)) {
                 return new DeadlineCommand(description, formatDate(variable));
             } else {
-                Ui.printIndent();
-                throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct deadline format! :<\n"
-                        + "    Deadline \n" + "        Eg. deadline __(task)__ /by _(dd/MM/yyyy)_(hhmm)__\n");
+                throw new DukeException("☹ OOPSY DAISY!!! Please follow \n"
+                        + "the correct deadline format! :<\n"
+                        + "    Deadline \n"
+                        + "        Eg. deadline __(task)__ /by \n"
+                        + "           _(dd/MM/yyyy)_(hhmm)__\n");
             }
         case "event":
             if (isValidEventCommand(properInput) && isValidDateFormat(properInput)) {
                 return new EventCommand(description, formatDate(variable));
             } else {
                 Ui.printIndent();
-                throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct event format! :<\n"
-                        + "    Event \n" + "        Eg. event __(task)__ /at _(dd/MM/yyyy)_(hhmm)__\n");
+                throw new DukeException("☹ OOPSY DAISY!!! Please follow \n"
+                        + "the correct event format! :<\n"
+                        + "    Event \n"
+                        + "        Eg. event __(task)__ /at \n"
+                        + "           _(dd/MM/yyyy)_(hhmm)__\n");
             }
         case "delete":
             if (isValidDeleteCommand(properInput)) {
                 return new DeleteCommand(taskType, description);
             } else {
                 Ui.printIndent();
-                throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct delete format! :<\n"
-                        + "    Delete \n" + "        Eg. delete __(number)__ or delete all\n");
+                throw new DukeException("☹ OOPSY DAISY!!! Please follow \n"
+                        + "the correct delete format! :<\n"
+                        + "    Delete \n"
+                        + "        Eg. delete __(number)__ or delete all\n");
             }
         case "find":
             if (isValidFindCommand(properInput)) {
                 return new FindCommand(taskType, description);
             } else {
                 Ui.printIndent();
-                throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct find format! :<\n"
+                throw new DukeException("☹ OOPSY DAISY!!! Please follow\n"
+                        + "the correct find format! :<\n"
                         + "    Find \n" + "        Eg. find __(keyword)__\n");
             }
         case "done":
@@ -114,8 +125,10 @@ public class Parser {
                 return new DoneCommand(taskType, description);
             } else {
                 Ui.printIndent();
-                throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct done format! :<\n"
-                        + "    Done \n" + "        Eg. done __(number[make sure its a task and not an expense])__\n");
+                throw new DukeException("☹ OOPSY DAISY!!! Please follow \n"
+                        + "the correct done format! :<\n"
+                        + "    Done \n"
+                        + "        Eg. done __(number[not expenses task])__\n");
             }
         case "expenses":
             if (isValidExpensesCommand(properInput)) {
@@ -123,8 +136,10 @@ public class Parser {
                 return new ExpensesCommand(description, variable);
             } else {
                 Ui.printIndent();
-                throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct done format! :<\n"
-                        + "    Expenses \n" + "        Eg. expenses __$(amount)__ /on __(category)__\n");
+                throw new DukeException("☹ OOPSY DAISY!!! Please follow \n"
+                        + "the correct done format! :<\n"
+                        + "    Expenses \n"
+                        + "        Eg. expenses __$(amount)__ /on __(category)__\n");
             }
         case "list":
             return new ListCommand(description);
@@ -136,7 +151,8 @@ public class Parser {
             return new HelpCommand(description);
         default:
             Ui.printIndent();
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't \n"
+                    + "know what that means :-(\n"
                     + "    I can only do these functions for now: \n \n"
                     + "    Todo \n" + "        Eg. todo __(task)__\n"
                     + "    Event \n" + "        Eg. event __(task)__\n"
@@ -177,7 +193,8 @@ public class Parser {
             return Integer.parseInt(text.substring(getSlashIndex(text) + 4, getSlashIndex(text) + 6));
         } else {
             Ui.printIndent();
-            throw new DukeException("Wrong Format! Please enter a date format as follows: dd/mm/yyyy hhmm.");
+            throw new DukeException("Wrong Format! Please enter a date\n"
+                    + " format as follows: dd/mm/yyyy hhmm.");
         }
     }
 
@@ -195,7 +212,8 @@ public class Parser {
             return Integer.parseInt(text.substring(getSlashIndex(text) + 7, getSlashIndex(text) + 9));
         } else {
             Ui.printIndent();
-            throw new DukeException("Wrong Format! Please enter a date format as follows: dd/mm/yyyy hhmm.");
+            throw new DukeException("Wrong Format! Please enter a date\n"
+                    + " format as follows: dd/mm/yyyy hhmm.");
         }
     }
 
@@ -213,7 +231,8 @@ public class Parser {
             return Integer.parseInt(text.substring(getSlashIndex(text) + 10, getSlashIndex(text) + 14));
         } else {
             Ui.printIndent();
-            throw new DukeException("Wrong Format! Please enter a date format as follows: dd/mm/yyyy hhmm.");
+            throw new DukeException("Wrong Format! Please enter a date\n"
+                    + " format as follows: dd/mm/yyyy hhmm.");
         }
     }
 
@@ -231,7 +250,8 @@ public class Parser {
             return Integer.parseInt(text.substring(getSlashIndex(text) + 15, getSlashIndex(text) + 17));
         } else {
             Ui.printIndent();
-            throw new DukeException("Wrong Format! Please enter a date format as follows: dd/mm/yyyy hhmm.");
+            throw new DukeException("Wrong Format! Please enter a date\n"
+                    + " format as follows: dd/mm/yyyy hhmm.");
         }
     }
 
@@ -250,7 +270,8 @@ public class Parser {
             return Integer.parseInt(text.substring(getSlashIndex(text) + 17));
         } else {
             Ui.printIndent();
-            throw new DukeException("Wrong Format! Please enter a date format as follows: dd/mm/yyyy hhmm.");
+            throw new DukeException("Wrong Format! Please enter a date\n"
+                    + " format as follows: dd/mm/yyyy hhmm.");
         }
     }
 
@@ -291,7 +312,8 @@ public class Parser {
         } else {
             Ui.printIndent();
             throw new DukeException("Invalid Date Format!\n"
-                    + "    There are at most 31 days, 12 months, 23 hours and 59 minutes! "
+                    + "    There are at most 31 days, 12 months,\n"
+                    + " 23 hours and 59 minutes! \n"
                     + "And remember that the year is 2019!\n"
                     + "    Please try again! Thank you! :)");
         }
@@ -433,7 +455,8 @@ public class Parser {
         assert text != null;
         if (text.length() < 7) {
             Ui.printIndent();
-            throw new DukeException("Wrong Format! Please add an 'all' or a valid number after the delete word! :)");
+            throw new DukeException("Wrong Format! Please add an 'all' or\n"
+                    + " a valid number after the delete word! :)");
         } else {
             char[] valueArray = text.substring(7).toCharArray();
             boolean isNumber = false;
@@ -443,11 +466,13 @@ public class Parser {
                     isNumber = true;
                 }
             }
-            if (text.contains("all") || (isNumber && Integer.parseInt(text.substring(7)) > 0)) {
-                return text.contains(" ") || Integer.parseInt(text.substring(7)) <= CompleteList.listOfPlans.size();
+            if (text.contains("all")) {
+                return text.contains(" ");
+            } else if (isNumber && Integer.parseInt(text.substring(7)) > 0) {
+                return text.contains(" ") && Integer.parseInt(text.substring(7)) <= CompleteList.listOfPlans.size();
             } else {
                 Ui.printIndent();
-                throw new DukeException("Wrong Format! Please add an 'all' or "
+                throw new DukeException("Wrong Format! Please add an 'all' or\n"
                         + "a valid number after the delete word! Thank You :)");
             }
         }
@@ -478,7 +503,8 @@ public class Parser {
         assert text != null;
         if (text.length() < 5) {
             Ui.printIndent();
-            throw new DukeException("Wrong Format! Please add a valid number after the done word! :)");
+            throw new DukeException("Wrong Format! Please add a \n"
+                    + "valid number after the done word! :)");
         } else {
             char[] valueArray = text.substring(5).toCharArray();
             boolean isNumber = false;
@@ -493,8 +519,9 @@ public class Parser {
                         && isValidDoneNumberGiven(text.substring(5));
             } else {
                 Ui.printIndent();
-                throw new DukeException("Wrong Format! Please add a valid number that is a task "
-                        + "(and not an expenses!!) after the done word! Thank You :)");
+                throw new DukeException("Wrong Format! Please add a valid \n"
+                        + "number that is a task (and not an expenses!!)\n"
+                        + " after the done word! Thank You :)");
             }
         }
     }

@@ -18,16 +18,14 @@ public class Ui {
      * Prints the greeting at the initiation of the chat bot.
      */
     public String greeting() {
-        String logo = "     ____        _        \n"
+        String dukeLogo = "     ____        _        \n"
                 + "    |  _ \\ _   _| | _____ \n"
                 + "    | | | | | | | |/ / _ \\\n"
                 + "    | |_| | |_| |   <  __/\n"
                 + "    |____/ \\__,_|_|\\_\\___|\n";
 
         // Prints out greeting of the chat bot.
-        printLine();
-        printIndent();
-        logo += "    Hello! My name is \n" + logo + "\n"
+        String logo = "    Hello! My name is \n" + dukeLogo + "\n"
                 + "    What can I do for you? \n";
         printIndent();
         logo += "    I can only do these functions for now: \n \n"
@@ -71,7 +69,6 @@ public class Ui {
      * has added the task into the list.
      */
     public String printGI() {
-        Ui.printIndent();
         return "Got it. I've added this task:";
     }
 
@@ -79,7 +76,6 @@ public class Ui {
      * Ends the chat bot.
      */
     public String printBye() {
-        printIndent();
         return "Bye. Hope to see you again soon!";
     }
 
@@ -98,16 +94,13 @@ public class Ui {
      * @param i Indicates the task number that is done.
      */
     public static String printDelete(int i) {
-        printIndent();
         return CompleteList.listOfPlans.get(i - 1).toString();
-        //printLine();
     }
 
     /**
      * Prints a statement to tell the user that the task has been removed.
      */
     public String printRemove() {
-        Ui.printIndent();
         return "Noted. I've removed this task.";
     }
 
@@ -118,9 +111,7 @@ public class Ui {
      *     does not exist but cannot be created, or cannot be opened for any other reason.
      */
     public static String printNumOfTasks() throws IOException {
-        Ui.printIndent();
         return "Now you have " + Ui.getNumOfTasks() + " tasks in the list.";
-        //Ui.printLine();
     }
 
     /**

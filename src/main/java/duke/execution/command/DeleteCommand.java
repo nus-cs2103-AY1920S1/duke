@@ -45,7 +45,7 @@ public class DeleteCommand extends Command {
             storage.writeToFile(Storage.file, "");
             CompleteList.listOfPlans.clear();
             Ui.printIndent();
-            return "Everything in your list has been removed! "
+            return "Everything in your list has been removed!\n"
                     + "Add more tasks to get started again!!!";
         } else {
             int taskNumber = Integer.parseInt(variable);

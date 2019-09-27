@@ -66,10 +66,12 @@ public class FindCommand extends Command {
         }
         if (tempList.isEmpty()) {
             Ui.printIndent();
-            throw new DukeException("No such word is found in any of the tasks.");
+            throw new DukeException("No such word is found in\n"
+                    + "any of the tasks.");
         } else {
             Ui.printIndent();
-            String matchingTask = "Here are the matching tasks in your list!\n";
+            String matchingTask = "Here are the matching tasks\n"
+                    + " in your list!\n";
             for (String str : tempList) {
                 Ui.printIndent();
                 matchingTask += str + "\n";

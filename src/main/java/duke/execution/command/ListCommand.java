@@ -37,7 +37,7 @@ public class ListCommand extends Command {
         assert ui != null;
         assert storage != null;
         if (CompleteList.listOfPlans.isEmpty()) {
-            return "There is no tasks in your list currently!!!";
+            return "There is no tasks currently!!!";
         } else {
             String list = "Here are the tasks in your list:\n";
             File temp = new File(Storage.file);

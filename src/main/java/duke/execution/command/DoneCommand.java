@@ -40,7 +40,7 @@ public class DoneCommand extends Command {
         System.out.println(taskNum - getNumOfExpensesBeforeDoneTask(taskNum) - 1);
         TaskList.listOfTasks.get(taskNum - getNumOfExpensesBeforeDoneTask(taskNum) - 1).markAsDone();
         String doneOutput = "Nice! I've marked this task as done:\n";
-        doneOutput += TaskList.listOfTasks.get(taskNum - 1).toString();
+        doneOutput += TaskList.listOfTasks.get(taskNum - getNumOfExpensesBeforeDoneTask(taskNum) - 1).toString();
         return doneOutput;
     }
 

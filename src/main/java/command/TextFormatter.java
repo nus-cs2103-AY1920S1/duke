@@ -135,6 +135,9 @@ public class TextFormatter {
         }
         String tasks = myTasks.toString();
         System.out.println(listMessageTitle + tasks);
+        if(input.size() == 0) {
+            return "    NOTHING MATCHED\n";
+        }
         return listMessageTitle + tasks;
     }
 

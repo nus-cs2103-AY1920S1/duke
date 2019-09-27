@@ -109,7 +109,7 @@ Example of usage: `archive`
 
 Expected outcome:
 ```
-Archived all done tasks at YOUR_DUKE_PATH/duke/src/main/data/archive.txt
+Archived all done tasks at ./archive.txt
 ```
 
 ### `delete` - Deletes a task

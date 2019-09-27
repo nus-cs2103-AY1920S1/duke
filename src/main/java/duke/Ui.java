@@ -42,7 +42,16 @@ public class Ui {
      * @return String Duke load file error message.
      */
     String showLoadingError() {
-        return "Error loading data from file. Creating tasklist from scratch.";
+        return "Duke can't load any data from default file. Let's start a new task list.";
+    }
+
+    /**
+     * Returns Duke load file error message.
+     *
+     * @return String Duke load file error message.
+     */
+    String showLoadingSuccess() {
+        return "Successfully created/loaded data from data.txt file.";
     }
 
     /**
@@ -52,15 +61,6 @@ public class Ui {
      */
     String showError(String errorMessage) {
         return errorMessage;
-    }
-
-    /**
-     * Returns Duke farewell message.
-     *
-     * @return String Duke farewell message.
-     */
-    public String showFarewell() {
-        return "Bye. Hope to see you again soon!";
     }
 
     /**

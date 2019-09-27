@@ -4,6 +4,8 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -43,14 +45,20 @@ public class Duke extends Application {
     /**
      * Class constructor that initializes storage, tasks and ui fields.
      */
-    public Duke() {
+    Duke() {
         ui = new Ui();
         storage = new Storage(Constants.DATASTORE);
+    }
 
+    String showWelcome() {
+        return ui.showWelcome();
+    }
+
+    String initMessage() {
         String dukeText;
         try {
             tasks = new TaskList(storage.load());
-            dukeText = ui.showWelcome();
+            dukeText = ui.showLoadingSuccess();
         } catch (IOException e) {
             dukeText = ui.showLoadingError();
             tasks = new TaskList();
@@ -58,9 +66,10 @@ public class Duke extends Application {
             dukeText = ui.showError(e.getMessage());
             tasks = new TaskList();
         }
+        return dukeText;
     }
 
-    public String run(String command) {
+    String run(String command) {
         assert ui != null : "UI cannot be null when program is run";
         String fullCommand = ui.readCommand(command);
         try {
@@ -78,6 +87,7 @@ public class Duke extends Application {
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
+
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
@@ -87,10 +97,6 @@ public class Duke extends Application {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton, dialogContainer);
 
         scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-
 
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
@@ -145,6 +151,8 @@ public class Duke extends Application {
             handleUserInput();
         });
 
+        stage.setScene(scene);
+        stage.show();
     }
 
     /**
@@ -161,8 +169,6 @@ public class Duke extends Application {
         );
         userInput.clear();
     }
-
-
 
     /**
      * Iteration 1:

@@ -14,7 +14,7 @@ Duke is for those who prefer to use a desktop chat bot for managing their tasks.
     * `list` : lists all contacts .
     * `todo workout` : adds an uncompleted todo with description workout as the last task in list. 
     * `delete 1` : deletes the 1st task shown in the current list  if it exists.
-    * `exit` : exits the app.
+    * `bye` : exits the app.
 7. Refer to Section 3, “Features” for details of each command.
 
 ## 3. Features 
@@ -127,13 +127,13 @@ Now you have 3 tasks in the list.
 ```
 
 ### `bye` - Exits the program
-Terminates Duke chat bot.
+Terminates Duke chat bot instantly.
 
 Format: `bye`
 
 Example of usage: `bye`
 
-Expected outcome: program exits.
+Expected outcome: program immediately exits.
 
 ## 4. FAQ
 Q: How do I transfer my data to another Computer?

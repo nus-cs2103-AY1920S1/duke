@@ -32,6 +32,8 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        dukeSays(duke.showWelcome());
+        dukeSays(duke.initMessage());
     }
 
     /**
@@ -47,5 +49,18 @@ public class MainWindow extends AnchorPane {
             DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            System.exit(0);
+        }
     }
+
+    @FXML
+    public void dukeSays(String dukeString) {
+        dialogContainer.getChildren().addAll(
+            DialogBox.getDukeDialog(dukeString, dukeImage)
+        );
+    }
+
+
+
 }

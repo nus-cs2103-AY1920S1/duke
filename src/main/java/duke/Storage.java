@@ -43,32 +43,39 @@ public class Storage {
 
         List<Task> tasks = new ArrayList<>(100);
         if (!file.createNewFile()) {
+            try {
+                //read file contents into List
+                FileReader fr = new FileReader(file);
+                BufferedReader br = new BufferedReader(fr);
+                String line;
+                while ((line = br.readLine()) != null) {
+                    String[] lines = line.split(" \\| ");
+                    boolean isDone;
+                    if (lines[1].equals("1")) {
+                        isDone = true;
+                    } else {
+                        isDone = false;
+                    }
+                    if (lines[0].equals("T")) {
+                        tasks.add(new Todo(lines[2], isDone));
+                    } else if (lines[0].equals("D")) {
+                        tasks.add(new Deadline(lines[2], lines[3], isDone));
+                    } else if (lines[0].equals("E")) {
+                        tasks.add(new Event(lines[2], lines[3], isDone));
+                    } else {
+                        throw new DukeException("Corrupted data in file.");
+                    }
+                }
 
-            //read file contents into List
-            FileReader fr = new FileReader(file);
-            BufferedReader br = new BufferedReader(fr);
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] lines = line.split(" \\| ");
-                boolean isDone;
-                if (lines[1].equals("1")) {
-                    isDone = true;
-                } else {
-                    isDone = false;
+                br.close();
+                fr.close();
+            } catch (Exception e) {
+                boolean flag = false;
+                if (file.delete()) {
+                    flag = file.createNewFile();
                 }
-                if (lines[0].equals("T")) {
-                    tasks.add(new Todo(lines[2], isDone));
-                } else if (lines[0].equals("D")) {
-                    tasks.add(new Deadline(lines[2], lines[3], isDone));
-                } else if (lines[0].equals("E")) {
-                    tasks.add(new Event(lines[2], lines[3], isDone));
-                } else {
-                    throw new DukeException("Corrupted data in file.");
-                }
+                throw new DukeException("Corrupted data in file. Attempt to overwrite file successful : " + flag);
             }
-
-            br.close();
-            fr.close();
         }
         return tasks;
     }

@@ -7,9 +7,13 @@ import duke.execution.TaskList;
 import duke.execution.UI;
 import duke.execution.commands.Command;
 import duke.models.Task;
+import javafx.application.Platform;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -29,7 +33,7 @@ public class Duke {
 
         try {
             this.ui = new UI();
-            this.storage = new Storage("./data/duke.txt");
+            this.storage = new Storage("./duke.txt");
             ArrayList<Task> existing = storage.readFileContents();
             this.taskList = new TaskList(existing);
         } catch (Exception e) {
@@ -88,7 +92,26 @@ public class Duke {
         } catch (DukeException e) {
             ui.displayError(e);
             return ui.getResponse();
+        } finally {
+            if (!ui.isRunning()) {
+                exit();
+            }
         }
+    }
+
+    /**
+     * Closes the application upon user entry of "bye".
+     */
+    public void exit() {
+        Timer countdown = new Timer();
+        TimerTask onExit = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.exit();
+            }
+        };
+
+        countdown.schedule(onExit, 2000);
     }
 
 

@@ -1,7 +1,6 @@
 package duke;
 
 import duke.execution.UI;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -72,12 +71,5 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        UI ui = new UI();
-
-        //exits the application after the user says bye
-        if (response.equals(ui.goodbyeMsg())) {
-            Platform.exit();
-            System.exit(0);
-        }
     }
 }

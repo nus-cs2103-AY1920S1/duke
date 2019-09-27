@@ -123,7 +123,8 @@ public class Storage {
                 + "Event" + " ~ "
                 + task.getStatusIcon() + " ~ "
                 + task.getDescription() + " ~ "
-                + task.getDate()
+                + task.getDate() + " ~ "
+                + task.getTags()
                 + System.lineSeparator());
         fw.close();
     }
@@ -133,7 +134,8 @@ public class Storage {
                 + "Deadline" + " ~ "
                 + task.getStatusIcon() + " ~ "
                 + task.getDescription() + " ~ "
-                + task.getDate()
+                + task.getDate() + " ~ "
+                + task.getTags()
                 + System.lineSeparator());
         fw.close();
     }
@@ -142,7 +144,8 @@ public class Storage {
         fw.write(task.getId() + " ~ "
                 + "ToDo" + " ~ "
                 + task.getStatusIcon() + " ~ "
-                + task.getDescription()
+                + task.getDescription() + " ~ "
+                + task.getTags()
                 + System.lineSeparator());
         fw.close();
     }
@@ -172,7 +175,8 @@ public class Storage {
     }
 
     private Task formatEvent(String[] tokens) {
-        Event eventTask = new Event(tokens[3], Integer.parseInt(tokens[0]), tokens[4]);
+        Tags tags = formatTags(tokens[5]);
+        Event eventTask = new Event(tokens[3], Integer.parseInt(tokens[0]), tokens[4], tags);
         if (tokens[2].equals("Done")) {
             eventTask.setDone();
         }
@@ -180,7 +184,8 @@ public class Storage {
     }
 
     private Task formatDeadline(String[] tokens) {
-        Deadline deadlineTask = new Deadline(tokens[3], Integer.parseInt(tokens[0]), tokens[4]);
+        Tags tags = formatTags(tokens[5]);
+        Deadline deadlineTask = new Deadline(tokens[3], Integer.parseInt(tokens[0]), tokens[4], tags);
         if (tokens[2].equals("Done")) {
             deadlineTask.setDone();
         }
@@ -188,10 +193,21 @@ public class Storage {
     }
 
     private Task formatToDo(String[] tokens) {
-        ToDo toDoTask = new ToDo(tokens[3], Integer.parseInt(tokens[0]));
+        Tags tags = formatTags(tokens[4]);
+        ToDo toDoTask = new ToDo(tokens[3], Integer.parseInt(tokens[0]), tags);
         if (tokens[2].equals("Done")) {
             toDoTask.setDone();
         }
         return toDoTask;
+    }
+
+    private Tags formatTags(String tagsString) {
+        String[] splitByHash = tagsString.split("#");
+        List<String> tagsList = new ArrayList<>();
+        for (int i = 1; i < splitByHash.length; i++) {
+            tagsList.add(splitByHash[i]);
+        }
+        return new Tags(tagsList);
+
     }
 }

@@ -18,6 +18,9 @@ import slave.exception.MissingDateException;
 import slave.exception.MissingDescriptionException;
 import slave.exception.MissingTaskException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A parser to take in input by user and returns the appropriate command.
  */
@@ -51,41 +54,57 @@ public class Parser {
             checkValidity("delete", fullCommand, tokens);
             return new DeleteCommand(Integer.parseInt(tokens[1]));
         case "todo":
-            checkValidity("todo", fullCommand, tokens);
-            return new AddToDoCommand(fullCommand.substring(5));
+            String[] splitByTagToDo = fullCommand.split("/t");
+            checkValidity("todo", splitByTagToDo[0], tokens);
+            return new AddToDoCommand(splitByTagToDo[0].substring(5), parseTags(splitByTagToDo));
         case "deadline":
-            checkValidity("deadline", fullCommand, tokens);
-            String[] deadlineSplitByTokens = fullCommand.split(" /by ");
+            String[] splitByTagDeadline = fullCommand.split("/t");
+            checkValidity("deadline", splitByTagDeadline[0], tokens);
+            String[] deadlineSplitByTokens = splitByTagDeadline[0].split(" /by ");
             String deadlineDesc = deadlineSplitByTokens[0].substring(9);
             String deadlineDate = deadlineSplitByTokens[deadlineSplitByTokens.length - 1];
-            return getValidDeadlineCommand(deadlineDesc, deadlineDate);
+            return getValidDeadlineCommand(deadlineDesc, deadlineDate, parseTags(splitByTagDeadline));
         case "event":
-            checkValidity("event", fullCommand, tokens);
-            String[] eventSplitByTokens = fullCommand.split(" /at ");
+            String[] splitByTagEvent = fullCommand.split("/t");
+            checkValidity("event", splitByTagEvent[0], tokens);
+            String[] eventSplitByTokens = splitByTagEvent[0].split(" /at ");
             String eventDesc = eventSplitByTokens[0].substring(6);
             String eventDate = eventSplitByTokens[eventSplitByTokens.length - 1];
-            return getValidEventCommand(eventDesc, eventDate);
+            return getValidEventCommand(eventDesc, eventDate, parseTags(splitByTagEvent));
         default:
             return new NullCommand(firstWord);
         }
     }
 
-    private static Command getValidEventCommand(String eventDesc, String eventDate) throws DukeException {
+    private static Tags parseTags(String[] command) {
+        if (command.length < 2) {
+            return new Tags();
+        } else {
+            String[] splitByHash = command[1].trim().split("#");
+            List<String> tagsList = new ArrayList<>();
+            for (int i = 1; i < splitByHash.length; i++){
+                tagsList.add(splitByHash[i]);
+            }
+            return new Tags(tagsList);
+        }
+    }
+
+    private static Command getValidEventCommand(String eventDesc, String eventDate, Tags tags) throws DukeException {
         if (isDate(eventDate)) {
             String[] eventSplitTokens = eventDate.split(" ");
             DateTime validEventDate = new DateTime(eventSplitTokens[0], eventSplitTokens[1]);
-            return new AddEventCommand(eventDesc, validEventDate);
+            return new AddEventCommand(eventDesc, validEventDate, tags);
         }
-        return new AddEventCommand(eventDesc, eventDate);
+        return new AddEventCommand(eventDesc, eventDate, tags);
     }
 
-    private static Command getValidDeadlineCommand(String deadlineDesc, String deadlineDate) throws DukeException {
+    private static Command getValidDeadlineCommand(String deadlineDesc, String deadlineDate, Tags tags) throws DukeException {
         if (isDate(deadlineDate)) {
             String[] dateSplitTokens = deadlineDate.split(" ");
             DateTime validDeadlineDate = new DateTime(dateSplitTokens[0], dateSplitTokens[1]);
-            return new AddDeadlineCommand(deadlineDesc, validDeadlineDate);
+            return new AddDeadlineCommand(deadlineDesc, validDeadlineDate, tags);
         }
-        return new AddDeadlineCommand(deadlineDesc, deadlineDate);
+        return new AddDeadlineCommand(deadlineDesc, deadlineDate, tags);
     }
 
     /**

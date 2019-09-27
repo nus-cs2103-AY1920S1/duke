@@ -1,5 +1,7 @@
 package slave.task;
 
+import slave.elements.Tags;
+
 /**
  * Class representing a Event task.
  */
@@ -15,8 +17,8 @@ public class Event extends Task {
      * @param id Id of event task.
      * @param at Event date.
      */
-    public Event(String description, int id, String at) {
-        super(description, id);
+    public Event(String description, int id, String at, Tags tags) {
+        super(description, id, tags);
         this.at = at;
         this.type = TaskType.EVENT;
     }
@@ -38,6 +40,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        String formattedString = "[E]" + super.toString() + " (at: " + at + ") ";
+        return formattedString;
     }
 }

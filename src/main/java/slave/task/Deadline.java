@@ -1,5 +1,9 @@
 package slave.task;
 
+import slave.elements.Tags;
+
+import java.util.Optional;
+
 /**
  * Class representing a Deadline task.
  */
@@ -15,8 +19,8 @@ public class Deadline extends Task {
      * @param id Id of deadline task.
      * @param by Deadline date.
      */
-    public Deadline(String description, int id, String by) {
-        super(description, id);
+    public Deadline(String description, int id, String by, Tags tags) {
+        super(description, id, tags);
         this.by = by;
         this.type = TaskType.DEADLINE;
     }
@@ -38,6 +42,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by + ") ";
     }
 }

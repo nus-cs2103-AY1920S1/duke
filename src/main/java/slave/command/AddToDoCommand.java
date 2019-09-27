@@ -1,5 +1,6 @@
 package slave.command;
 
+import slave.elements.Tags;
 import slave.elements.Ui;
 import slave.elements.TaskList;
 
@@ -14,14 +15,16 @@ import slave.task.ToDo;
 public class AddToDoCommand extends Command {
 
     private String task;
+    private Tags tags;
 
     /**
      * Constructor.
      *
      * @param task To-do description.
      */
-    public AddToDoCommand(String task) {
+    public AddToDoCommand(String task, Tags tags) {
         this.commandType = CommandType.ADDTODO;
+        this.tags = tags;
         this.task = task;
     }
 
@@ -34,7 +37,7 @@ public class AddToDoCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui) throws DukeException {
-        ToDo toDoTask = new ToDo(this.task, tasks.getSize() + 1);
+        ToDo toDoTask = new ToDo(this.task, tasks.getSize() + 1, this.tags);
         tasks.addToList(toDoTask);
         return ui.printAddToDoCommand(toDoTask, tasks);
     }

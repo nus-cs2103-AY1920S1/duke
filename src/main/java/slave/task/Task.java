@@ -1,10 +1,13 @@
 package slave.task;
 
+import slave.elements.Tags;
+
 /**
  * Abstract class which represents a task.
  */
 public abstract class Task {
 
+    Tags tags;
     private String description;
     private boolean isDone;
     private int id;
@@ -12,14 +15,15 @@ public abstract class Task {
 
     /**
      * Constructor for task.
-     *
-     * @param description Task description.
+     *  @param description Task description.
      * @param id Task id.
+     * @param tags
      */
-    public Task(String description, int id) {
+    public Task(String description, int id, Tags tags) {
         this.description = description;
         this.isDone = false;
         this.id = id;
+        this.tags = tags;
     }
 
     /**
@@ -86,13 +90,17 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public Tags getTags() {
+        return this.tags;
+    }
+
     /**
      * Converts task to an appropriate String representation with the status.
      *
      * @return Formatted string.
      */
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + this.getStatusIcon() + "] " + this.description + this.tags.toString();
     }
 
 }

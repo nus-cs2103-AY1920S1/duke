@@ -1,6 +1,7 @@
 package slave.command;
 
 import slave.elements.DateTime;
+import slave.elements.Tags;
 import slave.elements.Ui;
 import slave.elements.TaskList;
 
@@ -15,6 +16,7 @@ public class AddDeadlineCommand extends Command {
 
     private String task;
     private String date;
+    private Tags tags;
 
     /**
      * Constructor (date doesn't fit the DD/MM/YYYY HHMM format).
@@ -22,10 +24,11 @@ public class AddDeadlineCommand extends Command {
      * @param task Deadline description.
      * @param date Date description.
      */
-    public AddDeadlineCommand(String task, String date) {
+    public AddDeadlineCommand(String task, String date, Tags tags) {
         this.commandType = CommandType.ADDDEADLINE;
         this.task = task;
         this.date = date;
+        this.tags = tags;
     }
 
     /**
@@ -35,10 +38,11 @@ public class AddDeadlineCommand extends Command {
      * @param date Date description
      * @throws DukeException Throws invalid date exception of DD/MM/YYYY HHMM format.
      */
-    public AddDeadlineCommand(String task, DateTime date) throws DukeException {
+    public AddDeadlineCommand(String task, DateTime date, Tags tags) throws DukeException {
         this.commandType = CommandType.ADDDEADLINE;
         this.task = task;
         this.date = date.convertToString();
+        this.tags = tags;
     }
 
     /**
@@ -50,7 +54,7 @@ public class AddDeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui) throws DukeException {
-        Deadline deadlineTask = new Deadline(this.task, tasks.getSize() + 1, this.date);
+        Deadline deadlineTask = new Deadline(this.task, tasks.getSize() + 1, this.date, this.tags);
         tasks.addToList(deadlineTask);
         return ui.printAddDeadlineCommand(deadlineTask, tasks);
     }

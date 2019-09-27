@@ -33,19 +33,35 @@ public class Parser {
             switch (splittedInput[0]) {
             case "bye":
                 return new ExitCommand();
+            case "b":
+                return new ExitCommand();
             case "list":
+                return new ListCommand();
+            case "l":
                 return new ListCommand();
             case "done":
                 return new DoneCommand(splittedInput[1]);
+            case "d":
+                return new DoneCommand(splittedInput[1]);
             case "todo":
+                return new TodoCommand(splittedInput[1]);
+            case "t":
                 return new TodoCommand(splittedInput[1]);
             case "deadline":
                 return new DeadlineCommand(splittedInput[1]);
+            case "dl":
+                return new DeadlineCommand(splittedInput[1]);
             case "event":
+                return new EventCommand(splittedInput[1]);
+            case "e":
                 return new EventCommand(splittedInput[1]);
             case "delete":
                 return new DeleteCommand(splittedInput[1]);
+            case "del":
+                return new DeleteCommand(splittedInput[1]);
             case "find":
+                return new FindCommand(splittedInput[1]);
+            case "f":
                 return new FindCommand(splittedInput[1]);
             default:
                 throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

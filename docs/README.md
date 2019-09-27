@@ -20,7 +20,7 @@ Got it. I've added this task:
 ```
    
 * __Deadline__ 
-  * format: deadline <TASK_NAME> /by <due date/time> 
+  * format: deadline <task_name> /by <due date/time> 
     * due date/time must be written in the format (d/MM/yyyy) (HHmm).
   * Example: 
     * Usage: deadline return_book /by 31/9/2019 2359     
@@ -33,7 +33,7 @@ Got it. I've added this task:
   
   
 * __Event__ 
-  * format: event <TASK_NAME> /at <event date> <start time - end time>
+  * format: event <task_name> /at <event date> <start time - end time>
     * event date/time must be written in the format (d/MM/yyyy) (HHmm-HHmm)
   * Example: 
     * Usage: event CS2103_lecture /at 20/09/2019 1200-1400     

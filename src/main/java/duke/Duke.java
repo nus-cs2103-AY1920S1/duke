@@ -107,7 +107,9 @@ public class Duke {
         TimerTask onExit = new TimerTask() {
             @Override
             public void run() {
+
                 Platform.exit();
+                System.exit(0);
             }
         };
 

@@ -79,7 +79,7 @@ Expected outcome:
 
 Example of usage:
 
-`find`
+`find chemistry`
 
 
 Expected outcome:

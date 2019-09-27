@@ -17,10 +17,11 @@ public class EventCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage store) throws DukeException {
         int position = this.input.indexOf("/");
+        assert position != -1;
         if (position == -1) {
             throw new DukeException("☹ OOPS!!! Not a valid event command");
         }
-        Task newTask = new Event(this.input.substring(0,position).trim(), this.input.substring(position + 3));
+        Task newTask = new Event(this.input.substring(0,position).trim(), this.input.substring(position + 3).trim());
         tasks.input(newTask);
         store.write(tasks);
         return ui.addTask(newTask, tasks);

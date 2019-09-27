@@ -42,7 +42,7 @@ public class Duke extends Application {
      */
     public Duke()  {
         ui = new Ui();
-        this.storage = new Storage("./src/main/java/data/duke.txt");
+        this.storage = new Storage("./duke.txt");
         this.tasks = new TaskList(storage.load());
     }
 

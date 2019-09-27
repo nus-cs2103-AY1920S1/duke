@@ -1,5 +1,7 @@
 # User Guide - Duke
 
+Duke is an interactive task manager that can keep track of deadlines, events and other general tasks. You can mark tasks as done and delete them when they turn redundant, all in an immersive chat-bot like environment.
+
 ## Features 
 
 ### Add To-dos

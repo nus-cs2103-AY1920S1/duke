@@ -19,15 +19,21 @@ Delete complete and redundant tasks from task list!
 
 ## Usage
 
-### `Keyword` - Describe action
+### `Command` - Parameters
 
-Describe action and its outcome.
+This section documents the entire set of commands supported by Duke.
 
-Example of usage: 
+#### List
+
+Usage: 
 
 `list`
 
-Expected outcome:
+Output:
+```
+1. [Todo] [✔] Buy book
+2. [Deadline] [✘] Return Book (by: 28-09-2019 2359)
+```
+`
 
-`Here is a list of your current tasks: -'
-	1. [Deadline] [X] Eat candy (by: 22/05/2019 1200)`
+

@@ -34,18 +34,18 @@ public class Storage {
         ArrayList<Task> list = new ArrayList<>();
         FileReader fileReader;
         try {
-            File currentFile = new File(this.filePath);
-            fileReader = new FileReader(currentFile);
-            Scanner sc = new Scanner(currentFile);
+            File newTxt = new File(this.filePath);
+            fileReader = new FileReader(newTxt);
+            Scanner sc = new Scanner(newTxt);
             while (sc.hasNext()) {
-                String current = sc.nextLine();
-                char type = current.charAt(0);
-                int isDone = Character.getNumericValue(current.charAt(4));
-                String description = current.substring(8).trim();
-                switch (type) {
+                String nextTask = sc.nextLine();
+                char taskType = nextTask.charAt(0);
+                int taskCompleted = Character.getNumericValue(nextTask.charAt(4));
+                String description = nextTask.substring(8).trim();
+                switch (taskType) {
                 case 'T':
                     Todo newTask = new Todo(description);
-                    if (isDone == 1) {
+                    if (taskCompleted == 1) {
                         newTask.markAsDone();
                     }
                     list.add(newTask);
@@ -56,7 +56,7 @@ public class Storage {
                     String deadlineName = description.substring(0, index).trim();
                     String by = description.substring(index + 1).trim();
                     Deadline newDeadline = new Deadline(deadlineName, by.trim());
-                    if (isDone == 1) {
+                    if (taskCompleted == 1) {
                         newDeadline.markAsDone();
                     }
                     list.add(newDeadline);
@@ -67,7 +67,7 @@ public class Storage {
                     String eventName = description.substring(0, index1).trim();
                     String at = description.substring(index1 + 1).trim();
                     Event newEvent = new Event(eventName, at.trim());
-                    if (isDone == 1) {
+                    if (taskCompleted == 1) {
                         newEvent.markAsDone();
                     }
                     list.add(newEvent);
@@ -77,8 +77,8 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException err) {
-            File currentFile = new File(this.filePath);
-            currentFile.createNewFile();
+            File newTxt = new File(this.filePath);
+            newTxt.createNewFile();
         } finally {
             return list;
         }

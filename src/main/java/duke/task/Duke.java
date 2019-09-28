@@ -35,16 +35,15 @@ public class Duke extends Application {
     private TaskList tasks;
     private Ui ui;
 
-    private boolean toBreak;
+    private boolean isGettingConfirmation;
 
     /**
      * Constructor function.
-     * @param filePath The path to the file for tasks storage.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
-        toBreak = false;
+        storage = new Storage("../data/tasks.txt");
+        isGettingConfirmation = false;
 
         try {
             tasks = new TaskList(storage.load());
@@ -55,18 +54,11 @@ public class Duke extends Application {
     }
 
     /**
-     * Overloaded constructor function for JavaFX.
-     */
-    public Duke() {
-
-    }
-
-    /**
      * The main function to execute the program.
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
-        this.ui.printHello();
+        Ui.printHello();
 
         while (sc.hasNext()) {
             String next = sc.nextLine();
@@ -75,10 +67,6 @@ public class Duke extends Application {
                 this.handleInput(next);
             } catch (DukeException e) {
                 Ui.printError(e.getMessage());
-            }
-
-            if (this.toBreak) {
-                break;
             }
         }
 
@@ -175,7 +163,11 @@ public class Duke extends Application {
      * @return String with the response text.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            return handleInput(input);
+        } catch (DukeException e) {
+            return Ui.printError(e.getMessage());
+        }
     }
 
     /**
@@ -183,7 +175,7 @@ public class Duke extends Application {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-        new Duke("../data/tasks.txt").run();
+        new Duke().run();
     }
 
     /**
@@ -191,26 +183,32 @@ public class Duke extends Application {
      * @param next The next input by the user.
      * @throws DukeException When a program-specific exception has occurred.
      */
-    public void handleInput(String next) throws DukeException {
+    public String handleInput(String next) throws DukeException {
         if (next.equals("list")) {
-            System.out.print(Parser.handleList(this.tasks));
+            return Ui.printMessage(Parser.handleList(this.tasks));
         } else if (next.startsWith("done")) {
             Task task = Parser.handleDone(this.tasks, next);
-            this.ui.printDone(task);
             this.storage.save(this.tasks);
+            return this.ui.printDone(task);
         } else if (next.startsWith("delete")) {
             Task task = Parser.handleDelete(this.tasks, next);
-            this.ui.printDelete(task, this.tasks.getTasks().size());
             this.storage.save(this.tasks);
+            return this.ui.printDelete(task, this.tasks.getTasks().size());
         } else if (next.startsWith("find")) {
-            this.ui.printFind(Parser.handleFind(this.tasks, next));
+            return this.ui.printFind(Parser.handleFind(this.tasks, next));
         } else if (next.equals("bye")) {
-            this.toBreak = true;
-            this.ui.printBye();
+            String str = Ui.printBye();
+            System.exit(0);
+            return str;
         } else {
             Task task = Parser.handleItem(tasks, next);
-            this.ui.printAdd(task, (this.tasks.getTasks().size()));
             this.storage.save(this.tasks);
+
+            if (task == null) {
+                return Ui.printMessage("This task already exists, please try again with a different description!");
+            }
+
+            return this.ui.printAdd(task, (this.tasks.getTasks().size()));
         }
     }
 }

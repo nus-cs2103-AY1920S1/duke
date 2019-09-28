@@ -58,6 +58,12 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * method that enables us to flip the dialog box. simulates chat box gui.
+     * @param text text to fill within chatbox.
+     * @param img image of duke.
+     * @return Dialog box.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.repos.Repository;
 import duke.repos.TaskRepo;
 import duke.responses.ResponseGen;
 import duke.task.Task;
@@ -16,7 +17,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(TaskRepo taskRepo) throws IOException {
+    public String execute(Repository<Task> taskRepo) throws IOException {
         try {
             int index = Integer.parseInt(splitCommand[1]);
             Task removed = taskRepo.delete(index);

@@ -1,7 +1,9 @@
 package duke.command;
 
+import duke.repos.Repository;
 import duke.repos.TaskRepo;
 import duke.responses.ResponseGen;
+import duke.task.Task;
 
 import java.text.SimpleDateFormat;
 
@@ -14,7 +16,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public String execute(TaskRepo taskRepo) {
+    public String execute(Repository<Task> taskRepo) {
         return ResponseGen.listResponse(taskRepo.getAll());
     }
 

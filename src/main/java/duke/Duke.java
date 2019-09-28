@@ -32,11 +32,12 @@ public class Duke {
 
     Duke() {
     }
+
     /**
      * Main method that drives the running of the app. Creates new UI/Storage and ListManagers
      * @param filePath to access a pre-existing list (if-any)
      */
-    public Duke(String filePath) throws IOException {
+    Duke(String filePath) throws IOException {
         isExit = false;
         this.formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
         storage = new Storage(filePath);
@@ -60,10 +61,10 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) throws IOException, ParseException {
-       if (!this.isExit) {
-           return this.run(input);
-       } else {
-           return "Program has already terminated.";
+        if (!this.isExit) {
+            return this.run(input);
+        } else {
+            return "Program has already terminated.";
         }
     }
 

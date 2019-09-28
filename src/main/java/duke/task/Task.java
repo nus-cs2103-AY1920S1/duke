@@ -8,6 +8,7 @@ public abstract class Task implements Serializable {
     String type;
     public Boolean done;
     SimpleDateFormat formatter;
+
     /**
      * defines a generic constructor for all Task subclasses.
      * @param name String name.

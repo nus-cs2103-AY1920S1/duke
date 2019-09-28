@@ -1,20 +1,29 @@
 package duke.backend;
 
 import duke.task.Task;
-import duke.task.ToDos;
-import duke.task.Events;
-import duke.task.Deadlines;
 
-import java.io.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+
 
 public class Storage {
 
     private File file;
     private String filePath;
 
+    /**
+     * Constructor to initialise a storage with a filePath. Creates new file if doesn't exist.
+     * @param filePath String form of path.
+     * @throws IOException if File doesn't exist.
+     */
     public Storage(String filePath) throws IOException {
         assert !filePath.equals("");
         this.filePath = filePath;

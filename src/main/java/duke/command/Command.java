@@ -1,6 +1,8 @@
 package duke.command;
 
+import duke.repos.Repository;
 import duke.repos.TaskRepo;
+import duke.task.Task;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -19,7 +21,7 @@ public abstract class Command {
         this.formatter = formatter;
     }
 
-    public abstract String execute(TaskRepo taskRepo) throws ParseException, IOException;
+    public abstract String execute(Repository<Task> taskRepo) throws ParseException, IOException;
 
     public abstract boolean isExit();
 }

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.repos.Repository;
 import duke.repos.TaskRepo;
 import duke.task.Task;
 import duke.responses.ResponseGen;
@@ -16,7 +17,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(TaskRepo taskRepo) {
+    public String execute(Repository<Task> taskRepo) {
         List<Task> queriedList = taskRepo.find(this.splitCommand[1]);
         return ResponseGen.findResponse(queriedList);
     }

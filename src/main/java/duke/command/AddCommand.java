@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.repos.Repository;
 import duke.responses.ResponseGen;
 import duke.repos.TaskRepo;
 import duke.task.Deadlines;
@@ -21,7 +22,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public String execute(TaskRepo taskRepo) throws ParseException, IOException {
+    public String execute(Repository<Task> taskRepo) throws ParseException, IOException {
         switch (splitCommand[0]) {
         case "t": {
             try {

@@ -1,6 +1,8 @@
 package duke.command;
 
+import duke.repos.Repository;
 import duke.repos.TaskRepo;
+import duke.task.Task;
 
 import java.text.SimpleDateFormat;
 
@@ -11,7 +13,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public String execute(TaskRepo taskRepo) {
+    public String execute(Repository<Task> taskRepo) {
         return "\nBye. Hope to see you again soon!";
     }
 

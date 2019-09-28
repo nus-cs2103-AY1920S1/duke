@@ -45,3 +45,49 @@ Command | Example | Description
 `find <keyword>` | find homework | Find the tasks with "homework" and prints out them out in a list.
 `list` | list | Prints out everything in your list at that current point of time.
 
+#### Todo: `todo`
+Expected Outcome:
+
+<img src = "https://github.com/joshuaseetss/duke/tree/master/docs/images/todo.png" width="291" height="100">
+
+
+#### Event: `event`
+Expected Outcome:
+
+<img src = "https://github.com/joshuaseetss/duke/tree/master/docs/images/event.png" width="291" height="100">
+
+
+#### Deadline: `deadline`
+Expected Outcome:
+
+<img src = "https://github.com/joshuaseetss/duke/tree/master/docs/images/deadline.png" width="291" height="100">
+
+
+#### Done: `done`
+Expected Outcome:
+
+<img src = "https://github.com/joshuaseetss/duke/tree/master/docs/images/done.png" width="291" height="100">
+
+
+#### Delete: `delete`
+Expected Outcome:
+
+<img src = "https://github.com/joshuaseetss/duke/tree/master/docs/images/delete.png" width="291" height="100">
+
+#### DeleteAll: `deleteAll`
+Expected Outcome:
+
+<img src = "https://github.com/joshuaseetss/duke/tree/master/docs/images/deleteAll.png" width="291" height="100">
+
+
+#### Find: `find`
+Expected Outcome:
+
+<img src = "https://github.com/joshuaseetss/duke/tree/master/docs/images/find.png" width="291" height="100">
+
+
+#### List: `list`
+Expected Outcome:
+
+<img src = "https://github.com/joshuaseetss/duke/tree/master/docs/images/list.png" width="291" height="100">
+

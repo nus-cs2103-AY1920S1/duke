@@ -17,6 +17,5 @@ Example of usage:
 
 Expected outcome:
 
-![Image of list usage]
-(https://github.com/jerryk1997/duke/blob/master/docs/list_example.png)
+![Image of list usage](https://github.com/jerryk1997/duke/blob/master/docs/list_example.png)
 

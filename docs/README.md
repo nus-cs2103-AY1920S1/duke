@@ -44,49 +44,50 @@ Command | Example | Description
 `deleteAll <taskNumbers>` | delete 1 3 5 6 | Deletes the first, third, fifth and sixth task off the list
 `find <keyword>` | find homework | Find the tasks with "homework" and prints out them out in a list.
 `list` | list | Prints out everything in your list at that current point of time.
+`<command> *` | todo eat * | Prioritises this task and enters the task at the top of the list.
 
 #### Todo: `todo`
 Expected Outcome:
-![Alt text](./images/todo.png)
+
+![Todo picture](./images/todo.png)
 
 
 #### Event: `event`
 Expected Outcome:
-
-<img src = "https://github.com/joshuaseetss/duke/tree/master/docs/images/event.png" width="291" height="100">
+![Event picture](./images/event.png)
 
 
 #### Deadline: `deadline`
 Expected Outcome:
-
-<img src = "https://github.com/joshuaseetss/duke/tree/master/docs/images/deadline.png" width="291" height="100">
+![deadline picture](./images/deadline.png)
 
 
 #### Done: `done`
 Expected Outcome:
-
-<img src = "https://github.com/joshuaseetss/duke/tree/master/docs/images/done.png" width="291" height="100">
+![done picture](./images/done.png)
 
 
 #### Delete: `delete`
 Expected Outcome:
+![delete picture](./images/delete.png)
 
-<img src = "https://github.com/joshuaseetss/duke/tree/master/docs/images/delete.png" width="291" height="100">
 
 #### DeleteAll: `deleteAll`
 Expected Outcome:
-
-<img src = "https://github.com/joshuaseetss/duke/tree/master/docs/images/deleteAll.png" width="291" height="100">
+![deleteAll picture](./images/deleteAll.png)
 
 
 #### Find: `find`
 Expected Outcome:
+![find picture](./images/find.png)
 
-<img src = "https://github.com/joshuaseetss/duke/tree/master/docs/images/find.png" width="291" height="100">
 
 
 #### List: `list`
 Expected Outcome:
+![list picture](./images/find.png)
 
-<img src = "https://github.com/joshuaseetss/duke/tree/master/docs/images/list.png" width="291" height="100">
+#### <command> *: `<command> *`
+Expected Outcome:
+![list picture](./images/priority.png)
 

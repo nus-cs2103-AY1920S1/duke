@@ -3,6 +3,7 @@ package duke.task;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 import duke.task.Deadline;
 import duke.task.DukeException;
@@ -85,12 +86,26 @@ public class Parser {
      */
     public static String handleList(TaskList tasks) {
         StringBuilder sb = new StringBuilder();
+        int size = tasks.getTasks().size();
+
+        if (size == 0) {
+            sb.append("There are no tasks in the database.");
+            return sb.toString();
+        }
+
+        sb.append("Here are the list of tasks that you have:\n");
+
         for (int i = 0; i < tasks.getTasks().size(); i++) {
             sb.append(i + 1);
             sb.append(".");
             sb.append(tasks.get(i));
             sb.append('\n');
         }
+
+        if (sb.length() > 0 && sb.charAt(sb.length() - 1) == '\n') {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+
         return sb.toString();
     }
 
@@ -148,6 +163,7 @@ public class Parser {
      */
     public static Task handleItem(TaskList tasks, String input) throws DukeException {
         Task task;
+        boolean toAdd = true;
 
         if (input.startsWith("todo")) {
             if (input.length() < 6) {
@@ -166,10 +182,22 @@ public class Parser {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
 
+        for (int i = 0; i < tasks.getTasks().size(); i++) {
+            if (task.getType().equals(tasks.get(i).getType()) && task.compareTo(tasks.get(i)) == 0) {
+                // If we encounter a duplicate, we do not add the task
+                toAdd = false;
+                break;
+            }
+        }
+
         // The task created should not be done yet
         assert !task.isDone() : "Tasks that are just created should not be marked as done";
 
-        tasks.add(task);
-        return task;
+        if (toAdd) {
+            tasks.add(task);
+            return task;
+        } else {
+            return null;
+        }
     }
 }

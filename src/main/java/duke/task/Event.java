@@ -34,4 +34,28 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.from + " - " + this.to + ")";
     }
+
+    /**
+     * This function compares between two Event tasks by their description, from date and then the to date.
+     * @param other The other Event task to compare to.
+     * @return int
+     */
+    @Override
+    public int compareTo(Task other) {
+        if (!this.getType().equals(other.getType())) {
+            return -1;
+        }
+
+        Event comp = (Event) other;
+
+        if (this.description.compareTo(comp.description) == 0) {
+            if (this.from.compareTo(comp.from) == 0) {
+                return this.to.compareTo(comp.to);
+            } else {
+                return this.from.compareTo(comp.from);
+            }
+        } else {
+            return this.description.compareTo(comp.description);
+        }
+    }
 }

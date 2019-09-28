@@ -17,6 +17,8 @@ More importantly, DukeBot is optimized for those who prefer to work with a Comma
 
 2. Download the latest duke-0.2.0.jar [here](https://github.com/qweiping31415/duke/releases)
 
+![Ui.png](Ui.png)
+
 ## 3. Features 
 
 ### 3.1. Viewing help

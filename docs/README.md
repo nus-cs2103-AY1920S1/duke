@@ -4,8 +4,21 @@ interface to make your experience more immersive. Take on the role as young Anak
 Jedi Master Yoda in completing your tasks. Be careful though, Darth Vader might appear if you have more than 10
 uncompleted tasks.
 
+## Getting started
+1. Ensure that you have Java 11 or above installed on your computer.
+2. Download the latest release of Duke.
+3. Copy it into the folder of your choice and rename it to your liking.
+4. Double click the file to start the app.
+5. If step 4 does not work, navigate to the containing folder on your command line and type `java -jar [file name]`
+6. The GUI should appear in a few seconds.
+7. If you prefer to use a command line interface, follow step 5 but type `java -jar [file name] -c` instead.
+
 ## Features 
 
+### Multiple user intefaces
+This application supports a command line interface for those users who prefer not to use a GUI. To switch to using a
+command line interface instead, simply navigate to Duke's containing folder in your command line and type 
+`java -jar [file name] -c` to start the application.
 
 ### Add various tasks
 The application hosts a wide range of tasks to suit your needs. 

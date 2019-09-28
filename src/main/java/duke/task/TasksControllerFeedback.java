@@ -31,8 +31,8 @@ class TasksControllerFeedback {
                     .newLine()
                     .append("Hmmm. More than 5 tasks, I sense undone.")
                     .newLine()
-                    .append("Once you start down the dark path, forever will it dominate your destiny, " +
-                            "consume you it will.");
+                    .append("Once you start down the dark path, forever will it dominate your destiny, "
+                            + "consume you it will.");
 
             return builder.build();
         }

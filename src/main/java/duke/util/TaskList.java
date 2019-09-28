@@ -36,6 +36,13 @@ public class TaskList {
         return tasks.remove(index);
     }
 
+    /**
+     * Indicates whether the newly added task is already in the list.
+     *
+     * @param task  a <code>Task</code> that the user intends to add
+     * @return      <code>true</code> if this task list has a same task
+     *              <code>false</code> otherwise.
+     */
     public boolean contains(Task task) {
         for (Task t : tasks) {
             if (t.equals(task)) {
@@ -47,27 +54,42 @@ public class TaskList {
 
     /**
      * Compares two task list by sequentially comparing each task.
+     * This method is mainly for testing purpose.
      *
      * @param obj a <code>TaskList</code> object to be compared
-     * @return <code>true</code> if this task list has same tasks in the same order as another task list;
-     * <code>false</code> otherwise.
+     * @return    <code>true</code> if this task list has same tasks in the same order as another task list;
+     *            <code>false</code> otherwise.
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof TaskList) {
-            TaskList another = (TaskList) obj;
-            if (another.getTotalTask() != this.getTotalTask()) {
-                return false;
-            } else {
-                for (int i = 0; i < this.getTotalTask(); i++) {
-                    if (!this.getTaskAt(i).equals(another.getTaskAt(i))) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-        } else {
+        //@@author ZhangHuafan-reused
+        //Reused from https://www.javaworld.com/article/3305792/comparing-java-objects-with-equals-and-hashcode.html
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
             return false;
         }
+        //@@author
+
+        TaskList another = (TaskList) obj;
+        if (another.getTotalTask() != this.getTotalTask()) {
+            return false;
+        }
+        for (int i = 0; i < getTotalTask(); i++) {
+            if (!another.getTaskAt(i).equals(this.getTaskAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        String fullList = "";
+        for (int i = 1; i <= getTotalTask(); i++) {
+            fullList = fullList + i + ". " + this.getTaskAt(i - 1) + "\n";
+        }
+        return fullList;
     }
 }

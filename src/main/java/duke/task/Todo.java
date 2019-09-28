@@ -5,16 +5,10 @@ package duke.task;
  */
 public class Todo extends Task {
 
-    /**
-     * {@inheritDoc}
-     */
     public Todo(String description) {
         super(description);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public Todo(String description, boolean isDone) {
         super(description, isDone);
     }
@@ -30,12 +24,12 @@ public class Todo extends Task {
     }
 
     /**
-     * Compares two <code>Task</code> objects by their descriptions and <code>isDone</code> status.
-     * The comparison is mainly used for JUnit tests.
+     * Compares two <code>Task</code> objects by their descriptions and <code>isDone</code> status. The comparison is
+     * mainly used for JUnit tests.
      *
-     * @param obj  the object to be compared
-     * @return     <code>true</code> if the specifications for two tasks are all the same;
-     *             <code>false</code> otherwise.
+     * @param obj the object to be compared
+     * @return <code>true</code> if the specifications for two tasks are all the same;
+     * <code>false</code> otherwise.
      */
     @Override
     public boolean equals(Object obj) {

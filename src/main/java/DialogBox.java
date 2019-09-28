@@ -1,13 +1,9 @@
-import java.io.IOException;
-import java.util.Collections;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -20,10 +16,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
+import java.io.IOException;
+import java.util.Collections;
+
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * This is a class that represents a dialog box consisting of an ImageView to
+ * represent the speaker's face and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -31,9 +29,9 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private final static int SPACE = 20;
-    private final static Color colorBlue = Color.rgb(156, 202, 224);
-    private final static Color colorGreen= Color.rgb(202, 224, 156);
+    private static final int SPACE = 20;
+    private static final Color colorBlue = Color.rgb(156, 202, 224);
+    private static final Color colorGreen = Color.rgb(202, 224, 156);
 
     private DialogBox(String text, Image img) {
         super(SPACE);
@@ -52,9 +50,6 @@ public class DialogBox extends HBox {
         displayPicture.setClip(getImageClip());
     }
 
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
@@ -64,13 +59,20 @@ public class DialogBox extends HBox {
     }
 
     private void setBackgroundColor(Label label, Color color) {
-        label.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, new Insets(-5,-5,-5,-5))));
+        label.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, new Insets(-5, -5, -5, -5))));
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
+    static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a flipped dialog aligning at the left side.
+     *
+     * @param text  a string showing duke's response to user's command
+     * @param img   an <code>Image</code> object as duke's profile
+     * @return      a flipped dialog of duke aligning at the left side of the chat box
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

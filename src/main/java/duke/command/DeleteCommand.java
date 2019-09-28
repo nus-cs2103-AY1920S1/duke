@@ -30,11 +30,11 @@ public class DeleteCommand extends Command {
      * deleting. If the specified task number is out of the available range, a <code>DukeException</code> will be
      * thrown.
      *
-     * @param taskList        {@inheritDoc}
-     * @param ui              {@inheritDoc}
-     * @param storage         {@inheritDoc}
-     * @return                a string showing the specified task is deleted from the task list
-     * @throws DukeException  If the specified task number does not existed in the current list
+     * @param taskList {@inheritDoc}
+     * @param ui       {@inheritDoc}
+     * @param storage  {@inheritDoc}
+     * @return a string showing the specified task is deleted from the task list
+     * @throws DukeException If the specified task number does not existed in the current list
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

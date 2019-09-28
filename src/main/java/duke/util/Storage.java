@@ -5,7 +5,11 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -33,7 +37,7 @@ public class Storage {
      * @return a <code>TaskList</code> object containing all tasks loaded from the hard disk storage
      * @throws FileNotFoundException If the <code>Scanner</code> cannot find the file to read information from
      */
-  
+
     public List<Task> loadTasks() throws DukeException, IOException {
         File file = new File(filePath);
         file.createNewFile();
@@ -47,7 +51,8 @@ public class Storage {
 
     /**
      * Writes every tasks in the current task list to the hard disk in the form of strings. Specific tasks,
-     * <code>Todo</code>, <code>Deadline</code>, or <code>Event</code> will be distinguished by a starting letter: T, D,
+     * <code>Todo</code>, <code>Deadline</code>, or <code>Event</code> will be distinguished by a starting letter: T,
+     * D,
      * or E, in order to load the same-type task back from storage.
      *
      * @param taskList a <code>TaskList</code> object of which the information about tasks will be recorded to the

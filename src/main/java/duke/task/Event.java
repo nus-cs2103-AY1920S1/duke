@@ -14,7 +14,8 @@ public class Event extends Task {
     /**
      * {@inheritDoc} This is a class constructor specifying the description, start time and end time for the task. The
      * <code>isDone</code> status is set to be <code>false</code> by default.
-     *F
+     * F
+     *
      * @param startDateTime a <code>LocalDateTime</code> object to specify the start date and time of this event
      * @param endTime       a <code>LocalTime</code> object to specify the end time of this event
      */
@@ -49,7 +50,7 @@ public class Event extends Task {
      * {@inheritDoc}
      *
      * @return a string representing this todo in the format of a tag "[E]" at the start, followed by the description,
-     * the start date time, and the end time.
+     *         the start date time, and the end time.
      */
     @Override
     public String toString() {
@@ -57,12 +58,12 @@ public class Event extends Task {
     }
 
     /**
-     * Compares two <code>Task</code> objects by their descriptions and <code>isDone</code> status.
-     * The comparison is mainly used for JUnit tests.
+     * Compares two <code>Task</code> objects by their descriptions and <code>isDone</code> status. The comparison is
+     * mainly used for JUnit tests.
      *
-     * @param obj  the object to be compared
-     * @return     <code>true</code> if the specifications for two tasks are all the same;
-     *             <code>false</code> otherwise.
+     * @param obj the object to be compared
+     * @return <code>true</code> if the specifications for two tasks are all the same;
+     * <code>false</code> otherwise.
      */
     @Override
     public boolean equals(Object obj) {

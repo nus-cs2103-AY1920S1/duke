@@ -8,12 +8,12 @@ import java.time.format.DateTimeFormatter;
 
 
 /**
- * Task is the base base class for all tasks. Basically, a Task object encapsulates the information about
- * the description and status (done or not).
+ * Task is the base base class for all tasks. Basically, a Task object encapsulates the information about the
+ * description and status (done or not).
  */
 public class Task {
 
-    static final protected DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MMM-yyyy, HH:mm");
+    protected static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MMM-yyyy, HH:mm");
     protected String description;
     protected boolean isDone;
 
@@ -40,7 +40,7 @@ public class Task {
     }
 
     private String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "μ2713" : "μ2718");
     }
 
     public String getDescription() {
@@ -60,7 +60,7 @@ public class Task {
      * @return a specific <code>Task</code> object, namely, <code>Todo</code>, <code>Deadline</code>, or
      * <code>Event</code>,
      */
-    static public Task from(String taskInfo) throws DukeException {
+    public static Task from(String taskInfo) throws DukeException {
         String[] taskInfos = taskInfo.split("\\|");
         switch (taskInfos[0]) {
         case "T":

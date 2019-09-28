@@ -10,7 +10,7 @@ public class Deadline extends Task {
     private LocalDateTime dueDateTime;
 
     /**
-     * {@inheritDoc} This is a class constructor specifying the description and the due dateTime. The
+     * This is a class constructor specifying the description and the due dateTime. The
      * <code>isDone</code> status is set to be <code>false</code> by default.
      *
      * @param dueDateTime a <code>LocalDateTime</code> object to specify the due date and time
@@ -39,7 +39,7 @@ public class Deadline extends Task {
      * {@inheritDoc}
      *
      * @return a string representing this todo in the format of a tag "[D]" at the start, followed by the description
-     * and the due date time
+     *         and the due date time
      */
     @Override
     public String toString() {
@@ -47,12 +47,12 @@ public class Deadline extends Task {
     }
 
     /**
-     * Compares two <code>Task</code> objects by their descriptions and <code>isDone</code> status.
-     * The comparison is mainly used for JUnit tests.
+     * Compares two <code>Task</code> objects by their descriptions and <code>isDone</code> status. The comparison is
+     * mainly used for JUnit tests.
      *
-     * @param obj  the object to be compared
-     * @return     <code>true</code> if the specifications for two tasks are all the same;
-     *             <code>false</code> otherwise.
+     * @param obj the object to be compared
+     * @return <code>true</code> if the specifications for two tasks are all the same;
+     * <code>false</code> otherwise.
      */
     @Override
     public boolean equals(Object obj) {

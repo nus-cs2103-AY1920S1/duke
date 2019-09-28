@@ -1,14 +1,20 @@
 package duke.util;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * This is a class that parsers user's commands(strings) to <code>LocalDateTime</code> objects and executable
@@ -79,7 +85,7 @@ public class Parser {
             if (infos.length < 2) {
                 throw new DukeException("☹ OOPS!!! No enough information entered");
             }
-            return new TodoCommand(infos[1]);
+            return new AddCommand(new Todo(infos[1]));
         case "deadline":
             if (infos.length < 2) {
                 throw new DukeException("☹ OOPS!!! No enough information entered");
@@ -90,7 +96,7 @@ public class Parser {
             try {
                 String[] details = infos[1].split(" /by ");
                 LocalDateTime due = Parser.parseDateTime(details[1]);
-                return new DeadlineCommand(details[0], due);
+                return new AddCommand(new Deadline(details[0], due));
             } catch (DateTimeParseException e) {
                 throw new DukeException("The deadline is in invalid format");
             }
@@ -106,7 +112,7 @@ public class Parser {
                 String[] times = details[1].split("-");
                 LocalDateTime startDateTime = Parser.parseDateTime(times[0]);
                 LocalTime time = LocalTime.parse(times[1]);
-                return new EventCommand(details[0], startDateTime, time);
+                return new AddCommand(new Event(details[0], startDateTime, time));
             } catch (DateTimeParseException e) {
                 throw new DukeException("The duration is in invalid format");
             }

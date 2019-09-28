@@ -12,99 +12,89 @@ import java.util.Scanner;
  * rest needs to take in some parameter(s) to show according responses.
  */
 public class Ui {
-    private static final String INDENTATION = "     ";
-    private static final String SEPARATOR = "    ____________________________________________________________\n";
-    public static final String WELCOME_Msg = "Hello! I'm Duke\nWhat can I do for you?";
-    public static final String ENDING_Msg = "Bye. Hope to see you again soon!";
-    public static final String SAVING_ERROR_Msg = "☹ OOPS!!! We cannot save your data!";
-    public static final String LOADING_ERROR_Msg = "☹ OOPS!!! We cannot load your data!";
-    public static final String NO_TASK_Msg = "kkk ~ There is no task in your todo list now!";
-    private Scanner scanner;
-
-    /**
-     * This is a sole constructor initialising its <code>Scanner</code> to read from console.
-     */
-    public Ui() {
-        scanner = new Scanner(System.in);
-    }
-
-    private String getFormattedStr(String str) {
-        return SEPARATOR + INDENTATION + str.replace("\n", "\n" + INDENTATION)
-                + "\n" + SEPARATOR;
-    }
+    private static final String WELCOME = "Hello! I'm your Duke\nWhat can I do for you?";
+    private static final String ENDING = "Bye. Hope to see you again soon!";
+    private static final String SAVING_ERROR = "☹ OOPS!!! We cannot save your data!";
+    private static final String LOADING_ERROR = "☹ OOPS!!! We cannot load your data!";
+    private static final String NO_TASK = "kkk ~ There is no task in your todo list now!";
+    private static final String DUPLICATION = "A same task already exists!!! Do not bother yourself to do it twice=)";
 
     public String showWelcome() {
-        System.out.println(getFormattedStr(WELCOME_Msg));
-        return WELCOME_Msg;
+        return WELCOME;
     }
 
     public String showGoodbye() {
-        System.out.println(getFormattedStr(ENDING_Msg));
-        return ENDING_Msg;
+        return ENDING;
     }
 
     public String showSavingError() {
-        System.out.println(getFormattedStr(SAVING_ERROR_Msg));
-        return SAVING_ERROR_Msg;
+        return SAVING_ERROR;
     }
 
     public String showLoadingError() {
-        System.out.println(getFormattedStr(LOADING_ERROR_Msg));
-        return LOADING_ERROR_Msg;
+        return LOADING_ERROR;
     }
 
     public String showError(String errorMsg) {
-        System.out.println(getFormattedStr(errorMsg));
         return errorMsg;
     }
 
     public String showNoTask() {
-        System.out.println(getFormattedStr(NO_TASK_Msg));
-        return NO_TASK_Msg;
-    }
-
-    public String showTaskAdded(int total, Task newTask) {
-        String msg = "Got it. I've added this task:\n" + "  " + newTask
-                + "\nNow you have " + total + " tasks in the list.";
-        System.out.println(getFormattedStr(msg));
-        return msg;
-    }
-
-    public String showTaskDeleted(int total, Task removedTask) {
-        String msg = "Noted. I've removed this task: \n" + "  " + removedTask
-                + "\nNow you have " + total + " tasks in the list.";
-        System.out.println(getFormattedStr(msg));
-        return msg;
-    }
-
-    public String showTaskDone(Task doneTask) {
-        String msg = "Nice! I've marked this task as done:\n" + "  " + doneTask;
-        System.out.println(getFormattedStr(msg));
-        return msg;
+        return NO_TASK;
     }
 
     public String showTaskDuplicated() {
-        String msg = "A same task already exists!!! Do not bother yourself to do it twice=)";
-        System.out.println(getFormattedStr(msg));
+        return DUPLICATION;
+    }
+
+    /**
+     * Informs the user that the task he has marked done.
+     *
+     * @param doneTask  the <code>Task</code> that the user just marked as done
+     * @return          a string that informs the user the marked-done task
+     */
+    public String showTaskDone(Task doneTask) {
+        String msg = "Nice! I've marked this task as done:\n" + "  " + doneTask;
         return msg;
     }
 
+    /**
+     * Informs the user that the task he has added and the remaining number of tasks.
+     *
+     * @param total         the total number of tasks
+     * @param newTask       the <code>Task</code> that the user just added
+     * @return              a string that informs the user the added task and the total number of tasks
+     */
+    public String showTaskAdded(int total, Task newTask) {
+        String msg = "Got it. I've added this task:\n" + "  " + newTask
+                + "\nNow you have " + total + " tasks in the list.";
+        return msg;
+    }
+
+    /**
+     * Informs the user that the task he has deleted and the remaining number of tasks.
+     *
+     * @param total         the total number of left tasks
+     * @param removedTask   the <code>Task</code> that the user just deleted
+     * @return              a string that informs the user the deleted task and the total number of left tasks
+     */
+    public String showTaskDeleted(int total, Task removedTask) {
+        String msg = "Noted. I've removed this task: \n" + "  " + removedTask
+                + "\nNow you have " + total + " tasks in the list.";
+        return msg;
+    }
+
+    /**
+     * Shows the full list to the user.
+     *
+     * @param taskList  a <code>TaskList</code> of the user
+     * @return          a string representing the full content of the list
+     */
     public String showFullList(TaskList taskList) {
         if (taskList.getTotalTask() == 0) {
             return showNoTask();
         } else {
-            String formattedList = "";
-            String header = "Here are the tasks in your list:\n";
-            for (int i = 1; i <= taskList.getTotalTask(); i++) {
-                formattedList = formattedList + INDENTATION + i + ". " + taskList.getTaskAt(i - 1) + "\n";
-            }
-            System.out.println(SEPARATOR + INDENTATION + header + formattedList + SEPARATOR);
-            return header + formattedList;
+            return "Here are the tasks in your list:\n" + taskList;
         }
     }
-
-    public String readCommand() {
-        return scanner.nextLine();
-    }
-
 }

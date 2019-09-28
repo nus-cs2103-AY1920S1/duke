@@ -2,19 +2,16 @@ import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 /**
- * This is class that represents controller for MainWindow.
- * It provides the layout for the other controls.
+ * This is class that represents controller for MainWindow. It provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -31,6 +28,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes the layout of the main window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -38,6 +38,11 @@ public class MainWindow extends AnchorPane {
         scrollPane.setFitToWidth(true);
     }
 
+    /**
+     * Sets <code>Duke</code> object to an existing reference.
+     *
+     * @param duke  a <code>Duke</code> object that will help process the user's command
+     */
     public void setDuke(Duke duke) {
         this.duke = duke;
         dialogContainer.getChildren().add(
@@ -63,11 +68,15 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Exits the chat box after showing the goodbye message.
+     */
     //@@author ZhangHuafan
     //Reused from https://github.com/jyx11011/duke/blob/master/src/main/java/duke/ui/MainWindow.java
     public void exit() {
+        final int exitingDelay = 2;
         userInput.setDisable(true);
-        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+        PauseTransition delay = new PauseTransition(Duration.seconds(exitingDelay));
         delay.setOnFinished(event -> Platform.exit());
         delay.play();
     }

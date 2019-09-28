@@ -1,5 +1,10 @@
 import duke.command.Command;
-import duke.util.*;
+import duke.util.DukeException;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
+import duke.util.Parser;
+
 
 import java.io.IOException;
 
@@ -30,6 +35,11 @@ public class Duke {
         return taskList;
     }
 
+    /**
+     * Loads data to take list and shows welcome message to the user.
+     *
+     * @return  a string welcoming the user
+     */
     public String setUp() {
         try {
             taskList = new TaskList(storage.loadTasks());
@@ -41,28 +51,11 @@ public class Duke {
     }
 
     /**
-     * Starts the whole interaction process with the user. At first, it loads and shows the task list from previous
-     * storage. Util the user enters "bye" commands, it executes the user's every commands. It also informs user about
-     * invalid commands from input during the interaction.
+     * Executes the command and shows corresponding reply.
+     *
+     * @param input  a string representing the user's command
+     * @return       a string showing the executing result
      */
-    public void run() {
-
-        setUp();
-
-        boolean isExist = false;
-        while (!isExist) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parseCommand(fullCommand);
-                c.execute(taskList, ui, storage);
-                isExist = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
-        }
-        ui.showGoodbye();
-    }
-
     public String getResponse(String input) {
         try {
             Command c = Parser.parseCommand(input);

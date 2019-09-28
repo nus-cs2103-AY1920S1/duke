@@ -1,4 +1,4 @@
-# Christopher v0.2.0 User Guide
+# Christopher v0.3.3 User Guide
 
 ## Christopher's Amazing Features 
 
@@ -66,9 +66,9 @@ Christopher will return an error statement with an exception.
 User can update the task which is stored inside the task list.
 1. If user wants to update a 'Todo' type task, user can only specify the task description.
    `update [task_list_index] [new_task_description]`
-1. For updating 'Event' and 'Deadline' type tasks, user must update either 1; task description or
-time or both.
-    `update [task_list_index] [new_task_description] [new_time]`
+1. For updating 'Event' and 'Deadline' type tasks, if user wants to update time description only, 
+follow the syntax `update [task_list_index] [new_task_description]`. If user wants to update time, user must input both description and time together.
+`update [task_list_index] [new_task_description] [new_time]`
 
 **Example of usage**: 
 `update 2 report 2 test`

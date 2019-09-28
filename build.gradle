@@ -17,7 +17,7 @@ tasks.withType(JavaCompile) {
 }
 
 group 'seedu.duke'
-version '0.3.2'
+version '0.3.3'
 
 repositories {
     mavenCentral()

@@ -29,14 +29,26 @@ public class CmdDone extends Cmd {
             boolean isValidIndex = validateIndex(taskList, description);
             if (isValidIndex) {
                 int index = Integer.valueOf(description) - 1;
-                taskList.get(index).markAsDone();
+                Task task = taskList.get(index);
+                if (checkIfNotMarked(task)) {
+                    taskList.get(index).markAsDone();
 
-                storage.saveTask(taskList);
-                String message = "Nice! I've marked this task as done:\n"
-                        + ui.displayTask(this.getMsg(), taskList, index);
-                this.setMsg(message);
+                    storage.saveTask(taskList);
+                    String message = "Nice! I've marked this task as done:\n"
+                            + ui.displayTask(this.getMsg(), taskList, index);
+                    this.setMsg(message);
+                } else {
+                    this.setMsg("Already marked as done!");
+                }
             }
         }
+    }
+
+    private boolean checkIfNotMarked(Task task) {
+        if (task.getIsDone()) {
+            return false;
+        }
+        return true;
     }
 
     private boolean validateIndex(List<Task> taskList, String description) {

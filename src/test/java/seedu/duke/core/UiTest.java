@@ -21,4 +21,15 @@ public class UiTest {
         Ui ui = new Ui();
         assertEquals("", ui.displayTask("", taskList, 2));
     }
+
+    //Discontinued due to UTF encoding issues.
+    /*
+    @Test
+    public void displayList() {
+        List<Task> taskList = new ArrayList<>();
+        taskList.add(new Todo("buy bread"));
+        Ui ui = new Ui();
+        assertEquals("1.[T][✘] buy bread", ui.displayList("", taskList));
+    }
+    */
 }

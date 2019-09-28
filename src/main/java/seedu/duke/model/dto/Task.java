@@ -32,26 +32,32 @@ public class Task {
     }
 
     public String getDescription() {
+
         return description;
     }
 
     public void setDescription(String description) {
+
         this.description = description;
     }
 
     public void setIsDone(boolean isDone) {
+
         this.isDone = isDone;
     }
 
     public boolean getIsDone() {
+
         return isDone;
     }
 
     public void setDone(boolean done) {
+
         isDone = done;
     }
 
     public String getType() {
+
         return type;
     }
 

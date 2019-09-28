@@ -1,8 +1,9 @@
 package duke.task;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 
-public abstract class Task {
+public abstract class Task implements Serializable {
     public String name;
     String type;
     public Boolean done;

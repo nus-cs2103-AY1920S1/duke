@@ -17,6 +17,7 @@ public class Deadlines extends Task {
         super(name, formatter);
         this.type = "[D]";
         this.date = date;
+        assert date != null;
     }
 
     /**

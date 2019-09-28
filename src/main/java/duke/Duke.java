@@ -1,8 +1,11 @@
 package duke;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
-import duke.ui.Ui;
+import java.util.ArrayList;
+
+import duke.task.Task;
 import duke.backend.Storage;
 import duke.backend.ListManager;
 import duke.command.Command;
@@ -17,7 +20,6 @@ import javafx.scene.image.Image;
 
 public class Duke {
 
-    private Ui ui;
     private Storage storage;
     private ListManager listManager;
     private ScrollPane scrollPane;
@@ -35,15 +37,13 @@ public class Duke {
      * Main method that drives the running of the app. Creates new UI/Storage and ListManagers
      * @param filePath to access a pre-existing list (if-any)
      */
-    Duke(String filePath) {
-        ui = new Ui();
+    Duke(String filePath) throws IOException {
         isExit = false;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
         storage = new Storage(filePath, formatter);
         try {
-            listManager = new ListManager(storage.load(), formatter);
+            listManager = new ListManager((ArrayList<Task>) storage.load(), formatter);
         } catch (FileNotFoundException e) {
-            ui.showLoadingError();
             listManager = new ListManager(formatter);
         }
 
@@ -55,7 +55,7 @@ public class Duke {
     private String run(String input) {
         String output = "";
         Command c = Parser.parse(input);
-        output = c.execute(listManager, ui, storage);
+        output = c.execute(listManager, storage);
         isExit = c.isExit();
         return output;
     }

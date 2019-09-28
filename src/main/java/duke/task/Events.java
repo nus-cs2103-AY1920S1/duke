@@ -17,6 +17,7 @@ public class Events extends Task {
         super(name, formatter);
         this.date = date;
         this.type = "[E]";
+        assert date != null;
     }
 
     /**

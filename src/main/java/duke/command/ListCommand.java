@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.backend.ListManager;
 import duke.backend.Storage;
-import duke.ui.Ui;
 
 public class ListCommand extends Command {
 
@@ -11,7 +10,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public String execute(ListManager listManager, Ui ui, Storage storage) {
+    public String execute(ListManager listManager, Storage storage) {
         return listManager.iterate();
     }
 

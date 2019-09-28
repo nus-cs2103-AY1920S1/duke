@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.backend.ListManager;
 import duke.backend.Storage;
-import duke.ui.Ui;
+
 
 import java.io.IOException;
 
@@ -13,13 +13,9 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public String execute(ListManager listManager, Ui ui, Storage storage) {
-        String output = "";
-        for (int i = 0; i < listManager.actualList.size(); i++) {
-            output += listManager.actualList.get(i).saveText() + "\n";
-        }
+    public String execute(ListManager listManager, Storage storage) {
         try {
-            storage.save(storage.filePath, output);
+            storage.save(listManager.actualList);
         } catch (IOException e) {
             System.out.println("Failed to save:" + e.getMessage());
         }

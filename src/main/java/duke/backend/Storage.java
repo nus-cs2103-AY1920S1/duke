@@ -4,24 +4,23 @@ import duke.task.Task;
 import duke.task.ToDos;
 import duke.task.Events;
 import duke.task.Deadlines;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.FileNotFoundException;
+
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
 
 public class Storage {
 
-    public String filePath;
+    private File file;
+    private String filePath;
     private SimpleDateFormat formatter;
 
-    public Storage(String filePath, SimpleDateFormat formatter) {
+    public Storage(String filePath, SimpleDateFormat formatter) throws IOException {
         this.filePath = filePath;
+        this.file = new File(filePath);
         this.formatter = formatter;
+        checkFile();
     }
 
     /**
@@ -30,58 +29,30 @@ public class Storage {
      * @return new ArrayList of tasks.
      * @throws FileNotFoundException in the event that file does not exist in given directory.
      */
-    public ArrayList<Task> load() throws FileNotFoundException {
-        File f = new File(this.filePath);
-        Scanner s = new Scanner(f);
-        ArrayList<Task> oldList = new ArrayList<>();
-        while (s.hasNextLine()) {
-            String task = s.nextLine();
-            String[] splitTask = task.split("\\|");
-            switch (splitTask[0]) {
-            case "T":
-                ToDos todo = new ToDos(splitTask[2], formatter);
-                todo.done = isDone(Integer.parseInt(splitTask[1]));
-                oldList.add(todo);
-                break;
-            case "D":
-                try {
-                    Date date = formatter.parse(splitTask[3]);
-                    Deadlines dl = new Deadlines(splitTask[2], formatter, date);
-                    dl.done = isDone(Integer.parseInt(splitTask[1]));
-                    oldList.add(dl);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case "E":
-                try {
-                    System.out.println(splitTask[3]);
-                    Date date = formatter.parse(splitTask[3]);
-                    Events event = new Events(splitTask[2], formatter, date);
-                    event.done = isDone(Integer.parseInt(splitTask[1]));
-                    oldList.add(event);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                break;
-            default:
-                System.out.println("Task does not exist.");
-                break;
-            }
+    public List<Task> load() throws IOException {
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Task[] arrayOfTasks = (Task[]) ois.readObject();
+            return new ArrayList<>(Arrays.asList(arrayOfTasks));
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new IOException();
         }
-        return oldList;
     }
 
     /**
      * method that saves current list in ListManager to a text file in given directory.
-     * @param filePath String of given directory.
-     * @param textToAdd String of tasks.
      * @throws IOException to handle if there is no text to be written in.
      */
-    public void save(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(textToAdd);
-        fw.close();
+    public void save(List<Task> listOfTasks) throws IOException {
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(listOfTasks.toArray(new Task[0]));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -94,6 +65,13 @@ public class Storage {
             return true;
         } else {
             return false;
+        }
+    }
+
+    private void checkFile() throws IOException {
+        if (!this.file.exists()) {
+            File file = new File(this.filePath);
+            save(new ArrayList<Task>());
         }
     }
 }

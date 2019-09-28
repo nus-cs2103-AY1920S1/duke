@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.backend.ListManager;
 import duke.backend.Storage;
-import duke.ui.Ui;
+
 
 public abstract class Command {
 
@@ -14,7 +14,7 @@ public abstract class Command {
         this.splitCommand = splitCommand;
     }
 
-    public abstract String execute(ListManager listManager, Ui ui, Storage storage);
+    public abstract String execute(ListManager listManager, Storage storage);
 
     public abstract boolean isExit();
 }

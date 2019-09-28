@@ -16,6 +16,9 @@ public class Main extends Application {
 
     private Duke duke = new Duke("data/tasks.txt");
 
+    public Main() throws IOException {
+    }
+
     @Override
     public void start(Stage stage) {
         try {

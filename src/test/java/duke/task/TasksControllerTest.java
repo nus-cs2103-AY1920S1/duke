@@ -172,7 +172,7 @@ class TasksControllerTest {
         this.generateMocks();
 
         List<Task> tasks = this.generateMockTasks();
-        this.controller.setNewTasks(tasks);
+        this.controller.setNewTasks(tasks, true);
 
         List<Task> storedTasks = this.repo.getCurrentTasks();
 

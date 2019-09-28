@@ -4,10 +4,3 @@ E | 0 | project meeting | 19/09/2019 1900
 E | 0 | eat deck mala | 21/09/2019 1230
 E | 0 | team meeting | 25/09/2019 1300
 T | 0 | return book
-T | 0 | 1
-T | 0 | 2
-T | 0 | 4
-T | 0 | 6
-T | 0 | 199292
-T | 0 | 12
-T | 0 | 29292929

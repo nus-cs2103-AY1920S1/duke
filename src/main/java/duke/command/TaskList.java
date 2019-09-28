@@ -1,9 +1,11 @@
 package duke.command;
 
 import duke.task.Task;
+import duke.task.TaskComparator;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Represents the list of task that has and has not been done.
@@ -39,7 +41,7 @@ public class TaskList {
      * @return The task that has been removed from the list.
      */
     public Task deleteTask(int index) {
-        return list.remove(index);
+        return this.list.remove(index);
     }
 
     /**
@@ -59,5 +61,11 @@ public class TaskList {
         return this.list.get(index);
     }
 
+    /**
+     * Sorts the list of tasks.
+     */
+    public void sortTaskList() {
+        Collections.sort(this.list, new TaskComparator());
+    }
 }
 

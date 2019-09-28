@@ -1,6 +1,13 @@
+D | 1 | submit assignment | 30/09/2019 2359
+D | 0 | submit project milestone | 02/10/2019 2359
 E | 0 | project meeting | 19/09/2019 1900
-D | 0 | submit peer review | 23/09/2019 2359
-D | 0 | submit assignment | 21/09/2019 2359
-T | 0 | return physics book to NLB bugis
-E | 0 | team meeting | 18/08/2019 1700
-E | 0 | makan mala | 21/09/2019 1230
+E | 0 | eat deck mala | 21/09/2019 1230
+E | 0 | team meeting | 25/09/2019 1300
+T | 0 | return book
+T | 0 | 1
+T | 0 | 2
+T | 0 | 4
+T | 0 | 6
+T | 0 | 199292
+T | 0 | 12
+T | 0 | 29292929

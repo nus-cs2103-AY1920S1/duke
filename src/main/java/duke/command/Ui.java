@@ -32,8 +32,8 @@ public class Ui {
      */
     public String printTaskDone(Task task) {
         String message;
-        message = "Nice! I've marked this task as done:";
-        message =  message + "[" + "\u2713" + "] " + task.getDescription();
+        message = "Nice! I've marked this task as done:\n  ";
+        message =  message + task;
         return message;
     }
 
@@ -44,7 +44,7 @@ public class Ui {
      */
     public String printDeleteTask(Task task, ArrayList<Task> list) {
         String message;
-        message = "Noted. I've removed this task:\n";
+        message = "Noted. I've removed this task:\n  ";
         message = message + task + "\n";
         message = message + "Now you have " + list.size() + " tasks in the list";
         return message;
@@ -58,7 +58,7 @@ public class Ui {
     public String printToDoTask(Task task, ArrayList<Task> list) {
         String message;
         message = "Got it. I've added this task:\n";
-        message = message + " " + task + "\n";
+        message = message + "  " + task + "\n";
         message = message + "Now you have " + list.size() + " tasks in the list";
         return message;
     }
@@ -71,7 +71,7 @@ public class Ui {
     public String printEventtTask(Task task, ArrayList<Task> list) {
         String message;
         message = "Got it. I've added this task:\n";
-        message = message + " " + task + "\n";
+        message = message + "  " + task + "\n";
         message = message + "Now you have " + list.size() + " tasks in the list.";
         return message;
     }
@@ -84,7 +84,7 @@ public class Ui {
     public String printDeadlineTask(Task task, ArrayList<Task> list) {
         String message;
         message = "Got it. I've added this task: \n";
-        message = message + " " + task + "\n";
+        message = message + "  " + task + "\n";
         message = message + "Now you have " + list.size() + " tasks in the list.";
         return message;
     }
@@ -109,8 +109,11 @@ public class Ui {
 
     public static int taskNumber = 1;
 
+    /**
+     * prints all the task that is in the list of Task.
+     * @param list The list of task in which all the tasks are to be printed.
+     */
     public String printListUsingStream(ArrayList<Task> list) {
-        Collections.sort(list, new TaskComparator());
         String message;
         if (list.size() == 0) {
             message = "Nothing added yet";
@@ -151,11 +154,11 @@ public class Ui {
      */
     public static String printWelcomeMessage() {
         String message;
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = "  _____            _        \n"
+                + " |   __  \\ _     _|  |  _    __ \n"
+                + " |  |   |  |  |   |  |  |/ /  / _ \\\n"
+                + " |  |__|  |  |__|  |      V   __/\n"
+                + " |_____/ \\___,_|__|\\__\\___|\n";
         message = "Hello from\n" + logo + "\n";
         message = message + "What can I do for you?";
         return message;

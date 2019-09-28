@@ -76,6 +76,8 @@ public class Parser {
         } else if (firstWord.equals("find")) {
             String item = input.split(" ")[1];
             message = processFindWithStream(item, this.taskList, this.storage);
+        } else if (firstWord.equals("sort")) {
+            message = processSortList(this.taskList, this.storage);
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but i don't know what that means :-(");
         }
@@ -190,6 +192,15 @@ public class Parser {
             throw new DukeException ("Sorry we cannot find the task :(");
         }
         return message;
+    }
 
+    public String processSortList(TaskList taskList, Storage storage) throws IOException {
+        taskList.sortTaskList();
+        storage.setList(this.taskList);
+        storage.updateFile();
+        String message;
+        message = "Here is your sorted List:\n";
+        message = message + ui.printListUsingStream(this.taskList.getList()).split("\n", 2)[1];
+        return message;
     }
 }

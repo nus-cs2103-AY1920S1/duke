@@ -47,8 +47,7 @@ Command | Example | Description
 
 #### Todo: `todo`
 Expected Outcome:
-
-<img src = "https://github.com/joshuaseetss/duke/tree/master/docs/images/todo.png" width="291" height="100">
+![Alt text](./images/todo.png)
 
 
 #### Event: `event`

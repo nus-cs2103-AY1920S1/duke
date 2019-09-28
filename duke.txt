@@ -1,3 +1,4 @@
 D | 1 | cs2103 | 30 September 2019, 11.59PM
 E | 1 | acronis | 26 September 2019, 6.00PM
-D | 1 | cs2100 lab | 05 October 2019, 11.00PM
+T | 1 | go to lab
+E | 1 | noc connection | 05 October 2019, 10.00AM

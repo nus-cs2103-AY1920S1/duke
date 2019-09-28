@@ -1,3 +1,12 @@
+package duke.handler;
+
+import duke.command.*;
+import duke.exceptions.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 public class Parser {
 
     public Parser() {}

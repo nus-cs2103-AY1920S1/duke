@@ -9,7 +9,7 @@ import java.nio.file.NoSuchFileException;
 public abstract class Duke {
     protected static final String DEFAULT_FILE_PATH = "tasks.txt";
     private Parser parser;
-    protected Ui ui;
+    Ui ui;
 
     /**
      * Constructs a new copy of the Duke application.

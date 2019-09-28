@@ -2,10 +2,12 @@ package duke.gui;
 
 import duke.Duke;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class GuiDuke extends Duke {
     private boolean exit;
+    private List<String> messages;
 
     /**
      * Constructs a new copy of the Duke application for GUI with the default path.
@@ -20,7 +22,12 @@ class GuiDuke extends Duke {
      * @param filePath File path of the save file to store tasks.
      */
     private GuiDuke(String filePath) {
-        super(filePath, new GuiMessage());
+        this(filePath, new ArrayList<>());
+    }
+
+    private GuiDuke(String filePath, List<String> messages) {
+        super(filePath, message -> messages.add(String.join("\n", message)));
+        this.messages = messages;
     }
 
     String getResponse(String input) {
@@ -31,9 +38,8 @@ class GuiDuke extends Duke {
     }
 
     List<String> getAndClearMessages() {
-        GuiMessage guiMessage = (GuiMessage) ui;
-        List<String> messageList = guiMessage.getMessageList();
-        guiMessage.clear();
+        List<String> messageList = List.copyOf(messages);
+        messages.clear();
         return messageList;
     }
 

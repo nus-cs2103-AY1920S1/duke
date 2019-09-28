@@ -1,9 +1,9 @@
 package duke.tasks;
 
-import duke.DukeException;
-
 import java.text.ParseException;
 import java.util.Date;
+
+import duke.exception.DukeException;
 
 public class Deadline extends Task {
 

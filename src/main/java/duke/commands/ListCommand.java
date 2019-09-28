@@ -1,18 +1,21 @@
 package duke.commands;
 
+import duke.model.Model;
+import duke.storage.Storage;
 import duke.tasks.TaskList;
-import duke.Storage;
 import duke.ui.Ui;
 
 public class ListCommand extends Command {
+
     /**
-     * List all tasks in the task list.
-     * @param taskList task list of the Duke project
+     * list all tasks in the task list.
+     * @param model model of the Duke project
      * @param ui an instance of the Ui class
      * @param storage an instance of the storage class
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(Model model, Ui ui, Storage storage) {
+        TaskList taskList = model.getTaskList();
         if (taskList.getSize() == 0) {
             ui.showNoTask();
         } else {

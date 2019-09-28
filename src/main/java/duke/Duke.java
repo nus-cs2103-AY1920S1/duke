@@ -1,6 +1,9 @@
 package duke;
 
-import duke.tasks.TaskList;
+import duke.exception.DukeException;
+import duke.model.Model;
+import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.commands.Command;
 import duke.ui.MainWindow;
 import duke.ui.Ui;
@@ -9,12 +12,11 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class Duke extends Application {
+    private Model model;
     private Parser parser;
     private Storage storage;
-    private TaskList taskList;
     private Ui ui;
     private MainWindow mainWindow;
-    private boolean isExit = false;
 
     /**
      * Start the gui application.
@@ -30,11 +32,11 @@ public class Duke extends Application {
 
         Label initialMessageLabel;
         try {
-            taskList = storage.loadData();
+            model = storage.loadData();
             ui.showGreeting();
         } catch (DukeException e) {
             ui.showException(e);
-            taskList = new TaskList();
+            model = new Model();
         } finally {
             String initialMessage = ui.toString();
             assert !initialMessage.isEmpty() : "Empty message at the start!";
@@ -49,8 +51,8 @@ public class Duke extends Application {
      */
     public String process(String input) {
         try {
-            Command command = parser.parse(input);
-            command.execute(taskList, ui, storage);
+            Command command = parser.parse(model, input);
+            command.execute(model, ui, storage);
         } catch (DukeException e) {
             ui.showException(e);
         } finally {

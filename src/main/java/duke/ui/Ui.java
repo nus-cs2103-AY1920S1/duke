@@ -1,10 +1,11 @@
 package duke.ui;
 
-import duke.DukeException;
+import java.util.List;
+
+import duke.exception.DukeException;
+import duke.parser.Aliases;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-
-import java.util.List;
 
 public class Ui {
     private static final StringBuilder INDENT = new StringBuilder(" ".repeat(5));
@@ -114,6 +115,79 @@ public class Ui {
             this.content.append(INDENT);
             this.content.append(String.format("     %d.%s\n", i + 1, selectedTasks.get(i)));
         }
+    }
+
+    /**
+     * Add add-alias message to output string.
+     * @param alias alias entered by the user
+     * @param keyword keyword mapped to the alias
+     */
+    public void showAddAlias(String alias, String keyword) {
+        this.content.append(INDENT);
+        this.content.append(String.format("\"%s\" is now mapped to \"%s\".\n", alias, keyword));
+    }
+
+    /**
+     * Add delete alias message to output string.
+     * @param alias alias entered by the user
+     * @param keyword keyword mapped to the alias
+     */
+    public void showDeleteAlias(String alias, String keyword) {
+        this.content.append(INDENT);
+        this.content.append(String.format("\"%s\" is no longer mapped to \"%s\".\n", alias, keyword));
+    }
+
+    /**
+     * Add view alias message to output string.
+     * @param alias alias entered by the user
+     * @param keyword keyword mapped to the alias
+     */
+    public void showViewAlias(String alias, String keyword) {
+        this.content.append(INDENT);
+        this.content.append(String.format("\"%s\" is an alias for \"%s\".\n", alias, keyword));
+    }
+
+    /**
+     * Add list aliases message to output string.
+     * @param aliases the aliases object of the application
+     */
+    public void showAllAliases(Aliases aliases) {
+        this.content.append(INDENT);
+        this.content.append("Here are the available aliases (left) and their mapped keywords (right):\n");
+        for (String alias: aliases.getAllAliases()) {
+            this.content.append(INDENT);
+            this.content.append(String.format("\"%s\": \"%s\".\n", alias, aliases.getKeyword(alias)));
+        }
+    }
+
+    /**
+     * Add list aliases message to output string when there is no alias available.
+     */
+    public void showNoAliases() {
+        this.content.append(INDENT);
+        this.content.append("There is no alias available, try create some!\n");
+    }
+
+    /**
+     * Add list matching aliases message to output string.
+     * @param matchingAliases aliases mapped to the keyword
+     * @param keyword keyword entered by the user
+     */
+    public void showMatchingAliases(List<String> matchingAliases, String keyword) {
+        this.content.append(INDENT);
+        this.content.append(String.format("Here are the aliases for \"%s\":\n", keyword));
+        this.content.append(INDENT);
+        this.content.append(String.join(", ", matchingAliases));
+        this.content.append('\n');
+    }
+
+    /**
+     * Add message to output string when there is no alias mapped the given keyword.
+     * @param keyword keyword entered by the user
+     */
+    public void showNoMatchingAliases(String keyword) {
+        this.content.append(INDENT);
+        this.content.append(String.format("There is no alias available for \"%s\", try create some!\n", keyword));
     }
 
     /**

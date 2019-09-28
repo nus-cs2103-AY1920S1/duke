@@ -1,9 +1,10 @@
 package duke.commands;
 
-import duke.DukeException;
+import duke.exception.DukeException;
+import duke.model.Model;
+import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.Storage;
 import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
@@ -19,15 +20,21 @@ public class DeleteCommand extends Command {
 
     /**
      * Delete a task.
-     * @param taskList task list of the Duke project
+     * @param model model of the Duke project
      * @param ui an instance of the Ui class
      * @param storage an instance of the storage class
      * @throws DukeException if errors occur when executing the command
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        Task task = taskList.getTask(taskIndex);
-        taskList.removeTask(taskIndex);
-        ui.showDelete(task, taskList);
-        storage.saveData(taskList);
+    public void execute(Model model, Ui ui, Storage storage) throws DukeException {
+        try {
+            TaskList taskList = model.getTaskList();
+            System.out.println(taskIndex);
+            Task task = taskList.getTask(taskIndex);
+            taskList.removeTask(taskIndex);
+            ui.showDelete(task, taskList);
+            storage.saveData(model);
+        } catch (Exception e) {
+            throw new DukeException("Please enter a valid task number!");
+        }
     }
 }

@@ -1,4 +1,4 @@
-package duke;
+package duke.storage;
 
 import java.io.IOException;
 import java.io.FileInputStream;
@@ -7,7 +7,8 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import duke.tasks.TaskList;
+import duke.exception.DukeException;
+import duke.model.Model;
 
 public class Storage {
     private static final String FILEPATH = "data/duke.txt";
@@ -17,18 +18,18 @@ public class Storage {
      * @return the task list stored in data file
      * @throws DukeException if errors occur when loading data
      */
-    public TaskList loadData() throws DukeException {
+    public Model loadData() throws DukeException {
         try {
             FileInputStream file = new FileInputStream(FILEPATH);
             if (file.available() == 0) {
-                return new TaskList();
+                return new Model();
             }
             ObjectInputStream object = new ObjectInputStream(file);
 
-            TaskList tasks = (TaskList) object.readObject();
+            Model model = (Model) object.readObject();
             object.close();
 
-            return tasks;
+            return model;
         } catch (FileNotFoundException e) {
             throw new DukeException("The data file is not found.");
         } catch (ClassNotFoundException e) {
@@ -40,21 +41,20 @@ public class Storage {
 
     /**
      * Store data into the storage file.
-     * @param tasks the task list of the project
+     * @param model the model of Duke application
      * @throws DukeException if errors occur when saving data
      */
-    public void saveData(TaskList tasks) throws DukeException {
+    public void saveData(Model model) throws DukeException {
         try {
             FileOutputStream file = new FileOutputStream(FILEPATH);
             ObjectOutputStream object = new ObjectOutputStream(file);
 
-            object.writeObject(tasks);
+            object.writeObject(model);
             object.close();
         } catch (FileNotFoundException e) {
             throw new DukeException("The data file is not found.");
         } catch (IOException e) {
-            //throw new DukeException("Cannot save data to the file.");
-            throw new DukeException(e.getMessage());
+            throw new DukeException("Cannot save data to the file.");
         }
     }
 }

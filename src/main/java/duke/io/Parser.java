@@ -12,6 +12,7 @@ import duke.command.Find;
 import duke.exception.DukeDuplicateTaskException;
 import duke.exception.DukeIllegalActionException;
 import duke.exception.DukeIllegalDescriptionException;
+import duke.exception.DukeIllegalIndexException;
 
 import java.io.FileNotFoundException;
 
@@ -30,46 +31,50 @@ public class Parser {
      * @throws DukeIllegalActionException DukeIllegalActionException
      */
     public static String parse(String act, Storage storage) throws FileNotFoundException,
-            DukeIllegalDescriptionException, DukeIllegalActionException, DukeDuplicateTaskException {
+            DukeIllegalDescriptionException, DukeIllegalActionException, DukeDuplicateTaskException,
+            DukeIllegalIndexException {
         String response = "";
         if (DuplicateChecker.checkDuplication(act)) {
             throw new DukeDuplicateTaskException();
         }
+        switch (formatAction(act)) {
+        case LIST:
+            response = ListTasks.listTasks();
+            break;
+        case DONE:
+            response = Done.done(act, storage);
+            break;
+        case TODO:
+            response = AddTodo.addTodo(act, storage);
+            break;
+        case DEADLINE:
+            response = AddDeadline.addDeadline(act, storage);
+            break;
+        case EVENT:
+            response = AddEvent.addEvent(act, storage);
+            break;
+        case DELETE:
+            response = Delete.delete(act, storage);
+            break;
+        case FIND:
+            response = Find.find(act, storage);
+            break;
+        case CLEAR:
+            response = Clear.clear(storage);
+            break;
+        default:
+            break;
+        }
+        DukeActionStack.pushAction(act);
+        return response;
+    }
+
+    private static Action formatAction(String act) throws DukeIllegalActionException {
         try {
-            switch (Action.valueOf(act.split(" ")[0].toUpperCase())) {
-            case LIST:
-                response = ListTasks.listTasks();
-                break;
-            case DONE:
-                response = Done.done(act, storage);
-                break;
-            case TODO:
-                response = AddTodo.addTodo(act, storage);
-                break;
-            case DEADLINE:
-                response = AddDeadline.addDeadline(act, storage);
-                break;
-            case EVENT:
-                response = AddEvent.addEvent(act, storage);
-                break;
-            case DELETE:
-                response = Delete.delete(act, storage);
-                break;
-            case FIND:
-                response = Find.find(act, storage);
-                break;
-            case CLEAR:
-                response = Clear.clear();
-                break;
-            default:
-                response = "No command detected!";
-                break;
-            }
-            DukeActionStack.pushAction(act);
+            return Action.valueOf(act.split(" ")[0].toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new DukeIllegalActionException();
         }
-        return response;
     }
 }
 

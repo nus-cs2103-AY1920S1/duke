@@ -1,4 +1,5 @@
 import duke.actionstack.DukeActionStack;
+import duke.exception.DukeIllegalFileFormatException;
 import duke.io.Storage;
 import duke.ui.DialogPanel;
 import duke.ui.Ui;

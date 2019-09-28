@@ -20,11 +20,10 @@ public class AddDeadline extends Command {
      * @throws DukeIllegalDescriptionException DukeIllegalDescriptionException
      * @throws FileNotFoundException FileNotFoundException
      */
-    public static String addDeadline(String act, Storage storage) throws DukeIllegalDescriptionException,
-            FileNotFoundException {
-        String dlDetail = act.substring(9);
-        int dlDivision = dlDetail.indexOf("/");
+    public static String addDeadline(String act, Storage storage) throws DukeIllegalDescriptionException {
         try {
+            String dlDetail = act.substring(9);
+            int dlDivision = dlDetail.indexOf("/");
             String dlDescription = dlDetail.substring(0, dlDivision - 1);
 
             String by = dlDetail.substring(dlDivision + 3);

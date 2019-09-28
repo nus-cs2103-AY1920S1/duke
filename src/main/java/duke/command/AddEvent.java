@@ -22,9 +22,9 @@ public class AddEvent extends Command {
      */
     public static String addEvent(String act, Storage sto) throws FileNotFoundException,
             DukeIllegalDescriptionException {
-        String eventDetail = act.substring(6);
-        int eventDivision = eventDetail.indexOf("/");
         try {
+            String eventDetail = act.substring(6);
+            int eventDivision = eventDetail.indexOf("/");
             String eventDescription = eventDetail.substring(0, eventDivision - 1);
             String at = eventDetail.substring(eventDivision + 3);
 

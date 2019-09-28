@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.exception.DukeDuplicateTaskException;
+import duke.exception.DukeIllegalIndexException;
 import duke.io.Parser;
 import duke.io.Storage;
 import duke.exception.DukeIllegalActionException;
@@ -37,7 +38,7 @@ public class Ui {
         try {
             return Parser.parse(act, storage);
         } catch (DukeIllegalDescriptionException | DukeIllegalActionException
-                | DukeDuplicateTaskException | FileNotFoundException e) {
+                | DukeDuplicateTaskException | FileNotFoundException | DukeIllegalIndexException e) {
             return (e.getMessage());
         }
     }

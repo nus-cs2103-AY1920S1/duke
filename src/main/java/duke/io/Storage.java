@@ -1,5 +1,6 @@
 package duke.io;
 
+import duke.exception.DukeIllegalFileFormatException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -53,8 +54,8 @@ public class Storage {
                 }
                 parseLine(type, state, content, time, tasks);
             }
-        } catch (ParseException e) {
-            e.printStackTrace();
+        } catch (ParseException | IndexOutOfBoundsException e) {
+            throw new DukeIllegalFileFormatException();
         }
         return tasks;
     }

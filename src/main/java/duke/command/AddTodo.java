@@ -18,10 +18,11 @@ public class AddTodo extends Command {
      * @throws DukeIllegalDescriptionException DukeIllegalDescriptionException
      * @throws FileNotFoundException FileNotFoundException
      */
-    public static String addTodo(String act, Storage sto) throws DukeIllegalDescriptionException,
-            FileNotFoundException {
-        String tdDescription = act.substring(5);
-        if (tdDescription.isBlank()) {
+    public static String addTodo(String act, Storage sto) throws DukeIllegalDescriptionException {
+        String tdDescription;
+        try {
+            tdDescription = act.substring(5);
+        } catch (StringIndexOutOfBoundsException e) {
             throw new DukeIllegalDescriptionException(act);
         }
         Task todo = new ToDo(tdDescription);

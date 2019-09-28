@@ -25,6 +25,7 @@ public class Storage {
      * @param tasks TaskList to be saved.
      * @throws Exception in case of file not found exception.
      */
+    //Solution below adapted from https://stackoverflow.com/questions/16111496/java-how-can-i-write-my-arraylist-to-a-file-and-read-load-that-file-to-the
     public void save(TaskList tasks) throws DukeException {
         try {
             int size = tasks.getSize();
@@ -52,7 +53,7 @@ public class Storage {
      * @param tasks performs a deep copy of the loaded TaskList into this tasks parameter.
      * @throws Exception in case of file not found exception.
      */
-
+    //Solution below adapted from https://stackoverflow.com/questions/16111496/java-how-can-i-write-my-arraylist-to-a-file-and-read-load-that-file-to-the
     public void load(TaskList tasks) throws DukeException {
         try {
             FileInputStream fis = new FileInputStream("t.tmp");

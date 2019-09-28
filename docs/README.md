@@ -1,10 +1,10 @@
 # User Guide
 
-[1. Introduction](#Introduction) 
-[2. Quick Start](#Quick-Start)  
-[3. Features](#Features)    
-[4. FAQ](#FAQ)   
-[5. Command Summary](#Command-Summary) 
+[1. Introduction](README.md#Introduction)
+[2. Quick Start](README.md#Quick-Start)  
+[3. Features](README.md#Features)    
+[4. FAQ](README.md#FAQ)   
+[5. Command Summary](README.md#Command-Summary) 
 
 ## 1. Introduction 
 
@@ -31,6 +31,7 @@ Adds a task to the list
 ##### 3.2.1. Adding a ToDo Task: `todo` 
 Adds a ToDo task to the list
 Format: `todo TASK_DESCRIPTION` 
+
 Examples:
 * `todo homework`
 * `todo read book`
@@ -38,6 +39,7 @@ Examples:
 ##### 3.2.2. Adding a Deadline Task: `deadline` 
 Adds a Deadline task to the list
 Format: `deadline TASK_DESCRIPTION /by DUE_DATETIME`
+
 Examples:
 * `deadline do homework /by 3pm`
 * `deadline do homework /by Monday`
@@ -51,6 +53,7 @@ Examples:
 ##### 3.2.3. Adding a Event Task: `event` 
 Adds an Event task to Duke
 Format: `event TASK_DESCRIPTION /by DUE_DATETIME`
+
 Example:
 * `event consultation /at 3pm`
 * `event consultation /at Monday`
@@ -70,7 +73,7 @@ Example:
 * `find homework`
 
 
-### 3.4. Marking a task as done: -- `done`  
+### 3.4. Marking a task as done: `done`  
 Marks the specified task in the list as done.  
 
 Format: `done INDEX`
@@ -79,7 +82,7 @@ Format: `done INDEX`
 * The index must be a positive integer 1, 2, 3, …​
 
 
-### 3.5. Deleting a task: -- `delete`
+### 3.5. Deleting a task: `delete`
 Deletes the specified task from the list.  
 Format: `delete INDEX`
 * Deletes the tasks at the specified INDEX.
@@ -87,12 +90,12 @@ Format: `delete INDEX`
 * The index must be a positive integer 1, 2, 3, …​
 
 
-### 3.6. Listing all tasks : -- `list`
+### 3.6. Listing all tasks : `list`
 Shows a list of all tasks in the list.  
 Format: `list`
 
 
-### 3.7. Exiting the program: -- `bye`  
+### 3.7. Exiting the program: `bye`  
 Exits the program.  
 Format: `bye`
 

@@ -48,7 +48,6 @@ public class Parser {
         } else if (tokens[0].equals("find")) {
             return FindCommand.createFindCommandIfValid(tokens);
         } else {
-            System.out.println(tokens[0]);
             return Parser.createAddCommandIfValid(tokens, input);
         }
     }
@@ -105,13 +104,13 @@ public class Parser {
      */
 
     //@@author qweiping31415-reused
-    //Reused from @briyanii with minor modifications
+    //Reused from https://github.com/briyanii/duke/blob/master/src/main/java/duke/command/Parser.java
+    // with minor modifications
     public static String parseDateTime(String dateTimeString) throws DukeException {
         assert dateTimeString != null;
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
             LocalDateTime dateAndTime = LocalDateTime.parse(dateTimeString, formatter);
-
 
             int year = dateAndTime.getYear();
             String month = dateAndTime.getMonth().toString();
@@ -168,7 +167,7 @@ public class Parser {
     //@@author
 
 
-    
+
     // helper method to check if the given date and time of a deadline or event task
     // can be recognised as a DateTime format.
     private static Command createDateCommandIfValid(String[] tokens, String fullCommand, int mode)

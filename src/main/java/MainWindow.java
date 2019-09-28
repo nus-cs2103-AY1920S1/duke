@@ -14,6 +14,9 @@ import duke.core.Ui;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
+
+//Some design for MainWindow.fxml
+//adapted from https://github.com/calvincxz/duke/blob/master/src/main/resources/view/MainWindow.fxml
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;

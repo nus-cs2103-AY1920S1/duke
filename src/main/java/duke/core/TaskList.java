@@ -28,7 +28,6 @@ public class TaskList {
         this.storage = storage;
     }
 
-
     /**
      * Initialises the TaskList, with a given ArrayList to store the tasks,
      * and holds a reference to the main storage
@@ -51,6 +50,7 @@ public class TaskList {
     public void addToList(Task task) throws IOException {
         this.taskList.add(task);
         this.storage.overwriteStorage(taskList);
+
     }
 
 

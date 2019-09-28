@@ -1,6 +1,7 @@
 package duke.core;
 
 import java.io.*;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -14,23 +15,52 @@ import duke.errors.DukeExceptionType;
 
 
 
+
 /**
- * Represents the storage of the application. Provides methods that to overwrite
- * the contents of the file and loading data from the file.
+ * Represents the storage of the application. Provides methods that create a storage,
+ * overwrite the contents of the file and loading data from the file.
  */
 public class Storage{
 
     private File file;
 
+    /**
+     * Initialises the Storage with the file
+     *
+     * @param file File Object
+     */
+    private Storage(File file) {
+        this.file = file;
+    }
 
     /**
-     * Initialises the Storage with the file path of the file
+     * Creates a Storage for the application
+     * It creates a new directory with a new text file if there is no existing file
      *
-     * @param filePath String of the directory the file is in.
+     * @return Storage for the application
      */
-    public Storage(String filePath){
-        this.file = new File(filePath);
+    public static Storage createStorageIfRequired() {
+        String path = System.getProperty("user.home");
+        path += File.separator + "DukeData";
+        File customDir = new File(path);
+        if (!customDir.exists()) {
+            customDir.mkdirs();
+        }
+
+        path += File.separator + "data.txt";
+        File file = new File(path);
+
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return new Storage(file);
     }
+
 
 
     /**
@@ -43,7 +73,7 @@ public class Storage{
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
-            Scanner sc = new Scanner(file);
+            Scanner sc = new Scanner(this.file);
             while (sc.hasNext()) {
                 String line = sc.nextLine();
                 taskList.add(formatFileToTask(line));
@@ -63,6 +93,7 @@ public class Storage{
      */
     void overwriteStorage(ArrayList<Task> taskList) throws IOException{
         assert (this.file != null);
+
         FileWriter fw = new FileWriter(this.file);
         for (Task task: taskList){
             switch (task.getType()) {

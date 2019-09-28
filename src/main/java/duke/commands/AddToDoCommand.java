@@ -29,7 +29,6 @@ public class AddToDoCommand extends Command{
 
     }
 
-
     /**
      * Adds the to-do task to the task list and prints the result.
      *
@@ -40,9 +39,7 @@ public class AddToDoCommand extends Command{
     @Override
     public String execute(TaskList taskList, Ui ui) throws IOException {
         ToDo task = ToDo.createToDo(tokens);
-
         DukeAssertions.assertNotNull(taskList,ui);
-
         taskList.addToList(task);
         return ui.printAddMessage(task, taskList);
     }

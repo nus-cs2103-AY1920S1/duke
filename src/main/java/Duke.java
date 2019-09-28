@@ -12,7 +12,6 @@ import duke.tasks.Task;
 import java.io.IOException;
 
 
-
 /**
  * The driver class to run user interface of Duke. Duke provides commands to add different tasks,
  * list out tasks, marking tasks as done, deleting tasks and storing the tasks into a file for
@@ -26,15 +25,13 @@ public class Duke {
 
     /**
      * Initialises a new Duke application.
-     * @throws IOException Thrown when writing to file fails.
      * @throws DukeException Thrown when parts of the command cannot be executed.
      */
-    Duke() throws DukeException, IOException {
-        String filePath = "./data/duke.txt";
-        this.ui = new Ui();
-        Storage storage = new Storage(filePath);
+    Duke() throws DukeException {
+        Storage storage = Storage.createStorageIfRequired();
         this.taskList = new TaskList(storage.load(), storage);
         Task.setTaskList(taskList);
+        this.ui = new Ui();
     }
 
 

@@ -8,7 +8,7 @@ public class Ui {
     /** Pre-intro message. */
     private static String pre_intro = "♬♫♪♩ Cebuuuuu ♩♪♫♬\n";
     /** Intro message. */
-    private static String intro = "Oh sorry! I'm Larry\nWhat can I do for you?\n";
+    private static String intro = "Oh hello! I'm Larry.\nWhat can I do for you?\n";
     /** Help prompt for user.*/
     private static String help_prompt = "Unsure what to do? Type 'help'.";
     /** Goodbye message. */

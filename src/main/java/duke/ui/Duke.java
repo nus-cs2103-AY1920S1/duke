@@ -21,7 +21,7 @@ public class Duke {
 
     /** Stores the duke.main.Ui object used to display messages to the user. */
     private Ui ui;
-    /** Stores the duke.command.Storage object used to read/write from file. */
+    /** Stores the duke.command.Storage qobject used to read/write from file. */
     private Storage storage;
     /** Stores the duke.command.TaskList object used to add/delete tasks. */
     private TaskList taskList;
@@ -36,7 +36,7 @@ public class Duke {
      */
     public void initialize(MainWindow mainWindow) {
         ui = new Ui(mainWindow);
-        storage = new Storage("data/duke.txt");
+        storage = new Storage("data/larry.txt");
         taskList = new TaskList(storage);
         ui.printIntro();
     }

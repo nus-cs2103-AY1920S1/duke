@@ -17,7 +17,7 @@ public class DoneCommand extends Command {
         return toString() + " " + taskDone;
     }
 
-   public int getTaskNumber() {
+    public int getTaskNumber() {
         return taskNumber;
     }
 

@@ -15,6 +15,12 @@ public class TaskList {
         return this.taskList;
     }
 
+    /**
+     * Method to find a task given a description in the task list.
+     * @param description keyword to find the task
+     * @return returns the task with given keyword
+     * @throws TaskNotFoundException no task with given keyword is found
+     */
     public Task findTask(String description) throws TaskNotFoundException {
         Task t = new Task("");
         boolean flag = true;

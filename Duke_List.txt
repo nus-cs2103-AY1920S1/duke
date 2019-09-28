@@ -1,4 +1,3 @@
-T @ 0 @ borrow book
-T @ 0 @ sleep
-E @ 0 @ project meeting @ 16/05/2019 1500
 D @ 0 @ project @ 12/12/2012 1200
+T @ 0 @ borrow a chinese book
+E @ 0 @ project meeting @ 12/12/0012 1100

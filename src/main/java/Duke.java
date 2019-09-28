@@ -1,10 +1,116 @@
+import exceptions.DukeException;
+import utilities.ExpenseList;
+import utilities.Ui;
+import utilities.Parser;
+import utilities.Storage;
+import utilities.TaskList;
+
+
+/**
+ * Main entry point.
+ */
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+    private ExpenseList expenses;
+
+
+    /**
+     * constructor for Duke.
+     *
+     * @param filePath is the filename of the text file
+     *
+     * @throws Exception in case file is not able to load
+     */
+    private Duke(String filePath) throws Exception {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        expenses = new ExpenseList();
+        try {
+            tasks = new TaskList(storage.load());
+            expenses = new ExpenseList(storage.loadExpenses());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
     }
+
+    /**
+     * constructor for Duke when launcher is running.
+     *
+     * @throws Exception in case file is unable to load
+     */
+    Duke() throws Exception {
+        ui = new Ui();
+        storage = new Storage("data/DukeOutput.txt");
+        expenses = new ExpenseList(storage.loadExpenses());
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
+
+    /**
+     * asks ui to run the application.
+     */
+    private void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine();
+                command.Command c = Parser.parse(fullCommand);
+                //c.execute(tasks, ui, storage);
+                String result = c.executeAsString(tasks, ui, storage, expenses);
+                System.out.println(result);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
+    }
+
+
+    /**
+     * entry point of Duke.
+     *
+     * @param args are standard feature
+     *
+     * @throws Exception in case file is not found
+     */
+    public static void main(String[] args) throws Exception {
+        new Duke("data/DukeOutput.txt").run();
+        System.exit(0);
+    }
+
+
+    /**
+     * to get response the display it.
+     *
+     * @param input is the input command
+     *
+     * @return the String output message
+     */
+    String getResponse(String input) {
+        try {
+            command.Command c = Parser.parse(input);
+            return c.executeAsString(tasks, ui, storage, expenses);
+        } catch (DukeException e) {
+            return ui.showErrorFX(e.getMessage());
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+
 }

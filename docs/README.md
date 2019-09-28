@@ -46,43 +46,43 @@ Command | Example | Description
 `list` | list | Prints out everything in your list at that current point of time.
 `<command> *` | todo eat * | Prioritises this task and enters the task at the top of the list.
 
-#### Todo: `todo`
+#### Todo: `todo eat`
 Expected Outcome:
 
 ![Todo picture](./images/todo.png)
 
 
-#### Event: `event`
+#### Event: `event birthday party /at John's place`
 Expected Outcome:
 
 ![Event picture](./images/event.png)
 
 
-#### Deadline: `deadline`
+#### Deadline: `deadline duke /by monday`
 Expected Outcome:
 
 ![deadline picture](./images/deadline.png)
 
 
-#### Done: `done`
+#### Done: `done 1`
 Expected Outcome:
 
 ![done picture](./images/done.png)
 
 
-#### Delete: `delete`
+#### Delete: `delete 2`
 Expected Outcome:
 
 ![delete picture](./images/delete.png)
 
 
-#### DeleteAll: `deleteAll`
+#### DeleteAll: `deleteAll 1 2`
 Expected Outcome:
 
 ![deleteAll picture](./images/deleteAll.png)
 
 
-#### Find: `find`
+#### Find: `find homework`
 Expected Outcome:
 
 ![find picture](./images/find.png)
@@ -93,7 +93,7 @@ Expected Outcome:
 
 ![list picture](./images/find.png)
 
-#### command *: `<command> *`
+#### command *: `todo sleep *`
 Expected Outcome:
 
 ![list picture](./images/priority.png)

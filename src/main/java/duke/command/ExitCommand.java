@@ -1,11 +1,7 @@
 package duke.command;
 
-import duke.backend.ListManager;
-import duke.backend.Storage;
 import duke.repos.TaskRepo;
 
-
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 public class ExitCommand extends Command {

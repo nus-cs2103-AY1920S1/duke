@@ -1,4 +1,4 @@
-package duke;
+package duke.responses;
 
 import duke.task.Task;
 

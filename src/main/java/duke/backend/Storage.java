@@ -16,6 +16,7 @@ public class Storage {
     private String filePath;
 
     public Storage(String filePath) throws IOException {
+        assert !filePath.equals("");
         this.filePath = filePath;
         this.file = new File(filePath);
         checkFile();

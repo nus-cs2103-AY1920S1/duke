@@ -13,6 +13,7 @@ public class Parser {
      * @throws IllegalArgumentException if the command is not one of the valid ones.
      */
     public static Command parse(String fullCommand, SimpleDateFormat formatter) throws IllegalArgumentException {
+        assert !fullCommand.equals("");
         String[] splitCommand = fullCommand.split(" ", 0);
         switch (splitCommand[0]) {
             case "t":

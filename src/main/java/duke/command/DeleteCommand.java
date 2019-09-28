@@ -1,9 +1,7 @@
 package duke.command;
 
-import duke.ResponseGen;
-import duke.backend.ListManager;
-import duke.backend.Storage;
 import duke.repos.TaskRepo;
+import duke.responses.ResponseGen;
 import duke.task.Task;
 
 import java.io.IOException;
@@ -13,6 +11,8 @@ public class DeleteCommand extends Command {
 
     public DeleteCommand(String fullCommand, String[] splitCommand, SimpleDateFormat formatter) {
         super(fullCommand, splitCommand, formatter);
+        assert !fullCommand.equals("");
+        assert splitCommand.length != 0;
     }
 
     @Override

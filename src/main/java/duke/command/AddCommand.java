@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.ResponseGen;
+import duke.responses.ResponseGen;
 import duke.repos.TaskRepo;
 import duke.task.Deadlines;
 import duke.task.Events;
@@ -16,6 +16,8 @@ public class AddCommand extends Command {
 
     public AddCommand(String fullCommand, String[] splitCommand, SimpleDateFormat formatter) {
         super(fullCommand, splitCommand, formatter);
+        assert !fullCommand.equals("");
+        assert splitCommand.length != 0;
     }
 
     @Override

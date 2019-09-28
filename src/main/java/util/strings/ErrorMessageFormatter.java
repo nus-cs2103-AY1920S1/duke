@@ -10,7 +10,7 @@ public class ErrorMessageFormatter {
      * @return the formatted message.
      */
     public static String formatErrorMessage(String message) {
-        return "I'm sorry, I do not understand. "
+        return "Sorry, understand I do not. "
                 + message;
     }
 }

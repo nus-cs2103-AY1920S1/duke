@@ -10,6 +10,12 @@ import java.util.Optional;
 class TasksControllerFeedback {
     String displayAllTasks(List<Task> tasks) {
         OutputBuilder builder = new OutputBuilder();
+
+        if (tasks.size() == 0) {
+            builder.append("0 tasks remaining you have.");
+            return builder.build();
+        }
+
         builder.append(tasks.size() + " tasks remaining:")
                 .newLine()
                 .appendTasks(tasks);

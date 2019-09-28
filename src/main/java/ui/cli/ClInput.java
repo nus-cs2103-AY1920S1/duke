@@ -11,6 +11,7 @@ import java.util.Scanner;
  * Encapsulates the command line as a DukeInput input channel for the application.
  */
 public class ClInput extends DukeInput {
+    private static String STOP_SCANNER_INDICATOR = "f3ezlsm3nlrzc4v4fymu";
     private static Scanner scanner;
     private static boolean isActive;
 
@@ -41,6 +42,11 @@ public class ClInput extends DukeInput {
 
         while (ClInput.isActive) {
             String input = scanner.nextLine();
+
+            if (input.equals(STOP_SCANNER_INDICATOR)) {
+                break;
+            }
+
             updateAllListeners(input);
         }
     }

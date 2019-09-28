@@ -10,4 +10,9 @@ public interface UiDriver {
      * @param input input from the UiController.
      */
     public void receiveUserInput(String input);
+
+    /**
+     * Method used by UiController to notify the driver once it has closed. The driver should respond accordingly.
+     */
+    public void onUiClosed();
 }

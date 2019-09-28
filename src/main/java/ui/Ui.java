@@ -83,7 +83,7 @@ public class Ui implements DukeInputListener {
      */
     public void stopUi() {
         try {
-            outputChannel.displayOutput("Bye! Hope to see you again!");
+            outputChannel.displayOutput("See you again I hope.");
         } catch (UiException e) {
             System.out.println("Ui closed unexpectedly.");
         } finally {
@@ -91,6 +91,7 @@ public class Ui implements DukeInputListener {
                 this.inputChannel.stopInputChannel();
                 this.outputChannel.stopOutputChannel();
                 this.isUiInitialized = false;
+                driver.onUiClosed();
             });
         }
     }

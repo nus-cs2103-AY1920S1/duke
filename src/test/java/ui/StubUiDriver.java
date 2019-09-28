@@ -15,4 +15,9 @@ public class StubUiDriver implements UiDriver {
             assertEquals(input, expectedInput);
         }
     }
+
+    @Override
+    public void onUiClosed() {
+        return;
+    }
 }

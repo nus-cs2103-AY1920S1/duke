@@ -79,6 +79,8 @@ public class Duke implements UiDriver {
             System.out.println("FATAL: Failed to initialize ui.");
             System.exit(1);
         }
+
+        System.exit(0);
     }
 
     /**
@@ -119,6 +121,15 @@ public class Duke implements UiDriver {
             System.out.println("FATAL: Ui stopped working.");
             System.exit(1);
         }
+    }
+
+    /**
+     * Method used by UiController to notify the driver once it has closed. The driver should respond accordingly.
+     */
+    @Override
+    public void onUiClosed() {
+        System.out.println("Exiting program...");
+        System.exit(0);
     }
 
     private void handleCommandCreationExceptions(CommandCreationException error) {

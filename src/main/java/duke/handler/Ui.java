@@ -48,6 +48,14 @@ public class Ui {
         System.out.println(completedTask);
     }
 
+    public void showMatchingTasksMessage() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
+    public void showMatchingTasks(Task matchedTask, int taskIndex) {
+        System.out.println(taskIndex + "." + matchedTask);
+    }
+
     public void showLine() {
         System.out.println("_______________________________");
     }

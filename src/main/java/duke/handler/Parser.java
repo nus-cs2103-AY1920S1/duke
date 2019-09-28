@@ -58,6 +58,14 @@ public class Parser {
                     AddCommand addCommand = new AddCommand(line, newTask);
                     return addCommand;
                 }
+            } else if (line.length() >= 4 && line.substring(0, 4).equals("find")) {
+                if (line.substring(5).length() == 0) {
+                    throw new DukeException("☹ OOPS!!! Please specify a keyword.");
+                } else {
+                    String keyWord = line.substring(5);
+                    FindCommand findCommand = new FindCommand(fullCommand, keyWord);
+                    return findCommand;
+                }
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }

@@ -10,6 +10,7 @@ public class Parser {
     private Ui ui;
     private String taskType;
     private String taskDesc;
+    private boolean isExit = false;
     Priority taskPriority = Priority.LOW;
 
     /**
@@ -39,6 +40,7 @@ public class Parser {
 
         if (taskType.equals("bye")) {
 
+            isExit = true;
             return ui.showGoodbye();
 
         } else if (taskType.equals("list")) {
@@ -178,6 +180,10 @@ public class Parser {
         }
 
         return builder.toString();
+    }
+
+    public boolean isExit() {
+        return isExit;
     }
 
     public static boolean correctInput(String input) {

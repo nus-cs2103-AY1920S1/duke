@@ -9,6 +9,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private boolean isExit = false;
 
     public Duke() {
 
@@ -32,6 +33,7 @@ public class Duke {
         try {
             String output = parser.parseCommand(input, tasks);
             storage.update(tasks);
+            isExit = parser.isExit();
 
             return output;
 
@@ -53,6 +55,10 @@ public class Duke {
         String output = run(input);
         assert output != null;
         return output;
+    }
+
+    public boolean isExit() {
+        return isExit;
     }
 
 }

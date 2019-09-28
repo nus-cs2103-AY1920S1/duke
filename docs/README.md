@@ -5,7 +5,7 @@
 ### Feature 1 
 Description of feature.
 
-## Usage
+## Usag
 
 ### `Keyword` - Describe action
 

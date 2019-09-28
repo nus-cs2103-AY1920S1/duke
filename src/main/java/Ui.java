@@ -15,7 +15,7 @@ public class Ui {
         return welcomeMessage;
     }
 
-    public String showGoodbye() {
+    public static String showGoodbye() {
         String exitMessage = line()
                 + indent() + "Bye. Hope to see you again soon\n"
                 + line();

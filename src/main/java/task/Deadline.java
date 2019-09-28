@@ -5,6 +5,11 @@ import tool.DateTime;
 public class Deadline extends Task {
     protected DateTime by;
 
+    /**
+     * Constructor for Deadline Task
+     * @param description: Task description
+     * @param by: DateTime object for Deadline Task
+     */
     public Deadline(String description, DateTime by) {
         super(description);
         this.by = by;
@@ -12,8 +17,8 @@ public class Deadline extends Task {
 
     /**
      * Edits the specified attribute of task object with given update.
-     * @param attribute: done, des, date, time
-     * @param update: true/false, new des, date
+     * @param attribute: Attribute to be edited: done, des, date, time
+     * @param update: New attribute: true/false, new des, date
      */
     @Override
     public void edit(String attribute, String update) {

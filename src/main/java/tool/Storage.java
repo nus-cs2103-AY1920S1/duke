@@ -20,12 +20,15 @@ public class Storage {
     protected FileWriter fw;
 
 
+    /**
+     * Constructor for storage object
+     * @param filePath
+     */
     public Storage(String filePath) {
         try {
             this.filePath = filePath;
             fw = new FileWriter(filePath, true);
         } catch(IOException e) {
-//            e.printStackTrace();
             System.out.println("Error occurred creating new storage object.");
         }
 
@@ -74,7 +77,6 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-//            e.printStackTrace();
             System.out.println("Error occurred loading tasks from file");
         }
 
@@ -89,11 +91,14 @@ public class Storage {
         try {
             this.fw.append(t.storageString() + System.lineSeparator());
         } catch (IOException e) {
-//            e.printStackTrace();
             System.out.println("Error occurred saving task to file.");
         }
     }
 
+    /**
+     * Deletes task from hard drive specified at index i
+     * @param i
+     */
     protected void delete(int i) {
         try {
             FileReader fr = new FileReader(filePath);
@@ -141,11 +146,14 @@ public class Storage {
             Files.copy(Paths.get("./temp.txt"), Paths.get("./duke.txt"), StandardCopyOption.REPLACE_EXISTING);
             Files.delete(Paths.get("./temp.txt"));
         } catch (IOException e) {
-//            e.printStackTrace();
             System.out.println("Error occurred updating status of task.");
         }
     }
 
+    /**
+     * Closes file reader & saves all changes to task list in hard drive
+     * @param tasks
+     */
     public void close(TaskList tasks) {
         try {
             FileReader fr = new FileReader(filePath);
@@ -160,7 +168,6 @@ public class Storage {
             Files.copy(Paths.get("./temp.txt"), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
             Files.delete(Paths.get("./temp.txt"));
         } catch (IOException e) {
-//            e.printStackTrace();
             System.out.println("Error occurred saving tasks to text file.");
         }
     }

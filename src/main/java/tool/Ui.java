@@ -71,6 +71,12 @@ public class Ui {
         return "Here are the matching tasks in your list:";
     }
 
+    /**
+     * Handles UI for "edit" command
+     * @param prevTask
+     * @param newTask
+     * @return
+     */
     protected String edit(String prevTask, Task newTask) {
         if (prevTask.equals(newTask.toString())) {
             return "OOPS!! There's nothing to change.";

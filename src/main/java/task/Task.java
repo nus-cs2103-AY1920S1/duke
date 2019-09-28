@@ -6,7 +6,7 @@ public class Task {
     protected int status;
 
     /**
-     * Constructor for task.Task
+     * Constructor for Task
      * @param description
      */
     public Task(String description) {
@@ -14,6 +14,7 @@ public class Task {
         this.isDone = false;
         this.status = 0;
     }
+
 
     protected String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols

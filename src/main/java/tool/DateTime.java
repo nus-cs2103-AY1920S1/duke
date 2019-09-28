@@ -10,6 +10,10 @@ public class DateTime {
             "July", "August", "September", "October", "November", "December"};
 
 
+    /**
+     * Constructor for DateTime object for Deadline and Event tasks.
+     * @param raw: Raw user input string
+     */
     public DateTime(String raw) {
         String[] rawArr = raw.split("/");
         if (rawArr.length < 2) {

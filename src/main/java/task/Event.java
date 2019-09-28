@@ -5,6 +5,11 @@ import tool.DateTime;
 public class Event extends Task {
     protected DateTime at;
 
+    /**
+     * Constructor for Event task
+     * @param description: Task description
+     * @param at: DateTime object for Event task
+     */
     public Event(String description, DateTime at) {
         super(description);
         this.at = at;
@@ -12,8 +17,8 @@ public class Event extends Task {
 
     /**
      * Edits the specified attribute of task object with given update.
-     * @param attribute: done, des, date
-     * @param update: true/false, new des, date
+     * @param attribute: Attribute to be edited: done, des, date
+     * @param update: New attribute: true/false, new des, date
      */
     @Override
     public void edit(String attribute, String update) {

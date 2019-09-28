@@ -2,6 +2,10 @@ package task;
 
 public class Todo extends Task {
 
+    /**
+     * Constructor for Todo task
+     * @param description
+     */
     public Todo(String description) {
         super(description);
     }

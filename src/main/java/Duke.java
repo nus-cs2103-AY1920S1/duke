@@ -32,21 +32,6 @@ public class Duke extends Application {
 
 
     public static void main(String[] args) {
-//        Scanner scanner = new Scanner(System.in);
-////        Storage storage = new Storage("src/main/java/data/duke.txt");
-//        Ui ui = new Ui();
-//        ui.hi();
-//        TaskList commands = new TaskList(storage.load(new ArrayList<Task>())); //TODO
-//        Parser p = new Parser(commands, storage, ui);
-//        while(scanner.hasNextLine()) {
-//            String x = scanner.nextLine();
-//            String xx = p.parse(x);
-//            if (x.equals("bye")) {
-//                scanner.close();
-//                break;
-//            }
-//
-//        }
         System.out.println("testing");
     }
 

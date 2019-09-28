@@ -28,7 +28,6 @@ public class Parser {
             String[] inputArr = command.split(" ");
             String userCommand = inputArr[0];
             String dukeText;
-//            System.out.println("command: " + userCommand);
             try {
                 switch (userCommand) {
                     case "bye":
@@ -70,6 +69,13 @@ public class Parser {
 
     }
 
+    /**
+     * Parses the task command
+     * @param command
+     * @param type
+     * @return String output for duke
+     * @throws DukeException
+     */
     private String parseTask(String command, String type) throws DukeException {
         try {
             String taskString = command.split(" ", 2)[1];
@@ -105,6 +111,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the delete command
+     * @param inputArr
+     * @return String output for duke
+     * @throws DukeException
+     */
     private String parseDelete(String[] inputArr) throws DukeException {
         try {
             int i = Integer.parseInt(inputArr[1]) - 1;
@@ -121,12 +133,23 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses find command
+     * @param inputArr
+     * @return String output for duke
+     */
     private String parseFind(String[] inputArr) {
         assert inputArr.length < 2 : "Missing word to find";
         String word = inputArr[1];
         return this.ui.find() + "\n" + this.commands.find(word);
     }
 
+    /**
+     * Parses done command
+     * @param inputArr
+     * @return String output for duke
+     * @throws DukeException
+     */
     private String parseDone(String[] inputArr) throws DukeException {
         try {
             int index = Integer.parseInt(inputArr[1]) - 1;
@@ -143,8 +166,13 @@ public class Parser {
 
     }
 
+    /**
+     * Parses edit command
+     * @param command
+     * @return String output for duke
+     * @throws DukeException
+     */
     private String parseEdit(String command) throws DukeException {
-        //input = i/attribute/new des
         String input = command.split(" ", 2)[1];
         try {
             String[] splitInput = input.split("/", 3);

@@ -150,6 +150,6 @@ public class Parser {
         }
 
         return new UnknownCommand();
+        }
     }
-}
 

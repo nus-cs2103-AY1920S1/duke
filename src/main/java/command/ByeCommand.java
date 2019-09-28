@@ -16,7 +16,7 @@ public class ByeCommand implements Command {
      * @param taskList The TaskList used to store the Tasks for this instance of Duke (not used in this method).
      * @param storage The Storage used to store the Tasks on the hard disk (not used in this method).
      */
-    public void execute(TaskList taskList, Storage storage) {
-        UI.bye();
+    public String execute(TaskList taskList, Storage storage) {
+        return UI.bye();
     }
 }

@@ -11,5 +11,5 @@ import main.TaskList;
  * All Commands must implement an execute method, which will be accessed by the Duke.run() method.
  */
 public interface Command {
-    void execute(TaskList tl, Storage st) throws IOException;
+    String execute(TaskList tl, Storage st) throws IOException;
 }

@@ -19,7 +19,7 @@ public class UnknownCommand implements Command {
      * @param taskList The TaskList from the main Duke object.
      * @param storage The Storage from the main Duke object.
      */
-    public void execute(TaskList taskList, Storage storage) {
-        System.err.println(new UnknownCommandException());
+    public String execute(TaskList taskList, Storage storage) {
+        return new UnknownCommandException().toString();
     }
 }

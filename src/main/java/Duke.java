@@ -1,3 +1,18 @@
+import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
+
 import command.ByeCommand;
 import command.Command;
 import main.Parser;
@@ -6,7 +21,10 @@ import main.TaskList;
 import main.UI;
 import task.Task;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,6 +32,12 @@ import java.util.Scanner;
  * Duke runs as the main and this is where all the work is initialised at.
  */
 public class Duke {
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
     private Storage storage;
     private TaskList taskList;
 
@@ -22,7 +46,7 @@ public class Duke {
      *
      * Also instantiates an instance of Storage and TaskList for this instance of Duke.
      */
-    private Duke(){
+    public Duke(){
         storage = new Storage();
         ArrayList<Task> list = storage.readFromFile();
         this.taskList = new TaskList(list);
@@ -36,11 +60,15 @@ public class Duke {
      *
      * @throws IOException When the Parser f
      */
-    private void run() throws IOException {
+    private String run(String command) throws IOException {
         Parser parser = new Parser();
-        Scanner sc = new Scanner(System.in);
+        //Scanner sc = new Scanner(System.in);
 
-        while (sc.hasNextLine()) {
+        Command c = parser.parse(command);
+        return c.execute(taskList, storage);
+
+
+        /*while (sc.hasNextLine()) {
             String nextLine = sc.nextLine();
 
             Command c = parser.parse(nextLine);
@@ -49,7 +77,7 @@ public class Duke {
             if (c instanceof ByeCommand) {
                 break;
             }
-        }
+        }*/
     }
 
 
@@ -63,7 +91,7 @@ public class Duke {
      *
      * @param args Input from the User.
      */
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Duke duke = new Duke();
         UI.start();
 
@@ -72,5 +100,21 @@ public class Duke {
         } catch (IOException ioE) {
             System.err.println(ioE);
         }
+    }*/
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    @FXML
+    public String getResponse(String input, Duke duke) {
+        String toReturn = "";
+        try{
+            toReturn = duke.run(input);
+        } catch (IOException io) {
+            System.err.println(io);
+        }
+
+        return "Duke heard: " + toReturn;
     }
 }

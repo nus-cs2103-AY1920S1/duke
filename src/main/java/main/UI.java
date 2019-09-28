@@ -13,19 +13,19 @@ public interface UI {
     /**
      * Prints the start message when Duke is executed.
      */
-    static void start() {
-        System.out.println("    ____________________________________________________________\n"
+    static String start() {
+        return "    ____________________________________________________________\n"
                 + "     Hello! I'm Duke\n"
                 + "     What can I do for you?\n"
-                + "    ____________________________________________________________\n");
+                + "    ____________________________________________________________\n";
 
     }
 
     /**
      * Prints the closing message when a ByeCommand is executed.
      */
-    static void bye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    static String bye() {
+        return ("Bye. Hope to see you again soon!");
     }
 
     /**

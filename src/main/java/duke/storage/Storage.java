@@ -3,10 +3,14 @@ package duke.storage;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.logic.TaskList;
-
-import java.io.*;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.io.ObjectOutputStream;
+import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.File;
 import java.lang.StringBuilder;
-
 
 /**
  * Storage class to load and save the TaskList into the program.
@@ -62,7 +66,6 @@ public class Storage {
         } catch (IOException e) {
             File f = new File("/t.tmp");
             f.getParentFile().mkdirs();
-//            throw new DukeException(e.getMessage());
         } catch (ClassNotFoundException e) {
             throw new DukeException(e.getMessage());
         }

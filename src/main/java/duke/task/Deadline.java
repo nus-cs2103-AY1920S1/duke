@@ -28,6 +28,7 @@ public class Deadline extends Task {
     public String getDateTime() {
         return this.dateTime;
     }
+
     /**
      * Returns a string representation of a Deadline object in the in the format of [D][✗] task (by: dateTime).
      *

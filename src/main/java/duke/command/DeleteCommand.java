@@ -41,7 +41,7 @@ public class DeleteCommand extends Command {
             tasks.deleteTask(num - 1);
             ui.setDeleteResponse(task, tasks.getSize());
             storage.save(tasks);
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new DukeException("☹ OOPS!!! Please input a valid number.");
         }
 

@@ -4,7 +4,10 @@ import duke.exception.DukeException;
 import duke.logic.Actions;
 import duke.logic.TaskList;
 import duke.storage.Storage;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.task.Event;
+import duke.task.Todo;
 import duke.ui.Ui;
 
 /**
@@ -25,6 +28,12 @@ public class AddCommand extends Command {
         this.action = action;
     }
 
+    /**
+     * Detects anomalies for schedule clashes.
+     * @param currentTask task to be added.
+     * @param tasks list of existing tasks.
+     * @return TaskList of Tasks that have schedule which clashes with the currentTask.
+     */
     public TaskList detectAnomalies(Task currentTask, TaskList tasks) {
         TaskList clashedTasks = new TaskList();
         for (Task task : tasks.getTasks()) {

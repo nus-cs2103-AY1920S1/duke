@@ -1,6 +1,12 @@
 package duke.logic;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.UpdateCommand;
+import duke.command.WrongCommand;
 import duke.logic.Actions;
 
 /**

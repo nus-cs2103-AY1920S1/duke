@@ -1,10 +1,11 @@
 package duke.commands;
 
-import duke.DukeException;
+import duke.exception.DukeException;
+import duke.model.Model;
+import duke.storage.Storage;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.Storage;
 import duke.ui.Ui;
 
 public class EventCommand extends Command {
@@ -23,15 +24,17 @@ public class EventCommand extends Command {
 
     /**
      * Create an event.
-     * @param taskList task list of the Duke project
+     * @param model model of the Duke project
      * @param ui an instance of the Ui class
      * @param storage an instance of the storage class
      * @throws DukeException if errors occur when executing the command
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    @Override
+    public void execute(Model model, Ui ui, Storage storage) throws DukeException {
+        TaskList taskList = model.getTaskList();
         Task event = new Event(this.description, this.at);
         taskList.addTask(event);
         ui.showAddTask(event, taskList);
-        storage.saveData(taskList);
+        storage.saveData(model);
     }
 }

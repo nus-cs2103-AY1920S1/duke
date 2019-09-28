@@ -1,9 +1,10 @@
 package duke.commands;
 
-import duke.DukeException;
+import duke.exception.DukeException;
+import duke.model.Model;
+import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.Storage;
 import duke.ui.Ui;
 
 public class DoneCommand extends Command {
@@ -19,15 +20,17 @@ public class DoneCommand extends Command {
 
     /**
      * Mark a task as done.
-     * @param taskList task list of the Duke project
+     * @param model model of the Duke project
      * @param ui an instance of the Ui class
      * @param storage an instance of the storage class
      * @throws DukeException if errors occur when executing the command
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    @Override
+    public void execute(Model model, Ui ui, Storage storage) throws DukeException {
+        TaskList taskList = model.getTaskList();
         Task task = taskList.getTask(this.taskIndex);
         task.markAsDone();
         ui.showDone(task);
-        storage.saveData(taskList);
+        storage.saveData(model);
     }
 }

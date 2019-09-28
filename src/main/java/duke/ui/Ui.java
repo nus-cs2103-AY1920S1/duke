@@ -1,4 +1,8 @@
-import java.text.DateFormatSymbols;
+package duke.ui;
+
+import duke.task.Task;
+import duke.logic.TaskList;
+
 import java.text.ParseException;
 import java.time.DateTimeException;
 import java.util.Date;
@@ -21,7 +25,7 @@ public class Ui {
      * @return Day of Month, Year hh.mm(am/pm) format. Example: 2nd of December 2019, 6pm.
      */
 
-    static String toDateString(String dateTime) {
+    public static String toDateString(String dateTime) {
         try {
             SimpleDateFormat parser = null;
             SimpleDateFormat formatter = null;
@@ -69,7 +73,7 @@ public class Ui {
     /**
      * Sets the input from the user.
      */
-    void setInput() {
+    public void setInput() {
         String newInput = sc.nextLine();
         this.input = newInput;
         this.inputArr = newInput.split(" ");
@@ -141,7 +145,7 @@ public class Ui {
      * @param list list of task.
      */
     public void setListResponse(String list) {
-        setResponse(list);
+        setResponse("Here are your tasks:\n " + list);
     }
 
     /**
@@ -222,7 +226,7 @@ public class Ui {
      *
      * @return UI response attribute.
      */
-    String getResponse() {
+    public String getResponse() {
         return this.response;
     }
 

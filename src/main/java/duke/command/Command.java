@@ -1,6 +1,13 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.logic.TaskList;
+import duke.ui.Ui;
+
 public abstract class Command {
 
-    String input;
+    protected String input;
     boolean isExit = false;
 
     /**
@@ -20,7 +27,7 @@ public abstract class Command {
      * @param ui      Ui object.
      * @param storage Storage object to save and load files.
      */
-    abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Returns boolean object isExit to determine if program should exit.

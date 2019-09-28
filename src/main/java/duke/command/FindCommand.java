@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.logic.TaskList;
+import duke.ui.Ui;
+
 public class FindCommand extends Command {
     public FindCommand(String input) {
         super(input);

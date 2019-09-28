@@ -1,3 +1,5 @@
+package duke.logic;
+
 /**
  * Enum class for all the recognised actions.
  */

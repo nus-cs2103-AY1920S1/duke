@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.ui.Ui;
+
 /**
  * Event task that inherits from Task.
  */

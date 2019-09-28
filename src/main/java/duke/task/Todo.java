@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Todo task that inherits from Task.
  */

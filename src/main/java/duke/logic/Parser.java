@@ -1,3 +1,8 @@
+package duke.logic;
+
+import duke.command.*;
+import duke.logic.Actions;
+
 /**
  * Parser class to parse user input into a Command.
  */
@@ -5,11 +10,12 @@ public class Parser {
     /**
      * Returns a Command based on user input.
      *
-     * @param input user input.
+     * @param userInput user input.
      * @return Command based on user input.
      */
-    public static Command parse(String input) {
-        String[] inputArr = input.split(" ");
+    public static Command parse(String userInput) {
+        String input = userInput.trim();
+        String[] inputArr = input.trim().split(" ");
         Actions type;
         Command command = new WrongCommand(input);
         if (input.equals("bye")) {

@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.logic.Actions;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.logic.TaskList;
+import duke.ui.Ui;
+
 /**
  * Update command that inherits from Command, updates the TaskList.
  */

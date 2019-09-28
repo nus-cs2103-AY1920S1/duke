@@ -1,4 +1,8 @@
-import javax.print.ServiceUI;
+package duke.logic;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -67,7 +71,7 @@ public class TaskList implements Serializable {
      * @param index index of task to be returned.
      * @return task at the given index.
      */
-    public Task getTask(int index) throws DukeException{
+    public Task getTask(int index) throws DukeException {
         try {
             return this.tasks.get(index);
         } catch (IndexOutOfBoundsException e) {

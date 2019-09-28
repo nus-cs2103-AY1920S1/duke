@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.logic.Actions;
+import duke.logic.TaskList;
+import duke.storage.Storage;
+import duke.task.*;
+import duke.ui.Ui;
+
 /**
  * Adds a Task to the TaskList.
  */

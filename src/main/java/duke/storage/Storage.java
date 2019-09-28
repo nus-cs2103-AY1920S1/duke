@@ -1,3 +1,9 @@
+package duke.storage;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.logic.TaskList;
+
 import java.io.*;
 import java.lang.StringBuilder;
 
@@ -53,7 +59,11 @@ public class Storage {
                 tasks.addTask(task);
             }
             ois.close();
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e) {
+            File f = new File("/t.tmp");
+            f.getParentFile().mkdirs();
+//            throw new DukeException(e.getMessage());
+        } catch (ClassNotFoundException e) {
             throw new DukeException(e.getMessage());
         }
     }

@@ -1,19 +1,9 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.text.DateFormatSymbols;
-
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.Region;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.logic.Parser;
+import duke.storage.Storage;
+import duke.logic.TaskList;
+import duke.ui.Ui;
 
 /**
  * Main class that runs the Duke program.

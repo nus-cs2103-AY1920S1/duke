@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.ui.Ui;
+
 /**
  * Deadline task that inherits from Task.
  */

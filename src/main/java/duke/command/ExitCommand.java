@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.logic.TaskList;
+import duke.ui.Ui;
+
 /**
  * Exit command that inherits from Command to exit from the program.
  */

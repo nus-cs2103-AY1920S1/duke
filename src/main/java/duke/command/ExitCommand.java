@@ -2,23 +2,20 @@ package duke.command;
 
 import duke.backend.ListManager;
 import duke.backend.Storage;
+import duke.repos.TaskRepo;
 
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 public class ExitCommand extends Command {
 
-    public ExitCommand(String fullCommand, String[] splitCommand) {
-        super(fullCommand, splitCommand);
+    public ExitCommand(String fullCommand, String[] splitCommand, SimpleDateFormat formatter) {
+        super(fullCommand, splitCommand, formatter);
     }
 
     @Override
-    public String execute(ListManager listManager, Storage storage) {
-        try {
-            storage.save(listManager.actualList);
-        } catch (IOException e) {
-            System.out.println("Failed to save:" + e.getMessage());
-        }
+    public String execute(TaskRepo taskRepo) {
         return "\nBye. Hope to see you again soon!";
     }
 

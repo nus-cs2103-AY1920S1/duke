@@ -1,5 +1,7 @@
 package duke.repos;
 
+import duke.task.Task;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -8,7 +10,9 @@ public interface Repository<T> {
 
     void create(T entity) throws IOException;
 
-    void insert (int index, T entity);
+    List<Task> find(String query);
 
-    void delete(int index);
+    Task delete(int index) throws IOException;
+
+    void done(int index) throws IOException;
 }

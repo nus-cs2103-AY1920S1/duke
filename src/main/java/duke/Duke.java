@@ -2,9 +2,11 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import duke.repos.TaskRepo;
 import duke.task.Task;
 import duke.backend.Storage;
 import duke.backend.ListManager;
@@ -30,6 +32,8 @@ public class Duke {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private boolean isExit;
+    private SimpleDateFormat formatter;
+    private TaskRepo repo;
 
     Duke() {
     }
@@ -39,23 +43,18 @@ public class Duke {
      */
     Duke(String filePath) throws IOException {
         isExit = false;
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
-        storage = new Storage(filePath, formatter);
-        try {
-            listManager = new ListManager((ArrayList<Task>) storage.load(), formatter);
-        } catch (FileNotFoundException e) {
-            listManager = new ListManager(formatter);
-        }
-
+        this.formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        storage = new Storage(filePath);
+        repo = new TaskRepo(storage);
     }
 
     /**
      * method to ask the UI to ask user for input and change String input into Command class.
      */
-    private String run(String input) {
+    private String run(String input) throws IOException, ParseException {
         String output = "";
-        Command c = Parser.parse(input);
-        output = c.execute(listManager, storage);
+        Command c = Parser.parse(input, formatter);
+        output = c.execute(repo);
         isExit = c.isExit();
         return output;
     }
@@ -65,7 +64,7 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) {
+    String getResponse(String input) throws IOException, ParseException {
        if (!this.isExit) {
            return this.run(input);
        } else {

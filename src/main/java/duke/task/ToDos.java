@@ -19,16 +19,4 @@ public class ToDos extends Task {
         }
         return output;
     }
-
-    @Override
-    public String saveText() {
-        String output = "T|";
-        if (this.done) {
-            output += "1|";
-        } else {
-            output += "0|";
-        }
-        output += this.name;
-        return output;
-    }
 }

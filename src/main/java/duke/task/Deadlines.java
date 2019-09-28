@@ -34,21 +34,5 @@ public class Deadlines extends Task {
         }
         return output;
     }
-
-    /**
-     * Overrides saveText method to produce String to be saved in txt file.
-     * @return String output.
-     */
-    @Override
-    public String saveText() {
-        String output = "D|";
-        if (this.done) {
-            output += "1|";
-        } else {
-            output += "0|";
-        }
-        output += this.name + "|" + formatter.format(this.date);
-        return output;
-    }
 }
 

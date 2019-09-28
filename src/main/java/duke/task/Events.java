@@ -33,16 +33,4 @@ public class Events extends Task {
         }
         return output;
     }
-
-    @Override
-    public String saveText() {
-        String output = "E|";
-        if (this.done) {
-            output += "1|";
-        } else {
-            output += "0|";
-        }
-        output += this.name + "|" + formatter.format(this.date);
-        return output;
-    }
 }

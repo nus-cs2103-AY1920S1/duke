@@ -14,12 +14,10 @@ public class Storage {
 
     private File file;
     private String filePath;
-    private SimpleDateFormat formatter;
 
-    public Storage(String filePath, SimpleDateFormat formatter) throws IOException {
+    public Storage(String filePath) throws IOException {
         this.filePath = filePath;
         this.file = new File(filePath);
-        this.formatter = formatter;
         checkFile();
     }
 
@@ -37,7 +35,7 @@ public class Storage {
             return new ArrayList<>(Arrays.asList(arrayOfTasks));
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-            throw new IOException();
+            throw new IOException("Error!");
         }
     }
 

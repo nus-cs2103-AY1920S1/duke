@@ -2,6 +2,8 @@ package duke.parser;
 
 import duke.command.*;
 
+import java.text.SimpleDateFormat;
+
 public class Parser {
 
     /**
@@ -10,25 +12,25 @@ public class Parser {
      * @return Command based on the first word of String command.
      * @throws IllegalArgumentException if the command is not one of the valid ones.
      */
-    public static Command parse(String fullCommand) throws IllegalArgumentException {
+    public static Command parse(String fullCommand, SimpleDateFormat formatter) throws IllegalArgumentException {
         String[] splitCommand = fullCommand.split(" ", 0);
         switch (splitCommand[0]) {
             case "t":
             case "d":
             case "e":
-                return new AddCommand(fullCommand, splitCommand);
+                return new AddCommand(fullCommand, splitCommand, formatter);
             case "done":
-                return new DoneCommand(fullCommand, splitCommand);
+                return new DoneCommand(fullCommand, splitCommand, formatter);
             case "list":
-                return new ListCommand(fullCommand, splitCommand);
+                return new ListCommand(fullCommand, splitCommand, formatter);
             case "bye":
-                return new ExitCommand(fullCommand, splitCommand);
+                return new ExitCommand(fullCommand, splitCommand, formatter);
             case "delete":
-                return new DeleteCommand(fullCommand, splitCommand);
+                return new DeleteCommand(fullCommand, splitCommand, formatter);
             case "find":
-                return new FindCommand(fullCommand, splitCommand);
+                return new FindCommand(fullCommand, splitCommand, formatter);
             case "help":
-                return new HelpCommand(fullCommand, splitCommand);
+                return new HelpCommand(fullCommand, splitCommand, formatter);
             default:
                 throw new IllegalArgumentException("Invalid Command");
         }

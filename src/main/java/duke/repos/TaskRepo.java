@@ -3,9 +3,9 @@ package duke.repos;
 import duke.backend.Storage;
 import duke.task.Task;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskRepo implements Repository<Task> {
     private Storage storage;
@@ -28,12 +28,22 @@ public class TaskRepo implements Repository<Task> {
     }
 
     @Override
-    public void insert(int index, Task entity) {
-
+    public Task delete(int index) throws IOException {
+        Task removed = listOfTasks.remove(index - 1);
+        storage.save(listOfTasks);
+        return removed;
     }
 
     @Override
-    public void delete(int index) {
+    public List<Task> find(String query) {
+        return listOfTasks.stream()
+                .filter(task -> task.name.contains(query))
+                .collect(Collectors.toList());
+    }
 
+    @Override
+    public void done(int index) throws IOException {
+        listOfTasks.get(index - 1).done = true;
+        storage.save(listOfTasks);
     }
 }

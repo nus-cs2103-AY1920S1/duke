@@ -2,10 +2,12 @@ package seedu.duke.core;
 
 import javafx.scene.control.Label;
 import seedu.duke.model.dto.Task;
+import seedu.duke.model.dto.Todo;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;

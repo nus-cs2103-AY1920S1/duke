@@ -68,11 +68,13 @@ public class CmdUpdate extends Cmd {
         String[] descAndTime = inputs[1].split(" /at ", 2);
         int arrayLength = descAndTime.length;
         if (arrayLength == 1) {
+            //update description only
             String newDescription = descAndTime[0];
             Event updatedEvent = (Event) taskList.get(index);
             updatedEvent.setDescription(newDescription);
             taskList.set(index, updatedEvent);
         } else if (arrayLength == 2) {
+            //update both desc and time
             String updatedDescription = descAndTime[0];
             String updatedTime = descAndTime[1];
             taskList.set(index, new Event(updatedDescription, updatedTime));

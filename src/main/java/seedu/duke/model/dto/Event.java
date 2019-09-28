@@ -50,4 +50,9 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
+
+    public static void main(String[] args) throws ParseException {
+        Event event = new Event("project meeting", "18/09/19 12:00");
+        System.out.println(event.getAt());
+    }
 }

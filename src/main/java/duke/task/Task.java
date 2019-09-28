@@ -1,5 +1,8 @@
 package duke.task;
 
+import duke.Storage;
+
+import java.io.IOException;
 import java.util.List;
 
 public abstract class Task {
@@ -9,6 +12,13 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    static List<String> addTask(Task task, TaskList tasks, Storage storage) throws IOException {
+        tasks.add(task);
+        storage.store(tasks.getAsLines());
+        return List.of("Got it. I've added this task:", "  " + task,
+                "Now you have " + tasks.size() + " tasks in the list.");
     }
 
     /**

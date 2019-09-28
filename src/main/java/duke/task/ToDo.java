@@ -5,7 +5,6 @@ import duke.Storage;
 import duke.command.Command;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class ToDo extends Task {
     ToDo(String description) {
@@ -22,14 +21,10 @@ public class ToDo extends Task {
     public static Command getCommand(TaskList tasks, Storage storage) {
         return words -> {
             if (words.length == 1) {
-                throw new DukeException("The description of a todo cannot be empty.");
+                throw new DukeException("To create a todo, enter the command \"todo <description>\".");
             }
             String[] nameArr = Arrays.copyOfRange(words, 1, words.length);
-            Task task = new ToDo(String.join(" ", nameArr));
-            tasks.add(task);
-            storage.store(tasks.getAsLines());
-            return List.of("Got it. I've added this task:", "  " + task,
-                    "Now you have " + tasks.size() + " tasks in the list.");
+            return addTask(new ToDo(String.join(" ", nameArr)), tasks, storage);
         };
     }
 

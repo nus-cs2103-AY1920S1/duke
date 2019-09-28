@@ -23,7 +23,7 @@ class ToDoTest {
             ToDo.getCommand(taskListStub, storageStub).run(new String[]{"todo"});
             fail();
         } catch (DukeException e) {
-            String expected = "The description of a todo cannot be empty.";
+            String expected = "To create a todo, enter the command \"todo <description>\".";
             assertEquals(new DukeException(expected).getMessage(), e.getMessage());
             assertNull(taskListStub.lastAction);
             assertNull(storageStub.stored);

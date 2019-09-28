@@ -20,7 +20,7 @@ class DeadlineTest {
     @Test
     void getCommand_runWithoutParams_exceptionThrown() throws IOException {
         getCommandExceptionThrownHelper(new String[]{"deadline"},
-                "A deadline must have a time.");
+                "To create a deadline, enter the command \"deadline <description> /by <time>\".");
     }
 
     @Test

@@ -20,7 +20,7 @@ class EventTest {
     @Test
     void getCommand_runWithoutParams_exceptionThrown() throws IOException {
         getCommandExceptionThrownHelper(new String[]{"event"},
-                "An event must have a time.");
+                "To create an event, enter the command \"event <description> /at <time>\".");
     }
 
     @Test

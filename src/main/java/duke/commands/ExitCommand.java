@@ -14,6 +14,15 @@ public class ExitCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.showExit();
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        System.exit(0);
+                    }
+                },
+                1000
+        );
     }
 
     /**

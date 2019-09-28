@@ -28,7 +28,7 @@ public class Task {
     }
 
     public String getDate() {
-        return "";
+        return null;
     }
 
     public String getDescription() {

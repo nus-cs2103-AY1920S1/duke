@@ -61,7 +61,7 @@ public class DeleteCommand implements Command {
         }
 
         if (this.deleteAll && this.deletedTasks != null) {
-            return Optional.of(() -> tasksController.setNewTasks(deletedTasks));
+            return Optional.of(() -> tasksController.setNewTasks(deletedTasks, true));
         }
 
         if (!this.deleteAll && this.deletedTask != null) {

@@ -37,7 +37,7 @@ public class SortCommand implements Command {
         }
 
         if (this.oldCopy != null) {
-            return Optional.of(() -> tasksController.setNewTasks(oldCopy));
+            return Optional.of(() -> tasksController.setNewTasks(oldCopy, true));
         }
 
         return Optional.empty();

@@ -34,9 +34,11 @@ public class ClOutput extends DukeOutput {
         if (isOpen) {
             StringBuilder builder = new StringBuilder();
 
+            message = message.replaceAll("/vader/", "");
+
             String messageWithIndent = message.replaceAll("(?m)^", "     ");
 
-            String horizontalDivider = "____________________________________________________________\n";
+            String horizontalDivider = "____________________________________________________________________________\n";
             String output = builder.append(horizontalDivider)
                     .append("\n")
                     .append(messageWithIndent)

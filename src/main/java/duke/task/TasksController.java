@@ -136,7 +136,7 @@ public class TasksController {
      * @return true if the new tasks were successfully set.
      * @throws UiException if the ui fails unexpectedly.
      */
-    public boolean setNewTasks(List<Task> tasks) throws UiException {
+    public boolean setNewTasks(List<Task> tasks, boolean print) throws UiException {
         try {
             tasksRepo.setNewTasks(tasks);
         } catch (TaskRepoException e) {
@@ -144,8 +144,11 @@ public class TasksController {
             return false;
         }
 
-        String feedback = this.feedbackFormatter.displayAllTasks(tasks);
-        this.displayFeedback(feedback);
+        if (print) {
+            String feedback = this.feedbackFormatter.displayAllTasks(tasks);
+            this.displayFeedback(feedback);
+        }
+
         return true;
     }
 
@@ -265,10 +268,12 @@ public class TasksController {
 
             List<Task> sortedTasks = tasksRepo.getCurrentTasks();
             sortedTasks.sort(sortingMethod.comparator);
-            this.setNewTasks(sortedTasks);
+            this.setNewTasks(sortedTasks, false);
 
             String feedback = this.feedbackFormatter.displayTasksSorted(sortingMethod);
             this.displayFeedback(feedback);
+
+            this.listTasks();
 
             return oldTasks;
         } catch (TaskRepoException e) {

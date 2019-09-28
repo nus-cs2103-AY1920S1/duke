@@ -2,6 +2,11 @@ package duke.task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a list of tasks to be handled by Duke. It has methods
+ * for handling each task object in the list, such as adding, deleting,
+ * marking as done etc.
+ */
 public class TaskList {
     private ArrayList<Task> tasks = new ArrayList<>();
 

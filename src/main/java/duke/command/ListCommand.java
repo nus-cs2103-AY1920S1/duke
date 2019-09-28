@@ -5,6 +5,9 @@ import duke.handler.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * ListCommand handles the listing of all tasks in Duke list of tasks.
+ */
 public class ListCommand extends Command {
 
     public ListCommand(String fullCommand) {

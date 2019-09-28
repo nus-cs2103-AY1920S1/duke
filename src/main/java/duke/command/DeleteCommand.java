@@ -5,6 +5,9 @@ import duke.handler.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * DeleteCommand handles the deletion of tasks from Duke list of tasks.
+ */
 public class DeleteCommand extends Command {
 
     public DeleteCommand(String fullCommand) {

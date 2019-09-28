@@ -5,6 +5,9 @@ import duke.handler.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * DoneCommand handles the marking of tasks as done.
+ */
 public class DoneCommand extends Command {
 
     public DoneCommand(String fullCommand) {

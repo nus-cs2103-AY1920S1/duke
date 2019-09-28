@@ -4,6 +4,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Represents an Event task. An Event is a task that has
+ * a 'description' and an 'at' date and time that task has to
+ * be completed.
+ */
 public class Event extends Task {
 
     private char taskType = 'E';

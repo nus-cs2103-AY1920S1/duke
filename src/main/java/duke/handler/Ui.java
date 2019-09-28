@@ -4,6 +4,10 @@ import duke.task.Task;
 
 import java.util.Scanner;
 
+/**
+ * Ui is the face of Duke, taking in inputs from users and also
+ * displaying template messages of Duke.
+ */
 public class Ui {
 
     private Scanner scanner;

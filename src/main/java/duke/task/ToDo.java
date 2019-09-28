@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a to do task that needs to be completed.
+ */
 public class ToDo extends Task {
 
     private char taskType = 'T';

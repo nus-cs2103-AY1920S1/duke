@@ -7,6 +7,10 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/**
+ * Parser is the logic handler of Duke. It breaks down each command entered
+ * by the user and returning a Command object of its corresponding type.
+ */
 public class Parser {
 
     public Parser() {}

@@ -4,6 +4,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Represents a Deadline task. A Deadline is a task that has
+ * a 'description' and a 'by' date and time that task has to
+ * be completed.
+ */
 public class Deadline extends Task {
 
     private char taskType = 'D';

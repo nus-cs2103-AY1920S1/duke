@@ -5,6 +5,9 @@ import duke.handler.Storage;
 import duke.handler.Ui;
 import duke.task.TaskList;
 
+/**
+ * Represents the Duke task manager*
+ */
 public class Duke {
 
     private Storage storage;

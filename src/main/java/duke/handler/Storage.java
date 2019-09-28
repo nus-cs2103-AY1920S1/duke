@@ -9,6 +9,10 @@ import duke.task.ToDo;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Storage is the handler that retrieves data from the duke.txt file, and
+ * writes new data to the same file.
+ */
 public class Storage {
 
     private String filePath;

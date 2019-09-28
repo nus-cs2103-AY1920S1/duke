@@ -4,6 +4,9 @@ import duke.handler.Storage;
 import duke.handler.Ui;
 import duke.task.TaskList;
 
+/**
+ * ExitCommand handles the exit of Duke when executed.
+ */
 public class ExitCommand extends Command {
 
     public ExitCommand(String fullCommand) {

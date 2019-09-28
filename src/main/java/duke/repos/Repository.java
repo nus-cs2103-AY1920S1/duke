@@ -15,4 +15,6 @@ public interface Repository<T> {
     Task delete(int index) throws IOException;
 
     void done(int index) throws IOException;
+
+    List<Task> sort();
 }

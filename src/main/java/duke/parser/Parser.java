@@ -1,13 +1,6 @@
 package duke.parser;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.HelpCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 
 import java.text.SimpleDateFormat;
 
@@ -39,6 +32,8 @@ public class Parser {
             return new FindCommand(fullCommand, splitCommand, formatter);
         case "help":
             return new HelpCommand(fullCommand, splitCommand, formatter);
+        case "sort":
+            return new SortCommand(fullCommand, splitCommand, formatter);
         default:
             throw new IllegalArgumentException("Invalid Command");
         }

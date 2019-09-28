@@ -62,4 +62,20 @@ public class ResponseGen {
         }
     }
 
+    public static String sortResponse(List<Task> listOfTasks) {
+        StringBuilder output = new StringBuilder();
+        if (listOfTasks.size() == 0) {
+            return "You have nothing on your to-do list!";
+        } else {
+            output.append("\tHere are the tasks in your list sorted alphabetically:\n");
+            for (int j = 0; j < listOfTasks.size(); j++) {
+                output.append('\t');
+                output.append(j + 1).append(".");
+                output.append(listOfTasks.get(j).toString()).append('\n');
+            }
+            output.append("\tYou have ").append(listOfTasks.size()).append(" tasks!");
+            return output.toString();
+        }
+    }
+
 }

@@ -31,7 +31,7 @@ public class Ui {
             SimpleDateFormat formatter = null;
             if (dateTime.split(" ").length == 2) {
                 parser = new SimpleDateFormat("dd/MM/yyyy HHmm");
-                formatter = new SimpleDateFormat("dd MMMM yyyy, h.mm a");
+                formatter = new SimpleDateFormat("dd MMMM yyyy, h.mma");
             } else {
                 parser = new SimpleDateFormat("dd/MM/yyyy");
                 formatter = new SimpleDateFormat("dd MMMM yyyy");

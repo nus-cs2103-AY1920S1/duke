@@ -16,7 +16,7 @@ public class FindCommandProducer extends CommandProducer {
     @Override
     public Command generateCommand(String arguments) throws CommandCreationException {
         if (arguments.equals("")) {
-            throw new CommandCreationException("Please enter a search parameter");
+            throw new CommandCreationException("Search parameter, I must have.");
         }
 
         return new FindCommand(arguments, this.tasksController);

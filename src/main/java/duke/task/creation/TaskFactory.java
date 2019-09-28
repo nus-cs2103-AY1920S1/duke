@@ -35,9 +35,9 @@ public class TaskFactory {
             return Optional.of(TaskBuilder.buildTask(taskTypeOptional.get(), taskArguments));
 
         } catch (TaskArgumentsException e) {
-            throw new TaskCreationException("Something unexpected happened.");
+            throw new TaskCreationException("Hmmm? Unexpected, something has happened..");
         } catch (UnknownDateTimeException e) {
-            throw new TaskCreationException("Please enter a valid date and time.");
+            throw new TaskCreationException("Enter a valid date and time you must.");
         }
     }
 }

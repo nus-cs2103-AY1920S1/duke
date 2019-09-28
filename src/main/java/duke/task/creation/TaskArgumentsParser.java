@@ -80,7 +80,7 @@ class TaskArgumentsParser {
         }
 
         if (numDates > 2) {
-            throw new TaskArgumentsException("A task cannot have more than 2 date time arguments.");
+            throw new TaskArgumentsException("Not more than 2 date time arguments, a task can have.");
         }
 
         arguments = trimFromMatchOnwards(arguments, foundPatterns.get(foundPatterns.size() - 1));

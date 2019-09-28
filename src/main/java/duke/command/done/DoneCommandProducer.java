@@ -20,7 +20,7 @@ public class DoneCommandProducer extends CommandProducer {
         try {
             index = Integer.parseInt(arguments) - 1;
         } catch (NumberFormatException e) {
-            throw new CommandCreationException("Please enter a numerical argument.");
+            throw new CommandCreationException("Numerical argument only, is required.");
         }
 
         return new DoneCommand(index, tasksController);

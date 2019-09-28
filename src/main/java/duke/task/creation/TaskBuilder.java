@@ -34,7 +34,7 @@ class TaskBuilder {
 
     private static Object[] getArgumentArray(TaskArguments taskArguments) throws TaskCreationException {
         if (taskArguments.getDetails().equals("")) {
-            throw new TaskCreationException("Please enter some task details.");
+            throw new TaskCreationException("Enter some task details you must.");
         }
 
         List<Object> argsList = new ArrayList<>();
@@ -50,7 +50,7 @@ class TaskBuilder {
             return (Task) constructor.newInstance(arguments);
 
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            throw new TaskCreationException("Unable to create task");
+            throw new TaskCreationException("Unable to create task, I fear.");
         }
     }
 }

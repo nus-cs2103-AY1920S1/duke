@@ -25,7 +25,7 @@ public class DeleteCommandProducer extends CommandProducer {
             if (arguments.equals("all")) {
                 deleteAll = true;
             } else {
-                throw new CommandCreationException("That is an invalid command for delete.");
+                throw new CommandCreationException("Herh herh herh. Invalid command that is..");
             }
         }
 

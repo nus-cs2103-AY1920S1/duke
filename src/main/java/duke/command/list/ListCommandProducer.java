@@ -16,7 +16,7 @@ public class ListCommandProducer extends CommandProducer {
     @Override
     public Command generateCommand(String arguments) throws CommandCreationException {
         if (!arguments.equals("")) {
-            throw new CommandCreationException("List does not accept arguments.");
+            throw new CommandCreationException("Does not accept arguments, this command.");
         }
 
         return new ListCommand(tasksController);

@@ -16,7 +16,7 @@ public class ByeCommandProducer extends CommandProducer {
     @Override
     public Command generateCommand(String arguments) throws CommandCreationException {
         if (!arguments.equals("")) {
-            throw new CommandCreationException("This command does not accept arguments.");
+            throw new CommandCreationException("Accept arguments, this command does not.");
         }
 
         return new ByeCommand(ui);

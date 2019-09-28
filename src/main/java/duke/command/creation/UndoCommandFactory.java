@@ -27,12 +27,12 @@ public class UndoCommandFactory implements CommandFactory {
         }
 
         if (!CommandSplitter.getArguments(input).equals("")) {
-            throw new CommandCreationException("Undo command does not accept arguments.");
+            throw new CommandCreationException("Arguments, this command does not accept.");
         }
 
         UndoAction undoAction = this.commandExecutor.getLatestUndoAction();
         if (undoAction == null) {
-            throw new CommandCreationException("You have no actions to undo.");
+            throw new CommandCreationException("No actions to undo you have, I'm afraid.");
         }
 
         Command undoCommand = new Command() {

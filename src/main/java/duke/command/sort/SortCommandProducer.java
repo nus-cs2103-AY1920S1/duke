@@ -20,7 +20,7 @@ public class SortCommandProducer extends CommandProducer {
         TaskSorts sortingMethod = Arrays.stream(TaskSorts.values())
                 .filter(sort -> sort.keyword.equals(arguments))
                 .findFirst()
-                .orElseThrow(() -> new CommandCreationException("Please enter a valid argument."));
+                .orElseThrow(() -> new CommandCreationException("Invalid argument, I sense."));
 
         return new SortCommand(sortingMethod, this.tasksController);
     }

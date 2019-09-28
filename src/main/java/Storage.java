@@ -106,6 +106,7 @@ public class Storage {
      */
     public Date convertToDate(String str) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy hh:mm");
+        assert (str.length() == 17) : "Date should be in this format: \"dd MMM yyyy hh:mm\".";
         Date date = sdf.parse(str);
         return date;
     }

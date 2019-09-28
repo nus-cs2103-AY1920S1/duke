@@ -108,7 +108,7 @@ public class Task {
      * @return True if the task description contains the keyword.
      */
     public boolean hasKeyword(String keyword) {
-        return description.contains(keyword);
+        return description.toLowerCase().contains(keyword.toLowerCase());
     }
 
     @Override

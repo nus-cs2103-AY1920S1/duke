@@ -38,6 +38,10 @@ public class Parser {
             return new FindCommand(input);
         case "priority":
             return new PriorityCommand(input);
+        case "clear":
+            return new ClearCommand();
+        case "help":
+            return new HelpCommand();
         default:
             throw new DukeException();
         }

@@ -20,7 +20,7 @@ Command Format
 * Words in UPPER_CASE are the parameters to be supplied by the user<br />
     Example: in todo TASKNAME, TASKNAME is a parameter which can be used as todo tutorial.
     
-### 1. Viewing help: `help`
+### 1. Viewing help: **`help`**
 Format: help
 
 ### 2. Adding task
@@ -32,30 +32,34 @@ Example: `todo tutorial`
 #### 2.2. Adding deadline: **`deadline`**
 Adds a deadline to the list of tasks<br />
 Format: `deadline TASKNAME /by DATE`<br />
-Example: `deadline tutorial /by 24Aug19 15:00`
+Example: `deadline tutorial /by 02 Dec 2019 15:00`
   
 #### 2.3. Adding event: **`event`**
 Adds an event to the list of tasks<br />
-Format: `event TASKNAME /at DATE)`<br />
-Example: `event meeting /at 13Oct19 12:00`
+Format: `event TASKNAME /at DATE`<br />
+Example: `event meeting /at 13 Oct 2019 09:00`
   
-> Note: DATE is in the format ddMMMyy hh:mm
+> Note: DATE is in the format "dd MMM yyyy hh:mm"
   
 ### 3. Viewing all tasks: **`list`**
 Shows the list of all tasks in My Tasks<br />
-Format: `list
+Format: `list`
 `
 ### 4. Marking task as done: **`done`**
 Marks the task with task number as in the list as done<br />
 Format: `done TASKNUMBER`<br />
 Example: `done 4` (marks the task number 4 as done)
 
-### 5. Find task `find`
-Find a task by searching using a keyword<br />
+### 5. Find task **`find`**
+Find a task by searching using a keyword (can be in upper or lower case)<br />
 Format: `find KEYWORD`<br />
 Example: `find tutorial` (shows any task with they keyword "tutorial")
 
-### 6. Prioritise task `priority`
+### 6. Prioritise task **`priority`**
 Prioritise the task with task number as in the list as high, medium or low<br />
 Format: `priority TASKNUMBER LEVEL`<br />
 Example: `priority 3 high` (Marks task number 3 as high priority level)
+
+### 7. Clear all tasks **`clear`**
+Deletes all the tasks from the list
+Format: `clear`

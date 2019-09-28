@@ -60,6 +60,13 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Sets task with priority level.
+     *
+     * @param n Task Number.
+     * @param priority Priority Level - easy, medium or hard.
+     * @return The task with the updated priority level.
+     */
     public Task setTaskPriority(int n, String priority) {
         assert (list.size() > n);
         Task task = list.get(n);
@@ -76,6 +83,13 @@ public class TaskList {
     public Task removeTask(int n) {
         assert (list.size() > n);
         return list.remove(n);
+    }
+
+    /**
+     * Clears the taskList.
+     */
+    public void clear() {
+        list.clear();
     }
 
     /**
@@ -104,13 +118,13 @@ public class TaskList {
     public String showTaskFound(ArrayList<Task> taskList) {
         int length = taskList.size();
         StringBuffer taskFound =
-                new StringBuffer("Here are the matching tasks in your list:/n");
+                new StringBuffer("Here are the matching tasks in your list:\n");
         for (int i = 1; i <= length; i++) {
             Task task = taskList.get(i - 1);
             taskFound.append(i);
             taskFound.append(". ");
             taskFound.append(task);
-            taskFound.append("/n");
+            taskFound.append("\n");
         }
         return taskFound.toString();
     }

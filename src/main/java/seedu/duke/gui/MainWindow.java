@@ -1,5 +1,8 @@
 package seedu.duke.gui;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import seedu.duke.Duke;
+import seedu.duke.Ui;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -30,6 +34,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        // show welcome message
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.getWelcome(), dukeImage));
     }
 
     public void setDuke(Duke d) {
@@ -43,6 +49,15 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        // handles exit
+        if (input.equalsIgnoreCase("bye")) {
+            ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+            // schedule a exit task
+            Runnable task = () -> System.exit(0);
+            executor.schedule(task, 1, TimeUnit.SECONDS);
+            executor.shutdown();
+        }
+        // get response normally
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage));

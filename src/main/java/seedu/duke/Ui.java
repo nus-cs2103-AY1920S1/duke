@@ -38,7 +38,7 @@ public class Ui {
         return fullCommand.trim();
     }
 
-    public String getWelcome() {
+    public static String getWelcome() {
         return String.format("%s\nHello! I'm Duke\n", LOGO);
     }
 
@@ -46,7 +46,7 @@ public class Ui {
         show(getWelcome());
     }
 
-    public String getLine() {
+    public static String getLine() {
         return LINE;
     }
 
@@ -54,7 +54,7 @@ public class Ui {
         show(getLine());
     }
 
-    public String getLoadingError() {
+    public static String getLoadingError() {
         return LOADING_ERROR_MESSAGE;
     }
 
@@ -78,7 +78,7 @@ public class Ui {
         System.out.println(s);
     }
 
-    public String getHelpMessage() {
+    public static String getHelpMessage() {
         return HELP_MESSAGE;
     }
 

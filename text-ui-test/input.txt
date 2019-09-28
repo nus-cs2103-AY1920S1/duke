@@ -1,0 +1,7 @@
+hi
+todo
+todo sleep
+deadline homework /by midnight
+list
+done 1
+bye

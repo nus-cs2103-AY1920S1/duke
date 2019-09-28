@@ -11,7 +11,7 @@ public class Deadline extends Task {
     private String[] datetime;
 
     /**
-     * Instantiate a Events object by passing a String of description and time
+     * Instantiate a Events object by passing a String of description and time.
      * @param description Description of the deadline task.
      * @param by The date and time of the deadline.
      */
@@ -34,8 +34,9 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         try {
-            return "[D]" + super.toString() +
-                    "(by: " + super.getDate(this.datetime) + ", " + super.getTime(this.datetime) + ")";
+            return "[D]" + super.toString()
+                    + "(by: " + super.getDate(this.datetime)
+                    + ", " + super.getTime(this.datetime) + ")";
         } catch (ParseException parseError) {
             return parseError.toString();
         }

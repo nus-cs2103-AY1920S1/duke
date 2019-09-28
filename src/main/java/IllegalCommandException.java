@@ -9,7 +9,7 @@ public class IllegalCommandException extends Exception {
      * parameter is being passed through.
      * @param errorMessage a String to display the error.
      */
-    protected IllegalCommandException (String errorMessage) {
+    protected IllegalCommandException(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 

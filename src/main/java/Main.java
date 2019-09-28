@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +11,10 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("/Users/kchensheng/Documents/NUS/Y2" +
-            "/Sem1/CS2103/kwan_chen_sheng_duke/data/data.txt");
+    String fileDirectory = System.getProperty("user.dir");
+    String fileName = "data.txt";
+
+    private Duke duke = new Duke(fileDirectory + File.separator + fileName);
 
     @Override
     public void start(Stage stage) {

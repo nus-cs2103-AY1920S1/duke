@@ -68,7 +68,7 @@ public class Ui {
      */
     protected String getAddedMessage(ArrayList<Task> taskList) {
         String addedMessage = " Got it. I've added this task:\n"
-                + "   " + taskList.get(taskList.size()-1)
+                + "   " + taskList.get(taskList.size() - 1)
                 + "\n Now you have " + taskList.size() + " tasks in the list.";
 
         return addedMessage;
@@ -103,13 +103,13 @@ public class Ui {
 
     /**
      * Find the task that the User inputs.
-     * @param foundTasklist
+     * @param foundTaskList task list consists of all the similar words.
      * @return List of tasks found.
      */
-    protected String showFoundMessage(ArrayList<Task> foundTasklist) {
+    protected String showFoundMessage(ArrayList<Task> foundTaskList) {
         String foundMessage = "";
-        for (int x = 0; x < foundTasklist.size(); x++) {
-            foundMessage = foundMessage + 1 + ". " + foundTasklist.get(x) + "\n";
+        for (int x = 0; x < foundTaskList.size(); x++) {
+            foundMessage = foundMessage + 1 + ". " + foundTaskList.get(x) + "\n";
         }
 
         return foundMessage;
@@ -118,7 +118,7 @@ public class Ui {
     protected String showViewMessage(ArrayList<Task> viewTasklist) {
         String viewMessage = "";
         for (int x = 0; x < viewTasklist.size(); x++) {
-            viewMessage = viewMessage+ 1 + ". " + viewTasklist.get(x) + "\n";
+            viewMessage = viewMessage + 1 + ". " + viewTasklist.get(x) + "\n";
         }
         if (viewMessage.equals("")) {
             viewMessage = "No task found";

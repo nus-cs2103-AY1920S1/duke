@@ -25,7 +25,7 @@ public class TaskList {
     }
 
     /**
-     * Add tasks to the tasks list
+     * Add tasks to the tasks list.
      * @param command The description of task and date/time(if applicable) from the User
      * @throws IllegalCommandException If the User inputs a wrong/invalid command.
      */
@@ -38,7 +38,7 @@ public class TaskList {
         } else if (command.contains("event")) {
             String[] splitCommand = command.split(" ", 2);
             String[] splitEvent = (splitCommand[1].split("/", 2));
-            if (validDate(splitEvent[1])) {
+            if (validDateTime(splitEvent[1])) {
                 taskList.add(new Events(splitEvent[0], splitEvent[1]));
             } else {
                 throw new IllegalCommandException("Wrong date! Enter again");
@@ -47,11 +47,10 @@ public class TaskList {
             String[] splitCommand = command.split(" ", 2);
             String[] splitDeadline = (splitCommand[1].split("/", 2));
             if (validDateTime(splitDeadline[1])) {
-                taskList.add(new Events(splitDeadline[0], splitDeadline[1]));
+                taskList.add(new Deadline(splitDeadline[0], splitDeadline[1]));
             } else {
                 throw new IllegalCommandException("Wrong date! Enter again");
             }
-            taskList.add(new Deadline(splitDeadline[0], splitDeadline[1]));
         }
     }
 
@@ -61,14 +60,15 @@ public class TaskList {
      * @param dateTime the date and time input by User.
      * @return true if the date is valid.
      */
-    protected boolean validDateTime (String dateTime) {
+    protected boolean validDateTime(String dateTime) {
         String[] getDateTime = dateTime.split(" ");
         String[] getDate = getDateTime[1].split("/");
         String day = getDate[0];
         String month = getDate[1];
         String time = getDateTime[2];
-        if (Integer.valueOf(day) > 31 || Integer.valueOf(month) > 12 ||
-            Integer.valueOf(time) > 2359) {
+        if (Integer.parseInt(day) > 31
+                || Integer.parseInt(month) > 12
+                || Integer.parseInt(time) > 2359) {
             return false;
         }
         return true;
@@ -79,11 +79,11 @@ public class TaskList {
      * @param date the date input by User.
      * @return true if the date is valid.
      */
-    protected boolean validDate (String date) {
+    protected boolean validDate(String date) {
         String[] getDate = date.split("/");
         String day = getDate[0];
         String month = getDate[1];
-        if (Integer.valueOf(day) > 31 || Integer.valueOf(month) > 12) {
+        if (Integer.parseInt(day) > 31 || Integer.parseInt(month) > 12) {
             return false;
         }
         return true;
@@ -95,17 +95,19 @@ public class TaskList {
      * delete the task 3 from the tasks list).
      * @param command The command delete and the number of the task User wants to delete
      * @return the updated tasks list after deletion
-     * @throws IllegalCommandException if User did not enter a number after delete or invalid
-     * command.
+     * @throws IllegalCommandException if User did not enter a number after delete or invalid command.
      */
     protected String deleteTask(String command) throws IllegalCommandException {
         if (!command.contains(" ")) {
             throw new IllegalCommandException("Give a task to delete.");
         } else  {
             String[] splitCommand = command.split(" ");
-            int taskDelete = Integer.valueOf(splitCommand[1]);
+            int taskDelete = Integer.parseInt(splitCommand[1]);
+            if (taskDelete < taskList.size()) {
+                throw new IllegalCommandException("No such task to delete!");
+            }
             String deleted = taskList.get(taskDelete - 1).getDescription();
-            taskList.remove(taskDelete-1);
+            taskList.remove(taskDelete - 1);
             return deleted;
         }
     }
@@ -115,27 +117,26 @@ public class TaskList {
      * wants to indicate that task 3 in the list is completed).
      * @param command The command done and the number of the task User set as done.
      * @return Updated tasks list with the selected task being marked done.
-     * @throws IllegalCommandException if User did not enter a number after delete or invalid
-     * command.
+     * @throws IllegalCommandException if User did not enter a number after delete or invalid command.
      */
     protected String doneTask(String command) throws IllegalCommandException {
         if (!command.contains(" ")) {
             throw new IllegalCommandException("There must be a number after done.");
         } else {
             String[] splitString = command.split(" ");
-            int taskDone = Integer.valueOf(splitString[1]);
+            int taskDone = Integer.parseInt(splitString[1]);
             if (taskDone < taskList.size()) {
+                throw new IllegalCommandException("No task to delete!");
+            } else {
                 taskList.get(taskDone - 1).markAsDone();
                 return taskList.get(taskDone - 1).getDescription();
-            } else {
-                throw new IllegalCommandException("Invalid Task !");
             }
 
         }
     }
 
     /**
-     * Other classes can retrieve the tasks list
+     * Other classes can retrieve the tasks list.
      * @return The tasks list.
      */
     protected ArrayList<Task> getTaskList() {
@@ -187,8 +188,7 @@ public class TaskList {
      * @param viewTasks List of tasks that matches the input date
      * @param date date input by User.
      */
-    protected static void processViewTasks
-            (Task task, ArrayList<Task> viewTasks, String date) {
+    protected static void processViewTasks(Task task, ArrayList<Task> viewTasks, String date) {
         if (task.getNumericalDate().contains(date)) {
             viewTasks.add(task);
         }

@@ -30,7 +30,7 @@ public class Parser {
                 return ui.getAddedMessage(this.tasksList.getTaskList());
             } else if (command.contains("delete")) {
                 String deletedTask = this.tasksList.deleteTask(command); // retrieve the deleted task.
-                 return ui.getDeletedMessage(this.tasksList.getTaskList(), deletedTask);
+                return ui.getDeletedMessage(this.tasksList.getTaskList(), deletedTask);
             } else if (command.contains("done")) {
                 String taskDoneStr = this.tasksList.doneTask(command);  // retrieve the task that is done.
                 return ui.getDoneMessage(taskDoneStr);

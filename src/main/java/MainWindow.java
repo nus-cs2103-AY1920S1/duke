@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -34,6 +35,9 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    /**
+     * Run the application and display the welcome message from Duke.
+     */
     public void run() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(duke.getWelcomeMessage(), dukeImage)

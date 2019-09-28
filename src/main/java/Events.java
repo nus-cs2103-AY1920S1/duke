@@ -6,11 +6,11 @@ import java.text.ParseException;
  * instantiate a Events task.
  */
 public class Events extends Task {
-    private String event[];
+    private String[] event;
     private String[] datetime;
 
     /**
-     * Instantiate a Events object by passing a String of description and time
+     * Instantiate a Events object by passing a String of description and time.
      * @param description Description of the event task.
      * @param at The date and time of the event.
      */
@@ -33,8 +33,9 @@ public class Events extends Task {
     @Override
     public String toString() {
         try {
-            return "[E]" + super.toString() +
-                    "(at: " + super.getDate(this.datetime) + ", " + super.getTime(this.datetime) + ")";
+            return "[E]" + super.toString()
+                    + "(at: " + super.getDate(this.datetime)
+                    + ", " + super.getTime(this.datetime) + ")";
         } catch (ParseException parseError) {
             return parseError.toString();
         }

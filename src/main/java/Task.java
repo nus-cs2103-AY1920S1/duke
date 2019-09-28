@@ -15,7 +15,7 @@ public abstract class Task {
      * Task object is instantiated when User enters the description of task.
      * @param description Description of tasks.
      */
-    protected Task (String description) {
+    protected Task(String description) {
         this.description = description;
         this.taskIsDone = false;
     }
@@ -34,7 +34,7 @@ public abstract class Task {
      * @return Status of task.
      */
     protected String getStatusIcon() {
-        return (taskIsDone ? "\u2713" : "\u2718");
+        return (taskIsDone ? "Done!" : "x");
     }
 
     /**

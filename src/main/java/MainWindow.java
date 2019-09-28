@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -5,6 +6,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -23,6 +27,7 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaIceBear.png"));
+    private static final long BYE_DELAY = 1000;
 
     @FXML
     public void initialize() {
@@ -46,6 +51,18 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response)
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            exitApp();
+        }
+    }
+
+    /**
+     * Delays the program from exiting to show the bye message.
+     */
+    private void exitApp() {
+        new Timer().schedule(new TimerTask() {
+            public void run () { Platform.exit(); }
+        }, BYE_DELAY);
     }
 
     /**

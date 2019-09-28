@@ -27,6 +27,8 @@ public class Ui {
         this.content.append("Hello! I'm Duke\n");
         this.content.append(INDENT);
         this.content.append("What can I do for you?");
+        assert this.content.toString().equals("     Hello! I'm Duke\n     What can I do for you?") : "Welcome "
+                + "message is wrong!";
     }
 
     /**

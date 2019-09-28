@@ -109,8 +109,9 @@ public class MainWindow {
     }
 
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(duke.process(userInput.getText()));
+        String input = userInput.getText();
+        Label userText = new Label(input);
+        Label dukeText = new Label(duke.process(input));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(puppy)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(kitten))

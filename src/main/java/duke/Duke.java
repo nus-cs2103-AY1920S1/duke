@@ -14,6 +14,7 @@ public class Duke extends Application {
     private TaskList taskList;
     private Ui ui;
     private MainWindow mainWindow;
+    private boolean isExit = false;
 
     /**
      * Start the gui application.
@@ -27,7 +28,7 @@ public class Duke extends Application {
         mainWindow = new MainWindow(this);
         mainWindow.setGui(stage);
 
-        Label message;
+        Label initialMessageLabel;
         try {
             taskList = storage.loadData();
             ui.showGreeting();
@@ -35,8 +36,12 @@ public class Duke extends Application {
             ui.showException(e);
             taskList = new TaskList();
         } finally {
-            message = new Label(ui.toString());
-            mainWindow.displayMessage(message);
+            String initialMessage = ui.toString();
+            assert !initialMessage.isEmpty() : "Empty message at the start!";
+
+            initialMessageLabel = new Label(initialMessage);
+            System.out.println(ui.toString());
+            mainWindow.displayMessage(initialMessageLabel);
         }
     }
 
@@ -47,9 +52,6 @@ public class Duke extends Application {
         try {
             Command command = parser.parse(input);
             command.execute(taskList, ui, storage);
-            if (command.isExit()) {
-                System.exit(0);
-            }
         } catch (DukeException e) {
             ui.showException(e);
         } finally {

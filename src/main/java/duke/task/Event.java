@@ -40,15 +40,22 @@ public class Event extends Task {
      * @param other The other Event task to compare to.
      * @return int
      */
-    public int compareTo(Event other) {
-        if (this.description.compareTo(other.description) == 0) {
-            if (this.from.compareTo(other.from) == 0) {
-                return this.to.compareTo(other.to);
+    @Override
+    public int compareTo(Task other) {
+        if (!this.getType().equals(other.getType())) {
+            return -1;
+        }
+
+        Event comp = (Event) other;
+
+        if (this.description.compareTo(comp.description) == 0) {
+            if (this.from.compareTo(comp.from) == 0) {
+                return this.to.compareTo(comp.to);
             } else {
-                return this.from.compareTo(other.from);
+                return this.from.compareTo(comp.from);
             }
         } else {
-            return this.description.compareTo(other.description);
+            return this.description.compareTo(comp.description);
         }
     }
 }

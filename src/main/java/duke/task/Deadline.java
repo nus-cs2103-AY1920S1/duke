@@ -32,11 +32,18 @@ public class Deadline extends Task {
      * @param other The other Deadline task to compare to.
      * @return int
      */
-    public int compareTo(Deadline other) {
-        if (this.description.compareTo(other.description) == 0) {
-            return this.by.compareTo(other.by);
+    @Override
+    public int compareTo(Task other) {
+        if (!this.getType().equals(other.getType())) {
+            return -1;
+        }
+
+        Deadline comp = (Deadline) other;
+
+        if (this.description.compareTo(comp.description) == 0) {
+            return this.by.compareTo(comp.by);
         } else {
-            return this.description.compareTo(other.description);
+            return this.description.compareTo(comp.description);
         }
     }
 }

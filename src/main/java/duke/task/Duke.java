@@ -40,7 +40,7 @@ public class Duke extends Application {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("../data/tasks.txt");
+        storage = new Storage("data/tasks.txt");
 
         try {
             tasks = new TaskList(storage.load());

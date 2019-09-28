@@ -83,6 +83,16 @@ public class Ui {
         return taskRemoved.toString();
     }
 
+    public String showPrioritySet(Task task) {
+        StringBuffer taskPriority =
+                new StringBuffer("Noted. I've have set the task as ");
+        taskPriority.append(task.getPriority());
+        taskPriority.append(" priority.");
+        return taskPriority.toString();
+    }
+
+    // still need to update the file itself
+
     /**
      * Shows event error.
      *

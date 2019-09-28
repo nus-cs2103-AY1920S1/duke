@@ -12,10 +12,11 @@ public class Task {
     protected boolean isDone;
     protected Date date;
     protected String type = "";
-    private final int DONE = 1;
-    private final int NOT_DONE = 0;
-    private final String DONE_ICON = "\u2713";
-    private final String NOT_DONE_ICON = "\u2718";
+    protected String priority;
+    protected final int DONE = 1;
+    protected final int NOT_DONE = 0;
+    protected final String DONE_ICON = "\u2713";
+    protected final String NOT_DONE_ICON = "\u2718";
 
     /**
      * Creates a task with description.
@@ -82,6 +83,14 @@ public class Task {
      */
     public int getStatusNum() {
         return isDone ? DONE : NOT_DONE;
+    }
+
+    public String getPriority() {
+        return this.priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
     }
 
     /**

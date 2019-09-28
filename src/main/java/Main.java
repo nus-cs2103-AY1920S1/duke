@@ -7,8 +7,6 @@ import javafx.stage.Stage;
 
 /**
  * A GUI for Duke using FXML.
- *
- * @author Michelle Yong
  */
 public class Main extends Application {
     private Duke duke = new Duke();
@@ -16,11 +14,12 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            stage.setTitle("Task Manager");
+            stage.setTitle("My Tasks");
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            //stage.setResizable(false);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

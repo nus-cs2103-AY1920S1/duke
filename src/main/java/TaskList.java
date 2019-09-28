@@ -60,6 +60,13 @@ public class TaskList {
         return task;
     }
 
+    public Task setTaskPriority(int n, String priority) {
+        assert (list.size() > n);
+        Task task = list.get(n);
+        task.setPriority(priority);
+        return task;
+    }
+
     /**
      * Removes task of index n from the list.
      *

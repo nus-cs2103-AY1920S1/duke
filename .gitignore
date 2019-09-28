@@ -16,3 +16,6 @@ bin/
 # binary files
 *.class
 *.jar
+
+# user data
+data/

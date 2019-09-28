@@ -26,14 +26,18 @@ public class Storage {
 
     private File dataFile;
     private String filePath;
+    private static final String DEFAULT_STORAGE_FOLDER_NAME = "data";
+    private static final String DEFAULT_STORAGE_FILE_NAME = "tasks.txt";
     private static final int FULL_COMMAND_INDEX = 0;
     private static final int TASK_STATUS_INDEX = 1;
     private static final String FILE_NOT_FOUND_MESSAGE = "The hard disk file could not be loaded."
-            + " Creating an empty task list.";
-    private static final String FILE_INPUT_ERROR_MESSAGE = "The hard disk file could not be read."
-            + " Creating an empty task list.";
+            + " Creating an empty task list.\n";
     private static final String SAVE_FAIL_MESSAGE = "Data could not be saved."
             + " Please check the hard disk file.\n";
+    private static final String DEFAULT_STORAGE_FILE_CREATION_ERROR_MESSAGE = "Data file could not be created."
+            + " Please create a new file called tasks.txt in a directory named data.\n";
+    private static final String FILE_CORRUPTED_MESSAGE = "The data file is corrupted."
+            + " Deleting it and creating a new one.\n";
 
     /**
      * Constructs a Storage class that is connected to the specified file path.
@@ -64,10 +68,28 @@ public class Storage {
                 }
             });
             return tasks;
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
+            createNewStorageFile();
             throw new DukeException(FILE_NOT_FOUND_MESSAGE);
-        } catch  (IOException e) {
-            throw new DukeException(FILE_INPUT_ERROR_MESSAGE);
+        } catch (IndexOutOfBoundsException e) {
+            dataFile.delete();
+            createNewStorageFile();
+            throw new DukeException(FILE_CORRUPTED_MESSAGE);
+        }
+    }
+
+    /**
+     * Creates a new storage file.
+     * @throws DukeException If a storage file cannot be created.
+     */
+    private void createNewStorageFile() throws DukeException {
+        try {
+            File folder = new File(DEFAULT_STORAGE_FOLDER_NAME);
+            folder.mkdir();
+            File file = new File(folder, DEFAULT_STORAGE_FILE_NAME);
+            file.createNewFile();
+        } catch (IOException e) {
+            throw new DukeException(DEFAULT_STORAGE_FILE_CREATION_ERROR_MESSAGE);
         }
     }
 
@@ -105,6 +127,7 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
+            createNewStorageFile();
             throw new DukeException(SAVE_FAIL_MESSAGE);
         }
     }

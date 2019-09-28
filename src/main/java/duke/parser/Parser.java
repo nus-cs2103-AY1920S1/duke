@@ -242,7 +242,7 @@ public class Parser {
         if (input.equals("list")) {
             return new ListCommand();
         } else {
-           return new IncorrectCommand();
+            return new IncorrectCommand();
         }
     }
 

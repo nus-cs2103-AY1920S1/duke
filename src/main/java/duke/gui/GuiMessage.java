@@ -17,7 +17,7 @@ class GuiMessage implements Ui {
     }
 
     @Override
-    public void showMessage(List<String> messages) {
-        messageList.add(String.join("\n", messages));
+    public void showMessage(List<String> message) {
+        messageList.add(String.join("\n", message));
     }
 }

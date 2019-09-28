@@ -6,17 +6,17 @@ public interface Ui {
     /**
      * Outputs a list of lines.
      *
-     * @param messages List of lines.
+     * @param message List of lines.
      */
-    void showMessage(List<String> messages);
+    void showMessage(List<String> message);
 
     /**
      * Outputs a list of lines.
      *
-     * @param messages List of lines.
+     * @param message List of lines.
      */
-    default void showMessage(String... messages) {
-        showMessage(List.of(messages));
+    default void showMessage(String... message) {
+        showMessage(List.of(message));
     }
 
     /**
@@ -29,7 +29,7 @@ public interface Ui {
     }
 
     /**
-     * Outputs a welcome message.
+     * Shows a welcome message.
      */
     default void showWelcome() {
         showMessage("Hello! I'm Duke", "What can I do for you?");

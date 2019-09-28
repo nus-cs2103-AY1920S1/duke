@@ -29,13 +29,13 @@ public class CmdUi implements Ui {
     /**
      * Outputs a list of lines.
      *
-     * @param messages List of lines.
+     * @param message List of lines.
      */
     @Override
-    public void showMessage(List<String> messages) {
+    public void showMessage(List<String> message) {
         System.out.println(LINE);
-        for (String message : messages) {
-            System.out.println(INDENT + message);
+        for (String messageLine : message) {
+            System.out.println(INDENT + messageLine);
         }
         System.out.println(LINE);
         System.out.println();

@@ -2,12 +2,8 @@ package seedu.duke.core;
 
 import javafx.scene.control.Label;
 import seedu.duke.model.dto.Task;
-import seedu.duke.model.dto.Todo;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
@@ -34,8 +30,7 @@ public class Ui {
     public Ui() {
         prop = new Properties();
         try {
-            InputStream inputStream = new FileInputStream("data/duke.properties");
-            prop.load(inputStream);
+            prop.load(this.getClass().getResourceAsStream("/duke.properties"));
         } catch (IOException e) {
             System.out.println(e);
         }

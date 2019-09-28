@@ -7,7 +7,7 @@ import seedu.duke.task.TaskList;
 
 public class HelpCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showHelpMessage();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.getHelpMessage();
     }
 }

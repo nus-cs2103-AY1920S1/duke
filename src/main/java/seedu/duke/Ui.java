@@ -10,10 +10,10 @@ public class Ui {
     // get info from parser
     // show to the user
     private static final String LINE = "-------------------------";
-    private static final String LOGO = " ____ _ \n" + "| _ \\ _ _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| | < __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String LOADING_ERROR_MESSAGE = "Sorry, we encountered error loading your data. "
-            + "You will be using Duke fresh.";
+    private static final String LOGO = " ____ _ \n" + "| _ \\ _ _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| | < __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String LOADING_ERROR_MESSAGE =
+            "Sorry, we encountered error loading your data. " + "You will be using Duke fresh.";
     private static final String HELP_MESSAGE = "todo <desc>\n" + "event <desc> at dd/mm/yyyy hhmm\n"
             + "deadline <desc> by dd/mm/yyyy hhmm" + "list\n" + "delete <number>\n" + "exit\n";
     private Scanner sc;
@@ -38,32 +38,51 @@ public class Ui {
         return fullCommand.trim();
     }
 
+    public String getWelcome() {
+        return String.format("%s\nHello! I'm Duke\n", LOGO);
+    }
+
     public void showWelcome() {
-        System.out.println(LOGO);
-        System.out.println("Hello! I'm Duke");
+        show(getWelcome());
+    }
+
+    public String getLine() {
+        return LINE;
     }
 
     public void showLine() {
-        System.out.println(LINE);
+        show(getLine());
+    }
+
+    public String getLoadingError() {
+        return LOADING_ERROR_MESSAGE;
     }
 
     public void showLoadingError() {
-        System.out.println(LOADING_ERROR_MESSAGE);
+        show(getLoadingError());
     }
 
     public void showError(String errorMessage) {
-        System.out.println(errorMessage);
+        show(errorMessage);
+    }
+
+    public String getSuccessMessage(String action, Task t) {
+        return String.format("%s %s successful!\n", action, t);
     }
 
     public void showSuccessMessage(String action, Task t) {
-        System.out.printf("%s %s successful!\n", action, t);
+        show(getSuccessMessage(action, t));
     }
 
     public void show(String s) {
         System.out.println(s);
     }
 
+    public String getHelpMessage() {
+        return HELP_MESSAGE;
+    }
+
     public void showHelpMessage() {
-        System.out.println(HELP_MESSAGE);
+        show(HELP_MESSAGE);
     }
 }

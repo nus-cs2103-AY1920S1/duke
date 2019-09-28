@@ -6,7 +6,8 @@ import seedu.duke.Ui;
 import seedu.duke.task.TaskList;
 
 public class Command {
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return "";
     }
 
     public boolean isExit() {

@@ -19,18 +19,18 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Executes the add command, which saves the task into the given task list.
-     * Displays status message on ui, and stores (if applicable) in storage
+     * Executes the add command, which saves the task into the given task list. Displays status
+     * message on ui, and stores (if applicable) in storage
      *
      * @param tasks   the task list to add to
      * @param ui      the user interface to show information
      * @param storage the storage to update task list in
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             tasks.add(task);
             storage.store(tasks);
-            ui.showSuccessMessage("adding", task);
+            return ui.getSuccessMessage("adding", task);
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }

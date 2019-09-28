@@ -16,14 +16,14 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task task = tasks.remove(number);
             storage.store(tasks);
-            ui.showSuccessMessage("deleting", task);
+            return ui.getSuccessMessage("deleting", task);
         } catch (IOException e) {
-            System.out.println("There has been a problem saving the deletion.");
-            e.printStackTrace();
+            return "There has been a problem saving the deletion.";
+
         }
     }
 }

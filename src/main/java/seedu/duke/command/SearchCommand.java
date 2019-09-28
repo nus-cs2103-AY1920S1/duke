@@ -13,8 +13,8 @@ public class SearchCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         TaskList relevantTaskList = tasks.search(keyword);
-        ui.show(relevantTaskList.toString());
+        return relevantTaskList.toString();
     }
 }

@@ -15,15 +15,16 @@ public class DoneCommand extends Command {
         taskNumber = i;
     }
 
+
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             Task taskDone = tasks.markAsDone(taskNumber);
-            ui.showSuccessMessage("marked as done", taskDone);
+            String s = ui.getSuccessMessage("marked as done", taskDone);
             storage.store(tasks);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            System.err.println("Whoops, cannot be saved.");
+            return s;
+        } catch (Exception ex) {
+            return "Whoops, cannot be saved.";
         }
     }
 }

@@ -103,7 +103,7 @@ public class TaskList {
         } else  {
             String[] splitCommand = command.split(" ");
             int taskDelete = Integer.parseInt(splitCommand[1]);
-            if (taskDelete < taskList.size()) {
+            if (taskDelete > taskList.size()) {
                 throw new IllegalCommandException("No such task to delete!");
             }
             String deleted = taskList.get(taskDelete - 1).getDescription();
@@ -125,7 +125,7 @@ public class TaskList {
         } else {
             String[] splitString = command.split(" ");
             int taskDone = Integer.parseInt(splitString[1]);
-            if (taskDone < taskList.size()) {
+            if (taskDone > taskList.size()) {
                 throw new IllegalCommandException("No task to delete!");
             } else {
                 taskList.get(taskDone - 1).markAsDone();

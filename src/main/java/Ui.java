@@ -81,7 +81,7 @@ public class Ui {
      * @return the UI message shown to the User.
      */
     protected String getDeletedMessage(ArrayList<Task> taskList, String deleted) {
-        String deletedMessage = " Got it. I've added this task:\n"
+        String deletedMessage = " Got it. I've deleted this task:\n"
                 + "   " + deleted
                 + "\n Now you have " + taskList.size() + " tasks in the list.";
 
@@ -109,7 +109,7 @@ public class Ui {
     protected String showFoundMessage(ArrayList<Task> foundTaskList) {
         String foundMessage = "";
         for (int x = 0; x < foundTaskList.size(); x++) {
-            foundMessage = foundMessage + 1 + ". " + foundTaskList.get(x) + "\n";
+            foundMessage = foundMessage + (x + 1) + ". " + foundTaskList.get(x) + "\n";
         }
 
         return foundMessage;
@@ -118,7 +118,7 @@ public class Ui {
     protected String showViewMessage(ArrayList<Task> viewTasklist) {
         String viewMessage = "";
         for (int x = 0; x < viewTasklist.size(); x++) {
-            viewMessage = viewMessage + 1 + ". " + viewTasklist.get(x) + "\n";
+            viewMessage = viewMessage + (x + 1) + ". " + viewTasklist.get(x) + "\n";
         }
         if (viewMessage.equals("")) {
             viewMessage = "No task found";

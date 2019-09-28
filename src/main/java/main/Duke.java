@@ -28,7 +28,6 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         ui.showWelcome();
-        ui.printNonGuiDisplayMsg();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());

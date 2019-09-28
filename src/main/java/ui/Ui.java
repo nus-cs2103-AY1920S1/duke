@@ -41,15 +41,6 @@ public class Ui {
     }
 
     /**
-     * Prints message of relevant command in CLI.
-     */
-    public void printNonGuiDisplayMsg() {
-        if (!this.isGui) {
-            System.out.println(displayMsg);
-        }
-    }
-
-    /**
      * Sets displayMsg to error message.
      *
      * @param message of error

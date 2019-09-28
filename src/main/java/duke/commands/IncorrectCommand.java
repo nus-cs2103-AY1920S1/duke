@@ -8,7 +8,7 @@ public class IncorrectCommand extends Command {
 
     private static final String DEFAULT_MESSAGE = "OOPS!!! I'm sorry,"
         + " but I don't know what that means :-(\n"
-        + "Enter <help> for a list of commands\n";
+        + "Enter \"help\" (without \"\") for a list of commands.";
     private String errorMessage;
     private boolean hasErrorMessage;
 

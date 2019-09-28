@@ -53,9 +53,9 @@ public class Parser {
         case FindCommand.COMMAND_WORD:
             return prepareFindCommand(input);
         case HelpCommand.COMMAND_WORD:
-            return prepareHelpCommand();
+            return prepareHelpCommand(input);
         case ListCommand.COMMAND_WORD:
-            return prepareListCommand();
+            return prepareListCommand(input);
         case TodoCommand.COMMAND_WORD:
             return prepareTodoCommand(input);
         default:
@@ -109,8 +109,10 @@ public class Parser {
 
     /**
      * Prepares and returns a delete command based on the specified input.
+     * Returns an incorrect command with the appropriate message if the
+     * specified input is invalid.
      * @param input The specified input.
-     * @return A delete command based on the specified input.
+     * @return A delete command based on the specified input, if it is valid.
      */
     private static Command prepareDeleteCommand(String input) {
         try {
@@ -134,8 +136,10 @@ public class Parser {
 
     /**
      * Prepares and returns a done command based on the specified input.
+     * Returns an incorrect command with the appropriate message if the
+     * specified input is invalid.
      * @param input The specified input.
-     * @return A done command based on the specified input.
+     * @return A done command based on the specified input, if it is valid.
      */
     private static Command prepareDoneCommand(String input) {
         try {
@@ -167,8 +171,10 @@ public class Parser {
 
     /**
      * Prepares and returns an event command based on the specified input.
+     * Returns an incorrect command with the appropriate message if the
+     * specified input is invalid.
      * @param input The specified input.
-     * @return An event command based on the specified input.
+     * @return An event command based on the specified input, if it is valid.
      */
     private static Command prepareEventCommand(String input) {
         try {
@@ -189,8 +195,10 @@ public class Parser {
 
     /**
      * Prepares and returns a find command based on the specified input.
+     * Returns an incorrect command with the appropriate message if the
+     * specified input is invalid.
      * @param input The specified input.
-     * @return A find command based on the specified input.
+     * @return A find command based on the specified input, if it is valid.
      */
     private static Command prepareFindCommand(String input) {
         try {
@@ -203,11 +211,17 @@ public class Parser {
     }
 
     /**
-     * Prepares and returns a help command based on the specified input.
-     * @return A help command.
+     * Prepares and returns a help command if the specified input is valid.
+     * Otherwise, returns an incorrect command with the default error message.
+     * @param input The specified input.
+     * @return A help command if the specified input is valid.
      */
-    private static Command prepareHelpCommand() {
-        return new HelpCommand();
+    private static Command prepareHelpCommand(String input) {
+        if (input.equals("help")) {
+            return new HelpCommand();
+        } else {
+            return new IncorrectCommand();
+        }
     }
 
     /**
@@ -219,17 +233,25 @@ public class Parser {
     }
 
     /**
-     * Prepares and returns a list command.
-     * @return A list command.
+     * Prepares and returns a list command if the specified input is valid.
+     * Otherwise, returns an incorrect command with the default error message.
+     * @param input The specified input.
+     * @return A list command if the specified input is valid.
      */
-    private static Command prepareListCommand() {
-        return new ListCommand();
+    private static Command prepareListCommand(String input) {
+        if (input.equals("list")) {
+            return new ListCommand();
+        } else {
+           return new IncorrectCommand();
+        }
     }
 
     /**
      * Prepares and returns a todo command based on the specified input.
+     * Returns an incorrect command with the appropriate message if the
+     * specified input is invalid.
      * @param input The specified input.
-     * @return A todo command based on the specified input.
+     * @return A todo command based on the specified input, if it is valid.
      */
     private static Command prepareTodoCommand(String input) {
         try {

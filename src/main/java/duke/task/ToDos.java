@@ -13,7 +13,7 @@ public class ToDos extends Task {
     public String toString() {
         String output = "";
         if (this.done) {
-            output = this.type + "[✓]" + this.name;
+            output = this.type + "[\u2713]" + this.name;
         } else {
             output = this.type + "[X]" + this.name;
         }

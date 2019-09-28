@@ -28,7 +28,7 @@ public class Deadlines extends Task {
     public String toString() {
         String output;
         if (this.done) {
-            output = this.type + "[✓] " + this.name + "(by:" + formatter.format(this.date) + ")";
+            output = this.type + "[\u2713] " + this.name + "(by:" + formatter.format(this.date) + ")";
         } else {
             output = this.type + "[X] " + this.name + "(by:" + formatter.format(this.date) + ")";
         }

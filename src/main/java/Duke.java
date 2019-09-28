@@ -37,7 +37,7 @@ public class Duke {
                 +
                 "\n"
                 +
-                "These are your current tasks:\n "
+                "These are your current tasks:\n"
                 +
                 this.tasks.listTasks());
         return ui.getResponse();

@@ -145,7 +145,7 @@ public class Ui {
      * @param list list of task.
      */
     public void setListResponse(String list) {
-        setResponse("Here are your tasks:\n " + list);
+        setResponse("Here are your tasks:\n" + list);
     }
 
     /**

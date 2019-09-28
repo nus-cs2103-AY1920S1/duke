@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Events extends Task {
     String time;
-    Date date;
+    private Date date;
 
     /**
      * constructor for Deadlines. accesses name and formatter from parent.

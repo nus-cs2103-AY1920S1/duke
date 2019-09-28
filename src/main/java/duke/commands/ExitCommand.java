@@ -21,7 +21,7 @@ public class ExitCommand extends Command {
                         System.exit(0);
                     }
                 },
-                1000
+                500
         );
     }
 

@@ -1,9 +1,6 @@
 package duke.ui;
 
 import duke.Duke;
-import duke.Parser;
-import duke.Storage;
-import duke.tasks.TaskList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -117,9 +114,5 @@ public class MainWindow {
                 DialogBox.getDukeDialog(dukeText, new ImageView(kitten))
         );
         userInput.clear();
-    }
-
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
     }
 }

@@ -122,9 +122,8 @@ public class Ui {
      */
     @Override
     public String toString() {
-        StringBuilder output = new StringBuilder();
-        output.append(content);
+        String output = content.toString();
         this.content = new StringBuilder();
-        return output.toString();
+        return output;
     }
 }

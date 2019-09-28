@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="615.0" maxWidth="500.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
+    <children>
+      <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" onMouseDragged="#dragged" onMousePressed="#pressed" prefHeight="26.0" prefWidth="500.0" style="-fx-background-color: #242F3D;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <padding>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </padding>
+         <children>
+            <HBox alignment="CENTER_LEFT" onMouseDragged="#dragged" onMousePressed="#pressed" prefHeight="100.0" prefWidth="450.0">
+               <children>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/DaDuke.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label text="Duke - Your Personal Assistant Chat Bot!" textFill="WHITE" />
+               </children>
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </HBox>
+            <ImageView id="minimize_Icon" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#minimize" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/minimize.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="1.0" right="1.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView id="close_Icon" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#closeWindow" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/close.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="1.0" right="1.0" />
+               </HBox.margin>
+            </ImageView>
+         </children>
+      </HBox>
+        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="42.0" prefWidth="424.0" promptText="Give Duke a Command..." style="-fx-background-color: #17212B #17212B; -fx-text-fill: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="42.0" prefWidth="76.0" style="-fx-background-color: #2E6EA5; -fx-control-inner-background: #FFFFFF;" text="Send" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" layoutY="25.0" prefHeight="550.0" prefWidth="500.0" vvalue="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <content>
+                <VBox fx:id="dialogContainer" prefHeight="560.0" prefWidth="488.0" style="-fx-background-color: #131A22;">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="2.0" top="5.0" />
+               </padding>
+            </VBox>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

@@ -39,7 +39,7 @@ public class UndoCommandFactory implements CommandFactory {
 
             @Override
             public void execute() throws UiException {
-                UndoCommandFactory.this.ui.displayOutput("Noted. I have undone your latest action.");
+                UndoCommandFactory.this.ui.displayOutput("Noted. Undone your latest action I have.");
                 undoAction.undo();
             }
 

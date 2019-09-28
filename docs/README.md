@@ -54,40 +54,47 @@ Expected Outcome:
 
 #### Event: `event`
 Expected Outcome:
+&nbsp;
 ![Event picture](./images/event.png)
 
 
 #### Deadline: `deadline`
 Expected Outcome:
+&nbsp;
 ![deadline picture](./images/deadline.png)
 
 
 #### Done: `done`
 Expected Outcome:
+&nbsp;
 ![done picture](./images/done.png)
 
 
 #### Delete: `delete`
 Expected Outcome:
+&nbsp;
 ![delete picture](./images/delete.png)
 
 
 #### DeleteAll: `deleteAll`
 Expected Outcome:
+&nbsp;
 ![deleteAll picture](./images/deleteAll.png)
 
 
 #### Find: `find`
 Expected Outcome:
+&nbsp;
 ![find picture](./images/find.png)
-
 
 
 #### List: `list`
 Expected Outcome:
+&nbsp;
 ![list picture](./images/find.png)
 
 #### <command> *: `<command> *`
 Expected Outcome:
+&nbsp;
 ![list picture](./images/priority.png)
 

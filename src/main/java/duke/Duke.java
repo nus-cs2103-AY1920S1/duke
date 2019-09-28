@@ -40,7 +40,6 @@ public class Duke extends Application {
             assert !initialMessage.isEmpty() : "Empty message at the start!";
 
             initialMessageLabel = new Label(initialMessage);
-            System.out.println(ui.toString());
             mainWindow.displayMessage(initialMessageLabel);
         }
     }

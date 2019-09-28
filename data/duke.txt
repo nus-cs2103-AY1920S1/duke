@@ -1,4 +1,5 @@
-T | 0 | tutorial | low
-T | 0 | tutorial | high
+T | 1 | tutorial | low
 D | 0 | assignment | high | Thu Oct 24 15:00:00 SGT 2019
-E | 0 | meeting | low | Sun Oct 20 17:00:00 SGT 2019
+E | 0 | meeting | medium | Sun Oct 20 17:00:00 SGT 2019
+T | 1 | watch webcast | medium
+D | 0 | project | medium | Fri Oct 11 23:59:00 SGT 2019

@@ -7,7 +7,7 @@ My Tasks is a personal task manager that helps user keep track of their todo lis
 1. Download the latest mytasks.jar [here](https://github.com/michelleykw/duke/releases).
 1. Copy the file to the folder you want to use as the home folder for My Tasks.
 1. Double-click the file to start the app. The GUI should appear in a few seconds.
-![My Tasks Page](https://github.com/michelleykw/duke/blob/master/src/main/resources/images/DaDuke.png)
+![My Tasks Page](https://github.com/michelleykw/duke/blob/master/docs/Ui.png)
 1. Type the command in the command box and press Send to execute it.
 1. Some example commands you can try: 
     1. `list`: lists all tasks

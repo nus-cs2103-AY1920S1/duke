@@ -28,13 +28,7 @@ public class Ui {
      * Displays the welcome message when the user starts the program.
      */
     public String welcomeMessage() {
-        return "Hello from\n"
-            + " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n"
-            + "What can I do for you?";
+        return "What can Ice Bear do for you today?";
     }
 
     /**
@@ -42,8 +36,8 @@ public class Ui {
      *
      * @param e The error message to be displayed.
      */
-    public void printException(DukeException e) {
-        setResponse(" " + ((char) 0x2639) + " OOPS!!! " + e.toString());
+    public void printException(IceBearException e) {
+        setResponse("Oops! " + e.getMessage());
     }
 
     /**
@@ -73,9 +67,10 @@ public class Ui {
      */
     protected void printMatchList(ArrayList<Task> listItems) {
         if (listItems.isEmpty()) {
-            setResponse("Sorry, there are no matching tasks!");
+            setResponse("Ice Bear did not find any matching tasks.");
         } else {
-            StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:");
+            StringBuilder sb = new StringBuilder(
+                    "Ice Bear has found these matching tasks in your list:");
             for (int i = 1; i <= listItems.size(); i++) {
                 sb.append("\n  ")
                         .append(i)
@@ -90,7 +85,7 @@ public class Ui {
      * Displays a message to say goodbye to the user.
      */
     protected void byeMessage() {
-        setResponse("Hope to see you again soon!");
+        setResponse("Ice Bear hopes to see you again soon!");
     }
 
     /**
@@ -101,7 +96,7 @@ public class Ui {
      */
     protected void taskListAdd(String taskString, int listSize) {
         String taskSingular = listSize == 1 ? "task" : "tasks";
-        setResponse("Got it. I've added this task: \n"
+        setResponse("Got it. Ice Bear has added this task: \n"
                 + "  " + taskString + "\n"
                 + "Now you have " + listSize + " " + taskSingular + " in the list.");
     }
@@ -112,7 +107,7 @@ public class Ui {
      * @param taskString The String representation of the modified task.
      */
     protected void taskListDone(String taskString) {
-        setResponse("Nice! I've marked this task as done: \n"
+        setResponse("Okay. Ice Bear marked this task as done: \n"
                 + "  " + taskString);
     }
 
@@ -123,7 +118,7 @@ public class Ui {
      * @param listSize The new size of the list.
      */
     protected void taskListDelete(String taskString, int listSize) {
-        setResponse("I've removed this task:\n"
+        setResponse("Ice Bear has removed this task:\n"
                 + "  " + taskString + "\n"
                 + "Now you have " + listSize + " tasks in the list.");
     }
@@ -132,7 +127,7 @@ public class Ui {
      * Displays a message stating that Duke has successfully undone the previous action of the user.
      */
     protected void taskListUndo() {
-        setResponse("I've successfully undone the previous action.");
+        setResponse("Ice Bear has successfully undone the previous action.");
     }
 
 }

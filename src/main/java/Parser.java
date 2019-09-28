@@ -42,9 +42,9 @@ public class Parser {
             } else if (isValidTaskType(commandArray[0])) {
                 parseToDoCommand(command);
             } else {
-                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                throw new IceBearException("Ice Bear does not know what that means.");
             }
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             ui.printException(e);
         }
     }
@@ -66,9 +66,9 @@ public class Parser {
     /**
      * Helper function to parse the undo command.
      *
-     * @throws DukeException Exception thrown if there is nothing left to undo.
+     * @throws IceBearException Exception thrown if there is nothing left to undo.
      */
-    private void parseUndoCommand() throws DukeException {
+    private void parseUndoCommand() throws IceBearException {
         taskList.undo();
     }
 
@@ -76,13 +76,13 @@ public class Parser {
      * Helper function to parse the find command.
      *
      * @param command The original command input by the user.
-     * @throws DukeException Exception thrown if no keywords were specified by the user.
+     * @throws IceBearException Exception thrown if no keywords were specified by the user.
      */
-    private void parseFindCommand(String command) throws DukeException {
+    private void parseFindCommand(String command) throws IceBearException {
         String[] commandArray = command.split(" ");
         if (commandArray.length == 1) {
-            throw new DukeException("Please provide a keyword "
-                    + "for us to filter the list of tasks with!");
+            throw new IceBearException("Please provide a keyword "
+                    + "for Ice Bear to filter the list of tasks with!");
         }
         taskList.find(command.replaceFirst("find ", ""));
     }
@@ -91,14 +91,14 @@ public class Parser {
      * Helper function to parse the done command.
      *
      * @param command The original command input by the user.
-     * @throws DukeException Exception thrown if the id was not specified or is invalid.
+     * @throws IceBearException Exception thrown if the id was not specified or is invalid.
      */
-    private void parseDoneCommand(String command) throws DukeException {
+    private void parseDoneCommand(String command) throws IceBearException {
         String[] commandArray = command.split(" ");
         if (commandArray.length == 1) {
-            throw new DukeException("Please specify a task ID to set as done!");
+            throw new IceBearException("Ice Bear needs to know which task ID to set as done!");
         } else if (!commandArray[1].matches("\\d+")) {
-            throw new DukeException("The ID of the task must be an integer!");
+            throw new IceBearException("The ID of the task must be an integer!");
         }
         int id = Integer.parseInt(commandArray[1]);
         taskList.markAsDone(id);
@@ -108,14 +108,14 @@ public class Parser {
      * Helper function to parse the delete command.
      *
      * @param command The original command input by the user.
-     * @throws DukeException Exception thrown if the id was not specified or is invalid.
+     * @throws IceBearException Exception thrown if the id was not specified or is invalid.
      */
-    private void parseDeleteCommand(String command) throws DukeException {
+    private void parseDeleteCommand(String command) throws IceBearException {
         String[] commandArray = command.split(" ");
         if (commandArray.length == 1) {
-            throw new DukeException("Please specify a task ID to delete!");
+            throw new IceBearException("Ice Bear needs to know which task ID to delete!");
         } else if (!commandArray[1].matches("\\d+")) {
-            throw new DukeException("The ID of the task must be an integer!");
+            throw new IceBearException("The ID of the task must be an integer!");
         }
         int id = Integer.parseInt(commandArray[1]);
         taskList.delete(id);
@@ -125,11 +125,11 @@ public class Parser {
      * Helper function to parse the to do command.
      *
      * @param command The original command input by the user.
-     * @throws DukeException Exception thrown if there was no description provided.
+     * @throws IceBearException Exception thrown if there was no description provided.
      */
-    private void parseToDoCommand(String command) throws DukeException {
+    private void parseToDoCommand(String command) throws IceBearException {
         if (command.equals("todo")) {
-            throw new DukeException("The description of a todo cannot be empty.");
+            throw new IceBearException("The description of a todo cannot be empty.");
         }
         taskList.addTask(command);
     }

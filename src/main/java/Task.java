@@ -22,9 +22,9 @@ public abstract class Task {
      *
      * @param command The entire line of command input by the user into the program.
      * @return A Task object that follows the specifications of the input.
-     * @throws DukeException Exception thrown if the format is invalid.
+     * @throws IceBearException Exception thrown if the format is invalid.
      */
-    protected static Task create(String command) throws DukeException {
+    protected static Task create(String command) throws IceBearException {
         String[] commandArray = command.split(" ");
         String taskType = commandArray[0];
         command = command.replaceFirst(taskType + " ", "");
@@ -42,16 +42,16 @@ public abstract class Task {
      *
      * @param command the original command by the user without the first parameter.
      * @return An event task, if the command is valid.
-     * @throws DukeException Exception thrown if the format is invalid.
+     * @throws IceBearException Exception thrown if the format is invalid.
      */
-    private static EventTask createEventTask(String command) throws DukeException {
+    private static EventTask createEventTask(String command) throws IceBearException {
         String[] commandArray = command.split(" /at ");
         String details = commandArray[0];
         if (commandArray.length != 2) {
-            throw new DukeException("Invalid command format! Proper usage: "
+            throw new IceBearException("Invalid command format! Proper usage: "
                     + "'event <details> /at <timing>'");
         } else if (details.equals("")) {
-            throw new DukeException("The description of an event cannot be empty.");
+            throw new IceBearException("The description of an event cannot be empty.");
         } else {
             return new EventTask(commandArray[0], TimedTask.parseDateTime(commandArray[1]));
         }
@@ -62,16 +62,16 @@ public abstract class Task {
      *
      * @param command the original command by the user without the first parameter.
      * @return A deadline task, if the command is valid.
-     * @throws DukeException Exception thrown if the format is invalid.
+     * @throws IceBearException Exception thrown if the format is invalid.
      */
-    private static DeadlineTask createDeadlineTask(String command) throws DukeException {
+    private static DeadlineTask createDeadlineTask(String command) throws IceBearException {
         String[] commandArray = command.split(" /by ");
         String details = commandArray[0];
         if (commandArray.length != 2) {
-            throw new DukeException("Invalid command format! Proper usage: "
+            throw new IceBearException("Invalid command format! Proper usage: "
                     + "'deadline <details> /by <timing>'");
         } else if (details.equals("")) {
-            throw new DukeException("The description of a deadline cannot be empty.");
+            throw new IceBearException("The description of a deadline cannot be empty.");
         } else {
             return new DeadlineTask(commandArray[0], TimedTask.parseDateTime(commandArray[1]));
         }
@@ -82,11 +82,11 @@ public abstract class Task {
      *
      * @param command the original command by the user without the first parameter.
      * @return A to do task, if the command is valid.
-     * @throws DukeException Exception thrown if the format is invalid.
+     * @throws IceBearException Exception thrown if the format is invalid.
      */
-    private static ToDoTask createToDoTask(String command) throws DukeException {
+    private static ToDoTask createToDoTask(String command) throws IceBearException {
         if (command.equals("")) {
-            throw new DukeException("The description of a todo cannot be empty.");
+            throw new IceBearException("The description of a todo cannot be empty.");
         } else {
             return new ToDoTask(command);
         }
@@ -97,9 +97,9 @@ public abstract class Task {
      *
      * @param item The entire line of command input by the user into the program.
      * @return A Task object according to the line in the save file.
-     * @throws DukeException Exception thrown if the line does not follow the format for some reason.
+     * @throws IceBearException Exception thrown if the line does not follow the format for some reason.
      */
-    protected static Task createFromFile(String item) throws DukeException {
+    protected static Task createFromFile(String item) throws IceBearException {
         String[] args = item.split(" \\| ");
         assert args.length > 1;
         String taskType = args[0];

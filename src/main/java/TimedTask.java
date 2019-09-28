@@ -52,20 +52,20 @@ public abstract class TimedTask extends Task {
      *
      * @param input the user's input of the date and time, specified by DD/MM/YYYY HHMM.
      * @return A Calendar object representing the date and time.
-     * @throws DukeException Thrown when the date or its format is invalid.
+     * @throws IceBearException Thrown when the date or its format is invalid.
      */
-    public static Calendar parseDateTime(String input) throws DukeException {
+    public static Calendar parseDateTime(String input) throws IceBearException {
         // Input Validation
         String[] inputArr = input.split(" ");
         if (inputArr.length != 2) {
-            throw new DukeException("Invalid date/time format!"
+            throw new IceBearException("Invalid date/time format!"
                     + "Please follow the format: <DD/MM/YYYY><Space><24hr Time Format>");
         }
         // Date Input Validation
         String date = inputArr[0];
         String dateRegex = "^(\\d{1,2})/(\\d{1,2})/(\\d{4})";
         if (!date.matches(dateRegex)) {
-            throw new DukeException("Invalid date format!"
+            throw new IceBearException("Invalid date format!"
                     + "Please follow the appropriate Date format: DD/MM/YYYY");
         }
         String[] dateArr = date.split("/");
@@ -73,16 +73,16 @@ public abstract class TimedTask extends Task {
         int month = Integer.parseInt(dateArr[1]);
         int year = Integer.parseInt(dateArr[2]);
         if (!isValidDate(day, month, year)) {
-            throw new DukeException("Please input a valid Date!");
+            throw new IceBearException("Please input a valid Date!");
         }
         // Time Input Validation
         if (!inputArr[1].matches("\\d{4}")) {
-            throw new DukeException("Please follow the 24h Time format: HHMM");
+            throw new IceBearException("Please follow the 24h Time format: HHMM");
         }
         int hour = Integer.parseInt(inputArr[1].substring(0, 2));
         int minute = Integer.parseInt(inputArr[1].substring(2, 4));
         if (!isValidTime(hour, minute)) {
-            throw new DukeException("Please input a valid Time!");
+            throw new IceBearException("Please input a valid Time!");
         }
 
         return new Calendar

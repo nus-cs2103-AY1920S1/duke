@@ -9,7 +9,7 @@ public class TaskList {
     private Storage storage;
     private Ui ui;
 
-    TaskList(Storage storage, Ui ui) throws DukeException {
+    TaskList(Storage storage, Ui ui) throws IceBearException {
         this.ui = ui;
         this.storage = storage;
         this.listItems = storage.load();
@@ -23,10 +23,10 @@ public class TaskList {
      * Adds a task to the list based on the given command.
      *
      * @param command The command given by the user to be processed.
-     * @throws DukeException Exception thrown during the creation of
+     * @throws IceBearException Exception thrown during the creation of
      *     the Task object if the command is invalid.
      */
-    protected void addTask(String command) throws DukeException {
+    protected void addTask(String command) throws IceBearException {
         Task newTask = Task.create(command);
         storage.addNew(newTask.toFileString());
         listItems.add(newTask);
@@ -37,11 +37,11 @@ public class TaskList {
      * Mark a task in the list as done based on its ID.
      *
      * @param id the ID of the task that is done.
-     * @throws DukeException Exception thrown if the ID input is invalid.
+     * @throws IceBearException Exception thrown if the ID input is invalid.
      */
-    protected void markAsDone(int id) throws DukeException {
+    protected void markAsDone(int id) throws IceBearException {
         if (id > listItems.size() || id <= 0) {
-            throw new DukeException("The ID that you have entered is not a valid task ID.");
+            throw new IceBearException("The ID that you have entered is not a valid task ID.");
         }
         Task task = listItems.get(id - 1);
         task.setDone();
@@ -53,11 +53,11 @@ public class TaskList {
      * Delete a task in the list based on its ID.
      *
      * @param id the ID of the task that is to be deleted.
-     * @throws DukeException Exception thrown if the ID input is invalid.
+     * @throws IceBearException Exception thrown if the ID input is invalid.
      */
-    protected void delete(int id) throws DukeException {
+    protected void delete(int id) throws IceBearException {
         if (id > listItems.size() || id <= 0) {
-            throw new DukeException("The ID that you have entered is not a valid task ID.");
+            throw new IceBearException("The ID that you have entered is not a valid task ID.");
         }
         Task task = listItems.remove(id - 1);
         storage.updateSaveFile(listItems);
@@ -82,9 +82,9 @@ public class TaskList {
     /**
      * Undoes the last action made by the user.
      *
-     * @throws DukeException Exception thrown when there is nothing to undo.
+     * @throws IceBearException Exception thrown when there is nothing to undo.
      */
-    protected void undo() throws DukeException {
+    protected void undo() throws IceBearException {
         this.listItems = storage.undo();
         ui.taskListUndo();
     }

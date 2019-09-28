@@ -18,7 +18,7 @@ public class StorageTest {
     public void clearDukeSaveFileBeforeTest() {
         try {
             storage.updateSaveFile(new ArrayList<Task>());
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             fail(e.toString());
         }
     }
@@ -32,7 +32,7 @@ public class StorageTest {
             Storage storage = new Storage(
                     "D:/Marcus Folder/SCHOOL STUFF/YEAR 2/CS2103T/duke/data/duke.txt");
             storage.updateSaveFile(new ArrayList<Task>());
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             fail(e.toString());
         }
     }
@@ -59,7 +59,7 @@ public class StorageTest {
             storage.updateSaveFile(tasks);
             assertEquals(tasks.get(0).toString(), storage.load().get(0).toString());
 
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             fail(e.toString());
         }
     }
@@ -74,7 +74,7 @@ public class StorageTest {
             Task t2 = Task.create("event abcd /at 1/2/1997 2335");
             storage.addNew(t2.toFileString());
             assertEquals(t2.toString(), storage.load().get(1).toString());
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             fail(e.toString());
         }
     }

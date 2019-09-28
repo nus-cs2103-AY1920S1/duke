@@ -28,9 +28,9 @@ public class Storage {
      * Reads the save file and produces the saved list of tasks.
      *
      * @return An ArrayList of the saved list of tasks.
-     * @throws DukeException Error occurs if the file path is invalid or the file is corrupted.
+     * @throws IceBearException Error occurs if the file path is invalid or the file is corrupted.
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws IceBearException {
         ArrayList<Task> listItems = new ArrayList<>();
 
         try {
@@ -45,10 +45,10 @@ public class Storage {
             previousSaves.add(sb.toString());
             return listItems;
         } catch (IOException e) { // this should not occur as the file is hard-coded.
-            throw new DukeException("Error occurred while loading file, "
+            throw new IceBearException("Error occurred while loading file, "
                     + "the file path is invalid:" + "\n" + e);
-        } catch (DukeException e) {
-            throw new DukeException("Error occurred while loading file, "
+        } catch (IceBearException e) {
+            throw new IceBearException("Error occurred while loading file, "
                     + "the file seems to be corrupted." + "\n" + e);
         }
     }
@@ -57,9 +57,9 @@ public class Storage {
      * Stores a new task in the save file in a specified format.
      *
      * @param item The String representation of the task specifically to be stored in the list.
-     * @throws DukeException Occurs if the file cannot be found.
+     * @throws IceBearException Occurs if the file cannot be found.
      */
-    public void addNew(String item) throws DukeException {
+    public void addNew(String item) throws IceBearException {
         try {
             FileWriter fw = new FileWriter(new File(filepath), true); // append mode: true
             fw.write(item + "\n");
@@ -67,7 +67,7 @@ public class Storage {
             String s = previousSaves.getLast();
             this.previousSaves.add(s + item + "\n");
         } catch (IOException e) {
-            throw new DukeException("Error occurred while adding new task! + \n" + e);
+            throw new IceBearException("Error occurred while adding new task! + \n" + e);
         }
     }
 
@@ -75,9 +75,9 @@ public class Storage {
      * Updates the description of a task in the save file.
      *
      * @param list The entire list of tasks.
-     * @throws DukeException Occurs if the file cannot be found.
+     * @throws IceBearException Occurs if the file cannot be found.
      */
-    public void updateSaveFile(ArrayList<Task> list) throws DukeException {
+    public void updateSaveFile(ArrayList<Task> list) throws IceBearException {
         StringBuilder newFileContent = new StringBuilder();
         for (Task task : list) {
             newFileContent.append(task.toFileString()).append("\n");
@@ -91,15 +91,15 @@ public class Storage {
      * Stores the file content without saving.
      *
      * @param newFileContent the new file content.
-     * @throws DukeException Occurs if the file cannot be found.
+     * @throws IceBearException Occurs if the file cannot be found.
      */
-    private void update(String newFileContent) throws DukeException {
+    private void update(String newFileContent) throws IceBearException {
         try {
             FileWriter fw = new FileWriter(file);
             fw.write(newFileContent);
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("Error while updating task in save file: "
+            throw new IceBearException("Error while updating task in save file: "
                     + "File not found!\n" + e);
         }
     }
@@ -108,11 +108,11 @@ public class Storage {
      * Undoes the previous action of the user by loading the previous state of the task list.
      *
      * @return The last known state of the task list.
-     * @throws DukeException Exception thrown when there is nothing to undo.
+     * @throws IceBearException Exception thrown when there is nothing to undo.
      */
-    public ArrayList<Task> undo() throws DukeException {
+    public ArrayList<Task> undo() throws IceBearException {
         if (this.previousSaves.size() <= 1) {
-            throw new DukeException("There is nothing to undo!");
+            throw new IceBearException("There is nothing to undo!");
         }
         this.previousSaves.removeLast();
         String save = this.previousSaves.getLast();

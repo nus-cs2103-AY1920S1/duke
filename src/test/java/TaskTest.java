@@ -14,7 +14,7 @@ public class TaskTest {
             // test case 2
             t.setDone();
             assertEquals(t.toString(), "[T]" + "[" + (char) 0x2713 + "] " + "abc");
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             fail("Exception Occurred.\n" + e.toString());
         }
     }
@@ -29,7 +29,7 @@ public class TaskTest {
             t.setDone();
             assertEquals("[E]" + "[" + (char) 0x2713 + "] " + "hello"
                     + " (at: 1st of January 2011, 3:00pm)", t.toString());
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             fail("Exception Occurred.\n" + e.toString());
         }
     }
@@ -39,43 +39,43 @@ public class TaskTest {
         try {
             Task t1 = Task.create("event hello /at 01/012011 1500");
             fail("1st Exception was not thrown");
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             assertNotNull(e);
         }
         try {
             Task t2 = Task.create("event /at 01/01/2011 1500");
             fail("2nd Exception was not thrown");
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             assertNotNull(e);
         }
         try {
             Task t3 = Task.create("event hello /at 01/13/2011 1500");
             fail("3rd Exception was not thrown");
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             assertNotNull(e);
         }
         try {
             Task t4 = Task.create("event hello /at 32/01/2011 1500");
             fail("4th Exception was not thrown");
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             assertNotNull(e);
         }
         try {
             Task t5 = Task.create("event hello /at 31/02/2011 1500");
             fail("5th Exception was not thrown");
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             assertNotNull(e);
         }
         try {
             Task t6 = Task.create("event hello /at 01/13/2011 1500");
             fail("6th Exception was not thrown");
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             assertNotNull(e);
         }
         try {
             Task t7 = Task.create("event hello /at 01/12/211 1500");
             fail("7th Exception was not thrown");
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             assertNotNull(e);
         }
     }
@@ -90,7 +90,7 @@ public class TaskTest {
             t.setDone();
             assertEquals("[D]" + "[" + (char) 0x2713 + "] " + "hello"
                     + " (by: 1st of January 2011, 3:00pm)", t.toString());
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             fail("Exception Occurred.\n" + e.toString());
         }
     }
@@ -100,43 +100,43 @@ public class TaskTest {
         try {
             Task t1 = Task.create("deadline hello /by 01/012011 1500");
             fail("1st Exception was not thrown");
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             assertNotNull(e);
         }
         try {
             Task t2 = Task.create("deadline /by 01/01/2011 1500");
             fail("2nd Exception was not thrown");
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             assertNotNull(e);
         }
         try {
             Task t3 = Task.create("deadline hello /by 01/13/2011 1500");
             fail("3rd Exception was not thrown");
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             assertNotNull(e);
         }
         try {
             Task t4 = Task.create("deadline hello /by 32/01/2011 1500");
             fail("4th Exception was not thrown");
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             assertNotNull(e);
         }
         try {
             Task t5 = Task.create("deadline hello /by 31/02/2011 1500");
             fail("5th Exception was not thrown");
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             assertNotNull(e);
         }
         try {
             Task t6 = Task.create("deadline hello /by 01/13/2011 1500");
             fail("6th Exception was not thrown");
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             assertNotNull(e);
         }
         try {
             Task t7 = Task.create("deadline hello /by 01/12/211 1500");
             fail("7th Exception was not thrown");
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             assertNotNull(e);
         }
     }
@@ -157,7 +157,7 @@ public class TaskTest {
             Task t4 = Task.createFromFile("E | 1 | don't die | 22/11/2019 2234");
             assertEquals("[E][" + (char) 0x2713
                     + "] don't die (at: 22nd of November 2019, 10:34pm)", t4.toString());
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             fail(e.toString());
         }
     }
@@ -173,7 +173,7 @@ public class TaskTest {
 
             Task t3 = Task.create("todo hello");
             assertEquals("T | 0 | hello", t3.toFileString());
-        } catch (DukeException e) {
+        } catch (IceBearException e) {
             fail(e.toString());
         }
     }

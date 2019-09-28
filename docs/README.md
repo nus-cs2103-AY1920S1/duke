@@ -11,8 +11,8 @@
 
 ## Usage
 
-### `list`
-**List all the tasks in the list of tasks.**
+### **list**
+`List all the tasks in the list of tasks.`
 
 Example of usage:
 ```
@@ -28,8 +28,8 @@ Here are the tasks in your list:
 5. [T][✘] return book
 ```
 
-### `todo`
-**Creates a todo task and append it to the list.**
+### **todo**
+`Creates a todo task and append it to the list.`
 
 The format is as follow:
 `todo <description>`
@@ -46,8 +46,8 @@ Got it. I've added this task:
 Now you have 3 tasks in the list
 ```
 
-### `event`
-**Creates an event task and append it to the list.**
+### **event**
+`Creates an event task and append it to the list.`
 
 The format is as follow:
 `event <description> /at <datetimeformat>`
@@ -64,8 +64,8 @@ Got it. I've added this task:
 Now you have 4 tasks in the list
 ```
 
-### `deadline`
-**Creates a deadline task and append it to the list.**
+### **deadline**
+`Creates a deadline task and append it to the list.`
 
 The format is as follow:
 `deadline <description> /by <datetimeformat>`
@@ -82,8 +82,8 @@ Got it. I've added this task:
 Now you have 5 tasks in the list
 ```
 
-### `done <index>`
-**Marks the task at the given index as done.**
+### **done <index>**
+`Marks the task at the given index as done.`
 
 Example of usage:
 ```
@@ -96,8 +96,8 @@ Nice! I've marked this task as done:
   [E][✓] project meeting (at: 19/09/2019 1300)
 ```
 
-### `delete <index>`
-**Delete the task at the given index from the list.**
+### **delete <index>**
+`Delete the task at the given index from the list.`
 
 Example of usage:
 ```
@@ -111,8 +111,8 @@ Noted. I've removed this task:
 Now you have 4 taks in the list
 ```
 
-### `find <string>`
-**Finds all the tasks in the list that partially/ fully matches the given string.**
+### **find <string>**
+`Finds all the tasks in the list that partially/ fully matches the given string.`
 
 Example of usage:
 ```
@@ -124,8 +124,8 @@ Expected outcome:
 [T][✘] return book
 ```
 
-### `sort`
-**Sort the list of task in order from [D], [E], then [T]. In category [D] and [E], the tasks are sorted from the earliest date to the latest date.**
+### **sort**
+`Sort the list of task in order from [D], [E], then [T]. In category [D] and [E], the tasks are sorted from the earliest date to the latest date.`
 
 Example of usage:
 ```
@@ -142,8 +142,8 @@ Here is your sorted List:
 5. [T][✘] return book
 ```
 
-### `bye`
-**Terminates the program and exits.**
+### **bye**
+`Terminates the program and exits.`
 
 Example of usage:
 ```

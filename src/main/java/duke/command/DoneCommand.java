@@ -1,19 +1,30 @@
 package duke.command;
 
-import java.io.IOException;
-import java.util.List;
-
 import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.function.IntFunction;
+
 public class DoneCommand implements Command {
     private TaskList tasks;
     private Storage storage;
+    private IntFunction<List<String>> action = index -> {
+        Task task = tasks.get(index);
+        task.markAsDone();
+        return List.of("Nice! I've marked this task as done:", "  " + task);
+    };
 
     public DoneCommand(TaskList tasks, Storage storage) {
         this.tasks = tasks;
         this.storage = storage;
+    }
+
+    DoneCommand(TaskList tasks, Storage storage, IntFunction<List<String>> action) {
+        this(tasks, storage);
+        this.action = action;
     }
 
     /**
@@ -33,9 +44,8 @@ public class DoneCommand implements Command {
         } else if (index < 0 || index >= tasks.size()) {
             return List.of("Invalid task number. Please use a number from 1 to " + tasks.size() + ".");
         }
-        Task task = tasks.get(index);
-        task.markAsDone();
+        List<String> message = action.apply(index);
         storage.store(tasks.getAsLines());
-        return List.of("Nice! I've marked this task as done:", "  " + task);
+        return message;
     }
 }

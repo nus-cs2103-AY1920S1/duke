@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private static final String FILE_DELIMITER = "\\";
-    private static final String PATH_TO_SAVEFILE = FILE_DELIMITER + "data" + FILE_DELIMITER + "icebear.txt";
+    private static final String PATH_TO_SAVEFILE = FILE_DELIMITER + "icebear.txt";
     private static final String filepath = System.getProperty("user.dir") + PATH_TO_SAVEFILE;
     private IceBear iceBear = new IceBear(filepath);
 

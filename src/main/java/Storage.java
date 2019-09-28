@@ -18,9 +18,16 @@ public class Storage {
      *
      * @param filepath The file path of the save file.
      */
-    public Storage(String filepath) {
+    public Storage(String filepath) throws IceBearException {
         this.filepath = filepath;
-        this.file = new File(filepath);
+        try {
+            this.file = new File(filepath);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+            throw new IceBearException("Error creating new save file. Your changes won't be saved!");
+        }
         this.previousSaves = new LinkedList<>();
     }
 

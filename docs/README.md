@@ -18,7 +18,7 @@ My Tasks is a personal task manager that helps user keep track of their todo lis
 ## Features 
 Command Format
 * Words in UPPER_CASE are the parameters to be supplied by the user<br />
-    Example: in todo TASKNAME, TASKNAME is a parameter which can be used as todo tutorial.
+    Example: in todo TASK_NAME, TASK_NAME is a parameter which can be used as todo tutorial.
     
 ### 1. Viewing help: **`help`**
 Format: help
@@ -26,17 +26,17 @@ Format: help
 ### 2. Adding task
 #### 2.1. Adding todo: **`todo`**
 Adds a todo to the list of tasks<br />
-Format: `todo TASKNAME`<br />
+Format: `todo TASK_NAME`<br />
 Example: `todo tutorial`
   
 #### 2.2. Adding deadline: **`deadline`**
 Adds a deadline to the list of tasks<br />
-Format: `deadline TASKNAME /by DATE`<br />
+Format: `deadline TASK_NAME /by DATE`<br />
 Example: `deadline tutorial /by 02 Dec 2019 15:00`
   
 #### 2.3. Adding event: **`event`**
 Adds an event to the list of tasks<br />
-Format: `event TASKNAME /at DATE`<br />
+Format: `event TASK_NAME /at DATE`<br />
 Example: `event meeting /at 13 Oct 2019 09:00`
   
 > Note: DATE is in the format "dd MMM yyyy hh:mm"
@@ -47,7 +47,7 @@ Format: `list`
 `
 ### 4. Marking task as done: **`done`**
 Marks the task with task number as in the list as done<br />
-Format: `done TASKNUMBER`<br />
+Format: `done TASK_NUMBER`<br />
 Example: `done 4` (marks the task number 4 as done)
 
 ### 5. Find task **`find`**
@@ -57,7 +57,7 @@ Example: `find tutorial` (shows any task with they keyword "tutorial")
 
 ### 6. Prioritise task **`priority`**
 Prioritise the task with task number as in the list as high, medium or low<br />
-Format: `priority TASKNUMBER LEVEL`<br />
+Format: `priority TASK_NUMBER PRIORITY_LEVEL`<br />
 Example: `priority 3 high` (Marks task number 3 as high priority level)
 
 ### 7. Clear all tasks **`clear`**

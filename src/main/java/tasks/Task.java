@@ -8,15 +8,20 @@ import java.util.Date;
  * @author Michelle Yong
  */
 public class Task {
-    protected String description;
     protected boolean isDone;
-    protected Date date;
-    protected String type = "";
-    protected String priority;
     protected final int DONE = 1;
     protected final int NOT_DONE = 0;
     protected final String DONE_ICON = "\u2713";
     protected final String NOT_DONE_ICON = "\u2718";
+    protected final String LOW_PRIORITY = "low";
+    protected final String MEDIUM_PRIORITY = "medium";
+    protected final String HIGH_PRIORITY = "high";
+    protected final String LOW_PRIORITY_ICON = "\u263A";
+    protected final String HIGH_PRIORITY_ICON = "\u2620";
+    protected String description;
+    protected Date date;
+    protected String type = "";
+    protected String priority = MEDIUM_PRIORITY;
 
     /**
      * Creates a task with description.
@@ -85,12 +90,22 @@ public class Task {
         return isDone ? DONE : NOT_DONE;
     }
 
+    /**
+     * Gets the priority of the task.
+     *
+     * @return The priority of the task, low, medium or high.
+     */
     public String getPriority() {
         return this.priority;
     }
 
+    /**
+     * Sets the priority level of the tasks.
+     *
+     * @param priority The priority level to be set.
+     */
     public void setPriority(String priority) {
-        this.priority = priority;
+        this.priority = priority.toLowerCase();
     }
 
     /**
@@ -113,6 +128,12 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.getDescription();
+        String task = "[" + this.getStatusIcon() + "] " + this.getDescription();
+        if (this.getPriority().equals(HIGH_PRIORITY)) {
+            task += (" " + HIGH_PRIORITY_ICON);
+        } else if (this.getPriority().equals(LOW_PRIORITY)) {
+            task += (" " +  LOW_PRIORITY_ICON);
+        }
+        return task;
     }
 }

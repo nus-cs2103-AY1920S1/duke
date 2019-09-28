@@ -58,43 +58,46 @@ public class Storage {
     }
 
     public void loadTodoToList(String type, String[] taskArr, ArrayList<Task> list) {
-        assert (type.equals("T"));
         Todo todo = new Todo(taskArr[2]);
-        if (taskArr[1].equals("1")) {
-            todo.markAsDone();
-        }
+        updateDone(todo, taskArr);
+        updatePriority(todo, taskArr);
         list.add(todo);
     }
 
     public void loadDeadlineToList(String type, String[] taskArr, ArrayList<Task> list)
             throws ParseException {
-        assert (type.equals("D"));
-        String date = taskArr[3].substring(8, 10) + " "
-                + taskArr[3].substring(4, 7) + " "
-                + taskArr[3].substring(24, 28) + " "
-                + taskArr[3].substring(11, 16);
-        Deadline deadline = new Deadline(taskArr[2],
-                convertToDate(date));
-        if (taskArr[1].equals("1")) {
-            assert (taskArr[1].equals("1"));
-            deadline.markAsDone();
-        }
+        Deadline deadline = new Deadline(taskArr[2], getDate(taskArr));
+        updateDone(deadline, taskArr);
+        updatePriority(deadline, taskArr);
         list.add(deadline);
     }
 
     public void loadEventToList(String type, String[] taskArr, ArrayList<Task> list)
             throws ParseException {
-        assert (type.equals("E"));
-        String date = taskArr[3].substring(8, 10) + " "
-                + taskArr[3].substring(4, 7) + " "
-                + taskArr[3].substring(24, 28) + " "
-                + taskArr[3].substring(11, 16);
-        Event event = new Event(taskArr[2], convertToDate(date));
+        Event event = new Event(taskArr[2], getDate(taskArr));
+        updateDone(event, taskArr);
+        updatePriority(event, taskArr);
+        list.add(event);
+    }
+
+    public Date getDate(String[] taskArr) throws ParseException {
+        String date = taskArr[4].substring(8, 10) + " "
+                + taskArr[4].substring(4, 7) + " "
+                + taskArr[4].substring(24, 28) + " "
+                + taskArr[4].substring(11, 16);
+        return convertToDate(date);
+    }
+
+    public void updatePriority(Task task, String[] taskArr) {
+        String priority = taskArr[3];
+        task.setPriority(priority);
+    }
+
+    public void updateDone(Task task, String[] taskArr) {
         if (taskArr[1].equals("1")) {
             assert (taskArr[1].equals("1"));
-            event.markAsDone();
+            task.markAsDone();
         }
-        list.add(event);
     }
 
     /**
@@ -146,6 +149,11 @@ public class Storage {
         textToAdd.append(task.getStatusNum());
         textToAdd.append(" | ");
         textToAdd.append(task.getDescription());
+
+        // add priority!!!!!!!!!!!!!!!!!!!!
+        textToAdd.append(" | ");
+        textToAdd.append(task.getPriority());
+
         if (type.equals("D") || type.equals("E")) {
             assert (type.equals("D") || type.equals("E"));
             textToAdd.append(" | ");

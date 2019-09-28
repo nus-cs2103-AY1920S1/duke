@@ -22,6 +22,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + super.date + ")";
+        String deadlineDate = super.date.toString().substring(0, 16);
+        return "[D]" + super.toString() + " (by: " + deadlineDate + ")";
     }
 }

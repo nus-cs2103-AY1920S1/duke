@@ -1,1 +1,4 @@
-T | 0 | Tutorial
+T | 0 | tutorial | low
+T | 0 | tutorial | high
+D | 0 | assignment | high | Thu Oct 24 15:00:00 SGT 2019
+E | 0 | meeting | low | Sun Oct 20 17:00:00 SGT 2019

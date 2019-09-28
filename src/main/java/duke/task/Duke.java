@@ -35,20 +35,17 @@ public class Duke extends Application {
     private TaskList tasks;
     private Ui ui;
 
-    private boolean isGettingConfirmation;
-
     /**
      * Constructor function.
      */
     public Duke() {
         ui = new Ui();
         storage = new Storage("../data/tasks.txt");
-        isGettingConfirmation = false;
 
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            Ui.showLoadingError();
             tasks = new TaskList();
         }
     }

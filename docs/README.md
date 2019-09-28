@@ -3,18 +3,20 @@
 ## Features 
 
 ### Feature 1 
-Description of feature.
+Displaying your list of items.
 
-## Usag
+## Usage
 
-### `Keyword` - Describe action
+### `list` - Shows your list of items
 
-Describe action and its outcome.
+`list` is a command that helps to display the current list of items you have stored.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`list`
 
 Expected outcome:
 
-`outcome`
+![Image of list usage]
+(https://github.com/jerryk1997/duke/blob/master/docs/list_example.png)
+

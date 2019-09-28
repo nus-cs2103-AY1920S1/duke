@@ -3,7 +3,7 @@
 ## Features 
 
 ### Feature 1 
-Show you your current list of tasks.
+Shows you your current list of tasks.
 
 ## Usage
 
@@ -14,8 +14,8 @@ Example of usage:
 `list`
 
 ### Feature 2
-Add a task into the list of tasks. Dates and times are to be input as the following format:
-DD/MM/YYYY HHMM
+Adds a task into the list of tasks. Dates and times are to be input as the following format:
+`DD/MM/YYYY HHMM`
 
 ## Usage
 
@@ -23,7 +23,7 @@ DD/MM/YYYY HHMM
 
 ### `event [description] /at [date time]` - Adds an event task into the list with the description, date and time.
  
-### deadline [description] /by [date time]` - Adds a deadline task into the list with the description, date and time.
+### `deadline [description] /by [date time]` - Adds a deadline task into the list with the description, date and time.
 
 Example of usage: 
 
@@ -69,7 +69,7 @@ Examples of usage:
 
 ### Feature 5
 Update the description or date and time of a task. Dates and times are to be input as the following format:
-DD/MM/YYYY HHMM
+`DD/MM/YYYY HHMM`
 
 
 ##Usage

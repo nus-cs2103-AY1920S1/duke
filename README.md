@@ -4,6 +4,8 @@ interface to make your experience more immersive. Take on the role as young Anak
 Jedi Master Yoda in completing your tasks. Be careful though, Darth Vader might appear if you have more than 10
 uncompleted tasks.
 
+![alt text](https://raw.githubusercontent.com/limhawjia/duke/master/docs/Ui.png)
+
 ## Getting started
 1. Ensure that you have Java 11 or above installed on your computer.
 2. Download the latest release of Duke.

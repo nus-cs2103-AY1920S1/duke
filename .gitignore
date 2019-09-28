@@ -1,3 +1,6 @@
+data/
+/src/main/java/META-INF/
+
 # IDEA files
 /.idea/
 /out/

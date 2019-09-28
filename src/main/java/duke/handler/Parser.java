@@ -17,6 +17,7 @@ public class Parser {
 
     public static Command parse(String fullCommand) throws DukeException {
         String line = fullCommand.toLowerCase();
+
         if (line.length() >= 3 && line.substring(0, 3).equals("bye")) {
             ExitCommand exitCommand = new ExitCommand(line);
             return exitCommand;
@@ -46,7 +47,7 @@ public class Parser {
                     throw new DukeException("☹ OOPS!!! Please specify a [description of deadline] /by [date of deadline].");
                 } else {
                     String description = line.substring(9, index - 1);
-                    String by = line.substring(index + 4, line.length());
+                    String by = line.substring(index + 4);
                     newTask = new Deadline(description, by);
                     AddCommand addCommand = new AddCommand(line, newTask);
                     return addCommand;
@@ -57,7 +58,7 @@ public class Parser {
                     throw new DukeException("☹ OOPS!!! Please specify a [description of event] /at [date of event]");
                 } else {
                     String description = line.substring(6, index - 1);
-                    String at = line.substring(index + 4, line.length());
+                    String at = line.substring(index + 4);
                     newTask = new Event(description, at);
                     AddCommand addCommand = new AddCommand(line, newTask);
                     return addCommand;

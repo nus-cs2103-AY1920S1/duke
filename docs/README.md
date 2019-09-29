@@ -121,16 +121,45 @@ There are three modes of changing:
      * For `Deadline` tasks: edit [index]  [task name] t: [dd/mm/yy hhmm] 
      * For `Todo` tasks: edit [task name] t:
      * index is the number of the task when `list` is called
+   * Example 1: 
+     * sample input: deadline change tyres 1 /by 01/02/18 1200 (creating)
+     * e.g `1. [D][X] change tyres 1 (by: 1st of February 18, 12pm)` (assuming number of task when `list` is called is 1)
+     * sample edit input: edit 1 changes tyres 1 edited t: 02/03/18 1623 
+     * outcome: `1. [D][X] changes tyres 1 edited (by: 2nd of March 18, 423pm)`
+   * Example 2:
+     * sample input: event change tyres 1 /at 01/02/18 1200-1300 (creating)
+     * e.g `1. [E][X] change tyres 1 (at: 1st of February 18, 12pm-1pm)` (assuming number of task when `list` is called is 1)
+     * sample edit input: edit 1 changes tyres 1 edited t: 02/03/18 1623-1800 
+     * outcome: `1. [E][X] changes tyres 1 edited (at: 2nd of March 18, 423pm-6pm)`
+     
    
 2. changing `task name`
    * Format on command Line:
      * edit [index] desc [task name]
      * index is the number of the task when `list` is called
+     
+   * Example 1: 
+     * sample input: deadline change tyres 1 /by 01/02/18 1200 (creating)
+     * e.g `1. [D][X] change tyres 1 (by: 1st of February 18, 12pm)` (assuming number of task when `list` is called is 1)
+     * sample edit input: edit 1 desc change name
+     * outcome: `1. [D][X] changes name edited (by: 1st of February 18, 12pm)` 
+        
 
 3. changing `date` and `time`
    * Format on command Line:
      * edit [index] time [dd/mm/yy hhmm]
      * index is the number of the task when `list` is called
+   * Example 1: 
+     * sample input: deadline change tyres 1 /by 01/02/18 1200 (creating)
+     * e.g `1. [D][X] change tyres 1 (by: 1st of February 18, 12pm)` (assuming number of task when `list` is called is 1)
+     * sample edit input: edit 1 time 03/02/18 1800
+     * outcome: `1. [D][X] changes name edited (by: 3rd of February 18, 6pm)` 
+   * Example 2:
+     * sample input: event change tyres 1 /at 01/02/18 1200-1300 (creating)
+     * e.g `1. [E][X] change tyres 1 (at: 1st of February 18, 12pm-1pm)` (assuming number of task when `list` is called is 1)
+     * sample edit input: edit 1 time 02/03/18 1623-1800 
+     * outcome: `1. [E][X] change tyres 1 (at: 2nd of March 18, 423pm-6pm)`
+     
 
 ### 4.7 `Exit Application` 
 

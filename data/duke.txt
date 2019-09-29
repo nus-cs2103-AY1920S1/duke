@@ -1,0 +1,5 @@
+[T][0] cs2103 increments
+[T][0] cs2103 user guide
+[D][0] cs2103 project (by: 11th November 2019, 1:00pm)
+[E][0] cs2103 week 3 meeting (at: 2nd February 2019, 1:15pm)
+[T][0] cs2103 duke

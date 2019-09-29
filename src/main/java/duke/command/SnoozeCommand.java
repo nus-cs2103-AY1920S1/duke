@@ -3,6 +3,7 @@ package duke.command;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.Ui;
+import duke.util.UiMessage;
 import duke.util.exception.DukeException;
 
 /**
@@ -24,5 +25,6 @@ public class SnoozeCommand extends ModifyTaskCommand {
     public void execute(TaskList tasks, Ui ui) throws DukeException {
         Task task = getTaskById(tasks);
         task.snooze();
+        ui.showMessage(UiMessage.TASK_SNOOZED);
     }
 }

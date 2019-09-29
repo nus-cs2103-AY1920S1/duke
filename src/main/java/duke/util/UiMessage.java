@@ -14,8 +14,9 @@ public enum UiMessage {
     TASKS_NOT_FOUND("Existing tasks file not found! Starting duke afresh..."),
     // commands
     TASK_ADDED("Okay! I've added the task."),
+    TASK_SNOOZED("Okay! The task has been snoozed by 1 day."),
     // helpers
-    HINT_LIST(". Use list to see all your tasks!");
+    HINT_LIST("Use list to see all your tasks!");
 
     private final String message;
 

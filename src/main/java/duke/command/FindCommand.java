@@ -34,7 +34,6 @@ public class FindCommand implements Command {
 
             // if ok, find and return matching tasks
             TaskList matchingTasks = tasks.findTasks(keyword);
-            // todo: find tasks does not return taskId of original tasks
             if (matchingTasks.isEmpty()) {
                 throw new DukeException(ExceptionType.NO_MATCHING_TASKS);
             } else {

@@ -1,6 +1,7 @@
 package duke.task;
 
 import static duke.util.DateTime.parseDate;
+import static duke.util.DateTime.snoozeDate;
 
 import duke.util.exception.DukeException;
 import java.util.Date;
@@ -36,6 +37,6 @@ public class EventTask extends Task {
 
     @Override
     public void snooze() {
-        // todo
+        this.at = snoozeDate(this.at);
     }
 }

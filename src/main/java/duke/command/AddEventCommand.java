@@ -17,6 +17,7 @@ public class AddEventCommand extends AddTaskCommand {
 
     @Override
     public Task createTask() throws DukeException {
+        // todo: add assertion here
         return new EventTask(getDescription(), getDeadlineString());
     }
 }

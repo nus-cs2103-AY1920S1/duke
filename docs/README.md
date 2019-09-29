@@ -25,7 +25,7 @@
 ## 1.Introduction <a name="introduction"></a>
 Task Book is a simple scheduler with a built in note taking function. It features a command line interface and a helpful chatbot for those who like a more interactive experience. The table formatted data also provides an easy and intuitive way to sort and view the items.
 
-![ui](Ui.png?raw=true "Task and notebook view")
+![ui](Ui.PNG?raw=true "Task and notebook view")
 ![notes ui](notes.PNG?raw=true "notes view")
 
 ## 2. Quick Start <a name="QuickStart"></a>

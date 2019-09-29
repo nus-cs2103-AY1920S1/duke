@@ -40,7 +40,7 @@ public class DialogBox extends HBox {
         this.dialog.setText(dialog);
         this.box.getStyleClass().add(styleClass);
         this.avatar.setImage(avatar);
-        Circle clip = new Circle(35, 35, 35);
+        Circle clip = new Circle(32, 32, 32);
         this.avatar.setClip(clip);
     }
 

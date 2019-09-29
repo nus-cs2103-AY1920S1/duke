@@ -5,9 +5,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
-<fx:root xmlns:fx="http://javafx.com/fxml/1" alignment="TOP_RIGHT" maxHeight="Infinity" maxWidth="Infinity"
-         minHeight="-Infinity"
-         minWidth="-Infinity" prefWidth="380.0" spacing="10.0" stylesheets="@../stylesheets/dialogBox.css"
+<fx:root xmlns:fx="http://javafx.com/fxml/1" alignment="TOP_RIGHT"
+         maxHeight="Infinity" maxWidth="Infinity"
+         minHeight="-Infinity" minWidth="-Infinity"
+         prefWidth="380.0" spacing="10.0"
+         stylesheets="@../stylesheets/dialogBox.css"
          type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171">
     <HBox fx:id="box" style="-fx-background-radius: 10">
         <padding>
@@ -15,11 +17,11 @@
         </padding>
         <Label fx:id="dialog" text="Label" wrapText="true">
             <font>
-                <Font name="Arial" size="13.0"/>
+                <Font size="13.0"/>
             </font>
         </Label>
     </HBox>
-    <ImageView fx:id="avatar" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true"/>
+    <ImageView fx:id="avatar" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true"/>
     <padding>
         <Insets bottom="15.0" left="20.0" right="20.0" top="15.0"/>
     </padding>

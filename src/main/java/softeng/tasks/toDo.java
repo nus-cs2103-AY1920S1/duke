@@ -3,7 +3,7 @@ package softeng.tasks;
 /**
  * Represents some task to do.
  */
-public class toDo extends Task{
+public class toDo extends Task {
     public toDo(String description) {
         super(description);
     }
@@ -12,7 +12,7 @@ public class toDo extends Task{
     }
     @Override
     public String toString() {
-        return "[T]["+ this.getStatusIcon() +"] " + super.toString();
+        return "[T][" + this.getStatusIcon() + "] " + super.toString();
     }
 
     /**

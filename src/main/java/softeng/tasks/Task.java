@@ -8,7 +8,7 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description){
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
@@ -19,7 +19,7 @@ public class Task {
     }
 
     /**
-     * Retrieves the done/not done status of the task
+     * Retrieves the done/not done status of the task.
      * @return 0 representing "not done" and 1 representing "done"
      */
     public String getStatusIcon() {

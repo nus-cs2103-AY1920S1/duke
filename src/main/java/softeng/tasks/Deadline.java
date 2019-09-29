@@ -7,7 +7,7 @@ import softeng.date.Date;
  * Represents a Deadline task. A <code>Deadline</code> object corresponds to the
  * description of the task and the due date. e.g. <code>read book by Saturday</code>
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected String by;
     protected Date byDate;
 

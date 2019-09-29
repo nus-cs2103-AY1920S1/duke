@@ -1,25 +1,17 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.task.Event;
 import duke.task.Task;
-import java.util.Scanner;
 
 public class AddEventCommand extends AddTaskCommand {
-    private Scanner s = new Scanner(restOfCommand);
-
-    public AddEventCommand(String restOfCommand) {
-        super(restOfCommand);
+    public AddEventCommand(String command) throws DukeException {
+        // todo: use enum and then lambda to pass in delimiter
+        super(command);
         s.useDelimiter("/at");
-    }
-
-    @Override
-    public String getDescription() {
-        return this.s.next().strip();
-    }
-
-    @Override
-    public String getDeadline() {
-        return this.s.next().strip();
+        setDescription();
+        setDeadlineString();
+        setDeadline();
     }
 
     @Override

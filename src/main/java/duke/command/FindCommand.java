@@ -5,22 +5,36 @@ import duke.exception.ExceptionType;
 import duke.task.TaskList;
 import duke.util.Storage;
 import duke.util.Ui;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class FindCommand implements Command {
-    private String keyword;
+    private Scanner s;
 
-    public FindCommand(String keyword) {
+    public FindCommand(String fullCommand) {
         super();
-        this.keyword = keyword;
+        this.s = new Scanner(fullCommand);
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        TaskList matchingTasks = tasks.findTasks(this.keyword);
-        if (matchingTasks.isEmpty()) {
-            ui.showError(new DukeException(ExceptionType.NO_MATCHING_TASKS));
-        } else {
-            ui.showTasks(matchingTasks);
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        try {
+            // first, try to get keyword
+            s.next(); // command (find), to be ignored
+            String keyword = s.nextLine();
+
+            // if ok, find and return matching tasks
+            TaskList matchingTasks = tasks.findTasks(keyword);
+            if (matchingTasks.isEmpty()) {
+                throw new DukeException(ExceptionType.NO_MATCHING_TASKS);
+            } else {
+                ui.showTasks(matchingTasks);
+            }
+        } catch (InputMismatchException e) {
+            // user input after "find" is empty
+            throw new DukeException(ExceptionType.KEYWORD_BLANK);
         }
+
+
     }
 }

@@ -6,40 +6,66 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.Storage;
 import duke.util.Ui;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public abstract class AddTaskCommand implements Command {
-    String restOfCommand;
+    Scanner s;
+    private String description;
+    private Date deadline;
+    private String deadlineString;
+    // todo: move dateFormatter to somewhere else that makes more sense
+    private SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
-    AddTaskCommand(String restOfCommand) {
-        this.restOfCommand = restOfCommand;
-//        this.s = new Scanner(command);
-//        String taskTypeString = s.next();
-//
-//        if (taskTypeString.equals("todo")) {
-//            return new AddTodoCommand(s.nextLine());
-//        } else if (taskTypeString.equals("event")) {
-//            this.taskType = TaskType.EVENT;
-//        } else if (taskTypeString.equals("deadline")) {
-//            this.taskType = TaskType.DEADLINE;
-//        } else {
-//            throw new DukeException(ExceptionType.INVALID_COMMAND);
-//        }
+    AddTaskCommand(String fullCommand) {
+        super();
+        this.s = new Scanner(fullCommand);
+        s.next(); // ignore command
     }
 
-    abstract String getDescription();
-    abstract String getDeadline();
+    String getDescription() {
+        return this.description;
+    }
+
+    Date getDeadline() {
+        return this.deadline;
+    }
+
+    void setDescription() throws DukeException {
+        try {
+            this.description = this.s.next().strip();
+        } catch (NoSuchElementException e) {
+            // user input after task type is blank
+            throw new DukeException(ExceptionType.DESCRIPTION_BLANK);
+        }
+    }
+
+    void setDeadlineString() throws DukeException {
+        try {
+            this.deadlineString = this.s.next().strip();
+        } catch (NoSuchElementException e) {
+            // no deadline entered
+            throw new DukeException(ExceptionType.DEADLINE_BLANK);
+        }
+    }
+
+    void setDeadline() throws DukeException {
+        try {
+            this.deadline = this.dateFormatter.parse(this.deadlineString);
+        } catch (ParseException e) {
+            // deadline entered in wrong format
+            throw new DukeException(ExceptionType.INVALID_DATE);
+        }
+    };
 
     abstract Task createTask();
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        try {
-            Task newTask = createTask();
-            tasks.add(newTask);
-        } catch (NoSuchElementException e) {
-            // user input after task type is blank
-            ui.showError(new DukeException(ExceptionType.DESCRIPTION_BLANK));
-        }
+        Task newTask = createTask();
+        tasks.add(newTask);
     }
 }

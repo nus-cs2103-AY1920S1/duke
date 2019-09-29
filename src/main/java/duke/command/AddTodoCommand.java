@@ -1,22 +1,20 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.Todo;
+import java.util.Date;
 
 public class AddTodoCommand extends AddTaskCommand {
-
-    public AddTodoCommand(String restOfCommand) {
-        super(restOfCommand);
+    public AddTodoCommand(String fullCommand) throws DukeException {
+        super(fullCommand);
+        s.useDelimiter("\n"); // no special delimiter required
+        setDescription();
     }
 
     @Override
-    public String getDescription() {
-        return this.restOfCommand.strip();
-    }
-
-    @Override
-    public String getDeadline() {
-        return "no deadline";
+    Date getDeadline() {
+        return null;
     }
 
     @Override

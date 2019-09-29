@@ -29,6 +29,8 @@ public class Parser {
             return new AddDeadlineCommand(fullCommand);
         } else if (command.equals("snooze")) {
             return new SnoozeCommand(fullCommand);
+        } else if (command.equals("tag")) {
+            return new TagCommand(fullCommand);
         } else {
             throw new DukeException(ExceptionType.INVALID_COMMAND);
         }

@@ -9,6 +9,7 @@ public abstract class Task implements Serializable {
     private String description;
     private Boolean isDone = false;
     TaskType type;
+    private String tag;
 
     /**
      * Constructs a Task, with the specified description.
@@ -27,7 +28,12 @@ public abstract class Task implements Serializable {
     public String toString() {
         String type = "[" + this.type.getTaskTypeInitial() + "] ";
         String status = "[" + this.getStatusIcon() + "] ";
-        return type + status + this.description;
+        String toString = type + status + this.description;
+
+        if (this.hasTag()) {
+            toString = toString + " (tag: " + this.getTag() + ")";
+        }
+        return toString;
     }
 
     /**
@@ -52,4 +58,29 @@ public abstract class Task implements Serializable {
      * Postpones the deadline of the given task by 1 day if no other argument is specified.
      */
     public abstract void snooze();
+
+    /**
+     * Adds a tag to the given task.
+     * Currently supports only one tag per task.
+     * To override existing tag, use tag command.
+     * @param tag Tag to be added to the given task.
+     */
+    public void addTag(String tag) {
+        this.tag = tag;
+        // todo: replace with proper UI implementation
+        System.out.println("Nice! I've added a tag to this task:");
+        System.out.println(this.toString());
+    }
+
+    private String getTag() {
+        return this.tag;
+    }
+
+    private boolean hasTag() {
+        if (this.getTag() == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

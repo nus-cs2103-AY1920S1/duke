@@ -14,6 +14,7 @@ public enum ExceptionType {
     DESCRIPTION_BLANK("Oops! You did not enter a description!"),
     DEADLINE_BLANK("Oops! You did not enter a deadline!"),
     KEYWORD_BLANK("Oops! You did not enter a keyword!"),
+    TAG_BLANK("Oops! You did not enter a tag!"),
     // nothing to return
     NO_MATCHING_TASKS("There are no tasks matching your query :("),
     TASK_LIST_EMPTY("The task list is empty."),;

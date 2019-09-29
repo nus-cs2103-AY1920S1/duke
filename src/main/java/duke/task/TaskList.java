@@ -85,10 +85,9 @@ public class TaskList implements Serializable {
 
     /**
      * Deletes the given task from the TaskList.
-     * @param taskId ID of task to be deleted from the TaskList.
+     * @param taskToDelete Task to be deleted from the TaskList.
      */
-    public void deleteTask(int taskId) {
-        Task taskToDelete = getTask(taskId);
+    public void deleteTask(Task taskToDelete) {
         String taskDescription = taskToDelete.toString();
         tasks.remove(taskToDelete);
         System.out.println("Noted. I've removed this task: " + taskDescription);

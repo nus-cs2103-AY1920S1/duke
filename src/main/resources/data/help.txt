@@ -1,0 +1,15 @@
+Woooof! Here are the list of commands that you can use:
+  - todo <task name>
+      (saves a default To-Do task)
+  - deadline <task name> /by <date and time in D/MM/YYYY HHmm>
+      (saves a To-Do task with a deadline)
+  - event <event name> /at <venue>
+      (saves an Event task with a location)
+  - delete <task number>
+      (deletes a task from your list)
+  - done <task number>
+      (marks a task as done)
+  - list
+      (displays your task list)
+  - find <task name>
+      (find tasks with the search term)

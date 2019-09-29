@@ -1,6 +1,6 @@
-# JavaFX Tutorial Part 2 - Creating a GUI for Duke
+# JavaFX Tutorial Part 2 - Creating a Gui for Duke
 
-In this tutorial, we will be creating a GUI for Duke from scratch based on the following mockup.
+In this tutorial, we will be creating a Gui for Duke from scratch based on the following mockup.
 
 ![Mockup for Duke](assets/DukeMockup.png)
 

@@ -224,11 +224,11 @@ Run the application and play around with it.
 ![DialogBoxes Iteration 3](assets/DialogBoxesIteration3.png)
 
 Congratulations! 
-You have successfully implemented a fully functional GUI for Duke!  
+You have successfully implemented a fully functional Gui for Duke!  
 
 ## Exercises
 
-1. While the GUI looks similar to the mockup, there are still parts that need to be refined. Try your hand at some of these tasks:
+1. While the Gui looks similar to the mockup, there are still parts that need to be refined. Try your hand at some of these tasks:
    * Add padding between each DialogBox
    * Add padding between each ImageView and its Label
    * Clip the ImageView into a circle

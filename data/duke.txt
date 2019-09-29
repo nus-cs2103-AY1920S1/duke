@@ -1,2 +1,0 @@
-T | 0 | feed dog 
-D | 0 | buy food | 29th of February 2019, 6pm

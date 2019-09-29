@@ -1,0 +1,14 @@
+T | 1 | dance
+T | 0 | fly
+T | 1 | run
+T | 0 | walk
+D | 0 | hi | 20/09/2019 2223
+D | 0 | dance | 20/09/2019 2223
+D | 0 | iP | 19/09/2019 2223
+D | 0 | take antibiotics | 16/09/2019 2000
+E | 0 | We Will Dance | 18/09/2019 1700
+T | 0 | dance
+T | 1 | fly
+E | 0 | flying | 23/09/2019 1634
+T | 0 | nfaoiwa
+T | 0 | this will disappear

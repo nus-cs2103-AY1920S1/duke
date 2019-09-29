@@ -6,7 +6,7 @@ _Duke is a command-line-based task manager._
 ### 1. Add a task
 Add a task either of type Todo, Deadline or Event.
 * __Todo__ 
-  * format: todo (TASK_NAME)
+  * format: todo (task_name)
   * Example: 
     * Usage: todo borrow_book     
     * Expected Outcome: 

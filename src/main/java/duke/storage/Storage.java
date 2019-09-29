@@ -1,5 +1,6 @@
 package duke.storage;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -21,6 +22,18 @@ public class Storage {
     final private static Charset ENCODING = StandardCharsets.UTF_8;
 
     private Path path;
+
+    /**
+     * Constructor for Storage if duke.txt is missing.
+     */
+    public Storage() {
+        new File("data").mkdirs();
+        try {
+            new File("data/duke.txt").createNewFile();
+        } catch (IOException e) {
+            e.getMessage();
+        }
+    }
 
     /**
      * Constructor for Storage.

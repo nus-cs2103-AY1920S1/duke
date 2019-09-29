@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 
 import duke.command.Command;
+import duke.parser.Comd;
 import duke.ui.Ui;
 import duke.parser.Parser;
 import duke.tasklist.TaskList;
@@ -30,6 +31,7 @@ public class Duke {
             taskList = new TaskList(storage.readDuke());
         } catch (IOException e) {
             ui.showLoadingError();
+            storage = new Storage();
             taskList = new TaskList();
         }
     }

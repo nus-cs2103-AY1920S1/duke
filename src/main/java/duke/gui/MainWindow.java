@@ -55,5 +55,13 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (response.contains("See you again.")) {
+            try {
+                Thread.sleep(3 * 1000);
+            } catch (InterruptedException ie) {
+                Thread.currentThread().interrupt();
+            }
+            System.exit(0);
+        }
     }
 }

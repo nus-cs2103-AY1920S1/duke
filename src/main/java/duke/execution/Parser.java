@@ -61,6 +61,7 @@ public class Parser {
         String variable = inputArray[0];
         String description = getDescriptionOfTask(properInput);
         if (taskType.equals("deadline") || taskType.equals("event") || taskType.equals("expenses")) {
+            assert description != null;
             int slashIndex = properInput.indexOf("/");
             variableIndex = slashIndex + 4;
             if (properInput.length() > variableIndex) {

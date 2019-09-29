@@ -32,7 +32,9 @@ public class Parser {
      */
     public static Command parseCommand(String input) throws DukeException, IllegalArgumentException {
         String[] tokens = input.split(" ");
-        if (tokens[0].equals("bye")) {
+        if (tokens.length == 0) {
+            return new NullCommand();
+        } else if (tokens[0].equals("bye")) {
             return new ExitCommand();
         } else if (tokens[0].equals("list")) {
             return new ListCommand();

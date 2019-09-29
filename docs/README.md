@@ -3,7 +3,7 @@
 ## Features 
 
 ### Feature 1 
-Description of feature.
+A todo list application where user can add tasks, deadlines and events.
 
 ## Usage
 

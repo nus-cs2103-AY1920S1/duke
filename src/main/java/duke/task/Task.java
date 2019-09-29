@@ -55,6 +55,7 @@ public class Task {
     }
 
     public void setAsDone() {
+        this.isDone = true;
     }
 
     /**

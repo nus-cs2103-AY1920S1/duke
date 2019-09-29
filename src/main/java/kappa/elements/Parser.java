@@ -13,13 +13,12 @@ import kappa.command.Command;
 import kappa.command.AddDeadlineCommand;
 import kappa.command.FindCommand;
 
+import kappa.exception.InvalidTagException;
 import kappa.exception.KappaException;
 import kappa.exception.MissingDateException;
 import kappa.exception.MissingTaskException;
-import kappa.exception.InvalidTagException;
 import kappa.exception.MissingDescriptionException;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,9 +36,10 @@ public class Parser {
      * @return Corresponding command based on user input.
      * @throws KappaException For invalid input.
      */
-    public static Command parse(String fullCommand) throws KappaException {
+    public static Command parse(String fullCommand) throws KappaException, AssertionError {
         String[] tokens = fullCommand.split(" ");
         String firstWord = tokens[0];
+        assert (!firstWord.isEmpty());
         switch (firstWord) {
         case "bye":
             return new ExitCommand();

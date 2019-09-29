@@ -1,5 +1,13 @@
 # User Guide
 
+## Getting Started
+ 1. Ensure that you have Java Version 11 installed on your computer.
+ 2. Download the latest jar file [here](https://github.com/cutieprobe/duke/releases).
+ 
+## Working Screenshot
+
+![working screenshot](https://raw.githubusercontent.com/cutieprobe/duke/master/docs/Ui.png)
+
 ## Features 
 1. Manage tasks
 2. Customize commands

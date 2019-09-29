@@ -30,7 +30,7 @@ Task Book is a simple scheduler with a built in note taking function. It feature
 
 ## 2. Quick Start <a name="QuickStart"></a>
 1.  Ensure you have Java 11 or above installed in your Computer.
-2.  Download the latest ```TaskBook.jar``` [here]([https://github.com/lzw12345/duke/releases](https://github.com/lzw12345/duke/releases))
+2.  Download the latest ```TaskBook.jar``` [here](https://github.com/lzw12345/duke/releases)
 3.  Copy the file to the folder where you want to store Task book (note the save file will be store here too)
 4.  Double-click the file to start the app. The GUI should appear in a few seconds.
 5.  Some sample commands you can try 

@@ -36,6 +36,7 @@ Example of usage:
 `done 3`
 
 Expected outcome:
+![Done task](/images/Done.png)
 
 ### Feature 3 
 
@@ -51,6 +52,7 @@ Example of usage:
 `delete 1`
 
 Expected outcome:
+![Delete task](/images/Delete.png)
 
 ### Feature 4 
 
@@ -66,6 +68,7 @@ Example of usage:
 `list`
 
 Expected outcome:
+![List task](/images/List.png)
 
 ### Feature 5 
 
@@ -81,6 +84,7 @@ Example of usage:
 `find finish`
 
 Expected outcome:
+![Find task](/images/Find.png)
 
 ### Feature 6 
 You are able to view schedule of the day.
@@ -97,4 +101,5 @@ Example of usage:
 `view 23/04/2019`
 
 Expected outcome:
+![Viewtask](/images/View.png)
 

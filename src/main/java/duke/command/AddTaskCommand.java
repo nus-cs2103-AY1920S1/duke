@@ -11,6 +11,9 @@ import java.util.Date;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Represents a command to add a new task to the list of tasks.
+ */
 public abstract class AddTaskCommand implements Command {
     Scanner s;
     private String description;
@@ -25,14 +28,28 @@ public abstract class AddTaskCommand implements Command {
         s.next(); // ignore command
     }
 
+    /**
+     * Returns the description of the task to be added.
+     * @return Description of the task to be added.
+     */
     String getDescription() {
         return this.description;
     }
 
+    /**
+     * Returns the deadline of the task to be added.
+     * For Deadline tasks, this refers to the expected date of completion.
+     * For Event tasks, this refers to the expected date of occurrence.
+     * @return Deadline of the task to be added.
+     */
     Date getDeadline() {
         return this.deadline;
     }
 
+    /**
+     * Retrieves the description of the task to be added, based on command issued by user.
+     * @throws DukeException Application-specific exception thrown during execution.
+     */
     void setDescription() throws DukeException {
         try {
             this.description = this.s.next().strip();
@@ -42,6 +59,11 @@ public abstract class AddTaskCommand implements Command {
         }
     }
 
+    /**
+     * Retrieves the string representing the deadline of the task to be added,
+     * based on command issued by user.
+     * @throws DukeException Application-specific exception thrown during execution.
+     */
     void setDeadlineString() throws DukeException {
         try {
             this.deadlineString = this.s.next().strip();
@@ -51,6 +73,10 @@ public abstract class AddTaskCommand implements Command {
         }
     }
 
+    /**
+     * Retrieves the deadline of the task to be added, based on command issued by user.
+     * @throws DukeException Application-specific exception thrown during execution.
+     */
     void setDeadline() throws DukeException {
         try {
             this.deadline = this.dateFormatter.parse(this.deadlineString);
@@ -60,8 +86,17 @@ public abstract class AddTaskCommand implements Command {
         }
     };
 
+    /**
+     * Creates the task to be added, based on command issued by the user.
+     * @return Task to be added.
+     */
     abstract Task createTask();
 
+    /**
+     * Creates a new Task based on command issued by the user, and adds it to the list of tasks.
+     * @param tasks List of tasks.
+     * @param ui UI to display to the user.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui) {
         Task newTask = createTask();

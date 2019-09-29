@@ -1,5 +1,8 @@
 package duke.util.exception;
 
+/**
+ * Represents different types of Exceptions unique to the application.
+ */
 public enum ExceptionType {
     // invalid
     INVALID_ID("Oops! You entered an invalid task ID!"),
@@ -21,6 +24,10 @@ public enum ExceptionType {
         this.message = message;
     }
 
+    /**
+     * Returns a message describing the Exception, to be displayed in the UI.
+     * @return Message describing the Exception, to be displayed in the UI.
+     */
     public String getMessage() {
         return this.message;
     }

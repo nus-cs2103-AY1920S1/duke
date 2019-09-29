@@ -4,6 +4,9 @@ import duke.util.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Task;
 
+/**
+ * Represents a command to create and add a Deadline task.
+ */
 public class AddDeadlineCommand extends AddTaskCommand {
     public AddDeadlineCommand(String command) throws DukeException {
         // todo: use enum and then lambda to pass in delimiter

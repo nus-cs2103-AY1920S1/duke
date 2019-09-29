@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * List of tasks in the application.
+ * Represents the list of tasks in the application.
  */
 public class TaskList implements Serializable {
 
@@ -56,7 +56,7 @@ public class TaskList implements Serializable {
     // todo: move to Ui class
     public void printList() {
         for (Task task : tasks) {
-            int i = getId(task, this);
+            int i = getId(task);
             String s = task.toString();
             System.out.println(i + ". " + s);
         }
@@ -68,12 +68,12 @@ public class TaskList implements Serializable {
      * @param task Task whose ID is required.
      * @return ID of the given task.
      */
-    private int getId(Task task, TaskList taskList) {
-        return taskList.tasks.indexOf(task) + 1;
+    private int getId(Task task) {
+        return this.tasks.indexOf(task) + 1;
     }
 
     /**
-     * Returns the task with the given ID in the main TaskList.
+     * Returns the task with the given ID in this TaskList.
      * @param taskId ID of the task.
      * @return Task with the given ID.
      * @throws IndexOutOfBoundsException Exception thrown when the given ID is not present in

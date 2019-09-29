@@ -11,11 +11,21 @@ import java.util.Scanner;
 public class DeleteCommand implements Command {
     private Scanner s;
 
+    /**
+     * Constructs a new DeleteCommand, given the full command issued by the user.
+     * @param fullCommand Full command issued by the user.
+     */
     public DeleteCommand(String fullCommand) {
         super();
         this.s = new Scanner(fullCommand);
     }
 
+    /**
+     * Deletes a task, based on command issued by the user.
+     * @param tasks List of tasks.
+     * @param ui UI to display to the user.
+     * @throws DukeException Application-specific exception thrown during execution.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui) throws DukeException {
         try {

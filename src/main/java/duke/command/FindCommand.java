@@ -11,7 +11,8 @@ public class FindCommand implements Command {
     private Scanner s;
 
     /**
-     * @param fullCommand Command that was entered by the user.
+     * Constructs a new FindCommand, given the full command issued by the user.
+     * @param fullCommand Full command issued by the user.
      */
     public FindCommand(String fullCommand) {
         super();
@@ -19,6 +20,7 @@ public class FindCommand implements Command {
     }
 
     /**
+     * Finds a list of tasks matching the keyword issued by the user.
      * @param tasks List of tasks.
      * @param ui UI to display to the user.
      * @throws DukeException Application-specific exception thrown during execution.
@@ -42,7 +44,5 @@ public class FindCommand implements Command {
             // user input after "find" is empty
             throw new DukeException(ExceptionType.KEYWORD_BLANK);
         }
-
-
     }
 }

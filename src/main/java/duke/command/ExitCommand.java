@@ -8,6 +8,11 @@ import duke.util.Ui;
  */
 public class ExitCommand implements Command {
 
+    /**
+     * Exits the application.
+     * @param tasks List of tasks.
+     * @param ui UI to display to the user.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui) {
         // do nothing

@@ -8,14 +8,27 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Represents a request from the user to mark a given task as done.
+ */
 public class DoneCommand implements Command {
     private Scanner s;
 
+    /**
+     * Constructs a new DoneCommand, given the full command issued by the user.
+     * @param fullCommand Full command issued by the user.
+     */
     public DoneCommand(String fullCommand) {
         super();
         this.s = new Scanner(fullCommand);
     }
 
+    /**
+     * Marks the task in the command issued by the user as done.
+     * @param tasks List of tasks.
+     * @param ui UI to display to the user.
+     * @throws DukeException Application-specific exception thrown during execution.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui) throws DukeException {
         try {

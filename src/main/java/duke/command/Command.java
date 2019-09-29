@@ -5,12 +5,13 @@ import duke.task.TaskList;
 import duke.util.Ui;
 
 /**
- * Interface for commands, containing execute() method and isExit() boolean.
+ * Represents commands requested by user and related operations,
+ * such as executing the command.
  */
 public interface Command {
 
     /**
-     * Performs command, by interacting with tasks and UI.
+     * Executes the command, by interacting with tasks and UI.
      * @param tasks List of tasks.
      * @param ui UI to display to the user.
      * @throws DukeException Application-specific exception thrown during execution.

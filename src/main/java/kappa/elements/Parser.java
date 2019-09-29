@@ -93,11 +93,9 @@ public class Parser {
             if (splitByHash.length == 0) {
                 throw new InvalidTagException();
             }
-
-            List<String> tagsList = new ArrayList<>(Stream.of(splitByHash)
+            List<String> tagsList = Stream.of(splitByHash)
                     .map(String::trim)
-                    .collect(Collectors.toList())
-                    .subList(1, splitByHash.length));
+                    .filter((s) -> !s.isEmpty()).collect(Collectors.toList());
             return new Tags(tagsList);
         }
     }

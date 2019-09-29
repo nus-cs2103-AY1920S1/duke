@@ -202,7 +202,6 @@ public class Ui {
     public String toString() {
         String output = content.toString();
         this.content = new StringBuilder();
-        System.out.println(output);
         return output;
     }
 }

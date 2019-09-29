@@ -28,7 +28,6 @@ public class DeleteCommand extends Command {
     public void execute(Model model, Ui ui, Storage storage) throws DukeException {
         try {
             TaskList taskList = model.getTaskList();
-            System.out.println(taskIndex);
             Task task = taskList.getTask(taskIndex);
             taskList.removeTask(taskIndex);
             ui.showDelete(task, taskList);

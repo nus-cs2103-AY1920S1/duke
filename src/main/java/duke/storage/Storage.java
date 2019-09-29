@@ -1,9 +1,10 @@
 package duke.storage;
 
-import java.io.IOException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -11,7 +12,7 @@ import duke.exception.DukeException;
 import duke.model.Model;
 
 public class Storage {
-    private static final String FILEPATH = "data/duke.txt";
+    private static final String FILEPATH = System.getProperty("user.dir") + "/dukeData/duke.txt";
 
     /**
      * Retrieve data from the storage file.
@@ -46,7 +47,11 @@ public class Storage {
      */
     public void saveData(Model model) throws DukeException {
         try {
-            FileOutputStream file = new FileOutputStream(FILEPATH);
+            // Create the file if it does not exist.
+            File dataFile = new File(FILEPATH);
+            dataFile.getParentFile().mkdirs();
+            dataFile.createNewFile();
+            FileOutputStream file = new FileOutputStream(dataFile, false);
             ObjectOutputStream object = new ObjectOutputStream(file);
 
             object.writeObject(model);

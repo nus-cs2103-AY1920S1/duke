@@ -1,3 +1,8 @@
+package czkay.duke.model.task;
+
+import czkay.duke.exception.DukeException;
+import czkay.duke.exception.InvalidTimeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -5,7 +10,7 @@ import java.time.format.DateTimeParseException;
 /**
  * Represents the timed task given by the user.
  */
-abstract class TimedTask extends Task {
+public abstract class TimedTask extends Task {
     LocalDateTime timestamp;
     static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
@@ -20,7 +25,7 @@ abstract class TimedTask extends Task {
     }
 
     @Override
-    boolean isTimed() {
+    public boolean isTimed() {
         return true;
     }
 
@@ -28,7 +33,7 @@ abstract class TimedTask extends Task {
      * Gets the timestamp of the timed task.
      * @return The timestamp of the timed task.
      */
-    LocalDateTime getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 

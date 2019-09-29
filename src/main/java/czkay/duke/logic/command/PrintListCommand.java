@@ -1,7 +1,12 @@
+package czkay.duke.logic.command;
+
+import czkay.duke.model.TaskList;
+import czkay.duke.storage.Storage;
+
 /**
  * A Command to print the task list.
  */
-class PrintListCommand extends Command {
+public class PrintListCommand extends Command {
 
     /**
      * Executes the command to print the task list.
@@ -10,7 +15,7 @@ class PrintListCommand extends Command {
      * @param storage The storage that handles saving and loading the task list.
      */
     @Override
-    String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         if (tasks.isEmpty()) {
             return "There are currently no tasks in your list!";
         }

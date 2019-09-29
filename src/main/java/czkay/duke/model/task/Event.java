@@ -1,9 +1,13 @@
+package czkay.duke.model.task;
+
+import czkay.duke.exception.DukeException;
+
 /**
  * Represents the event task given by the user.
  */
-class Event extends TimedTask {
+public class Event extends TimedTask {
 
-    Event(String taskDescription, String timestamp) throws DukeException {
+    public Event(String taskDescription, String timestamp) throws DukeException {
         super(taskDescription, timestamp);
     }
 

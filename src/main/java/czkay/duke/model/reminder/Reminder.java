@@ -1,3 +1,8 @@
+package czkay.duke.model.reminder;
+
+import czkay.duke.model.task.Task;
+import czkay.duke.model.task.TimedTask;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -48,7 +53,7 @@ public class Reminder implements Serializable {
      * @param task The task which may or may not be upcoming.
      * @return An Optional Reminder which will contain a reminder if the task is upcoming.
      */
-    static Optional<Reminder> createReminderIfValid(Task task) {
+    public static Optional<Reminder> createReminderIfValid(Task task) {
         if (task.isTimed() && !(task.isDone())) {
             Reminder potentialReminder = new Reminder((TimedTask) task);
             return (potentialReminder.isValid) ? Optional.of(potentialReminder) : Optional.empty();

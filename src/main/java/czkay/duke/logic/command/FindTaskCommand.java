@@ -1,12 +1,18 @@
+package czkay.duke.logic.command;
+
+import czkay.duke.model.task.Task;
+import czkay.duke.model.TaskList;
+import czkay.duke.storage.Storage;
+
 import java.util.List;
 
 /**
  * A Command to find tasks from the task list based on a keyword.
  */
-class FindTaskCommand extends Command {
+public class FindTaskCommand extends Command {
     private String keyword;
 
-    FindTaskCommand(String keyword) {
+    public FindTaskCommand(String keyword) {
         this.keyword = keyword;
     }
 
@@ -17,7 +23,7 @@ class FindTaskCommand extends Command {
      * @param storage The storage that handles saving and loading the task list.
      */
     @Override
-    String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         List<Task> matchedTasks = tasks.getMatchedTasks(keyword);
         if (matchedTasks.isEmpty()) {
             return "There are no tasks in your list matching your keyword!";

@@ -1,9 +1,13 @@
+package czkay.duke.model.task;
+
+import czkay.duke.exception.DukeException;
+
 /**
  * Represents the deadline task given by the user.
  */
-class Deadline extends TimedTask {
+public class Deadline extends TimedTask {
 
-    Deadline(String taskDescription, String timestamp) throws DukeException {
+    public Deadline(String taskDescription, String timestamp) throws DukeException {
         super(taskDescription, timestamp);
     }
 

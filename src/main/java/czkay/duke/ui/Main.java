@@ -1,5 +1,8 @@
+package czkay.duke.ui;
+
 import java.io.IOException;
 
+import czkay.duke.model.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

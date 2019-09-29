@@ -1,3 +1,6 @@
+package czkay.duke.ui;
+
+import czkay.duke.model.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

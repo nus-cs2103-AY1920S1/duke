@@ -1,10 +1,17 @@
+package czkay.duke.model;
+
+import czkay.duke.exception.DukeException;
+import czkay.duke.logic.command.Command;
+import czkay.duke.logic.parser.Parser;
+import czkay.duke.storage.Storage;
+
 import java.io.IOException;
 
 /**
  * Driver class for the Duke iP.
  * Duke manages a task list that allows users to add, track and delete various types of tasks.
  */
-class Duke {
+public class Duke {
     private Storage storage;
     private TaskList tasks;
 
@@ -13,7 +20,7 @@ class Duke {
      *
      * @return A message to tell the user whether a task list has been loaded or a new one has been created instead.
      */
-    String fetchTaskList() {
+    public String fetchTaskList() {
         storage = new Storage("data/tasks.tmp");
         try {
             tasks = storage.load();
@@ -31,7 +38,7 @@ class Duke {
      * @param input The raw user input.
      * @return A message to the user based on what they inputted.
      */
-    String getResponse(String input) {
+    public String getResponse(String input) {
         String response;
         try {
             Command c = Parser.parse(input);
@@ -47,7 +54,7 @@ class Duke {
      *
      * @return The welcome message.
      */
-    String showWelcome() {
+    public String showWelcome() {
         return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
@@ -56,7 +63,7 @@ class Duke {
      *
      * @return The reminders for the user.
      */
-    String showReminders() {
+    public String showReminders() {
         return tasks.getReminders();
     }
 

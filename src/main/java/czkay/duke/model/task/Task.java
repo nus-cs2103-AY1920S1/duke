@@ -1,9 +1,11 @@
+package czkay.duke.model.task;
+
 import java.io.Serializable;
 
 /**
  * Represents the task given by the user.
  */
-abstract class Task implements Serializable {
+public abstract class Task implements Serializable {
     String taskDescription;
     boolean isDone;
 
@@ -15,7 +17,7 @@ abstract class Task implements Serializable {
     /**
      * Marks this task as complete.
      */
-    void markAsDone() {
+    public void markAsDone() {
         isDone = true;
     }
 
@@ -24,7 +26,7 @@ abstract class Task implements Serializable {
      *
      * @return A boolean value for whether the task is a timed task.
      */
-    boolean isTimed() {
+    public boolean isTimed() {
         return false;
     }
 
@@ -32,7 +34,7 @@ abstract class Task implements Serializable {
      * Check if the task is complete.
      * @return A boolean value for whether the task is complete.
      */
-    boolean isDone() {
+    public boolean isDone() {
         return isDone;
     }
 
@@ -40,7 +42,7 @@ abstract class Task implements Serializable {
      * Gets the description of the task.
      * @return The task description.
      */
-    String getTaskDescription() {
+    public String getTaskDescription() {
         return taskDescription;
     }
 

@@ -21,7 +21,7 @@ public class TaskList {
     }
 
     /**
-     * Adds a toDo task to the task list
+     * Adds a toDo task to the task list.
      * @param tsk the task to be added
      */
     public String addToDo(String tsk) {

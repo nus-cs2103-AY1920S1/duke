@@ -7,7 +7,7 @@ import softeng.date.Date;
  * Represents an Event task. An <code>Event</code> object corresponds to the
  * description of the task and the date. e.g. <code>party at Saturday</code>
  */
-public class Event extends Task{
+public class Event extends Task {
     protected String at;
     protected Date atDate;
     
@@ -28,7 +28,7 @@ public class Event extends Task{
     @Override
     public String toString() {
         String str = Objects.isNull(atDate) ? at : atDate.toString();
-        return "[E]["+ this.getStatusIcon() +"] " + super.toString() + " (at: " + str + ")";
+        return "[E][" + this.getStatusIcon() + "] " + super.toString() + " (at: " + str + ")";
     }
 
     /**

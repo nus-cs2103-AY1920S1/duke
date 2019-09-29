@@ -8,7 +8,6 @@ import java.util.Scanner;
  * Represents a parser of user commands in Duke chat bot.
  */
 public class Parser {
-    //protected Scanner sc;
 
     public Parser() {
 

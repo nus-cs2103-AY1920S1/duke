@@ -2,9 +2,6 @@ package softeng.duke;
 
 import javafx.geometry.Insets;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.stage.StageStyle;
 import softeng.tasks.TaskList;
 import softeng.dukeExceptions.DukeException;
 import softeng.gui.DialogBox;
@@ -17,9 +14,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
-import java.io.File;
-
 
 /**
  * Represents a chat bot that manages your daily tasks.

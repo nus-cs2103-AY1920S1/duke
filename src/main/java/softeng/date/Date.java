@@ -9,7 +9,8 @@ public class Date {
     protected int yr;
     protected double time;
     protected String meridian;
-    private String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    private String[] months = {"January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"};
 
     /**
      * @param str The string in the format of "dd/mm/yyyy 0000"
@@ -37,7 +38,7 @@ public class Date {
     }
 
     /**
-     * Returns whether a string is in a "dd/mm/yyyy 0000" format
+     * Returns whether a string is in a "dd/mm/yyyy 0000" format.
      * @param str The string in question
      * @return A boolean indicating whether the string is in a Date format
      */
@@ -59,7 +60,7 @@ public class Date {
             return "1st of " + mon + " " + yr + ", " + time + meridian;
         } else if (day == 2) {
             return "2nd of " + mon + " " + yr + ", " + time + meridian;
-        } else if (day == 3){
+        } else if (day == 3) {
             return "3rd of " + mon + " " + yr + ", " + time + meridian;
         } else {
             return day + "th of " + mon + " " + yr + ", " + time + meridian;

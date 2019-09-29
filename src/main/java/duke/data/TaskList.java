@@ -44,11 +44,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If the specified index is out of bounds.
      */
     public Task get(int index) throws IndexOutOfBoundsException {
-        try {
-            return tasks.get(index);
-        } catch (IndexOutOfBoundsException e) {
-            throw e;
-        }
+        return tasks.get(index);
     }
 
     /**

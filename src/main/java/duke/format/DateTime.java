@@ -123,7 +123,7 @@ public class DateTime {
         int t = Integer.parseInt(split);
         int min = t % 100;
         int hr = t / 100;
-        if (t > 2359) {
+        if (t > 2359 || t < 0) {
             throw new InvalidDateTimeException();
         } else if (hr == 0) {
             if (min == 0) {

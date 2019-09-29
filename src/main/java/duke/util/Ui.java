@@ -10,7 +10,8 @@ import duke.task.Task;
  * rest needs to take in some parameter(s) to show according responses.
  */
 public class Ui {
-    private static final String WELCOME = "Hello! I'm your Duke\nWhat can I do for you?";
+    private static final String WELCOME = "Hello! I'm your Duke\nWhat can I do for you?\n(Type \"help\" to know my " +
+            "various features!)";
     private static final String ENDING = "Bye. Hope to see you again soon!";
     private static final String SAVING_ERROR = "☹ OOPS!!! We cannot save your data!";
     private static final String LOADING_ERROR = "☹ OOPS!!! We cannot load your data!";

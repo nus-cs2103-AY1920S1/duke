@@ -41,6 +41,9 @@ public class DoneCommand extends Command {
             throw new DukeException("The task number is invalid!");
         }
         Task doneTask = taskList.getTaskAt(taskNumber);
+        if (doneTask.getStatus()) {
+            throw new DukeException("You've already marked this task as done!");
+        }
         doneTask.markDone();
         try {
             storage.recordTasks(taskList);

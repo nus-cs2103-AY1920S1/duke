@@ -6,6 +6,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -57,6 +58,8 @@ public class Parser {
         String[] infos = info.trim().split("\\s+", 2);
         String primaryCommand = infos[0];
         switch (primaryCommand) {
+        case "help":
+            return new HelpCommand();
         case "bye":
             return new ExitCommand();
         case "list":

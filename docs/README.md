@@ -6,10 +6,9 @@ This is a simple organiser to keep track of the tasks that is being entered by y
 ## Features
 
 ### Feature 1 
-You are able to add tasks by using the keywords `event`, `deadline` or `todo`.
 
 ## Usage
-Type the the keywords to allow the organiser to add the task.
+You are able to add tasks by using the keywords `event`, `deadline` or `todo`. Type the the keywords to allow the organiser to add the task.
 
 ### `Keyword` - Describe action
 
@@ -21,13 +20,12 @@ Example of usage:
 
 Expected outcome:
 
-``
+![Adding task](/images/AddTask.png)
 
 ### Feature 2 
-You are able to mark task as done by using `done` command.
 
 ## Usage
-When you have finish a task, you are able to mark task as completed. 
+You are able to mark task as done by using `done` command. When you have finish a task, you are able to mark task as completed. 
 
 ### `Keyword` - Describe action
 
@@ -40,10 +38,9 @@ Example of usage:
 Expected outcome:
 
 ### Feature 3 
-You are able to delete task using the `delete` command.
 
 ## Usage
-You can delete a task if you want to remove unwanted entries of task.
+You are able to delete task using the `delete` command. You can delete a task if you want to remove unwanted entries of task.
 
 ### `Keyword` - Describe action
 
@@ -56,10 +53,9 @@ Example of usage:
 Expected outcome:
 
 ### Feature 4 
-You are able to list down the task by using `list` command.
 
 ## Usage
-You are able to have a list of tasks you've entered into the organiser by the order you typed your tasks in.
+You are able to list down the task by using `list` command. You are able to have a list of tasks you've entered into the organiser by the order you typed your tasks in.
 
 ### `Keyword` - Describe action
 
@@ -72,10 +68,9 @@ Example of usage:
 Expected outcome:
 
 ### Feature 5 
-You are able to find tasks with a keyword.
 
 ## Usage
-When you are trying to search for tasks with similar keyword, `find` command can be used to search for the tasks related to that keyword.
+You are able to find tasks with a keyword. When you are trying to search for tasks with similar keyword, `find` command can be used to search for the tasks related to that keyword.
 
 ### `Keyword` - Describe action
 

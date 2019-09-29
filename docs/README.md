@@ -1,6 +1,6 @@
 # Duke - User Guide    
 
-![Duke](https://raw.githubusercontent.com/charliechoong/duke/master/resources/images/theDuke.png)   
+![Duke](https://github.com/charliechoong/duke/blob/master/tutorials/assets/daDuke.png?raw=true)   
 
 **Table of Contents :**  
 - [1. Introduction](#1-introduction)  
@@ -45,7 +45,7 @@
 ## 3. Commands
    The commands are as listed below : 
 
-### 3.1. Adding a task : `add`
+### 3.1. Adding a task : `todo` `deadline` `event`
    This command allows you to add any of the 3 types of tasks to 
    list. The full command differs for all 3 types.
 
@@ -137,7 +137,7 @@ This command allows the user to prioritise a task. `#1` represents high
 priority. `#2` represents medium priority. `#3` represents low
 priority.    
 
-*Format for setting as HIGH priority: `#1 [taskIndex]`
+*Format for setting as HIGH priority: `#1 [taskIndex]`*
 * __Example of usage__:  
     `#1 2`  
     

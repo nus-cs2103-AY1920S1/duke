@@ -237,7 +237,7 @@ Bye. Hope to see you again soon!
 ### `alias <alias name> <reserved command>` - creates, updates or removes an alias command
 
 
-Tag an alias name to a reserved command. More specifically, one of the following will happen depending on the parameters of the function. Please note that you can NOT remap a reserved command.
+Tag an alias name to a reserved command. More specifically, one of the following will happen depending on the parameters of the function. Please note that you can NOT remap a reserved command. For now, alias commands do not persist beyond the current session. 
 
 1. a new alias command is created if the alias does not exist
 

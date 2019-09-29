@@ -1,0 +1,4 @@
+E | 1 | have meeting | 02/10/2019 1600
+D | 0 | return book | 02/10/2019 1600
+EX | buy a book | 10
+T | 0 | read a book

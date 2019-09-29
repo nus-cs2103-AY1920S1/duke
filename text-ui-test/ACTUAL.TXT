@@ -1,0 +1,64 @@
+Hello from Weiwen
+ What can I do for you?
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+Got it. I've added this task: 
+[T]✘ a
+Now you have 1 tasks in the list.
+Got it. I've added this task: 
+[T]✘ b
+Now you have 2 tasks in the list.
+Got it. I've added this task: 
+[T]✘ jadfsl
+Now you have 3 tasks in the list.
+OOPS!!! I'm sorry, but I don't know what that means :-(
+Here are the tasks in your list:
+1.[T]✘ a
+2.[T]✘ b
+3.[T]✘ jadfsl
+OOPS!!! The description of a event cannot be empty.
+OOPS!!! The description of a event cannot be empty.
+OOPS!!! The time details of a event cannot be empty.
+Got it. I've added this task: 
+[E]✘ 1 (at: b)
+Now you have 4 tasks in the list.
+OOPS!!! The description of a event cannot be empty.
+OOPS!!! The description of a event cannot be empty.
+OOPS!!! The time details of a event cannot be empty.
+Got it. I've added this task: 
+[D]✘ ab (by: c)
+Now you have 5 tasks in the list.
+Here are the tasks in your list:
+1.[T]✘ a
+2.[T]✘ b
+3.[T]✘ jadfsl
+4.[E]✘ 1 (at: b)
+5.[D]✘ ab (by: c)
+OOPS!!! there is no number entered
+OOPS!!! there is no number entered
+OOPS!!! there is no number entered
+Nice! I've marked this task as done: 
+[T]✓ a
+Here are the tasks in your list:
+1.[T]✓ a
+2.[T]✘ b
+3.[T]✘ jadfsl
+4.[E]✘ 1 (at: b)
+5.[D]✘ ab (by: c)
+OOPS!!! there is no number entered
+OOPS!!! there is no number entered
+OOPS!!! there is no number entered
+OOPS!!! I'm sorry, but there is no such task in the list
+Noted. I've removed this task: 
+[T]✓ a
+Now you have 4 tasks in the list.
+Here are the tasks in your list:
+1.[T]✘ b
+2.[T]✘ jadfsl
+3.[E]✘ 1 (at: b)
+4.[D]✘ ab (by: c)
+Bye. Hope to see you again soon!

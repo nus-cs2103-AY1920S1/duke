@@ -1,0 +1,26 @@
+todo a
+todo b
+todo jadfsl
+fajsklda
+list
+event 
+event
+event 1
+event 1/b
+deadline 
+deadline
+deadline ab
+deadline ab/c
+list
+done
+done 
+done abc
+done 1
+list
+delete
+delete 
+delete ab
+delete 10
+delete 1
+list
+bye

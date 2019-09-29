@@ -55,7 +55,7 @@ public class Task {
      * false to true.
      */
     public void toggleState() {
-        this.done = !done;
+        this.done = true;
     }
 
     /**

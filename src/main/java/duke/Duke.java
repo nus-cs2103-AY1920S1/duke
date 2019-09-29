@@ -6,6 +6,7 @@ import duke.task.TaskList;
 import duke.ui.UI;
 import duke.util.Parser;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -19,12 +20,11 @@ public class Duke {
     /**
      * Initializes the duke chatbot with a file path for storage purpose.
      */
-    public Duke() {
-        try {
-            this.storage = new Storage("duke.txt");
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+    public Duke() throws IOException {
+        File new_file = new File("data/duke.txt");
+        new_file.getParentFile().mkdirs();
+        new_file.createNewFile();
+        this.storage = new Storage(new_file);
         this.ui = new UI();
         try {
             tasks = new TaskList(storage.readFile());
@@ -42,6 +42,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parseUserInput(input);
+            System.out.println(c.getClass().getSimpleName());
             String result = c.execute(tasks, ui, storage);
             System.out.println(result);
             return result;

@@ -23,14 +23,11 @@ public class Storage {
     /**
      * Initialize a Storage object with a file path. A file object will be created
      * base on the file path given. If the file does not exist, create a file.
-     * @param filePath The file path to the storage file.
+     * @param file The storage file.
      * @throws IOException If there is an error for io.
      */
-    public Storage(String filePath) throws IOException {
-        this.file = new File(filePath);
-        if (!file.exists()) {
-            file.createNewFile();
-        }
+    public Storage(File file) throws IOException {
+        this.file = file;
     }
 
     /**

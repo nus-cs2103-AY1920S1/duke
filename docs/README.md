@@ -4,18 +4,17 @@
 1. Manage tasks
 2. Customize commands
 
-### Feature 1 
-#### Manage tasks
+### Feature 1: Manage Tasks
 Add, remove, search and view various types of tasks to manage your daily life.
 
-#### Customize commands
+### Feature 2: Customize Commands
 Add customized shorter aliases for commands to enjoy more efficient typing.
 
 ## Usage
 
 ### `todo` - Add a todo
 
-default alias: `t`
+Default alias: `t`
 
 Add a new todo task.
 
@@ -32,7 +31,7 @@ Expected outcome:
 
 ### `deadline` - Add a deadline
 
-default alias: `dd`
+Default alias: `dd`
 
 Add a new deadline task.
 
@@ -49,7 +48,7 @@ Expected outcome:
 
 ### `event` - Add a event
 
-default alias: `e`
+Default alias: `e`
 
 Add a new event task.
 
@@ -66,7 +65,7 @@ Expected outcome:
 
 ### `list` - List all tasks
 
-default alias: `l`
+Default alias: `l`
 
 List all tasks in the task list.
 
@@ -86,7 +85,7 @@ Expected outcome:
 
 ### `done` - Mark a task as done
 
-default alias: `dn`
+Default alias: `dn`
 
 Mark an existing task as done.
 
@@ -103,7 +102,7 @@ Expected outcome:
 
 ### `delete` - Delete a task
 
-default alias: `de`
+Default alias: `de`
 
 Delete an existing task.
 
@@ -120,7 +119,7 @@ Expected outcome:
 
 ### `find` - Search for tasks
 
-default alias: `t`
+Default alias: `t`
 
 Search for all tasks matching the keyword.
 
@@ -137,7 +136,7 @@ Expected outcome:
 
 ### `bye` - Exit the application
 
-default alias: `b`, `exit`
+Default alias: `b`, `exit`
 
 Exit the application.
 
@@ -153,7 +152,7 @@ Expected outcome:
 
 ### `alias add` - Add an alias to a keyword
 
-default alias: `aa`
+Default alias: `aa`
 
 Add an alias to a command keyword.
 
@@ -169,7 +168,7 @@ Expected outcome:
 
 ### `alias delete` - Delete an alias
 
-default alias: `t`
+Default alias: `t`
 
 Delete an alias so that it is no longer mapped to its keyword.
 
@@ -185,7 +184,7 @@ Expected outcome:
 
 ### `alias view` - View an alias
 
-default alias: `t`
+Default alias: `t`
 
 View an alias and the keyword mapped it is mapped to.
 
@@ -201,7 +200,7 @@ Expected outcome:
 
 ### `alias list` - List all aliases of a keyword
 
-default alias: `al`
+Default alias: `al`
 
 View all aliases mapped to a keyword.
 
@@ -218,7 +217,7 @@ Expected outcome:
 
 ### `alias all` - List all aliases and their keywords
 
-default alias: `aall`
+Default alias: `aall`
 
 View all aliases and their respective keywords.
 

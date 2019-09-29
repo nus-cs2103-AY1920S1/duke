@@ -1,8 +1,9 @@
 package duke.task;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TaskList {
+public class TaskList implements Serializable {
 
     private ArrayList<Task> tasks;
 
@@ -21,6 +22,10 @@ public class TaskList {
             + ". Use list to see all your tasks!");
     }
 
+//    public void addAll(ArrayList<Task> tasks) {
+//        this.tasks.addAll(tasks);
+//    }
+
     public void printList() {
         int i = 1;
         for (Task task : tasks) {
@@ -30,16 +35,12 @@ public class TaskList {
         }
     }
 
-//    public String writeToFile() {
-//        Task task;
-//        for (Task task : tasks) {
-//            String s = task.printToFile();
-//            return s;
-//        }
-//    }
-
     public Task getTask(int taskIndex) throws IndexOutOfBoundsException {
         return tasks.get(taskIndex - 1);
+    }
+
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
     }
 
     public void deleteTask(Task taskToDelete) {

@@ -1,73 +1,92 @@
 package duke.util;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import duke.task.Task;
 import duke.task.TaskList;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class Storage {
     private String filePath;
-    private String doneMessage = "Success! Your tasks have been saved to: "; // should be in Ui class?
+    private String tasksImportedMessage = "Success! Your tasks have been imported from: ";
+    private String tasksSavedMessage = "Success! Your tasks have been saved to: "; // should be in Ui class?
+    private String tasksNotSavedMessage = "Your task list is empty! Adios :)";
+    private String fileNotFoundMessage = "Existing tasks file not found! Starting duke afresh...";
 
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> load() {
-        ArrayList<Task> tasks = new ArrayList<>();
+    private boolean hasDirectory() {
+        // check if parent directory exists. if not, create it
+        File file = new File(this.filePath);
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+            return false;
+        } else {
+            return true;
+        }
+    }
+    private boolean hasFile() {
+        File file = new File(this.filePath);
+
+        // check if file exists
+        if (!file.exists()) {
+            System.out.println(fileNotFoundMessage);
+            return false;
+        }
+
+        return true;
+    }
+
+    public TaskList load() {
+        TaskList tasks = new TaskList();
+        // if directory does not exist, or file does not exist, no need to load from file
+        if (!hasDirectory() || !hasFile()) {
+            return tasks;
+        }
+
+        // for each line in file
+            // create corresponding task
+            // add task to list
+
         try {
-            // create buffered reader from file
-            BufferedReader br = new BufferedReader(new FileReader(this.filePath));
+            FileInputStream fis = new FileInputStream(this.filePath);
+            ObjectInputStream ois = new ObjectInputStream(fis);
 
-            // create Gson object
-            Gson gson = new Gson();
+            tasks = (TaskList) ois.readObject();
 
-            // create type token to deal with ArrayList
-            Type taskListType = new TypeToken<ArrayList<Task>>(){}.getType();
+            ois.close();
+            fis.close();
 
-            // import tasks from json
-            tasks = gson.fromJson(br, taskListType);
-
-        } catch (FileNotFoundException e) {
-            System.out.println("Existing tasks file not found! Starting duke afresh...");
+            System.out.println(tasksImportedMessage);
         } catch (Exception e) {
             // temporary haxx
             e.printStackTrace();
         }
+
         return tasks;
     }
 
-    private Task loadTask(String line) {
-        // use Task class's constructor from String
-        Task task = new Task(line);
-        return task;
-    }
-
     public void save(TaskList tasks) {
-        // create json representation and save to given file
+        // first, check if task list is empty. if so, do not save
+        if (tasks.isEmpty()) {
+            System.out.println(tasksNotSavedMessage);
+            return;
+        }
+
         try {
-            // todo: fix file not found (create file), maybe use FileOutputStream instead
-            File file = new File(this.filePath);
-            file.createNewFile(); // result (boolean) is not required
-            PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file)));
+            FileOutputStream fos = new FileOutputStream(this.filePath);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
 
-            // create json representation of tasks
-            Gson gson = new Gson();
-            gson.toJson(tasks, pw);
+            oos.writeObject(tasks);
 
-            // print done
-            System.out.println(doneMessage + filePath);
-        } catch (IOException e) {
+            oos.close();
+            fos.close();
+
+            System.out.println(tasksSavedMessage + this.filePath);
+        } catch (Exception e) {
             // temporary haxx
             e.printStackTrace();
         }

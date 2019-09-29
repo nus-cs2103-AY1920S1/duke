@@ -1,12 +1,14 @@
 package duke.task;
 
-public class Task {
+import java.io.Serializable;
+
+public abstract class Task implements Serializable {
     private String description;
     private Boolean isDone;
     String type;
 
     public Task(String description) {
-        // todo: modify constructor to create new task from String
+        // todo: add new constructor to create new task from String
         this.description = description;
         this.isDone = false;
     }

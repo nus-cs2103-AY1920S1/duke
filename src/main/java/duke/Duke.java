@@ -15,11 +15,15 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        tasks = new TaskList();
+
         try {
-            tasks = new TaskList(storage.load());
+            TaskList tasksFromFile = storage.load();
+            tasks = tasksFromFile;
         } catch (Exception e) {
+            // temporary haxx
+            e.printStackTrace();
             ui.showLoadingError();
-            tasks = new TaskList();
         }
     }
 
@@ -39,6 +43,7 @@ public class Duke {
                 ui.showLine();
             }
         }
+        ui.showGoodbye();
     }
 
     public static void main(String[] args) {

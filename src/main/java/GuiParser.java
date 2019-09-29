@@ -17,7 +17,7 @@ public class GuiParser {
     private Tasklist tasklist;
 
     /**
-     * Parser constructor
+     * Parser constructor.
      *
      * @param tasklist tasklist containing the list of tasks
      * @param gui the ui to be used
@@ -45,59 +45,58 @@ public class GuiParser {
      */
 
     public String guiParserRead(String command) throws IOException {
-            if (command.equals("bye")) {
-                System.exit(0);
-                return gui.bye();
-            } else if (command.equals("list")) {
-                return gui.listOut() + "\n" + tasklist.printlist();
-            } else {
-                String[] ls = command.split(" ");
-                if (ls[0].equals("done")) {
-                    String num = command.substring(5, 6);
-                    return doneCommand(num);
-                } else if (ls[0].equals("todo")) {
-                    String[] td = command.split(" ");
-                    try {
-                        return todoCommand(td);
-                    } catch (DukeException e) {
-                        System.out.println(e);
-                    }
-                } else if (ls[0].equals("event")) {
-                    String[] eve = command.split(" ");
-                    return eventCommand(eve);
-                } else if (ls[0].equals("deadline")) {
-                    String[] eve = command.split(" ");
-                    return deadlineCommand(eve);
-                } else if (ls[0].equals("delete")) {
-                    String dnumber = ls[1];
-                    return deleteCommand(dnumber);
-                } else if (ls[0].equals("find")) {
-                    ArrayList<Task> temp = tasklist.find(ls[1]);
-                    String out = gui.find();
-                    out = out + "\n" + tasklist.printlistfind(temp);
-                    return out;
-                } else if (ls[0].equals("sort")) {
-                    String sorter = ls[1];
-                    tasklist.sort(sorter);
-                    storage.saveFile(tasklist.returnTasks());
-                    return "Sorted!";
-                } else if (ls[0].equals("help")) {
-                    return helpCommand();
-                } else {
-                    try {
-                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    } catch (DukeException e) {
-                        System.out.println(e);
-                    }
-                    return "OOPS!!! I'm sorry, but I don't know what that means :-(";
+        if (command.equals("bye")) {
+            System.exit(0);
+            return gui.bye();
+        } else if (command.equals("list")) {
+            return gui.listOut() + "\n" + tasklist.printlist();
+        } else {
+            String[] ls = command.split(" ");
+            if (ls[0].equals("done")) {
+                String num = command.substring(5, 6);
+                return doneCommand(num);
+            } else if (ls[0].equals("todo")) {
+                String[] td = command.split(" ");
+                try {
+                    return todoCommand(td);
+                } catch (DukeException e) {
+                    System.out.println(e);
                 }
+            } else if (ls[0].equals("event")) {
+                String[] eve = command.split(" ");
+                return eventCommand(eve);
+            } else if (ls[0].equals("deadline")) {
+                String[] eve = command.split(" ");
+                return deadlineCommand(eve);
+            } else if (ls[0].equals("delete")) {
+                String dnumber = ls[1];
+                return deleteCommand(dnumber);
+            } else if (ls[0].equals("find")) {
+                ArrayList<Task> temp = tasklist.find(ls[1]);
+                String out = gui.find();
+                out = out + "\n" + tasklist.printlistfind(temp);
+                return out;
+            } else if (ls[0].equals("sort")) {
+                String sorter = ls[1];
+                tasklist.sort(sorter);
+                storage.saveFile(tasklist.returnTasks());
+                return "Sorted!";
+            } else if (ls[0].equals("help")) {
+                return helpCommand();
+            } else {
+                try {
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                } catch (DukeException e) {
+                    System.out.println(e);
+                }
+                return "OOPS!!! I'm sorry, but I don't know what that means :-(";
             }
-            return "OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
-
+        return "OOPS!!! I'm sorry, but I don't know what that means :-(";
+    }
 
     /**
-     * Returns String of the Date and Time in the user friendly format
+     * Returns String of the Date and Time in the user friendly format.
      *
      * @param deadline deadline of event or deadline
      * @return String in user friendly format
@@ -130,6 +129,13 @@ public class GuiParser {
         return output;
     }
 
+    /**
+     * Marks the task as done.
+     *
+     * @param num index of the event that is done
+     * @return String in user friendly format
+     */
+
     public String doneCommand(String num) throws IOException {
         int res = Integer.parseInt(num);
         Task t = tasklist.get(res - 1);
@@ -138,17 +144,22 @@ public class GuiParser {
         return gui.done() + "\n" + t;
     }
 
+    /**
+     * Todo Command to be run when a todo is added.
+     *
+     * @param td the user input in an array of strings
+     * @return String in user friendly format
+     */
+
     public String todoCommand(String[] td) throws IOException, DukeException {
         if (td.length == 1) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
         String com = td[1];
         if (td.length > 1) {
-            for (int i = 2; i < td.length; i ++) {
+            for (int i = 2; i < td.length; i++) {
                 com = com + " " + td[i];
             }
-        } else {
-
         }
         tasklist.addTodo(new Todo(com));
         String out = gui.taskadded();
@@ -159,13 +170,20 @@ public class GuiParser {
         return out;
     }
 
+    /**
+     * Event Command to be run when a event is added.
+     *
+     * @param eve the user input in an array of strings
+     * @return String in user friendly format
+     */
+
     public String eventCommand(String[] eve) throws IOException {
         String com = "";
         String eventdate = "";
-        for (int i = 1; i < eve.length; i ++) {
+        for (int i = 1; i < eve.length; i++) {
             if (eve[i].equals("/at")) {
-                eventdate = eve[i+1];
-                for (int j = i+2; j < eve.length; j ++) {
+                eventdate = eve[i + 1];
+                for (int j = i + 2; j < eve.length; j++) {
                     eventdate = eventdate + " " + eve[j];
                 }
                 break;
@@ -186,13 +204,20 @@ public class GuiParser {
         return out;
     }
 
+    /**
+     * Deadline Command to be run when a deadline is added.
+     *
+     * @param eve the user input in an array of strings
+     * @return String in user friendly format
+     */
+
     public String deadlineCommand(String[] eve) throws IOException {
         String com = "";
         String deadline = "";
-        for (int i = 1; i < eve.length; i ++) {
+        for (int i = 1; i < eve.length; i++) {
             if (eve[i].equals("/by")) {
-                deadline = eve[i+1];
-                for (int j = i+2; j < eve.length; j ++) {
+                deadline = eve[i + 1];
+                for (int j = i + 2; j < eve.length; j++) {
                     deadline = deadline + " " + eve[j];
                 }
                 break;
@@ -213,17 +238,30 @@ public class GuiParser {
         return out;
     }
 
+    /**
+     * Delete Command to be run.
+     *
+     * @param dnumber the index of task to be deleted
+     * @return String in user friendly format
+     */
+
     public String deleteCommand(String dnumber) throws IOException {
         int dnum = Integer.parseInt(dnumber);
         String out = "Noted. I've removed this task:";
         assert tasklist != null : "tasklist cannot be empty";
-        out = out + "\n" + tasklist.returnTasks().get(dnum-1);
-        tasklist.delete(dnum-1);
+        out = out + "\n" + tasklist.returnTasks().get(dnum - 1);
+        tasklist.delete(dnum - 1);
         count--;
         out = out + "\n" + gui.listcount(count);
         storage.saveFile(tasklist.returnTasks());
         return out;
     }
+
+    /**
+     * Prints commands.
+     *
+     * @return String in user friendly format
+     */
 
     public String helpCommand() {
         String intro = "Here are some commands you can use:\n";

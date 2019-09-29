@@ -1,4 +1,4 @@
 1. [T][✓] krbff
-2. [T][✘] CS2103T
-3. [D][✓] fwoc (by: 6th aug)
+2. [D][✓] fwoc (by: 6th aug)
+3. [T][✓] CS2103T
 4. [E][✘] Tutorial (at: 6th of June 2019, 6.00AM)

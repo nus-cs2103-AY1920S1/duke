@@ -13,7 +13,7 @@ public class Storage {
     private Tasklist tasklist;
 
     /**
-     * Constructor for Storage instance
+     * Constructor for Storage instance.
      *
      * @throws IOException  If file is wrong
      */
@@ -45,7 +45,7 @@ public class Storage {
     }
 
     /**
-     * Method to retrieve Tasklist to get tasks
+     * Method to retrieve Tasklist to get tasks.
      *
      * @return tasklist of tasks
      */
@@ -56,7 +56,7 @@ public class Storage {
     }
 
     /**
-     * Saves the current tasks at hand into the txt file
+     * Saves the current tasks at hand into the txt file.
      *
      * @param tasks  ArrayList of the tasks
      * @throws IOException  If file is wrong
@@ -66,7 +66,7 @@ public class Storage {
         FileWriter fw = new FileWriter(tempFile);
         String texttoadd = "";
         System.out.println("These will be saved");
-        for (int i = 0; i < tasks.size(); i ++) {
+        for (int i = 0; i < tasks.size(); i++) {
             int num = i + 1;
             String textpart = num + ". " + tasks.get(i);
             if (i == 0) {
@@ -88,7 +88,7 @@ public class Storage {
     }
 
     /**
-     * Creates a file for the data to be saved
+     * Creates a file for the data to be saved.
      *
      * @throws IOException  If file is wrong
      */
@@ -117,71 +117,72 @@ public class Storage {
         createTasks(filetasks);
     }
 
+    /**
+     * Creates the tasks from the data file and saves it on current tasklist.
+     *
+     * @param filetasks an Arraylist of the tasks in the file in String format
+     * @throws FileNotFoundException  If file is wrong
+     */
+
     public void createTasks(ArrayList<String> filetasks) {
         while (!filetasks.isEmpty()) {
             String tas = filetasks.remove(0);
             String[] splittedtas = tas.split("");
             if (splittedtas[4].equals("T")) {
                 String word = "";
-                for (int i = 10; i < splittedtas.length; i ++) {
+                for (int i = 10; i < splittedtas.length; i++) {
                     word = word + splittedtas[i];
                 }
                 tasklist.addTodo(new Todo(word));
                 if (isDone(splittedtas[7])) {
-                    Task t = tasklist.returnTasks().get(tasklist.size()-1);
+                    Task t = tasklist.returnTasks().get(tasklist.size() - 1);
                     t.markAsDone();
                 }
             } else if (splittedtas[4].equals("D")) {
                 String word = "";
                 String deadline = "";
-                for (int i = 10; i < splittedtas.length; i ++) {
+                for (int i = 10; i < splittedtas.length; i++) {
                     if (splittedtas[i].equals("(")) {
-                        for (int j = i+5; j < splittedtas.length-1; j++) {
+                        for (int j = i + 5; j < splittedtas.length - 1; j++) {
                             deadline = deadline + splittedtas[j];
                         }
                         break;
                     } else {
-                        if (splittedtas[i+1].equals("(")) {
-
-                        } else {
+                        if (!splittedtas[i + 1].equals("(")) {
                             word = word + splittedtas[i];
                         }
                     }
                 }
                 tasklist.addDeadline(new Deadline(word, deadline));
                 if (isDone(splittedtas[7])) {
-                    Task t = tasklist.returnTasks().get(tasklist.size()-1);
+                    Task t = tasklist.returnTasks().get(tasklist.size() - 1);
                     t.markAsDone();
                 }
             } else if (splittedtas[4].equals("E")) {
                 String word = "";
                 String date = "";
-                for (int i = 10; i < splittedtas.length; i ++) {
+                for (int i = 10; i < splittedtas.length; i++) {
                     if (splittedtas[i].equals("(")) {
-                        for (int j = i+5; j < splittedtas.length-1; j++) {
+                        for (int j = i + 5; j < splittedtas.length - 1; j++) {
                             date = date + splittedtas[j];
                         }
                         break;
                     } else {
-                        if (splittedtas[i+1].equals("(")) {
-
-                        } else {
+                        if (!splittedtas[i + 1].equals("(")) {
                             word = word + splittedtas[i];
                         }
                     }
                 }
                 tasklist.addEvent(new Event(word, date));
                 if (isDone(splittedtas[7])) {
-                    Task t = tasklist.returnTasks().get(tasklist.size()-1);
+                    Task t = tasklist.returnTasks().get(tasklist.size() - 1);
                     t.markAsDone();
                 }
-            } else {
-
             }
         }
     }
 
     public static boolean isDone(String op) {
-        return (op.equals("\u2713"));
+        return (op.equals("✓"));
     }
 }

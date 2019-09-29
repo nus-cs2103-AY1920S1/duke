@@ -3,6 +3,12 @@ public class UI {
     public UI() {
 
     }
+
+    /**
+     * Prints out the opening.
+     *
+     */
+
     public static void start() {
         /*String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -23,6 +29,11 @@ public class UI {
     public static void printLineS() {
         System.out.println("____________________________________________________________\n");
     }
+
+    /**
+     * Prints out bye when user inputs bye.
+     *
+     */
 
     public static void bye() {
         printLine();

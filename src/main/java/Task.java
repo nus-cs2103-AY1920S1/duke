@@ -5,7 +5,7 @@ public class Task {
 
 
     /**
-     * Constructor for Task
+     * Constructor for Task.
      *
      * @param description description of the Task.
      *
@@ -16,10 +16,11 @@ public class Task {
     }
 
     /**
+     * Returns the appropriate icon for whether the task is done.
      *
      * @return the appropriate status icon for whether the task is done or not.
-     *
      */
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
@@ -28,9 +29,9 @@ public class Task {
         return this.description;
     }
 
-    public String date(){
+    public String date() {
         return "";
-    };
+    }
 
     public void markAsDone() {
         this.isDone = true;

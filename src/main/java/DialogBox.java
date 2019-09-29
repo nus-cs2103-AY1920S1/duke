@@ -46,11 +46,27 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Prints out all the tasks in the tasks list.
+     *
+     * @param l a String of what the user inputs are
+     * @param iv image of user
+     * @return DialogBox for GUI
+     */
+
     public static DialogBox getUserDialog(String l, Image iv) {
         DialogBox temp = new DialogBox(l, iv);
         temp.setStyle("-fx-background-color: #0099cc");
         return temp;
     }
+
+    /**
+     * Prints out all the tasks in the tasks list.
+     *
+     * @param l a String of what duke will reply
+     * @param iv image of duke
+     * @return DialogBox for GUI
+     */
 
     public static DialogBox getDukeDialog(String l, Image iv) {
         var db = new DialogBox(l, iv);

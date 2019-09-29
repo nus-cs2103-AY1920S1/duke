@@ -5,9 +5,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
+
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -20,7 +22,7 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private GuiUI Gui = new GuiUI();
+    private GuiUI gui = new GuiUI();
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
@@ -49,10 +51,15 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Prints the greetings using GUI.
+     *
+     */
+
     @FXML
     public void printGreeting() {
-        String output = Gui.start();
-        String list = Gui.listOut() + "\n" + duke.startList();
+        String output = gui.start();
+        String list = gui.listOut() + "\n" + duke.startList();
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(output, dukeImage),
                 DialogBox.getDukeDialog(list, dukeImage)

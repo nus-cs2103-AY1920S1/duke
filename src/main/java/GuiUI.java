@@ -3,6 +3,13 @@ public class GuiUI {
     public GuiUI() {
 
     }
+
+    /**
+     * Prints all the necessary stuff for the UI.
+     *
+     * @return String of the hellos
+     */
+
     public String start() {
         /*String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

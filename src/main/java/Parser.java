@@ -16,7 +16,7 @@ public class Parser {
     private Tasklist tasklist;
 
     /**
-     * Parser constructor
+     * Parser constructor.
      *
      * @param tasklist tasklist containing the list of tasks
      * @param ui the ui to be used
@@ -74,11 +74,9 @@ public class Parser {
                         }
                         String com = td[1];
                         if (td.length > 1) {
-                            for (int i = 2; i < td.length; i ++) {
+                            for (int i = 2; i < td.length; i++) {
                                 com = com + " " + td[i];
                             }
-                        } else {
-
                         }
                         tasklist.addTodo(new Todo(com));
                         UI.printLine();
@@ -88,17 +86,17 @@ public class Parser {
                         UI.listcount(count);
                         UI.printLineS();
                         storage.saveFile(tasklist.returnTasks());
-                    } catch (DukeException e){
+                    } catch (DukeException e) {
                         System.out.println(e);
                     }
                 } else if (ls[0].equals("event")) {
                     String[] eve = command.split(" ");
                     String com = "";
                     String eventdate = "";
-                    for (int i = 1; i < eve.length; i ++) {
+                    for (int i = 1; i < eve.length; i++) {
                         if (eve[i].equals("/at")) {
-                            eventdate = eve[i+1];
-                            for (int j = i+2; j < eve.length; j ++) {
+                            eventdate = eve[i + 1];
+                            for (int j = i + 2; j < eve.length; j++) {
                                 eventdate = eventdate + " " + eve[j];
                             }
                             break;
@@ -122,10 +120,10 @@ public class Parser {
                     String[] eve = command.split(" ");
                     String com = "";
                     String deadline = "";
-                    for (int i = 1; i < eve.length; i ++) {
+                    for (int i = 1; i < eve.length; i++) {
                         if (eve[i].equals("/by")) {
-                            deadline = eve[i+1];
-                            for (int j = i+2; j < eve.length; j ++) {
+                            deadline = eve[i + 1];
+                            for (int j = i + 2; j < eve.length; j++) {
                                 deadline = deadline + " " + eve[j];
                             }
                             break;
@@ -150,8 +148,8 @@ public class Parser {
                     int dnum = Integer.parseInt(dnumber);
                     UI.printLine();
                     System.out.println("Noted. I've removed this task:");
-                    System.out.println(tasklist.returnTasks().get(dnum-1));
-                    tasklist.delete(dnum-1);
+                    System.out.println(tasklist.returnTasks().get(dnum - 1));
+                    tasklist.delete(dnum - 1);
                     count--;
                     UI.listcount(count);
                     UI.printLineS();
@@ -173,7 +171,7 @@ public class Parser {
     }
 
     /**
-     * Returns String of the Date and Time in the user friendly format
+     * Returns String of the Date and Time in the user friendly format.
      *
      * @param deadline deadline of event or deadline
      * @return String in user friendly format

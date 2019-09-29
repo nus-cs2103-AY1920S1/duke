@@ -26,7 +26,7 @@ public class Storage {
         StringBuilder path = new StringBuilder();
         path.append(root);
 
-        File directory = new File(path + "/duke/src/main//java/data");
+        File directory = new File(path + "/data");
 
         if (!directory.exists()) {
             directory.mkdirs();

@@ -18,6 +18,7 @@ public class DeleteCommand extends Command {
         int taskIndex = Integer.parseInt(fullCommand.replaceAll("\\D+","")) - 1;
         Task deletedTask = tasks.getTasks().get(taskIndex);
         tasks.deleteTask(taskIndex);
+        ui.clearResponse();
         ui.showTaskDeleted(deletedTask, tasks.getNumberOfTasks());
     }
 

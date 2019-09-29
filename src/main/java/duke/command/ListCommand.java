@@ -15,10 +15,13 @@ public class ListCommand extends Command {
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.clearResponse();
         ui.showTasksMessage();
         for (int i = 1; i < tasks.getNumberOfTasks() + 1; i++) {
             Task currentTask = tasks.getTasks().get(i - 1);
-            System.out.println(String.format(i + "." + currentTask, currentTask.getStatusIcon()));
+            String line = String.format(i + "." + currentTask, currentTask.getStatusIcon());
+            ui.setResponse(line);
+            System.out.println(line);
         }
     }
     public boolean isExit() {

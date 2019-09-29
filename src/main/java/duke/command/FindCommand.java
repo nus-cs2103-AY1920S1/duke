@@ -14,6 +14,7 @@ public class FindCommand extends Command {
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.clearResponse();
         ui.showMatchingTasksMessage();
         for (Task task : tasks.getTasks()) {
             String description = task.getDescription();

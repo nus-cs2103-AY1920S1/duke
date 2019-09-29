@@ -18,6 +18,7 @@ public class DoneCommand extends Command {
         int taskIndex = Integer.parseInt(fullCommand.replaceAll("\\D+","")) - 1;
         Task completedTask = tasks.getTasks().get(taskIndex);
         tasks.doneTask(completedTask);
+        ui.clearResponse();
         ui.showTaskDone(completedTask);
     }
 

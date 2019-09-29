@@ -19,6 +19,7 @@ public class AddCommand extends Command {
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(addedTask);
+        ui.clearResponse();
         ui.showTaskAdded(addedTask, tasks.getNumberOfTasks());
     }
 

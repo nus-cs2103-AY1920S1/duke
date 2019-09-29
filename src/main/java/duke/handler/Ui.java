@@ -11,9 +11,11 @@ import java.util.Scanner;
 public class Ui {
 
     private Scanner scanner;
+    private String response;
 
     public Ui() {
         this.scanner = new Scanner(System.in);
+        this.response = "";
     }
 
     public void showWelcome() {
@@ -22,54 +24,78 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke" + "\n" + "What can I do for you?");
+        response = "Hello from\n" + logo + "Hello! I'm Duke\nWhat can I do for you?";
+        System.out.println(response);
     }
 
     public void showFarewell() {
         scanner.close();
-        System.out.println("Bye. Hope to see you again soon!");
+        setResponse("Bye. Hope to see you again soon!");
+        System.out.println(response);
     }
 
     public void showTasksMessage() {
-        System.out.println("Here are the tasks in your list:");
+        setResponse("Here are the tasks in your list:");
+        System.out.println(response);
     }
 
     public void showTaskAdded(Task addedTask, int numberOfTasks) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(addedTask);
-        System.out.println(String.format("Now you have %d tasks in the list.", numberOfTasks));
+        setResponse("Got it. I've added this task:");
+        setResponse(addedTask.toString());
+        setResponse(String.format("Now you have %d tasks in the list.", numberOfTasks));
+        System.out.println(response);
     }
 
     public void showTaskDeleted(Task deletedTask, int numberOfTasks) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(deletedTask);
-        System.out.println(String.format("Now you have %d tasks in the list.", numberOfTasks));
+        setResponse("Noted. I've removed this task:");
+        setResponse(deletedTask.toString());
+        setResponse(String.format("Now you have %d tasks in the list.", numberOfTasks));
+        System.out.println(response);
     }
 
     public void showTaskDone(Task completedTask) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(completedTask);
+        setResponse("Nice! I've marked this task as done:");
+        setResponse(completedTask.toString());
+        System.out.println(response);
     }
 
     public void showMatchingTasksMessage() {
-        System.out.println("Here are the matching tasks in your list:");
+        setResponse("Here are the matching tasks in your list:");
+        System.out.println(response);
     }
 
     public void showMatchingTasks(Task matchedTask, int taskIndex) {
-        System.out.println(taskIndex + "." + matchedTask);
+        setResponse(taskIndex + "." + matchedTask);
+        System.out.println(response);
     }
 
-    public void showLine() {
-        System.out.println("_______________________________");
-    }
+//    public void showLine() {
+//        setResponse("_______________________________");
+//        System.out.println("_______________________________");
+//    }
 
     public void showError(String error) {
+        clearResponse();
+        setResponse(error);
         System.out.println(error);
     }
 
     public void showLoadingError() {
-        System.out.println("☹ OOPS!!! File could not be found.");
+        clearResponse();
+        setResponse("☹ OOPS!!! File could not be found.");
+        System.out.println(response);
+    }
+
+    public void setResponse(String line) {
+        response += line + "\n";
+    }
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void clearResponse() {
+        response = "";
     }
 
     public String readCommand() {

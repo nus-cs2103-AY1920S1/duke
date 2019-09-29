@@ -1,7 +1,6 @@
 /**
- * Represents the add command which is activated when there is a valid task.
- * An <code>AddCommand</code> object adds valid to task to the taskList.
- * e.g., <code>/*event test </code>
+ * Represents a user command. A <code>AddCommand</code> object corresponds to
+ * with a valid task creation command e.g., <code>event test code /at 14/09/2019 0830</code>
  */
 
 public class AddCommand extends Command {

@@ -2,6 +2,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Represents the date and time for events and deadlines.
+ * A <code>DateTime</code> object will be created to represent
+ * the date and time of tasks. e.g., <code>event test code /at 14/09/2019 0830</code>
+ */
+
 public class DateTime {
 
     protected String input;

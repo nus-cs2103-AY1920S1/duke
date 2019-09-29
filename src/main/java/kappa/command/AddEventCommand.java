@@ -48,6 +48,33 @@ public class AddEventCommand extends Command {
     }
 
     /**
+     * Gets task.
+     *
+     * @return Task.
+     */
+    public String getTask() {
+        return this.task;
+    }
+
+    /**
+     * Gets tags.
+     *
+     * @return Tags.
+     */
+    public Tags getTags() {
+        return this.tags;
+    }
+
+    /**
+     * Gets date in string.
+     *
+     * @return date in string format.
+     */
+    public String getDate() {
+        return this.date;
+    }
+
+    /**
      * Executes the command by adding event task to list and print to user.
      *
      * @param tasks List containing current tasks.

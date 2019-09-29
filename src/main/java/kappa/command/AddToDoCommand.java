@@ -30,6 +30,24 @@ public class AddToDoCommand extends Command {
     }
 
     /**
+     * Gets task.
+     *
+     * @return Task.
+     */
+    public String getTask() {
+        return this.task;
+    }
+
+    /**
+     * Gets tags.
+     *
+     * @return Tags.
+     */
+    public Tags getTags() {
+        return this.tags;
+    }
+
+    /**
      * Executes the command by adding to-do task to list and print to user.
      *
      * @param tasks List containing current tasks.

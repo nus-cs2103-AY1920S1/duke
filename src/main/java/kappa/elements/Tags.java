@@ -34,4 +34,18 @@ public class Tags {
         }
         return formattedString.toString().trim();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Tags)) {
+            return false;
+        }
+        Tags t2 = (Tags) o;
+        if (t2 == this) {
+            return true;
+        }
+        return this.tagSet.containsAll(t2.tagSet) && t2.tagSet.containsAll(this.tagSet);
+
+
+    }
 }

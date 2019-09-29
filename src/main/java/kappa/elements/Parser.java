@@ -60,20 +60,20 @@ public class Parser {
         case "todo":
             String[] splitByTagToDo = fullCommand.split("/t");
             checkValidity("todo", splitByTagToDo[0], splitByTagToDo[0].split(" "));
-            return new AddToDoCommand(splitByTagToDo[0].substring(5), parseTags(splitByTagToDo));
+            return new AddToDoCommand(splitByTagToDo[0].substring(5).trim(), parseTags(splitByTagToDo));
         case "deadline":
             String[] splitByTagDeadline = fullCommand.split("/t");
             checkValidity("deadline", splitByTagDeadline[0].trim(), splitByTagDeadline[0].split(" "));
             String[] deadlineSplitByTokens = splitByTagDeadline[0].trim().split(" /by ");
-            String deadlineDesc = deadlineSplitByTokens[0].substring(9);
-            String deadlineDate = deadlineSplitByTokens[deadlineSplitByTokens.length - 1];
+            String deadlineDesc = deadlineSplitByTokens[0].substring(9).trim();
+            String deadlineDate = deadlineSplitByTokens[deadlineSplitByTokens.length - 1].trim();
             return getValidDeadlineCommand(deadlineDesc, deadlineDate, parseTags(splitByTagDeadline));
         case "event":
             String[] splitByTagEvent = fullCommand.split("/t");
             checkValidity("event", splitByTagEvent[0], splitByTagEvent[0].split(" "));
             String[] eventSplitByTokens = splitByTagEvent[0].split(" /at ");
-            String eventDesc = eventSplitByTokens[0].substring(6);
-            String eventDate = eventSplitByTokens[eventSplitByTokens.length - 1];
+            String eventDesc = eventSplitByTokens[0].substring(6).trim();
+            String eventDate = eventSplitByTokens[eventSplitByTokens.length - 1].trim();
             return getValidEventCommand(eventDesc, eventDate, parseTags(splitByTagEvent));
         default:
             return new NullCommand(firstWord);

@@ -56,11 +56,6 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (response.contains("See you again.")) {
-            try {
-                Thread.sleep(3 * 1000);
-            } catch (InterruptedException ie) {
-                Thread.currentThread().interrupt();
-            }
             System.exit(0);
         }
     }

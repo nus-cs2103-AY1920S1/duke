@@ -41,8 +41,4 @@ Find
 # Feedback, Bug Reports
 
 * If you have feedback or bug reports, please submit in issue or email lawnce@gmail.com.
-<<<<<<< HEAD
 * We welcome pull requests too.
-=======
-* We welcome pull requests too.
->>>>>>> 43dd94b7611f2a0bf0821ecfdbf74509df47df82

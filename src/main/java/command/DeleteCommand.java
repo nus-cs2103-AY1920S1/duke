@@ -27,7 +27,9 @@ public class DeleteCommand implements Command {
      * @param taskList The TaskList from the main Duke object.
      * @param storage The Storage from the main Duke object.
      */
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
+        String toReturn = "";
+
         try {
             ArrayList<Task> list = taskList.getTaskList();
             if (taskNum > list.size() || taskNum <= 0) {
@@ -36,11 +38,13 @@ public class DeleteCommand implements Command {
             Task task = list.remove(taskNum - 1);
             int listSize =  list.size();
 
-            UI.removedTask(task, listSize);
-
             storage.writeToFile(list);
+
+            return UI.removedTask(task, listSize);
         } catch (DeleteException delExp) {
             System.err.println(delExp);
         }
+
+        return toReturn;
     }
 }

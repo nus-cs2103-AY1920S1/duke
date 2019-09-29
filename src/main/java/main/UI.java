@@ -12,6 +12,8 @@ public interface UI {
 
     /**
      * Prints the start message when Duke is executed.
+     *
+     * @return The start message.
      */
     static String start() {
         return "    ____________________________________________________________\n"
@@ -23,6 +25,8 @@ public interface UI {
 
     /**
      * Prints the closing message when a ByeCommand is executed.
+     *
+     * @return The bye message.
      */
     static String bye() {
         return ("Bye. Hope to see you again soon!");
@@ -32,12 +36,13 @@ public interface UI {
      * Prints the contents of the TaskList (given as an argument) whenever a new task is added to the TaskList.
      *
      * @param taskList A TaskList instance unique to each instance of Duke.
+     *
+     * @return The message explaining a new task.
      */
-    static void newTask(ArrayList<Task> taskList) {
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("    " + taskList.get(taskList.size() - 1));
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-
+    static String newTask(ArrayList<Task> taskList) {
+        return "Got it. I've added this task: \n"
+                +   "    "  + taskList.get(taskList.size() - 1) + "\n"
+                + "Now you have " + taskList.size() + " tasks in the list. \n";
     }
 
     /**
@@ -46,46 +51,54 @@ public interface UI {
      *
      * @param task The Task to be removed from the TaskList.
      * @param listSize The size of the TaskList, after removal of Task.
+     *
+     * @return The message explaining the deletion of a task.
      */
-    static void removedTask(Task task, int listSize){
-        System.out.println(" Noted. I've removed this task: ");
-        System.out.println("    " + task);
-        System.out.println("Now you have " + listSize + " tasks in the list.");
-
+    static String removedTask(Task task, int listSize){
+        return " Noted. I've removed this task: \n"
+                + "    " + task + "\n"
+                + "Now you have " + listSize + " tasks in the list.\n";
     }
 
     /**
      * Prints the number of Tasks in the TaskList (given as an argument).
      *
      * @param taskList A TaskList instance unique to each instance of Duke.
+     *
+     * @return The number of tasks in the TaskList.
      */
-    static void numTasks(ArrayList<Task> taskList) {
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-
+    static String numTasks(ArrayList<Task> taskList) {
+        return "Now you have " + taskList.size() + " tasks in the list.\n";
     }
 
     /**
      * Prints that a given Task is designated as done, typically when a DoneCommand is excuted.
      *
      * @param task The Task designated as done.
+     *
+     * @return The done message.
      */
-    static void done(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(" " + task);
+    static String done(Task task) {
+        return "Nice! I've marked this task as done:\n"
+                + " " + task + "\n";
     }
 
     /**
      * Prints the first portion of a find Command.
+     *
+     * @return The start message when a FindCommand is executed.
      */
-    public static void findStart(){
-        System.out.println("    ____________________________________________________________\n" +
-                "     Here are the matching tasks in your list:");
+    static String findStart(){
+        return "    ____________________________________________________________\n"
+                + "     Here are the matching tasks in your list: \n";
     }
 
     /**
      * Prints a plain line.
+     *
+     * @return Returns a line.
      */
-    public static void endLine() {
-        System.out.println("    ____________________________________________________________");
+    static String endLine() {
+        return "    ____________________________________________________________";
     }
 }

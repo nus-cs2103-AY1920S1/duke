@@ -18,12 +18,17 @@ public class ListCommand implements Command {
      * @param taskList The TaskList from the main Duke object.
      * @param storage The Storage from the main Duke object.
      */
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
+        StringBuilder toReturn = new StringBuilder();
         ArrayList<Task> list = taskList.getTaskList();
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) != null) {
-                System.out.println(i + 1 + "." + list.get(i));
+                toReturn.append(i + 1);
+                toReturn.append(".");
+                toReturn.append(list.get(i));
+                toReturn.append("\n");
             }
         }
+        return toReturn.toString();
     }
 }

@@ -30,7 +30,7 @@ public class TodoCommand implements Command {
      * @param taskList The TaskList from the main Duke object.
      * @param storage The Storage from the main Duke object.
      */
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         ArrayList<Task> list = taskList.getTaskList();
 
         Task todo = new Todo(todoName);
@@ -38,6 +38,6 @@ public class TodoCommand implements Command {
         taskList.addTaskList(todo);
         storage.writeToFile(list);
 
-        UI.newTask(list);
+        return UI.newTask(list);
     }
 }

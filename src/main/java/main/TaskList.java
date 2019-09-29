@@ -13,7 +13,7 @@ public class TaskList {
     private ArrayList<Task> list;
 
     /**
-     * Instantiates a TaskList object with an empty ArrayList<Task>.
+     * Instantiates a TaskList object with an empty ArrayList.
      */
     public TaskList() {
         list = new ArrayList<>();

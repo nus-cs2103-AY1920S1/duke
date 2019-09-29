@@ -13,8 +13,8 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tl, Storage st) {
-        UI.findStart();
+    public String execute(TaskList tl, Storage st) {
+        StringBuilder toReturn = new StringBuilder(UI.findStart());
         int counter = 1;
 
         for (Task task : tl.getTaskList()) {
@@ -22,13 +22,18 @@ public class FindCommand implements Command {
 
             for (String nameComponent : taskNameComponents) {
                 if (nameComponent.equalsIgnoreCase(searchTerm)) {
-                    System.out.println("     " + counter + "." + task);
+                    toReturn.append("     " );
+                    toReturn.append(counter);
+                    toReturn.append(".");
+                    toReturn.append(task);
+                    toReturn.append("\n");
                     counter++;
                     break;
                 }
             }
         }
+        toReturn.append(UI.endLine());
 
-        UI.endLine();
+        return toReturn.toString();
     }
 }

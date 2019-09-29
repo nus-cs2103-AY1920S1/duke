@@ -1,32 +1,18 @@
-import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
 
-import command.ByeCommand;
 import command.Command;
 import main.Parser;
 import main.Storage;
 import main.TaskList;
-import main.UI;
 import task.Task;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Duke runs as the main and this is where all the work is initialised at.
@@ -103,8 +89,12 @@ public class Duke {
     }*/
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Sends the user input to Duke backend to be processed.
+     *
+     * @param input String input from the user.
+     * @param duke This instance of Duke.
+     *
+     * @return Returns a string to be shown to the user.
      */
     @FXML
     public String getResponse(String input, Duke duke) {
@@ -115,6 +105,6 @@ public class Duke {
             System.err.println(io);
         }
 
-        return "Duke heard: " + toReturn;
+        return toReturn;
     }
 }

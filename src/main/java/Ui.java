@@ -1,5 +1,3 @@
-import tasks.Task;
-
 /**
  * Deals with the interactions with the user.
  *

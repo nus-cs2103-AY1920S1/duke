@@ -1,5 +1,3 @@
-import exception.DukeException;
-import tasks.Event;
 import java.util.Date;
 import java.io.IOException;
 import java.text.ParseException;

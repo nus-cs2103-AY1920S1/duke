@@ -1,5 +1,3 @@
-import exception.DukeException;
-
 /**
  * Handles the user command.
  *
@@ -18,7 +16,7 @@ public class Parser {
      */
     public static Command getCommand(String input) throws DukeException {
         String[] inputArr = input.split(" ");
-        String command = inputArr[0];
+        String command = inputArr[0].toLowerCase();
         switch (command) {
         case "todo":
             return new TodoCommand(input);

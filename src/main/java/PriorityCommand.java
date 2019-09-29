@@ -1,6 +1,3 @@
-import exception.DukeException;
-import tasks.Task;
-
 import java.io.IOException;
 
 public class PriorityCommand extends Command {

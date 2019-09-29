@@ -19,13 +19,13 @@ public class HelpCommand extends Command {
      */
     public String execute(Storage storage, TaskList taskList, Ui ui) {
         StringBuilder help = new StringBuilder("List of commands:\n");
-        help.append("- todo TASKNAME\n");
-        help.append("- deadline TASKNAME /by DATE\n");
-        help.append("- event TASKNAME /at DATE\n");
+        help.append("- todo TASK_NAME\n");
+        help.append("- deadline TASK_NAME /by DATE\n");
+        help.append("- event TASK_NAME /at DATE\n");
         help.append("- list\n");
-        help.append("- done TASKNUMBER\n");
+        help.append("- done TASK_NUMBER\n");
         help.append("- find KEYWORD\n");
-        help.append("- priority TASKNUMBER LEVEL\n");
+        help.append("- priority TASK_NUMBER LEVEL\n");
         help.append("- clear\n");
         help.append("Note:\nDATE is in the format \"dd MMM yyyy hh:mm\".\n");
         help.append("Words in UPPER_CASE are the parameters to be supplied.");

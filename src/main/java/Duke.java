@@ -1,10 +1,3 @@
-import exception.DukeException;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.scene.image.Image;
 import java.text.ParseException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,29 +13,21 @@ public class Duke {
     protected Storage storage;
     protected TaskList taskList;
     protected Ui ui;
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass()
-            .getResourceAsStream("images/DaUser.png"));
-    private Image duke = new Image(this.getClass()
-            .getResourceAsStream("images/DaDuke.png"));
 
     /**
      * Creates the task manager with the relevant ui, storage and task list.
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("data/duke.txt");
-        // storage to change such that accessible on other devices
+        storage = new Storage();
         try {
             taskList = new TaskList(storage.load());
         } catch (FileNotFoundException f) {
             System.out.println("File is not found.");
         } catch (ParseException p) {
             System.out.println("Parse exception occurred. Please ensure correct input format.");
+        } catch (IOException io) {
+            System.out.println("IOException occurred.");
         }
     }
 

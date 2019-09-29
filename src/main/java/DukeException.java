@@ -1,5 +1,3 @@
-package exception;
-
 /**
  *  Simulates an exception in Duke.
  *

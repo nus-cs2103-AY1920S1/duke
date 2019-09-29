@@ -1,5 +1,3 @@
-package tasks;
-
 import java.util.Date;
 
 /**

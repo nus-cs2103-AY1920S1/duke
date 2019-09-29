@@ -1,7 +1,3 @@
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
@@ -18,16 +14,14 @@ import java.text.SimpleDateFormat;
  * @author Michelle Yong
  */
 public class Storage {
-    private String filePath;
-
+    private final String DIRECTORY_PATH = System.getProperty("user.dir") + "/data";
+    private final String FILE_PATH = this.DIRECTORY_PATH + "/mytasks.txt";
+    private File directory = new File(DIRECTORY_PATH);
+    private File file = new File(FILE_PATH);
     /**
      * Creates the storage with the file of tasks.
-     *
-     * @param filePath The path to the file of tasks.
      */
-    public Storage(String filePath) {
-        this.filePath = filePath;
-    }
+    public Storage() {}
 
     /**
      * Loads the task from the file into an array list.
@@ -36,9 +30,14 @@ public class Storage {
      * @throws FileNotFoundException If file is not found.
      * @throws ParseException If a parse exception occurred.
      */
-    public ArrayList<Task> load() throws FileNotFoundException, ParseException {
-        ArrayList<Task> list = new ArrayList<Task>();
-        File file = new File(filePath);
+    public ArrayList<Task> load() throws FileNotFoundException, ParseException, IOException {
+        ArrayList<Task> list = new ArrayList<>();
+        if (!this.directory.exists()) {
+            this.directory.mkdir();
+        }
+        if (!this.file.exists()) {
+            this.file.createNewFile();
+        }
         Scanner fs = new Scanner(file);
         while (fs.hasNext()) {
             String line = fs.nextLine();
@@ -46,25 +45,26 @@ public class Storage {
             String[] taskArr = line.split(" \\| ");
             String type = taskArr[0];
             if (type.equals("T")) {
-                loadTodoToList(type, taskArr, list);
+                loadTodoToList(taskArr, list);
             } else if (type.equals("D")) {
-                loadDeadlineToList(type, taskArr, list);
+                loadDeadlineToList(taskArr, list);
             } else if (type.equals("E")) {
-                loadEventToList(type, taskArr, list);
+                loadEventToList(taskArr, list);
             }
         }
         fs.close();
         return list;
     }
 
-    public void loadTodoToList(String type, String[] taskArr, ArrayList<Task> list) {
+    public void loadTodoToList(String[] taskArr, ArrayList<Task> list) {
         Todo todo = new Todo(taskArr[2]);
         updateDone(todo, taskArr);
         updatePriority(todo, taskArr);
         list.add(todo);
     }
 
-    public void loadDeadlineToList(String type, String[] taskArr, ArrayList<Task> list)
+
+    public void loadDeadlineToList(String[] taskArr, ArrayList<Task> list)
             throws ParseException {
         Deadline deadline = new Deadline(taskArr[2], getDate(taskArr));
         updateDone(deadline, taskArr);
@@ -72,7 +72,7 @@ public class Storage {
         list.add(deadline);
     }
 
-    public void loadEventToList(String type, String[] taskArr, ArrayList<Task> list)
+    public void loadEventToList(String[] taskArr, ArrayList<Task> list)
             throws ParseException {
         Event event = new Event(taskArr[2], getDate(taskArr));
         updateDone(event, taskArr);
@@ -122,7 +122,7 @@ public class Storage {
      * @throws IOException If an input or output exception occurred.
      */
     private void appendToFile(String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true);
+        FileWriter fw = new FileWriter(FILE_PATH, true);
         fw.write(textToAppend);
         fw.close();
     }
@@ -137,23 +137,17 @@ public class Storage {
         StringBuffer textToAdd = new StringBuffer();
         String type = task.getType();
         if (type.equals("T")) {
-            assert (type.equals("T"));
             textToAdd.append("T | ");
         } else if (type.equals("D")) {
-            assert (type.equals("D"));
             textToAdd.append("D | ");
         } else if (type.equals("E")) {
-            assert (type.equals("E"));
             textToAdd.append("E | ");
         }
         textToAdd.append(task.getStatusNum());
         textToAdd.append(" | ");
         textToAdd.append(task.getDescription());
-
-        // add priority!!!!!!!!!!!!!!!!!!!!
         textToAdd.append(" | ");
         textToAdd.append(task.getPriority());
-
         if (type.equals("D") || type.equals("E")) {
             assert (type.equals("D") || type.equals("E"));
             textToAdd.append(" | ");
@@ -181,7 +175,7 @@ public class Storage {
      * @throws IOException If an input or output exception occurred.
      */
     private void writeToFile(String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
+        FileWriter fw = new FileWriter(FILE_PATH);
         fw.write(textToAdd);
         fw.close();
     }

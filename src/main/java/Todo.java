@@ -1,5 +1,3 @@
-package tasks;
-
 /**
  * Represents a todo.
  *

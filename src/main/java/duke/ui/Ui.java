@@ -1,5 +1,7 @@
 package duke.ui;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import duke.exception.DukeException;
@@ -154,7 +156,9 @@ public class Ui {
     public void showAllAliases(Aliases aliases) {
         this.content.append(INDENT);
         this.content.append("Here are the available aliases (left) and their mapped keywords (right):\n");
-        for (String alias: aliases.getAllAliases()) {
+        List<String> allAliases = new ArrayList<>(aliases.getAllAliases());
+        Collections.sort(allAliases);
+        for (String alias: allAliases) {
             this.content.append(INDENT);
             this.content.append(String.format("\"%s\": \"%s\".\n", alias, aliases.getKeyword(alias)));
         }
@@ -198,6 +202,7 @@ public class Ui {
     public String toString() {
         String output = content.toString();
         this.content = new StringBuilder();
+        System.out.println(output);
         return output;
     }
 }

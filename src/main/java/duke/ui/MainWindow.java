@@ -57,12 +57,12 @@ public class MainWindow {
 
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(900.0);
+        stage.setMinWidth(600.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(600.0, 900.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(585, 830);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -73,9 +73,9 @@ public class MainWindow {
         dialogContainer.setPadding(new Insets(10, 10, 10, 10));
         dialogContainer.setSpacing(20);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(540.0);
 
-        sendButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(60.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 

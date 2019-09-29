@@ -46,7 +46,7 @@ public class Parser {
 
     private Command parseDone(String arguments) throws DukeException {
         try {
-            return new DoneCommand(Integer.parseInt(arguments));
+            return new DoneCommand(Integer.parseInt(arguments) - 1);
         } catch (Exception e) {
             throw new DukeException("Invalid task number!");
         }

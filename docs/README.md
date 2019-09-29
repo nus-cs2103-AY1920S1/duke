@@ -25,6 +25,7 @@ Format : 'deadline {description) /by {date}'
 
 #### 3.1.3 Event Task
 Format : 'event {description} /at {mm/dd/yyyy hh mm)'
+Example : event birthday /at 10/10/2019 18 00
 
 ### 3.2 List
 Shows the list of all tasks in stored in Duke at that point.

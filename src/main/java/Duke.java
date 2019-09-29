@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Scanner;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -140,7 +141,23 @@ public class Duke extends Application {
      */
     public String getResponse(String command) {
         Parser parser = new Parser();
-        String contents = Storage.readFile();
+        String contents;
+        try {
+            contents = readFile();
+        } catch (Exception e) {
+            try {
+                FileWriter fw = new FileWriter("duke.txt");
+                fw.write("");
+                fw.close();
+            } catch (Exception e2) {
+                return e2.getMessage();
+            }
+            try {
+                contents = readFile();
+            } catch (Exception e3) {
+                return e3.getMessage();
+            }
+        }
         TaskList tasks = new TaskList();
         String message;
 
@@ -184,7 +201,7 @@ public class Duke extends Application {
                                 i + 1
                         );
                     }
-                    Storage.saveFile(tasks);
+                    saveFile(tasks);
                     return list;
                 } else if (parser.isDone(commandTokens)) {
                     int completedIndex = Integer.parseInt(commandTokens[1]) - 1;
@@ -192,7 +209,7 @@ public class Duke extends Application {
                     Task completedTask = tasks.getTask(completedIndex);
                     completedTask.setCompleted();
                     message += completedTask;
-                    Storage.saveFile(tasks);
+                    saveFile(tasks);
                     return message;
                 } else if (parser.isTodo(commandTokens)) {
                     if (commandTokens.length == 1) {
@@ -205,7 +222,7 @@ public class Duke extends Application {
                             newTask,
                             tasks.getSize()
                     );
-                    Storage.saveFile(tasks);
+                    saveFile(tasks);
                     return message;
                 } else if (parser.isDeadline(commandTokens)) {
                     String[] deadlineTokens = command.substring(9).split(" /by ");
@@ -216,7 +233,7 @@ public class Duke extends Application {
                             newTask,
                             tasks.getSize()
                     );
-                    Storage.saveFile(tasks);
+                    saveFile(tasks);
                     return message;
                 } else if (parser.isEvent(commandTokens)) {
                     String[] eventTokens = command.substring(6).split(" /at ");
@@ -227,7 +244,7 @@ public class Duke extends Application {
                             newTask,
                             tasks.getSize()
                     );
-                    Storage.saveFile(tasks);
+                    saveFile(tasks);
                     return message;
                 } else if (parser.isDelete(commandTokens)) {
                     int removeIndex = Integer.parseInt(commandTokens[1]) - 1;
@@ -237,7 +254,7 @@ public class Duke extends Application {
                             "Noted. I've removed this task:\n  %sNow you have %d tasks in the list.",
                             removeTask,
                             tasks.getSize());
-                    Storage.saveFile(tasks);
+                    saveFile(tasks);
                     return message;
                 } else if (parser.isFind(commandTokens)) {
                     String keyword = commandTokens[1];
@@ -256,7 +273,7 @@ public class Duke extends Application {
                                 i + 1
                         );
                     }
-                    Storage.saveFile(tasks);
+                    saveFile(tasks);
                     return list;
 
                 } else {
@@ -267,7 +284,7 @@ public class Duke extends Application {
             }
         } else {
 
-            Storage.saveFile(tasks);
+            saveFile(tasks);
             return "Bye. Hope to see you again soon!";
 
         }
@@ -282,7 +299,12 @@ public class Duke extends Application {
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser();
 
-        String contents = Storage.readFile();
+        String contents = "";
+        try {
+            contents = readFile();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         System.out.println(
                 Ui.formatMessage("Hello, I'm duke.Duke\nWhat can I do for you?")
@@ -414,11 +436,40 @@ public class Duke extends Application {
             commandTokens = command.split(" ");
         }
 
-        Storage.saveFile(tasks);
+        saveFile(tasks);
 
         System.out.println(
                 Ui.formatMessage("Bye. Hope to see you again soon!")
         );
+    }
+
+    /**
+     * Method to read saved tasks from file.
+     */
+
+    public static String readFile() throws Exception {
+        String contents = "";
+        FileReader reader = new FileReader("duke.txt");
+        int i;
+        while ((i = reader.read()) != -1) {
+            contents += (char) i;
+        }
+        reader.close();
+
+        return contents;
+    }
+
+    public static void saveFile(TaskList tasks) {
+        try {
+            FileWriter fstream = new FileWriter("duke.txt");
+            BufferedWriter out = new BufferedWriter(fstream);
+            for (int i = 0; i < tasks.getSize(); i++) {
+                out.write(tasks.getTask(i).saveString());
+            }
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

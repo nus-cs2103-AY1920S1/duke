@@ -13,18 +13,14 @@ public class Storage {
      * Method to read saved tasks from file.
      */
 
-    public static String readFile() {
+    public static String readFile() throws Exception {
         String contents = "";
-        try {
-            FileReader reader = new FileReader("data/duke.txt");
-            int i;
-            while ((i = reader.read()) != -1) {
-                contents += (char) i;
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        FileReader reader = new FileReader("../duke.txt");
+        int i;
+        while ((i = reader.read()) != -1) {
+            contents += (char) i;
         }
+        reader.close();
 
         return contents;
     }

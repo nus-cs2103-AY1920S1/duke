@@ -71,14 +71,14 @@ Duke Increment | Tutorial
     * Allows you to view a list of all useful commands
 1. Add a task:
     * 'todo' 
-    	* Format: [task details]
-    	* Adds a todo-type task for you
+        * Format: [task details]
+        * Adds a todo-type task for you
     * 'deadline' 
-    	* Format: [task details] /by [dd/mm/yyyy] [24hr time format]
- 	* Adds a deadline-type task for you
+        * Format: [task details] /by [dd/mm/yyyy] [24hr time format]
+        * Adds a deadline-type task for you
     * 'event' 
-	* Format: [task details] /at [dd/mm/yyyy] [start time(24hr time format)]-[end time(24hr time format)]
-	* Adds an event-type task for you
+        * Format: [task details] /at [dd/mm/yyyy] [start time(24hr time format)]-[end time(24hr time format)]
+        * Adds an event-type task for you
 1. Delete a task: 'delete'
     * Format: delete [n]
     * Deletes the nth task in the list
@@ -94,7 +94,7 @@ Duke Increment | Tutorial
 1. Add an expense: 'spending'
     * Format: spending [category] [amount] [description]
     * Below is the list of all available categories:
-	1. Food
+        1. Food
         1. Transport
         1. Education
         1. Household

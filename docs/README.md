@@ -115,6 +115,8 @@ There are three modes of changing:
 
 1. changing `task name`, `date` and `time`
    * Format on command Line: 
+     * For this command, match the type of task in the list to the type here E.g if the task is 'Event' then follow 'Event'
+     * Any deviation from the above will cause bugs
      * For `Event` tasks: edit [index]  [task name] t: [dd/mm/yy hhmm-hhmm] 
      * For `Deadline` tasks: edit [index]  [task name] t: [dd/mm/yy hhmm] 
      * For `Todo` tasks: edit [task name] t:

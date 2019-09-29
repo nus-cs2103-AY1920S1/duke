@@ -3,7 +3,7 @@ Duke is a java interactive console application which aims to help the user to
  better manage his tasks. It stores the description, date and the status(whether it is done)
  of a task in a local txt file for the user to track all these tasks.
 
-![Duke UI](UI.png)
+![Duke UI](Ui.png)
 
 ## List of features
 1. [Add a task](#add-task)
@@ -85,7 +85,7 @@ Expected outcome:
 ## <a name="find-task"></a>Find a task
 Find a task based on description.
 ## Usage
-![Duke UI](UI.png)
+![Duke UI](Ui.png)
 ### `Keyword` - find
 Find takes an argument that is part of the description of a task if that task 
 exists. 

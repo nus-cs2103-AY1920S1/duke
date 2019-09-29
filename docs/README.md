@@ -115,9 +115,10 @@ There are three modes of changing:
 
 1. changing `task name`, `date` and `time`
    * Format on command Line: 
-     * For `Event` tasks: edit [task name] :t [dd/mm/yy hhmm-hhmm] 
-     * For `Deadline` tasks: edit [task name] :t [dd/mm/yy hhmm] 
-     * For `Todo` tasks: edit [task name] :t 
+     * For `Event` tasks: edit [index]  [task name] t: [dd/mm/yy hhmm-hhmm] 
+     * For `Deadline` tasks: edit [index]  [task name] t: [dd/mm/yy hhmm] 
+     * For `Todo` tasks: edit [task name] t:
+     * index is the number of the task when `list` is called
    
 2. changing `task name`
    * Format on command Line:

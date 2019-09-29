@@ -20,7 +20,11 @@ public class Parser {
         } else if (command.equals("delete")) {
             int taskId = commandReader.nextInt();
             return new DeleteCommand(taskId);
+        } else if (command.equals("find")) {
+            String keyword = commandReader.nextLine();
+            return new FindCommand(keyword);
         } else if (command.equals("todo")) {
+            // todo: error handling for empty restOfCommand :(
             String restOfCommand = commandReader.nextLine();
             return new AddTodoCommand(restOfCommand);
         } else if (command.equals("event")) {
@@ -29,9 +33,6 @@ public class Parser {
         } else if (command.equals("deadline")) {
             String restOfCommand = commandReader.nextLine();
             return new AddDeadlineCommand(restOfCommand);
-        } else if (command.equals("find")) {
-            String keyword = commandReader.nextLine();
-            return new FindCommand(keyword);
         } else {
             throw new InputMismatchException();
         }

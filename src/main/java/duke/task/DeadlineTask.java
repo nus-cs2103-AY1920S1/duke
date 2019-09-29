@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Represents a Deadline, a type of Task that has an expected date of completion.
  */
-public class Deadline extends Task {
+public class DeadlineTask extends Task {
     private Date by;
 
     /**
@@ -13,7 +13,7 @@ public class Deadline extends Task {
      * @param description Description of the Deadline.
      * @param by Expected date of completion of the Deadline.
      */
-    public Deadline(String description, Date by) {
+    public DeadlineTask(String description, Date by) {
         super(description);
         this.by = by;
         this.type = TaskType.DEADLINE;

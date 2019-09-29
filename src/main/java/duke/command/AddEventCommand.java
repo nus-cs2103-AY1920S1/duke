@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.util.exception.DukeException;
-import duke.task.Event;
+import duke.task.EventTask;
 import duke.task.Task;
 
 /**
@@ -19,6 +19,6 @@ public class AddEventCommand extends AddTaskCommand {
 
     @Override
     public Task createTask() {
-        return new Event(getDescription(), getDeadline());
+        return new EventTask(getDescription(), getDeadline());
     }
 }

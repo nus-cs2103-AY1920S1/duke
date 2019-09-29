@@ -1,11 +1,11 @@
 package duke.command;
 
-import duke.util.exception.DukeException;
-import duke.task.Deadline;
+import duke.task.DeadlineTask;
 import duke.task.Task;
+import duke.util.exception.DukeException;
 
 /**
- * Represents a command to create and add a Deadline task.
+ * Represents a command to create and add a DeadlineTask.
  */
 public class AddDeadlineCommand extends AddTaskCommand {
     public AddDeadlineCommand(String command) throws DukeException {
@@ -19,6 +19,6 @@ public class AddDeadlineCommand extends AddTaskCommand {
 
     @Override
     public Task createTask() {
-        return new Deadline(getDescription(), getDeadline());
+        return new DeadlineTask(getDescription(), getDeadline());
     }
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Represents an Event, a type of Task that has an expected date of occurrence.
  */
-public class Event extends Task {
+public class EventTask extends Task {
     private Date at;
 
     /**
@@ -13,7 +13,7 @@ public class Event extends Task {
      * @param description Description of the Event.
      * @param at Expected date of occurrence of the Event.
      */
-    public Event(String description, Date at) {
+    public EventTask(String description, Date at) {
         super(description);
         this.at = at;
         this.type = TaskType.EVENT;

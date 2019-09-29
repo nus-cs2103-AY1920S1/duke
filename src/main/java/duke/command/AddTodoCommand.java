@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.util.exception.DukeException;
 import duke.task.Task;
-import duke.task.Todo;
+import duke.task.TodoTask;
+import duke.util.exception.DukeException;
 import java.util.Date;
 
 /**
- * Represents a command to create and add a Todo task.
+ * Represents a command to create and add a TodoTask.
  */
 public class AddTodoCommand extends AddTaskCommand {
     public AddTodoCommand(String fullCommand) throws DukeException {
@@ -22,6 +22,6 @@ public class AddTodoCommand extends AddTaskCommand {
 
     @Override
     public Task createTask() {
-        return new Todo(getDescription());
+        return new TodoTask(getDescription());
     }
 }

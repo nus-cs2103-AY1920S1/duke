@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/duke.iml" filepath="$PROJECT_DIR$/.idea/modules/duke.iml" group="duke" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/duke_main.iml" filepath="$PROJECT_DIR$/.idea/modules/duke_main.iml" group="duke" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/duke_test.iml" filepath="$PROJECT_DIR$/.idea/modules/duke_test.iml" group="duke" />
+      <module fileurl="file://$PROJECT_DIR$/kwan_chen_sheng_duke.iml" filepath="$PROJECT_DIR$/kwan_chen_sheng_duke.iml" />
+    </modules>
+  </component>
+</project>

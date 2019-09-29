@@ -2,7 +2,6 @@ package duke.models;
 
 public class Task extends Planner {
 
-    //protected String description;
     protected boolean isDone;
     protected boolean isCorrectFormat;
 
@@ -18,14 +17,6 @@ public class Task extends Planner {
         this.isCorrectFormat = false;
     }
 
-    /**
-     * Method to get whether that date is in correct format.
-     *
-     * @return Returns the boolean isCorrectFormat for the date.
-     */
-    public boolean getIsCorrectFormat() {
-        return isCorrectFormat;
-    }
 
     /**
      * Returns tick or cross symbol.
@@ -33,7 +24,7 @@ public class Task extends Planner {
      * @return A tick or cross to symbolize whether the task has been done.
      */
     public String getStatusIcon() {
-        return (isDone ? "done" : "not done"); //return tick or X symbols
+        return (isDone ? "done" : "not done");
     }
 
     /**

@@ -131,9 +131,9 @@ public class Storage {
         } else {
             while (sc.hasNext()) {
                 String plans = sc.nextLine();
-                int startBracketindex = plans.indexOf("[");
+                int startBracketIndex = plans.indexOf("[");
                 int closeBracketIndex = plans.indexOf("]");
-                String taskType = plans.substring(startBracketindex + 1, closeBracketIndex);
+                String taskType = plans.substring(startBracketIndex + 1, closeBracketIndex);
                 int spaceIndex = plans.indexOf(" ");
                 switch (taskType) {
                 case "T":

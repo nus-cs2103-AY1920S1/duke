@@ -25,9 +25,9 @@ import java.util.Collections;
  * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class DataStorage {
-    final static String FILE_PATH = "/data/save.txt";
+    final static String HOME = System.getProperty("user.home");
+    final static String FILE_PATH = HOME + File.separator + "data" + File.separator + "save.txt";
     private ArrayList<Task> tasks;
-
     private final String newLine = System.getProperty("line.separator");
 
     /**
@@ -119,18 +119,10 @@ public class DataStorage {
     }
 
     private void readFromFile() throws IOException, DukeException {
-//        Charset utf8 = StandardCharsets.UTF_8;
-//        Path path = Paths.get(FILE_PATH);
-//        Path parentDir = path.getParent();
-//        Files.createDirectories(parentDir);
-//        Files.write(path, Collections.singleton(""), utf8);
-//        File file = new File(FILE_PATH);
-        File parentDir = new File("/data");
-        if (!parentDir.exists()) {
-            parentDir.mkdir();
-        }
         File file = new File(FILE_PATH);
         if (!file.exists()) {
+            File parent = file.getParentFile();
+            parent.mkdirs();
             file.createNewFile();
         }
 

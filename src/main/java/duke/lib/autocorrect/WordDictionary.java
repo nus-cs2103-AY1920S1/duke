@@ -19,7 +19,8 @@ import java.util.HashSet;
 import java.util.List;
 
 public class WordDictionary {
-    private final static String GLOSSARY_FILEPATH = "/data/words.txt";
+    final static String HOME = System.getProperty("user.home");
+    final static String GLOSSARY_FILEPATH = HOME + File.separator + "data" + File.separator + "words.txt";
     private final static List<String> CORPUS = new ArrayList<String>(
             List.of("find", "bye", "list", "done", "delete", "todo", "event", "deadline"));
 
@@ -29,12 +30,10 @@ public class WordDictionary {
     public WordDictionary() throws IOException, DukeException {
         wordList = new HashSet<>();
 
-        File parentDir = new File("/data");
-        if (!parentDir.exists()) {
-            parentDir.mkdir();
-        }
         File file = new File(GLOSSARY_FILEPATH);
         if (!file.exists()) {
+            File parent = file.getParentFile();
+            parent.mkdirs();
             initializeWordList(file);
         }
 
@@ -51,18 +50,12 @@ public class WordDictionary {
     }
 
     private void initializeWordList(File file) throws IOException {
-//        Charset utf8 = StandardCharsets.UTF_8;
-//        Path parentDir = Paths.get(GLOSSARY_FILEPATH).getParent();
-//        Files.createDirectories(parentDir);
+
 
         file.createNewFile();
 
-//        FileWriter fw = new FileWriter(file);
         Files.write(Paths.get(GLOSSARY_FILEPATH), CORPUS);
-//        for (String s : CORPUS) {
-////            fw.write(s);
-////        }
-//        Files.write(Paths.get(GLOSSARY_FILEPATH), CORPUS);
+
     }
 
     public HashSet<String> getWordList() {

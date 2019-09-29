@@ -75,10 +75,20 @@ public class Parser {
 
         switch (action) {
         case "done":
-            command = Optional.of(new MarkAsDoneCommand(Integer.parseInt(parameters[1]) - 1));
+            try {
+                command = Optional.of(new MarkAsDoneCommand(Integer.parseInt(parameters[1]) - 1));
+            } catch (NumberFormatException e) {
+                throw new InvalidInputException(
+                        "Please input an integer that corresponds to the completed task's index!");
+            }
             break;
         case "delete":
-            command = Optional.of(new DeleteTaskCommand(Integer.parseInt(parameters[1]) - 1));
+            try {
+                command = Optional.of(new DeleteTaskCommand(Integer.parseInt(parameters[1]) - 1));
+            } catch (NumberFormatException e) {
+                throw new InvalidInputException(
+                        "Please input an integer that corresponds to the to-be-deleted task's index!");
+            }
             break;
         case "find":
             command = Optional.of(new FindTaskCommand(parameters[1]));

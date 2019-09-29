@@ -22,6 +22,8 @@ import com.leeyiyuan.task.TaskList;
 
 
 import java.io.File;
+import java.net.URLDecoder;
+import java.net.URISyntaxException;
 
 public class MainWindow extends VBox implements UserOutputInterface {
     @FXML
@@ -42,11 +44,21 @@ public class MainWindow extends VBox implements UserOutputInterface {
 
     @FXML
     private void initialize() {
-        this.storage = new Storage("duke.txt");
+
+        String storagePath = "";
+        try {
+            storagePath = new File(MainWindow.class.getProtectionDomain().getCodeSource().getLocation().toURI())
+                    .getPath();
+        } catch (URISyntaxException e) {
+            // Suppress format exception since this assumes format is valid.
+        }
+        storagePath += ".dukedata.txt";
+
+        this.storage = new Storage(storagePath);
         this.parser = new Parser();
 
         addDukeDialog("Hello! I'm Duke\nWhat can I do for you?");
-        addDukeDialog("By the way, I'm using this file to store your data:\n" + new File("duke.txt").getAbsolutePath());
+        addDukeDialog("By the way, I'm using this file to store your data:\n" + storagePath);
 
         try {
             this.tasks = new TaskList(this.storage.load());

@@ -111,14 +111,14 @@ Duke Increment | Tutorial
     * Lists all available expenses and their total amount
 
 ## 4. FAQs
-**Q: Where can I find all the commands?**
-  A: Type 'glossary' into the command prompt and click enter. This will print out a list of all useful commands for your reference.
-**Q: How do I exit from the application?**
-  A: Left-click the red-buttom marked X at the top right hand corner of the application window.
-**Q: If I key in a wrong amount for my expense, how can i correct it?**
-  A: As of Version 1.0.0, the only way to fo it would be to remove this expense and add it back again. We are working on providing you with an easier way to handle expenses and task editing in Version 2. Stay tuned.**
-**Q: What is the difference between a task and an expense?**
-  A: Our application provides you with both choices, where a task keeps track of your daily schedule and activities while an expense takes note of your daily spendings.
+**Q: Where can I find all the commands?**  
+  * A: Type 'glossary' into the command prompt and click enter. This will print out a list of all useful commands for your reference.
+**Q: How do I exit from the application?**  
+  * A: Left-click the red-buttom marked X at the top right hand corner of the application window.
+**Q: If I key in a wrong amount for my expense, how can i correct it?**  
+  * A: As of Version 1.0.0, the only way to fo it would be to remove this expense and add it back again. We are working on providing you with an easier way to handle expenses and task editing in Version 2. Stay tuned.**
+**Q: What is the difference between a task and an expense?**  
+  * A: Our application provides you with both choices, where a task keeps track of your daily schedule and activities while an expense takes note of your daily spendings.
 
 
 

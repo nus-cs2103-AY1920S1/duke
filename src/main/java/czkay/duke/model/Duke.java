@@ -21,7 +21,7 @@ public class Duke {
      * @return A message to tell the user whether a task list has been loaded or a new one has been created instead.
      */
     public String fetchTaskList() {
-        storage = new Storage("data/tasks.tmp");
+        storage = new Storage("tasks.tmp");
         try {
             tasks = storage.load();
             tasks.createReminders();

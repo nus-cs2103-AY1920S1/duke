@@ -1,6 +1,2 @@
-E | 0 | CS2101 graded presentation | 20th of September 2019, 2pm-4pm
-T | 0 | CS2101 presentation preparation (slides) 
-D | 0 | CS2100 complete assignment | 20th of September 2019, 3pm
-T | 0 | CS2100 print lab worksheet 
-T | 0 | MA1521 online quiz 
-D | 0 | SEP application | 20th of September 2019, 11.59pm
+T | 0 | MA1521 online quiz
+T | 1 | fix jar file

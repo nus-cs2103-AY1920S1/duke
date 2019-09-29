@@ -41,9 +41,22 @@ public class Storage {
                 memory.add(newTask);
             }
         } catch (FileNotFoundException e) {
+            createNewStorageFile();
             throw new DukeException("File not found. A new TaskList will be loaded.");
         } finally {
             return memory;
+        }
+    }
+
+    private void createNewStorageFile() throws DukeException {
+        try {
+            File newFolder = new File("data");
+            newFolder.mkdir();
+            File newFile = new File(newFolder, "duke.txt");
+            newFile.createNewFile();
+            filePath = "data/duke.txt";
+        } catch (IOException e) {
+            throw new DukeException("New storage file could not be created.");
         }
     }
 

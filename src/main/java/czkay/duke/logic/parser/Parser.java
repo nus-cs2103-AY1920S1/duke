@@ -1,3 +1,20 @@
+package czkay.duke.logic.parser;
+
+import czkay.duke.exception.DukeException;
+import czkay.duke.exception.EmptyDescriptionException;
+import czkay.duke.exception.InvalidInputException;
+import czkay.duke.logic.command.AddTaskCommand;
+import czkay.duke.logic.command.Command;
+import czkay.duke.logic.command.DeleteTaskCommand;
+import czkay.duke.logic.command.ExitCommand;
+import czkay.duke.logic.command.FindTaskCommand;
+import czkay.duke.logic.command.MarkAsDoneCommand;
+import czkay.duke.logic.command.PrintListCommand;
+import czkay.duke.logic.command.PrintRemindersCommand;
+import czkay.duke.model.task.Deadline;
+import czkay.duke.model.task.Event;
+import czkay.duke.model.task.Todo;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -117,7 +134,7 @@ public class Parser {
      * @return A Command that varies based on the user input.
      * @throws DukeException If the user input is invalid.
      */
-    static Command parse(String userInput) throws DukeException {
+    public static Command parse(String userInput) throws DukeException {
         String[] parameters = userInput.split(" ", 2);
         assert parameters.length > 0 : "There must be at least 1 potential parameter in the input.";
 

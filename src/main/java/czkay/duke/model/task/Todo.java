@@ -1,9 +1,11 @@
+package czkay.duke.model.task;
+
 /**
  * Represents the todo task given by the user.
  */
-class Todo extends Task {
+public class Todo extends Task {
 
-    Todo(String taskDescription) {
+    public Todo(String taskDescription) {
         super(taskDescription);
     }
 

@@ -1,12 +1,19 @@
+package czkay.duke.logic.command;
+
+import czkay.duke.exception.DukeException;
+import czkay.duke.model.task.Task;
+import czkay.duke.model.TaskList;
+import czkay.duke.storage.Storage;
+
 import java.io.IOException;
 
 /**
  * A Command to delete a task from the task list.
  */
-class DeleteTaskCommand extends Command {
+public class DeleteTaskCommand extends Command {
     private int targetIndex;
 
-    DeleteTaskCommand(int index) {
+    public DeleteTaskCommand(int index) {
         targetIndex = index;
     }
 
@@ -19,7 +26,7 @@ class DeleteTaskCommand extends Command {
      * @throws DukeException If the user input is invalid.
      */
     @Override
-    String execute(TaskList tasks, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList tasks, Storage storage) throws IOException, DukeException {
         Task deletedTask = tasks.deleteTask(targetIndex);
         tasks.createReminders();
         storage.update(tasks);

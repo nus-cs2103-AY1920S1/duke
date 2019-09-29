@@ -1,3 +1,4 @@
+import czkay.duke.ui.Main;
 import javafx.application.Application;
 
 /**

@@ -27,25 +27,26 @@ public class Parser {
         try {
             String[] commandTokens = Utils.trimAll(fullCommand.split(" ", 2));
             switch (commandTokens[0]) {
-            case "todo":
-            case "deadline":
-            case "event":
-                return parseAddCommand(fullCommand);
-            case "delete":
-                return parseDeleteCommand(commandTokens);
-            case "list":
-                return new ListCommand();
-            case "done":
-                return parseDoneCommand(commandTokens);
-            case "bye":
-            case "exit":
-                return new ExitCommand();
-            case "help":
-                return new HelpCommand();
-            case "search":
-                return parseSearchCommand(commandTokens);
-            default:
-                throw new DukeException("No such command!");
+                case "todo":
+                case "deadline":
+                case "event":
+                    return parseAddCommand(fullCommand);
+                case "delete":
+                case "rm":
+                    return parseDeleteCommand(commandTokens);
+                case "list":
+                case "ls":
+                    return new ListCommand();
+                case "done":
+                    return parseDoneCommand(commandTokens);
+                case "bye":
+                case "exit":
+                case ":q":
+                    return new ExitCommand();
+                case "search":
+                    return parseSearchCommand(commandTokens);
+                default:
+                    return new HelpCommand();
             }
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
@@ -53,8 +54,8 @@ public class Parser {
     }
 
     /**
-     * Takes in a line and returns a Optional Task. The Optional task is empty if
-     * the line is malformed.
+     * Takes in a line and returns a Optional Task. The Optional task is empty if the line is
+     * malformed.
      * 
      * @param line the line from text file to be parsed into task.
      * @return an Optional Task object parsed from the input line
@@ -67,16 +68,16 @@ public class Parser {
 
         try {
             switch (tokens[0]) {
-            case "E":
-                return Optional.of(Event.fromFormattedString(tokens));
-            case "D":
-                return Optional.of(Deadline.fromFormattedString(tokens));
-            case "T":
-                return Optional.of(ToDo.fromFormattedString(tokens));
-            default:
-                // impossible.
-                assert false;
-                return Optional.empty();
+                case "E":
+                    return Optional.of(Event.fromFormattedString(tokens));
+                case "D":
+                    return Optional.of(Deadline.fromFormattedString(tokens));
+                case "T":
+                    return Optional.of(ToDo.fromFormattedString(tokens));
+                default:
+                    // impossible.
+                    assert false;
+                    return Optional.empty();
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -93,15 +94,15 @@ public class Parser {
     private static AddCommand parseAddCommand(String fullCommand) throws DukeException {
         String[] commandTokens = fullCommand.split(" ", 2);
         switch (commandTokens[0]) {
-        case "todo":
-            return parseNewTodoCommand(fullCommand);
-        case "deadline":
-            return parseNewDeadlineCommand(fullCommand);
-        case "event":
-            return parseNewEventCommand(fullCommand);
-        default:
-            assert false;
-            throw new DukeException("Neither todo, event nor deadline.");
+            case "todo":
+                return parseNewTodoCommand(fullCommand);
+            case "deadline":
+                return parseNewDeadlineCommand(fullCommand);
+            case "event":
+                return parseNewEventCommand(fullCommand);
+            default:
+                assert false;
+                throw new DukeException("Neither todo, event nor deadline.");
         }
     }
 
@@ -110,8 +111,8 @@ public class Parser {
         String descAtTime = fullCommand.split(" ", 2)[1];
         String[] descTime = Utils.trimAll(descAtTime.split(" */?at *"));
         if (descTime.length == 1) {
-            throw new DukeException("An event must have a '/at' delimiter separating " + "description and time!\n"
-                    + "Proper format: 'event desc /at time");
+            throw new DukeException("An event must have a '/at' delimiter separating "
+                    + "description and time!\n" + "Proper format: 'event desc /at time");
         } else if (descTime[0].equals("")) {
             throw new DukeException("Description missing!");
         }
@@ -123,8 +124,8 @@ public class Parser {
         String descByTime = fullCommand.split(" ", 2)[1];
         String[] descTime = Utils.trimAll(descByTime.split(" */?by *"));
         if (descTime.length == 1) {
-            throw new DukeException("A deadline must have a '/by' delimiter separating " + "description and time!\n"
-                    + "Proper format: 'event desc /at time");
+            throw new DukeException("A deadline must have a '/by' delimiter separating "
+                    + "description and time!\n" + "Proper format: 'event desc /at time");
         } else if (descTime[0].equals("")) {
             throw new DukeException("Description missing!");
         }

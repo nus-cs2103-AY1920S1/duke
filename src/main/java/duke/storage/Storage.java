@@ -69,7 +69,8 @@ public class Storage {
                 tasks.get(count).setDone();
             }
             count++;
-        } else if (item.startsWith("E")) {
+        } else {
+            assert item.startsWith("E") : "Task should start with T or D or E";
             // split command into 4 parts
             String[] splitStr = item.split(" \\| ", 4);
             tasks.add(new Event(splitStr[2], splitStr[3]));

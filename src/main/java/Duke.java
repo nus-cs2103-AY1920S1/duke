@@ -18,7 +18,7 @@ public class Duke {
     private boolean isLoaded;
 
     /**
-     * Initialises the Duke class with a certain filepath.
+     * Initialises the Duke class.
      * Creates a new user interface and storage.
      * Load any existing tasks from the file found in filepath to a list.
      * If no file is found in the filepath, shows an error and creates a new list.

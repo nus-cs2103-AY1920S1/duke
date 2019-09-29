@@ -16,7 +16,7 @@ public class Ui {
      * Shows welcome message.
      */
     public static String showWelcome() {
-        return "Hello Mocha! \n What can I do for you?";
+        return "Hello Mocha! \nWhat can I do for you?";
     }
 
     /**

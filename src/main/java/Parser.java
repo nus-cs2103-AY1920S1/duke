@@ -32,7 +32,7 @@ public class Parser {
      * is thrown. Otherwise the task is processed accordingly.
      * @param input String input from the user.
      * @param taskList The current list of tasks
-     * @throws DukeException
+     * @throws DukeException Throws exception to handle incorrect user input
      */
     public String parseCommand(String input, TaskList taskList) throws DukeException {
         assert input != null;
@@ -47,7 +47,7 @@ public class Parser {
 
             return ui.showTaskList(taskList);
 
-        } else if (taskType.equals("priority")){
+        } else if (taskType.equals("priority")) {
 
             String output = ui.showPriorityTaskList(
                     taskList.getPriorityTaskList());
@@ -100,8 +100,8 @@ public class Parser {
             inputArr = Arrays.copyOfRange(inputArr,1, inputArr.length);
         } else if (inputArr[0].equals("low")) {
             inputArr = Arrays.copyOfRange(inputArr,1, inputArr.length);
-        } else{
-
+        } else {
+            assert false;
         }
 
         //Extracting task type and description from input
@@ -187,14 +187,14 @@ public class Parser {
     }
 
     public static boolean correctInput(String input) {
-        return input.equals("todo") ||
-                input.equals("event") ||
-                input.equals("deadline") ||
-                input.equals("list") ||
-                input.equals("done") ||
-                input.equals("bye") ||
-                input.equals("delete") ||
-                input.equals("find") ||
-                input.equals("priority");
+        return input.equals("todo")
+                || input.equals("event")
+                || input.equals("deadline")
+                || input.equals("list")
+                || input.equals("done")
+                || input.equals("bye")
+                || input.equals("delete")
+                || input.equals("find")
+                || input.equals("priority");
     }
 }

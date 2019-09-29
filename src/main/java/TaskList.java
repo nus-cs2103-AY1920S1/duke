@@ -24,7 +24,7 @@ public class TaskList {
      * Constructs a TaskList object.
      * Passes an existing list of tasks to be
      * stored in this TaskList object.
-     * @param taskList
+     * @param taskList Linked List of task
      */
     public TaskList(LinkedList<Task> taskList) {
         this.taskList = taskList;
@@ -32,7 +32,7 @@ public class TaskList {
 
     public void deleteTask(int taskNum) {
         assert !(taskNum < 0) : "Negative task number";
-        taskList.remove(taskNum -1);
+        taskList.remove(taskNum - 1);
         updateQueue();
     }
 
@@ -48,7 +48,7 @@ public class TaskList {
 
     public Task getTask(int taskNum) {
         assert !(taskNum < 0) : "Negative task number";
-        return taskList.get(taskNum -1);
+        return taskList.get(taskNum - 1);
     }
 
     public PriorityQueue<Task> getPriorityTaskList() {
@@ -68,7 +68,7 @@ public class TaskList {
      * Loops through the list of tasks tries to match the target String
      * a substring in the task description.
      * @param target Target string to search for
-     * @return LinkedList<Task> of matching tasks
+     * @return LinkedList of matching tasks
      */
     public LinkedList<Task> searchFor(String target) {
         ListIterator<Task> iter = taskList.listIterator();

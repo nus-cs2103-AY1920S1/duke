@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  * tasks such as doing the task and storing the deadlines
  * of the task as a Java date.
  */
-public class Task implements Comparable<Task>{
+public class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
     protected Priority taskPriority;

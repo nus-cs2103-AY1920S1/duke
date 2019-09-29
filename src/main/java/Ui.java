@@ -23,7 +23,7 @@ public class Ui {
     }
 
     public static String indent() {
-        return "    " ;
+        return "    ";
     }
 
     public static String line() {
@@ -143,7 +143,7 @@ public class Ui {
             output.append(indent() + "Here are the matching tasks in your list:\n");
         }
 
-        while(iter.hasNext()) {
+        while (iter.hasNext()) {
             current = iter.next();
             output.append(indent() + count + "." + current.toString() + "\n");
         }

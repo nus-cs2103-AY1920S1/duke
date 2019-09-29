@@ -18,7 +18,6 @@ public class Storage {
     File taskListFile;
 
     /**
-     *
      * Constructs a Storage object.
      * Takes in a file path so that it can be used later
      * to direct where to store the information.
@@ -35,7 +34,7 @@ public class Storage {
      * method does is read the tasks line by line and create new
      * Task objects based on the strings and adds them to a
      * LinkedList to be returned.
-     * @return LinkedList<Task> List representing the tasks saved
+     * @return LinkedList List representing the tasks saved
      * @throws DukeException Exception thrown if no existing list is found
      */
     public LinkedList<Task> load() throws DukeException {
@@ -57,20 +56,20 @@ public class Storage {
                 Priority taskPriority = getPriority(nextTaskArr[0]);
 
                 switch (nextTaskArr[1]) {
-                    case "T":
-                        taskList.add(
-                                new Todo(nextTaskArr[3], status, taskPriority));
-                        break;
-                    case "D":
-                        taskList.add(
-                                new Deadline(nextTaskArr[3], nextTaskArr[4], status, taskPriority));
-                        break;
-                    case "E":
-                        taskList.add(
-                                new Event(nextTaskArr[3], nextTaskArr[4], status, taskPriority));
-                        break;
-                     default:
-                        assert false;
+                case "T":
+                    taskList.add(
+                            new Todo(nextTaskArr[3], status, taskPriority));
+                    break;
+                case "D":
+                    taskList.add(
+                            new Deadline(nextTaskArr[3], nextTaskArr[4], status, taskPriority));
+                    break;
+                case "E":
+                    taskList.add(
+                            new Event(nextTaskArr[3], nextTaskArr[4], status, taskPriority));
+                    break;
+                default:
+                    assert false;
                 }
             }
 
@@ -104,7 +103,7 @@ public class Storage {
      * onto the file storing the information. Every change is not an
      * addition but rather the whole file is overwritten again.
      * @param taskList TaskList object representing the current list of tasks
-     * @throws IOException
+     * @throws IOException Throws an IOException
      */
     public void update(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(taskListFile);

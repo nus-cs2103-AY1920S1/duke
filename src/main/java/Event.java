@@ -26,7 +26,7 @@ public class Event extends Task {
      * from memory and hence can be already completed and the
      * status of completion needs to be a parameter as well.
      * @param description Description of the task
-     * @param deadline Date of the deadline
+     * @param eventDate Date of the deadline
      * @param status Status of completion
      */
     public Event(String description, String eventDate, boolean status, Priority priority) {

@@ -11,18 +11,25 @@ list by typing 'help'
 ### `todo/deadline/event` - Create a task
 
 Type 'todo <name>' to create a simple todo.
+
 Type 'deadline <task> /by <dd/mm/yyyy hhmm>' to create a deadline.
+
 Type 'event <task> /at <dd/mm/yyyy hhmm>' to create an event.
 
 
 Example of usage: 
-
+`todo buy groceries`
+`event presentation /at 31/03/2020 1400` 
 `deadline essay for prof tan /by 31/03/2020 1700`
 
 Expected outcome:
 
 `Got it. I've created this task :
- [d][x] essay for prof tan (by 31/03/2020 1700)
+ [t][x] buy groceries`
+`Got it. I've created this task :
+ [e][x] presentation (at 31/03/2020 1700)`
+ `Got it. I've created this task :
+  [d][x] essay for prof tan (by 31/03/2020 1700)`
  
 ### Feature 2
 Import tasks from an external file

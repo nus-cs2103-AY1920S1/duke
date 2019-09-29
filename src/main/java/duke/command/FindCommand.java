@@ -3,7 +3,6 @@ package duke.command;
 import duke.util.exception.DukeException;
 import duke.util.exception.ExceptionType;
 import duke.task.TaskList;
-import duke.util.Storage;
 import duke.util.Ui;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -11,13 +10,21 @@ import java.util.Scanner;
 public class FindCommand implements Command {
     private Scanner s;
 
+    /**
+     * @param fullCommand Command that was entered by the user.
+     */
     public FindCommand(String fullCommand) {
         super();
         this.s = new Scanner(fullCommand);
     }
 
+    /**
+     * @param tasks List of tasks.
+     * @param ui UI to display to the user.
+     * @throws DukeException Application-specific exception thrown during execution.
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui) throws DukeException {
         try {
             // first, try to get keyword
             s.next(); // command (find), to be ignored
@@ -25,6 +32,7 @@ public class FindCommand implements Command {
 
             // if ok, find and return matching tasks
             TaskList matchingTasks = tasks.findTasks(keyword);
+            // todo: find tasks does not return taskId of original tasks
             if (matchingTasks.isEmpty()) {
                 throw new DukeException(ExceptionType.NO_MATCHING_TASKS);
             } else {

@@ -4,7 +4,6 @@ import duke.util.exception.DukeException;
 import duke.util.exception.ExceptionType;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.util.Storage;
 import duke.util.Ui;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -64,8 +63,12 @@ public abstract class AddTaskCommand implements Command {
     abstract Task createTask();
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui) {
         Task newTask = createTask();
         tasks.add(newTask);
+
+        // todo: use UiMessage
+        System.out.println("Okay! I've added: " + getDescription()
+            + ". Use list to see all your tasks!");
     }
 }

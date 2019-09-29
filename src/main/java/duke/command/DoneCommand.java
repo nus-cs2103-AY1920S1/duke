@@ -3,7 +3,6 @@ package duke.command;
 import duke.util.exception.DukeException;
 import duke.util.exception.ExceptionType;
 import duke.task.TaskList;
-import duke.util.Storage;
 import duke.util.Ui;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
@@ -18,7 +17,7 @@ public class DoneCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui) throws DukeException {
         try {
             // first, try to get taskId
             s.next(); // command (done), to be ignored

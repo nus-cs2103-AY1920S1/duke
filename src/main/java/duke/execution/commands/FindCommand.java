@@ -56,7 +56,7 @@ public class FindCommand extends Command {
     @Override
     protected void checkValidity() throws DukeException {
         if (this.descriptionOfTask.isEmpty()) {
-            throw new DukeException(" ☹ OOPS!!! The description of an delete cannot be empty.");
+            throw new DukeException(" ☹ OOPS!!! The description of a find cannot be empty.");
         }
     }
 }

@@ -47,34 +47,34 @@ public class Parser {
         switch (action) {
 
         case "bye":
-            return new ByeCommand(rest);
+            return new ByeCommand(rest.trim());
 
         case "list":
-            return new ListCommand(rest);
+            return new ListCommand(rest.trim());
 
         case "done":
-            return new DoneCommand(rest);
+            return new DoneCommand(rest.trim());
 
         case "todo":
-            return new TodoCommand(rest);
+            return new TodoCommand(rest.trim());
 
         case "deadline":
-            return new DeadlineCommand(rest);
+            return new DeadlineCommand(rest.trim());
 
         case "event":
-            return new EventCommand(rest);
+            return new EventCommand(rest.trim());
 
         case "delete":
-            return new DeleteCommand(rest);
+            return new DeleteCommand(rest.trim());
 
         case "find":
-            return new FindCommand(rest);
+            return new FindCommand(rest.trim());
 
         case "deleteAll":
-            return new MassDeleteCommand(rest);
+            return new MassDeleteCommand(rest.trim());
 
         default:
-            System.out.println("ERROR: " + rest);
+            System.out.println("ERROR: " + rest.trim());
             throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 
         }

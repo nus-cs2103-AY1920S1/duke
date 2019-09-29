@@ -61,6 +61,8 @@ public class FindCommand extends Command {
     /**
      * Prints all the tasks that match the keyword given by the user. If there are no matching tasks,
      * the user will be advised as such.
+     *
+     * @return String containing a list of all matches
      */
     private String printAllMatches() {
         if (matchedTasks.size() > 0) {
@@ -74,6 +76,7 @@ public class FindCommand extends Command {
 
     /**
      * Prints each task that matches the keyword given by the user.
+     *
      * @return String all matching tasks in storage
      */
     private String printMatchesFromList() {

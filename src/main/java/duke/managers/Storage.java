@@ -48,6 +48,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates new storage file path in the event that there is no existing file.
+     *
+     * @throws DukeException is thrown when there is an error with creating the storage file
+     */
     private void createNewStorageFile() throws DukeException {
         try {
             File newFolder = new File("data");

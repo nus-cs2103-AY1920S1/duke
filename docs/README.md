@@ -1,7 +1,6 @@
 # Duke User Guide
 
-![Image of Ui](https://github.com/bitterg0d/duke/tree/master/docs/Ui.png)
-
+![Image of Ui](https://github.com/bitterg0d/duke/blob/master/docs/Ui.png?raw=true)
 ## Features 
 ### Duke can help you track tasks such as:
 * To-Dos

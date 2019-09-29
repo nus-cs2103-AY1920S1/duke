@@ -28,7 +28,7 @@ public class Ui {
      * Prints line that encloses Duke's dialogues.
      */
     public void printLine() {
-        System.out.println("\t____________________________________________________________");
+        System.out.println("____________________________________________________________");
     }
 
     /**
@@ -44,7 +44,7 @@ public class Ui {
      * @param toPrint string to be printed
      */
     public void printDuke(String toPrint) {
-        System.out.print("\t" + toPrint);
+        System.out.print(toPrint);
     }
 
     /**
@@ -55,10 +55,10 @@ public class Ui {
     public String showList(ArrayList<Task> list) {
         StringBuilder msg = new StringBuilder();
 
-        System.out.println("\tHere are the tasks in your list:");
+        msg.append("Here are the tasks in your list:\n");
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
-            msg.append("\t" + (i + 1) + ". " + task.toString() + "\n");
+            msg.append((i + 1) + ". " + task.toString() + "\n");
 
         }
         return msg.toString();
@@ -98,7 +98,20 @@ public class Ui {
     public String showDone(Task task) {
         StringBuilder msg = new StringBuilder();
         msg.append("Nice! I've marked this task as done:\n");
-        msg.append("\t[" + task.getStatusIcon() + "] " + task.getDesc());
+        msg.append(task.toString() + task.getDesc());
         return msg.toString();
+    }
+
+    public String showHelp() {
+        StringBuilder helpMsg = new StringBuilder();
+        helpMsg.append("Hello, I'm Duke!\n" +
+                        "I can keep track of your to-dos, deadlines and events. Use these commands to control me:\n" +
+                        "\t- todo [description]\n" +
+                        "\t- event [description] /at [date time]\n" +
+                        "\t- deadline [description] /by [date time]\n" +
+                        "\t- list\n" +
+                        "\t- bye (exits duke)\n" +
+                        "\t- find [keyword]");
+        return helpMsg.toString();
     }
 }

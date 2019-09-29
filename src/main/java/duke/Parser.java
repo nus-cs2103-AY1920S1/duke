@@ -1,12 +1,6 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.ExitCommand;
-import duke.command.DeleteCommand;
-import duke.command.Command;
-import duke.command.ListCommand;
-import duke.command.DoneCommand;
-import duke.command.FindCommand;
+import duke.command.*;
 
 import duke.task.Todo;
 import duke.task.Deadline;
@@ -70,6 +64,8 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException exception) {
                 throw new EmptyTaskNumberException();
             }
+        case "help":
+            return new HelpCommand();
         case "find":
             return new FindCommand(inputArr[1]);
         default:

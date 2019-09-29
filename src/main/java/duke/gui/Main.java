@@ -1,3 +1,5 @@
+package duke.gui;
+
 import java.io.IOException;
 
 import duke.Duke;
@@ -26,13 +28,5 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
     }
 }

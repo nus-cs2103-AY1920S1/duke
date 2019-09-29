@@ -1,9 +1,7 @@
 package duke.command;
 
-import duke.Saved;
 import duke.TaskList;
 import duke.exception.DukeException;
-import duke.task.Task;
 import duke.ui.Ui;
 
 public class FindCommand extends Command {

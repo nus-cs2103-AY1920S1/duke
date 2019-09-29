@@ -68,8 +68,8 @@ Example Usage: `done 1`
 
 Expected Output:
 ```
-Noted. I've marked this task as complete. 
-    [T][X] Complete Project Work
+Noted. I've marked this task as done. 
+    [T][✓] Complete Project Work
 Now you have 1 task in this list. 
 ```
 

@@ -8,33 +8,32 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="177.0" prefWidth="392.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="380.0" prefHeight="177.0" prefWidth="380.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-      <VBox prefHeight="147.0" prefWidth="239.0">
-         <children>
-            <AnchorPane prefHeight="28.0" prefWidth="299.0">
-               <children>
-                    <Label fx:id="header" alignment="TOP_LEFT" contentDisplay="RIGHT" layoutY="5.0" text="header" textFill="#0778f7" wrapText="true">
-                     <font>
+        <VBox>
+            <children>
+                <Label fx:id="header" alignment="TOP_LEFT" contentDisplay="RIGHT" text="header" textFill="#0778f7" wrapText="true">
+                    <font>
                         <Font name="System Bold" size="15.0" />
-                     </font>
-                    </Label>
-               </children>
-            </AnchorPane>
-            <AnchorPane prefHeight="21.0" prefWidth="81.0">
-               <children>
-                  <Label fx:id="dialog" alignment="TOP_LEFT" layoutY="1.0" minHeight="-Infinity" minWidth="-Infinity" text="message" textFill="#0a0a0a" wrapText="true">
-                     <font>
+                    </font>
+               <VBox.margin>
+                  <Insets left="5.0" />
+               </VBox.margin>
+                </Label>
+                <Label fx:id="dialog" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" text="message" textFill="#0a0a0a">
+                    <font>
                         <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-         </children>
-      </VBox>
+                    </font>
+               <VBox.margin>
+                  <Insets left="5.0" />
+               </VBox.margin>
+                </Label>
+                <AnchorPane prefHeight="28.0" prefWidth="299.0" />
+            </children>
+        </VBox>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
     </children>
     <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+        <Insets bottom="15.0" top="15.0" />
     </padding>
 </fx:root>

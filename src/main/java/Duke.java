@@ -148,6 +148,7 @@ public class Duke extends Application {
         } catch (DukeException ex) {
             return ("OOPS!!! " + ex.getMessage() + "\n");
         }
-        return "Sorry, I don't understand what you are trying to tell me.";
+        return "Sorry, I don't understand \n" +
+                "what you are trying to tell me.";
     }
 }

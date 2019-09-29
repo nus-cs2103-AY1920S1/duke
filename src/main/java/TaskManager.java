@@ -64,7 +64,8 @@ public class TaskManager {
                 storage.writeToFile(typeOfTask, "0", taskDescription, t);
             }
         } else {
-            throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(");
+            throw new UnknownCommandException("I'm sorry, but I don't\n" +
+                    "know what that means :-(");
         }
 
         assert tasks.size() > 0 : "List of tasks should not be empty.";
@@ -76,11 +77,14 @@ public class TaskManager {
             throws EmptyDescriptionException, EmptyToDoDescriptionException {
         if (taskDescription.equals("dummy") || taskDescription.equals("")) {
             if (userCommand.equals("event")) {
-                throw new EmptyDescriptionException("The description of a event cannot be empty.");
+                throw new EmptyDescriptionException("The description of a \n" +
+                        "event cannot be empty.");
             } else if (userCommand.equals("deadline")) {
-                throw new EmptyDescriptionException("The description of a deadline cannot be empty.");
+                throw new EmptyDescriptionException("The description of a \n" +
+                        "deadline cannot be empty.");
             } else if (userCommand.equals("todo")) {
-                throw new EmptyToDoDescriptionException("The description of a todo cannot be empty.");
+                throw new EmptyToDoDescriptionException("The description of a \n" +
+                        "todo cannot be empty.");
             }
         }
     }

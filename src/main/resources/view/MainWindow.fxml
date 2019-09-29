@@ -13,23 +13,20 @@
     <children>
         <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" promptText="Type message here..." AnchorPane.bottomAnchor="1.0" />
         <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" layoutY="52.0" prefHeight="506.0" prefWidth="400.0" vvalue="1.0">
          <content>
-                <VBox fx:id="dialogContainer" prefHeight="0.0" prefWidth="400.0">
-               <children>
-                  <AnchorPane prefHeight="78.0" prefWidth="400.0" styleClass="bodybg">
-                     <children>
-                        <Label alignment="TOP_CENTER" layoutX="281.0" prefHeight="50.0" prefWidth="119.0" text="Jarvis" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font name="Geeza Pro Regular" size="30.0" />
-                           </font>
-                        </Label>
-                        <Line endX="367.0" layoutX="34.0" layoutY="50.0" startX="-100.0" stroke="#979595" />
-                     </children>
-                  </AnchorPane>
-               </children>
-            </VBox>
+            <VBox fx:id="dialogContainer" prefHeight="505.0" prefWidth="363.0" />
          </content>
-        </ScrollPane>
+      </ScrollPane>
+      <AnchorPane prefHeight="54.0" prefWidth="400.0" styleClass="bodybg">
+         <children>
+            <Label alignment="TOP_CENTER" layoutX="284.0" layoutY="3.0" prefHeight="50.0" prefWidth="119.0" text="Jarvis" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Geeza Pro Regular" size="30.0" />
+               </font>
+            </Label>
+            <Line endX="366.0" endY="1.5" layoutX="34.0" layoutY="52.0" startX="-34.00001525878906" startY="1.5" stroke="#979595" />
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>

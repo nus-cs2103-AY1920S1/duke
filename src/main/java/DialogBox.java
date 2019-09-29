@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -51,7 +50,7 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img, "User");
         db.dialog.setFont(new Font("Consolas", 10));
-        db.setMinSize(TextArea.USE_PREF_SIZE, TextArea.USE_PREF_SIZE);
+        db.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
         return db;
     }
 

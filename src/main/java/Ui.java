@@ -23,7 +23,7 @@ public class Ui {
 
     public String greeting() {
         return "Hello! Nice to meet you!\n" +
-                "I am hope you are having a productive day.";
+                "I hope you are having a productive day.";
     }
 
     public String showListOfTask(TaskList tasks) {
@@ -95,7 +95,7 @@ public class Ui {
 
     public String announceCleared() {
         return "You have cleared the local file.\n" +
-                "There are currently no task.\n" +
+                "There is currently no task.\n" +
                 "You are free to be productive with Jarvis again! Enjoy :)";
     }
 }

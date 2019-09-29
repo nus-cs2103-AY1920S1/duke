@@ -51,7 +51,7 @@ public class DialogBox extends HBox {
      * @param img Image of the user.
      * @return a DialogBox object containing user inputs
      */
-    public static DialogBox getUserDialog(String text, Image img) {
+    static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setStyle("-fx-background-color: #C2DFFF;"
                 + "-fx-background-radius: 15;");
@@ -64,7 +64,7 @@ public class DialogBox extends HBox {
      * @param img Image of duke
      * @return a DialogBox object containing duke's responses
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         db.setStyle("-fx-background-color: #E5E4E2;"

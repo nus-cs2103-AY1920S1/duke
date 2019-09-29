@@ -1,17 +1,15 @@
 package duke.task;
 
-/**
- * Encapsulates aa Event object that inherits from Task class and
- * stores task name, status and event time.
- */
-
-import duke.task.Task;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
+
+/**
+ * Encapsulates aa Event object that inherits from Task class and
+ * stores task name, status and event time.
+ */
 
 public class Event extends Task {
 

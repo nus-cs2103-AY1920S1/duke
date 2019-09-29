@@ -1,16 +1,16 @@
 package duke.core;
 
-/**
- * Encapsulates a TaskList object, which contains the task list,
- * and has operations to add/delete/done tasks in the list.
- */
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
 import java.util.ArrayList;
+
+/**
+ * Encapsulates a TaskList object, which contains the task list,
+ * and has operations to add/delete/done tasks in the list.
+ */
 
 public class TaskList {
 
@@ -39,38 +39,38 @@ public class TaskList {
      * Prints out the tasks in the list currently.
      */
     public String showTasks() {
-        String message = "Here are the tasks in your list: ";
+        StringBuilder message = new StringBuilder("Here are the tasks in your list: ");
         int i = 0;
         for (Task task : list) {
-            message += "\n" + (i + 1) + ". " + task;
+            message.append("\n").append(i + 1).append(". ").append(task);
             i++;
         }
         //for (int i = 0; i < list.size(); i++) {
         //    message += (i + 1) + ". " + list.get(i) + "\n";
         //}
-        return message;
+        return message.toString();
     }
 
     /**
      * Prints out the tasks with keyword in the list currently.
      */
     public String findTask(String keyword) {
-        String message = "Here are the matching tasks in your list: ";
+        StringBuilder message = new StringBuilder("Here are the matching tasks in your list: ");
         int i = 0;
         for (Task task : list) {
             if (task.toString().contains(keyword)) {
-                message += "\n" + (i + 1) + ". " + task;
+                message.append("\n").append(i + 1).append(". ").append(task);
                 i++;
             }
         }
-        return message;
+        return message.toString();
     }
 
     /**
-     * Adds a new task into the list and prints out the message.
+     * Formats and returns a message when a task is added.
      * @param newTask newly created task object.
      */
-    private String getMessage(Task newTask) {
+    private String getMessageAfterAdding(Task newTask) {
         return "Got it. I've added this task: \n  "
                 + newTask + "\nNow you have " + list.size() + " tasks in the list.";
     }
@@ -83,7 +83,7 @@ public class TaskList {
     public String addTodo(String activityName, boolean isDone) {
         Task newTask = new Todo(activityName,isDone);
         list.add(newTask);
-        return getMessage(newTask);
+        return getMessageAfterAdding(newTask);
     }
 
     /**
@@ -95,7 +95,7 @@ public class TaskList {
     public String addDeadline(String activityName, String deadline, boolean isDone) {
         Task newTask = new Deadline(activityName, isDone, deadline);
         list.add(newTask);
-        return getMessage(newTask);
+        return getMessageAfterAdding(newTask);
     }
 
     /**
@@ -107,7 +107,7 @@ public class TaskList {
     public String addEvent(String activityName, String time, boolean isDone) {
         Task newTask = new Event(activityName,isDone, time);
         list.add(newTask);
-        return getMessage(newTask);
+        return getMessageAfterAdding(newTask);
     }
 
     /**
@@ -134,13 +134,20 @@ public class TaskList {
         ArrayList<Task> toRemove = new ArrayList<>();
         for (int i : indices) {
             assert i >= 1 && i <= list.size() : "Invalid index input";
-            list.get(i - 1).markAsDeleted();
             toRemove.add(list.get(i - 1));
             message.append("\n  ");
             message.append(list.get(i - 1).toString());
         }
         list.removeAll(toRemove);
         return message + "\nNow you have " + list.size() + " tasks in the list.";
+    }
+
+    /**
+     * Returns the number of existing tasks in the list.
+     * @return an integer representing the number of tasks in the list.
+     */
+    int getNumOfTask() {
+        return list.size();
     }
 
     /**

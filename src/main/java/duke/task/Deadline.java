@@ -1,17 +1,15 @@
 package duke.task;
 
-/**
- * Encapsulates a Deadline object that inherits from Task class and
- * stores task name, status and deadline time.
- */
-
-import duke.task.Task;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
+
+/**
+ * Encapsulates a Deadline object that inherits from Task class and
+ * stores task name, status and deadline time.
+ */
 
 public class Deadline extends Task {
 

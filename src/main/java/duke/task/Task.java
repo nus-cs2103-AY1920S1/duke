@@ -12,7 +12,7 @@ public class Task {
      */
     String taskName;
     boolean isDone;
-    boolean isDeleted;
+    private boolean isDeleted;
 
     /**
      * The constructor takes in a String of taskName and a boolean variable
@@ -23,22 +23,13 @@ public class Task {
     Task(String taskName, boolean done) {
         this.taskName = taskName;
         this.isDone = done;
-        isDeleted = false;
     }
 
     /**
-     * Changes the status of the task when a "done" command is executed.
+     * Sets isDone to be true when a "done" command is executed.
      */
     public void markAsDone() {
         isDone = true;
-    }
-
-    public void markAsDeleted() {
-        isDeleted = true;
-    }
-
-    public boolean isDeleted() {
-        return isDeleted;
     }
 
     @Override

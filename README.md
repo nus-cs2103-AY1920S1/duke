@@ -105,14 +105,3 @@ Command | Format
 
 * If you have feedback or bug reports, please post in [chensu2436/duke issue tracker](https://github.com/chensu2436/duke/issues).
 * Pull requests are welcomed too.
-
-
-
-[Gradle Tutorial](tutorials/gradleTutorial.md)<br>
-[Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)<br>
-JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for Duke][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]
-
-[fx1]: <tutorials/javaFxTutorialPart1.md>
-[fx2]: <tutorials/javaFxTutorialPart2.md>
-[fx3]: <tutorials/javaFxTutorialPart3.md>
-[fx4]: <tutorials/javaFxTutorialPart4.md>

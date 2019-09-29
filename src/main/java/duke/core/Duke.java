@@ -1,21 +1,18 @@
 package duke.core;
 
-/**
- * This program reads in command, adds new tasks into the task lists, changes the task
- * status when it is done, and delete the tast according to the command.
- */
-
 import duke.command.Command;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
+/**
+ * This program reads in command, adds new tasks into the task lists, changes the task
+ * status when it is done, and delete the task according to the command.
+ */
 
 public class Duke {
 
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
-    private Parser parser;
 
     /**
      * Loads the data from given file path.
@@ -40,7 +37,7 @@ public class Duke {
             return ui.sayBye();
         } else {
             try {
-                parser = new Parser(input);
+                Parser parser = new Parser(input, tasks.getNumOfTask());
                 Command command = parser.parseCommand();
                 return command.execute(tasks, storage);
             } catch (DukeException e) {
@@ -49,6 +46,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns a String of greeting message to the DialogBox.
+     * @return String of greeting message from duke.
+     */
     public String getGreeting() {
         return ui.greet();
     }

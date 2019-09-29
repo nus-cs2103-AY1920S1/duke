@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.core.Parser;
 import duke.core.Storage;
 import duke.core.TaskList;
 
@@ -11,22 +10,25 @@ import duke.core.TaskList;
 
 public class FindCommand extends Command {
 
+    private final String keyword;
+
     /**
-     * The constructor is inherited from Command class.
-     * @param fullCommand String of valid, full command input
+     * Creates a FindCommand object.
+     * @param fullCommand String of full, valid command
+     * @param keyword String of keyword
      */
-    public FindCommand(String fullCommand) {
+    public FindCommand(String fullCommand, String keyword) {
         super(fullCommand);
+        this.keyword = keyword;
     }
 
     @Override
     /**
      * Lists tasks that contains the keyword in the tasks list.
      * @param tasks TaskList object containing a list of existing tasks.
-     * @param storage
+     * @param storage the storage object that deals with saving and loading task lists.
      */
     public String execute(TaskList tasks, Storage storage) {
-        Parser parser = new Parser(fullCommand);
-        return tasks.findTask(parser.getKeyword());
+        return tasks.findTask(keyword);
     }
 }

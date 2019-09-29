@@ -21,7 +21,7 @@ public class ListCommand extends Command {
     /**
      * Lists existing tasks in the tasks list.
      * @param tasks TaskList object containing a list of existing tasks.
-     * @param storage
+     * @param storage the storage object that deals with saving and loading task lists.
      */
     public String execute(TaskList tasks, Storage storage) {
         return tasks.showTasks();

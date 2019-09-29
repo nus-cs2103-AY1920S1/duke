@@ -13,13 +13,23 @@ public class Deadline extends Task {
      * 
      * @param done        a boolean denoting the status of the task
      * @param description a string describing the deadline
-     * @param by          a string following "dd/mm/yyyy hh:mm" denoting the
-     *                    deadline
+     * @param by          a string following "dd/mm/yyyy hh:mm" denoting the deadline
      * @throws DateTimeParseException if the format is not as above
      */
     public Deadline(boolean done, String description, String by) throws DateTimeParseException {
+        this(done, description, parseTime(by));
+    }
+
+    /**
+     * Creates a deadline object.
+     * 
+     * @param done        a boolean denoting the status of the task
+     * @param description a string describing the deadline
+     * @param by          a string following "dd/mm/yyyy hh:mm" denoting the deadline
+     */
+    public Deadline(boolean done, String description, LocalDateTime by) {
         super(description);
-        this.by = parseTime(by.trim());
+        this.by = by;
         this.isDone = done;
     }
 
@@ -27,8 +37,7 @@ public class Deadline extends Task {
      * Creates a deadline object.
      * 
      * @param description a string describing the deadline
-     * @param by          a string following "dd/mm/yyyy hh:mm" denoting the
-     *                    deadline
+     * @param by          a string following "dd/mm/yyyy hh:mm" denoting the deadline
      * @throws DateTimeParseException if the format is not as above
      */
     public Deadline(String description, String by) throws DateTimeParseException {
@@ -45,8 +54,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Takes in an array of string, consist of space-split strings from a saved
-     * input. Returns a Deadline object.
+     * Takes in an array of string, consist of space-split strings from a saved input. Returns a
+     * Deadline object.
      * 
      * @param tokens an array of strings
      * @return an {@link Optional} {@link Deadline}.
@@ -54,9 +63,11 @@ public class Deadline extends Task {
      * @throws NumberFormatException  if the number representing done is not 1 or 0
      * @throws DateTimeParseException if the date format is illegal
      */
-    public static Deadline fromFormattedString(String[] tokens) throws NumberFormatException, DateTimeParseException {
+    public static Deadline fromFormattedString(String[] tokens)
+            throws NumberFormatException, DateTimeParseException {
         boolean done = Integer.parseInt(tokens[1]) == 1;
-        Deadline deadline = new Deadline(done, tokens[2], tokens[3]);
+        LocalDateTime by = LocalDateTime.parse(tokens[3]);
+        Deadline deadline = new Deadline(done, tokens[2], by);
         return deadline;
     }
 }

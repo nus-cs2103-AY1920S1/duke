@@ -32,6 +32,9 @@ public class Task {
         System.out.println(this.toString());
     }
 
-//    public String printToFile() {
-//    }
+    public enum TaskType {
+        DEADLINE,
+        EVENT,
+        TODO
+    }
 }

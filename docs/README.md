@@ -17,7 +17,7 @@ Type 'deadline <task> /by <dd/mm/yyyy hhmm>' to create a deadline. <br />
 Type 'event <task> /at <dd/mm/yyyy hhmm>' to create an event. <br />
 
 
-Example of usage: 
+Example of usage: <br />
 `todo buy groceries` <br />
 `event presentation /at 31/03/2020 1400` <br />
 `deadline essay for prof tan /by 31/03/2020 1700` <br />
@@ -35,10 +35,10 @@ Expected outcome:
 Import tasks from an external file
 ## Usage
 Type `import` or `overwrite` to add tasks from an external file to your current task list, or write over your current task list.
-
+<br /> You can also select these 2 options from a **dropdown menu**.
 ### `import/overwrite` - Import tasks from an external file
 
-Type `import` to open a file chooser. The tasks from this external file will be added on to your existing tasks. 
+Type `import` to open a file chooser. The tasks from this external file will be added on to your existing tasks. <br />
 Type `overwrite` to open a file chooser. The tasks from this file will overwrite your task list.
 
 
@@ -48,14 +48,15 @@ Example of usage:
 
 Expected outcome:
 
-A file chooser will open up.
+A file chooser will open up. When you select a `*.txt` file that is in the correct format, Duke will tell you `Import from *.txt was successful!`
+
 
 
 ### Feature 3
 Flexible delete commands
 ## Usage
 Type `rmdone` or `deleteAll` or `delete <range>` to remove all tasks marked as done, remove 
-all tasks, or delete a specific range of tasks.
+all tasks, or delete a specific range of tasks. You can select `Delete all tasks` and `Delete all done tasks` from the **dropdown menu**.
 
 ### `rmdone/deleteAll/delete <range>` - Import tasks from an external file
 

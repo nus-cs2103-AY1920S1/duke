@@ -1,0 +1,332 @@
+<!doctype html>
+<!--suppress ALL -->
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script>document.getElementsByTagName("html")[0].className += " js";</script>
+	<link rel="stylesheet" href="assets/css/style.css">
+	<title>Duke help page</title>
+</head>
+
+<body>
+	<header class="cd-header flex flex-column flex-center">
+		<div class="text-component text-center">
+			<h1>Duke FAQ</h1>
+		</div>
+	</header>
+
+	<section class="cd-faq js-cd-faq container max-width-md margin-top-lg margin-bottom-lg">
+		<ul class="cd-faq__categories">
+			<li><a class="cd-faq__category cd-faq__category-selected truncate" href="#basics">Basics</a></li>
+			<li><a class="cd-faq__category truncate" href="#mobile">Others</a></li>
+		</ul> <!-- cd-faq__categories -->
+
+		<div class="cd-faq__items">
+			<ul id="basics" class="cd-faq__group">
+				<li class="cd-faq__title">
+					<h2>Basics</h2>
+				</li>
+				<li class="cd-faq__item">
+					<a class="cd-faq__trigger" href="#0"><span>What is Duke?</span></a>
+					<div class="cd-faq__content">
+						<div class="text-component">
+							<p>
+								Duke acts as your trusty online secretary where he helps you to keep track of all your
+								key dates for all your important events. These tasks that you have can be classified
+								into To Do,
+								Events and Deadline tasks. Users can then give timings for their deadline tasks, when
+								they need
+								to complete it by. As for event tasks, they can give a time where the event will occur.
+							</p>
+						</div>
+					</div> <!-- cd-faq__content -->
+				</li>
+
+				<li class="cd-faq__item">
+					<a class="cd-faq__trigger" href="#0"><span>What are the commands for Duke?</span></a>
+					<div class="cd-faq__content">
+						<div class="text-component">
+							<p>
+								Here are the list of command for Duke:
+								<ol>
+									<li>list: Shows the current list of task that the user has</li>
+									<br>
+									<li>todo [description]: Defines a todo task accompanied with the description of the
+										task</li>
+									<br>
+									<li>deadline [description] /by [time]: Defines a event task accompanied with the
+										description of the task
+										and also the time when the task has to be done</li>
+									<br>
+									<li>event [description] /at [time]: Defines a event task accompanied with the
+										description of the task
+										and also the time when the event will occur
+									</li>
+									<br>
+									<li>
+										find [keyword]: Given a keyword from the user, Duke will search the current task
+										list and show the
+										task and index of the task in the task list.
+									</li>
+									<br>
+									<li>
+										done [index]: Given the index in the range of the task list, Duke will check
+										that specific task in the list
+									</li>
+									<br>
+									<li>
+										delete [index]: Given the index in the range of the task lsit, Duke will delete
+										that specific task in the list
+									</li>
+									<br>
+									<li>
+										bye: Indicates that the user is done using Duke and closes the program. Duke
+										will save the latest task list
+										with the user
+									</li>
+								</ol>
+						</div>
+					</div> <!-- cd-faq__content -->
+				</li>
+
+				<li class="cd-faq__item">
+					<a class="cd-faq__trigger" href="#0"><span>Can Duke keep track of my task even after closing
+							it?</span></a>
+					<div class="cd-faq__content">
+						<div class="text-component">
+							<p>
+								Yes, Duke will create a txt file with the current tasks that you have and store it in
+								your local drive.
+								Whenever you startup Duke, the current task list that is on the Duke.txt file will be
+								loaded onto Duke
+								and shown to the user. Duke will update the user's task list after each command that
+								alters the task list.
+								This helps to ensure that the task list will be the most updated one even when Duke is
+								to crash.
+							</p>
+						</div>
+					</div> <!-- cd-faq__content -->
+				</li>
+
+				<li class="cd-faq__item">
+					<a class="cd-faq__trigger" href="#0"><span>Where will my task list be saved at using
+							Duke?</span></a>
+					<div class="cd-faq__content">
+						<div class="text-component">
+							<p>
+								Duke will save all changes to the user task list in a txt file named "Duke.txt".
+								This file will then be subsequently be saved in the user's local drive. Users
+								will be able to access their task list through the Duke folder in their local drive.
+							</p>
+						</div>
+					</div> <!-- cd-faq__content -->
+				</li>
+			</ul> <!-- cd-faq__group -->
+
+			<ul id="mobile" class="cd-faq__group">
+				<li class="cd-faq__title">
+					<h2>Others</h2>
+				</li>
+				<li class="cd-faq__item">
+					<a class="cd-faq__trigger" href="#0"><span>Advance Commands</span></a>
+					<div class="cd-faq__content">
+						<div class="text-component">
+							<p>
+								Duke also supports a list of other advance commands for much efficient use:
+								<ol>
+									<li>
+										l: The simplified version of indicating a list
+									</li>
+									<br>
+									<li>
+										t [description]: The simplified version of indicating a to do task. This is
+										accompanied with a description of the to do task
+									</li>
+									<br>
+									<li>
+										d [description]/by [time]: The simplified version of indicating a deadline task.
+										This is
+										accompanied with a description of the deadline task
+									</li>
+									<br>
+									<li>
+										e [description]/at [time]: The simplified version of indicating a event task.
+										This is
+										accompanied with a description of the event task
+									</li>
+									<br>
+									<li>
+										f [keyword]: The simplified version of the find function. This helps to find the
+										tasks that are relevant to the keyword and showcase to the users
+									</li>
+									<br>
+									<li>
+										do [index]: The simplified version of the done function. This helps Duke mark
+										the
+										current
+										task specified by the user as done
+									</li>
+									<br>
+									<li>
+										dd [index]: The simplified version of the delete function. This helps Duke to
+										delete the
+										current task in the task list specified by the user
+									</li>
+									<br>
+									<li>
+										bb: The simplified version of the bye function. This closes Duke.
+									</li>
+								</ol>
+						</div>
+					</div> <!-- cd-faq__content -->
+				</li>
+
+				<li class="cd-faq__item">
+					<a class="cd-faq__trigger" href="#0"><span>Issues and potential warnings</span></a>
+					<div class="cd-faq__content">
+						<div class="text-component">
+							<p>
+								Here are some of the possible violations that users may encounter when using Duke:
+								<ol>
+									<li>
+										Number error exception: The specific index that the user give is not a valid
+										number
+										recognized by Java
+									</li>
+									<br>
+									<li>
+										Index out of bound exception: The specific index that the user give is out of
+										the
+										range of the number of task in the task list.
+									</li>
+									<br>
+									<li>
+										Duke exception: Duke exceptions are thrown when the user gives an invalid
+										command which
+										Duke does not recognize.
+									</li>
+								</ol>
+						</div>
+					</div> <!-- cd-faq__content -->
+				</li>
+
+				<li class="cd-faq__item">
+					<a class="cd-faq__trigger" href="#0"><span>Creating your own Duke.txt file</span></a>
+					<div class="cd-faq__content">
+						<div class="text-component">
+							<p>If Duke indicates that there is no Duke.txt file to read during setup,
+								do go into the Duke folder, create a folder name data. In that data
+								folder, create a Duke.txt file.
+							</p>
+						</div>
+					</div> <!-- cd-faq__content -->
+				</li>
+
+				<li class="cd-faq__item">
+					<a class="cd-faq__trigger" href="#0"><span>Additional Features of Duke</span></a>
+					<div class="cd-faq__content">
+						<div class="text-component">
+							<p>
+								Duke will format the date and time of your deadline and event tasks if they are
+								specified
+								in the dd/mm/yyyy format. Duke will also format 24h clock timings to 12h clock timings.
+								<br>
+								<br>
+								Example: deadline return books /by 12/09/2019 0040
+								Will be formatted to: deadline return books (by: 12th September 2019, 12:40am)
+								<br>
+								<br>
+								Also, do take note that there are also shortcut commands that are implemented in Duke
+								for ease of use for the user.
+							</p>
+						</div>
+					</div> <!-- cd-faq__content -->
+				</li>
+
+				<li class="cd-faq__item">
+					<a class="cd-faq__trigger" href="#0"><span>Duke progression</span></a>
+					<div class="cd-faq__content">
+						<div class="text-component">
+							<p>
+								Here is the breakdown of Duke progression:
+								<ol>
+									<li>
+										Added in greet, bye, echo, list function
+									</li>
+									<br>
+									<li>
+										Added in To Do, Deadline, Event task categorization.
+									</li>
+									<br>
+									<li>
+										Added in the done and delete function.
+									</li>
+									<br>
+									<li>
+										Added in the find function.
+									</li>
+									<br>
+									<li>
+										Added in the advance commands and also help page.
+									</li>
+								</ol>
+						</div>
+					</div> <!-- cd-faq__content -->
+				</li>
+
+
+				<li class="cd-faq__item">
+					<a class="cd-faq__trigger" href="#0"><span>About the creator</span></a>
+					<div class="cd-faq__content">
+						<div class="text-component">
+							<p>Thank you for your support in using Duke. My name is Zhao Ming and this is an
+								individual project that we have to do during our CS2103T module in NUS. I hope
+								that Duke will be useful to you and that you will use it to track your daily
+								activities.
+							</p>
+						</div>
+					</div> <!-- cd-faq__content -->
+				</li>
+
+				<li class="cd-faq__item">
+					<a class="cd-faq__trigger" href="#0"><span>Contact me</span></a>
+					<div class="cd-faq__content">
+						<div class="text-component">
+							<p>
+								I can be contacted through the following channels:
+								<ol>
+									<li>
+										Github: <a
+											href="https://github.com/ngzhaoming">https://github.com/ngzhaoming</a>
+									</li>
+									<br>
+									<li>
+										Instagram: <a
+											href="https://www.instagram.com/zhaoming_boiboi/">https://www.instagram.com/zhaoming_boiboi/</a>
+									</li>
+									<br>
+									<li>
+										LinkedIn: <a
+											href="https://www.linkedin.com/in/ng-zhao-ming-b6059117b/">www.linkedin.com/in/zhaoming-ng</a>
+									</li>
+									<br>
+									<li>
+										Email: ngzhaoming@gmail.com
+									</li>
+								</ol>
+						</div>
+					</div> <!-- cd-faq__content -->
+				</li>
+			</ul> <!-- cd-faq__group -->
+
+			<a href="#0" class="cd-faq__close-panel text-replace">Close</a>
+
+			<div class="cd-faq__overlay" aria-hidden="true"></div>
+		</div>	</section> <!-- cd-faq -->
+	<script src="assets/js/util.js"></script> <!-- util functions included in the CodyHouse framework -->
+	<script src="assets/js/main.js"></script>
+</body>
+
+</html>

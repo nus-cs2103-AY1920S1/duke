@@ -1,0 +1,17 @@
+Bye
+todo read book
+deadline todo
+list
+deadline return book /by June 6th
+eventtodo
+todo join sports club
+done 100000000000000
+done 1
+event /at Friday
+list
+echo
+event team meeting /at Aug 6th 2-4pm
+bye guys
+list
+done 10
+bye

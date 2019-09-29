@@ -71,6 +71,22 @@ Expected outcome:
 `Got it. I've deleted these tasks:` <br />
 Duke will delete items 1 through 4, 6 through 9, and 12, and display these tasks.
 
+### Feature 4
+Expenses Tracker
+## Usage
+Click on `Expenses Tracker` under `Other tools` in the menubar to open the interface.
+### Add an expense/income item to your list using the +/- buttons
+
+
+
+Example of usage: 
+
+Type the name of your expense/income, the amount, and then click `+`/`-` to add the item to the correct column.<br />
+The total budget amount will automatically update.
+
+Expected outcome:
+
+The columns will automatically update.
 
 
 

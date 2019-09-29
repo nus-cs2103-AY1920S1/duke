@@ -70,11 +70,11 @@ public class Ui {
                 +
                 "first, edit both date and time:\n"
                 +
-                "    [edit <item num> <desc> :t <dd/mm/yy hhmm-hhmm>] \n"
+                "    [edit <item num> <desc> t: <dd/mm/yy hhmm-hhmm>] \n"
                 +
                 "    ****second 'hhmm' can be omitted for Deadline task\n"
                 +
-                "    ****for todo Task, end input with :t\n"
+                "    ****for todo Task, end input with t:\n"
                 +
                 "  edit desc only:\n"
                 +

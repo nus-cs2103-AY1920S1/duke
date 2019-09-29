@@ -58,7 +58,7 @@ Flexible delete commands
 Type `rmdone` or `deleteAll` or `delete <range>` to remove all tasks marked as done, remove 
 all tasks, or delete a specific range of tasks. You can select `Delete all tasks` and `Delete all done tasks` from the **dropdown menu**.
 
-### `rmdone/deleteAll/delete <range>` - Import tasks from an external file
+### `rmdone/deleteAll/delete <range>` - Delete all done tasks/delete all tasks/delete tasks in a range
 
 
 

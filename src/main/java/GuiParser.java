@@ -51,48 +51,43 @@ public class GuiParser {
         } else if (command.equals("list")) {
             return gui.listOut() + "\n" + tasklist.printlist();
         } else {
-            String[] ls = command.split(" ");
-            if (ls[0].equals("done")) {
-                String num = command.substring(5, 6);
-                return doneCommand(num);
-            } else if (ls[0].equals("todo")) {
-                String[] td = command.split(" ");
-                try {
+            try {
+                String[] ls = command.split(" ");
+                if (ls[0].equals("done")) {
+                    String num = command.substring(5, 6);
+                    return doneCommand(num);
+                } else if (ls[0].equals("todo")) {
+                    String[] td = command.split(" ");
                     return todoCommand(td);
-                } catch (DukeException e) {
-                    System.out.println(e);
-                }
-            } else if (ls[0].equals("event")) {
-                String[] eve = command.split(" ");
-                return eventCommand(eve);
-            } else if (ls[0].equals("deadline")) {
-                String[] eve = command.split(" ");
-                return deadlineCommand(eve);
-            } else if (ls[0].equals("delete")) {
-                String dnumber = ls[1];
-                return deleteCommand(dnumber);
-            } else if (ls[0].equals("find")) {
-                ArrayList<Task> temp = tasklist.find(ls[1]);
-                String out = gui.find();
-                out = out + "\n" + tasklist.printlistfind(temp);
-                return out;
-            } else if (ls[0].equals("sort")) {
-                String sorter = ls[1];
-                tasklist.sort(sorter);
-                storage.saveFile(tasklist.returnTasks());
-                return "Sorted!";
-            } else if (ls[0].equals("help")) {
-                return helpCommand();
-            } else {
-                try {
+                } else if (ls[0].equals("event")) {
+                    String[] eve = command.split(" ");
+                    return eventCommand(eve);
+                } else if (ls[0].equals("deadline")) {
+                    String[] eve = command.split(" ");
+                    return deadlineCommand(eve);
+                } else if (ls[0].equals("delete")) {
+                    String dnumber = ls[1];
+                    return deleteCommand(dnumber);
+                } else if (ls[0].equals("find")) {
+                    ArrayList<Task> temp = tasklist.find(ls[1]);
+                    String out = gui.find();
+                    out = out + "\n" + tasklist.printlistfind(temp);
+                    return out;
+                } else if (ls[0].equals("sort")) {
+                    String sorter = ls[1];
+                    tasklist.sort(sorter);
+                    storage.saveFile(tasklist.returnTasks());
+                    return "Sorted!";
+                } else if (ls[0].equals("help")) {
+                    return helpCommand();
+                } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                } catch (DukeException e) {
-                    System.out.println(e);
                 }
-                return "OOPS!!! I'm sorry, but I don't know what that means :-(";
+            } catch (DukeException e) {
+                System.out.println(e);
+                return e.toString();
             }
         }
-        return "OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
     /**
@@ -177,7 +172,10 @@ public class GuiParser {
      * @return String in user friendly format
      */
 
-    public String eventCommand(String[] eve) throws IOException {
+    public String eventCommand(String[] eve) throws IOException, DukeException {
+        if (eve.length == 1) {
+            throw new DukeException("OOPS!!! The description of an Event cannot be empty.");
+        }
         String com = "";
         String eventdate = "";
         for (int i = 1; i < eve.length; i++) {
@@ -211,7 +209,10 @@ public class GuiParser {
      * @return String in user friendly format
      */
 
-    public String deadlineCommand(String[] eve) throws IOException {
+    public String deadlineCommand(String[] eve) throws IOException, DukeException {
+        if (eve.length == 1) {
+            throw new DukeException("OOPS!!! The description of a Deadline cannot be empty.");
+        }
         String com = "";
         String deadline = "";
         for (int i = 1; i < eve.length; i++) {

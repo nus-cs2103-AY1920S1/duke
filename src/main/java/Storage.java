@@ -183,6 +183,7 @@ public class Storage {
     }
 
     public static boolean isDone(String op) {
-        return (op.equals("✓"));
+        String done = "\u2713";
+        return (op.equals(done));
     }
 }

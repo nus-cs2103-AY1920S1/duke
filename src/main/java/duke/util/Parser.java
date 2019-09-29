@@ -1,8 +1,8 @@
 package duke.util;
 
 import duke.command.*;
-import duke.exception.DukeException;
-import duke.exception.ExceptionType;
+import duke.util.exception.DukeException;
+import duke.util.exception.ExceptionType;
 import java.util.Scanner;
 
 public class Parser {
@@ -24,11 +24,9 @@ public class Parser {
         } else if (command.equals("todo")) {
             return new AddTodoCommand(fullCommand);
         } else if (command.equals("event")) {
-            String restOfCommand = commandReader.nextLine();
-            return new AddEventCommand(restOfCommand);
+            return new AddEventCommand(fullCommand);
         } else if (command.equals("deadline")) {
-            String restOfCommand = commandReader.nextLine();
-            return new AddDeadlineCommand(restOfCommand);
+            return new AddDeadlineCommand(fullCommand);
         } else {
             throw new DukeException(ExceptionType.INVALID_COMMAND);
         }

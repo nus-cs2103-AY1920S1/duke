@@ -1,7 +1,8 @@
 package duke;
 
+import duke.util.UiMessage;
 import duke.command.Command;
-import duke.exception.DukeException;
+import duke.util.exception.DukeException;
 import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Storage;
@@ -23,12 +24,11 @@ public class Duke {
         } catch (Exception e) {
             // temporary haxx
             e.printStackTrace();
-            ui.showLoadingError();
         }
     }
 
     private void run() {
-        ui.showWelcome();
+        ui.showMessage(UiMessage.WELCOME);
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -43,7 +43,7 @@ public class Duke {
                 ui.showLine();
             }
         }
-        ui.showGoodbye();
+        ui.showMessage(UiMessage.GOODBYE);
     }
 
     public static void main(String[] args) {

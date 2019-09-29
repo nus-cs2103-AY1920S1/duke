@@ -12,7 +12,7 @@ public class Storage {
     private String tasksImportedMessage = "Success! Your tasks have been imported from: ";
     private String tasksSavedMessage = "Success! Your tasks have been saved to: "; // should be in Ui class?
     private String tasksNotSavedMessage = "Your task list is empty! Adios :)";
-    private String fileNotFoundMessage = "Existing tasks file not found! Starting duke afresh...";
+    private String tasksNotFoundMessage = "Existing tasks file not found! Starting duke afresh...";
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -33,7 +33,8 @@ public class Storage {
 
         // check if file exists
         if (!file.exists()) {
-            System.out.println(fileNotFoundMessage);
+            // todo: replace with showMessage(UiMessage.TASKS_NOT_FOUND)
+            System.out.println(tasksNotFoundMessage);
             return false;
         }
 
@@ -47,12 +48,8 @@ public class Storage {
             return tasks;
         }
 
-        // for each line in file
-            // create corresponding task
-            // add task to list
-
         try {
-            FileInputStream fis = new FileInputStream(this.filePath);
+            FileInputStream fis = new FileInputStream(filePath);
             ObjectInputStream ois = new ObjectInputStream(fis);
 
             tasks = (TaskList) ois.readObject();
@@ -60,7 +57,8 @@ public class Storage {
             ois.close();
             fis.close();
 
-            System.out.println(tasksImportedMessage);
+            // todo: replace with showMessage(UiMessage.TASKS_IMPORTED)
+            System.out.println(tasksImportedMessage + filePath);
         } catch (Exception e) {
             // temporary haxx
             e.printStackTrace();
@@ -72,6 +70,7 @@ public class Storage {
     public void save(TaskList tasks) {
         // first, check if task list is empty. if so, do not save
         if (tasks.isEmpty()) {
+            // todo: replace with showMessage(UiMessage.TASKS_NOT_SAVED)
             System.out.println(tasksNotSavedMessage);
             return;
         }
@@ -85,6 +84,8 @@ public class Storage {
             oos.close();
             fos.close();
 
+            // todo: replace with showMessage(UiMessage.TASKS_SAVED)
+            // how to pass filePath to Ui?
             System.out.println(tasksSavedMessage + this.filePath);
         } catch (Exception e) {
             // temporary haxx

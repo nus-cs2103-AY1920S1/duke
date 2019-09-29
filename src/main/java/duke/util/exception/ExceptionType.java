@@ -1,4 +1,4 @@
-package duke.exception;
+package duke.util.exception;
 
 public enum ExceptionType {
     // invalid

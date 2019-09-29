@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.exception.DukeException;
+import duke.util.exception.DukeException;
 import duke.task.Task;
 import duke.task.Todo;
 import java.util.Date;

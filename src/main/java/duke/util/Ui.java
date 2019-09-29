@@ -1,11 +1,10 @@
 package duke.util;
-import duke.exception.DukeException;
+import duke.util.exception.DukeException;
 import duke.task.TaskList;
 import java.util.Scanner;
 
 public class Ui {
     private Scanner in;
-    private String loadingErrorMessage = "Oh no! Could not load tasks from file :(";
     private String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -18,14 +17,6 @@ public class Ui {
         this.in = new Scanner(System.in);
     }
 
-    public void showLoadingError() {
-        System.out.println(loadingErrorMessage);
-    }
-
-    public void showWelcome() {
-        System.out.println(welcomeMessage);
-    }
-
     public String readCommand() {
         return in.nextLine();
     }
@@ -35,12 +26,12 @@ public class Ui {
         System.out.println(line);
     }
 
-    public void showError(DukeException exception) {
-        System.out.println(exception.getMessage());
+    public void showMessage(UiMessage uiMessage) {
+        System.out.println(uiMessage.getMessage());
     }
 
-    public void showGoodbye() {
-        System.out.println(goodbyeMessage);
+    public void showError(DukeException exception) {
+        System.out.println(exception.getMessage());
     }
 
     public void showTasks(TaskList matchingTasks) {

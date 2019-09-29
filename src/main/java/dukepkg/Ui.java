@@ -169,4 +169,17 @@ public class Ui {
     public String showNoMatchingTask() {
         return "Oops, no matching task.";
     }
+
+    public String showHelpMsg() {
+        return "Here is the list of available commands:\n" +
+                "Add task - todo <task>\n" +
+                "Add timed task - time <task> <duration>\n" +
+                "Add event - event <task> /at <time>\n " +
+                "Add deadline - deadline <task> /by <time> \n" +
+                "Mark task as done - done <task_id>\n" +
+                "Delete task - delete <task_id>\n" +
+                "List all tasks - list\n" +
+                "Find task by keywords - find <keywords separated by space>\n" +
+                "Exit the program - bye\n";
+    }
 }

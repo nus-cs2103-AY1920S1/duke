@@ -245,6 +245,8 @@ public class Parser {
                 case "find":
                     validateFindTaskCommandFormat(arr);
                     return Command.getFindTaskCommand(arr);
+                case "help":
+                    return new HelpCommand();
                 default:
                     unrecognizedAction();
                     return new ByeCommand(); // not reachable

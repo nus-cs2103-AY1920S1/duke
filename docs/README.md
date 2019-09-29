@@ -11,7 +11,7 @@ Hi! Tsuki Task Manager is a girl's school themed app that helps you organize you
 3. Copy the file to the folder you want to use as the home folder for your duke task manager.
 4. Open the terminal and type `java -jar tsuki.jar` to start the app. The GUI should appear in a few seconds.
 5. Type the command in the command box and press `Enter` to execute it. <br />
-  e.g. typing  `list` and pressing `Enter` will list all the current task stored in the database.
+  e.g. typing  `help` and pressing `Enter` will list all the current task stored in the database.
 
 ## Features
 * no duplicate tasks.
@@ -23,6 +23,14 @@ Hi! Tsuki Task Manager is a girl's school themed app that helps you organize you
   4. Task number out of bounds: `Oops! The task No. you refer to is non-existent. Try another one.`
 
 ## Usage
+
+### 3.0 `help` - get help
+
+View all the available commands.
+
+Example of usage:
+
+`help`
 
 ### 3.1 `todo <task_content>` - add an todo task
 

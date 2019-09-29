@@ -24,7 +24,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Tsuki Task Manager");
-            stage.setMinWidth(400);
+            stage.setMinWidth(450);
             stage.setMinHeight(300);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();

@@ -46,6 +46,7 @@ public class Deadline extends Recurrence {
         DateTime newDateTime = this.dateTime.setNewDate(super.unitTime, super.quantity);
         Deadline newTask = new Deadline(super.description, newDateTime);
         newTask.isDone = false;
+        newTask.setAsRecurring(unitTime, quantity);
         return newTask;
     }
 
@@ -56,9 +57,24 @@ public class Deadline extends Recurrence {
     @Override
     public String toString() {
         String output = "[D][" + super.getStatusIcon() + "]" + " " + super.description
+                + System.lineSeparator() + dateTime.toString();
+        if (super.isRecurring) {
+            output += System.lineSeparator()
+                +  "recurring every:" + System.lineSeparator()
+                + super.quantity + " " + super.unitTime + "(s)";
+        }
+        return output;
+    }
+
+    /**
+     * How task data will be stored as a string in the txt file
+     * @return task data formatted as String.
+     */
+    public String parse() {
+        String output = "[D][" + super.getStatusIcon() + "]" + " " + super.description
                 + "(by: " + dateTime.toString() + ")";
         if (super.isRecurring) {
-            output += " every: " + super.quantity + " " + super.unitTime + "(s)";
+            output += " [recurring every: " + super.quantity + " " + super.unitTime + "(s)]";
         }
         return output;
     }

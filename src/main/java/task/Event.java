@@ -46,6 +46,7 @@ public class Event extends Recurrence {
         DateTime newDateTime = this.dateTime.setNewDate(super.unitTime, super.quantity);
         Event newTask = new Event(super.description, newDateTime);
         newTask.isDone = false;
+        newTask.setAsRecurring(unitTime, quantity);
         return newTask;
     }
 
@@ -55,10 +56,25 @@ public class Event extends Recurrence {
      */
     @Override
     public String toString() {
+        String output = "[E][" + super.getStatusIcon() + "]" + " " + super.description
+                + System.lineSeparator() + dateTime.toString();
+        if (super.isRecurring) {
+            output += System.lineSeparator()
+                    +  "recurring every:" + System.lineSeparator()
+                    + super.quantity + " " + super.unitTime + "(s)";
+        }
+        return output;
+    }
+
+    /**
+     * How task data will be stored as a string in the txt file
+     * @return task data formatted as String.
+     */
+    public String parse() {
         String output = "[E][" + super.getStatusIcon() + "]" + " " + super.description + "(at: "
                 + dateTime.toString() + ")";
         if (super.isRecurring) {
-            output += " every: " + super.quantity + " " + super.unitTime + "(s)";
+            output += " [recurring every: " + super.quantity + " " + super.unitTime + "(s)]";
         }
         return output;
     }

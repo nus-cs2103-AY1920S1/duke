@@ -137,12 +137,13 @@ public class TaskList {
      * toString method of TaskList.
      * @return contents of TaskList. i.e. tasks.
      */
+    @Override
     public String toString() {
         String output = "";
         if (taskNum != 0) {
             for (int index = 0; index < taskNum; index++) {
                 Task task = schedule.get(index);
-                output += ("     " + (index + 1) + "." + task.toString() + "\n");
+                output += ((index + 1) + "." + task.toString() + System.lineSeparator() + System.lineSeparator());
             }
             return output.substring(0, output.length() - 1);
         } else {
@@ -159,7 +160,7 @@ public class TaskList {
         if (taskNum != 0) {
             for (int index = 0; index < taskNum; index++) {
                 Task task = getTask(index);
-                output += (task.toString() + "\n");
+                output += (task.parse() + "\n");
             }
             return output.substring(0, output.length() - 1);
         } else {

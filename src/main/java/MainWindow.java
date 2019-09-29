@@ -32,8 +32,8 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         VBox.setVgrow(scrollPane, javafx.scene.layout.Priority.ALWAYS);
-        String welcomeMsg = ("      Hi there." + System.lineSeparator()
-                + "      Welcome to"  + System.lineSeparator() + "      Ouroborus")
+        String welcomeMsg = ("Hi there." + System.lineSeparator()
+                + " Welcome to Ouroborus")
                 + System.lineSeparator();
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcomeMsg, dukeImage));
     }

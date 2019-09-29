@@ -5,6 +5,7 @@ import filewriter.Storage;
 import task.Recurrence;
 import task.Task;
 import task.TaskList;
+import task.Todo;
 import ui.Ui;
 
 public class EditCommand extends Command {
@@ -46,6 +47,12 @@ public class EditCommand extends Command {
             if (completedTask instanceof Recurrence) {
                 if (((Recurrence) completedTask).isRecurring) {
                     Task nextTask = ((Recurrence) completedTask).getRecurrence();
+                    tasks.addTask(nextTask);
+                    ui.showUpdateMessage(nextTask);
+                }
+            } else if (completedTask instanceof Todo) {
+                if (((Todo) completedTask).isRecurring) {
+                    Task nextTask = ((Todo) completedTask).getRecurrence();
                     tasks.addTask(nextTask);
                     ui.showUpdateMessage(nextTask);
                 }

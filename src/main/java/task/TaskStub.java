@@ -20,4 +20,8 @@ public class TaskStub extends Task {
     public String toString() {
         return description;
     }
+
+    public String parse() {
+        return description;
+    }
 }

@@ -47,17 +47,23 @@ public class Storage {
      */
     private Task read(String line) throws DukeException {
         Task output;
+        boolean isRecurring;
         switch (line.charAt(line.indexOf("[") + 1)) {
         case 'T':
+            isRecurring = line.indexOf(" [recurring]") != -1;
+            line = line.replace(" [recurring]", "");
             output = new Todo(line.substring(7, line.length()));
             updateStatus(output, line);
+            if (isRecurring) {
+                ((Todo) output).setAsRecurring();
+            }
             return output;
         case 'D':
             try {
                 int timeDivider = line.indexOf("(by:");
-                int recDivider = line.indexOf(" every: ");
+                int recDivider = line.indexOf(" [recurring every: ");
                 String input = line.substring(7, timeDivider);
-                boolean isRecurring = (recDivider != -1);
+                isRecurring = (recDivider != -1);
                 if (isRecurring){
                     input += "/by " + DateTime.readDeadLine(line.substring(timeDivider + 5, recDivider - 1)).toString();
 
@@ -75,9 +81,9 @@ public class Storage {
         case 'E':
             try {
                 int timeDivider = line.indexOf("(at:");
-                int recDivider = line.indexOf(" every: ");
+                int recDivider = line.indexOf(" [recurring every: ");
                 String input = line.substring(7, timeDivider);
-                boolean isRecurring = (recDivider != -1);
+                isRecurring = (recDivider != -1);
                 if (isRecurring){
                     input += "/at "
                             + DateTime.readEventTime(line.substring(timeDivider + 5, recDivider - 1)).toString();
@@ -110,7 +116,7 @@ public class Storage {
             if (task instanceof Todo){
                 throw new DukeException("Txt error: Can only set Event or Deadline as a recurrence.");
             }
-            String[] details = line.substring(recDivider + 8, line.length() - 4).split(" ");
+            String[] details = line.substring(recDivider + 19, line.length() - 4).split(" ");
             ((Recurrence) task).setAsRecurring(details[1], Integer.parseInt(details[0]));
         }
     }

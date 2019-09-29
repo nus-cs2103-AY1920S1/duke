@@ -30,7 +30,7 @@ public class RevertCommand extends Command{
     }
 
     /**
-     * Marks the (index)th task in TaskList as done.
+     * Reverts the (index)th task in TaskList to be non-recurring..
      * @param tasks current TaskList object used in this instance of Duke..
      * @param ui Instance of user interface to print feedback to user.
      * @param storage updates data record of TaskList in storage.filepath if needed.
@@ -40,16 +40,24 @@ public class RevertCommand extends Command{
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task task = tasks.getTask(index);
+            if (task.getStatusIcon().equals("+")) {
+                throw new DukeException("Can only convert uncompleted Task to recurring tasks.");
+            }
             if (task instanceof Todo) {
-                throw new DukeException("Todo tasks are not recurring.");
+                if (((Todo) task).isRecurring) {
+                    ((Todo) task).revert();
+                } else {
+                    throw new DukeException("Task is not recurring.");
+                }
             }
             if (task instanceof Recurrence) {
                 if (!((Recurrence) task).isRecurring) {
                     throw new DukeException("Task is not recurring.");
+                } else {
+                    Recurrence recurrence = (Recurrence) task;
+                    recurrence.revert();
                 }
             }
-            Recurrence recurrence = (Recurrence) task;
-            recurrence.revert();
             ui.showRevertMessage(task);
         } catch (NullPointerException | IndexOutOfBoundsException e) {
             throw new DukeException("Index out of bounds.");

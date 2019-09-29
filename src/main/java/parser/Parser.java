@@ -41,14 +41,10 @@ public class Parser {
                 }
                 return new AddCommand(command, wordArr[1]);
             }
-        } catch (IndexOutOfBoundsException | DukeException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Give instructions in the format: (instruction type) (details)");
         } catch (NumberFormatException e) {
-            if (command.equals(FullCommand.RECUR)){
-                throw new DukeException("Give instructions in the format: Recur (index) (unit_time) (quantity)");
-            } else {
-                throw new DukeException("'done' and 'delete' must be followed by an integer index.");
-            }
+            throw new DukeException("'done' and 'delete' must be followed by an integer index.");
         }
     }
 }

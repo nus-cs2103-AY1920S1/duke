@@ -73,6 +73,7 @@ public class Duke extends Application {
                 listBuilder.append(ui.showSeparationLine());
                 if (tasks.getListOfTasks().isEmpty()) {
                     listBuilder.append("Sorry, there are no tasks in the list");
+                    listBuilder.append(ui.showSeparationLine());
                 } else {
                     listBuilder.append("     Here are the tasks in your list:\n");
                     listBuilder.append(tasks.printList());

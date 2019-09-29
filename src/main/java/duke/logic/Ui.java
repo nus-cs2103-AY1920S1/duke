@@ -173,9 +173,9 @@ public class Ui {
         glossaryBuilder.append("~~~~~~~~~~~~~~~~~~~~\n");
         glossaryBuilder.append("todo {task}: Adds a 'todo' style task\n");
         glossaryBuilder.append("~~~~~~~~~~~~~~~~~~~~\n");
-        glossaryBuilder.append("deadline (task} /by {time}: Adds a 'deadline' style task\n");
+        glossaryBuilder.append("deadline {task} /by {time}: Adds a 'deadline' style task\n");
         glossaryBuilder.append("~~~~~~~~~~~~~~~~~~~~\n");
-        glossaryBuilder.append("event (task} /at {time}: Adds an 'event' style task\n");
+        glossaryBuilder.append("event {task} /at {time}: Adds an 'event' style task\n");
         glossaryBuilder.append("~~~~~~~~~~~~~~~~~~~~\n");
         glossaryBuilder.append("spending {category} {amount} {brief description}: Adds a spending\n");
         glossaryBuilder.append("~~~~~~~~~~~~~~~~~~~~\n");

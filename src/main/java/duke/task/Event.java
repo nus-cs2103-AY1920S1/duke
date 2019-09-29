@@ -7,7 +7,8 @@ import java.lang.reflect.Array;
  */
 public class Event extends Task {
     protected Date atDate;
-    protected Time atTime;
+    protected Time atStartTime;
+    protected Time atEndTime;
     protected String exactDuration;
 
     public Event(String description, String duration) {
@@ -15,7 +16,9 @@ public class Event extends Task {
         this.exactDuration = duration;
         String[] temp = duration.split(" ");
         atDate = new Date((String) Array.get(temp, 0));
-        atTime = new Time((String) Array.get(temp, 1));
+        String[] timeArray = ((String) Array.get(temp, 1)).split("-");
+        Time atStartTime = new Time((String) Array.get(timeArray, 0));
+        Time atEndTime = new Time((String) Array.get(timeArray, 1));
     }
 
     /**
@@ -44,6 +47,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.atDate + ", " + this.atTime +")";
+        return "[E]" + super.toString() + " (at: " + this.atDate + ", " + this.atStartTime + "to" + this.atEndTime +")";
     }
 }

@@ -15,6 +15,10 @@ Wow! Never forget anything again!
 
 ## Usage
 
+### `help` 
+
+Shows starting prompt with the help test again.
+
 ### `todo <name>`
 
 Example of usage: 
@@ -48,21 +52,30 @@ Adds an event to your list with whatever name and time you gave it!
 
 `[E][X] Cook dinner for lazy kids (at: 29 Sep 2019, 23:59 PM)`
 
-### `help` 
-
-Lists help page.
 
 ### `list`
 
 Lists all tasks in your list.
 
-### `delete <number>`
-
-Deletes task number `<number>` as shown on the `list` page.
-
 ### `done <number>`
 
 Marks task number `<number>` (as shown on the `list` page) as done.
+
+### `delete <term>`
+
+Where `<term>` can be either `<number>`, `done` or `all`.
+
+#### `<number>`
+
+Deletes task number `<number>` as shown on the `list` page.
+
+#### `done`
+
+Deletes all tasks marked as done.
+
+#### `all`
+
+Deletes all tasks.
 
 ### `search <text>`
 

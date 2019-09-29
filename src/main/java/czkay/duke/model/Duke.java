@@ -24,7 +24,7 @@ public class Duke {
         storage = new Storage("tasks.tmp");
         try {
             tasks = storage.load();
-            tasks.createReminders();
+            tasks.updateReminders();
             return "Task list loaded.";
         } catch (IOException | ClassNotFoundException e) {
             tasks = new TaskList();

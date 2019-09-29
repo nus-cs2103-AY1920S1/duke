@@ -122,7 +122,7 @@ public class TaskList implements Serializable {
     /**
      * Creates reminders of the user's upcoming tasks.
      */
-    public void createReminders() {
+    public void updateReminders() {
         List<Reminder> currReminders = new ArrayList<>();
         for (Task task : taskList) {
             Optional<Reminder> potentialReminder = Reminder.createReminderIfValid(task);

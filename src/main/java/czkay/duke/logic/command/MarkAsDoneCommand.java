@@ -26,6 +26,7 @@ public class MarkAsDoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) throws IOException, DukeException {
         tasks.markTaskAsDone(targetIndex);
+        tasks.updateReminders();
         storage.update(tasks);
         return String.format("Nice! I've marked this task as done:\n%s", tasks.get(targetIndex));
     }

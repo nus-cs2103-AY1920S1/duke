@@ -28,7 +28,7 @@ public class DeleteTaskCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) throws IOException, DukeException {
         Task deletedTask = tasks.deleteTask(targetIndex);
-        tasks.createReminders();
+        tasks.updateReminders();
         storage.update(tasks);
         StringBuilder sb = new StringBuilder("Noted. I've removed this task:\n");
         sb.append(deletedTask.toString());

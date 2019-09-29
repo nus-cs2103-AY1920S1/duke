@@ -26,7 +26,7 @@ public class Parser {
             String command = tokens[0].trim();
             if (tokens.length == 1) {
                 // If the command is "bye" or "list".
-                return new String[]{command, null};
+                return new String[]{command, ""};
             }
 
             String arguments = tokens[1].trim();
@@ -34,7 +34,7 @@ public class Parser {
                 tokens = input.split(" ", 3);
                 command = command + ' ' + tokens[1].trim();
                 if (tokens.length == 2) {
-                    return new String[]{command, null};
+                    return new String[]{command, ""};
                 }
                 arguments = tokens[2].trim();
             }

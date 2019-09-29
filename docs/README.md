@@ -45,7 +45,7 @@ Duke has saved the latest data!
 
 
 ### Deletion of Tasks
-Command: `save [task_num]`
+Command: `delete [task_num]`
 
 This command will delete the `task_num`-th Task from Duke. The `task_num` is the number of the Task when you run the `list` command.  
 Description of feature.

@@ -6,7 +6,7 @@ _Duke is a command-line-based task manager._
 ### 1. Add a task
 Add a task either of type Todo, Deadline or Event.
 * __Todo__ 
-  * format: todo <TASK_NAME>
+  * format: todo (TASK_NAME)
   * Example: 
     * Usage: todo borrow_book     
     * Expected Outcome: 
@@ -19,7 +19,7 @@ I've added this task:
 ```
    
 * __Deadline__ 
-  * format: deadline <task_name> /by <due date/time> 
+  * format: deadline (task_name) /by (due date/time) 
     * due date/time must be written in the format (d/MM/yyyy) (HHmm).
   * Example: 
     * Usage: deadline return_book /by 31/9/2019 2359     
@@ -35,7 +35,7 @@ I've added this task:
   
   
 * __Event__ 
-  * format: event <task_name> /at <event date> <start time - end time>
+  * format: event (task_name) /at (event date) (start time - end time)
     * event date/time must be written in the format (d/MM/yyyy) (HHmm-HHmm)
   * Example: 
     * Usage: event CS2103_lecture /at 20/09/2019 1200-1400     
@@ -53,7 +53,7 @@ I've added this task:
 Mark an existing task as complete. 
 Incomplete tasks have a "-" status symbol left of their task name, while completed tasks have a "+" status symbol.
 
-* format: done <index>
+* format: done (index)
   * index indicates the position of the task on the list to mark as done.
 * Example
   * done 1
@@ -68,7 +68,7 @@ done:
 
 ### 3. Delete a task
 Delete an existing task from the task list.
-* format: done <index>
+* format: delete (index)
   * index indicates the position of the task on the list to mark as done.
 * Example:
   * delete 1
@@ -83,7 +83,7 @@ I've removed:
 
 ### 5. Find tasks using keywords
 Find a task or certain tasks using given keyword(s).
-* format: find <keyword>
+* format: find (keyword)
 * Example: find book
 * Expected Outcome:
 ```
@@ -115,7 +115,7 @@ your list:
 Set a task to recur once completed. (Todo type tasks)
 Set a task to recur once every specified time period (Event and Deadline type Tasks)
 Note that only an imcomplete task can be set to be recurring.
-* format: recur <index> <unit time> <quantity>
+* format: recur (index) (unit time) (quantity)
 * Example: recur 2 2 days
 *Expected Outcome:
 ```
@@ -127,7 +127,7 @@ Setting this event to recurssive:
 ### 8. Set recurssive task as non-recurssive.
 Set a task to ocue only once at the specified time.
 Note that only an incomplete recurring task can be set to non-recurring.
-* format: revert <index>
+* format: revert (index)
 * Example: revert 2
 * Expected Outcome:
 ```

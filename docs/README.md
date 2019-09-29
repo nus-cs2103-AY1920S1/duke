@@ -1,14 +1,15 @@
-# Duke User Guide
+# User Guide
 
 ![Image of Ui](https://github.com/bitterg0d/duke/blob/master/docs/Ui.png?raw=true)
 ## Features 
-### Duke can help you track tasks such as:
+### 1. Duke can help you track tasks such as:
 * To-Dos
 * Events
 * Deadlines
-### Find tasks using keywords
-### Delete tasks
-### Mark as done
+
+### 2. Find tasks using keywords
+### 3. Delete tasks
+### 4. Mark as done
 
 ## Usage
 - `bye` - Exits programme.

@@ -14,8 +14,8 @@ as well as from a GUI.
 6. Some example commands you can try:
     - `list` : lists all tasks
     - `todo learn to use Duke` : adds a todo
-    - `delete 3` : deletes the 3rd task in the list
-    - `exit` : exits the app
+    - `done 1` : mark the first task as done
+    - `bye` : exits the app
 
 Details of the commands are explained below.
 
@@ -35,8 +35,10 @@ and distraction-free environment for you to focus on managing your tasks.
 
 The command syntax is the same in both GUI and CLI.
 
-Duke launches in GUI by default, the CLI version can be launched by passing
-`cli` as an option to the jar file on the command line.
+Duke launches in GUI by default, the CLI version can be launched with the following command
+```
+java -jar duke.jar cli
+```
 
 ### Responsive UI
 Resize and position the window however you like, and Duke will still work as

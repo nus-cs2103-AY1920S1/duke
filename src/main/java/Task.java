@@ -28,6 +28,10 @@ public class Task implements Serializable {
         this.isDone = true;
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     /**
      * Gets the status icon for the task.
      *
@@ -47,14 +51,13 @@ public class Task implements Serializable {
      * @param s Input string to be parsed.
      * @return The parsed Date object.
      */
-    protected static Date parseDate(String s) {
+    protected static Date parseDate(String s) throws DukeException {
         SimpleDateFormat parser = new SimpleDateFormat("dd/MM/yyyy HHmm");
         try {
             return parser.parse(s);
         } catch (ParseException e) {
-            System.out.println("Your date needs to be in dd/mm/yyyy hhmm format!");
+            throw new DukeException("Your date needs to be in dd/mm/yyyy hhmm format!");
         }
-        return new Date();
     }
 
     /**

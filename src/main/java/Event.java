@@ -4,7 +4,7 @@ import java.util.Date;
 public class Event extends Task {
     protected Date at;
 
-    public Event(String description, String at) {
+    public Event(String description, String at) throws DukeException{
         super(description);
         assert (!at.isEmpty());
         this.at = Task.parseDate(at);

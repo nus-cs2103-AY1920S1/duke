@@ -3,7 +3,7 @@ import java.util.Date;
 public class Deadline extends Task {
     protected Date by;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeException{
         super(description);
         assert (!by.isEmpty());
         this.by = Task.parseDate(by);

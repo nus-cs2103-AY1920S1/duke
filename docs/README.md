@@ -2,19 +2,35 @@
 
 ## Features 
 
-### Feature 1 
-A todo list application where user can add tasks, deadlines and events.
+### Add task 
+    
+### Delete task
+    
+### Mark task as done
+    
+### Display tasks
+    
+### Search for task
+
 
 ## Usage
 
 ### `Keyword` - Describe action
 
-Describe action and its outcome.
+To add task, type:
+    `todo` + 'name of task'
+    `deadline` + 'name of task' + 'DD/MM/YY hhmm'
+    `event` + 'name of event' + 'DD/MM/YY hhmm'
 
-Example of usage: 
+To delete task, type:
+    `delete` + 'task number'
+    
+To mark task as done, type:
+    `done` + 'task number
 
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
+To display all tasks, type:
+    `list`
+    
+To search for tasks, type:
+    `find` + 'keyword'
+    

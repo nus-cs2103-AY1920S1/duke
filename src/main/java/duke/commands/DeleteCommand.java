@@ -9,6 +9,8 @@ import duke.data.tasks.Task;
 public class DeleteCommand extends Command {
 
     private int taskNumber;
+    private static final String INDEX_OUT_OF_BOUNDS_MESSAGE = "Please enter a valid task number"
+            + " to delete.\n";
     private static final String SUCCESS_MESSAGE = "Noted. I've removed this task:\n"
             + "%s\nNow you have %d task(s) in the list.\n";
     public static final String COMMAND_WORD = "delete";
@@ -27,8 +29,12 @@ public class DeleteCommand extends Command {
      */
     @Override
     public CommandResult execute() {
-        Task task = tasks.remove(taskNumber - 1);
-        return new CommandResult(String.format(SUCCESS_MESSAGE, task.toString(), tasks.size()));
+        try {
+            Task task = tasks.remove(taskNumber - 1);
+            return new CommandResult(String.format(SUCCESS_MESSAGE, task.toString(), tasks.size()));
+        } catch (IndexOutOfBoundsException e) {
+            return new CommandResult(INDEX_OUT_OF_BOUNDS_MESSAGE);
+        }
     }
 
 }

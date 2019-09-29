@@ -55,8 +55,9 @@ public class TaskList {
      * Removes and returns the task at the specified index of this task list.
      * @param index The specified index.
      * @return The task at the specified index of this task list.
+     * @throws IndexOutOfBoundsException If the specified index is out of bounds.
      */
-    public Task remove(int index) {
+    public Task remove(int index) throws IndexOutOfBoundsException {
         return tasks.remove(index);
     }
 

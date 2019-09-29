@@ -10,7 +10,6 @@ import duke.exceptions.DukeException;
 import duke.parser.Parser;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 

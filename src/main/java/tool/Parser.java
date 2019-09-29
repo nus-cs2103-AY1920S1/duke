@@ -31,7 +31,6 @@ public class Parser {
             try {
                 switch (userCommand) {
                     case "bye":
-                        this.storage.close(this.commands);
                         dukeText = this.ui.bye();
                         break;
                     case "list":
@@ -98,7 +97,7 @@ public class Parser {
                     tt = new Deadline(des, new DateTime(dateTime));
                 }
                 this.commands.add(tt);
-                storage.save(tt);
+                storage.save(this.commands);
                 return this.ui.addTask(tt, this.commands.size());
             } catch (ArrayIndexOutOfBoundsException e) {
                 String messageError = type.equals("d") ? "OOPS!!! The format for deadline is wrong. Please follow: <description> /by <time>"
@@ -123,7 +122,7 @@ public class Parser {
             assert i <= commands.size() : "Index for delete is out of bounds";
             try {
                 Task tt = this.commands.delete(i);
-                storage.delete(i + 1);
+                storage.save(this.commands);
                 return this.ui.delete(tt, this.commands.size());
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! Index for delete does not exist in the list.");
@@ -155,7 +154,7 @@ public class Parser {
             int index = Integer.parseInt(inputArr[1]) - 1;
             try {
                 Task doneTask = this.commands.done(index);
-                this.storage.done(doneTask, index + 1);
+                this.storage.save(this.commands);
                 return this.ui.done(doneTask);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! Index for done does not exist in the list.");
@@ -183,7 +182,7 @@ public class Parser {
             String newDes = splitInput[2];
             System.out.println("newDes: " + newDes);
             toEdit.edit(attribute, newDes);
-            this.storage.done(toEdit, i);
+            this.storage.save(this.commands);
             return this.ui.edit(oldTask, toEdit);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Format for edit command is wrong. Try: edit index/attribute/updated info instead.");

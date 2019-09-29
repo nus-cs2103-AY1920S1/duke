@@ -28,11 +28,18 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private static Storage storage = new Storage("./duke.txt");
+    private Parser p;
+
+    public Duke() {
+        Ui ui = new Ui();
+        Storage storage = new Storage("./duke.txt");
+        TaskList commands = new TaskList(storage.load(new ArrayList<Task>()));
+        this.p = new Parser(commands, storage, ui);
+    }
 
 
     public static void main(String[] args) {
-        System.out.println("testing");
+
     }
 
     @Override
@@ -126,11 +133,7 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        Ui ui = new Ui();
-        TaskList commands = new TaskList(storage.load(new ArrayList<Task>())); //TODO
-        Parser p = new Parser(commands, storage, ui);
         String xx = p.parse(input);
-        storage.close(commands);
         assert xx.isEmpty() : "Response cannot be empty";
         return xx;
     }

@@ -9,9 +9,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+
 import java.util.ArrayList;
 
 
@@ -87,88 +85,17 @@ public class Storage {
      * Saves the latest task in the .txt file
      * @param Task t
      */
-     protected void save(Task t) {
-        try {
-            this.fw.append(t.storageString() + System.lineSeparator());
-        } catch (IOException e) {
-            System.out.println("Error occurred saving task to file.");
-        }
+    public void save(TaskList t) {
+         try {
+             FileWriter fw = new FileWriter(this.filePath);
+             ArrayList<Task> tasks = t.getList();
+             for (Task task : tasks) {
+                 fw.write(task.storageString() + "\n");
+             }
+             fw.close();
+         } catch (IOException e) {
+             System.out.println("Error occurred saving task to file.");
+         }
     }
 
-    /**
-     * Deletes task from hard drive specified at index i
-     * @param i
-     */
-    protected void delete(int i) {
-        try {
-            FileReader fr = new FileReader(filePath);
-            BufferedReader br = new BufferedReader(fr);
-            FileWriter ff = new FileWriter("./temp.txt", true);
-            int j = 1;
-            String x;
-            while ((x = br.readLine()) != null) {
-                if (i != j) {
-                    ff.write(x + System.lineSeparator());
-                    ff.flush();
-                }
-                j++;
-            }
-            ff.close();
-            Files.copy(Paths.get("./temp.txt"), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
-            Files.delete(Paths.get("./temp.txt"));
-        } catch (IOException e) {
-//            e.printStackTrace();
-            System.out.println("Error occurred deleting task in file");
-        }
-    }
-
-    /**
-     * Changes the status of task from not done to done
-     * @param t
-     * @param index
-     */
-    protected void done(Task t, int index) {
-        try {
-            FileReader fr = new FileReader(filePath);
-            BufferedReader br = new BufferedReader(fr);
-            FileWriter ff = new FileWriter("./temp.txt", true);
-            String x;
-            int i = 1;
-            while ((x = br.readLine()) != null) {
-                if (i == index) {
-                    ff.write(t.storageString() + System.lineSeparator());
-                } else {
-                    ff.write(x + System.lineSeparator());
-                }
-                i++;
-            }
-            ff.close();
-            Files.copy(Paths.get("./temp.txt"), Paths.get("./duke.txt"), StandardCopyOption.REPLACE_EXISTING);
-            Files.delete(Paths.get("./temp.txt"));
-        } catch (IOException e) {
-            System.out.println("Error occurred updating status of task.");
-        }
-    }
-
-    /**
-     * Closes file reader & saves all changes to task list in hard drive
-     * @param tasks
-     */
-    public void close(TaskList tasks) {
-        try {
-            FileReader fr = new FileReader(filePath);
-            BufferedReader br = new BufferedReader(fr);
-            FileWriter ff = new FileWriter("./temp.txt", true);
-            String x;
-            for (Task t : tasks.getList()) {
-                    ff.write(t.storageString() + System.lineSeparator());
-                    ff.flush();
-            }
-            ff.close();
-            Files.copy(Paths.get("./temp.txt"), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
-            Files.delete(Paths.get("./temp.txt"));
-        } catch (IOException e) {
-            System.out.println("Error occurred saving tasks to text file.");
-        }
-    }
 }

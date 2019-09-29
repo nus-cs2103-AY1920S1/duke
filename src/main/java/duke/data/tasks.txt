@@ -4,3 +4,6 @@ todo feed Yuki the dog | 0
 todo eat dinner | 0
 deadline soccer match /by 20/09/2019 15:00:00 | 0
 todo shower | 1
+event ddd /at 12/09/2019 12:00:00 | 0
+event ddd /at 13/09/2019 13:00:00 | 0
+event ddd /at 13/10/9019 13:00:00 | 0

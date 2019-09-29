@@ -20,13 +20,9 @@ public class Event extends Task {
      */
     public Event(String description, String dateAndTime) throws ParseException {
         super(description);
-        try {
-            dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-            dateFormat.setLenient(false);
-            this.dateAndTime = dateFormat.parse(dateAndTime);
-        } catch (ParseException e) {
-            throw e;
-        }
+        dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        dateFormat.setLenient(false);
+        this.dateAndTime = dateFormat.parse(dateAndTime);
     }
 
 

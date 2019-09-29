@@ -1,2 +1,3 @@
-T | true | homework
-T | false | asdfas
+T | false | a new item to clone
+T | false | a new item to clone
+T | false | a new item to clone

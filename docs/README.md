@@ -68,7 +68,7 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've deleted these tasks:`
+`Got it. I've deleted these tasks:` <br />
 Duke will delete items 1 through 4, 6 through 9, and 12, and display these tasks.
 
 

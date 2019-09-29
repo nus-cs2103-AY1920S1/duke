@@ -27,6 +27,8 @@ public class Parser {
             return new AddEventCommand(fullCommand);
         } else if (command.equals("deadline")) {
             return new AddDeadlineCommand(fullCommand);
+        } else if (command.equals("snooze")) {
+            return new SnoozeCommand(fullCommand);
         } else {
             throw new DukeException(ExceptionType.INVALID_COMMAND);
         }

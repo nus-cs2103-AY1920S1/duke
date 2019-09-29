@@ -47,4 +47,9 @@ public abstract class Task implements Serializable {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(this.toString());
     }
+
+    /**
+     * Postpones the deadline of the given task by 1 day if no other argument is specified.
+     */
+    public abstract void snooze();
 }

@@ -19,6 +19,7 @@ public abstract class AddTaskCommand implements Command {
     private String description;
     private Date deadline;
     private String deadlineString;
+
     // todo: move dateFormatter to somewhere else that makes more sense
     private SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
 

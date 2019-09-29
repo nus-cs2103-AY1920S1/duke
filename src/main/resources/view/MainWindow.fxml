@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
+  <children>
+      <Pane prefHeight="41.0" prefWidth="400.0" style="-fx-background-color: #ffffff; -fx-border-color: #808080; -fx-border-radius: 5px;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0">
+         <children>
+          <TextField fx:id="userInput" onAction="#handleUserInput" prefHeight="41.0" prefWidth="304.0" promptText="Enter a message..." style="-fx-background-color: transparent;" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Pane>
+    <Button fx:id="sendButton" layoutX="340.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="60.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/send.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" layoutY="55.0" prefHeight="502.0" prefWidth="400.0" style="-fx-focus-color: transparent; -fx-faint-focus-color: transparent;" vvalue="1.0">
+      <content>
+        <VBox fx:id="dialogContainer" prefHeight="491.0" prefWidth="388.0" style="-fx-background-color: #ffffff;" />
+      </content>
+    </ScrollPane>
+      <VBox prefHeight="54.0" prefWidth="398.0" style="-fx-border-color: #dfdfdf;" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+         <children>
+            <Pane prefHeight="134.0" prefWidth="396.0">
+               <children>
+                  <ImageView fx:id="headerProfilePicture" fitHeight="32.0" fitWidth="32.0" layoutX="182.0" layoutY="8.0" pickOnBounds="true" />
+               </children>
+            </Pane>
+            <Label alignment="BOTTOM_CENTER" prefHeight="54.0" prefWidth="396.0" text="Doke" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Roboto Black" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+  </children>
+</fx:root>

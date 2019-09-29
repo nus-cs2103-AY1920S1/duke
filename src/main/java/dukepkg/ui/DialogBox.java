@@ -45,6 +45,7 @@ class DialogBox extends HBox {
         final Circle clip = new Circle(25, 25, 25);
         displayPicture.setClip(clip);
         displayPicture.setImage(img);
+        dialog.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
         this.setBackground(new Background(new BackgroundFill(
                 Color.gray(0.865), new CornerRadii(10), new Insets(5, 5, 5, 5))));
         this.setSpacing(10);

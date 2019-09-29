@@ -40,18 +40,19 @@ public abstract class Command {
                 Parser.validateDeadlineFormat(arr);
                 t = Parser.standardizeDeadlineTime(arr);
                 return new DeadlineCommand(t);
-            } else {
+            } else if(arr[0].equals("event")){
                 Parser.validateEventFormat(arr);
                 t = Parser.standardizeEventTime(arr);
                 return new EventCommand(t);
+            } else if (arr[0].equals("time")) {
+                Parser.validateTimeFormat(arr);
+                t = Parser.constructTimeCommand(arr);
+                return new TimeCommand(t);
             }
-        }
-        if(arr[1].contains("/for")) {
-            Parser.validateTimeFormat(arr);
-            return new TimeCommand(t);
         } else {
             return new TodoCommand(t);
         }
+        return new TodoCommand(t);
     }
 
     /**

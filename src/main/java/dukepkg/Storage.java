@@ -46,13 +46,15 @@ public class Storage {
         while (s.hasNext()) {
             String line = s.nextLine();
             String[] arr = line.split(" # ");
-            Task t;
+            Task t = null;
             if (arr.length == 3) {
                 t = new Todo(arr[2]);
             } else if (arr[0].equals("D")) {
                 t = new Deadline(arr[2], arr[3]);
-            } else {
+            } else if (arr[0].equals("E")){
                 t = new Event(arr[2], arr[3]);
+            } else if (arr[0].equals("T")){
+                t = new Time(arr[2], arr[3]);
             }
             if (Integer.parseInt(arr[1]) == 1) {
                 t.markDone();
@@ -74,7 +76,7 @@ public class Storage {
             String s = (t instanceof Todo) ? "T # " : ((t instanceof Event) ? "E # " : "D # ");
             s += t.isDone() ? "1 # " : "0 # ";
             s += t.getTask();
-            s += (t instanceof Todo) ? "" : ((t instanceof Event) ? " # " + ((Event) t).getAt() : " # " + ((Deadline) t).getBy());
+            s += t instanceof Todo ? "" : (t instanceof Time) ? " # " + ((Time) t).getDuration() : ((t instanceof Event) ? " # " + ((Event) t).getAt() : " # " + ((Deadline) t).getBy());
 
             fw.write(s + "\n");
         }

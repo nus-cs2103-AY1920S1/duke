@@ -26,6 +26,13 @@ public class Parser {
 
     }
 
+    public static Task constructTimeCommand(String[] arr) {
+        String[] timed_task = arr[1].trim().split("/for", 2);
+        Task t;
+        t = new Time(timed_task[0].trim(), timed_task[1].trim());
+        return t;
+    }
+
     private String getAction(String[] arr) {
         return arr[0];
     }
@@ -232,6 +239,7 @@ public class Parser {
                 case "todo":
                 case "deadline":
                 case "event":
+                case "time":
                     validateAddTaskCommandLength(arr);
                     return Command.getAddTaskCommand(arr);
                 case "find":

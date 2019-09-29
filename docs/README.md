@@ -1,12 +1,15 @@
 # User Guide
+
 ## 1. Introduction
-Hi! Duke is a high school themed app that helps you organize your tasks, ranging from todos, events to deadlines. Specifically, Duke is optimized for those who prefer to work with a Command Line Interface (CLI) while still enjoys a pleasant Graphical User Interface (GUI). If you can type comfortably fast, Duke can get your bucket list management more lightweight and fun than traditional GUI apps. Interested? Jump to the section 2, `Quick Start` to get started.
+Hi! Tsuki Task Manager is a girl's school themed app that helps you organize your tasks, ranging from todos, events to deadlines. Specifically, Duke is optimized for those who prefer to work with a Command Line Interface (CLI) while still enjoys a pleasant Graphical User Interface (GUI). If you can type comfortably fast, Duke can get your bucket list management more lightweight and fun than traditional GUI apps. Interested? Jump to the section 2, `Quick Start` to get started.
+
+![Sample usage](Ui.png)
 
 ## 2. Quick Start
 1. Ensure you have Java `11` or above installed in your computer.
-2. Download the latest `duke-zj-0.2.0.jar` here.
+2. Download the latest `tsuki.jar` here.
 3. Copy the file to the folder you want to use as the home folder for your duke task manager.
-4. Open the terminal and type `java -jar duke-zj-0.2.0.jar` to start the app. The GUI should appear in a few seconds.
+4. Open the terminal and type `java -jar tsuki.jar` to start the app. The GUI should appear in a few seconds.
 5. Type the command in the command box and press `Enter` to execute it. <br />
   e.g. typing  `list` and pressing `Enter` will list all the current task stored in the database.
 
@@ -37,7 +40,20 @@ Got it! I've added this task:
 Now you have 1 task in the list.
 ```
 
-### 3.2 `deadline <task_content> /by <time>` - add an deadline
+### 3.2 `time <task_content> /for <duration>` - add an timed task
+Add a task that needs to be finished within the speculated time limit.
+
+Example of usage:
+`time website design /for 2hrs`
+
+Expected outcome:
+```
+Got it! I've added this task:
+   [T][x] website design (for: 2hrs)
+Now you have 1 task in the list.
+```
+
+### 3.3 `deadline <task_content> /by <time>` - add an deadline
 
 Add an deadline task into task manager.
 
@@ -67,7 +83,7 @@ Got it! I've added this task:
 Now you have 3 tasks in the list.
 ```
 
-### 3.3 `event` - add an event
+### 3.4 `event` - add an event
 
 Add an upcoming event.
 
@@ -97,7 +113,7 @@ Got it! I've added this task:
 Now you have 3 tasks in the list.
 ```
 
-### 3.4 `done <Task_ID>` - mark a task as finished
+### 3.5 `done <Task_ID>` - mark a task as finished
 
 Mark a task as finished.
 
@@ -110,7 +126,7 @@ Nice! I've marked this task as done:
   [D][] shower (by: tonight)
 ```
 
-### 3.5 `delete <Task_ID>` - delete a task
+### 3.6 `delete <Task_ID>` - delete a task
 
 Delete a task by number.
 
@@ -123,7 +139,7 @@ Noted. I've removed this task:
   [D][x] shower (by: tonight)
 Now you have 2 tasks in the list.
 ```
-### 3.6 `list` - list out all available tasks
+### 3.7 `list` - list out all available tasks
 Output a list of commands that are currently stored in the database.
 
 Example of usage:
@@ -139,7 +155,7 @@ Or, if there is nothing in the list yet:
 
 `Your task list is empty.`
 
-### 3.7 `find <keyword>` - find tasks by keyword
+### 3.8 `find <keyword>` - find tasks by keyword
 
 Find tasks that matches the keywords you enter. Can use more than 1 keyword.
 
@@ -156,7 +172,7 @@ Or, if there is no tasks find:
 
 `Oops, no matching task.`
 
-### 3.8 `bye` - quit
+### 3.9 `bye` - quit
 
 Quit the app.
 

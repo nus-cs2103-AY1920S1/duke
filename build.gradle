@@ -54,8 +54,8 @@ test {
 }
 
 shadowJar {
-    archiveBaseName = "duke-zj"
-    archiveVersion = "0.2.0"
+    archiveBaseName = "tsuki"
+    archiveVersion = ""
     archiveClassifier = null
     archiveAppendix = null
 }

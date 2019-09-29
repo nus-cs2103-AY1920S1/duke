@@ -14,13 +14,6 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
-    public enum TaskType {
-        DEADLINE,
-        EVENT,
-        TODO
-    }
-
-    // ideal implementation of addToList
     public void add(Task task) {
         tasks.add(task);
 
@@ -28,34 +21,12 @@ public class TaskList {
             + ". Use list to see all your tasks!");
     }
 
-    public Task newTask(TaskType taskType, String description, String deadline)
-            throws IllegalArgumentException {
-        Task newTask = null; // task to be added
-
-        switch (taskType) {
-        case DEADLINE:
-            newTask = new Deadline(description, deadline);
-            break;
-        case EVENT:
-            newTask = new Event(description, deadline);
-            break;
-        case TODO:
-            newTask = new Todo(description);
-            break;
-        default:
-            // this should not happen; invalid task type should be caught in caller method already
-            System.out.println("Something went wrong!");
-            break;
-        }
-
-        return newTask;
-    }
-
     public void printList() {
         int i = 1;
         for (Task task : tasks) {
             String s = task.toString();
             System.out.println(i + ". " + s);
+            i++;
         }
     }
 

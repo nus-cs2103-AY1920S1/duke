@@ -1,40 +1,24 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.task.Task;
-import duke.task.TaskList;
-import duke.util.Storage;
-import duke.util.Ui;
-import java.util.NoSuchElementException;
+import duke.task.Todo;
+import java.util.Date;
 
 public class AddTodoCommand extends AddTaskCommand {
-
-    public AddTodoCommand(String restOfCommand) {
-        super(restOfCommand);
+    public AddTodoCommand(String fullCommand) throws DukeException {
+        super(fullCommand);
+        s.useDelimiter("\n"); // no special delimiter required
+        setDescription();
     }
 
     @Override
-    public String getDescription() {
-        return this.restOfCommand.strip();
-    }
-
-    @Override
-    public String getDeadline() {
-        return "no deadline";
-    }
-
-    @Override
-    public Task createTask() {
+    Date getDeadline() {
         return null;
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        try {
-            Task newTask = tasks.newTask(TaskList.TaskType.TODO, getDescription(), getDeadline());
-            tasks.add(newTask);
-        } catch (NoSuchElementException e) {
-            // user input after task type is blank
-            ui.showError("Oops! You did not enter a description!");
-        }
+    public Task createTask() {
+        return new Todo(getDescription());
     }
 }

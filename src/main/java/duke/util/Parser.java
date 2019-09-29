@@ -1,12 +1,13 @@
 package duke.util;
 
 import duke.command.*;
-import java.util.InputMismatchException;
+import duke.exception.DukeException;
+import duke.exception.ExceptionType;
 import java.util.Scanner;
 
 public class Parser {
 
-    public static Command parse(String fullCommand) throws InputMismatchException {
+    public static Command parse(String fullCommand) throws DukeException {
         Scanner commandReader  = new Scanner(fullCommand);
         String command = commandReader.next();
 
@@ -15,25 +16,21 @@ public class Parser {
         } else if (command.equals("list")) {
             return new ListCommand();
         } else if (command.equals("done")) {
-            int taskId = commandReader.nextInt(); // extract the task ID entered by user
-            return new DoneCommand(taskId);
+            return new DoneCommand(fullCommand);
         } else if (command.equals("delete")) {
-            int taskId = commandReader.nextInt();
-            return new DeleteCommand(taskId);
+            return new DeleteCommand(fullCommand);
+        } else if (command.equals("find")) {
+            return new FindCommand(fullCommand);
         } else if (command.equals("todo")) {
-            String restOfCommand = commandReader.nextLine();
-            return new AddTodoCommand(restOfCommand);
+            return new AddTodoCommand(fullCommand);
         } else if (command.equals("event")) {
             String restOfCommand = commandReader.nextLine();
             return new AddEventCommand(restOfCommand);
         } else if (command.equals("deadline")) {
             String restOfCommand = commandReader.nextLine();
             return new AddDeadlineCommand(restOfCommand);
-        } else if (command.equals("find")) {
-            String keyword = commandReader.nextLine();
-            return new FindCommand(keyword);
         } else {
-            throw new InputMismatchException();
+            throw new DukeException(ExceptionType.INVALID_COMMAND);
         }
     }
 }

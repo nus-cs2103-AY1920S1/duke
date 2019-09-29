@@ -1,9 +1,11 @@
 package duke.task;
 
-public class Event extends Task {
-    private String at;
+import java.util.Date;
 
-    public Event(String description, String at) {
+public class Event extends Task {
+    private Date at;
+
+    public Event(String description, Date at) {
         super(description);
         this.at = at;
         this.type = "E";

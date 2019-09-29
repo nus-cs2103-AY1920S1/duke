@@ -23,7 +23,7 @@ public class Task {
     }
 
     private String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); // return tick or X symbols
+        return (isDone ? "Y" : "N"); // return Y or N
     }
 
     public void markAsDone() {
@@ -32,6 +32,11 @@ public class Task {
         System.out.println(this.toString());
     }
 
-//    public String printToFile() {
-//    }
+    public enum TaskType {
+        DEADLINE,
+        EVENT,
+        TODO
+    }
+
+    // todo: use TaskType enum to get type in toString() instead
 }

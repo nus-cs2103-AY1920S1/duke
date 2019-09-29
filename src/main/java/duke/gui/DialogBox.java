@@ -65,6 +65,7 @@ public class DialogBox extends HBox {
         DialogBox userDialog = new DialogBox(text, img);
         userDialog.setAlignment(Pos.BOTTOM_RIGHT);
         userDialog.setMinHeight(Region.USE_PREF_SIZE);
+        userDialog.setMaxWidth(370.0);
         return userDialog;
     }
 
@@ -73,6 +74,7 @@ public class DialogBox extends HBox {
         dukeDialog.flip();
         dukeDialog.setAlignment(Pos.BOTTOM_LEFT);
         dukeDialog.setMinHeight(Region.USE_PREF_SIZE);
+        dukeDialog.setMaxWidth(370.0);
         return dukeDialog;
     }
 }

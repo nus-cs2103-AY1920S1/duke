@@ -58,7 +58,7 @@ public class Ui {
         msg.append("Here are the tasks in your list:\n");
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
-            msg.append((i + 1) + ". " + task.toString() + "\n");
+            msg.append(i + 1 + ". " + task.toString() + "\n");
 
         }
         return msg.toString();
@@ -106,12 +106,14 @@ public class Ui {
         StringBuilder helpMsg = new StringBuilder();
         helpMsg.append("Hello, I'm Duke!\n" +
                         "I can keep track of your to-dos, deadlines and events. Use these commands to control me:\n" +
-                        "\t- todo [description]\n" +
-                        "\t- event [description] /at [date time]\n" +
-                        "\t- deadline [description] /by [date time]\n" +
+                        "\t- todo [desc]\n" +
+                        "\t- event [desc] /at [date time]\n" +
+                        "\t- deadline [des] /by [date time]\n" +
                         "\t- list\n" +
                         "\t- bye (exits duke)\n" +
-                        "\t- find [keyword]");
+                        "\t- find [keyword]\n" +
+                        "\t* date format - DD/MM/YYYY\n" +
+                        "\t* time format - 0000");
         return helpMsg.toString();
     }
 }

@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.exception.DukeException;
+import duke.exception.ExceptionType;
 import duke.task.TaskList;
 import duke.util.Storage;
 import duke.util.Ui;
@@ -16,10 +18,9 @@ public class FindCommand implements Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList matchingTasks = tasks.findTasks(this.keyword);
         if (matchingTasks.isEmpty()) {
-            System.out.println("There are no tasks matching your query :(");
+            ui.showError(new DukeException(ExceptionType.NO_MATCHING_TASKS));
         } else {
-            System.out.println("Here are the matching tasks in your list:");
-            matchingTasks.printList();
+            ui.showTasks(matchingTasks);
         }
     }
 }

@@ -14,7 +14,6 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
-    // ideal implementation of addToList
     public void add(Task task) {
         tasks.add(task);
 
@@ -27,6 +26,7 @@ public class TaskList {
         for (Task task : tasks) {
             String s = task.toString();
             System.out.println(i + ". " + s);
+            i++;
         }
     }
 

@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.exception.DukeException;
+import duke.exception.ExceptionType;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.Storage;
@@ -25,7 +27,7 @@ public abstract class AddTaskCommand implements Command {
             tasks.add(newTask);
         } catch (NoSuchElementException e) {
             // user input after task type is blank
-            ui.showError("Oops! You did not enter a description!");
+            ui.showError(new DukeException(ExceptionType.DESCRIPTION_BLANK));
         }
     }
 }

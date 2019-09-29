@@ -1,4 +1,6 @@
 package duke.util;
+import duke.exception.DukeException;
+import duke.task.TaskList;
 import java.util.Scanner;
 
 public class Ui {
@@ -33,12 +35,16 @@ public class Ui {
         System.out.println(line);
     }
 
-    public void showError(String message) {
-        // todo: use exceptions to abstract out error messages from command classes?
-        System.out.println(message);
+    public void showError(DukeException exception) {
+        System.out.println(exception.getMessage());
     }
 
     public void showGoodbye() {
         System.out.println(goodbyeMessage);
+    }
+
+    public void showTasks(TaskList matchingTasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        matchingTasks.printList();
     }
 }

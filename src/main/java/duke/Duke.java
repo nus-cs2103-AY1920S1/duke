@@ -1,6 +1,8 @@
 package duke;
 
 import duke.command.Command;
+import duke.exception.DukeException;
+import duke.exception.ExceptionType;
 import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Storage;
@@ -34,7 +36,7 @@ public class Duke {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (InputMismatchException e) {
-                ui.showError("Command not recognised!");
+                ui.showError(new DukeException(ExceptionType.INVALID_COMMAND));
             } finally {
                 ui.showLine();
             }

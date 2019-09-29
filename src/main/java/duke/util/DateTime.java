@@ -9,6 +9,7 @@ import java.util.Date;
 public class DateTime {
     // todo: date format is not implemented correctly
     private static DateFormat dateFormat = new SimpleDateFormat("dd/mm/YYYY HHmm");
+
     public static Date parseDate(String date) {
         Date d = null;
         try {
@@ -20,4 +21,5 @@ public class DateTime {
         }
         return d;
     }
+
 }

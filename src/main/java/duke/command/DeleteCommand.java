@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.exception.DukeException;
+import duke.exception.ExceptionType;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.Storage;
@@ -22,10 +24,10 @@ public class DeleteCommand implements Command {
             tasks.deleteTask(task); // mark task as done
         } catch (InputMismatchException | IndexOutOfBoundsException e) {
             // user input after "done" is not an int, or is an invalid task ID
-            ui.showError("Oops! You entered an invalid task ID!");
+            ui.showError(new DukeException(ExceptionType.INVALID_ID));
         } catch (NoSuchElementException e) {
             // user input after "done" is blank
-            ui.showError("Oops! You did not enter a task ID!");
+            ui.showError(new DukeException(ExceptionType.ID_BLANK));
         }
     }
 }

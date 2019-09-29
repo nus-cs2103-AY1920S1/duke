@@ -18,7 +18,7 @@ Duke is a java interactive console application which aims to help the user to
 Add either a todo task, deadline task or event task.
 
 ## Usage
-
+![Duke UI](add.png)
 ### `Keyword` - todo/deadline/event
 
 The keyword is indicating the type of task and a description is required after the keyword. If no description is given an error will be thrown. 
@@ -43,7 +43,7 @@ Expected outcome:
 ## <a name="delete-task"></a>Delete a task
 
 ## Usage
-
+![Duke UI](delete.png)
 ### `Keyword` - delete
 
 Remove a task from the list of tasks. Delete command takes in an integer which
@@ -65,7 +65,7 @@ Expected outcome:
 ## <a name="done-task"></a>Mark a task as done
 
 ## Usage
-
+![Duke UI](done.png)
 ### `Keyword` - done
 
 Mark a task as done. This task will be listed with a ✓ to show that it is done.
@@ -85,7 +85,7 @@ Expected outcome:
 ## <a name="find-task"></a>Find a task
 Find a task based on description.
 ## Usage
-
+![Duke UI](UI.png)
 ### `Keyword` - find
 Find takes an argument that is part of the description of a task if that task 
 exists. 
@@ -120,7 +120,7 @@ Expected outcome:
 ## <a name="reschedule-task"></a>Reschedule a task
 Change the date and time for a task.
 ## Usage
-
+![Duke UI](reschedule.png)
 ### `Keyword` - reschedule
 Reschedule takes in 2 arguments. The first argument is the index of the 
 task in the list that you wish to reschedule. The second argument is the 

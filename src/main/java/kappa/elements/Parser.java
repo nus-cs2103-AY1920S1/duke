@@ -20,6 +20,7 @@ import kappa.exception.InvalidTagException;
 import kappa.exception.MissingDescriptionException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -90,12 +91,15 @@ public class Parser {
             return new Tags();
         } else {
             String[] splitByHash = command[1].trim().split("#");
+            String[] tagsArray = Arrays.copyOfRange(splitByHash,1,splitByHash.length);
             if (splitByHash.length == 0) {
                 throw new InvalidTagException();
             }
-            List<String> tagsList = Stream.of(splitByHash)
+            List<String> tagsList = Stream.of(tagsArray)
                     .map(String::trim)
-                    .filter((s) -> !s.isEmpty()).collect(Collectors.toList());
+                    .filter((s) -> !s.isEmpty())
+                    .collect(Collectors.toList());
+
             return new Tags(tagsList);
         }
     }

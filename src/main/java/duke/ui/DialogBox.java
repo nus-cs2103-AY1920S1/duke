@@ -22,8 +22,8 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
 
-    private static final String DUKE_BACKGROUND_COLOUR = "-fx-background-color: #324851";
-    private static final String USER_BACKGROUND_COLOUR = "-fx-background-color: #7da3a1";
+    private static final String DUKE_BACKGROUND_COLOUR = "-fx-background-color: #a07855";
+    private static final String USER_BACKGROUND_COLOUR = "-fx-background-color: #d4b996";
 
     @FXML
     private Label dialog;
@@ -51,7 +51,7 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        setAlignment(Pos.CENTER_LEFT);
     }
 
     /**

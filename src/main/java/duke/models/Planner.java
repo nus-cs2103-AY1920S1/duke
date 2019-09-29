@@ -7,7 +7,7 @@ public class Planner {
 
     public Planner(String description) {
         this.description = description;
-        this.isDone = isDone;
+        this.isDone = false;
     }
 
     /**

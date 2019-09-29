@@ -7,7 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import duke.execution.Ui;
+import duke.Duke;
 import duke.execution.command.Command;
 import duke.execution.command.ByeCommand;
 import duke.execution.command.DeadlineCommand;
@@ -151,7 +151,6 @@ public class Parser {
         case "help":
             return new HelpCommand(description);
         default:
-            Ui.printIndent();
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't \n"
                     + "know what that means :-(\n"
                     + "    I can only do these functions for now: \n \n"
@@ -193,7 +192,6 @@ public class Parser {
         if ((text.length() > (getSlashIndex(text) + 4)) && (text.length() > (getSlashIndex(text) + 6))) {
             return Integer.parseInt(text.substring(getSlashIndex(text) + 4, getSlashIndex(text) + 6));
         } else {
-            Ui.printIndent();
             throw new DukeException("Wrong Format! Please enter a date\n"
                     + " format as follows: dd/mm/yyyy hhmm.");
         }
@@ -212,7 +210,6 @@ public class Parser {
         if ((text.length() > (getSlashIndex(text) + 7)) && (text.length() > (getSlashIndex(text) + 9))) {
             return Integer.parseInt(text.substring(getSlashIndex(text) + 7, getSlashIndex(text) + 9));
         } else {
-            Ui.printIndent();
             throw new DukeException("Wrong Format! Please enter a date\n"
                     + " format as follows: dd/mm/yyyy hhmm.");
         }
@@ -231,7 +228,6 @@ public class Parser {
         if ((text.length() > (getSlashIndex(text) + 10)) && (text.length() > (getSlashIndex(text) + 14))) {
             return Integer.parseInt(text.substring(getSlashIndex(text) + 10, getSlashIndex(text) + 14));
         } else {
-            Ui.printIndent();
             throw new DukeException("Wrong Format! Please enter a date\n"
                     + " format as follows: dd/mm/yyyy hhmm.");
         }
@@ -270,7 +266,6 @@ public class Parser {
         if (text.length() >= (getSlashIndex(text) + 17)) {
             return Integer.parseInt(text.substring(getSlashIndex(text) + 17));
         } else {
-            Ui.printIndent();
             throw new DukeException("Wrong Format! Please enter a date\n"
                     + " format as follows: dd/mm/yyyy hhmm.");
         }
@@ -328,7 +323,7 @@ public class Parser {
      * @return Returns the correctly formatted date with the
      *     appropriate strings.
      */
-    public static String formatDate(String date) {
+    public static String formatDate(String date) throws DukeException {
         assert date != null;
         String formatted = date;
         if (!date.contains(")")) {
@@ -358,7 +353,7 @@ public class Parser {
                 System.out.println("That is the wrong date format! >:-(");
             }
         } else {
-            //isCorrectFormat = true;
+            throw new DukeException("Sorry, wrong format!");
         }
         return formatted;
     }
@@ -391,17 +386,20 @@ public class Parser {
      */
     public static String getDescriptionOfTask(String text) throws DukeException {
         assert text != null;
+        String description = text;
         int spaceIndex = text.indexOf(" ");
         if ((text.contains("deadline") && isValidDeadlineCommand(text))
                 || (text.contains("event") && isValidEventCommand(text))
                 || (text.contains("expenses") && isValidExpensesCommand(text))) {
             int slashIndex = text.indexOf("/");
-            return text.substring(spaceIndex + 1, slashIndex - 1);
+            description = text.substring(spaceIndex + 1, slashIndex - 1);
+            return description;
         } else if (text.contains("todo") || text.contains("done")
                 || text.contains("delete") || text.contains("find")) {
-            return text.substring(spaceIndex + 1);
+            description = text.substring(spaceIndex + 1);
+            return description;
         } else {
-            return text;
+            return description;
         }
     }
 

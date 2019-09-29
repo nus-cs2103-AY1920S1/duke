@@ -46,7 +46,6 @@ public class FindCommand extends Command {
         assert ui != null;
         assert storage != null;
         File f = new File(Storage.file);
-        assert f != null;
         Scanner sc = new Scanner(f);
         ArrayList<String> tempList = new ArrayList<>();
         int num = 1;

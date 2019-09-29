@@ -30,8 +30,8 @@ public abstract class Command {
      *
      * @param taskList the list of tasks
      * @param storage  storage for saving and loading from file
-     * @throws DukeException
-     * @throws IOException
+     * @throws DukeException dukeException
+     * @throws IOException IOException
      */
     public abstract void executeCommand(TaskList taskList, Storage storage) throws DukeException, IOException;
 }

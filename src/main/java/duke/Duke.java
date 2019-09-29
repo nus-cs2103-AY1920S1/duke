@@ -66,14 +66,14 @@ public class Duke extends Application {
         new Duke("data/tasks.txt").run();
     }
 
-//    @Override
-//    public void start(Stage stage) {
-//        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-//        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-//
-//        stage.setScene(scene); // Setting the stage to show our screen
-//        stage.show(); // Render the stage.
-//    }
+    //    @Override
+    //    public void start(Stage stage) {
+    //        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+    //        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+    //
+    //        stage.setScene(scene); // Setting the stage to show our screen
+    //        stage.show(); // Render the stage.
+    //    }
 
     @Override
     public void start(Stage stage) {
@@ -163,7 +163,8 @@ public class Duke extends Application {
 
     /**
      * Iteration 2:
-     * Creates two dialog boxes, one echoing userPng input and the other containing duke.Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing userPng input and the other containing duke.
+     * Duke's reply and then appends them to
      * the dialog container. Clears the userPng input after processing.
      */
     private void handleUserInput() {

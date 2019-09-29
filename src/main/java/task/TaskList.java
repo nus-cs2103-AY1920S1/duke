@@ -24,7 +24,7 @@ public class TaskList {
     }
 
     /**
-     * add a task to the taskList
+     * Add a task to the taskList.
      *
      * @param task task
      */
@@ -37,9 +37,9 @@ public class TaskList {
     }
 
     /**
-     * delete a task from the taskList
+     * Delete a task from the taskList.
      *
-     * @param task
+     * @param task task
      */
     public void deleteTask(Task task) {
         assert (task != null) : "A given task cannot be null";
@@ -49,7 +49,7 @@ public class TaskList {
     }
 
     /**
-     * delete a task according to index
+     * Delete a task according to index.
      *
      * @param index index of task
      */

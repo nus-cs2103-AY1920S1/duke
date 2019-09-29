@@ -22,24 +22,24 @@ public class Parser {
         assert (!command.isEmpty()) : "Cannot parse an empty string";
         String[] op = command.split(" ");
         switch (op[0]) {
-            case "bye":
-                return new ExitCommand(command);
-            case "todo":
-            case "event":
-            case "deadline":
-                return new AddCommand(command);
-            case "delete":
-                return new DeleteCommand(command);
-            case "list":
-                return new ListCommand(command);
-            case "done":
-                return new DoneCommand(command);
-            case "find":
-                return new FindCommand(command);
-            case "check":
-                return new DetectCommand(command);
-            default:
-                return new UnknownCommand(command);
+        case "bye":
+            return new ExitCommand(command);
+        case "todo":
+        case "event":
+        case "deadline":
+            return new AddCommand(command);
+        case "delete":
+            return new DeleteCommand(command);
+        case "list":
+            return new ListCommand(command);
+        case "done":
+            return new DoneCommand(command);
+        case "find":
+            return new FindCommand(command);
+        case "check":
+            return new DetectCommand(command);
+        default:
+            return new UnknownCommand(command);
         }
 
     }

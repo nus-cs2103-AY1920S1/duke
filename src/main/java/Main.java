@@ -11,7 +11,7 @@ import java.io.IOException;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    private Duke duke = new Duke("src/data/duke.txt");
+    private Duke duke = new Duke("/src/data/duke.txt");
 
     @Override
     public void start(Stage stage) {

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public class Storage {
     private String filepath;
-
     public Storage(String filepath) {
         this.filepath = filepath;
     }
@@ -47,6 +46,9 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         try (FileInputStream fi = new FileInputStream(new File(filepath));
              ObjectInputStream oi = new ObjectInputStream(fi)) {
+
+             //TODO: Check if filepath exists, if not create it
+
             ArrayList<Task> tasks = new ArrayList<>();
             //numObjects refers to how many Tasks were stored in this file.
             int numObjects = oi.readInt();

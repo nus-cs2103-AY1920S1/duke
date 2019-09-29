@@ -25,8 +25,8 @@ import java.io.File;
  * Represents a chat bot that manages your daily tasks.
  */
 public class Duke extends Application {
-    private Image user = new Image(this.getClass().getResourceAsStream("images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -87,7 +87,7 @@ public class Duke extends Application {
         dialogContainer.setMinHeight(535);
 
         // create a image
-        Image image = new Image(this.getClass().getResourceAsStream("images/bg.jpg"));
+        Image image = new Image(this.getClass().getResourceAsStream("/images/bg.jpg"));
 
         // create a background image
         BackgroundImage backgroundimage = new BackgroundImage(image,

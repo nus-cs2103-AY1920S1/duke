@@ -21,7 +21,7 @@
 
 **list**
 * `list`
-* This lists all the current tasks added.
+* This lists all the current tasks added to the task list.
 
 **listdone**
 * `listdone`

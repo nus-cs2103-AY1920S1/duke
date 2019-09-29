@@ -1,0 +1,16 @@
+clear
+todo stuff to do
+event event1 /at some random place
+deadline return book /by Sunday
+deadline deadline /by 20/21/1997 1800
+deadline deadline /by 12/12/1997 1830
+list
+done 2
+done 4
+done 6
+find 1997
+list
+delete 3
+list
+bye
+

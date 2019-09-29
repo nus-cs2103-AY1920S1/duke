@@ -41,9 +41,14 @@ public class TaskList {
      * Returns the task at the specified index of this task list.
      * @param index The specified index.
      * @return The task at the specified index of this task list.
+     * @throws IndexOutOfBoundsException If the specified index is out of bounds.
      */
-    public Task get(int index) {
-        return tasks.get(index);
+    public Task get(int index) throws IndexOutOfBoundsException {
+        try {
+            return tasks.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw e;
+        }
     }
 
     /**

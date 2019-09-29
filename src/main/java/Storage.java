@@ -19,7 +19,7 @@ public class Storage {
      * Storage class deals with loading tasks from the file and saving tasks in the file.
      */
     public Storage() {
-        this.filename = "/Users/karthika/Desktop/duke/data/tasks.txt";
+        this.filename = "data/tasks.txt";
         File directory = new File(String.valueOf(Path.of(filename).getParent()));
 
         if (!directory.isDirectory()) {

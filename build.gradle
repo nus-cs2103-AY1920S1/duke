@@ -38,12 +38,6 @@ shadowJar {
     archiveAppendix = null
 }
 
-shadowJar {
-    archiveBaseName = "duke"
-    archiveVersion = "0.2"
-    archiveClassifier = null
-    archiveAppendix = null
-}
 
 shadowJar {
     archiveBaseName = "duke"

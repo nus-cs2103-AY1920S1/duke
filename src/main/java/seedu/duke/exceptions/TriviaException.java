@@ -1,7 +1,7 @@
 package seedu.duke.exceptions;
 
 /**
- * Exception class for Duke-specific errors.
+ * Exception class for Trivia-specific errors.
  */
 public class TriviaException extends Exception {
 

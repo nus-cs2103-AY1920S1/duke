@@ -7,7 +7,7 @@ import seedu.duke.util.TaskList;
 import seedu.duke.util.UI;
 
 /**
- * Abstract class to serve as the parent class for all other commands.
+ * Abstract class to serve as the parent class for all base duke commands.
  */
 public abstract class Command extends MasterCommand {
 
@@ -17,6 +17,7 @@ public abstract class Command extends MasterCommand {
      * @param tasks TaskList of tasks to be operated on.
      * @param ui UI to display messages to the user.
      * @param storage Storage to write or read files if applicable.
+     * @return String that the UI specifies.
      * @throws DukeException Throws if reading or writing files fails wherever storage is involved.
      */
     public abstract String execute(TaskList tasks, UI ui, Storage storage) throws DukeException;

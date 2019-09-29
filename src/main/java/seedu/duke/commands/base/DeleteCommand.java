@@ -31,6 +31,7 @@ public class DeleteCommand extends Command {
      * @param tasks TaskList of tasks to delete from.
      * @param ui UI to inform the user of deletion.
      * @param storage Storage to write after deletion.
+     * @return String that informs the user of deletion.
      * @throws DukeException Throws if storage cannot find the file to write to.
      */
     @Override

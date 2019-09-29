@@ -15,6 +15,7 @@ public class ByeCommand extends Command {
      * @param tasks Not applicable.
      * @param ui UI to say goodbye to the user.
      * @param storage Not applicable.
+     * @return String that says goodbye to the user.
      */
     @Override
     public String execute(TaskList tasks, UI ui, Storage storage) {

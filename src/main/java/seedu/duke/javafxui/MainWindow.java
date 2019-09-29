@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import seedu.duke.Duke;
-import seedu.duke.commands.base.ByeCommand;
 
 import java.util.Timer;
 import java.util.TimerTask;

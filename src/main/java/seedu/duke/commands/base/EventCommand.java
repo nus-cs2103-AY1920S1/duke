@@ -32,7 +32,8 @@ public class EventCommand extends Command {
      *
      * @param tasks TaskList of tasks to add the event to.
      * @param ui UI to display that event has been added.
-     * @param storage Storage to write files.
+     * @param storage Storage to write event to.
+     * @return String that displays the event that was added.
      * @throws DukeException Throws if storage cannot find the file to write to.
      */
     @Override

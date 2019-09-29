@@ -30,6 +30,7 @@ public class FindCommand extends Command {
      * @param tasks TaskList of tasks to find the character sequence in.
      * @param ui UI to display found tasks to the user.
      * @param storage Not applicable.
+     * @return String that displays found tasks to the user.
      * @throws DukeException Throws if task(s) could not be found.
      */
     @Override

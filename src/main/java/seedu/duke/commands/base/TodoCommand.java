@@ -29,8 +29,9 @@ public class TodoCommand extends Command {
      * new change to the text file.
      *
      * @param tasks TaskList of tasks to be operated on.
-     * @param ui UI to display messages to the user.
-     * @param storage Storage to write or read files if applicable.
+     * @param ui UI to display the Todo that has been added.
+     * @param storage Storage to write Todo to.
+     * @return String that displays Todo that was added.
      * @throws DukeException Throws if storage cannot find the file to write to.
      */
     @Override

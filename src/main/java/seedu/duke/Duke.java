@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import seedu.duke.commands.MasterCommand;
-import seedu.duke.commands.base.Command;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.TriviaException;
 import seedu.duke.trivia.Trivia;
@@ -51,11 +50,11 @@ public class Duke {
         }
     }
 
-        /**
-         * Main constructor for Duke that specifies the path of the save file.
-         *
-         * @param savedPath Path of the duke.txt file used to store information.
-         */
+    /**
+     * Main constructor for Duke that specifies the path of the save file.
+     *
+     * @param savedPath Path of the duke.txt file used to store information.
+     */
     public Duke(String savedPath) {
         ui = new UI();
         storageHandler = new Storage(savedPath, triviaPath);
@@ -71,6 +70,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Main constructor used for javafx which requires a no argument constructor.
+     */
     public Duke() {
         ui = new UI();
         storageHandler = new Storage(savedPath, triviaPath);

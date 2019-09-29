@@ -15,9 +15,9 @@ public class DoneCommand extends Command {
     private int entry;
 
     /**
-     * Constructor to provide the entry number to set done.
+     * Constructor to provide the entry number to mark done.
      *
-     * @param entry Entry number of the TaskList to set done.
+     * @param entry Entry number of the TaskList to mark done.
      */
     public DoneCommand(int entry) {
         this.entry = entry;
@@ -27,9 +27,10 @@ public class DoneCommand extends Command {
      * Marks the task as done, informs the user that the task has been set as done and then writes
      * the new change to the text file.
      *
-     * @param tasks TaskList of tasks to delete from.
-     * @param ui UI to inform the user of deletion.
-     * @param storage Storage to write after deletion.
+     * @param tasks TaskList of tasks to mark done.
+     * @param ui UI to inform the user which task was marked done.
+     * @param storage Storage to write after marking done.
+     * @return String that informs the user which task was marked done.
      * @throws DukeException Throws if storage cannot find the file to write to.
      */
     @Override

@@ -32,7 +32,8 @@ public class DeadlineCommand extends Command {
      *
      * @param tasks TaskList of tasks to add the deadline to.
      * @param ui UI to display that deadline has been added.
-     * @param storage Storage to write files.
+     * @param storage Storage to write deadline to.
+     * @return String that displays the deadline that was added.
      * @throws DukeException Throws if storage cannot find the file to write to.
      */
     @Override

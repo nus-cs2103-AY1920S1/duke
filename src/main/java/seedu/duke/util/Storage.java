@@ -1,8 +1,6 @@
 package seedu.duke.util;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
-import seedu.duke.Duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.TriviaException;
 import seedu.duke.tasks.Deadline;
@@ -80,6 +78,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads trivia using Gson.
+     *
+     * @return Trivia after reading Json file stored in data.
+     * @throws TriviaException Throws if file could not be read.
+     */
     public Trivia loadTrivia() throws TriviaException {
         try {
             triviaReader = new FileReader(trivia);
@@ -219,6 +223,12 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * Method to write trivia to Json using Gson.
+     *
+     * @param triviaToWrite Trivia to write to Json.
+     * @throws TriviaException Throws if file could not be found.
+     */
     public void writeTrivia(Trivia triviaToWrite) throws TriviaException {
         try {
             String json = gson.toJson(triviaToWrite);

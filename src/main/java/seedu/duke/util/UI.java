@@ -5,7 +5,6 @@ import seedu.duke.trivia.QuestionAnswer;
 import seedu.duke.trivia.Trivia;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class UI {
     private static final String logo = " ____        _        \n"
@@ -41,6 +40,8 @@ public class UI {
 
     /**
      * Prints out a welcome message.
+     *
+     * @return Welcome message.
      */
     public String greet() {
         return WELCOME_MESSAGE;
@@ -48,6 +49,8 @@ public class UI {
 
     /**
      * Prints out an error if file cannot be loaded.
+     *
+     * @return Error message.
      */
     public String cannotLoad() {
         return ERROR_CANNOT_LOAD;
@@ -57,6 +60,7 @@ public class UI {
      * Displays the TaskList in order of addition.
      *
      * @param taskList TaskList to print out.
+     * @return Tasklist in string form.
      */
     public String showTaskList(TaskList taskList) {
         assert taskList != null: "taskList cannot be null";
@@ -67,6 +71,7 @@ public class UI {
      * Lets the user know that a task has been marked done.
      *
      * @param task Task to be marked done.
+     * @return Task that was marked done.
      */
     public String showDone(Task task) {
         return DONE + task + "\n";
@@ -78,6 +83,7 @@ public class UI {
      * @param task Task that was operated on
      * @param taskList TaskList of the Task that was operated on.
      * @param isAdd Type of operation that was done.
+     * @return Task that was operated on in with wrappers.
      */
     public String operateTask(Task task, TaskList taskList, boolean isAdd) {
         if (isAdd) {
@@ -93,6 +99,7 @@ public class UI {
      * Displays the found items to the user.
      *
      * @param foundItems The result of finding the taskList.
+     * @return All found items in TaskList format.
      */
     public String showFound(TaskList foundItems) {
         assert foundItems != null: "foundItems has to be non-null";
@@ -107,6 +114,7 @@ public class UI {
      * Show error to the user.
      *
      * @param e Error to be shown.
+     * @return Error message.
      */
     public String showError(String e) {
         return e;
@@ -114,35 +122,58 @@ public class UI {
 
     /**
      * Prints bye message.
+     *
+     * @return Bye message.
      */
     public String bye() {
         return BYE;
     }
 
+    /**
+     * Informs user that trivia has started.
+     *
+     * @return Trivia start message.
+     */
     public String startTrivia() {
         return TRIVIA_START;
     }
 
     /**
      * Prints out and error if trivia cannot be loaded.
+     *
+     * @return Error message.
      */
     public String cannotLoadTrivia() {
         return ERROR_CANNOT_LOAD_TRIVIA;
     }
 
     /**
-     * Displays the answer that was added to the trivia.
+     * Displays the question that was added to the trivia.
      *
-     * @return Message informing user that answer has been added.
+     * @param question Question that was added to trivia.
+     * @return Message informing user that question has been added.
      */
     public String questionAdded(String question) {
         return TRIVIA_QUESTION_ADDED + question;
     }
 
+    /**
+     * Displays the answer that was added to the trivia.
+     *
+     * @param answer Answer that was added to trivia.
+     * @param question Question of answer that was added to trivia.
+     * @return Message informing user that answer has been added.
+     */
     public String answerAdded(String answer, String question) {
         return answer + "\n" + TRIVIA_ANSWER_ADDED + question;
     }
 
+    /**
+     * Views all the questions and answers in the trivia.
+     *
+     * @param trivia Trivia to view questions and answers.
+     * @return String that lists all questions and answers.
+     */
     public String viewAllTrivia (Trivia trivia) {
         ArrayList<QuestionAnswer> questionBank = trivia.getQuestionBank();
         String temp = "So this is all you have so far:\n";
@@ -152,42 +183,98 @@ public class UI {
         return temp;
     }
 
+    /**
+     * Informs user that trivia has been exited.
+     *
+     * @return Exit message.
+     */
     public String exitTrivia() {
         return TRIVIA_EXIT;
     }
 
+    /**
+     * Informs the user that question has been deleted.
+     *
+     * @param deletedQuestion Question that was deleted.
+     * @return Deleted question with message.
+     */
     public String deleteQuestion(String deletedQuestion) {
         return TRIVIA_DELETE_QUESTION + deletedQuestion;
     }
 
+    /**
+     * Informs the user that answer has been deleted.
+     *
+     * @param deletedAnswer Answer that was deleted.
+     * @return Deleted answer with message.
+     */
     public String deleteAnswer(String deletedAnswer) {
         return TRIVIA_DELETE_ANSWER + deletedAnswer;
     }
 
+    /**
+     * Shows current question in quiz to the user.
+     *
+     * @param trivia Trivia to show the question from.
+     * @return Current question in quiz.
+     */
     public String showQuestion(Trivia trivia) {
         return trivia.showCurrentQuestion();
     }
 
+    /**
+     * Informs the user that quiz has started as well as show the first question.
+     *
+     * @param trivia Trivia to show first question from.
+     * @return Quiz start message.
+     */
     public String startQuiz(Trivia trivia) {
         return TRIVIA_START_QUIZ + showQuestion(trivia);
     }
 
+    /**
+     * Informs the user that quiz has ended.
+     *
+     * @return Quiz end message.
+     */
     public String finishTrivia() {
         return TRIVIA_FINISH;
     }
 
+    /**
+     * Tells the user that they got the correct answer and to show the next question.
+     *
+     * @param trivia Trivia to show the next question.
+     * @return Correct answer message and next question.
+     */
     public String correctAnswer(Trivia trivia) {
         return TRIVIA_CORRECT + TRIVIA_NEXT_QUESTION + trivia.showCurrentQuestion();
     }
 
+    /**
+     * Tells the user that they got the last question correct.
+     *
+     * @return Correct last answer message.
+     */
     public String correctAnswerFinal() {
         return TRIVIA_CORRECT_FINAL;
     }
 
+    /**
+     * Tells the user that they got the wrong answer and to show the next question.
+     *
+     * @param trivia Trivia to show the next question.
+     * @return Wrong answer message and next question.
+     */
     public String wrongAnswer(Trivia trivia) {
         return TRIVIA_WRONG + TRIVIA_NEXT_QUESTION + trivia.showCurrentQuestion();
     }
 
+    /**
+     * Tells the user that they got the last question wrong.
+     *
+     * @return Wrong last answer message.
+     */
     public String wrongAnswerFinal() {
         return TRIVIA_WRONG_FINAL;
     }

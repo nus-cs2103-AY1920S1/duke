@@ -1,5 +1,6 @@
 package util;
 
+import command.DetectCommand;
 import command.Command;
 import command.FindCommand;
 import command.ExitCommand;
@@ -35,6 +36,8 @@ public class Parser {
                 return new DoneCommand(command);
             case "find":
                 return new FindCommand(command);
+            case "check":
+                return new DetectCommand(command);
             default:
                 return new UnknownCommand(command);
         }

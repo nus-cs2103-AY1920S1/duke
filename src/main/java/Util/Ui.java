@@ -43,6 +43,14 @@ public class Ui {
         System.out.println("Here are the matching tasks in your list");
     }
 
+    public static void duplicateMsg() {
+        System.out.println("I've found following duplicate tasks in your taskList: ");
+    }
+
+    public static void duplicateEmptyMsg() {
+        System.out.println("Congrat! No duplicates found!");
+    }
+
     public static void unknownMsg() {
         System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }

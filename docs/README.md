@@ -14,7 +14,6 @@
 
 ### `Bye`
 
-
 ## Usage
 
 ### `List` 
@@ -31,7 +30,6 @@ Expected outcome:
     2.[E][✘] acronis (at: 26 September 2019, 6.00PM)
     3.[T][✘] workout
 
-##
 ### `Add`
 #####    Adds a task to the current database. Tasks can be a ToDo, Deadline or Event.
 Example of usage:
@@ -43,10 +41,11 @@ Expected outcome:
     Got it. I've added this task:
     [T][✘] midterm paper
     Now you have 4 tasks in the list.
-##
+
 Example of usage:
 
     deadline finish lab1 /by 01/10/2019, 2359
+    
     
 Expected outcome:
 
@@ -54,7 +53,7 @@ Expected outcome:
     [D][✘] finish lab1 (by: 01 October 2019, 11.59PM)
     Now you have 5 tasks in the list.
     
-##
+
 Example of usage:
 
     event fintech hackathon /at 11/11/2019, 1800
@@ -66,7 +65,6 @@ Expected outcome:
     Now you have 5 tasks in the list.
          
 
-##
 ### `Delete`  
 ##### Deletes selected task.   
 Example of usage:
@@ -79,7 +77,7 @@ Expected outcome:
     [D][✓] cs2103 (by: 30 September 2019, 11.59PM)
     Now you have 4 tasks in the list.
     
-##
+
 ### `Done`
 ##### Marks the selected task as done.
 Example of usage:
@@ -91,7 +89,7 @@ Expected outcome:
     Nice! I've marked this task as done:
     [E][✘] acronis (at: 26 September 2019, 6.00PM)
     
-##
+
 ### `Find`
 ##### Finds tasks that contains the specified keyword.
 Example of usage:
@@ -103,7 +101,7 @@ Expected outcome:
     Here are the matching tasks in your list:
     3.[T][✘] midterm paper
     
-##
+
 ### `Bye`
 ##### Ends interaction with Duke and saves new data to file.
 Example of usage:

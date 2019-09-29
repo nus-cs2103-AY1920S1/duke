@@ -1,6 +1,5 @@
 package task;
 
-import exception.DukeException;
 import filewriter.Storage;
 
 
@@ -12,6 +11,7 @@ import java.util.ArrayList;
 public class TaskList {
     ArrayList<Task> schedule = new ArrayList<>();
     public int taskNum;
+    public int completedNum;
     public boolean isFirst;
 
     /**
@@ -23,6 +23,7 @@ public class TaskList {
         try {
             this.schedule = storage.getSchedule();
             taskNum = schedule.size();
+            completedNum = storage.getCompletedNum();
             if (taskNum == 0) {
                 isFirst = true;
             } else {
@@ -82,6 +83,7 @@ public class TaskList {
             throws NullPointerException, IndexOutOfBoundsException, NumberFormatException {
         Task completedTask = schedule.get(index);
         completedTask.markAsDone();
+        completedNum += 1;
         return completedTask;
     }
 
@@ -107,6 +109,9 @@ public class TaskList {
         Task removedTask = schedule.get(index);
         schedule.remove(index);
         taskNum--;
+        if (removedTask.getStatusIcon().equals("+")) {
+            completedNum --;
+        }
         return removedTask;
     }
 
@@ -115,6 +120,8 @@ public class TaskList {
      */
     public void reset(){
         schedule = new ArrayList<Task>();
+        taskNum = 0;
+        completedNum = 0;
     }
 
     /**

@@ -6,6 +6,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -31,7 +32,10 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         VBox.setVgrow(scrollPane, javafx.scene.layout.Priority.ALWAYS);
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog("Hi there", dukeImage));
+        String welcomeMsg = ("      Hi there." + System.lineSeparator()
+                + "      Welcome to"  + System.lineSeparator() + "      Ouroborus")
+                + System.lineSeparator();
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcomeMsg, dukeImage));
     }
 
     public void setDuke(Duke d) {
@@ -47,7 +51,9 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
+                //new HBox(),
                 DialogBox.getUserDialog(input, userImage),
+                //new HBox(),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();

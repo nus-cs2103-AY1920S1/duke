@@ -16,7 +16,7 @@ public class Ui {
      * Called when execute method of ExitCommand is called.
      */
     public void showGoodbye() {
-        System.out.println("    Bye. Hope to see you again soon!");
+        System.out.println("    See you around...");
     }
 
     /**
@@ -41,7 +41,7 @@ public class Ui {
     public void readTask(Task newTask, int taskNum) {
         System.out.println("     Got it. I've added this task:");
         System.out.println("       " + newTask.toString());
-        System.out.println("     Now you have " + taskNum + " tasks in the list.");
+        System.out.println("     " + taskNum + " tasks to go.");
     }
 
     /**
@@ -52,9 +52,15 @@ public class Ui {
      * @param taskNum      Number of Task(s) left in the Task List.
      */
     public void readDelete(Task removedTask, int taskNum) {
-        System.out.println("     Noted. I've removed this task:");
-        System.out.println("       " + removedTask.toString());
-        System.out.println("     Now you have " + taskNum + " tasks in the list.");
+        System.out.println("     Ok. I've removed this task:");
+        System.out.println("     " + removedTask.toString());
+        if (removedTask.getStatusIcon().equals("-")) {
+            System.out.println();
+            System.out.println("     You didn't complete the task");
+            System.out.println("     before deleting it...");
+            System.out.println();
+        }
+        System.out.println("     " + taskNum + " tasks left.");
     }
 
     /**
@@ -64,8 +70,9 @@ public class Ui {
      * @param completedTask Task which has been marked as done.
      */
     public void readDone(Task completedTask) {
-        System.out.println("     Nice! I've marked this task as done:");
-        System.out.println("       " + completedTask.toString());
+        System.out.println("     Nice!");
+        System.out.println("     I've marked this task as done:");
+        System.out.println("     " + completedTask.toString());
     }
 
     /**
@@ -75,15 +82,22 @@ public class Ui {
      * @param tasks TaskList
      */
     public void readList(TaskList tasks) {
-        System.out.println("     Here are the task(s) in your list: ");
+        if (tasks.taskNum - tasks.completedNum > 5) {
+            System.out.println("Woah that's hella lot of stuff to do. You sure you're alright?");
+        } else {
+            System.out.println("Nice and Light.");
+        }
+        System.out.println("Here are the task(s) in your list: ");
+        System.out.println();
         System.out.println(tasks);
     }
 
-    public void readClear(TaskList tasks){
-        if (tasks.taskNum < 5) {
-            System.out.println("Got it. Starting fresh.");
+    public void readClear(int incompleteNum){
+        if (incompleteNum < 5) {
+            System.out.println("     Got it. Starting fresh.");
         } else {
-            System.out.println("Yeah just sweep it under the rug. That's going to help.");
+            System.out.println("     Yeah just sweep it under the rug.");
+            System.out.println("     That's going to help.");
         }
     }
 
@@ -95,20 +109,21 @@ public class Ui {
      * @param tasks TaskList of tasks with keyword.
      */
     public void showMatches(TaskList tasks) {
-        showLine();
-        System.out.println("     Here are the matching task(s) in your list: ");
+        System.out.println("Here are the matching task(s) in your list: ");
+        System.out.println();
         System.out.println(tasks);
-        showLine();
     }
 
     public void showRecurMessage(Recurrence task){
-        System.out.println(" Got it. Setting this event to recurring:");
-        System.out.println(task);
+        System.out.println("     Got it.");
+        System.out.println("     Setting this event to recurring:");
+        System.out.println("     " + task);
     }
 
     public void showRevertMessage(Task task){
-        System.out.println(" Got it. Setting this event to non-recurring:");
-        System.out.println(task);
+        System.out.println("     Got it.");
+        System.out.println("     Setting this event to non-recurring:");
+        System.out.println("     " + task);
     }
 
     /**
@@ -125,7 +140,9 @@ public class Ui {
      *
      * @param errorMsg DukeException e.getMessage()
      */
-    public String showError(String errorMsg) { return("      OOPS!!! " + errorMsg);
+    public String showError(String errorMsg) {
+        String message = "      OOPS!!! " + errorMsg;
+        return message;
     }
 
     /**

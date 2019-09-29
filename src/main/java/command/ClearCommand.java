@@ -31,7 +31,8 @@ public class ClearCommand extends Command{
      * @throws DukeException Thrown when index == 0, or when index is larger than number of Task(s) in TaskList.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        int incompleteNum = tasks.taskNum - tasks.completedNum;
         tasks.reset();
-        ui.readClear(tasks);
+        ui.readClear(incompleteNum);
     }
 }

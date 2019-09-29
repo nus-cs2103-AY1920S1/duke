@@ -50,22 +50,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public void getFont(String fName) {
+    public void getFont(String fName, int size) {
         InputStream is = Main.class.getResourceAsStream(fName);
-        Font font =  Font.loadFont(getClass().getResourceAsStream(fName), 20);
+        Font font =  Font.loadFont(getClass().getResourceAsStream(fName), size);
         this.dialog.setFont(font);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.getFont("/fonts/Dudu_Calligraphy.ttf");
+        db.getFont("/fonts/Dudu_Calligraphy.ttf",25);
         return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.getFont("/fonts/Faraco_Hand.ttf");
+        db.getFont("/fonts/Faraco_Hand.ttf", 18);
         return db;
     }
 }

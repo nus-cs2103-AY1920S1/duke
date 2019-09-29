@@ -2,7 +2,6 @@ package duke.task;
 
 /**
  * Represents the possible types of Tasks.
- * Possible values: TODO, DEADLINE, EVENT.
  */
 public enum TaskType {
     DEADLINE("by", "D"),

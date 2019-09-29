@@ -8,7 +8,7 @@ public class TodoTask extends Task {
 
     /**
      * Snoozes ("postpones") the given task.
-     * Not applicable to tasks of TODO type.
+     * Not applicable to TodoTasks.
      */
     @Override
     public void snooze() {

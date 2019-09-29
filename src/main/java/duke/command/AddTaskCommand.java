@@ -1,13 +1,11 @@
 package duke.command;
 
-import duke.util.exception.DukeException;
-import duke.util.exception.ExceptionType;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.Ui;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import duke.util.UiMessage;
+import duke.util.exception.DukeException;
+import duke.util.exception.ExceptionType;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -17,11 +15,7 @@ import java.util.Scanner;
 public abstract class AddTaskCommand implements Command {
     Scanner s;
     private String description;
-    private Date deadline;
     private String deadlineString;
-
-    // todo: move dateFormatter to somewhere else that makes more sense
-    private SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     AddTaskCommand(String fullCommand) {
         super();
@@ -38,13 +32,13 @@ public abstract class AddTaskCommand implements Command {
     }
 
     /**
-     * Returns the deadline of the task to be added.
+     * Returns the string representing the deadline of the task to be added.
      * For Deadline tasks, this refers to the expected date of completion.
      * For Event tasks, this refers to the expected date of occurrence.
      * @return Deadline of the task to be added.
      */
-    Date getDeadline() {
-        return this.deadline;
+    String getDeadlineString() {
+        return this.deadlineString;
     }
 
     /**
@@ -75,36 +69,23 @@ public abstract class AddTaskCommand implements Command {
     }
 
     /**
-     * Retrieves the deadline of the task to be added, based on command issued by user.
-     * @throws DukeException Application-specific exception thrown during execution.
-     */
-    void setDeadline() throws DukeException {
-        try {
-            this.deadline = this.dateFormatter.parse(this.deadlineString);
-        } catch (ParseException e) {
-            // deadline entered in wrong format
-            throw new DukeException(ExceptionType.INVALID_DATE);
-        }
-    };
-
-    /**
      * Creates the task to be added, based on command issued by the user.
      * @return Task to be added.
      */
-    abstract Task createTask();
+    abstract Task createTask() throws DukeException;
 
     /**
      * Creates a new Task based on command issued by the user, and adds it to the list of tasks.
      * @param tasks List of tasks.
      * @param ui UI to display to the user.
+     * @throws DukeException Application-specific exception thrown during execution.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public void execute(TaskList tasks, Ui ui) throws DukeException {
         Task newTask = createTask();
         tasks.add(newTask);
 
-        // todo: use UiMessage
-        System.out.println("Okay! I've added: " + getDescription()
-            + ". Use list to see all your tasks!");
+        ui.showMessage(UiMessage.TASK_ADDED);
+        ui.showMessage(UiMessage.HINT_LIST);
     }
 }

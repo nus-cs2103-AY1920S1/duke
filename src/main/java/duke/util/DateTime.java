@@ -1,25 +1,21 @@
 package duke.util;
 
-import java.text.DateFormat;
+import duke.util.exception.DukeException;
+import duke.util.exception.ExceptionType;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 //import duke.util.Ui;
 
 public class DateTime {
-    // todo: date format is not implemented correctly
-    private static DateFormat dateFormat = new SimpleDateFormat("dd/mm/YYYY HHmm");
+    private static SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
-    public static Date parseDate(String date) {
-        Date d = null;
+    public static Date parseDate(String date) throws DukeException {
         try {
-            d = dateFormat.parse(date);
+            return dateFormatter.parse(date);
         } catch (ParseException e) {
-            // how to use ui's methods without passing Ui to this method?
-            System.out.println("Oops! You did not enter the date in an appropriate format.\n" +
-                    "Try: DD/MM/YYYY HHmm instead.");
+            // deadline entered in wrong format
+            throw new DukeException(ExceptionType.INVALID_DATE);
         }
-        return d;
     }
-
 }

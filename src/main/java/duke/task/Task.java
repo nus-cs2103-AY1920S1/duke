@@ -105,10 +105,6 @@ public abstract class Task implements Serializable {
     }
 
     private boolean hasPriority() {
-        if (this.getPriority() == null) {
-            return false;
-        } else {
-            return true;
-        }
+        return this.getPriority() != null;
     }
 }

@@ -9,16 +9,14 @@ import duke.util.exception.DukeException;
  */
 public class AddDeadlineCommand extends AddTaskCommand {
     public AddDeadlineCommand(String command) throws DukeException {
-        // todo: use enum and then lambda to pass in delimiter
         super(command);
         s.useDelimiter("/by");
         setDescription();
         setDeadlineString();
-        setDeadline();
     }
 
     @Override
-    public Task createTask() {
-        return new DeadlineTask(getDescription(), getDeadline());
+    public Task createTask() throws DukeException {
+        return new DeadlineTask(getDescription(), getDeadlineString());
     }
 }

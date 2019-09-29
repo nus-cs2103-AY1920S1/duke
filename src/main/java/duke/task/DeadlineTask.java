@@ -1,5 +1,8 @@
 package duke.task;
 
+import static duke.util.DateTime.parseDate;
+
+import duke.util.exception.DukeException;
 import java.util.Date;
 
 /**
@@ -11,12 +14,13 @@ public class DeadlineTask extends Task {
     /**
      * Constructs a new Deadline, with the specified description and date of completion.
      * @param description Description of the Deadline.
-     * @param by Expected date of completion of the Deadline.
+     * @param byString String representing expected date of completion of the Deadline.
      */
-    public DeadlineTask(String description, Date by) {
+    public DeadlineTask(String description, String byString) throws DukeException {
         super(description);
-        this.by = by;
         this.type = TaskType.DEADLINE;
+
+        this.by = parseDate(byString);
     }
 
     /**

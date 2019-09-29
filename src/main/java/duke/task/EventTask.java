@@ -1,5 +1,8 @@
 package duke.task;
 
+import static duke.util.DateTime.parseDate;
+
+import duke.util.exception.DukeException;
 import java.util.Date;
 
 /**
@@ -11,12 +14,13 @@ public class EventTask extends Task {
     /**
      * Constructs a new Event, with the specified description and date of occurrence.
      * @param description Description of the Event.
-     * @param at Expected date of occurrence of the Event.
+     * @param atString String representing expected date of occurrence of the Event.
      */
-    public EventTask(String description, Date at) {
+    public EventTask(String description, String atString) throws DukeException {
         super(description);
-        this.at = at;
         this.type = TaskType.EVENT;
+
+        this.at = parseDate(atString);
     }
 
     /**

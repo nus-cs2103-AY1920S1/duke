@@ -12,8 +12,10 @@ public enum UiMessage {
     TASKS_SAVED("Success! Your tasks have been saved to: "),
     TASKS_NOT_SAVED("Your task list is empty! Adios :)"),
     TASKS_NOT_FOUND("Existing tasks file not found! Starting duke afresh..."),
-    // miscellaneous
-    LINE("____________________________________________________________");
+    // commands
+    TASK_ADDED("Okay! I've added the task."),
+    // helpers
+    HINT_LIST(". Use list to see all your tasks!");
 
     private final String message;
 

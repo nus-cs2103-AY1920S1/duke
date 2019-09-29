@@ -5,14 +5,15 @@ Welcome to the User Guide for my personal Duke implementation. In this User Guid
 There are a few implemented features in Duke. The exhaustive list of the current features are as follows:
 1. Listing of Tasks
 2. Saving of Tasks
-3. Creation of Tasks
+3. Deletion of Tasks
+4. Marking of Tasks as Complete
+5. Searching/Finding of Tasks
+6. Creation of Tasks
     - Creation of ToDo Tasks
     - Creation of Event Tasks
     - Creation of Deadline Tasks
-4. Marking of Tasks as Complete
-5. Searching of Tasks
-6. Help page 
-7. Error detection
+7. Help Page 
+8. Error detection
     - Display of user-friendly error messages
 
 
@@ -45,16 +46,29 @@ Duke has saved the latest data!
 
 
 ### Deletion of Tasks
-Command: `save [task_num]`
+Command: `delete [task_num]`
 
 This command will delete the `task_num`-th Task from Duke. The `task_num` is the number of the Task when you run the `list` command.  
-Description of feature.
 
 Example Usage: `delete 1`
 
 Expected Output:
 ```
 Noted. I've removed this task. 
+    [T][X] Complete Project Work
+Now you have 1 task in this list. 
+```
+
+### Marking of Tasks as Complete
+Command: `done [task_num]`
+
+This command will mark the `task_num`-th Task from Duke as complete. The `task_num` is the number of the Task when you run the `list` command.  
+
+Example Usage: `done 1`
+
+Expected Output:
+```
+Noted. I've marked this task as complete. 
     [T][X] Complete Project Work
 Now you have 1 task in this list. 
 ```

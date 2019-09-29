@@ -19,7 +19,7 @@ public class NewGui extends VBox {
     private Label systemOutput;
 
     private Duke duke;
-    String str;
+    private String str;
 
     @FXML
     private Integer task;
@@ -69,5 +69,9 @@ public class NewGui extends VBox {
         }
         taskView.setTable(duke.getUiTasks());
         taskNoteBook.setTaskNoteBook(duke.getNotes());
+    }
+
+    public String getStr() {
+        return str;
     }
 }

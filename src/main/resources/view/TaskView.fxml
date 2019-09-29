@@ -6,10 +6,10 @@
 <fx:root fx:id="taskView" type="TableView" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <columns>
       <TableColumn fx:id="indexCol" editable="false" prefWidth="75.0" text="Task Index" />
-    <TableColumn fx:id="taskTypeCol" editable="false" prefWidth="98.66675055027008" text="Tasktype" />
+    <TableColumn fx:id="taskTypeCol" editable="false" prefWidth="98.66675055027008" text="Task Type" />
       <TableColumn fx:id="statusCol" editable="false" prefWidth="99.33336639404297" text="Status" />
     <TableColumn fx:id="descriptionCol" editable="false" prefWidth="258.66664123535156" text="Description" />
-      <TableColumn fx:id="dateDueCol" editable="false" minWidth="0.0" prefWidth="141.33334350585938" text="DateDue" />
-      <TableColumn fx:id="dateCreatedCol" prefWidth="75.0" text="DateCreated" />
+      <TableColumn fx:id="dateDueCol" editable="false" minWidth="0.0" prefWidth="141.33334350585938" text="Date Due" />
+      <TableColumn fx:id="dateCreatedCol" prefWidth="75.0" text="Date Created" />
   </columns>
 </fx:root>

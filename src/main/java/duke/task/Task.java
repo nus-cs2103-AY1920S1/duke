@@ -56,7 +56,7 @@ public abstract class Task {
      * Returns the status of the task.
      * @return Unicode character representing status of task.
      */
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return this.isDone ? "✓" : "✘";
     }
 

@@ -1,20 +1,33 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
 public class TodoTest {
+    private static final String DESCRIPTION = "run";
 
     @Test
-    public void testStringConversion() {
-        assertEquals("[T][✘] run", new Todo("run").toString());
+    public void stringConversion() {
+        assertEquals(String.format("[T][✘] %s", DESCRIPTION),
+                new Todo(DESCRIPTION).toString());
     }
 
     @Test
-    public void markAsDone_regularTask_success() {
-        Task task = new Todo("run");
+    public void isDone() {
+        assertEquals(false, new Todo(DESCRIPTION).isDone());
+        assertEquals(true, new Todo(DESCRIPTION, true).isDone());
+    }
+
+    @Test
+    public void getDescription() {
+        assertEquals(DESCRIPTION, new Todo(DESCRIPTION).getDescription());
+    }
+
+    @Test
+    public void markAsDone() {
+        Task task = new Todo(DESCRIPTION);
         task.markAsDone();
-        assertEquals("[T][✓] run", task.toString());
+        assertEquals(true, task.isDone());
     }
 }

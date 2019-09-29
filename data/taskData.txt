@@ -1,0 +1,9 @@
+{ type: event, done: false, description: team meeting, time: 01/1/2000 1800 to 19/2/2010 2000 }
+{ type: event, done: false, description: Birthday, time: 10/01/2019 0000 to 10/01/2019 2359 }
+{ type: deadline, done: false, description: Lab assignment, time: 25/9/2019 2359 }
+{ type: todo, done: false, description: Buy some apples }
+{ type: deadline, done: false, description: Get my admin stuff done, time: 30/9/2019 2359 }
+{ type: todo, done: false, description: Do some thorough housekeeping }
+{ type: event, done: false, description: CS2103T Lecture, time: 20/9/2019 1600 to 1800 }
+{ type: todo, done: false, description: Get a haircut }
+{ type: deadline, done: false, description: Claim warranty for phone, time: 30/12/2019 2359 }

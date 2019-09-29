@@ -1,0 +1,26 @@
+list list list
+a very invalid command
+bye bye
+done 1
+event /at 2359
+deadline /by sunday 2359
+deadline submit report /by
+event tutorial /at
+event tutorial /at Mon 2-4pm
+deadline submit report /by Fri 2359
+todo
+todo just a todo
+list
+done 2
+todo another todo
+event cs2103 lecture /at Fri 4-6pm
+list
+done 100
+list
+done 1
+delete 2
+list
+delete 4
+delete 10
+list
+bye

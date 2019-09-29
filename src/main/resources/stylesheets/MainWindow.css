@@ -1,0 +1,33 @@
+#MainWindow {
+    -fx-background-color: #353238;
+}
+
+#DialogScrollPane {
+    -fx-border-style: solid;
+    -fx-border-color: #252323;
+    -fx-border-width: 3;
+    -fx-background-color: #30292F;
+}
+
+#DialogVBox {
+    -fx-background-color: #30292F;
+}
+
+#SendButton {
+    -fx-background-color: rgb(65, 63, 84);
+    -fx-text-fill: rgb(222,222,222);
+    -fx-font-weight: bold;
+    -fx-font-size:18;
+}
+
+#SendButton:hover {
+    -fx-background-color: #393654;
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+}
+
+#UserTextInput {
+    -fx-border-style: solid;
+    -fx-border-color: #252323;
+    -fx-border-width: 1;
+}

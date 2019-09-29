@@ -30,7 +30,10 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-
+    /**
+     * Creates a new instance of Duke with the given txt file.
+     * @param file txt file to store the list of tasks.
+     */
     public Duke(String file) {
         ui = new Ui();
         storage = new Storage(file);

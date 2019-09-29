@@ -12,3 +12,6 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+src/main/java/expected.txt
+src/main/java/actual.txt
+src/main/java/runtests.bat

@@ -16,7 +16,7 @@ Are you a struggling student simply swamped by the overwhelming amount of work, 
  4. Double click the file to run.
  
  
-##Features:
+## Features
 Duke supports the addition of three types of tasks: `ToDos`, `Deadlines` as well as `Events`. 
 
 

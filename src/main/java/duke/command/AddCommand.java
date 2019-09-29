@@ -6,7 +6,6 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 import java.io.IOException;
-import java.util.Objects;
 
 /**
  * This is a <code>Command</code> to add a new task to the task list. After the <code>execute</code>, The new task, if

@@ -7,7 +7,6 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 import java.io.IOException;
-import java.util.Objects;
 
 /**
  * This is a <code>Command</code> to delete one task from the task list. After the <code>execute</code>, The target

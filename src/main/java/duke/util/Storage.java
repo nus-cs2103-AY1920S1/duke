@@ -7,7 +7,6 @@ import duke.task.Todo;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -36,9 +35,9 @@ public class Storage {
      * Loads tasks from the <code>File</code>. A new <code>Task</code> object is created from each line in the file and
      * added to the task list.
      *
-     * @return                  a <code>TaskList</code> object containing all tasks loaded from the hard disk storage
-     * @throws IOException      If the <code>File</code> cannot be created at the specified file location
-     * @throws DukeException    If stored strings are in unexpected format
+     * @return a <code>TaskList</code> object containing all tasks loaded from the hard disk storage
+     * @throws IOException   If the <code>File</code> cannot be created at the specified file location
+     * @throws DukeException If stored strings are in unexpected format
      */
     public List<Task> loadTasks() throws DukeException, IOException {
         File file = new File(filePath);

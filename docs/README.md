@@ -76,7 +76,7 @@ Expected outcome:
 
 ```
 Nice! I've marked this task as done:
-[D][✘] hello world (by 1 Jan 2019 18:00)
+[D][✓] hello world (by 1 Jan 2019 18:00)
 ```
 
 ### 5. `event` - Adds an event

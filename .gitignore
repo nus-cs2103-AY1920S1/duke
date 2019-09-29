@@ -20,4 +20,4 @@ src/main/resources/docs/
 bin/
 
 # Local data files
-/data/duke.txt
+*.txt

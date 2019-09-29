@@ -41,7 +41,7 @@ public class MainWindow extends AnchorPane {
     /**
      * Sets <code>Duke</code> object to an existing reference.
      *
-     * @param duke  a <code>Duke</code> object that will help process the user's command
+     * @param duke a <code>Duke</code> object that will help process the user's command
      */
     public void setDuke(Duke duke) {
         this.duke = duke;

@@ -7,6 +7,7 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * This is a <code>Command</code> to delete one task from the task list. After the <code>execute</code>, The target
@@ -55,7 +56,7 @@ public class DeleteCommand extends Command {
      *
      * @param obj the object to be compared
      * @return <code>true</code> if two objects are both <code>DeleteCommand<></code> and have the same task number;
-     * <code>false</code> otherwise.
+     *         <code>false</code> otherwise.
      */
     @Override
     public boolean equals(Object obj) {
@@ -66,4 +67,5 @@ public class DeleteCommand extends Command {
             return false;
         }
     }
+
 }

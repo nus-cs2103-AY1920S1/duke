@@ -57,10 +57,15 @@ public class Parser {
         String[] infos = info.trim().split("\\s+", 2);
         String primaryCommand = infos[0];
         switch (primaryCommand) {
-        case "list":
-            return new ListCommand();
         case "bye":
             return new ExitCommand();
+        case "list":
+            return new ListCommand();
+        case "find":
+            if (infos.length < 2) {
+                throw new DukeException("Emmm...I don't think I can guess what you want to find from an empty keyword");
+            }
+            return new FindCommand(infos[1]);
         case "done":
             if (infos.length < 2) {
                 throw new DukeException("☹ OOPS!!! No enough information entered");
@@ -116,8 +121,6 @@ public class Parser {
             } catch (DateTimeParseException e) {
                 throw new DukeException("The duration is in invalid format");
             }
-        case "find":
-            return new FindCommand(infos[1]);
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

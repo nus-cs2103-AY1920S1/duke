@@ -55,7 +55,7 @@ public class DoneCommand extends Command {
      *
      * @param obj the object to be compared
      * @return <code>true</code> if two objects are both <code>DoneCommand<></code> and have the same task number;
-     * <code>false</code> otherwise.
+     *         <code>false</code> otherwise.
      */
     @Override
     public boolean equals(Object obj) {

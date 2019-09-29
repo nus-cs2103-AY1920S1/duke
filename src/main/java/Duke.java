@@ -1,10 +1,9 @@
 import duke.command.Command;
 import duke.util.DukeException;
+import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-import duke.util.Parser;
-
 
 import java.io.IOException;
 
@@ -38,7 +37,7 @@ public class Duke {
     /**
      * Loads data to take list and shows welcome message to the user.
      *
-     * @return  a string welcoming the user
+     * @return a string welcoming the user
      */
     public String setUp() {
         try {
@@ -53,8 +52,8 @@ public class Duke {
     /**
      * Executes the command and shows corresponding reply.
      *
-     * @param input  a string representing the user's command
-     * @return       a string showing the executing result
+     * @param input a string representing the user's command
+     * @return a string showing the executing result
      */
     public String getResponse(String input) {
         try {

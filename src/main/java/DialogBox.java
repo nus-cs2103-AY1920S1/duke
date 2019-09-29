@@ -20,8 +20,8 @@ import java.io.IOException;
 import java.util.Collections;
 
 /**
- * This is a class that represents a dialog box consisting of an ImageView to
- * represent the speaker's face and a label containing text from the speaker.
+ * This is a class that represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * containing text from the speaker.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -69,9 +69,9 @@ public class DialogBox extends HBox {
     /**
      * Returns a flipped dialog aligning at the left side.
      *
-     * @param text  a string showing duke's response to user's command
-     * @param img   an <code>Image</code> object as duke's profile
-     * @return      a flipped dialog of duke aligning at the left side of the chat box
+     * @param text a string showing duke's response to user's command
+     * @param img  an <code>Image</code> object as duke's profile
+     * @return a flipped dialog of duke aligning at the left side of the chat box
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);

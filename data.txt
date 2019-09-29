@@ -1,2 +1,2 @@
-T|false|eat cakes
-D|false|eat 5 cakes|2019-09-20T15:31
+T|true|Sleep early
+T|true|kjd

@@ -1,9 +1,5 @@
 package duke.task;
 
-import duke.util.DukeException;
-
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 
@@ -40,7 +36,7 @@ public class Task {
     }
 
     private String getStatusIcon() {
-        return (isDone ? "μ2713" : "μ2718");
+        return (isDone ? "✓" : "✘");
     }
 
     public String getDescription() {
@@ -49,33 +45,6 @@ public class Task {
 
     public boolean getStatus() {
         return isDone;
-    }
-
-    /**
-     * Creates a specific <code>Task</code> object from a string, which contains the information about a task stored in
-     * the hard disk. Task types can be <code>Todo</code>, <code>Deadline</code>, and <code>Event</code>, indicated by
-     * the first letter of the stored string value.
-     *
-     * @param taskInfo a string in a certain format that stores information about a task in the hard disk
-     * @return a specific <code>Task</code> object, namely, <code>Todo</code>, <code>Deadline</code>, or
-     * <code>Event</code>,
-     */
-    public static Task from(String taskInfo) throws DukeException {
-        String[] taskInfos = taskInfo.split("\\|");
-        switch (taskInfos[0]) {
-        case "T":
-            assert taskInfos.length == 3;
-            return new Todo(taskInfos[2], Boolean.parseBoolean(taskInfos[1]));
-        case "D":
-            assert taskInfos.length == 4;
-            return new Deadline(taskInfos[2], LocalDateTime.parse(taskInfos[3]), Boolean.parseBoolean(taskInfos[1]));
-        case "E":
-            assert taskInfos.length == 4;
-            return new Event(taskInfos[2], LocalDateTime.parse(taskInfos[3]), LocalTime.parse(taskInfos[4]),
-                    Boolean.parseBoolean(taskInfos[1]));
-        default:
-            throw new DukeException("Oh! Storage is corrupted!");
-        }
     }
 
     public void markDone() {

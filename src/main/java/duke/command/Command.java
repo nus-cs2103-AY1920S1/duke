@@ -39,7 +39,7 @@ public abstract class Command {
      *
      * @param obj the object to be compared
      * @return <code>true</code> if two commands are of the same type;
-     * <code>false</code> otherwise.
+     *         <code>false</code> otherwise.
      */
     @Override
     public boolean equals(Object obj) {

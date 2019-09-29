@@ -29,7 +29,7 @@ public class Todo extends Task {
      *
      * @param obj the object to be compared
      * @return <code>true</code> if the specifications for two tasks are all the same;
-     * <code>false</code> otherwise.
+     *         <code>false</code> otherwise.
      */
     @Override
     public boolean equals(Object obj) {

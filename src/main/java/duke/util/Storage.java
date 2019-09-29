@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -31,20 +33,39 @@ public class Storage {
     }
 
     /**
-     * Loads tasks from the <code>file</code>. A new <code>Task</code> object is created from each line in the file and
+     * Loads tasks from the <code>File</code>. A new <code>Task</code> object is created from each line in the file and
      * added to the task list.
      *
-     * @return a <code>TaskList</code> object containing all tasks loaded from the hard disk storage
-     * @throws FileNotFoundException If the <code>Scanner</code> cannot find the file to read information from
+     * @return                  a <code>TaskList</code> object containing all tasks loaded from the hard disk storage
+     * @throws IOException      If the <code>File</code> cannot be created at the specified file location
+     * @throws DukeException    If stored strings are in unexpected format
      */
-
     public List<Task> loadTasks() throws DukeException, IOException {
         File file = new File(filePath);
         file.createNewFile();
         Scanner scanner = new Scanner(file);
         List<Task> taskList = new ArrayList<>();
         while (scanner.hasNext()) {
-            taskList.add(Task.from(scanner.nextLine()));
+            String taskString = scanner.nextLine();
+            String[] taskInfos = taskString.split("\\|");
+            switch (taskInfos[0]) {
+            case "T":
+                assert taskInfos.length == 3;
+                taskList.add(new Todo(taskInfos[2], Boolean.parseBoolean(taskInfos[1])));
+                break;
+            case "D":
+                assert taskInfos.length == 4;
+                taskList.add(new Deadline(taskInfos[2], LocalDateTime.parse(taskInfos[3]),
+                        Boolean.parseBoolean(taskInfos[1])));
+                break;
+            case "E":
+                assert taskInfos.length == 4;
+                taskList.add(new Event(taskInfos[2], LocalDateTime.parse(taskInfos[3]), LocalTime.parse(taskInfos[4]),
+                        Boolean.parseBoolean(taskInfos[1])));
+                break;
+            default:
+                throw new DukeException("Oh! Storage is corrupted!");
+            }
         }
         return taskList;
     }
@@ -52,8 +73,7 @@ public class Storage {
     /**
      * Writes every tasks in the current task list to the hard disk in the form of strings. Specific tasks,
      * <code>Todo</code>, <code>Deadline</code>, or <code>Event</code> will be distinguished by a starting letter: T,
-     * D,
-     * or E, in order to load the same-type task back from storage.
+     * D, or E, in order to load the same-type task back from storage.
      *
      * @param taskList a <code>TaskList</code> object of which the information about tasks will be recorded to the
      *                 <code>file</code>
@@ -79,5 +99,13 @@ public class Storage {
         }
 
         writer.close();
+    }
+
+    /**
+     * Clears all the content of the storage file. This method is mainly for testing purpose.
+     */
+    void clear() {
+        File file = new File(filePath);
+        file.delete();
     }
 }

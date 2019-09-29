@@ -10,6 +10,12 @@ import java.text.SimpleDateFormat;
 
 public class DeleteCommand extends Command {
 
+    /**
+     * Constructor for DeleteCommand.
+     * @param fullCommand full String command.
+     * @param splitCommand fullCommand.split
+     * @param formatter formatter for Date
+     */
     public DeleteCommand(String fullCommand, String[] splitCommand, SimpleDateFormat formatter) {
         super(fullCommand, splitCommand, formatter);
         assert !fullCommand.equals("");

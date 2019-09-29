@@ -15,6 +15,12 @@ public abstract class Command {
     String[] splitCommand;
     SimpleDateFormat formatter;
 
+    /**
+     * Constructor for Command abstract class.
+     * @param fullCommand full String command.
+     * @param splitCommand String command.split
+     * @param formatter formatter for DateTime.
+     */
     public Command(String fullCommand, String[] splitCommand, SimpleDateFormat formatter) {
         this.fullCommand = fullCommand;
         this.splitCommand = splitCommand;

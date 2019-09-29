@@ -9,7 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class SortCommand extends Command{
+public class SortCommand extends Command {
     public SortCommand(String fullCommand, String[] splitCommand, SimpleDateFormat formatter) {
         super(fullCommand, splitCommand, formatter);
     }

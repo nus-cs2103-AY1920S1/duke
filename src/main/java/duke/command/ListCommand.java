@@ -9,6 +9,12 @@ import java.text.SimpleDateFormat;
 
 public class ListCommand extends Command {
 
+    /**
+     * Constructor for ListCommand.
+     * @param fullCommand full String command.
+     * @param splitCommand fullCommand.split
+     * @param formatter formatter for Date
+     */
     public ListCommand(String fullCommand, String[] splitCommand, SimpleDateFormat formatter) {
         super(fullCommand, splitCommand, formatter);
         assert !fullCommand.equals("");

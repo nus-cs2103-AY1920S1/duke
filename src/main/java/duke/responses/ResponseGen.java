@@ -6,8 +6,14 @@ import java.util.List;
 
 public class ResponseGen {
 
-    public ResponseGen() {}
+    public ResponseGen() {
+    }
 
+    /**
+     * Response Generator for add command.
+     * @param listOfTasks list of tasks.
+     * @return output string.
+     */
     public static String addResponse(List<Task> listOfTasks) {
         String output = "";
         output += "Got it. I've added this task:\n";
@@ -16,7 +22,13 @@ public class ResponseGen {
         return output;
     }
 
-    public static String deleteResponse (List<Task> listOfTasks, Task removed) {
+    /**
+     * Response generator for delete response.
+     * @param listOfTasks list of tasks.
+     * @param removed removed task.
+     * @return output string.
+     */
+    public static String deleteResponse(List<Task> listOfTasks, Task removed) {
         String output = "";
         output += "Noted. I've removed this task:\n";
         output +=  removed.toString() + '\n';
@@ -24,6 +36,12 @@ public class ResponseGen {
         return output;
     }
 
+    /**
+     * Response generator for done response.
+     * @param listOfTasks list of tasks.
+     * @param index index of task to set as done.
+     * @return output string.
+     */
     public static String doneResponse(List<Task> listOfTasks, int index) {
         listOfTasks.get(index - 1).done = true;
         String output = "";
@@ -32,6 +50,11 @@ public class ResponseGen {
         return output;
     }
 
+    /**
+     * Response generator for find response.
+     * @param listOfTasks list of tasks.
+     * @return output string.
+     */
     public static String findResponse(List<Task> listOfTasks) {
         StringBuilder output = new StringBuilder();
         if (listOfTasks.size() == 0) {
@@ -45,6 +68,11 @@ public class ResponseGen {
         }
     }
 
+    /**
+     * Response generator for list command.
+     * @param listOfTasks list of tasks.
+     * @return output string.
+     */
     public static String listResponse(List<Task> listOfTasks) {
         StringBuilder output = new StringBuilder();
         if (listOfTasks.size() == 0) {
@@ -60,6 +88,11 @@ public class ResponseGen {
         }
     }
 
+    /**
+     * Response Generator for sort command.
+     * @param listOfTasks list of tasks.
+     * @return output string.
+     */
     public static String sortResponse(List<Task> listOfTasks) {
         StringBuilder output = new StringBuilder();
         if (listOfTasks.size() == 0) {

@@ -10,6 +10,12 @@ import java.text.SimpleDateFormat;
 
 public class DoneCommand extends Command {
 
+    /**
+     * Constructor for DoneCommand.
+     * @param fullCommand full String command.
+     * @param splitCommand fullCommand.split
+     * @param formatter formatter for Date
+     */
     public DoneCommand(String fullCommand, String[] splitCommand, SimpleDateFormat formatter) {
         super(fullCommand, splitCommand, formatter);
         assert !fullCommand.equals("");

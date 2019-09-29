@@ -10,6 +10,12 @@ import java.util.List;
 
 public class FindCommand extends Command {
 
+    /**
+     * Constructor for FindCommand.
+     * @param fullCommand full String command.
+     * @param splitCommand fullCommand.split
+     * @param formatter formatter for Date
+     */
     public FindCommand(String fullCommand, String[] splitCommand, SimpleDateFormat formatter) {
         super(fullCommand, splitCommand, formatter);
         assert !fullCommand.equals("");

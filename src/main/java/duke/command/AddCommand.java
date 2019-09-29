@@ -15,6 +15,12 @@ import java.util.Date;
 
 public class AddCommand extends Command {
 
+    /**
+     * Constructor for AddCommand.
+     * @param fullCommand full String command.
+     * @param splitCommand fullCommand.split
+     * @param formatter formatter for Date
+     */
     public AddCommand(String fullCommand, String[] splitCommand, SimpleDateFormat formatter) {
         super(fullCommand, splitCommand, formatter);
         assert !fullCommand.equals("");
@@ -33,6 +39,7 @@ public class AddCommand extends Command {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            break;
         }
         case "d": {
             try {
@@ -58,6 +65,8 @@ public class AddCommand extends Command {
             }
             break;
         }
+        default:
+            System.out.println("Invalid Command");
         }
         return ResponseGen.addResponse(taskRepo.getAll());
 

@@ -54,7 +54,7 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
+    static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
@@ -64,7 +64,7 @@ public class DialogBox extends HBox {
      * @param img image of duke.
      * @return Dialog box.
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

@@ -35,6 +35,7 @@ public class Duke {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
+                // todo: remove redundant showLine() for bye command
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui);
                 isExit = c.isExit();

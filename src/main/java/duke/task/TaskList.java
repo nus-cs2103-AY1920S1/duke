@@ -53,23 +53,23 @@ public class TaskList implements Serializable {
     /**
      * Prints the list of tasks to the UI.
      */
+    // todo: move to Ui class
     public void printList() {
         for (Task task : tasks) {
-            int i = getId(task);
+            int i = getId(task, this);
             String s = task.toString();
             System.out.println(i + ". " + s);
         }
     }
 
     /**
-     * Returns the ID of the given task, in the main TaskList.
-     * Helper function for printList() and deleteTask() methods.
+     * Returns the ID of the given task, in the given TaskList.
+     * Helper function for printList() method.
      * @param task Task whose ID is required.
      * @return ID of the given task.
      */
-    private int getId(Task task) {
-        // todo: change to return ID in the main TaskList, rather than a sublist
-        return tasks.indexOf(task) + 1;
+    private int getId(Task task, TaskList taskList) {
+        return taskList.tasks.indexOf(task) + 1;
     }
 
     /**
@@ -85,18 +85,24 @@ public class TaskList implements Serializable {
 
     /**
      * Deletes the given task from the TaskList.
-     * @param taskToDelete Task to be deleted from the TaskList.
+     * @param taskId ID of task to be deleted from the TaskList.
      */
-    public void deleteTask(Task taskToDelete) {
-        // todo: change to use taskID instead of task
+    public void deleteTask(int taskId) {
+        Task taskToDelete = getTask(taskId);
         String taskDescription = taskToDelete.toString();
         tasks.remove(taskToDelete);
         System.out.println("Noted. I've removed this task: " + taskDescription);
         System.out.println("Now you have " + tasks.size() + " items in this list.");
     }
 
-    // todo: javadoc
+    /**
+     * Returns a TaskList containing tasks that match the given keyword.
+     * @param keyword Keyword to be used to find tasks.
+     * @return TaskList containing tasks that match the given keyword.
+     */
     public TaskList findTasks(String keyword) {
+        // todo: is it possible to implement without creating temporary TaskList object?
+        // so that the numbering of the tasks based on the original list can be preserved
         TaskList matchingTasks = new TaskList();
         for (Task task : tasks) {
             if (task.toString().contains(keyword)) {

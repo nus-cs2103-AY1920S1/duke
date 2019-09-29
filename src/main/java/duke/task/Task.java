@@ -4,24 +4,18 @@ import java.io.Serializable;
 
 public abstract class Task implements Serializable {
     private String description;
-    private Boolean isDone;
-    String type;
+    private Boolean isDone = false;
+    TaskType type;
 
     public Task(String description) {
-        // todo: add new constructor to create new task from String
         this.description = description;
-        this.isDone = false;
     }
 
     @Override
     public String toString() {
-        String type = "[" + this.type + "] ";
+        String type = "[" + this.type.getTaskTypeInitial() + "] ";
         String status = "[" + this.getStatusIcon() + "] ";
         return type + status + this.description;
-    }
-
-    String getDescription() {
-        return this.description;
     }
 
     private String getStatusIcon() {
@@ -33,12 +27,4 @@ public abstract class Task implements Serializable {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(this.toString());
     }
-
-    public enum TaskType {
-        DEADLINE,
-        EVENT,
-        TODO
-    }
-
-    // todo: use TaskType enum to get type in toString() instead
 }

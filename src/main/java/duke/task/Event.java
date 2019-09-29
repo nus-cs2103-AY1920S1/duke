@@ -8,7 +8,7 @@ public class Event extends Task {
     public Event(String description, Date at) {
         super(description);
         this.at = at;
-        this.type = "E";
+        this.type = TaskType.EVENT;
     }
 
     @Override

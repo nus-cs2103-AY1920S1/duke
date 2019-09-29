@@ -10,6 +10,7 @@ public abstract class Task implements Serializable {
     private Boolean isDone = false;
     TaskType type;
     private String tag;
+    private TaskPriority priority;
 
     /**
      * Constructs a Task, with the specified description.
@@ -32,6 +33,10 @@ public abstract class Task implements Serializable {
 
         if (this.hasTag()) {
             toString = toString + " (tag: " + this.getTag() + ")";
+        }
+
+        if (this.hasPriority()) {
+            toString = toString + " (priority: " + this.getPriority() + ")";
         }
         return toString;
     }
@@ -78,6 +83,29 @@ public abstract class Task implements Serializable {
 
     private boolean hasTag() {
         if (this.getTag() == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Adds a priority to the given task.
+     * @param priority Priority to be added to the given task.
+     */
+    public void addPriority(TaskPriority priority) {
+        this.priority = priority;
+        // todo: replace with proper UI implementation
+        System.out.println("Nice! I've added a priority to this task:");
+        System.out.println(this.toString());
+    }
+
+    private TaskPriority getPriority() {
+        return this.priority;
+    }
+
+    private boolean hasPriority() {
+        if (this.getPriority() == null) {
             return false;
         } else {
             return true;

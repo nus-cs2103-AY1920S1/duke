@@ -32,7 +32,7 @@ public enum TaskType {
      * @param taskTypeString String describing the type of the Task.
      * @return TaskType of the task.
      */
-    public TaskType getTaskType(String taskTypeString) {
+    public static TaskType getTaskType(String taskTypeString) {
         switch (taskTypeString) {
         case "todo":
             return TaskType.TODO;

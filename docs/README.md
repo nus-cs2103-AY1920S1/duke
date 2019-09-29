@@ -120,7 +120,7 @@ Format: `bye`
 
 9. ### Saving and loading the data
 Task list data is saved in the jar file automatically after any command that changes the data. 
-There is no need to save manually.
+There is no need to save manually. The data files will be saved in the parent folder of the duke-0.1.3.jar file in /data/duke.txt .
 
     Task list data is loaded from the jar file automatically when opening the program. 
     There is no need to load data manually.

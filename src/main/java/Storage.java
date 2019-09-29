@@ -80,6 +80,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Gets the priority of the task.
+     * @param priorityString String representation of priority
+     * @return Priority Priority of the task
+     */
     private Priority getPriority(String priorityString) {
         if (priorityString.equals("HIGH")) {
             return Priority.HIGH;

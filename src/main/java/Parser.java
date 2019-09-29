@@ -89,6 +89,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Processes the input to assign priority to the task if necessary.
+     * Parses through the string and checks if priority is assigned. If priority
+     * is not assigned, it is set to low by default
+     * @param input Input string from teh user
+     * @throws DukeException To check if input is correct
+     */
     private void preProcessInput(String input) throws DukeException {
         String[] inputArr = input.split(" ");
 
@@ -100,9 +107,7 @@ public class Parser {
             inputArr = Arrays.copyOfRange(inputArr,1, inputArr.length);
         } else if (inputArr[0].equals("low")) {
             inputArr = Arrays.copyOfRange(inputArr,1, inputArr.length);
-        } else {
-            assert false;
-        }
+        } else {}
 
         //Extracting task type and description from input
         taskType = inputArr[0];
@@ -114,6 +119,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Performs actions to do a task.
+     * Takes in the index of a task, and extracts it from the task list. Checks if
+     * the task is done. If the task is not done the Task#doTask is called to change
+     * the necessary attributes of the task, and the output from the UI is returned.
+     * @param taskDesc String of the index of the task
+     * @param taskList List of the tasks
+     * @return String String output from the UI
+     */
     private String doneCommand(String taskDesc, TaskList taskList) {
         int taskNum = Integer.parseInt(taskDesc);
         Task task = taskList.getTask(taskNum);
@@ -126,6 +140,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Performs actions to delete a task.
+     * Takes in the index of a task, and extracts it from the task list. Task#deleteTask
+     * is called to delete the task. Output from teh UI is returned.
+     * @param taskDesc String of the index of the task
+     * @param taskList List of the tasks
+     * @return String String output from the UI
+     */
     private String deleteCommand(String taskDesc, TaskList taskList) {
         int taskNum = Integer.parseInt(taskDesc);
         Task task = taskList.getTask(taskNum);
@@ -134,6 +156,14 @@ public class Parser {
         return ui.showTaskDeleted(task, taskList);
     }
 
+    /**
+     * Adds a To do task to the task list.
+     * Takes in the description of the to do task, and task list. Creates a to do task
+     * object, and adds it to the task list. Returns the output from the UI.
+     * @param taskDesc Description of task
+     * @param taskList List of tasks
+     * @return String String output from the UI
+     */
     private String todoCommand(String taskDesc, TaskList taskList) {
         Task newTodo = new Todo(taskDesc, taskPriority);
         taskList.addTask(newTodo);
@@ -141,6 +171,14 @@ public class Parser {
         return ui.showTaskAdded(newTodo, taskList);
     }
 
+    /**
+     * Adds a deadline task to the task list.
+     * Takes in the description of the deadline task, and task list. Creates a deadline task
+     * object, and adds it to the task list. Returns the output from the UI.
+     * @param taskDesc Description of task
+     * @param taskList List of tasks
+     * @return String String output from the UI
+     */
     private String deadlineCommand(String taskDesc, TaskList taskList) {
         String[] taskDescArr = taskDesc.split(" /");
 
@@ -151,6 +189,14 @@ public class Parser {
         return ui.showTaskAdded(newDeadline, taskList);
     }
 
+    /**
+     * Adds a event task to the task list.
+     * Takes in the description of the event task, and task list. Creates a event task
+     * object, and adds it to the task list. Returns the output from the UI.
+     * @param taskDesc Description of task
+     * @param taskList List of tasks
+     * @return String String output from the UI
+     */
     private String eventCommand(String taskDesc, TaskList taskList) {
         String[] taskDescArr = taskDesc.split(" /");
 
@@ -186,6 +232,11 @@ public class Parser {
         return isExit;
     }
 
+    /**
+     * Checks if the command is correct.
+     * @param input Command
+     * @return boolean Whether input is correct
+     */
     public static boolean correctInput(String input) {
         return input.equals("todo")
                 || input.equals("event")

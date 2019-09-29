@@ -27,13 +27,20 @@ public class Duke {
         }
     }
 
+    /**
+     * Processes the input from the user.
+     * Takes the input from the user, and processes it according to the command and description if
+     * necessary. The changes are updated in storage, and the response from the UI is returned as
+     * a string.
+     * @param input input from the user.
+     * @return String Response to be displayed to the user.
+     */
     public String run(String input) {
         Parser parser = new Parser(ui);
 
         try {
             String output = parser.parseCommand(input, tasks);
             storage.update(tasks);
-            isExit = parser.isExit();
 
             return output;
 
@@ -56,9 +63,4 @@ public class Duke {
         assert output != null;
         return output;
     }
-
-    public boolean isExit() {
-        return isExit;
-    }
-
 }

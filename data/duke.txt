@@ -1,0 +1,8 @@
+E | 1 | 1UP Welcome Tea | 18th of September 1997, 6.00pm
+D | 1 | UTS2101 paper | 18th of September 2019, 7.00pm
+E | 1 | House Committea | 26th of August 2019, 10.00pm
+T | 1 | Minh
+E | 1 | Rally | 2nd of September 2019, 8.00pm
+D | 0 | Make a decision | 20th of September 2019, 11.59pm
+T | 0 | Individual project
+D | 0 | tHalloween | 6th of October 2019, 12.00pm

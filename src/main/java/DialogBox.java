@@ -47,6 +47,12 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Gets the user dialog that has been input by the user and will be displayed.
+     * @param text the user-command that is given.
+     * @param img takes the image of the user.
+     * @return Dialog box.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img, "User");
         db.dialog.setFont(new Font("Consolas", 10));
@@ -54,6 +60,12 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    /**
+     * Gets the Duke dialog that is a reply to the user input.
+     * @param text the Duke execution that is given.
+     * @param img takes the image Duke.
+     * @return Dialog box.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img, "Jarvis");
         db.flip();

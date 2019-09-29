@@ -86,6 +86,13 @@ public class TaskList {
         return ui.announceNoneMatchingTask();
     }
 
+    /**
+     * Operation that checks if a task is same as any of the existing
+     * tasks stored in the list.
+     * @param task task subject.
+     * @return true when there is a same task that exist, false when the task
+     * is new and can be added.
+     */
     public Boolean checkForSameTask(Task task) {
         for (Task t : taskStorage) {
             if (t.equals(task)) {
@@ -95,6 +102,9 @@ public class TaskList {
         return false;
     }
 
+    /**
+     * Clears the list of tasks. The action is non-reversible.
+     */
     public void clear() {
         taskStorage.clear();
     }

@@ -73,6 +73,17 @@ public class TaskManager {
         return ui.newTaskAdded(t, taskCount);
     }
 
+    /**
+     * Checks if a deadline, todo or event task's description has been left empty.
+     * When the description is left empty, this methods throw exception to warn user
+     * that the description cannot be left empty.
+     *
+     * @param userCommand the command that includes the natuer of the task, either todo
+     *     deadline or event.
+     * @param taskDescription
+     * @throws EmptyDescriptionException
+     * @throws EmptyToDoDescriptionException
+     */
     private static void checkEmptyTaskDescription(String userCommand, String taskDescription)
             throws EmptyDescriptionException, EmptyToDoDescriptionException {
         if (taskDescription.equals("dummy") || taskDescription.equals("")) {

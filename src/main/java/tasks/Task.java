@@ -66,7 +66,7 @@ public class Task {
     }
 
     /**
-     * Convert to standard string format
+     * Convert to standard string format.
      *
      * @return a message that reflects the type and description of the Task.
      */
@@ -75,6 +75,13 @@ public class Task {
         return ("[" + typeOfTask + "]" + "[" + statusIcon + "] " + description);
     }
 
+    /**
+     * Compares two tasks. True is returned when two tasks are identical
+     * i.e. with the same fields or pointing to itself.
+     *
+     * @param taskOfComparison subject of the comparison.
+     * @return true when equal, false when different.
+     */
     public boolean equals(Task taskOfComparison) {
         if (this == taskOfComparison) {
             return true;

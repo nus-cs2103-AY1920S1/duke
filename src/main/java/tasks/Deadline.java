@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
  * Encapsulates a Task object of the type Deadline.
- * Represents a Deadline task that has specific due date/ due time.
+ * Represents a Deadline task that has specific due date / due time.
  */
 public class Deadline extends Task {
     protected Date endDate;
@@ -16,11 +16,8 @@ public class Deadline extends Task {
      * @param description This is the short description of the task.
      * @param endDate This specifies when the Deadline Task expires.
      *                It should include the due date or due time or both.
-     *                The format should follow "by: Day Time".
-     *                E.g. by: Sunday 5pm / by: 11/10/2019 3pm
-     *                Alternatively, the user has
-     *                the freedom to specify their own duration of
-     *                the event such as "by no idea :-P"
+     *                The format should follow "by: Day Time" strictly.
+     *                The date and time are not treated as strings.
      */
     public Deadline(String description, Date endDate) {
         super(description);

@@ -10,7 +10,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Entry point of this project Duke. Duke is a Task manager that aims
+ * Entry point of this project Duke. In this project, Jarvis is the name of the
+ * product while the underlying software is referred to as Duke. Duke is a Task manager that aims
  * to serve as an efficient way to manage our day to day tasks. It supports multiple types of task
  * such as todo reminders, tasks with a deadline and even an event.
  * The Duke task manager has many iterations, it is
@@ -28,8 +29,8 @@ public class Duke extends Application {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("/Users/TuanDingWei/Desktop/NUS_Academia" +
-                "/CS2103/Individual_project/Duke/local/Tasks.txt");
+        storage = new Storage("/Users/TuanDingWei/Desktop/NUS_Academia"
+                + "/CS2103/Individual_project/Duke/local/Tasks.txt");
         tasks = new TaskList(storage.load());
         ui.welcome();
     }
@@ -50,6 +51,10 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Entry point for Javafx of this project Duke.
+     * @param stage sets the stage for javafx.
+     */
     @Override
     public void start(Stage stage) {
         Duke duke = new Duke();

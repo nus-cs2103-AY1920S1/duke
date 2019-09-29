@@ -94,6 +94,10 @@ class IndexDoesNotExistException extends DukeException {
     }
 }
 
+/**
+ * Encapsulates exception that will be thrown when the Keyword is
+ * not specified.
+ */
 class EmptyKeywordException extends DukeException {
 
     public EmptyKeywordException(String message) {

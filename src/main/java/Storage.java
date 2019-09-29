@@ -55,7 +55,7 @@ public class Storage {
      */
     public void save(ArrayList<Task> list) {
         try {
-            File file = new File("/Users/sihao/Desktop/NUS AY19:20 Sem 1/CS2103/Duke/Data/Duke.txt");
+            File file = new File(filePath);
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
             for (Task t : list) {

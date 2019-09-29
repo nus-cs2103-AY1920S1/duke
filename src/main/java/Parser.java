@@ -76,7 +76,7 @@ public class Parser {
     		index = -1;
 			wordToFind = "";
     		try {
-    			nameOfTask = fullCommand.split(" ", 2)[1].split("/by")[0];
+    			nameOfTask = fullCommand.split(" ", 2)[1].split("/at")[0];
     			dateStr = fullCommand.split(" ", 2)[1].split("/at")[1];
     		} catch (IndexOutOfBoundsException e) {
     			throw new IncompleteCommandException("Incomplete Command");

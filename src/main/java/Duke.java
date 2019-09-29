@@ -28,7 +28,7 @@ public class Duke extends Application {
 
     public Duke() {
         ui = new Ui();
-        storage = new Storage("Data/Duke.txt");
+        storage = new Storage("Duke.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -70,20 +70,7 @@ public class Duke extends Application {
     }
 
     public static void main(String[] args) {
-        new Duke("/Users/sihao/Desktop/Duke/Data/Duke.txt").run();
-    }
-
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
+        new Duke("/data/Duke.txt").run();
     }
 
     /**
@@ -95,8 +82,8 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userInput.getText(), user),
+                DialogBox.getDukeDialog(getResponse(userInput.getText()),duke)
         );
         userInput.clear();
     }
@@ -104,10 +91,10 @@ public class Duke extends Application {
     /**
      * Creates a welcome message dialog box and appends to the dialog container
      */
-    private void welcomeDialog() {
+    void welcomeDialog() {
         ui = new Ui();
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(getDialogLabel(ui.showWelcome()), new ImageView(duke))
+                DialogBox.getDukeDialog(ui.showWelcome(), duke)
         );
     }
 
@@ -115,7 +102,7 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) throws DukeException {
+    String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             return c.execute(tasks, ui, storage);
@@ -127,7 +114,7 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
         ui = new Ui();
-        storage = new Storage("Data/Duke.txt");
+        storage = new Storage("/data/Duke.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -183,22 +170,22 @@ public class Duke extends Application {
 
         welcomeDialog();
 
-        //Step 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            try {
-                handleUserInput();
-            } catch (DukeException e) {
-                e.printStackTrace();
-            }
-        });
-
-        userInput.setOnAction((event) -> {
-            try {
-                handleUserInput();
-            } catch (DukeException e) {
-                e.printStackTrace();
-            }
-        });
+//        //Step 3. Add functionality to handle user input.
+//        sendButton.setOnMouseClicked((event) -> {
+//            try {
+//                handleUserInput();
+//            } catch (DukeException e) {
+//                e.printStackTrace();
+//            }
+//        });
+//
+//        userInput.setOnAction((event) -> {
+//            try {
+//                handleUserInput();
+//            } catch (DukeException e) {
+//                e.printStackTrace();
+//            }
+//        });
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));

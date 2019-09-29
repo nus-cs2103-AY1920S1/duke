@@ -6,7 +6,20 @@ public class Ui {
      * Prints welcome message when Duke.java is run
      */
     public String showWelcome() {
-        return "Hello! I'm Duke\nWhat can I do for you?";
+        return "Hello! I'm Duke\n" +
+                "What can I do for you?\n\n" +
+                "To add task, type: \n" +
+                "    todo + 'name of task'\n" +
+                "    deadline + 'name of task' + 'DD/MM/YY hhmm'\n" +
+                "    event + 'name of event' + 'DD/MM/YY hhmm'\n\n" +
+                "To delete task, type:\n" +
+                "    delete + 'task number'\n\n" +
+                "To mark task as done, type:\n" +
+                "    done + 'task number\n\n" +
+                "To display all tasks, type:\n" +
+                "    list\n\n" +
+                "To search for tasks, type:\n" +
+                "    find + 'keyword'";
     }
 
     /**

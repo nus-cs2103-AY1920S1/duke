@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" cache="true" cacheHint="QUALITY" cacheShape="false" centerShape="false" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" scaleShape="false" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" scaleShape="false" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" graphicTextGap="2.0" maxHeight="Infinity" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8b1b1#f8b1b1; -fx-background-radius: 8; -fx-padding: 10px; -fx-border-radius: 8; -fx-border-color: #fbf3f3#fbf3f3;" text="Label" textFill="#fbf3f3" wrapText="true">
+        <Label fx:id="dialog"  style="-fx-background-color: #f8b1b1#f8b1b1; -fx-background-radius: 8; -fx-padding: 10px; -fx-border-radius: 8; -fx-border-color: #fbf3f3#fbf3f3;" text="Label" textFill="#fbf3f3" wrapText="true" textAlignment="JUSTIFY">
             <font>
                 <Font name="Euphemia UCAS" size="12.0" />
             </font>

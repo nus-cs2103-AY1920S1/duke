@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
         try {
             Storage.saveList(TaskList.tasks);
         } catch (IOException e) {
-            str += ui.showSavingError(e);
+            str = ui.showSavingError(e);
         }
         return str;
     }

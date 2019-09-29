@@ -22,7 +22,7 @@
 
 # Tutorials 
 
-duke.ui.Duke Increment | Tutorial
+Duke Increment | Tutorial
 ---------------|---------------
 `A-Gradle` | [Gradle Tutorial](tutorials/gradleTutorial.md)
 `A-TextUiTesting` | [Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)

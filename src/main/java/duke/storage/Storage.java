@@ -33,6 +33,7 @@ public class Storage {
         } catch (IOException e) {
             e.getMessage();
         }
+        path = Paths.get("data/duke.txt");
     }
 
     /**
@@ -109,12 +110,5 @@ public class Storage {
             lines.add(task.toFile());
         }
         write(lines);
-    }
-
-    /**
-     * Creates new duke.txt if duke.txt is missing
-     */
-    public void createNewDuke() {
-
     }
 }

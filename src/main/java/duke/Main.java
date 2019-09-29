@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("data/tasks.txt");
+    private Duke duke = new Duke("tasks.txt");
 
     public Main() throws IOException {
     }

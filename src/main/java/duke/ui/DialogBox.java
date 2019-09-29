@@ -21,6 +21,10 @@ import javafx.scene.layout.HBox;
  * @author Lim Yong Shen, Kevin
  */
 public class DialogBox extends HBox {
+
+    private static final String DUKE_BACKGROUND_COLOUR = "-fx-background-color: #324851";
+    private static final String USER_BACKGROUND_COLOUR = "-fx-background-color: #7da3a1";
+
     @FXML
     private Label dialog;
     @FXML
@@ -57,7 +61,9 @@ public class DialogBox extends HBox {
      * @return A user dialog box based on the specified text and image.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox userDialogBox = new DialogBox(text, img);
+        userDialogBox.setStyle(USER_BACKGROUND_COLOUR);
+        return userDialogBox;
     }
 
     /**
@@ -67,8 +73,9 @@ public class DialogBox extends HBox {
      * @return A Duke dialog box based on the specified text and image.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
+        var dukeDialogBox = new DialogBox(text, img);
+        dukeDialogBox.flip();
+        dukeDialogBox.setStyle(DUKE_BACKGROUND_COLOUR);
+        return dukeDialogBox;
     }
 }

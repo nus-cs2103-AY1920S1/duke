@@ -58,7 +58,7 @@ public class NewGui extends VBox {
      * Switches the table type depending on the command .
      * @param input contains the full command
      */
-    private void chooseTableView(String input) {
+    public void chooseTableView(String input) {
         str = input.contains(" ") ? input.split(" ")[0] : input;
         if (str.toLowerCase().contains("notes")) {
             tableArea.getChildren().clear();

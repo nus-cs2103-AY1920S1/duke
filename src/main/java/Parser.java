@@ -28,6 +28,9 @@ public class Parser {
                 description = getDescription(fullCommand, command);
                 index = Integer.parseInt(description) - 1;
                 return new DeleteCommand(index);
+            case "find":
+                description = getDescription(fullCommand, command);
+                return new FindCommand(description);
             case "bye":
                 return new ByeCommand();
             default:

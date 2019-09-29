@@ -1,3 +1,9 @@
+/**
+ * Represents the add command which is activated when there is a valid task.
+ * An <code>AddCommand</code> object adds valid to task to the taskList.
+ * e.g., <code>/*event test </code>
+ */
+
 public class AddCommand extends Command {
     private Task task;
 

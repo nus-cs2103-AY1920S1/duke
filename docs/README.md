@@ -94,6 +94,42 @@ Expected outcome:
 
 ![Image of deleting a task](https://github.com/jerryk1997/duke/blob/master/docs/Delete_example.png)
 
+### Feature 7
+Assinging priority to the tasks.
+
+## Usage
+
+###  `high todo [description]`
+###  `medium event [description /at DD/MM/YYYY HHMM]`
+###  `low deadline Project submission /by 03/10/2019 1000`
+
+Priority can be high/medium/low. Priority can be assigned to the task by typing 'high', 'medium', or 'low' before the task. If no priority is assigned, the priority of the task is assigned to low by default.
+
+Example of usage:
+
+`high todo return book`
+
+Expected outcome:
+
+![Image of assigning priority example](https://github.com/jerryk1997/duke/blob/master/docs/Priority_example.png)
+
+### Feature 8
+Shows the list of tasks sorted by priority.
+
+## Usage
+
+### `priority` - Lists out tasks by priority.
+
+Example of usage:
+
+`priority`
+
+Expecte outcome:
+
+![Image of priority list example](https://github.com/jerryk1997/duke/blob/master/docs/PriorityList_example.png)
+
+
+
 
 
 

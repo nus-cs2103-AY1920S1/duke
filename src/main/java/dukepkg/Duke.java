@@ -20,17 +20,22 @@ public class Duke {
      * Instantiates a new Duke.
      */
     public Duke() {
-        Storage storage = new Storage("data/tasks.txt");
+        Storage storage = new Storage("data/zjtasks.txt");
         ui = new Ui();
         tasklist = new TaskList(storage, ui);
         tasklist.loadTaskHistory();
         parser = new Parser();
+
     }
 
     private void run() {
         ui.showGreeting();
         boolean isExit = false;
-        while(!isExit){
+        while(true){
+            if(isExit) {
+                System.out.println("Existing programme...");
+                System.exit(0);
+            }
             try {
                 String command = ui.readCommand();
                 Command c = parser.constructCommand(command);
@@ -60,9 +65,9 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = parser.constructCommand(input);
+            String uiMsg = c.execute(tasklist, ui);
             isExit = c.isExit();
-            return c.execute(tasklist, ui);
-
+            return uiMsg;
         } catch (DukeException e) {
             return ui.showDukeError(e);
         }

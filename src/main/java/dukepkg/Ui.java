@@ -57,7 +57,7 @@ public class Ui {
      * @return the string
      */
     public String showExitMsg() {
-        return "Bye. Hope to see you again soon!\n";
+        return "Bye. Hope to see you again soon! Exit in 3 seconds...\n";
     }
 
     /**
@@ -115,8 +115,8 @@ public class Ui {
      *
      * @return the string
      */
-    public String showGreeting() {
-        String greeting = "Hello! I'm Duke\n" +
+    public static String showGreeting() {
+        String greeting = "Hello! I'm Tsuki, your personal task manager.\n" +
                 "What can I do for you?\n";
         return greeting;
     }

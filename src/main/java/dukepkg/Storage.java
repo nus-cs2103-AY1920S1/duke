@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import dukepkg.Ui;
 
 /**
  * The Storage object used to save and retrieve task list data.
@@ -20,6 +21,16 @@ public class Storage {
      */
     public Storage(String filePath) {
         Storage.filePath = filePath;
+        File file = new File(filePath);
+        try {
+            if(!file.exists()) {
+                File dir = new File("data");
+                dir.mkdir();
+                file.createNewFile();
+            }
+        } catch (Exception e) {
+            System.out.println("File cannot be created!");
+        }
     }
 
     /**

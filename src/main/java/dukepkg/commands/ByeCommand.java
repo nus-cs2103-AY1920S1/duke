@@ -10,7 +10,7 @@ public class ByeCommand extends Command {
 
     @Override
     public String execute(TaskList tasklist, Ui ui) {
-        isExit = true;
+        this.isExit = true;
         return ui.showExitMsg();
     }
 

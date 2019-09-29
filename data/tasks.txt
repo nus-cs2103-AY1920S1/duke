@@ -6,3 +6,5 @@ E # 0 # a # 12nd of December 2019, 2pm
 D # 0 # b # 8th of December 2008, 6pm
 E # 0 # add # tmr
 T # 0 # 3244
+T # 0 # add_task
+T # 0 # today_is_a_good_day

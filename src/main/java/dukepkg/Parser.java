@@ -183,7 +183,7 @@ public class Parser {
         String month_str = month_enum.substring(0,1) + month_enum.substring(1).toLowerCase();
         int year = Integer.parseInt(date[2]);
         int hour = Integer.parseInt(date_time[1].substring(0,2));
-        int min = Integer.parseInt(date_time[1].substring(2,3));
+        int min = Integer.parseInt(date_time[1].substring(2,4));
         String output = String.valueOf(day);
         output += day % 10 == 1 ? "st of " : day % 10 == 2 ? "nd of " : day % 10 == 3 ? "rd of " : "th of ";
         output += month_str + " " + year + ", ";

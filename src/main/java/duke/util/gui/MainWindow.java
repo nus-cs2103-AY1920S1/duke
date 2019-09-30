@@ -1,7 +1,7 @@
-package duke.gui;
+package duke.util.gui;
 
-import static duke.gui.DialogBox.getDukeDialog;
-import static duke.gui.DialogBox.getUserDialog;
+import static duke.util.gui.DialogBox.getDukeDialog;
+import static duke.util.gui.DialogBox.getUserDialog;
 
 import duke.Duke;
 import javafx.fxml.FXML;

@@ -1,33 +1,36 @@
 package duke;
 
-import duke.util.UiMessage;
 import duke.command.Command;
-import duke.util.exception.DukeException;
 import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
+import duke.util.UiMessage;
+import duke.util.cli.Cli;
+import duke.util.exception.DukeException;
 
 public class Duke {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
-    private String filePath = "data/tasks.txt";
+    Storage storage;
+    TaskList tasks;
+    String filePath = "data/tasks.txt";
+
+    /** CLI implementation of Duke uses a Cli object to represent its UI. */
+    Ui ui;
 
     /**
      * Creates a new instance of Duke, with the default filePath.
      */
     public Duke() {
-        ui = new Ui();
+        ui = new Cli();
         storage = new Storage(filePath);
         tasks = new TaskList();
     }
 
     /**
      * Runs Duke from the CLI. All output is displayed in the CLI.
-     * Not used when Duke is run from the GUI.
+//     * Not used when Duke is run from the GUI.
      */
-    private void run() {
+    void run() {
         ui.showMessage(UiMessage.WELCOME);
         initializeStorage();
 
@@ -56,19 +59,6 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
-    }
-
-    public String getResponse(String input) {
-        try {
-            Command c = Parser.parse(input);
-            c.execute(tasks, ui);
-        } catch (DukeException e) {
-            ui.showError(e);
-        }
-
-        // dummy implementation
-        return "Duke heard: " + input;
-        //return ui.getResponse();
     }
 
     /**

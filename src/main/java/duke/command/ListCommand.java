@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.util.exception.DukeException;
-import duke.util.exception.ExceptionType;
 import duke.task.TaskList;
 import duke.util.Ui;
+import duke.util.exception.DukeException;
+import duke.util.exception.ExceptionType;
 
 public class ListCommand implements Command {
 

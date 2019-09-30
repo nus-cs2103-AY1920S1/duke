@@ -1,6 +1,8 @@
-package duke.util;
+package duke.util.cli;
 
 import duke.task.TaskList;
+import duke.util.Ui;
+import duke.util.UiMessage;
 import duke.util.exception.DukeException;
 import java.util.Scanner;
 

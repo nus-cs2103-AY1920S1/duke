@@ -23,6 +23,7 @@ public class Gui implements Ui {
     private ColourScheme colourScheme = ColourScheme.MINT;
 
     /** Represents the queue of messages to be displayed in the GUI. */
+    // todo: change Queue to Stream
     private Queue<MessageBox> messageBoxQueue = new LinkedList<>();
 
     /**

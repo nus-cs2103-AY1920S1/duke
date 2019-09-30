@@ -24,7 +24,7 @@ public class DoneCommand extends Command {
      * @throws IOException
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 
         Task task = taskList.done(this.index);
 

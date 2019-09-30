@@ -13,7 +13,7 @@ public class ExitCommand extends Command {
      * @throws IOException
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         return ui.bye();
     }
 

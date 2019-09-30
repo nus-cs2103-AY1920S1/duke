@@ -95,13 +95,13 @@ Example:<br>
   Gives result(s) of all tasks that contains "read book" in their descriptions.<br>
 
 ## 4. Command Summary
-Command | Format
--------|---------------
-**Add** | `todo ACTIVITY_NAME`<br> `deadline ACTIVITY_NAME / by TIME`<br>`event ACTIVITY_NAME / at TIME`
-**List** | `list`
-**Done** | `done INDEX` or <br>`done RANGE` or <br>`done INDEX...`
-**Delete** |`delete INDEX` or <br>`delete RANGE` or <br>`delete INDEX...`
-**Search** | `find KEYWORD`
+|Command | Format 
+|-------|---------------|
+|**Add** | `todo ACTIVITY_NAME`<br> `deadline ACTIVITY_NAME / by TIME`<br>`event ACTIVITY_NAME / at TIME` 
+|**List** | `list` 
+|**Done** | `done INDEX` or <br>`done RANGE` or <br>`done INDEX...` 
+|**Delete** |`delete INDEX` or <br>`delete RANGE` or <br>`delete INDEX...` 
+|**Search** | `find KEYWORD`
 
 # Feedback, Bug Reports
 

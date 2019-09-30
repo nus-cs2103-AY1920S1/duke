@@ -1,4 +1,4 @@
-package duke;
+package duke.gui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -9,7 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
@@ -20,8 +19,6 @@ import javafx.scene.layout.HBox;
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
-    @FXML
-    private ImageView displayPicture;
 
     private DialogBox(String text) {
         try {
@@ -34,7 +31,6 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        //displayPicture.setImage(img);
     }
 
     /**
@@ -53,7 +49,7 @@ public class DialogBox extends HBox {
 
     public static DialogBox getDukeDialog(String text) {
         var db = new DialogBox(text);
-//        db.flip();
+        db.flip();
         return db;
     }
 }

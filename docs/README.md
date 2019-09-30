@@ -1,7 +1,7 @@
 # User Guide
 
 ## Introduction
-Welcome to the Duke User Guide. This application allows user to manage their daily tasks via 
+Welcome to Duke User Guide. This application allows user to manage their daily tasks via 
 **Command Line Interface (CLI)** and through a friendly **Graphical User Interface (GUI)**. 
 The application comes with the feature to add tasks, mark task as done and much more!
 

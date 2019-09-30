@@ -5,19 +5,6 @@
 
 ![Ui.png](Ui.png)
 
-### List of all commands:
-- [`todo`](#11-adding-a-todo-task-to-the-current-task-list----todo)
-- [`deadline`](#12-adding-a-deadline-task-to-the-current-task-list----deadline)
-- [`event`](#13-adding-an-event-task-to-the-current-task-list----event)
-- [`list`](#2-listing-the-tasks-in-the-current-task-list----list)
-- [`done`](#3-completing-a-task-in-the-current-task-list----done)
-- [`delete`](#4-removing-a-task-from-the-current-task-list----delete)
-- [`find`](#51-searching-for-a-task-in-the-current-task-list-with-keyword----find)
-- [`relaxfind`](#52-searching-for-a-task-in-the-current-task-list-with-similar-keyword----relaxfind)
-- [`save`](#61-loading-a-task-list-from-another-save-file----load)
-- [`load`](#62-saving-the-current-task-list-to-a-specified-file----save)
-- [`bye`](#7-closing-duke----bye)
-
 ## Features 
 
 ### 1. Adding a Task to the Current Task List.

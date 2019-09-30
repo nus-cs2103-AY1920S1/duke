@@ -14,29 +14,28 @@ public class Duke {
     private Ui ui;
     private String filePath = "data/tasks.txt";
 
+    /**
+     * Creates a new instance of Duke, with the default filePath.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList();
-
-        ui.showMessage(UiMessage.WELCOME);
-
-        try {
-            TaskList tasksFromFile = storage.load();
-            tasks = tasksFromFile;
-        } catch (Exception e) {
-            // temporary haxx
-            e.printStackTrace();
-        }
     }
 
+    /**
+     * Runs Duke from the CLI. All output is displayed in the CLI.
+     * Not used when Duke is run from the GUI.
+     */
     private void run() {
+        ui.showMessage(UiMessage.WELCOME);
+        initializeStorage();
+
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
-                // todo: remove redundant showLine() for bye command
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui);
                 isExit = c.isExit();
@@ -47,9 +46,13 @@ public class Duke {
             }
         }
         storage.save(tasks);
-        ui.showMessage(UiMessage.GOODBYE);
     }
 
+    /**
+     * Creates and runs a new instance of Duke.
+     * Invoked when Duke is run from the CLI.
+     * @param args Arguments supplied by the user.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
@@ -66,5 +69,18 @@ public class Duke {
         // dummy implementation
         return "Duke heard: " + input;
         //return ui.getResponse();
+    }
+
+    /**
+     * Attempts to import an existing task list.
+     */
+    private void initializeStorage() {
+        try {
+            TaskList tasksFromFile = storage.load();
+            tasks = tasksFromFile;
+        } catch (Exception e) {
+            // temporary haxx
+            e.printStackTrace();
+        }
     }
 }

@@ -57,4 +57,8 @@ public class MainWindow extends AnchorPane {
         DialogBox outputDialog = getDukeDialog(response);
         dialogContainer.getChildren().add(outputDialog);
     }
+
+    public VBox getDialogContainer() {
+        return this.dialogContainer;
+    }
 }

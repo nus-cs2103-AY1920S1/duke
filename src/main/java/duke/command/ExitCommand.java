@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.task.TaskList;
 import duke.util.Ui;
+import duke.util.UiMessage;
 
 /**
  * Exits the application.
@@ -15,7 +16,7 @@ public class ExitCommand implements Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui) {
-        // do nothing
+        ui.showMessage(UiMessage.GOODBYE);
     }
 
     /**

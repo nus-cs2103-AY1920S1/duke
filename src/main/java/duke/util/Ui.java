@@ -3,9 +3,11 @@ package duke.util;
 import duke.task.TaskList;
 import duke.util.exception.DukeException;
 import java.util.Scanner;
+import javafx.scene.layout.VBox;
 
 public class Ui {
     private Scanner in;
+    private VBox dialogContainer;
 
     public Ui() {
         this.in = new Scanner(System.in);

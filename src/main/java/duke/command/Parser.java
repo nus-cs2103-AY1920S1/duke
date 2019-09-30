@@ -58,7 +58,7 @@ public class Parser {
         String firstWord = input.split(" ")[0];
         String message;
         if (firstWord.equals("bye")) {
-            return new String("Bye. Hope to see you again soon!");
+            message = ui.printByeMessage();
         } else if (firstWord.equals("list")) {
             message = ui.printListUsingStream(this.taskList.getList());
         } else if (firstWord.equals("done")) {
@@ -71,8 +71,6 @@ public class Parser {
             message = processTaskEvent(input, this.taskList, this.storage, this.set);
         } else if (firstWord.equals("delete")) {
             message = processDeleteTask(input, this.taskList, this.storage, this.set);
-        } else if (firstWord.equals("bye")) {
-            message = ui.printByeMessage();
         } else if (firstWord.equals("find")) {
             String item = input.split(" ")[1];
             message = processFindWithStream(item, this.taskList);

@@ -15,7 +15,7 @@ public class Expenses {
      * Create an expenses object that stores credit and debit items and can access storage.
      */
     public Expenses() {
-        storage = new ExpensesStorage("src/data/expenses.txt");
+        storage = new ExpensesStorage("expenses.txt");
         try {
             ArrayList<ArrayList<Item>> lists = storage.load();
             credit = lists.get(0);

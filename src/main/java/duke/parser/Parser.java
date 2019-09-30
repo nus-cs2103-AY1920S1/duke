@@ -62,6 +62,7 @@ public class Parser {
 
     public static int parseDoneCommand(String[] newTaskSplit) {
         int completedTaskNum = Integer.parseInt(newTaskSplit[1]) - 1;
+        assert completedTaskNum > 0;
         return completedTaskNum;
     }
 
@@ -73,8 +74,7 @@ public class Parser {
             throw new DukeDeleteIllegalArgumentException("You have entered too many arguments for deletion");
         } else {
             try {
-                int deletionNum = Integer.parseInt(newTaskSplit[1]) - 1;
-                return deletionNum;
+                return Integer.parseInt(newTaskSplit[1]) - 1;
             } catch (NumberFormatException e) {
                 throw new DukeDeleteIllegalArgumentException("Please enter a valid number for deletion");
             } catch (IndexOutOfBoundsException e) {
@@ -153,8 +153,7 @@ public class Parser {
             }
             if (foundEvent) {
                 DateTime eventTime = convertDateTime(eventTimeString);
-                Event newEvent = new Event(description, eventTime);
-                return newEvent;
+                return new Event(description, eventTime);
             } else {
                 throw new DukeEventIllegalArgumentException("event timing");
             }
@@ -166,8 +165,7 @@ public class Parser {
     private static String parseFindCommand(String[] newTaskSplit) throws DukeFindIllegalArgumentException {
         int newTaskLen = newTaskSplit.length;
         if (newTaskLen == 2) {
-            String keyword = newTaskSplit[1];
-            return keyword;
+            return newTaskSplit[1];
         } else if (newTaskLen > 2) {
             throw new DukeFindIllegalArgumentException("too many");
         } else {
@@ -176,6 +174,7 @@ public class Parser {
     }
 
     public static ArrayList<Task> findTasksByKeyword(String keyword, ArrayList<Task> taskArrayList) {
+        assert keyword.length() > 0;
         ArrayList<Task> searchResultArrayList = new ArrayList<Task>();
         for (Task task : taskArrayList) {
             String[] descriptionSplit = task.getDescription().split(" ");
@@ -193,7 +192,8 @@ public class Parser {
         return searchResultArrayList;
     }
 
-    public static DateTime convertDateTime(String dateTimeString) {
+    private static DateTime convertDateTime(String dateTimeString) {
+        assert dateTimeString.length() > 0;
         String[] dateTimeStringSplit = dateTimeString.split(" ");
         String[] dateStringSplit = dateTimeStringSplit[0].split("/");
         int day = Integer.parseInt(dateStringSplit[0]);
@@ -206,9 +206,7 @@ public class Parser {
     public static Task parseSaveData(String newTaskString) throws DukeSaveFileCorruptedError {
         String[] newTaskSplit = newTaskString.split(" \\| ");
         String taskType = newTaskSplit[0];
-        boolean taskIsDone = Integer.parseInt(newTaskSplit[1]) == 1
-                ? true
-                : false;
+        boolean taskIsDone = Integer.parseInt(newTaskSplit[1]) == 1;
         String description = newTaskSplit[2];
         Task newTask;
         switch(taskType) {
@@ -226,13 +224,9 @@ public class Parser {
         default:
             throw new DukeSaveFileCorruptedError();
         }
-        if (newTask != null) {
-            if (taskIsDone) {
-                newTask.taskComplete();
-            }
-            return newTask;
-        } else  {
-            throw new DukeSaveFileCorruptedError();
+        if (taskIsDone) {
+            newTask.taskComplete();
         }
+        return newTask;
     }
 }

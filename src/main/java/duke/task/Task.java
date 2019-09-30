@@ -40,7 +40,7 @@ public abstract class Task {
     @Override
     public String toString() {
         String output;
-        if (taskIsDone == true) {
+        if (taskIsDone) {
             output = "Complete";
         } else {
             output = "Incomplete";

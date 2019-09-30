@@ -7,6 +7,6 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        return this.toString();
+        return super.toString();
     }
 }

@@ -103,6 +103,7 @@ public class DateTime {
             }
 
             int minutes = time % 100;
+            boolean isMorning = time < 1200;
             int hours = (time - minutes) / 100;
             if (hours > 12) {
                 hours -= 12;

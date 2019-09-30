@@ -22,6 +22,7 @@ public class Duke {
 
     String getResponse(String input) throws DukeException {
         if (input.equals("bye")) {
+            System.exit(0);
             return ui.byeMessage();
         } else {
             return Parser.parse(input).execute(tasks, ui, storage);

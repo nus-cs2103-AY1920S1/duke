@@ -13,7 +13,9 @@ public class Ui {
     }
 
     public String showWelcome() {
-        return DIVIDER + "\nWelcome to Duke!\n" + DIVIDER;
+        return DIVIDER + "\nWelcome to Duke!\n" + DIVIDER
+                + "\nIf you require any assistance," +
+                "\nplease type (help) to see a list of valid commands.";
     }
 
     public String showLoadingError() {

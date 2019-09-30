@@ -34,6 +34,8 @@ public class Parser {
                     return new FindCommand(description);
                 case "bye":
                     return new ByeCommand();
+                case "help":
+                    return new HelpCommand();
                 default:
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }

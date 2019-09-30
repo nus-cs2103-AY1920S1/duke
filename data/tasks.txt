@@ -1,0 +1,12 @@
+-----
+Food
+5.0 : rice
+Transport
+Education
+Household
+Apparel
+80.0 : stuff
+Beauty
+Health
+Social
+Others

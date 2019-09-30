@@ -21,6 +21,7 @@ public class Storage {
 
     public Storage(String filePath) {
         this.filePath = filePath;
+        tempExpenseList = null;
     }
 
     /**
@@ -60,7 +61,13 @@ public class Storage {
         try {
             rewriteFile(this.filePath, "");
         } catch (IOException e) {
-            System.err.println("Error: " + e.getMessage());
+            File file = new File(this.filePath);
+            try {
+                file.getParentFile().mkdir();
+                file.createNewFile();
+            } catch (IOException ie) {
+                System.out.println("error");
+            }
         }
         for (Task task : taskList) {
             StringBuilder dataBuilder = new StringBuilder();
@@ -169,11 +176,11 @@ public class Storage {
                 }
             }
         }
-        tempExpenseList = expenseListToBeLoaded;
+        this.tempExpenseList = expenseListToBeLoaded;
         return taskListToBeLoaded;
     }
 
     public ExpenseList getTempExpenseList() {
-        return tempExpenseList;
+        return this.tempExpenseList;
     }
 }

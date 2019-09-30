@@ -24,8 +24,6 @@ public class Parser {
         if (tempArr.length > 1) {  //account for the fact that commands like "list" do not have duke.task details
             taskDetails = ((String) Array.get(tempArr, 1)).trim();
         }
-        System.out.println(command);
-        System.out.println(taskDetails);
     }
 
     /**

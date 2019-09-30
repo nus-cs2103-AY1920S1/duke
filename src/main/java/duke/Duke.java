@@ -56,6 +56,7 @@ public class Duke extends Application {
         } catch (FileNotFoundException e) {
             ui.showLoadingError();
             tasks = new TaskList();
+            listOfAllExpenses = new ExpenseList();
         }
     }
 

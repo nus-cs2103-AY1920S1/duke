@@ -33,6 +33,8 @@ public class Parser {
             return new TagCommand(fullCommand);
         } else if (command.equals("priority")) {
             return new PriorityCommand(fullCommand);
+        } else if (command.equals("save")) {
+            return new SaveCommand(); // disregard any input after "save"
         } else {
             throw new DukeException(ExceptionType.INVALID_COMMAND);
         }

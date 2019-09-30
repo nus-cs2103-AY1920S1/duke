@@ -9,13 +9,11 @@ import java.io.ObjectOutputStream;
 
 public class Storage {
     private String filePath;
-    private String tasksImportedMessage = "Success! Your tasks have been imported from: ";
-    private String tasksSavedMessage = "Success! Your tasks have been saved to: "; // should be in Ui class?
-    private String tasksNotSavedMessage = "Your task list is empty! Adios :)";
-    private String tasksNotFoundMessage = "Existing tasks file not found! Starting duke afresh...";
+    private Ui ui;
 
-    public Storage(String filePath) {
+    public Storage(String filePath, Ui ui) {
         this.filePath = filePath;
+        this.ui = ui;
     }
 
     private boolean hasDirectory() {
@@ -33,8 +31,7 @@ public class Storage {
 
         // check if file exists
         if (!file.exists()) {
-            // todo: replace with showMessage(UiMessage.TASKS_NOT_FOUND)
-            System.out.println(tasksNotFoundMessage);
+            ui.showMessage(UiMessage.TASKS_NOT_FOUND);
             return false;
         }
 
@@ -57,8 +54,8 @@ public class Storage {
             ois.close();
             fis.close();
 
-            // todo: replace with showMessage(UiMessage.TASKS_IMPORTED)
-            System.out.println(tasksImportedMessage + filePath);
+            String message = UiMessage.TASKS_IMPORTED.getMessage() + " " + this.filePath;
+            ui.showMessage(message);
         } catch (Exception e) {
             // temporary haxx
             e.printStackTrace();
@@ -70,8 +67,7 @@ public class Storage {
     public void save(TaskList tasks) {
         // first, check if task list is empty. if so, do not save
         if (tasks.isEmpty()) {
-            // todo: replace with showMessage(UiMessage.TASKS_NOT_SAVED)
-            System.out.println(tasksNotSavedMessage);
+            ui.showMessage(UiMessage.TASKS_NOT_SAVED);
             return;
         }
 
@@ -84,9 +80,8 @@ public class Storage {
             oos.close();
             fos.close();
 
-            // todo: replace with showMessage(UiMessage.TASKS_SAVED)
-            // how to pass filePath to Ui?
-            System.out.println(tasksSavedMessage + this.filePath);
+            String message = UiMessage.TASKS_SAVED.getMessage() + " " + this.filePath;
+            ui.showMessage(message);
         } catch (Exception e) {
             // temporary haxx
             e.printStackTrace();

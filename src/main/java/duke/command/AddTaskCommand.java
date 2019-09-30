@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.util.Storage;
 import duke.util.Ui;
 import duke.util.UiMessage;
 import duke.util.exception.DukeException;
@@ -78,14 +79,15 @@ public abstract class AddTaskCommand implements Command {
      * Creates a new Task based on command issued by the user, and adds it to the list of tasks.
      * @param tasks List of tasks.
      * @param ui UI to display to the user.
+     * @param storage Object that handles storage of task list to disk.
      * @throws DukeException Application-specific exception thrown during execution.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task newTask = createTask();
         tasks.add(newTask);
 
-        ui.showMessage(UiMessage.TASK_ADDED);
-        ui.showMessage(UiMessage.HINT_LIST);
+        String message = UiMessage.TASK_ADDED.getMessage() + " " + UiMessage.HINT_LIST.getMessage();
+        ui.showMessage(message);
     }
 }

@@ -1,9 +1,10 @@
 package duke.command;
 
+import duke.task.TaskList;
+import duke.util.Storage;
+import duke.util.Ui;
 import duke.util.exception.DukeException;
 import duke.util.exception.ExceptionType;
-import duke.task.TaskList;
-import duke.util.Ui;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -23,10 +24,11 @@ public class FindCommand implements Command {
      * Finds a list of tasks matching the keyword issued by the user.
      * @param tasks List of tasks.
      * @param ui UI to display to the user.
+     * @param storage Object that handles storage of task list to disk.
      * @throws DukeException Application-specific exception thrown during execution.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             // first, try to get keyword
             s.next(); // command (find), to be ignored

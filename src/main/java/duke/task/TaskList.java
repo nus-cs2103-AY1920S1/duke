@@ -53,7 +53,6 @@ public class TaskList implements Serializable {
     /**
      * Prints the list of tasks to the UI.
      */
-    // todo: move to Ui class
     public void printList() {
         for (Task task : tasks) {
             int i = getId(task);
@@ -68,7 +67,7 @@ public class TaskList implements Serializable {
      * @param task Task whose ID is required.
      * @return ID of the given task.
      */
-    private int getId(Task task) {
+    public int getId(Task task) {
         return this.tasks.indexOf(task) + 1;
     }
 
@@ -83,15 +82,16 @@ public class TaskList implements Serializable {
         return tasks.get(taskId - 1);
     }
 
+    public int getSize() {
+        return tasks.size();
+    }
+
     /**
      * Deletes the given task from the TaskList.
      * @param taskToDelete Task to be deleted from the TaskList.
      */
     public void deleteTask(Task taskToDelete) {
-        String taskDescription = taskToDelete.toString();
         tasks.remove(taskToDelete);
-        System.out.println("Noted. I've removed this task: " + taskDescription);
-        System.out.println("Now you have " + tasks.size() + " items in this list.");
     }
 
     /**

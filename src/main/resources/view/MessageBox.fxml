@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="TOP_RIGHT" style="-fx-background-color: #b2eee6; -fx-background-radius: 10;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <Label fx:id="message" text="Label" wrapText="true">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin></Label>
+  </children>
+  <padding>
+    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+  </padding>
+</fx:root>

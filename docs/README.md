@@ -57,6 +57,13 @@ Example of usage:
 
     * find todo
     * find carpet
+    
+### Exit duke: `bye`
+Saves all input and exits duke.
 
+Example of usage: 
+* bye
+Warning:
+If you close window without properly exiting duke, progress will be lost.
 
 *What are you waiting for? Go comic sans*

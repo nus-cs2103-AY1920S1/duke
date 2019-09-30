@@ -14,7 +14,8 @@
 4. Command Summary
 ```
 
-#1. Introduction
+## 1. Introduction
+
 Duke is for those who prefer to use a desktop app for managing tasks. 
 More importantly, Duke is optimized for those who prefer to work 
 with a Command Line Interface (CLI) while still having the benefits of a Graphical 
@@ -22,7 +23,8 @@ User Interface (GUI). If you can type fast, Duke can get your contact management
 tasks done faster than traditional GUI apps. Interested? Jump to the [Section 2, 
 “Quick Start”](#2.-Quick-Start) to get started. Enjoy!
 
-#2. Quick Start
+## 2. Quick Start
+
 1. Ensure you have `Java 11` or above installed in your Computer.
 1. Download the latest `duke.jar` here.
 1. Copy the file to the folder you want to use as the home folder for your Duke.
@@ -31,37 +33,37 @@ tasks done faster than traditional GUI apps. Interested? Jump to the [Section 2,
  at the right bottom to execute it.
 1. Refer to [Section 3, "Features"](#3.-Features) for details of each command.
 
-#3. Features
-##3.1 Adding a task<br>
+## 3. Features
+### 3.1 Adding a task<br>
 
 > There are 3 types of tasks for you to better categorize your tasks. 
 
-###(a) Add a todo task: `todo`<br>
+#### (a) Add a todo task: `todo`
 Adds a todo task into the task list.<br>
 Format: `todo ACTIVITY_NAME`<br>
 Example:<br>
 * `todo read newspaper`<br>
   Adds a todo task `read newspaper` into the task list.
 
-###(b) Add a deadline task: `deadline`<br>
+#### (b) Add a deadline task: `deadline`
 Adds a deadline task that needs to be done by a particular time into the task list.<br>
 Format: `deadline ACTIVITY_NAME / by TIME`<br>
 Example:<br>
 * `deadline return book / by Sunday`<br>
   Adds a deadline task `return book` that needs to be done by Sunday into the task list.
 
-###(c) Add an event task: `event`<br>
+#### (c) Add an event task: `event`
 Adds a deadline task that happens at a particular time into the task list.<br>
 Format: `event ACTIVITY_NAME / at TIME`<br>
 Example:<br>
 * `event midterm / at Oct 5`<br>
   Adds a event task `midterm` that happens on Oct 5 into the task list.
   
-##3.2 Listing task list: `list`<br>
+### 3.2 Listing task list: `list`
 Shows the list of existing tasks in the task list.<br>
 Format: `list`<br>
 
-##3.3 Marking task(s) as done: `done`<br>
+### 3.3 Marking task(s) as done: `done`
 Marks task(s) with particular index as done.<br>
 Format: `done INDEX` or `done RANGE` or `done INDEX...`<br>
 Example:<br>
@@ -72,7 +74,7 @@ Example:<br>
   `done 3,5`<br>
   Marks the task with index 3 and 5 as done.<br>
 
-##3.4 Deleting tasks(s): `delete`<br>
+### 3.4 Deleting tasks(s): `delete`
 Deletes task(s) with particular index.<br>
 Format: `delete INDEX` or `delete RANGE` or `delete INDEX...`<br>
 Example:<br>
@@ -83,7 +85,7 @@ Example:<br>
   `delete 3,5`<br>
   Deletes the task with index 3 and 5.<br>
   
-##3.5 Searching by keyword: `find`<br>
+### 3.5 Searching by keyword: `find`
 Searches the tasks according to the keywords.<br>
 Format: `find KEYWORD`<br>
 Example:<br>
@@ -92,7 +94,7 @@ Example:<br>
   `find read book`<br>
   Gives result(s) of all tasks that contains "read book" in their descriptions.<br>
 
-#4. Command Summary
+## 4. Command Summary
 Command | Format
 -------|---------------
 **Add** | `todo ACTIVITY_NAME`<br> `deadline ACTIVITY_NAME / by TIME`<br>`event ACTIVITY_NAME / at TIME`

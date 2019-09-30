@@ -222,6 +222,7 @@ public class Parser {
         message = message + "- find <word that matches the task description>\n";
         message = message + "- list - to list out the tasks that have been added\n";
         message = message + "- sort - to sort the list of tasks\n";
+        message = message + "- help - list out the list of commands\n";
         message = message + "- bye - to exit the application";
         return message;
     }

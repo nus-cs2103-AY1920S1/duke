@@ -40,7 +40,10 @@ public class Ui {
         return ("     Got it. I've added this task: \n" 
             + "      " + t.toString() + "\n     Now you have " + size + " tasks in the list.");
     }
-
+    public String doneString(Task t){
+        return ("     Got it. I've marked this task as done: \n" 
+        + "      " + t.toString());
+    }
     public String print(String str) {
         return str;
     }

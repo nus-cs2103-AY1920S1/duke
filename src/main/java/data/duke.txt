@@ -1,3 +1,2 @@
-T | false | a new item to clone
-T | false | a new item to clone
-T | false | a new item to clone
+T | true | homework 1
+E | true | concert | 13-09-2019 18:00

@@ -20,7 +20,7 @@ class DoneCommandTest {
         try {
             new DoneCommand().execute("done a", taskList, storage);
         } catch (DukeException e) {
-            assertEquals("OOPS!!! The completed task's index must be a number." , e.getMessage());
+            assertEquals("OOPS!!! The completed task's index must be a number.", e.getMessage());
         }
     }
 

@@ -116,6 +116,9 @@ Noted. I've removed this task:
 [D][✗] get ready for the party (by: 2nd of December, 2019, 6pm)
 Now you have 2 tasks in the list.
 ````
+Do note that, if you input more than one index for this command one after the other
+only the first index will be considered by Duke.
+
 ### 6. Mark task as Done
 Mark any task stored in Duke as done after you have completed it.
 
@@ -133,6 +136,9 @@ Expected outcome:
 Nice! I've marked this task as done:
 [T][✓] math homework
 ```
+
+Do note that, if you input more than one index for this command one after the other
+only the first index will be considered by Duke.
 ### 7. Search
 Search Duke for any task based on a keyword.
 

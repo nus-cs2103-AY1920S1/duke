@@ -142,6 +142,29 @@ Here is your sorted List:
 5. [T][✘] return book
 ```
 
+### **help**
+`List all the commands in Duke.`
+
+Example of usage:
+```
+help
+```
+
+Expected outcome:
+```
+Here is the list of commands for Duke:
+- todo <description>
+- event <description> /at dd/mm/yyyy hh:mm
+- deadline <description> /by dd/mm/yyyy hh:mm
+- done <Index> - mark the task at the given Index in the list as done
+- delete <Index> - delete the task at the given index from list
+- find <word that matches the task description>
+- list - to list out the tasks that have been added
+- sort - to sort the list of tasks
+- help - list out the list of commands
+- bye - to exit the application
+```
+
 ### **bye**
 `Terminates the program and exits.`
 

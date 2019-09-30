@@ -154,12 +154,8 @@ public class Ui {
      */
     public static String printWelcomeMessage() {
         String message;
-        String logo = "  _____            _        \n"
-                + " |   __  \\ _     _|  |  _    __ \n"
-                + " |  |   |  |  |   |  |  |/ /  / _ \\\n"
-                + " |  |__|  |  |__|  |      V   __/\n"
-                + " |_____/ \\___,_|__|\\__\\___|\n";
-        message = "Hello from\n" + logo + "\n";
+        String logo = "DUKE";
+        message = "Hello from " + logo + "\n";
         message = message + "What can I do for you?";
         return message;
     }

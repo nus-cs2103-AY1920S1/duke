@@ -6,7 +6,7 @@
 ## User Guide
 
 1. Ensure you have the latest version of Java
-2. Download the latest version of Duke. ([Click here](https://github.com/jeunhoe/duke/releases/download/v1.0/duke-1.0.jar))
+2. Download the latest version of Duke. ([Click here](https://github.com/jeunhoe/duke/releases/download/v1.1/duke-1.1.jar))
 3. Double click the file to open it.
 4. Duke should pop up in a new window.
 5. Use the commands supported by Duke, which are listed [here](https://jeunhoe.github.io/duke/#features)!

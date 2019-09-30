@@ -63,8 +63,8 @@ Example of usage:
 `list`
 
 Expected outcome:
-
-`1. [T][✗] homework 1
+`
+1. [T][✗] homework 1
 2. [E][✗] concert (at: 13-10-2019 18:00)
 3. [D][✗] concert (by: 15-10-2019 23:59)`
 
@@ -90,9 +90,9 @@ Example of usage:
 
 Expected outcome:
 
-Noted. I've removed this task:
+`Noted. I've removed this task:
 [T][✗] homework 1
-Now you have 2 tasks in the list.
+Now you have 2 tasks in the list.`
 
 
 ### `done <index>` - mark task as done

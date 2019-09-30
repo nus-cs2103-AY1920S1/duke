@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 
+// todo: custom styling for tasks, including status, priority, deadline, tags etc
 public class TaskMessageBox extends MessageBox {
     public TaskMessageBox(String text, ColourScheme colourScheme) {
         super(text);

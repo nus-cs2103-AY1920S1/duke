@@ -19,7 +19,7 @@ public abstract class MessageBox extends HBox {
     @FXML
     private Label message;
 
-    public MessageBox(String text) {
+    MessageBox(String text) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(
                 "/view/MessageBox.fxml"));
@@ -40,28 +40,4 @@ public abstract class MessageBox extends HBox {
     public void setMessage(Label message) {
         this.message = message;
     }
-
-//
-//    public static MessageBox getUserMessageBox(String text, ColourScheme colourScheme) {
-//        MessageBox userMessageBox = new MessageBox(text);
-//        userMessageBox.setStyle("-fx-background-color: " + colourScheme.getUserMessageBoxColour());
-//        userMessageBox.message.setStyle("-fx-fill: "+ colourScheme.getTextColour());
-//        DropShadow dropShadow = new DropShadow(5.0, Color.web(colourScheme.getUserShadowColour()));
-//        userMessageBox.setEffect(dropShadow);
-////        userMessageBox.setAlignment(Pos.TOP_RIGHT);
-//        return userMessageBox;
-//    }
-
-//    public static MessageBox getDukeMessageBox(String text, ColourScheme colourScheme) {
-//        MessageBox dukeMessageBox = new MessageBox(text);
-//        dukeMessageBox.setStyle("-fx-background-color: " + colourScheme.getDukeMessageBoxColour());
-//        dukeMessageBox.message.setStyle("-fx-fill: "+ colourScheme.getTextColour());
-//        DropShadow dropShadow = new DropShadow(5.0, Color.web(colourScheme.getDukeShadowColour()));
-//        dukeMessageBox.setEffect(dropShadow);
-////        dukeMessageBox.setAlignment(Pos.TOP_LEFT);
-//        return dukeMessageBox;
-//    }
-
-    // todo: getDukeExceptionMessageBox
-    // todo: getDukeTaskMessageBox
 }

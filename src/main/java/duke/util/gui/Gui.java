@@ -9,6 +9,7 @@ import duke.util.gui.messagebox.DukeMessageBox;
 import duke.util.gui.messagebox.ExceptionMessageBox;
 import duke.util.gui.messagebox.MessageBox;
 import duke.util.gui.messagebox.TaskMessageBox;
+import duke.util.gui.messagebox.UserMessageBox;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -31,6 +32,14 @@ public class Gui implements Ui {
     @Override
     public String readCommand() {
         return null;
+    }
+
+    public void showUserInput(String input) {
+        try {
+            messageBoxQueue.add(new UserMessageBox(input, this.colourScheme));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

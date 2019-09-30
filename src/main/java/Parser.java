@@ -66,7 +66,7 @@ public class Parser {
             throw new DukeEmptyException(raw[0]);
         } else {
             raw[0] = "";
-            if (raw[1].contains("/by") || raw[1].contains("/at")) {
+            if (raw[1].equals("/by") || raw[1].equals("/at")) {
                 throw new DukeEmptyException(task[0]);
             }
             task[1] = String.join(" ", raw).substring(1); //{command, desc+date, ""}
@@ -82,17 +82,21 @@ public class Parser {
     }
 
     private static String[] deadlineCommand(String[] task) throws DukeDeadlineException {
-        String[] desc_By = task[1].split("/by");
+        String[] desc_By = task[1].split(" /by ");
         if (desc_By.length == 1) {
             throw new DukeDeadlineException("\u2639 OOPS!!! I'm sorry, but the date of a deadline must be in the format"
-                    + " \"dd/MM/yyyy HHmm\"");
+                    + " \"/by dd/MM/yyyy HHmm\"");
         }
-        boolean hasDateFormat = (desc_By[1].split("/").length == 3); // {"18", "12", "2019 1800"}
-        boolean hasWrongTimeFormat = (desc_By[1].split(" ")[1].length() > 4); // {"18/12/2019", "18003dse3"}
-        boolean hasExtraTimeFormat = (desc_By[1].split("-").length == 1); // {"18/12/2019 1800"}
-        if (!hasDateFormat || !hasExtraTimeFormat || hasWrongTimeFormat) {
+        boolean hasWrongDateFormat = (desc_By[1].split("/").length != 3); // {"18", "12", "2019 1800"}
+        boolean hasWrongTimeFormat = (desc_By[1].split(" ").length != 2); // {"18/12/2019", "18003dse3"}
+        boolean hasExtraTimeFormat = (desc_By[1].split("-").length != 1); // {"18/12/2019 1800"}
+        if (hasWrongDateFormat || hasExtraTimeFormat || hasWrongTimeFormat) {
             throw new DukeDeadlineException("\u2639 OOPS!!! I'm sorry, but the date of a deadline must be in the format"
-                    + " \"dd/MM/yyyy HHmm\"");
+                    + " \"/by dd/MM/yyyy HHmm\"");
+        }
+        if (desc_By[1].split(" ")[1].length() != 4) {
+            throw new DukeDeadlineException("\u2639 OOPS!!! I'm sorry, but the date of a event must be in the format"
+                    + " \"/at dd/MM/yyyy HHmm\"");
         }
         task[1] = desc_By[0].trim();
         task[2] = desc_By[1].trim();
@@ -100,17 +104,21 @@ public class Parser {
     }
 
     private static String[] eventCommand(String[] task) throws DukeEventException {
-        String[] desc_At = task[1].split("/at");
+        String[] desc_At = task[1].split(" /at ");
         if (desc_At.length == 1) {
             throw new DukeEventException("\u2639 OOPS!!! I'm sorry, but the date of a event must be in the format"
-                    + " \"dd/MM/yyyy HHmm-HHmm\"");
+                    + " \"/at dd/MM/yyyy HHmm-HHmm\"");
         }
-        boolean hasDateFormat = (desc_At[1].split("/").length == 3); // {"18", "12", "2019 1800"}
-        boolean hasWrongTimeFormat = (desc_At[1].split(" ")[1].length() > 9); // {"18/12/2019", "1800-20003dse3"}
-        boolean hasExtraTimeFormat = (desc_At[1].split("-").length == 2); // {"18/12/2019 1800", "1800-2000"}
-        if (!hasDateFormat || !hasExtraTimeFormat || hasWrongTimeFormat) {
+        boolean hasWrongDateFormat = (desc_At[1].split("/").length != 3); // {"18", "12", "2019 1800"}
+        boolean hasWrongTimeFormat = (desc_At[1].split(" ").length != 2); // {"18/12/2019", "1800-20003dse3"}
+        boolean hasExtraTimeFormat = (desc_At[1].split("-").length != 2); // {"18/12/2019 1800", "1800-2000"}
+        if (hasWrongDateFormat || hasExtraTimeFormat || hasWrongTimeFormat) {
             throw new DukeEventException("\u2639 OOPS!!! I'm sorry, but the date of a event must be in the format"
-                    + " \"dd/MM/yyyy HHmm-HHmm\"");
+                    + " \"/at dd/MM/yyyy HHmm-HHmm\"");
+        }
+        if (desc_At[1].split(" ")[1].length() != 9) {
+            throw new DukeEventException("\u2639 OOPS!!! I'm sorry, but the date of a event must be in the format"
+                    + " \"/at dd/MM/yyyy HHmm-HHmm\"");
         }
         task[1] = desc_At[0].trim();
         task[2] = desc_At[1].trim();

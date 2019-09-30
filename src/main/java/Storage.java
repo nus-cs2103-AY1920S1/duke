@@ -20,10 +20,10 @@ public class Storage {
      * Creates a Storage object with the path of the file to be read.
      */
     public Storage() {
-        String folderPath = System.getProperty("user.dir") + "\\data";
+        String folderPath = System.getProperty("user.dir") + File.separator + "data";
         File directory = new File(folderPath);
         directory.mkdirs();
-        String filePath = System.getProperty("user.dir") + "\\data\\duke.txt";
+        String filePath = System.getProperty("user.dir") + File.separator + "data" + File.separator + "duke.txt";
         this.file = new File(filePath);
         this.output = "";
     }

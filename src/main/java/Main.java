@@ -12,14 +12,14 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Era duke = new Era("data/tasks.txt");
+    private Era duke = new Era("tasks.txt");
 
     @Override
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap, Color.STEELBLUE);
+            Scene scene = new Scene(ap, Color.RED);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.setTitle("ERA -- Easily Remember All");

@@ -1,5 +1,5 @@
 /**
- * Represents the initialisation and continuation of the program
+ * Represents the initialisation and continuation of the program.
  */
 
 public class Duke {
@@ -9,10 +9,10 @@ public class Duke {
     private Parser parser;
 
     /**
-     * Initializes the Duke application and the storage file.
+     * Initialises the Duke application and the storage file.
      */
 
-    void DukeStart() {
+    public Duke() {
         ui = new Ui();
         Storage storage = new Storage("data/savedTasks.txt");
         taskList = new TaskList(storage.load());
@@ -26,7 +26,7 @@ public class Duke {
      * @return response to the User input.
      */
 
-    String getResponse (String input) {
+    String getResponse(String input) {
         try {
             parser.parse(input, ui, taskList);
         } catch (DukeException e) {

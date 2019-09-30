@@ -67,12 +67,22 @@ public class Storage {
         return tl;
     }
 
+    /**
+     * Creates a new empty directory.
+     *
+     * @param filePath The path to create the directory.
+     */
     public void createNewDir(String filePath) {
         File newFolder = new File(filePath);
         boolean createdDir = newFolder.mkdir();
         assert createdDir : "failed to create directory";
     }
 
+    /**
+     * Creates a new empty save file.
+     *
+     * @param filePath The path to create the save file.
+     */
     public void createNewSaveFile(String filePath) {
         File newSaveFile = new File(filePath);
         boolean createdFile = false;
@@ -91,7 +101,8 @@ public class Storage {
         c.execute(tl);
     }
 
-    private void setPriorityOfTask(TaskList tl, int currentTaskIndex, String priority) throws SaveFileWrongFormatDukeException{
+    private void setPriorityOfTask(TaskList tl, int currentTaskIndex, String priority)
+            throws SaveFileWrongFormatDukeException {
         switch (priority) {
         case "HIGH":
             tl.setPriorityOfTask(currentTaskIndex, PriorityLevel.HIGH);

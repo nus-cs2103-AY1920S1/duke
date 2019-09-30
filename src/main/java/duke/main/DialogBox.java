@@ -35,33 +35,6 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
         displayPicture.setClip(new Circle(50.0,50.0,50.0));
     }
-//    public DialogBox(Label l, ImageView iv) {
-//        text = l;
-//        displayPicture = iv;
-//
-//        text.setWrapText(true);
-//        text.setPadding(new Insets(10.0,20.0,10.0,20.0));
-//        text.setBackground(
-//                new Background(
-//                        new BackgroundFill(
-//                                Color.LIGHTGREY,
-//                                CornerRadii.EMPTY,
-//                                Insets.EMPTY
-//                        )
-//                )
-//        );
-//        text.setMinHeight(100.0);
-//        text.setTextAlignment(TextAlignment.LEFT);
-//        displayPicture.setFitWidth(100.0);
-//        displayPicture.setFitHeight(100.0);
-//        displayPicture.setClip(new Circle(50.0,50.0,50.0));
-//
-//        this.setAlignment(Pos.TOP_RIGHT);
-//        this.getChildren().addAll(text, displayPicture);
-//
-//        this.setPadding(new Insets(20,20,20,20));
-//
-//    }
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
@@ -73,10 +46,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns the user DialogBox which will have the user input and user's profile picture.
+     *
+     * @param l The text written by user.
+     * @param iv The profile picture of user.
+     * @return DialogBox of user's input and user's profile picture.
+     */
     public static DialogBox getUserDialog(String l, Image iv) {
         return new DialogBox(l, iv);
     }
 
+    /**
+     * Returns the duke DialogBox which will have the duke response and duke's profile picture.
+     *
+     * @param l The response of Duke.
+     * @param iv The profile picture of duke.
+     * @return DialogBox of duke's response and duke's profile picture.
+     */
     public static DialogBox getDukeDialog(String l, Image iv) {
         var db = new DialogBox(l, iv);
         db.flip();

@@ -1,3 +1,4 @@
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 
 import javafx.geometry.Insets;
@@ -13,6 +14,9 @@ import javafx.scene.layout.VBox;
 
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.util.TimerTask;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -77,12 +81,17 @@ public class MainWindow extends AnchorPane {
         try {
             if (response.equalsIgnoreCase(EXIT_MESSAGE)) {
                 duke.saveTasks();
-                Thread.sleep(300);
                 Stage stage = Stage.class.cast(VBox.class.cast(dialogContainer).getScene().getWindow());
-                stage.close();
+                closeStage(stage);
             }
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             System.exit(0);
         }
+    }
+
+    private void closeStage(Stage stage) {
+        PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
+        pauseTransition.setOnFinished(event -> stage.close());
+        pauseTransition.play();
     }
 }

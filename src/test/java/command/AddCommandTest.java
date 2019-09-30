@@ -20,13 +20,10 @@ public class AddCommandTest {
 
     @Test
     public void testAddTodoEmpty_EmptyMessage() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
         TaskList taskList = new TaskList();
         AddCommand addCommand = new AddCommand("todo");
-        addCommand.executeCommand(taskList, null);
-        assertEquals(outContent.toString(), "☹ OOPS!!! The description of a todo cannot be empty.\n");
+        String result = addCommand.executeCommand(taskList, null);
+        assertEquals(result, "☹ OOPS!!! The description of a todo cannot be empty.\n");
     }
-
 
 }

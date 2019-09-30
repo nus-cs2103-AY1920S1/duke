@@ -11,7 +11,7 @@ version '0.1.0'
 
 shadowJar {
     archiveBaseName = "ERA"
-    archiveVersion = "0.1.0"
+    archiveVersion = "1.0"
     archiveClassifier = null
     archiveAppendix = null
 }

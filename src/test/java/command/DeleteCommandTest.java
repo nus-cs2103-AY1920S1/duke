@@ -27,19 +27,17 @@ public class DeleteCommandTest {
         System.setOut(new PrintStream(outContent));
         TaskList taskList = new TaskList();
         DeleteCommand deleteCommand = new DeleteCommand("delete");
-        deleteCommand.executeCommand(taskList, null);
-        assertTrue(outContent.toString().contains("☹ OOPS!!! You cannot delete an empty entry.\n"));
+        String result = deleteCommand.executeCommand(taskList, null);
+        assertEquals(result, "☹ OOPS!!! You cannot delete an empty entry.\n");
     }
 
     @Test
     public void testDelete_Outofbound_outofboundMessage() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
         TaskList taskList = new TaskList();
         taskList.addTask(new Task("todo borrow book"));
         DeleteCommand deleteCommand = new DeleteCommand("delete 2");
-        deleteCommand.executeCommand(taskList, null);
-        assertTrue(outContent.toString().contains("☹ OOPS!!! Out of range, the task does not exist\n"));
+        String result = deleteCommand.executeCommand(taskList, null);
+        assertEquals(result, "☹ OOPS!!! Out of range, the task does not exist.\n");
     }
 
 }

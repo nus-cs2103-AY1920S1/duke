@@ -38,8 +38,12 @@ public class AddCommand extends Command {
             } else {
                 int dateStartIndex = inputCommand.lastIndexOf("/by");
                 desc = inputCommand.substring(9, dateStartIndex - 1);
-                String ddl = convertDate(inputCommand.substring(dateStartIndex + 4));
-                msg = taskList.addTask(new Deadline(desc, ddl));
+                if (inputCommand.substring(dateStartIndex + 3).isEmpty()) {
+                    msg = Ui.missingDeadlineMsg();
+                } else {
+                    String ddl = convertDate(inputCommand.substring(dateStartIndex + 4));
+                    msg = taskList.addTask(new Deadline(desc, ddl));
+                }
             }
         } else if (op.equals("event")) {
             if (inputCommand.substring(5).isEmpty()) {
@@ -49,8 +53,12 @@ public class AddCommand extends Command {
             } else {
                 int dateStartIndex = inputCommand.indexOf("/at");
                 desc = inputCommand.substring(6, dateStartIndex - 1);
-                String date = convertDate(inputCommand.substring(dateStartIndex + 4));
-                msg = taskList.addTask(new Event(desc, date));
+                if (inputCommand.substring(dateStartIndex + 3).isEmpty()) {
+                    msg = Ui.missingEventMsg();
+                } else {
+                    String date = convertDate(inputCommand.substring(dateStartIndex + 4));
+                    msg = taskList.addTask(new Event(desc, date));
+                }
             }
         } else {
             msg = Ui.unknownMsg();

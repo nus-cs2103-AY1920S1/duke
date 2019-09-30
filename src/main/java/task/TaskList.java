@@ -60,4 +60,9 @@ public class TaskList {
                 + " " + target);
     }
 
+    public String clearTasks() {
+        tasks = new ArrayList<>();
+        return ("You have cleared the taskList!\n");
+    }
+
 }

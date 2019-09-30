@@ -8,6 +8,9 @@ public abstract class Task implements Comparable<Task> {
     boolean completed;
     PriorityLevel priority;
 
+    public static final String DONE_SYMBOL = "\u2713"; // ✓ symbol
+    public static final String NOT_DONE_SYMBOL = "\u2718"; // ✘ symbol
+
     /**
      * Creates a new Task with a task description.
      *

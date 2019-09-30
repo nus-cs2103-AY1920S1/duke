@@ -35,9 +35,9 @@ public class TodoTask  extends Task {
     @Override
     public String toString() {
         if (this.completed) {
-            return "[T][✓] " + description + " " + priority.toString();
+            return "[T][" + Task.DONE_SYMBOL + "] " + description + " " + priority.toString();
         } else {
-            return "[T][✗] " + description + " " + priority.toString();
+            return "[T][" + Task.NOT_DONE_SYMBOL + "] " + description + " " + priority.toString();
         }
     }
 }

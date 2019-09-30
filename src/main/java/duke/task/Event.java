@@ -44,9 +44,13 @@ public class Event extends Task {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         if (this.completed) {
-            sb.append("[E][✓] ");
+            sb.append("[E][");
+            sb.append(Task.DONE_SYMBOL);
+            sb.append("] ");
         } else {
-            sb.append("[E][✗] ");
+            sb.append("[E][");
+            sb.append(Task.NOT_DONE_SYMBOL);
+            sb.append("] ");
         }
         sb.append(description);
         sb.append(" (");

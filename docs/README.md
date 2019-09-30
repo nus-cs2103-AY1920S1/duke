@@ -8,30 +8,30 @@ Duke is a chatbot to help you manage your tasks. Feel free to say hi!
 2. Click on the **_View on GitHub_** button at the top of this page
     
 
-    <img src="Step 2.png" alt="View on GitHub button">
+    <img src="Step 2.png" alt="View on GitHub button" align="center">
 
 3. Click on releases
 
-    <img src="Step 3.png" alt="Releases tab">
+    <img src="Step 3.png" alt="Releases tab" align="center">
 
 4. Click on **_duke-0.2.1.jar_** and wait for the file to download
 
-    <img src="Step 4.png" alt="Duke jar file on GitHub repository">
+    <img src="Step 4.png" alt="Duke jar file on GitHub repository" align="center">
 
 5. Choose to keep the file if your computer says that it might be harmful. This message will appear at the bottom left corner of the screen.
     
-    <img src="Step 5.png" alt="Harmful file message">
+    <img src="Step 5.png" alt="Harmful file message" align="center">
 
 6. Double-click on the file to run it. You may move it into another directory if you want to.
     
-    <img src="Step 6.png" alt="Duke jar file on computer">
+    <img src="Step 6.png" alt="Duke jar file on computer" align="center">
 
 7. For Mac users: If the file can't be opened because it is from an unidentified developer, right click on the file and select **_Open_**. A popup window will appear. Select **_Open_**.
     
-    <img src="Step 7.1.png" alt="Unidentified developer message">
+    <img src="Step 7.1.png" alt="Unidentified developer message" align="center">
     <p align="center">This message box may pop up</p>
 
-    <img src="Step 7.2.png" alt="Right click window for Duke jar file">
+    <img src="Step 7.2.png" alt="Right click window for Duke jar file" align="center">
     <p align="center">Right click on the jar file and select Open</p>
 
 ## Features 

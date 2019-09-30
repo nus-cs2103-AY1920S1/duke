@@ -126,7 +126,7 @@ Lists all the available commands.
 <br>
 
 ### Exiting the program: `bye`
-Exits the program.
+Disables the user input text field. The program can be closed at this point since user input is no longer allowed.
 
 <center>
     <img src="Bye.png" alt="Bye command example" align="middle">

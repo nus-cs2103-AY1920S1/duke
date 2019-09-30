@@ -36,7 +36,7 @@ public class DukeDateStub extends DukeDate {
      * @return String form of this stub.
      */
     @Override
-    public String format() {
+    public String format(boolean shouldTrim) {
         DecimalFormat df = new DecimalFormat("00");
         return String.format("%d/%d/%d, %d:%s",
                 this.day,

@@ -25,7 +25,7 @@ class DeadlineTaskTest {
                 false,
                 dds);
 
-        assertEquals(dds.format(), dt.getDateAsString());
+        assertEquals(dds.format(false), dt.getDateAsString());
     }
 
     @Test
@@ -35,7 +35,7 @@ class DeadlineTaskTest {
                 false,
                 dds);
 
-        String expected = String.format("[D][✘] essay 1 (by: %s)", dds.format());
+        String expected = String.format("[D][✘] essay 1 (by: %s)", dds.format(false));
         assertEquals(expected, dt.getStatus());
     }
 }

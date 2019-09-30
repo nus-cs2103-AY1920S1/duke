@@ -2,6 +2,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.InputMismatchException;
 
@@ -38,6 +39,10 @@ public class Deadline extends Task {
             LocalTime time = LocalTime.parse(dateTime[1], DateTimeFormatter.ofPattern("HHmm"));
             return new Deadline(desc, date, time);
 
+        } catch (DateTimeParseException e) {
+            throw new DukeIllegalArgumentException("The input for Deadline is invalid. "
+                    + "Please ensure you input <description>, <Date> in d/MM/yyyy format, "
+                    + "and <Time> in HHmm format.");
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeIllegalArgumentException("The description of a Deadline cannot be empty.");
 

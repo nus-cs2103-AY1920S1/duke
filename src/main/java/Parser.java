@@ -17,30 +17,35 @@ public class Parser {
             assert command.length() != 0 : "user input command is blank";
             String[] cmdList = command.split(" ");
             String keyword = cmdList[0];
-
-            if (keyword.equalsIgnoreCase("bye")) {
+            switch (keyword.toLowerCase()) {
+            case "bye":
                 return new ExitCommand();
-            } else if (keyword.equalsIgnoreCase("find")) {
+
+            case "find":
                 String taskToFind = cmdList[1];
                 return new FindCommand(taskToFind);
-            } else if (keyword.equalsIgnoreCase("list")) {
+
+            case "list":
                 return new ListCommand();
 
-            } else if (keyword.equalsIgnoreCase("done")) {
+            case "done":
                 int idxToMarkAsDone = Integer.parseInt(cmdList[1]) - 1;
                 return new DoneCommand(idxToMarkAsDone);
 
-            } else if (keyword.equalsIgnoreCase("delete")) {
+            case "delete":
                 int idxToBeRemoved = Integer.parseInt(cmdList[1]) - 1;
                 return new DeleteCommand(idxToBeRemoved);
 
-            } else { //it will be an AddCommand or an invalid command
+            case "update":
+                int idxToUpdate = Integer.parseInt(cmdList[1]) - 1;
+                return new UpdateCommand(idxToUpdate, command.substring(9).trim());
+
+            default:  //it will be an AddCommand or an invalid command
                 Task taskToBeAdded = handleNewTask(keyword, command);
                 return new AddCommand(taskToBeAdded);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeIllegalArgumentException("Invalid input. Please minimally input a <keyword>, <description>, "
-                    + "and a <date> and <time> if required");
+            throw new DukeIllegalArgumentException("Invalid input. Please ensure input format is correct.");
         } catch (NumberFormatException e) {
             throw new DukeIllegalArgumentException("User input is not a number.");
 
@@ -55,17 +60,19 @@ public class Parser {
      * @return the Task object based on keyword.
      * @throws DukeIllegalArgumentException if user input does not match any Task keywords.
      */
-    private static Task handleNewTask(String keyword, String cmd) throws DukeIllegalArgumentException {
-        if (keyword.equalsIgnoreCase("deadline")) {
+    public static Task handleNewTask(String keyword, String cmd) throws DukeIllegalArgumentException {
+
+        switch (keyword.toLowerCase()) {
+        case "deadline":
             return Deadline.genDeadlineTask(cmd);
 
-        } else if (keyword.equalsIgnoreCase("event")) {
+        case "event":
             return Event.genEventTask(cmd);
 
-        } else if (keyword.equalsIgnoreCase("todo")) {
+        case "todo":
             return Todo.genTodoTask(cmd);
 
-        } else {
+        default:
             throw new DukeIllegalArgumentException("I'm sorry, but I don't know what that means :-(");
         }
     }

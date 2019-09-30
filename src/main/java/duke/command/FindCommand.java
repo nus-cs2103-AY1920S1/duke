@@ -3,6 +3,7 @@ package duke.command;
 import duke.task.TaskList;
 import duke.util.Storage;
 import duke.util.Ui;
+import duke.util.UiMessage;
 import duke.util.exception.DukeException;
 import duke.util.exception.ExceptionType;
 import java.util.InputMismatchException;
@@ -39,6 +40,7 @@ public class FindCommand implements Command {
             if (matchingTasks.isEmpty()) {
                 throw new DukeException(ExceptionType.NO_MATCHING_TASKS);
             } else {
+                ui.showMessage(UiMessage.MATCHING_TASKS);
                 ui.showTasks(matchingTasks);
             }
         } catch (InputMismatchException e) {

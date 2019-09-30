@@ -28,7 +28,7 @@ public class DoneCommand extends ModifyTaskCommand {
         Task task = getTaskById(tasks);
         task.markAsDone();
 
-        String message = UiMessage.TASK_DONE.getMessage() + " " + task.toString();
+        String message = UiMessage.TASK_DONE.getMessage() + task.toString();
         ui.showMessage(message);
     }
 }

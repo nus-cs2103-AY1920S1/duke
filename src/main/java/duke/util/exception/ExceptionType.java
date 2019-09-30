@@ -17,7 +17,7 @@ public enum ExceptionType {
     TAG_BLANK("Oops! You did not enter a tag!"),
     // nothing to return
     NO_MATCHING_TASKS("There are no tasks matching your query :("),
-    TASK_LIST_EMPTY("The task list is empty."),;
+    TASK_LIST_EMPTY("The task list is empty.");
 
     private final String message;
 

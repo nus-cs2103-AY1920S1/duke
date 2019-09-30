@@ -31,6 +31,7 @@ public class TaskList implements Serializable {
      * @return ArrayList containing the tasks in the TaskList.
      */
     public ArrayList<Task> getTasks() {
+        assert this.tasks != null;
         return this.tasks;
     }
 
@@ -48,6 +49,7 @@ public class TaskList implements Serializable {
      */
     public void add(Task task) {
         tasks.add(task);
+        assert !this.isEmpty();
     }
 
     /**
@@ -68,6 +70,9 @@ public class TaskList implements Serializable {
      * @return ID of the given task.
      */
     public int getId(Task task) {
+        int id = this.tasks.indexOf(task) + 1;
+        // getId should only ever be called on tasks that are present in the list
+        assert id > 1;
         return this.tasks.indexOf(task) + 1;
     }
 
@@ -91,6 +96,7 @@ public class TaskList implements Serializable {
      * @param taskToDelete Task to be deleted from the TaskList.
      */
     public void deleteTask(Task taskToDelete) {
+        assert tasks.contains(taskToDelete);
         tasks.remove(taskToDelete);
     }
 
@@ -100,7 +106,7 @@ public class TaskList implements Serializable {
      * @return TaskList containing tasks that match the given keyword.
      */
     public TaskList findTasks(String keyword) {
-        // todo: is it possible to implement without creating temporary TaskList object?
+        // is it possible to implement without creating temporary TaskList object?
         // so that the numbering of the tasks based on the original list can be preserved
         TaskList matchingTasks = new TaskList();
         for (Task task : tasks) {

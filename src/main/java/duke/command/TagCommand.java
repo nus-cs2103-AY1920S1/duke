@@ -34,7 +34,7 @@ public class TagCommand extends ModifyTaskCommand {
 
             // if ok, add tag to task
             task.addTag(tag);
-            String message = UiMessage.TASK_TAGGED.getMessage() + " " + task.toString();
+            String message = UiMessage.TASK_TAGGED.getMessage() + task.toString();
             ui.showMessage(message);
         } catch (NoSuchElementException e) {
             // user input after taskId is blank

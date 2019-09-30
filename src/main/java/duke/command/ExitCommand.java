@@ -18,6 +18,8 @@ public class ExitCommand implements Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        // todo: in future, "lock down" ui and actually exit Duke when this command is called?
+        // todo: call this command when the "close" button is pressed by user
         storage.save(tasks);
         ui.showMessage(UiMessage.GOODBYE);
     }

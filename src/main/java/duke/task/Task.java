@@ -26,9 +26,11 @@ public abstract class Task implements Serializable {
      */
     @Override
     public String toString() {
-        String type = "[" + this.type.getTaskTypeInitial() + "] ";
+        String typeInitial = "[" + this.type.getTaskTypeInitial() + "] ";
         String status = "[" + this.getStatusIcon() + "] ";
-        String toString = type + status + this.description;
+
+        assert this.description != null;
+        String toString = typeInitial + status + this.description;
 
         if (this.hasTag()) {
             toString = toString + " (tag: " + this.getTag() + ")";
@@ -75,11 +77,7 @@ public abstract class Task implements Serializable {
     }
 
     private boolean hasTag() {
-        if (this.getTag() == null) {
-            return false;
-        } else {
-            return true;
-        }
+        return this.getTag() != null;
     }
 
     /**

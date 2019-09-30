@@ -3,6 +3,7 @@ package duke.command;
 import duke.task.TaskList;
 import duke.util.Storage;
 import duke.util.Ui;
+import duke.util.UiMessage;
 import duke.util.exception.DukeException;
 import duke.util.exception.ExceptionType;
 
@@ -20,6 +21,7 @@ public class ListCommand implements Command {
         if (tasks.isEmpty()) {
             throw new DukeException(ExceptionType.TASK_LIST_EMPTY);
         }
+        ui.showMessage(UiMessage.TASK_LIST);
         ui.showTasks(tasks);
     }
 }

@@ -17,7 +17,9 @@ public class AddDeadlineCommand extends AddTaskCommand {
 
     @Override
     public Task createTask() throws DukeException {
-        // todo: add assertion here
+        assert this.getDescription() != null;
+        assert this.getDeadlineString() != null;
+
         return new DeadlineTask(getDescription(), getDeadlineString());
     }
 }

@@ -41,7 +41,7 @@ public class PriorityCommand extends ModifyTaskCommand {
 
             // todo: handle invalid priority string (currently, it just removes priority since null)
 
-            String message = UiMessage.TASK_PRIORITISED.getMessage() + " " + task.toString();
+            String message = UiMessage.TASK_PRIORITISED.getMessage() + task.toString();
             ui.showMessage(message);
         } catch (NoSuchElementException e) {
             // user input after taskId is blank

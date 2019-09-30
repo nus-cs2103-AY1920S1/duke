@@ -54,7 +54,7 @@ public class Storage {
             ois.close();
             fis.close();
 
-            String message = UiMessage.TASKS_IMPORTED.getMessage() + " " + this.filePath;
+            String message = UiMessage.TASKS_IMPORTED.getMessage() + this.filePath;
             ui.showMessage(message);
         } catch (Exception e) {
             // temporary haxx
@@ -80,7 +80,7 @@ public class Storage {
             oos.close();
             fos.close();
 
-            String message = UiMessage.TASKS_SAVED.getMessage() + " " + this.filePath;
+            String message = UiMessage.TASKS_SAVED.getMessage() + this.filePath;
             ui.showMessage(message);
         } catch (Exception e) {
             // temporary haxx

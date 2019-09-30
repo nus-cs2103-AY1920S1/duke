@@ -71,7 +71,6 @@ public class Gui implements Ui {
 
     @Override
     public void showTasks(TaskList tasks) {
-        showMessage(UiMessage.MATCHING_TASKS);
         ArrayList<Task> listOfTasks = tasks.getTasks();
         for (Task task : listOfTasks) {
             showTask(task, tasks);

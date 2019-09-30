@@ -113,6 +113,11 @@ public class Ui {
             }
         }
         // Update response
+        updateResponse(listOfTasks, isFound);
+        return getResponseDirect();
+    }
+
+    private void updateResponse(String listOfTasks, boolean isFound) {
         if (isFound) {
             int index = listOfTasks.lastIndexOf("\n     ");
             if (index > 0) {
@@ -122,6 +127,5 @@ public class Ui {
         } else {
             this.response = "\u2639 OOPS!!! There is no matching tasks in your list.";
         }
-        return getResponseDirect();
     }
 }

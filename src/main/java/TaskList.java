@@ -182,6 +182,11 @@ public class TaskList {
     public String generateInfo() {
 
         String taskFile = "";
+        taskFile = getTimeRefact(taskFile);
+        return taskFile;
+    }
+
+    private String getTimeRefact(String taskFile) {
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             String current;

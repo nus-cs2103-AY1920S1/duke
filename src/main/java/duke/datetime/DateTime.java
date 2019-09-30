@@ -1,5 +1,8 @@
 package duke.datetime;
 
+/**
+ * Stores Date, Month, Year and Time of an associated Task.
+ */
 public class DateTime {
     private final int day;
     private final int month;
@@ -8,6 +11,14 @@ public class DateTime {
     private final String dateTimeString;
     private String dateTimePrintFormat;
 
+    /**
+     * Represents the Date and Time of an associated Task object.
+     * @param day day of the Task
+     * @param month month of the Task
+     * @param year year of the Task
+     * @param time time of the Task(24 hr format)
+     * @param dateTimeString unprocessed String representing Date and Time
+     */
     public DateTime(int day, int month, int year, int time, String dateTimeString) {
         this.day = day;
         this.month = month;
@@ -16,6 +27,11 @@ public class DateTime {
         this.dateTimeString = dateTimeString;
     }
 
+    /**
+     * Converts DateTime object to a String representing the format for the Date and Time to be stored
+     * in a save file.
+     * @return DateTime object in save format
+     */
     public String toSaveFormat() {
         return dateTimeString;
     }

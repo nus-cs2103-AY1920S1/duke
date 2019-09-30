@@ -2,7 +2,7 @@
 
 This user guide contains instructions on how to enter commands to Duke. Duke provides both Command Line Interface (CLI) as well as Graphic User Interface (GUI). Command keywords and format are the same for both interfaces and introduced below.
 
-*Note: The current version of Duke only supports GUI input.*
+>*Note: The current version of Duke only supports GUI input/output.*
 
 ## Features 
 
@@ -187,13 +187,6 @@ Example of usage:
 
 `bye`
 
-Expected outcome:
-
-```
->>Goodbye. Hope to see you again UwU
-- Program exits -
-```
-
 Expected outcome in GUI:
 
 ```
@@ -201,3 +194,9 @@ Goodbye. This window will close soon. Hope to see you again UwU
 - Window closes and program exits after short delay -
 ```
 
+Expected outcome in CLI:
+
+```
+>>Goodbye. Hope to see you again UwU
+- Program exits -
+```

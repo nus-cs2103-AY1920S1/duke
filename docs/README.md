@@ -1,5 +1,15 @@
 # User Guide
 
+## Who is Larry the Cucumber?
+Taken from the VeggieTales series of TV shows, Larry the Cucumber is a cucumber. He's one of the main protagonists of
+the show and is Bob the Tomato's best friend. Together, they mostly serve as co-hosts, although they double up as actors
+too.
+
+Larry is best known for his witty series 'Silly songs with Larry' which has frequently been memed and circulated around
+the internet.
+
+![Image of Larry the Cucumber bot](Ui.png)
+
 ## Features 
 
 #### Help

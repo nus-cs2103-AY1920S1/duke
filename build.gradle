@@ -59,4 +59,3 @@ shadowJar {
     archiveClassifier = null
     archiveAppendix = null
 }
-

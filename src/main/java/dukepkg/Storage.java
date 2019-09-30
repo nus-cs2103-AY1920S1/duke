@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import dukepkg.Ui;
 
 /**
  * The Storage object used to save and retrieve task list data.

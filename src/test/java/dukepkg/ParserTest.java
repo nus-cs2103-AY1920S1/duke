@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static dukepkg.Parser.formatTime;
 
-public class ParserTest {
+class ParserTest {
     @Test
     public void formatTimeTest(){
         Assertions.assertEquals("12nd of November 2019, 2pm", formatTime("12/11/2019 1400"));

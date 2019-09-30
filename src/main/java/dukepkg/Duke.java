@@ -29,7 +29,7 @@ public class Duke {
     }
 
     private void run() {
-        ui.showGreeting();
+        Ui.showGreeting();
         boolean isExit = false;
         while(true){
             if(isExit) {

@@ -9,7 +9,7 @@ public abstract class Command {
     /**
      * The flag to check whether the command leads to a shutdown of system.
      */
-    protected boolean isExit = false;
+    boolean isExit = false;
 
     /**
      * Parses the input line as a command to modify existing tasks.
@@ -36,18 +36,19 @@ public abstract class Command {
     public static Command getAddTaskCommand(String[] arr) throws FormatException {
         Task t = new Todo(arr[1]);
         if (!arr[0].equals("todo")) {
-            if(arr[0].equals("deadline")) {
-                Parser.validateDeadlineFormat(arr);
-                t = Parser.standardizeDeadlineTime(arr);
-                return new DeadlineCommand(t);
-            } else if(arr[0].equals("event")){
-                Parser.validateEventFormat(arr);
-                t = Parser.standardizeEventTime(arr);
-                return new EventCommand(t);
-            } else if (arr[0].equals("time")) {
-                Parser.validateTimeFormat(arr);
-                t = Parser.constructTimeCommand(arr);
-                return new TimeCommand(t);
+            switch (arr[0]) {
+                case "deadline":
+                    Parser.validateDeadlineFormat(arr);
+                    t = Parser.standardizeDeadlineTime(arr);
+                    return new DeadlineCommand(t);
+                case "event":
+                    Parser.validateEventFormat(arr);
+                    t = Parser.standardizeEventTime(arr);
+                    return new EventCommand(t);
+                case "time":
+                    Parser.validateTimeFormat(arr);
+                    t = Parser.constructTimeCommand(arr);
+                    return new TimeCommand(t);
             }
         } else {
             return new TodoCommand(t);

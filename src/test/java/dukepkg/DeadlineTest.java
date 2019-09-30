@@ -3,7 +3,7 @@ package dukepkg;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class DeadlineTest {
+class DeadlineTest {
     @Test
     public void constructorTest(){
         Deadline d1 = new Deadline("finish 3230", "tmr");

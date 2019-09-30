@@ -6,7 +6,7 @@ import javafx.application.Application;
 /**
  * The type Launcher.
  */
-public class Launcher {
+class Launcher {
 
     /**
      * The entry point of application.

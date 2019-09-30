@@ -25,10 +25,9 @@ public class Ui {
      * Shows loading error of files.
      *
      * @param e the error message.
-     * @return the string
      */
-    public static String showLoadingError(FileNotFoundException e) {
-        return "Did you created the file for task storage? " + e.getMessage() + "\n";
+    public static void showLoadingError(FileNotFoundException e) {
+        e.getMessage();
     }
 
     /**
@@ -41,14 +40,14 @@ public class Ui {
         if (tasks.size() == 0) {
             return "Your task list is empty.";
         }
-        String str = "Here are the tasks in your list:\n";
+        StringBuilder str = new StringBuilder("Here are the tasks in your list:\n");
         int counter = 0;
         assert(tasks.size() != 0);
         for (Task t : tasks) {
             counter++;
-            str += counter + ". " + t.toString() + "\n";
+            str.append(counter).append(". ").append(t.toString()).append("\n");
         }
-        return str;
+        return str.toString();
     }
 
     /**
@@ -67,9 +66,8 @@ public class Ui {
      * @return the string
      */
     public String showTaskDonePrompt(Task t) {
-        String prompt = "Nice! I've marked this task as done:\n" +
+        return "Nice! I've marked this task as done:\n" +
                 "    " + t.toString() + "\n";
-        return prompt;
     }
 
     /**
@@ -80,10 +78,9 @@ public class Ui {
      * @return the string
      */
     public String showTaskDeletedPrompt(Task t, int size) {
-        String prompt = "Noted. I've removed this task:\n" +
+        return "Noted. I've removed this task:\n" +
                 "    " + t.toString() + "\n" +
                 "Now you have " + size + (size == 1 ? " task" : " tasks") + " in the list.\n";
-        return prompt;
     }
 
     /**
@@ -94,10 +91,9 @@ public class Ui {
      * @return the string
      */
     public String showAddedTaskPrompt(ArrayList<Task> tasks, Task t) {
-        String output = "Got it. I've added this task:\n" +
+        return "Got it. I've added this task:\n" +
                 "    " + t.toString() + "\n" +
                 "Now you have " + tasks.size() + (tasks.size() == 1 ? " task " : " tasks ") + "in the list. \n";
-        return output;
     }
 
     /**
@@ -116,9 +112,8 @@ public class Ui {
      * @return the string
      */
     public static String showGreeting() {
-        String greeting = "Hello! I'm Tsuki, your personal task manager.\n" +
+        return "Hello! I'm Tsuki, your personal task manager.\n" +
                 "What can I do for you?\n";
-        return greeting;
     }
 
     /**
@@ -152,13 +147,13 @@ public class Ui {
      * @return the string
      */
     public String showMatchingTask(ArrayList<Task> selected) {
-        String str = "Here are the matching tasks in your list: \n";
+        StringBuilder str = new StringBuilder("Here are the matching tasks in your list: \n");
         int counter = 0;
         for(Task s : selected) {
             counter ++;
-            str += counter + "." + s.toString() + "\n";
+            str.append(counter).append(".").append(s.toString()).append("\n");
         }
-        return str;
+        return str.toString();
     }
 
     /**
@@ -174,7 +169,7 @@ public class Ui {
         return "Here is the list of available commands:\n" +
                 "Add task - todo <task>\n" +
                 "Add timed task - time <task> <duration>\n" +
-                "Add event - event <task> /at <time>\n " +
+                "Add event - event <task> /at <time>\n" +
                 "Add deadline - deadline <task> /by <time> \n" +
                 "Mark task as done - done <task_id>\n" +
                 "Delete task - delete <task_id>\n" +

@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private static final String FILE_PATH = "src/main/java/duke/data/tasks.txt";
+    private static final String FILE_PATH = "tasks.txt";
     private Duke duke = new Duke(FILE_PATH);
 
     /**

@@ -106,7 +106,7 @@ public class Parser {
     }
 
     public static String parseFileEntryTaskType(String fileEntry) {
-        return fileEntry.split("\\|")[0];
+        return fileEntry.split("\\|")[0].trim();
     }
 
     /**
@@ -116,7 +116,7 @@ public class Parser {
      * @return Task description.
      */
     public static String parseFileEntryTaskDescription(String fileEntry) {
-        return fileEntry.split("\\|")[1];
+        return fileEntry.split("\\|")[1].trim();
     }
 
     /**
@@ -126,7 +126,7 @@ public class Parser {
      * @return Task date.
      */
     public static LocalDateTime parseFileEntryTaskDate(String fileEntry) {
-        String rawDate = fileEntry.split("\\|")[2];
+        String rawDate = fileEntry.split("\\|")[2].trim();
         return LocalDateTime.parse(rawDate, formatter);
     }
 

@@ -1,8 +1,9 @@
 package duke.util.gui;
 
-import static duke.util.gui.DialogBox.getDukeDialog;
-import static duke.util.gui.DialogBox.getUserDialog;
+import static duke.util.gui.messagebox.MessageBox.getDukeDialog;
+import static duke.util.gui.messagebox.MessageBox.getUserDialog;
 
+import duke.util.gui.messagebox.MessageBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -25,12 +26,17 @@ public class MainWindow extends AnchorPane {
 
     private GuiDuke duke;
 
+    /** Represents the colour scheme in use for the GUI. Hardcoded as MINT for now. */
+    private ColourScheme colourScheme = ColourScheme.MINT;
+
     //private Image userImage = new Image(this.getClass().getResourceAsStream("/images/kawaii_robot.png"));
     //private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/kawaii_robot_power.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        // todo: investigate why setting the scrollPane's background colour does not work
+        scrollPane.setStyle("-fx-background-color: " + colourScheme.getDukeLightColour());
     }
 
     public void setDuke(GuiDuke d) {
@@ -45,7 +51,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         // get and display user input
         String input = userInput.getText();
-        DialogBox inputDialog = getUserDialog(input);
+        MessageBox inputDialog = getUserDialog(input, this.colourScheme);
         dialogContainer.getChildren().add(inputDialog);
 
         // clear user input field
@@ -53,7 +59,7 @@ public class MainWindow extends AnchorPane {
 
         // get and display output from Duke
         String response = duke.getResponse(input);
-        DialogBox outputDialog = getDukeDialog(response);
+        MessageBox outputDialog = getDukeDialog(response, this.colourScheme);
         dialogContainer.getChildren().add(outputDialog);
     }
 

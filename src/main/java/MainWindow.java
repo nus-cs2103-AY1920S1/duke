@@ -88,7 +88,7 @@ public class MainWindow extends AnchorPane {
     public void setFirstDialog(Duke duke) {
         this.setDuke(duke);
         Ui ui = new Ui();
-        DialogBox welcomeDialog = DialogBox.createDialog(ui.showWelcome(), dukeImage);
+        DialogBox welcomeDialog = DialogBox.getDukeDialog(ui.showWelcome(), dukeImage);
         dialogContainer.getChildren().addAll(welcomeDialog);
     }
 }

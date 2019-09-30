@@ -1,0 +1,4 @@
+T | 1 |  read
+T | 0 |  work
+T | 0 |  project
+T | 0 |  read

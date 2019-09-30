@@ -4,7 +4,7 @@ Duke is a chatbot to help you manage your tasks. Feel free to say hi!
 
 ## Getting Started
 1. Make sure that you have Java 11 (or later) installed on your computer.
-2. Click on the **View on GitHub button at the top of this page**
+2. Click on the **View on GitHub button** at the top of this page
 3. Click on releases
 4. Click on duke-0.2.1.jar and wait for the file to download
 5. Choose to keep the file if your computer says that it might be harmful

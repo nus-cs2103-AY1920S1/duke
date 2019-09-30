@@ -1,3 +1,11 @@
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+
 import commands.DukeException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -18,14 +26,6 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -163,8 +163,10 @@ public class MainWindow extends BorderPane {
         final TextFlow help = makeCommand("help", "Shows this window.");
         final TextFlow importNoOver = makeCommand("import", "Opens file selector for importing w/o overwrite");
         final TextFlow importOver = makeCommand("overwrite", "Opens file selector for importing with overwrite");
-        final TextFlow find = makeCommand("find <keyword>", "Returns a list of tasks that contain the keyword");
-        final TextFlow event = makeCommand("event <name> /at <dd/mm/yyyy hhmm>", "Creates an event that starts at the given time.");
+        final TextFlow find = makeCommand("find <keyword>",
+                "Returns a list of tasks that contain the keyword");
+        final TextFlow event = makeCommand("event <name> /at <dd/mm/yyyy hhmm>",
+                "Creates an event that starts at the given time.");
         final TextFlow deleteAll = makeCommand("deleteAll", "Delete all tasks.");
         Text glossary = new Text();
         glossary.setUnderline(true);

@@ -1,10 +1,16 @@
 package expenses;
 
-import commands.DukeException;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import commands.DukeException;
 
 public class ExpensesStorage {
     private String filepath;
@@ -14,13 +20,19 @@ public class ExpensesStorage {
     }
 
     /**
-     * Overwrites entire file with current items
+     * Overwrites entire file with current items.
      */
     public void save(ArrayList<Item> credit, ArrayList<Item> debit) throws DukeException {
         //First delete the old file
         File file = new File(filepath);
         if (file.exists()) {
             file.delete();
+        } else {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new DukeException("I could not initialise a new file to save your tasks :(");
+            }
         }
 
         try (FileOutputStream fout = new FileOutputStream(filepath);

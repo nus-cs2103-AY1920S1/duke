@@ -1,7 +1,5 @@
 package components;
 
-import commands.*;
-
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,6 +7,24 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import commands.AddDeadlineCommand;
+import commands.AddEventCommand;
+import commands.AddTodoCommand;
+import commands.Command;
+import commands.DeleteAllCompletedCommand;
+import commands.DeleteAllTasksCommand;
+import commands.DeleteCommand;
+import commands.DisplayTasksCommand;
+import commands.DoneTaskCommand;
+import commands.DukeException;
+import commands.EndSessionCommand;
+import commands.FindTasksByKeywordCommand;
+import commands.PrintUserInputErrorCommand;
+import commands.UnrecognisedInputCommand;
+
+/**
+ * Parses all commands.
+ */
 public class Parser {
     private static SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
@@ -20,9 +36,10 @@ public class Parser {
     }
 
     /**
+     * The actual parsing method.
      * @param fullCommand the name of the string
      * @return a Command to execute
-     * @throws DukeException
+     * @throws DukeException thrown if keyword given is not recognised.
      */
     public static Command parse(String fullCommand) throws DukeException {
         Scanner sc = new Scanner(fullCommand);
@@ -47,7 +64,8 @@ public class Parser {
                 return new PrintUserInputErrorCommand("OOPS!!! The description of a todo cannot be empty.");
             }
         case "deadline":
-            String deadline = "", taskName = "";
+            String deadline = "";
+            String taskName = "";
             if (sc.hasNext()) {
                 while (sc.hasNext()) {
                     String s = sc.next();

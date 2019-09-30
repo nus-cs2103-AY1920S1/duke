@@ -1,3 +1,4 @@
+import commands.DukeException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,7 +12,10 @@ import java.io.IOException;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    private Duke duke = new Duke("/src/data/duke.txt");
+    private Duke duke = new Duke("duke.txt");
+
+    public Main() throws DukeException {
+    }
 
     @Override
     public void start(Stage stage) {

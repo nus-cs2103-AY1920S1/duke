@@ -8,6 +8,7 @@ import components.TaskList;
  */
 public interface Command {
     /**
+     * Executes the command.
      * @param storage  refers to the Storage instance. This object allows any commands that edit the Tasklist to save
      *                 changes onto file.
      * @param taskList refers to the TaskList instance. This object allows the list of items to change.

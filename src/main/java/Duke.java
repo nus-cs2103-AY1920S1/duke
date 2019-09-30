@@ -16,7 +16,7 @@ public class Duke {
      *
      * @param filepath refers to where items should be kept in memory.
      */
-    Duke(String filepath) {
+    Duke(String filepath) throws DukeException {
         storage = new Storage(filepath);
         try {
             taskList = new TaskList(storage.load());

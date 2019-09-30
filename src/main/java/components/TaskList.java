@@ -53,7 +53,7 @@ public class TaskList {
      * Delete a batch of tasks.
      * @param indicesToDeleteAt containing all the indices of the tasks to delete.
      * @return an arraylist of deleted tasks.
-     * @throws DukeException
+     * @throws DukeException exception.
      */
     public ArrayList<Task> batchDelete(ArrayList<Integer> indicesToDeleteAt) throws DukeException {
         try {
@@ -134,8 +134,8 @@ public class TaskList {
     }
 
     /**
-     * Finds all tasks that match a keyword
-     * @param str
+     * Finds all tasks that match a keyword.
+     * @param str keyword to find.
      * @return a String array of these tasks
      */
     public String[] findTaskByKeywordAndPrintList(String str) {

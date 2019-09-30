@@ -13,7 +13,7 @@ public class TrackingService {
     }
 
     /**
-     * Returns a single instance of the tracking service.
+     * Returns a single instance of the tracking service. Similar function to an Angular service.
      * @return the singleton
      */
     public static TrackingService getTrackingService() {

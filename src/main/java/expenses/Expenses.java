@@ -34,10 +34,10 @@ public class Expenses {
     }
 
     /**
-     *
-     * @param title
-     * @param amount
-     * @param isCredit
+     * Add an item.
+     * @param title the name of the item.
+     * @param amount the amount.
+     * @param isCredit whether this item was an income or expense.
      */
     public void add(String title, double amount, boolean isCredit) {
         if (isCredit) {
@@ -49,6 +49,12 @@ public class Expenses {
         }
     }
 
+    /**
+     * Remove an item.
+     * @param index which index no.
+     * @param isCredit whether the item is from the credit/debit column.
+     * @throws DukeException thrown if index is out of range.
+     */
     public void remove(int index, boolean isCredit) throws DukeException {
         try {
             if (isCredit) {

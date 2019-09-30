@@ -12,9 +12,9 @@ public class DeleteCommand implements Command {
     private ArrayList<Integer> indices = new ArrayList<>();
 
     /**
-     * A command to delete dynamically
-     * @param restOfLine
-     * @throws DukeException
+     * A command to delete dynamically.
+     * @param restOfLine the part of the line after the delete keyword.
+     * @throws DukeException thrown if number range is invalid.
      */
     public DeleteCommand(String restOfLine) throws DukeException {
         //should parse "2-3,5-7,10,15" as [1,2,4,5,6,9,14] -> expand the hyphen and --1 from each

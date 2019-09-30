@@ -43,7 +43,18 @@ Too many deadlines at your back? Have yourself a dose of calm by postponing non-
 <img src="snooze_tasks.PNG" width="400">
 
 ## Commands
-// todo: insert list of commands here
+1. [todo](#todo)
+2. [deadline](#deadline)
+3. [event](#event)
+4. [list](#list)
+5. [save](#save)
+6. [done](#done)
+7. [delete](#delete)
+8. [tag](#tag)
+9. [priority](#priority)
+10. [find](#find)
+11. [snooze](#snooze)
+12. [bye](#bye)
 
 ### `todo`
 Creates a new todo.
@@ -99,7 +110,6 @@ Saves the tasks in the task list to the disk.
 
 **Expected outcome:** The current state of the task list is saved to the disk.
 
-
 ### `done`
 Marks the task as complete.
 
@@ -121,8 +131,48 @@ Deletes the task.
 ### `tag`
 Adds a tag to a task.
 
-Usage: `tag [taskId] [tag]`
+**Usage:** `tag [taskId] [tag]`
 
-Parameters:
+**Parameters:**
 `[taskId]` ID of the task in the list (required). Use `list` to get this, if need be.
 `[tag]` Tag to be added to the task.
+
+**Expected outcome:** The tag is added to the task.
+
+### `priority`
+Adds a priority to a task.
+
+**Usage:** `priority [taskId] [priority]`
+
+**Parameters:**
+`[taskId]` ID of the task in the list (required). Use `list` to get this, if need be.
+`[priority]` Priority to be added to the task. Can be `low`, `medium` or `high`.
+
+**Expected outcome:** The tag is added to the task.
+
+### `find`
+Find tasks matching a query.
+
+**Usage:** `find [keyword]`
+
+**Parameters:**
+`[keyword]` Keyword to be used in searching for tasks.
+
+**Expected outcome:** Displays the list of tasks matching the query, if any.
+
+### `snooze`
+Snoozes a given task. That is, postpones its deadline by one day.
+
+**Usage:** `snooze [taskId]`
+
+**Parameters:**
+`[taskId]` ID of the task in the list (required). Use `list` to get this, if need be.
+
+**Expected outcome:** The deadline (of tasks with deadlines) or time (of events) is postponed by one day.
+
+### `bye`
+Saves the tasks in the task list to the disk, then exits Dose.
+
+**Usage:** `bye`
+
+**Expected outcome:** The current state of the task list is saved to the disk. Duke can be safely exited.

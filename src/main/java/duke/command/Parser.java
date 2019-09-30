@@ -216,7 +216,7 @@ public class Parser {
         String message = "Here is the list of commands for Duke:\n";
         message = message + "- todo <description>\n";
         message = message + "- event <description> /at dd/mm/yyyy hh:mm\n";
-        message = message + "- deadline <description> /by dd/mm/yyyy h:mm\n";
+        message = message + "- deadline <description> /by dd/mm/yyyy hh:mm\n";
         message = message + "- done <Index> - mark the task at the given Index in the list as done\n";
         message = message + "- delete <Index> - delete the task at the given index from list\n";
         message = message + "- find <word that matches the task description>\n";

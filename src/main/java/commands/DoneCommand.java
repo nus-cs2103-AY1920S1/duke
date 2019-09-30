@@ -18,7 +18,7 @@ public class DoneCommand extends Command {
         try {
             return taskList.markAsDone(Integer.parseInt(command[1]), storage);
         } catch (NumberFormatException e) {
-            throw new DukeException("☹ OOPS!!! The completed task's index must be a number.");
+            throw new DukeException("OOPS!!! The completed task's index must be a number.");
         }
     }
 

@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class FindCommand extends Command {
+
     String keywordToFind;
 
     /**

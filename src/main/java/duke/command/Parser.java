@@ -75,7 +75,7 @@ public class Parser {
             message = ui.printByeMessage();
         } else if (firstWord.equals("find")) {
             String item = input.split(" ")[1];
-            message = processFindWithStream(item, this.taskList, this.storage);
+            message = processFindWithStream(item, this.taskList);
         } else if (firstWord.equals("sort")) {
             message = processSortList(this.taskList, this.storage);
         } else if (firstWord.equals("help")) {
@@ -86,6 +86,14 @@ public class Parser {
         return message;
     }
 
+    /**
+     * Mark task as done.
+     * @param input String that contains the index of the task to be marked as done.
+     * @param taskList TaskList object that contains the list of task in which the task is located.
+     * @param storage storage to update the file after updating the task in the taskList.
+     * @return String to inform user if the task has been marked as done.
+     * @throws IOException Occurs when there is a problem in updating the file.
+     */
     public String processTaskDone(String input, TaskList taskList, Storage storage) throws IOException {
         Integer taskNum = Integer.valueOf(input.substring(5));
         Task currTask = taskList.getTask(taskNum - 1);
@@ -94,6 +102,15 @@ public class Parser {
         return ui.printTaskDone(currTask);
     }
 
+    /**
+     * Parse the given input into task todo and add it to the given taskList and update the file using the given storage.
+     * @param input String to be parsed into task todo.
+     * @param taskList TaskList object that contains the list of task in which the task is to be added.
+     * @param storage storage that is responsible for updating the file after addition of the task to taskList.
+     * @param set HashSet that contains the tasks in the list to check for duplicate task.
+     * @return String to inform user that the task has been added to the list of tasks.
+     * @throws IOException Occurs when there is a problem in updating the list.
+     */
     public String processTaskTodo(String input, TaskList taskList, Storage storage, HashSet<Task> set) throws DukeException, IOException {
         if (input.length() == 4) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
@@ -110,6 +127,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse the given input into task deadline and add it to the given taskList and update the file using the given storage.
+     * @param input String to be parsed into task deadline.
+     * @param taskList TaskList object that contains the list of task in which the task is to be added.
+     * @param storage storage that is responsible for updating the file after addition of the task to taskList.
+     * @param set HashSet that contains the tasks in the list to check for duplicate task.
+     * @return String to inform user that the task has been added to the list of tasks.
+     * @throws IOException Occurs when there is a problem in updating the list.
+     */
     public String processTaskDeadline(String input, TaskList taskList, Storage storage, HashSet<Task> set) throws DukeException, ParseException, IOException {
         if (input.length() == 8) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
@@ -131,6 +157,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse the given input into event task and add it to the given taskList and update the file using the given storage.
+     * @param input String to be parsed into event task.
+     * @param taskList TaskList object that contains the list of task in which the task is to be added.
+     * @param storage storage that is responsible for updating the file after addition of the task to taskList.
+     * @param set HashSet that contains the tasks in the list to check for duplicate task.
+     * @return String to inform user that the task has been added to the list of tasks.
+     * @throws IOException Occurs when there is a problem in updating the list.
+     */
     public String processTaskEvent(String input, TaskList taskList, Storage storage, HashSet<Task> set) throws DukeException, ParseException, IOException {
         if (input.length() == 5) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty");
@@ -152,6 +187,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Delete task from the list of tasks.
+     * @param input String that contains the index of the task to be deleted.
+     * @param taskList TaskList object that contains the list of task in which the task is located.
+     * @param storage storage to update the file after deleting the task in the taskList.
+     * @param set HashSet that contains the tasks in the list.
+     * @return String to inform user if the task has been marked as done.
+     * @throws IOException Occurs when there is a problem in updating the file.
+     */
     public String processDeleteTask(String input, TaskList taskList, Storage storage, HashSet<Task> set) throws IOException {
         Integer index = Integer.valueOf(input.substring(7));
         Task deletedTask = taskList.getTask(index - 1);
@@ -164,6 +208,7 @@ public class Parser {
         assert diffInSize == 1: "List should have at least 1 element or task should be deleted";
         return ui.printDeleteTask(deletedTask, this.taskList.getList());
     }
+
 
     public String processFind(String input, TaskList taskList, Storage storage) throws DukeException {
         String item = "(.*)" + input.split(" ", 2)[1] + "(.*)";
@@ -182,7 +227,14 @@ public class Parser {
         return message;
     }
 
-    public String processFindWithStream(String input, TaskList taskList, Storage storage) throws DukeException{
+    /**
+     * Finds the task in the list that has substring that matches the given word.
+     * @param input String that contains the word that is going to be found.
+     * @param taskList TaskList object that contains the list of task.
+     * @return String that contains the represents the task.
+     * @throws DukeException Occrus when the word that is to be found does not match any task in the list.
+     */
+    public String processFindWithStream(String input, TaskList taskList) throws DukeException{
         ArrayList<Task> list = taskList.getList();
         String message = "";
         assert list != null : "List should not point to null pointer";
@@ -202,6 +254,13 @@ public class Parser {
         return message;
     }
 
+    /**
+     * Sorts the list in the order of D, E, T
+     * @param taskList TaskList object that contains the list of task that is to be sorted.
+     * @param storage storage to update the file after sorting the list of tasks in taskList.
+     * @return the list that has been sorted in the order of D, E, T.
+     * @throws IOException Occurs when there is a problem in updating the file.
+     */
     public String processSortList(TaskList taskList, Storage storage) throws IOException {
         taskList.sortTaskList();
         storage.setList(this.taskList);
@@ -212,6 +271,10 @@ public class Parser {
         return message;
     }
 
+    /**
+     * List out the commands for duke application.
+     * @return list of commands for duke.
+     */
     public String processHelp() {
         String message = "Here is the list of commands for Duke:\n";
         message = message + "- todo <description>\n";

@@ -59,7 +59,7 @@ Example of usage:
 Expected outcome:
 
 `Got it. I've added this task:
-[D][✗] concert (by: 15-10-2019 23:59)
+[D][✗] submit proposal (by: 15-10-2019 23:59)
 Now you have 3 tasks in your list.`
 
 
@@ -73,7 +73,7 @@ Expected outcome:
 ```
 1. [T][✗] homework 1
 2. [E][✗] concert (at: 13-10-2019 18:00)
-3. [D][✗] concert (by: 15-10-2019 23:59)
+3. [D][✗] submit proposal (by: 15-10-2019 23:59)
 ```
 
 

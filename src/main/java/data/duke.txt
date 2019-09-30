@@ -1,2 +1,3 @@
 T | true | homework 1
 E | true | concert | 13-09-2019 18:00
+D | false | proposal | 15-10-2019 23:59

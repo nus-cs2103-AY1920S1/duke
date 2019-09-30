@@ -26,7 +26,7 @@ Type `list` to view the list
 3. `event` task - An event requires the description and datetime
   Type `event <description> /at <date & time>` to event task
   
-#### Examples:
+**Examples:**
 - `todo borrow book`
 - `deadline Assignment#2 /by 23/11/2019 2359`
 - `event Career Fair /at 15/3/2020 1800`
@@ -34,27 +34,32 @@ Type `list` to view the list
 ### 3. Find task using a keyword: **`find`**
 Type `find <keyword>` to find task related to keyword
 
-#### Examples:
+**Examples**
 1. `find homework`
 2. `find art exhibition`
 
 ### 4. Mark task as done: **`done`**
 Type `done <index of task on list>`to mark particular task as finish
 
+
 ### 5. Delete task: **`delete`**
 Type `delete <index of task on list>` to delete particular task from the task list
+
 
 ### 6. Sort the tasks: **`sort`**
 
 #### There are 3 types of sorts:
+
 1. `sort todo` sorts the task list displaying the todo first
 
 2. `sort deadline` sort the task list displaying the deadline first
 
 3. `sort event` sort the task list displaying the event first
   
+  
 ### 7. Farewell to Duke: **`bye`**
 type `bye` to make a farewell
+
 
 ## Additional Notes
 

@@ -14,6 +14,8 @@ public class DateClass {
      */
     public static Date stringToDate (String string) {
 
+        assert string.isBlank() : "String should not be Blank";
+
         SimpleDateFormat format = new SimpleDateFormat("d/MM/yyyy HHmm");
 
         Date date = null;

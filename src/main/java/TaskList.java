@@ -23,6 +23,9 @@ public class TaskList {
      * @param task The Task
      */
     public void add (Task task) {
+
+        assert task != null : "TASK SHOULD BE NON-NULL";
+
         list.add(task);
     }
 
@@ -32,6 +35,9 @@ public class TaskList {
      * @return
      */
     public Task done (int index) {
+
+        assert index >= 0 : "INDEX SHOULD BE GREATER THAN ZERO";
+
         Task task = list.get(index);
         task.markAsDone();
 
@@ -45,11 +51,15 @@ public class TaskList {
      */
     public Task delete (int index) {
 
+        assert index >= 0 : "INDEX SHOULD BE GREATER THAN ZERO";
+
         Task task = list.remove(index);
         return task;
     }
 
     public Task[] find(String text) {
+
+        assert text.isBlank() : "TEXT SHOULD NOT BE BLANK";
 
         ArrayList<Task> tasks =  new ArrayList<>();
 

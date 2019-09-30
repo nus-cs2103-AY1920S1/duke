@@ -88,6 +88,8 @@ public class Storage {
             }
         }
 
+        assert list.isEmpty() : "LIST SHOULD NOT BE EMPTY";
+
         return list;
     }
 
@@ -97,6 +99,8 @@ public class Storage {
      * @throws IOException
      */
     public void save (ArrayList<Task> list) throws IOException {
+
+        assert list.isEmpty() : "LIST SHOULD NOT BE EMPTY";
 
         String s = "";
 

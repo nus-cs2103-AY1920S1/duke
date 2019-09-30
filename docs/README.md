@@ -1,4 +1,4 @@
-#Duke User Guide
+# Duke User Guide
 Duke is an interactive chat-box style task manager which allows you to conveniently create and manage day
 to day tasks primarily to-dos, events and deadlines in a simple and user-friendly environment.  
 

@@ -127,7 +127,7 @@ public class Ui {
      * @return String
      */
     public String genReadError() {
-        return "Sorry, failed to read from the dog. If it's your first time running this, ignore.\n"; 
+        return "Sorry, failed to read from the disc. If it's your first time running this and you haven't used a command that would save things, ignore as the save file has not been created. This is because Duke dog only creates the save file once you need something to be saved and if it is not there.\n"; 
     }
 
     /**

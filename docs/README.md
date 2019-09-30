@@ -20,9 +20,8 @@ You may mark as done or delete a task.
 
 ### Load storage file
 
-By default your storage would be located at `/Users/uicfa/Downloads/data.json` for Windows and `/Users/leo/Downloads/data.json` for other platforms.
+By default your storage would be located at `./data.json`.
 
-You may also load your own storage file.
 
 ## Usage
 
@@ -45,9 +44,19 @@ Firstly, use `java -jar duke-0.2.3.jar` to launch the application.
 
 #### Load storage file
 
-- Click `File` menu on the top right corner
+- Click `File` menu on the top left corner
 - Click `Open...` in the dropdown menu
 - Select your storage file in the file selector window, then click `Open`
 - Duke will automatically load the new storage file for you
+
+#### Search tasks
+
+On the bottom right panel, type in search string then press `Search` button. Results will be shown under the search bar.
+
+#### Sort tasks
+
+- Click `Sort` menu on the top left
+- Select one sorting method from the dropdown menu
+- Tasks currently displayed in the middle panel would be sorted
 
 **NOTE:** please only load files that were created by Duke app itself.

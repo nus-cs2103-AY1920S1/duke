@@ -1,17 +1,20 @@
+package commands;
+
 import java.text.DateFormatSymbols;
+import exceptions.InvalidDukeDateException;
 
 /**
  * Helps handle and format the date inputted by the user into 
- * Duke into a valid format.
+ * Core.Duke into a valid format.
  */
 public class DateHelper {
 
     /**
      * Parses the user inputted time into a text format that will
-     * be displayed by Duke in its responses.
+     * be displayed by Core.Duke in its responses.
      * 
      * @param timeDetail The time as inputted by the user.
-     * @return String representation of the time as to be shown by Duke.
+     * @return String representation of the time as to be shown by Core.Duke.
      * @throws InvalidDukeDateException When the user inputs invalid or non-existent time details.
      */
     public static String parseTime(String timeDetail) throws InvalidDukeDateException {
@@ -27,10 +30,10 @@ public class DateHelper {
 
     /**
      * Parses the user inputted date into a text format that will
-     * be displayed by Duke in its responses.
+     * be displayed by Core.Duke in its responses.
      * 
      * @param dateDetail The date as inputted by the user.
-     * @return String representation of the date as to be shown by Duke.
+     * @return String representation of the date as to be shown by Core.Duke.
      * @throws InvalidDukeDateException When the user inputs invalid or non-existent date details.
      */
     public static String parseDate(String dateDetail) throws InvalidDukeDateException {

@@ -1,8 +1,13 @@
+package commands;
+
 import java.io.IOException;
+import core.Storage;
+import core.TaskList;
+import exceptions.DukeException;
 
 /**
  * Handles user's commands concerning marking a task as 
- * done inside Duke.
+ * done inside Core.Duke.
  */
 public class DoneCommand extends Command {
 

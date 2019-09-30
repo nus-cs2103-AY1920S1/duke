@@ -1,5 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import commands.DateHelper;
+import exceptions.DukeException;
 import org.junit.jupiter.api.Test;
 
 class DateHelperTest {

@@ -1,4 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import task.Task;
+import task.ToDos;
 import org.junit.jupiter.api.Test;
 
 class TodosTest {

@@ -1,12 +1,19 @@
+package core;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import exceptions.DukeException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDos;
 
 /**
- * The Storage class deals with retrieving tasks from the local file
+ * The Core.Storage class deals with retrieving tasks from the local file
  * and writing back to the file in the case of any modifications to the tasks.
  */
 public class Storage {
@@ -14,7 +21,7 @@ public class Storage {
     private String filePath;
 
     /**
-     * Constructs a new Storage object which obtains its data for initialisation
+     * Constructs a new Core.Storage object which obtains its data for initialisation
      * from a specified file.  
      * 
      * @param filePath File path of the file wherein tasks are stored. 
@@ -24,7 +31,7 @@ public class Storage {
     }
 
     /**
-     * Returns a new Task object created from an individual line of description
+     * Returns a new Tasks.Task object created from an individual line of description
      * of the task.
      * 
      * @param line The string which, in a single line, describes a particular task.

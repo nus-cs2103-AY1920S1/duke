@@ -1,6 +1,8 @@
+package task;
+
 /**
- * Event class which inherits from the Task class and is used to represent
- * events within Duke.
+ * Tasks.Event class which inherits from the Tasks.Task class and is used to represent
+ * events within Core.Duke.
  */
 
 public class Event extends Task {
@@ -8,7 +10,7 @@ public class Event extends Task {
     String timeline;
 
     /**
-     * Creates a new Event object.
+     * Creates a new Tasks.Event object.
      * @param task Description of the event to take place.
      * @param timeline Description of the duration of the event.
      */
@@ -18,7 +20,7 @@ public class Event extends Task {
     }
 
     /**
-     * Creates a new Event object for use within Duke, 
+     * Creates a new Tasks.Event object for use within Core.Duke,
      * with a predermined completion state of whether 
      * it is complete or not.
      * @param task Description of the event to take place.

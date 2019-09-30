@@ -1,12 +1,27 @@
-# Duke User Guide
+#Duke User Guide
+Duke is an interactive chat-box style task manager which allows you to conveniently create and manage day
+to day tasks primarily to-dos, events and deadlines in a simple and user-friendly environment.  
 
 ## Features 
 
-### Task Creation - Todo
-Create todo tasks and store them within Duke.
+### Task Creation
+Duke allows you to easily create different tasks such as to-dos, events and deadlines which are then
+stored on the system.
 
+### Task Management
+When certain tasks have been completed, Duke allows you to mark them as done thereby
+allowing you to keep better track of your pending items.
+
+### Task Deletion
+Duke allows you to delete redundant tasks so you see only what you want to see.
+
+### Task Search 
+In case you have a long list of tasks, Duke will allow you to search tasks you are looking for
+based on a particular keyword or even just parts of words.
+  
 ## Usage
 
+###1. Todo Creation
 ### `todo [todo description]`
 
 Type and pass this command to Duke to create and store a new todo task. The todo's description
@@ -18,12 +33,14 @@ Example of usage:
 
 Expected outcome:
 
-`A new todo will be created with its description being "todo finish math homework"`
+```
+Got it. I've added this task:
+    [T][✗] math homework
+Now you have 1 tasks in your list.
+```
 
-### Task Creation - Deadline
-Create deadline tasks and store them within Duke.
 
-## Usage
+### 2. Task Creation - Deadline
 
 ### `deadline [deadline description] /by [DD/MM/YYYY] [hhmm]`
 
@@ -37,13 +54,12 @@ Example of usage:
 
 Expected outcome:
 
-`A new deadline will be created with its description being "get ready for the party" and`
-`the deadline's completion data and time being 2/12/2019 1800, or "2nd of December, 2019, 6pm" as represented by Duke`
-
-### Task Creation - Event
-Create todo tasks and store them within Duke.
-
-## Usage
+```
+Got it. I've added this task:
+    [D][✗] get ready for the party (by: 2nd of December, 2019, 6pm)
+Now you have 2 tasks in your list.
+```
+### 3. Task Creation - Event
 
 ### `event [event description] /at [DD/MM/YYY] [hhmm-hhmm]`
 
@@ -57,13 +73,13 @@ Example of usage:
 
 Expected outcome:
 
-`A new event will be created with its description being "party at school" and`
-`the event's duration data and time being 2/12/2019 1800-2230, or "2nd of December, 2019, 6pm-10.30pm" as represented by Duke`
-
-### List
+```
+Got it. I've added this task:
+    [E][✗] party at school (at: 4th of December, 2019, 6pm-10.30pm)
+Now you have 3 tasks in your list.
+```
+### 4. List
 List down all the tasks stored in Duke.
-
-## Usage
 
 ### `list`
 
@@ -75,12 +91,15 @@ Example of usage:
 
 Expected outcome:
 
-`A numbered list of tasks will be showed by Duke with all the tasks listed out.`
+```
+Here are the tasks in your list:
+1. [T][✗] math homework
+2. [D][✗] get ready for the party (by: 2nd of December, 2019, 6pm)
+3. [E][✗] party at school (at: 4th of December, 2019, 6pm-10.30pm)
+```
 
-### Task Deletion
+### 5. Task Deletion
 Delete any task stored in Duke which you no longer require or want to see.
-
-## Usage
 
 ### `delete [task index]`
 
@@ -92,12 +111,13 @@ Example of usage:
 
 Expected outcome:
 
-`The second task as shown by Duke's list of tasks will be deleted.`
-
-### Mark Tasks as Done
+````
+Noted. I've removed this task:
+[D][✗] get ready for the party (by: 2nd of December, 2019, 6pm)
+Now you have 2 tasks in the list.
+````
+### 6. Mark task as Done
 Mark any task stored in Duke as done after you have completed it.
-
-## Usage
 
 ### `done [task index]`
 
@@ -109,21 +129,31 @@ Example of usage:
 
 Expected outcome:
 
-`The second task as shown by Duke's list of tasks will be marked as done.`
-
-### Search
+```
+Nice! I've marked this task as done:
+[T][✓] math homework
+```
+### 7. Search
 Search Duke for any task based on a keyword.
-
-## Usage
 
 ### `find [search query]`
 
 Duke will search for every task that matches the query you type, either fully or partially.
 
-Example of usage: 
+Example of usage (full word): 
 
-`find return`
+`find homework`
 
 Expected outcome:
+```
+1. [T][✓] math homework
+```
 
-`Duke will list down all the tasks which have the word "return" in them.`
+Example of usage (partial word): 
+
+`find scho`
+
+Expected outcome:
+```
+1. [E][✗] party at school (at: 4th of December, 2019, 6pm-10.30pm)
+```

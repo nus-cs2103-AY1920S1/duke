@@ -1,3 +1,5 @@
+package ui;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -9,11 +11,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.scene.transform.Translate;
 
 /**
  * An example of a custom control using FXML.
@@ -56,7 +56,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Creates a dialogbox design used for Duke user's.
+     * Creates a dialogbox design used for Core.Duke user's.
      * @param text The text to be displayed in the dialogbox. 
      * @param img The user's image to be shown in the dialogbox.
      * @return The dialog box as designed for the user.
@@ -71,10 +71,10 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Creates a dialogbox design used for Duke.
+     * Creates a dialogbox design used for Core.Duke.
      * @param text The text to be displayed in the dialogbox. 
-     * @param img Duke's image to be shown in the dialogbox.
-     * @return The dialog box as designed for Duke.
+     * @param img Core.Duke's image to be shown in the dialogbox.
+     * @return The dialog box as designed for Core.Duke.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);

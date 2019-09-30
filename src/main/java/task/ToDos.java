@@ -1,6 +1,8 @@
+package task;
+
 /**
- * The ToDo class is used to represent and manage ToDos within
- * Duke.
+ * The ToDo class is used to represent and manage Tasks.ToDos within
+ * Core.Duke.
  */
 
 public class ToDos extends Task {

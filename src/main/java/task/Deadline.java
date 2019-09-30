@@ -1,6 +1,8 @@
+package task;
+
 /**
- * Deadline class which inherits from the Task class and is used to represent
- * deadlines within Duke.
+ * Tasks.Deadline class which inherits from the Tasks.Task class and is used to represent
+ * deadlines within Core.Duke.
  */
 
 public class Deadline extends Task {
@@ -8,7 +10,7 @@ public class Deadline extends Task {
     String dueDate;
 
     /**
-     * Returns a new Deadline object for use within Duke.
+     * Returns a new Tasks.Deadline object for use within Core.Duke.
      * @param task Description of the deadline task.
      * @param dueDate Description of the time the deadline needs to be finished.
      */
@@ -18,7 +20,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a new Deadline object for use within Duke with a predermined completion state.
+     * Returns a new Tasks.Deadline object for use within Core.Duke with a predermined completion state.
      * @param task Description of the deadline task.
      * @param dueDate Description of the time the deadline needs to be finished.
      * @param complete Boolean variable to determine if the deadline has been finished or not.

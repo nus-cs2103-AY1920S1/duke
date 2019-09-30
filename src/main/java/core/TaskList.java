@@ -1,9 +1,12 @@
+package core;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import task.Task;
 
 /**
- * The TaskList class handles the storage, adding and deleting of
- * tasks in Duke program.
+ * The Core.TaskList class handles the storage, adding and deleting of
+ * tasks in Core.Duke program.
  */
 
 public class TaskList {
@@ -11,17 +14,17 @@ public class TaskList {
     private ArrayList<Task> taskList;
 
     /**
-     * Creates a new TaskList object initialised with tasks from
+     * Creates a new Core.TaskList object initialised with tasks from
      * the inputted array list of Tasks.
-     * @param taskList An array list of tasks with which the TaskList object is initialised.
+     * @param taskList An array list of tasks with which the Core.TaskList object is initialised.
      */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
     /**
-     * Returns the an array list which is the TaskList object's task list. 
-     * @return The current TaskList object's task list.
+     * Returns the an array list which is the Core.TaskList object's task list.
+     * @return The current Core.TaskList object's task list.
      */
     public ArrayList<Task> getTaskList() {
         return taskList;
@@ -32,10 +35,10 @@ public class TaskList {
     }
 
     /**
-     * Adds a new Task into the task list and writes
+     * Adds a new Tasks.Task into the task list and writes
      * the changes back into the local file of tasks as well.
      * @param task The task to be added into the task list.
-     * @param storage The Storage object handling the read and write from the local file storing the tasks.
+     * @param storage The Core.Storage object handling the read and write from the local file storing the tasks.
      * @throws IOException When the file to be written to is not found or does not exist.
      */
     public void addTask(Task task, Storage storage) throws IOException {
@@ -94,8 +97,9 @@ public class TaskList {
      * Deletes a specific task from the task list and writes
      * the changes back into the local file of tasks as well.
      * @param index The index of the task to be deleted from the array list.
-     * @param storage The Storage object handling the read and write from the local file storing the tasks.
-     * @return A stringbuilder object containing the response to be given by Duke upon deleting a task successfully.
+     * @param storage The Core.Storage object handling the read and write from the local file storing the tasks.
+     * @return A stringbuilder object containing the response to
+     *     be given by Duke upon deleting a task successfully.
      * @throws IndexOutOfBoundsException When the index specified by the user does not exist.
      * @throws IOException When the file to be written to is not found or does not exist.
      */
@@ -119,8 +123,8 @@ public class TaskList {
      * Sets the status of a particular task in the array list of tasks to 
      * completed thereby signifying that the task has been completed.
      * @param index The index of the task in the array list to be set to completed to be marked as completed.
-     * @param storage The Storage object handling the read and write from the local file storing the tasks.
-     * @return A stringbuilder object containing the response to be given by Duke upon 
+     * @param storage The Core.Storage object handling the read and write from the local file storing the tasks.
+     * @return A stringbuilder object containing the response to be given by Core.Duke upon
      *     marking a task as done successfully.
      * @throws IndexOutOfBoundsException When the index specified by the user does not exist.
      * @throws IOException When the file to be written to is not found or does not exist.

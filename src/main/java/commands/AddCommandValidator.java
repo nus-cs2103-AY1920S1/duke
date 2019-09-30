@@ -1,18 +1,24 @@
+package commands;
+
+import exceptions.InvalidDeadlineSyntaxException;
+import exceptions.InvalidDukeCommandException;
+import exceptions.InvalidEventSyntaxException;
+
 /**
  * Class used for validating user commands regarding adding 
- * a new task into Duke.
+ * a new task into Core.Duke.
  */
 public class AddCommandValidator {
 
     /**
-     * Constructs a new AddCommandValidator object.
+     * Constructs a new Commands.AddCommandValidator object.
      */
     public AddCommandValidator() {
 
     }
 
     /**
-     * Validates whether a command inputted by a user into Duke
+     * Validates whether a command inputted by a user into Core.Duke
      * is valid or not.
      * 
      * @param detail The details as inputted by the user but split into an array based on whitespaces. 

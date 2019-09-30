@@ -1,8 +1,13 @@
+package commands;
+
 import java.io.IOException;
+import core.Storage;
+import core.TaskList;
+import exceptions.DukeException;
 
 /**
  * Handles user's commands concerning the deletion of a 
- * task in Duke.
+ * task in Core.Duke.
  */
 public class DeleteCommand extends Command {
 

@@ -1,8 +1,13 @@
+package commands;
+
 import java.io.IOException;
+import core.Storage;
+import core.TaskList;
+import exceptions.DukeException;
 
 /**
  * Handles user's commands concerning the search of a 
- * particular task in Duke.
+ * particular task in Core.Duke.
  */
 public class FindCommand extends Command {
 

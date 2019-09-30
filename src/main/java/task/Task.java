@@ -1,6 +1,8 @@
+package task;
+
 /**
- * The Task class is used to represent Tasks and acts as the 
- * superclass to the Event, Deadline and Todos classes. 
+ * The Tasks.Task class is used to represent Tasks and acts as the
+ * superclass to the Tasks.Event, Tasks.Deadline and Todos classes.
  */
 public class Task {
     String task;
@@ -10,7 +12,7 @@ public class Task {
     String pending = "[✗] ";
 
     /**
-     * Creates a new Task object to be used within Duke.
+     * Creates a new Tasks.Task object to be used within Core.Duke.
      * @param task Description of the task to be created.
      */
     public Task(String task) {
@@ -19,7 +21,7 @@ public class Task {
     }
 
     /**
-     * Creates a new Task object to be used within Duke with the option
+     * Creates a new Tasks.Task object to be used within Core.Duke with the option
      * to predetermine whether it has been completed or not.  
      * @param task Description of the task to be created.
      * @param isPending Boolean to state whether the task been completed.
@@ -30,7 +32,7 @@ public class Task {
     }
 
     /**
-     * Returns the string representation of a Task for the purpose of writing
+     * Returns the string representation of a Tasks.Task for the purpose of writing
      * back onto the file.
      * @return String representation of a task.
      */
@@ -39,7 +41,7 @@ public class Task {
     }
 
     /**
-     * Returns the string representation of a Task.
+     * Returns the string representation of a Tasks.Task.
      */
     @Override
     public String toString() {

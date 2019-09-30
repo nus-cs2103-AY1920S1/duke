@@ -1,3 +1,6 @@
+package ui;
+
+import core.Duke;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,7 +13,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Controller for UI.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -35,7 +38,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Sets the Duke variable of this object to the Duke object
+     * Sets the Core.Duke variable of this object to the Duke object
      * provided as parameter.
      * @param d The duke object to be referenced by this object's 
      *     duke object.
@@ -46,7 +49,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates the greeting message from Duke in the 
+     * Creates the greeting message from Core.Duke in the
      * appropriate dialogbox form.
      */
     @FXML

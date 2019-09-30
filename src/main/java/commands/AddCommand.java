@@ -1,8 +1,18 @@
+package commands;
+
 import java.io.IOException;
+import core.Storage;
+import core.TaskList;
+import exceptions.DukeException;
+import exceptions.InvalidDukeDateException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDos;
 
 /**
  * Handles user's commands concerning the addition of a 
- * new task into Duke.
+ * new task into Core.Duke.
  */
 public class AddCommand extends Command {
 

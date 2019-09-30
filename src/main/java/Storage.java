@@ -30,7 +30,7 @@ public class Storage {
      * @throws IOException
      */
     public void makeDirectory (String folderPath) throws IOException {
-        File file = new File(filePath);
+        File file = new File(folderPath);
         file.mkdirs();
     }
 

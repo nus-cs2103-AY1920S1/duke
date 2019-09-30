@@ -22,15 +22,15 @@ public class AddCommand extends Command {
      * @param ui
      * @param storage
      * @throws IOException
+     * @return
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
 
         taskList.add(task);
 
-        ui.add(taskList.list);
-
         storage.save(taskList.list);
 
+        return ui.add(taskList.list);
     }
 }

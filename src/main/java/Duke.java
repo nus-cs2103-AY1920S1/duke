@@ -1,6 +1,18 @@
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Class where the main logic is executed
@@ -10,6 +22,23 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    private Duke duke;
+
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    private boolean isExit = false;
+
+    public Duke() {
+        this("data/duke.txt", "data");
+    }
 
     /**
      * Intialises all the classes needed to run this Application.
@@ -37,33 +66,25 @@ public class Duke {
     /**
      * Runs the main logic of the application
      */
-    public void run() {
-        ui.greeting();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-               // ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException | IOException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                //ui.showLine();
-            }
+    public String run (String fullCommand) {
+
+        try {
+            Command c = Parser.parse(fullCommand);
+            this.isExit = c.isExit();
+            return c.execute(tasks, ui, storage);
+        } catch (IOException | DukeException e) {
+            return ui.showError(e.getMessage());
         }
+
     }
 
     /**
-     * This is the starting point of the application
-     * @param args
-     * @throws DukeException
-     * @throws IOException
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-
-    public static void main(String[] args) throws DukeException, IOException {
-        new Duke("../data/duke.txt", "../data").run();
+    public String getResponse(String input) {
+        return this.run(input);
     }
+
 
 }

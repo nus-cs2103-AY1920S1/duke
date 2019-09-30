@@ -24,12 +24,12 @@ public class DeleteCommand extends Command {
      * @throws IOException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
 
         Task task = taskList.delete(index);
 
-        ui.delete(taskList.list, task);
-
         storage.save(taskList.list);
+
+        return ui.delete(taskList.list, task);
     }
 }

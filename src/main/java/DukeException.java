@@ -18,4 +18,8 @@ public class DukeException extends Exception {
     public static DukeException emptyDescription () {
         return new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
     }
+
+    public static DukeException outOfBounds () {
+        return new DukeException("☹ OOPS!!! The number you inputted is out of bounds \uD83D\uDE22");
+    }
 }

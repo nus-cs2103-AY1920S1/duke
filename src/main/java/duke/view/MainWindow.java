@@ -85,7 +85,7 @@ public class MainWindow extends AnchorPane {
                 Platform.exit();
                 System.exit(0);
             } catch (InterruptedException e) {
-                System.err.println(e.getStackTrace());
+                e.printStackTrace();
             }
         }).start();
     }

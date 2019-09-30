@@ -1,7 +1,7 @@
 # User Guide
 [1. Introduction](#Introduction)  
 [2. Quick Start](#Quick Start)  
-[3. Features](#Features)    
+[3. Features](#Features)
 [4. FAQ](#FAQ)   
 [5. Command Summary](#Command Summary) 
 
@@ -21,8 +21,8 @@ Have fun!
 Command Format
 * Words in UPPER_CASE are the parameters to be supplied by the user 
 e.g. in add n/NAME, NAME is a parameter which can be used as add n/John Doe.
-* Items in square brackets are optional e.g `deadline TASK_NAME  /by dd/mm/yyyy [hhmm]`
-can be used as `deadline TASK_NAME  /by dd/mm/yyyy`
+* Items in square brackets are optional e.g `deadline TASK_NAME  /by ddmmyyyy [hhmm]`
+can be used as `deadline TASK_NAME  /by ddmmyyyy`
 
 
 ### 3.1 Viewing help
@@ -34,7 +34,7 @@ Format: help
     * todo TASK_NAME 
     * event TASK_NAME /at ddmmyyyy hhmm hhmm  
     * deadline TASK_NAME /by ddmmyyyy [hhmm]
-* e.g. `event party /at 01/01/2011 0800 1900`
+* e.g. `event party /at 01012011 0800 1900`
 * e.g. `t read book`
 
 ### 3.3. Listing all tasks : list

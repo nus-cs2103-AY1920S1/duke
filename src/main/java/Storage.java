@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
@@ -25,12 +24,13 @@ public class Storage {
 
     /**
      * Loads the task from the file into an array list.
+     * Creates the file if it does not exists.
      *
      * @return The list of tasks to be loaded from the file.
-     * @throws FileNotFoundException If file is not found.
+     * @throws IOException If an input or output exception occurred.
      * @throws ParseException If a parse exception occurred.
      */
-    public ArrayList<Task> load() throws FileNotFoundException, ParseException, IOException {
+    public ArrayList<Task> load() throws ParseException, IOException {
         ArrayList<Task> list = new ArrayList<>();
         if (!this.directory.exists()) {
             this.directory.mkdir();
@@ -56,6 +56,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Loads the todo to the list.
+     *
+     * @param taskArr The array with the command details.
+     * @param list The list where the todo is to be added to.
+     */
     public void loadTodoToList(String[] taskArr, ArrayList<Task> list) {
         Todo todo = new Todo(taskArr[2]);
         updateDone(todo, taskArr);
@@ -64,6 +70,13 @@ public class Storage {
     }
 
 
+    /**
+     * Loads the deadline to the list.
+     *
+     * @param taskArr The array with the command details.
+     * @param list The list where the deadline is to be added to.
+     * @throws ParseException If a parse exception occurred.
+     */
     public void loadDeadlineToList(String[] taskArr, ArrayList<Task> list)
             throws ParseException {
         Deadline deadline = new Deadline(taskArr[2], getDate(taskArr));
@@ -72,6 +85,13 @@ public class Storage {
         list.add(deadline);
     }
 
+    /**
+     * Loads the event to the list.
+     *
+     * @param taskArr The array with the command details.
+     * @param list The list where the event is to be added to.
+     * @throws ParseException If a parse exception occurred.
+     */
     public void loadEventToList(String[] taskArr, ArrayList<Task> list)
             throws ParseException {
         Event event = new Event(taskArr[2], getDate(taskArr));
@@ -80,6 +100,13 @@ public class Storage {
         list.add(event);
     }
 
+    /**
+     * Gets the date from the command details.
+     *
+     * @param taskArr The array with the command details.
+     * @return The date of the task.
+     * @throws ParseException If a parse exception occurred.
+     */
     public Date getDate(String[] taskArr) throws ParseException {
         String date = taskArr[4].substring(8, 10) + " "
                 + taskArr[4].substring(4, 7) + " "
@@ -88,11 +115,23 @@ public class Storage {
         return convertToDate(date);
     }
 
+    /**
+     * Updates the priority of the task.
+     *
+     * @param task The task which priority is to be updated.
+     * @param taskArr The array with the command details.
+     */
     public void updatePriority(Task task, String[] taskArr) {
         String priority = taskArr[3];
         task.setPriority(priority);
     }
 
+    /**
+     * Updates the task to be done.
+     *
+     * @param task The task to be marked done.
+     * @param taskArr The array with the command details.
+     */
     public void updateDone(Task task, String[] taskArr) {
         if (taskArr[1].equals("1")) {
             assert (taskArr[1].equals("1"));

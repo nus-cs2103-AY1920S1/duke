@@ -1,5 +1,4 @@
 import java.text.ParseException;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -22,8 +21,6 @@ public class Duke {
         storage = new Storage();
         try {
             taskList = new TaskList(storage.load());
-        } catch (FileNotFoundException f) {
-            System.out.println("File is not found.");
         } catch (ParseException p) {
             System.out.println("Parse exception occurred. Please ensure correct input format.");
         } catch (IOException io) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 
 /**
+ * Solution below adapted from https://rxjs-dev.firebaseapp.com/guide/subject.
  * A class that pushes notifications.
  * @param <T> the generic type of the data that this class should push to listening objects.
  */

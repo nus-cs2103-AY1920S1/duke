@@ -1,6 +1,7 @@
 package rxjava;
 
 import java.util.function.Consumer;
+//Solution below adapted from https://rxjs-dev.firebaseapp.com/guide/subscription.
 
 public class Subscription<T> {
     Consumer<T> callback;

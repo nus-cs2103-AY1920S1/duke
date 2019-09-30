@@ -1,10 +1,11 @@
 package duke.storage;
 
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.TaskList;
+import duke.task.DoAfterTasks;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -63,6 +64,10 @@ public class Storage {
             break;
         case "E":
             tasks.add(new Event(splitStr[2], splitStr[3], splitStr[4]));
+            checkDone(splitStr[1], tasks.get(tasks.size() - 1));
+            break;
+        case "DA":
+            tasks.add(new DoAfterTasks(splitStr[2], splitStr[3]));
             checkDone(splitStr[1], tasks.get(tasks.size() - 1));
             break;
         default:

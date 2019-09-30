@@ -74,9 +74,9 @@ public class AddEventCommand extends Command {
             String formattedStart = dateTime.getEventStart().format(properStart);
             String formattedEnd = dateTime.getEventEnd().format((properEnd));
             tasklist.add(new Event(task, formattedStart, formattedEnd));
-            Task thing = tasklist.get(tasklist.size() - 1);
+            Task current = tasklist.get(tasklist.size() - 1);
             return "Got it. I've added this task: \n"
-                    + "  " + thing.toString() + "\n"
+                    + "  " + current.toString() + "\n"
                     + String.format("Now you have %d tasks in the list.", tasklist.size());
         }
     }

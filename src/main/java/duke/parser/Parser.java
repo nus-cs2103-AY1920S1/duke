@@ -1,14 +1,15 @@
 package duke.parser;
 
-import duke.command.Command;
 import duke.command.ByeCommand;
 import duke.command.SendTasksCommand;
 import duke.command.DoneTaskCommand;
 import duke.command.AddTodoCommand;
 import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
+import duke.command.Command;
 import duke.command.DeleteTaskCommand;
 import duke.command.FindCommand;
+import duke.command.DoAfterTasksCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.exception.MissingCommandException;
@@ -20,6 +21,7 @@ import duke.exception.MissingTaskIndexException;
 import duke.exception.MissingTodoException;
 import duke.exception.MissingStartException;
 import duke.exception.MissingEndException;
+import duke.exception.MissingDoException;
 
 /**
  * Deals with making sense of the user command.
@@ -99,6 +101,18 @@ public class Parser {
             checkString(splitStr);
             command = new FindCommand(splitStr[1].trim());
             break;
+        case "do":
+            checkString(splitStr);
+            String raw = splitStr[1].trim();
+            if (raw.startsWith("/after")) {
+                throw new MissingDoException();
+            } else if (raw.endsWith("/after") || (!raw.contains("/after"))) {
+                throw new MissingTaskIndexException();
+            } else {
+                String[] data = raw.split("/after", 2);
+                command = new DoAfterTasksCommand(data[0].trim(), data[1].trim());
+            }
+            break;
         case "":
             throw new MissingCommandException();
         default:
@@ -128,6 +142,8 @@ public class Parser {
                 throw new MissingEventException();
             case "find":
                 throw new MissingKeywordException();
+            case "do":
+                throw new MissingDoException();
             default:
                 assert false : splitStr[0];
             }

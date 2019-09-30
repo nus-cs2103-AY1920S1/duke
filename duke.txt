@@ -1,6 +1,1 @@
-E | 1 | swim in pool | westcoast
-T | 0 | say hi
-T | 1 | sleep
-E | 1 | sleep | home
-D | 0 | handing homeword | 02/05/3040 2300
-E | 0 | writing contest | 25 block PGPR
+T | 0 | hi

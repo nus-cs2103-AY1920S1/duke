@@ -90,6 +90,11 @@ public class Storage {
     public void saveFile(ArrayList<Task> tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
+            if (tasks.size() == 0) {
+                fw.write("");
+                fw.close();
+                return;
+            }
             String data = tasks.get(0).toFile();
             if (tasks.size() > 1) {
                 for (int i = 1; i < tasks.size(); i++) {

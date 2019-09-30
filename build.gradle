@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
-    id 'org.openjfx.javafxplugin' version '0.0.7'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
@@ -11,7 +10,7 @@ checkstyle {
 }
 
 group 'seedu.duke'
-version '0.1.0'
+version '0.2.0'
 
 repositories {
     mavenCentral()
@@ -50,11 +49,6 @@ dependencies {
 
 test {
     useJUnitPlatform()
-}
-
-javafx {
-    version = "11.0.2"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
 shadowJar {

@@ -17,7 +17,7 @@ javafx {
 }
 
 application {
-    mainClassName = 'duke.Launcher'
+    mainClassName = 'dose.Launcher'
 }
 
 run {
@@ -52,7 +52,7 @@ test {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "dose"
     archiveVersion = "1.1"
     archiveClassifier = null
     archiveAppendix = null

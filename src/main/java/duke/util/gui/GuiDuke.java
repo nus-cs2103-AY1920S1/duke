@@ -1,8 +1,11 @@
 package duke.util.gui;
 
 import duke.Duke;
+import duke.command.Command;
 import duke.task.TaskList;
+import duke.util.Parser;
 import duke.util.Storage;
+import duke.util.exception.DukeException;
 
 public class GuiDuke implements Duke {
     Storage storage;
@@ -26,16 +29,16 @@ public class GuiDuke implements Duke {
      * May not be required after UI implementation is refined.
      * @return Response from Duke to be displayed in the UI.
      */
-    public String getResponse(String input) {
-//        try {
-//            Command c = Parser.parse(input);
-//            c.execute(tasks, ui);
-//        } catch (DukeException e) {
-//            ui.showError(e);
-//        }
+    public void getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui);
+        } catch (DukeException e) {
+            ui.showError(e);
+        }
 
         // dummy implementation
-        return "Duke heard: " + input;
+//        return "Duke heard: " + input;
         //return ui.getResponse();
     }
 

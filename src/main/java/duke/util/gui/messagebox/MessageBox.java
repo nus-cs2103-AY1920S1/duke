@@ -6,7 +6,9 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * An example of a custom control using FXML.
@@ -37,6 +39,8 @@ public class MessageBox extends HBox {
         MessageBox userMessageBox = new MessageBox(text);
         userMessageBox.setStyle("-fx-background-color: " + colourScheme.getUserLightColour());
         userMessageBox.message.setStyle("-fx-fill: "+ colourScheme.getTextColour());
+        DropShadow dropShadow = new DropShadow(5.0, Color.web(colourScheme.getUserDarkColour()));
+        userMessageBox.setEffect(dropShadow);
 //        userMessageBox.setAlignment(Pos.TOP_RIGHT);
         return userMessageBox;
     }
@@ -45,6 +49,8 @@ public class MessageBox extends HBox {
         MessageBox dukeMessageBox = new MessageBox(text);
         dukeMessageBox.setStyle("-fx-background-color: " + colourScheme.getDukeMediumColour());
         dukeMessageBox.message.setStyle("-fx-fill: "+ colourScheme.getTextColour());
+        DropShadow dropShadow = new DropShadow(5.0, Color.web(colourScheme.getDukeDarkColour()));
+        dukeMessageBox.setEffect(dropShadow);
 //        dukeMessageBox.setAlignment(Pos.TOP_LEFT);
         return dukeMessageBox;
     }

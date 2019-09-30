@@ -1,9 +1,9 @@
 package duke.util.gui;
 
-import static duke.util.gui.messagebox.MessageBox.getDukeMessageBox;
 import static duke.util.gui.messagebox.MessageBox.getUserMessageBox;
 
 import duke.util.gui.messagebox.MessageBox;
+import java.util.Queue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -27,7 +27,7 @@ public class MainWindow extends AnchorPane {
     private GuiDuke duke;
 
     /** Represents the colour scheme in use for the GUI. Hardcoded as MINT for now. */
-    private ColourScheme colourScheme = ColourScheme.GREY;
+    private ColourScheme colourScheme = ColourScheme.MINT;
 
     //private Image userImage = new Image(this.getClass().getResourceAsStream("/images/kawaii_robot.png"));
     //private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/kawaii_robot_power.png"));
@@ -57,9 +57,9 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         // get and display output from Duke
-        String response = duke.getResponse(input);
-        MessageBox dukeMessageBox = getDukeMessageBox(response, this.colourScheme);
-        messageBoxContainer.getChildren().add(dukeMessageBox);
+        Queue<MessageBox> messageBoxQueue = duke.ui.messageBoxQueue;
+        messageBoxContainer.getChildren().addAll(messageBoxQueue);
+        messageBoxQueue.clear();
     }
 
 //    /**

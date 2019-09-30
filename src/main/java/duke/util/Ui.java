@@ -3,6 +3,9 @@ package duke.util;
 import duke.task.TaskList;
 import duke.util.exception.DukeException;
 
+/**
+ * Encapsulates methods related to displaying responses from Duke in the UI.
+ */
 public interface Ui {
     /**
      * Returns the command entered by the user.

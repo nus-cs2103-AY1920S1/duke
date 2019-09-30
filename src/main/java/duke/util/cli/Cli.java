@@ -6,6 +6,9 @@ import duke.util.UiMessage;
 import duke.util.exception.DukeException;
 import java.util.Scanner;
 
+/**
+ * Handles Duke's UI when in CLI mode.
+ */
 public class Cli implements Ui {
     private Scanner in;
 

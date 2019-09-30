@@ -15,6 +15,7 @@ public enum UiMessage {
     // commands
     TASK_ADDED("Okay! I've added the task."),
     TASK_SNOOZED("Okay! The task has been snoozed by 1 day."),
+    MATCHING_TASKS("Here are the matching tasks in your list..."),
     // helpers
     HINT_LIST("Use list to see all your tasks!");
 

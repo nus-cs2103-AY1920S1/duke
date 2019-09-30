@@ -3,13 +3,11 @@ package duke.util;
 import duke.task.TaskList;
 import duke.util.exception.DukeException;
 import java.util.Scanner;
-import javafx.scene.layout.VBox;
 
-public class Ui {
+public class Cli implements Ui {
     private Scanner in;
-    private VBox dialogContainer;
 
-    public Ui() {
+    public Cli() {
         this.in = new Scanner(System.in);
     }
 
@@ -29,25 +27,20 @@ public class Ui {
         System.out.println(line);
     }
 
-    /**
-     * Displays the required message in the UI, given the type of message required.
-     * @param uiMessage Enum indicating type of message required to be displayed.
-     */
+    @Override
     public void showMessage(UiMessage uiMessage) {
         System.out.println(uiMessage.getMessage());
     }
 
-    /**
-     * Displays the required error message in the UI, given the type of exception thrown.
-     * @param exception Exception thrown by the application.
-     */
+    @Override
     public void showError(DukeException exception) {
         System.out.println(exception.getMessage());
     }
 
-    public void showTasks(TaskList matchingTasks) {
+    @Override
+    public void showTasks(TaskList tasks) {
         System.out.println("Here are the matching tasks in your list:");
-        matchingTasks.printList();
+        tasks.printList();
     }
 
 //    public String getResponse() {

@@ -91,7 +91,7 @@ public class Ui {
      * @param numberOfTasks the remaining number of Tasks in the ArrayList tasks.
      */
     public void printDelete(Task taskToBeRemoved, int numberOfTasks) {
-        StringBuilder sb = new StringBuilder("Noted. I've removed this task:");
+        StringBuilder sb = new StringBuilder("Noted. I've removed this task:\n");
         sb.append("  " + taskToBeRemoved + "\n");
         sb.append("Now you have " + numberOfTasks + " tasks in the list.");
 
@@ -106,7 +106,7 @@ public class Ui {
      */
     public void printAdd(Task newTaskToBeAdded, int numberOfTasks) {
         StringBuilder sb = new StringBuilder("Got it. I've added this task:\n");
-        sb.append("  " + newTaskToBeAdded);
+        sb.append("  " + newTaskToBeAdded + "\n");
         sb.append("Now you have " + numberOfTasks + " tasks in the list.");
 
         printInGui(sb.toString());
@@ -139,8 +139,10 @@ public class Ui {
     public void printMatches(ArrayList<Task> matchingTasks) {
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
         for (int i = 1; i <= matchingTasks.size(); i++) {
-            sb.append(i + "." + matchingTasks.get(i - 1));
+            sb.append(i + "." + matchingTasks.get(i - 1) + "\n");
         }
+
+        printInGui(sb.toString());
     }
 
     /**

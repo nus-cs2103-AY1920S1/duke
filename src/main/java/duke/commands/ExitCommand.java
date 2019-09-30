@@ -14,7 +14,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public CommandResult execute() {
-        String exitMessage = "Bye. Hope to see you again soon!\n";
+        String exitMessage = "Bye. Hope to see you again soon!\nYou may close the application now.\n";
         return new CommandResult(exitMessage);
     }
 

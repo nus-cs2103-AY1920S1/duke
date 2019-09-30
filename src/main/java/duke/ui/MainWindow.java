@@ -59,6 +59,8 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-        userInput.clear();
+        if (response.equals("Bye. Hope to see you again soon!\nYou may close the application now.\n")) {
+            userInput.setDisable(true);
+        }
     }
 }

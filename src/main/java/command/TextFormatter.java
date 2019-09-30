@@ -114,9 +114,10 @@ public class TextFormatter {
     static String helloFormat() {
         String start = "Hello! I'm Duke\n    What can I do for you?";
         String converted = "    " + start + "\n";
-        String help = "    Type help to find out how to use DUKE";
+        String help = "    Type help to find out how to use DUKE\n";
+        String warning = "    REMEMBER TO TYPE BYE TO QUIT. ELSE, YOUR DATA WILL NOT BE SAVED!! \n";
         System.out.println(converted);
-        return  converted + help;
+        return  converted + help + warning;
     }
 
     /**

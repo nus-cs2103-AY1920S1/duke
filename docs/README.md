@@ -23,10 +23,10 @@
     - Example of usage: `deadline cs2103t user guide /by 12/12/12 2359`
 - `list` - Lists all the tasks that are currently stored in the programme.
 
-- `delete <task numner>` - Deletes a task from the list.
+- `delete <task number>` - Deletes a task from the list.
     - Example of usage: `delete 3`
     
-- `done <task numner>` - Marks a task from the list as done.
+- `done <task number>` - Marks a task from the list as done.
 
 - `find <keyword>` - Searches for tasks that match the given keyword.
     - Example of usage: `find wedding`

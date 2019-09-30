@@ -7,6 +7,7 @@ import seedu.duke.command.Command;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.DoneCommand;
 import seedu.duke.command.ExitCommand;
+import seedu.duke.command.GreetCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.SearchCommand;
@@ -27,26 +28,32 @@ public class Parser {
         try {
             String[] commandTokens = Utils.trimAll(fullCommand.split(" ", 2));
             switch (commandTokens[0]) {
-                case "todo":
-                case "deadline":
-                case "event":
-                    return parseAddCommand(fullCommand);
-                case "delete":
-                case "rm":
-                    return parseDeleteCommand(commandTokens);
-                case "list":
-                case "ls":
-                    return new ListCommand();
-                case "done":
-                    return parseDoneCommand(commandTokens);
-                case "bye":
-                case "exit":
-                case ":q":
-                    return new ExitCommand();
-                case "search":
-                    return parseSearchCommand(commandTokens);
-                default:
-                    return new HelpCommand();
+            case "todo":
+            case "deadline":
+            case "event":
+                return parseAddCommand(fullCommand);
+            case "delete":
+            case "rm":
+                return parseDeleteCommand(commandTokens);
+            case "list":
+            case "ls":
+                return new ListCommand();
+            case "done":
+                return parseDoneCommand(commandTokens);
+            case "bye":
+            case "exit":
+            case ":q":
+                return new ExitCommand();
+            case "search":
+                return parseSearchCommand(commandTokens);
+            case "hi":
+            case "hello":
+                return new GreetCommand();
+            case "help":
+            case "h":
+                return new HelpCommand();
+            default:
+                throw new DukeException("Are you lost? You can checkout the 'help' command.");
             }
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
@@ -68,16 +75,16 @@ public class Parser {
 
         try {
             switch (tokens[0]) {
-                case "E":
-                    return Optional.of(Event.fromFormattedString(tokens));
-                case "D":
-                    return Optional.of(Deadline.fromFormattedString(tokens));
-                case "T":
-                    return Optional.of(ToDo.fromFormattedString(tokens));
-                default:
-                    // impossible.
-                    assert false;
-                    return Optional.empty();
+            case "E":
+                return Optional.of(Event.fromFormattedString(tokens));
+            case "D":
+                return Optional.of(Deadline.fromFormattedString(tokens));
+            case "T":
+                return Optional.of(ToDo.fromFormattedString(tokens));
+            default:
+                // impossible.
+                assert false;
+                return Optional.empty();
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -94,15 +101,15 @@ public class Parser {
     private static AddCommand parseAddCommand(String fullCommand) throws DukeException {
         String[] commandTokens = fullCommand.split(" ", 2);
         switch (commandTokens[0]) {
-            case "todo":
-                return parseNewTodoCommand(fullCommand);
-            case "deadline":
-                return parseNewDeadlineCommand(fullCommand);
-            case "event":
-                return parseNewEventCommand(fullCommand);
-            default:
-                assert false;
-                throw new DukeException("Neither todo, event nor deadline.");
+        case "todo":
+            return parseNewTodoCommand(fullCommand);
+        case "deadline":
+            return parseNewDeadlineCommand(fullCommand);
+        case "event":
+            return parseNewEventCommand(fullCommand);
+        default:
+            assert false;
+            throw new DukeException("Neither todo, event nor deadline.");
         }
     }
 

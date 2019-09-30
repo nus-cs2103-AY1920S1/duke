@@ -3,7 +3,6 @@ plugins {
     id 'application'
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
-    // id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
 checkstyle {
@@ -11,14 +10,20 @@ checkstyle {
 }
 
 group 'seedu.duke'
-version '0.1.0'
+version '0.2.0a'
 
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.2.0a"
+    archiveClassifier = null
+    archiveAppendix = null
+}
 repositories {
     mavenCentral()
 }
 
 application {
-    // Change this to your main class.
     mainClassName = "seedu.duke.gui.Launcher"
 }
 
@@ -42,22 +47,3 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-
-shadowJar {
-    archiveBaseName = "duke"
-    archiveVersion = "0.1.3"
-    archiveClassifier = null
-    archiveAppendix = null
-}
-
-shadowJar {
-    archiveBaseName = "duke"
-    archiveVersion = "0.1.3"
-    archiveClassifier = null
-    archiveAppendix = null
-}
-
-// javafx {
-//     version = "11.0.2"
-//     modules = [ 'javafx.controls', 'javafx.fxml' ]
-// } 

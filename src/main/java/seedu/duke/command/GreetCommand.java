@@ -5,18 +5,13 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.task.TaskList;
 
-public class ExitCommand extends Command {
-    public ExitCommand() {
+public class GreetCommand extends Command {
+    public GreetCommand() {
         super();
     }
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        return "Exiting duke. Your tasks will be saved.";
+        return "Hello! How can I help you?";
     }
-
-    // @Override
-    // public boolean isExit() {
-    // return true;
-    // }
 }

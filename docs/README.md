@@ -1,32 +1,30 @@
 # Duke - User Guide
-:repoURL: https://github.com/anqichen9856/duke
 
-*By Chen Anqi, Sept 2019*
+__By Chen Anqi, Sept 2019__
 
 ## 1. Introduction
 Duke is a chat bot that help users track their tasks, deadlines and events. 
 While Duke has a Graphical User Interface (GUI), it is optimized for those who prefer to work with a Command Line Interface (CLI).
 If you can type fast, Duke can assist you in managing your tasks faster than traditional GUI apps.
-Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Interested? Read the "Quick Start" below to get started. Enjoy!
 
 ## 2. Quick Start
 
-.  Ensure you have Java `11` or above installed in your Computer.
-.  Download the latest `duke-{version}.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Duke.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
-+
-image::Ui.png[width="790"]
-+
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
-e.g. typing *`list`* and pressing kbd:[Enter] will display a list of your tasks, deadlines and events.
-.  Some example commands you can try:
+- Ensure you have Java `11` or above installed in your Computer.
+- Download the latest `duke-{version}.jar` [here](https://github.com/anqichen9856/duke/releases).
+- Copy the file to the folder you want to use as the home folder for your Duke.
+- Double-click the file to start the app. The GUI should appear in a few seconds.
+![Ui image](https://github.com/anqichen9856/duke/docs/Ui.png)
 
-* **`todo`**`todo read books` : adds a normal task `read books` to Duke.
-* **`delete`**`3` : deletes the 3rd task shown in the current list
-* *`exit`* : exits the app
+- Type the command in the command box and press `Enter` to execute it.
+e.g. typing `list` and pressing `Enter` will display a list of your tasks, deadlines and events.
+- Some example commands you can try:
 
-.  Refer to <<Features>> for details of each command.
+- `todo read books` : adds a normal task `read books` to Duke.
+- `delete 3` : deletes the 3rd task shown in the current list
+- `exit` : exits the app
+
+- Refer to "Features" & "Usage" below for details of each command.
 
 ## 3. Features 
 
@@ -67,7 +65,7 @@ be stored in the above mentioned location.
 You can exit Duke by typing a single word _"bye"_, and the app will be automatically terminated.
 
 
-## Usage 
+## 4. Usage 
 
 ### `todo` - add a normal task
 
@@ -76,7 +74,9 @@ By default, every newly added task is marked as undone (indicated by 'X').
 
 Example of usage: 
 
-`todo read books`
+```
+todo read books
+```
 
 Expected outcome:
 
@@ -94,7 +94,9 @@ By default, every newly added task is marked as undone (indicated by 'X').
  
 Example of usage: 
  
-`deadline project submission /by 2/10/2019 2359`
+```
+deadline project submission /by 2/10/2019 2359
+```
  
 Expected outcome:
  
@@ -111,7 +113,9 @@ By default, every newly added task is marked as undone (indicated by 'X').
 
 Example of usage: 
  
-`event team meeting /at 18/09/2019 1600-1800`
+```
+event team meeting /at 18/09/2019 1600-1800
+```
  
 Expected outcome:
  
@@ -129,7 +133,9 @@ _Note that the index is with respect to the task list, not the current displayed
  
 Example of usage #1: 
   
-`update 1 description read five books`
+```
+update 1 description read five books
+```
   
 Expected outcome #1:
   
@@ -141,7 +147,9 @@ Expected outcome #1:
  
 Example of usage #2: 
   
-`update 2 time 19/09/2019 2359`
+```
+update 2 time 19/09/2019 2359
+```
   
 Expected outcome #2:
   
@@ -152,7 +160,9 @@ Expected outcome #2:
 ```
 Example of usage #3: 
   
-`update 3 time 25/09/2019 1400-1600`
+```
+update 3 time 25/09/2019 1400-1600
+```
   
 Expected outcome #3:
   
@@ -169,7 +179,9 @@ _Note that the index is with respect to the task list, not the current displayed
  
 Example of usage: 
   
-`done 1`
+```
+done 1
+```
   
 Expected outcome:
   
@@ -184,7 +196,9 @@ Duke will display a complete list of existing tasks that have been recorded.
  
 Example of usage: 
   
-`list`
+```
+list
+```
   
 Expected outcome:
   
@@ -202,7 +216,9 @@ _Note that the search is case sensitive._
  
 Example of usage: 
   
-`find submission`
+```
+find submission
+```
   
 Expected outcome:
   
@@ -218,7 +234,9 @@ _Note that the index is with respect to the task list, not the current displayed
  
 Example of usage: 
   
-`delete 1`
+```
+delete 1
+```
   
 Expected outcome:
   
@@ -233,7 +251,9 @@ To exit Duke, type `bye`. Duke will automatically terminate in one second.
  
 Example of usage: 
   
-`bye`
+```
+bye
+```
   
 Expected outcome:
   
@@ -242,21 +262,21 @@ Expected outcome:
  (Exits)
 ```
 
-## 4. Command Summary
+## 5. Command Summary
 
-* *Add a normal task* `todo [description]` +
+* *Add a normal task* `todo [description]` 
 e.g. `todo read books`
-* *Add a deadline* `deadline [description] /by [d/MM/yyyy HHmm]` +
+* *Add a deadline* `deadline [description] /by [d/MM/yyyy HHmm]`
 e.g. `deadline project submission /by 20/09/2019 2359`
-* *Add an event* `event [description] /at [d/MM/yyyy HHmm-HHmm]` +
+* *Add an event* `event [description] /at [d/MM/yyyy HHmm-HHmm]` 
 e.g. `event meeting /at 1/10/2019 1400-1600`
-* *Delete a task* : `delete INDEX` +
+* *Delete a task* : `delete INDEX` 
 e.g. `delete 3`
-* *Mark a task as done* : `done INDEX` +
+* *Mark a task as done* : `done INDEX` 
 e.g. `done 1`
-* *Update a task* : `update INDEX [attribute] [new value]` +
+* *Update a task* : `update INDEX [attribute] [new value]` 
 e.g. `update 2 time 20/09/2019 2300`
-* *Find a task* : `find KEYWORD` +
+* *Find a task* : `find KEYWORD`
 e.g. `find project`
 * *List all tasks* : `list`
 * *Exit the app* : `exit`

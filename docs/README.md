@@ -1,7 +1,34 @@
-# User Guide - Duke
+# Duke - User Guide
+:repoURL: https://github.com/anqichen9856/duke
 
+*By Chen Anqi, Sept 2019*
 
-## Features 
+## 1. Introduction
+Duke is a chat bot that help users track their tasks, deadlines and events. 
+While Duke has a Graphical User Interface (GUI), it is optimized for those who prefer to work with a Command Line Interface (CLI).
+If you can type fast, Duke can assist you in managing your tasks faster than traditional GUI apps.
+Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+
+## 2. Quick Start
+
+.  Ensure you have Java `11` or above installed in your Computer.
+.  Download the latest `duke-{version}.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your Duke.
+.  Double-click the file to start the app. The GUI should appear in a few seconds.
++
+image::Ui.png[width="790"]
++
+.  Type the command in the command box and press kbd:[Enter] to execute it. +
+e.g. typing *`list`* and pressing kbd:[Enter] will display a list of your tasks, deadlines and events.
+.  Some example commands you can try:
+
+* **`todo`**`todo read books` : adds a normal task `read books` to Duke.
+* **`delete`**`3` : deletes the 3rd task shown in the current list
+* *`exit`* : exits the app
+
+.  Refer to <<Features>> for details of each command.
+
+## 3. Features 
 
 ### Add tasks to track them
 You can let Duke keep track of your tasks by providing the _description_ and _time_ (if applicable).
@@ -214,3 +241,22 @@ Expected outcome:
  Bye. Hope to see you again soon!
  (Exits)
 ```
+
+## 4. Command Summary
+
+* *Add a normal task* `todo [description]` +
+e.g. `todo read books`
+* *Add a deadline* `deadline [description] /by [d/MM/yyyy HHmm]` +
+e.g. `deadline project submission /by 20/09/2019 2359`
+* *Add an event* `event [description] /at [d/MM/yyyy HHmm-HHmm]` +
+e.g. `event meeting /at 1/10/2019 1400-1600`
+* *Delete a task* : `delete INDEX` +
+e.g. `delete 3`
+* *Mark a task as done* : `done INDEX` +
+e.g. `done 1`
+* *Update a task* : `update INDEX [attribute] [new value]` +
+e.g. `update 2 time 20/09/2019 2300`
+* *Find a task* : `find KEYWORD` +
+e.g. `find project`
+* *List all tasks* : `list`
+* *Exit the app* : `exit`

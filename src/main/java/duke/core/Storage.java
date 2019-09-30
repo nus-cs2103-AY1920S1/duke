@@ -31,9 +31,12 @@ public class Storage {
      */
     Storage(String filePath) {
         this.file = new File(filePath);
+        //@@author chensu2436-reused
+        //Reused from https://www.codota.com/web/assistant/code/rs/5c780d58df79be0001ddf2df#L44
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
         }
+        //@@author
     }
 
     /**

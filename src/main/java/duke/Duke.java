@@ -59,9 +59,6 @@ public class Duke {
         try {
             Command c = Parser.parse(input);
             c.execute(tasks, ui);
-            if (c.isExit()) {
-                System.exit(0);
-            }
         } catch (DukeException e) {
             ui.showError(e);
         }

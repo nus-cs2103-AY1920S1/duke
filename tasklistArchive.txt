@@ -1,4 +1,0 @@
-Deadline | Not done | Save the world /by Tue Dec 31 23:59:00 SGT 2019
-Event    | Not done | Be the next Ironman /at Wed Jan 01 00:00:00 SGT 2020
-To-Do    | Done     | Go on a date with MJ
-End of file

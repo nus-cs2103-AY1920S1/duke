@@ -170,5 +170,5 @@ Example of usage (partial word):
 
 Expected outcome:
 ```
-1. [E][✗] party at school (at: 4th of December, 2019, 6pm-10.30pm)
+2. [E][✗] party at school (at: 4th of December, 2019, 6pm-10.30pm)
 ```

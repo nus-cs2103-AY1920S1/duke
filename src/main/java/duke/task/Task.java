@@ -39,6 +39,12 @@ public abstract class Task {
     @Override
     public abstract String toString();
 
+    /**
+     * Helper function for snooze command. Only applicable to Deadline and Event type tasks.
+     * @param info User input. Contains task index and new date time.
+     * @return
+     * @throws DukeException
+     */
     public abstract Task updateDateTime(String info) throws DukeException;
 }
 

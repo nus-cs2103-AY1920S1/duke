@@ -213,6 +213,12 @@ public class TaskManager {
         return todoList.indexOf(task);
     }
 
+    /**
+     * Function to change the time associated with task
+     * @param input  user input for snooze command
+     * @return
+     * @throws DukeException
+     */
     protected Task delayTask(String input) throws DukeException{
         try{
             String[] userInput = input.split(" ", 2);

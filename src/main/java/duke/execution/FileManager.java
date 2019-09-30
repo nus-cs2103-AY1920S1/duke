@@ -153,6 +153,12 @@ public class FileManager {
         }
     }
 
+    /**
+     * Edits the time associated with task
+     * @param editIndex Index of task to edit
+     * @param editedTask Task that is being edited
+     * @throws DukeException
+     */
     protected void fileEditTime(int editIndex, Task editedTask) throws DukeException{
         StringBuilder finalInput = new StringBuilder();
         try {

@@ -95,6 +95,7 @@ Example:<br>
   Gives result(s) of all tasks that contains "read book" in their descriptions.<br>
 
 ## 4. Command Summary
+
 | Command | Format 
 | --- | --- |
 | **Add** | `todo ACTIVITY_NAME`<br> `deadline ACTIVITY_NAME / by TIME`<br>`event ACTIVITY_NAME / at TIME` 

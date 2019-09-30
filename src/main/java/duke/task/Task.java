@@ -68,9 +68,6 @@ public abstract class Task implements Serializable {
      */
     public void addTag(String tag) {
         this.tag = tag;
-        // todo: replace with proper UI implementation
-        System.out.println("Nice! I've added a tag to this task:");
-        System.out.println(this.toString());
     }
 
     private String getTag() {

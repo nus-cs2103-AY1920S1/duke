@@ -16,10 +16,13 @@ public enum UiMessage {
     TASK_ADDED("Okay! I've added the task."),
     TASK_DONE("Nice! I've marked this task as done:"),
     TASK_SNOOZED("Okay! The task has been snoozed by 1 day."),
+    TASK_DELETED("Noted. I've removed this task: "),
     MATCHING_TASKS("Here are the matching tasks in your list..."),
     TASK_TAGGED("Nice! I've added a tag to this task:"),
     TASK_PRIORITISED("Sweet! I've added a priority to this task: "),
     // helpers
+    TASKS_STATUS_FRONT("Now you have "),
+    TASKS_STATUS_BACK(" items in this list."),
     HINT_LIST("Use list to see all your tasks!");
 
     private final String message;

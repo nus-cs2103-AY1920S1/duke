@@ -1,6 +1,8 @@
 todo read book | 1
 event cook food /at 28/08/2019 13:00:00 | 0
-todo feed Yuki the dog | 0
-todo eat dinner | 0
+todo eat dinner | 1
 deadline soccer match /by 20/09/2019 15:00:00 | 0
 todo shower | 1
+deadline buy groceries /by 10/10/2019 15:00:00 | 0
+todo water the plants | 0
+todo buy bread | 0

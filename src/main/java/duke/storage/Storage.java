@@ -7,7 +7,6 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
@@ -23,6 +22,7 @@ public class Storage {
 
     private List<Task> tasks = new ArrayList<Task>();
     private String filePath;
+    private File file;
 
     /**
      * Creates a new Storage instance with the given path to the file.
@@ -31,6 +31,7 @@ public class Storage {
      */
     public Storage(String path) {
         this.filePath = path;
+        this.file = new File(filePath);
     }
 
     /**
@@ -52,19 +53,22 @@ public class Storage {
      * to be stored into a list.
      *
      * @return a list of Tasks.
-     * @throws FileNotFoundException exception produced by failure of finding a file.
      * @throws DukeException exception produced by reading empty file.
      */
-    public List<Task> load() throws FileNotFoundException, DukeException {
-        // Create a File for the given file path
-        File f = new File(filePath);
-        // Create a Scanner using the File as the source
-        Scanner s = new Scanner(f);
-        if (!s.hasNext()) throw new DukeException("Your task list is currently empty.");
-        while (s.hasNext()) {
-            readTasks(s.nextLine());
+    public List<Task> load() throws DukeException {
+        try {
+            if (file.createNewFile()) System.out.println("File created");
+            // Create a Scanner using the File as the source
+            Scanner s = new Scanner(file);
+            if (!s.hasNext()) throw new DukeException("Your task list is currently empty.");
+            while (s.hasNext()) {
+                readTasks(s.nextLine());
+            }
+            return tasks;
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
         }
-        return tasks;
+
     }
 
     /**

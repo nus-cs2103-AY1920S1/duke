@@ -169,7 +169,10 @@ public class TaskList {
      * @param n the position of task in the list of tasks.
      * @return the task deleted from the list.
      */
-    public Task delete(int n) {
+    public Task delete(int n) throws DukeException {
+        if ((n < 0) || (n > tasks.size())) {
+            throw new DukeException("\u2639 Oops, there is no matching task in the list.");
+        }
         Task task = this.tasks.get(n - 1);
         // Delete task from list
         this.tasks.remove(task);

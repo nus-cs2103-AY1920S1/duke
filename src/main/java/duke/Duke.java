@@ -1,38 +1,45 @@
 package duke;
 
-import java.util.Scanner;
-import java.util.ArrayList;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
-import java.io.File;
-
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.task.Task;
 import duke.ui.Ui;
 import duke.dukeexception.DukeException;
 import duke.command.Command;
 import duke.parser.Parser;
 
-public class Duke {
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
 
+/**
+ * duke.view.Main driver class for Duke application. Duke application helps the user to manage tasks and allows the user to
+ * add, remove, mark a task as completed, list all tasks and find all tasks containing a keyword.
+ */
+public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    private static final String INDENT_SPACING = "    ";
-    private static final String ROOT_DIRECTORY = "C:/Users/gbrls/OneDrive/Desktop/duke-master/src/main/java/duke/";
-    //private static final String SAVE_DIRECTORY = "/data";
-    //private static final String SAVE_FILE_NAME = "tasks.txt";
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    public Duke(String filePath) {
+    private static final String SAVE_DIRECTORY =
+            "C:/Users/gbrls/OneDrive/Desktop/duke-master/src/main/java/duke/data/tasks.txt";
+
+    /**
+     * Loads a save file and generates a new Ui, Storage and TaskList object stored as instance variables.
+     */
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(SAVE_DIRECTORY);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -40,29 +47,14 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command command = Parser.parse(fullCommand);
-                command.execute(tasks, ui, storage);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    
+    public String getResponse(String input) { //find a way to show welcome
+        try {
+            Command command = Parser.parse(input);
+            command.execute(tasks, ui, storage); //refactor way to display ui message
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
         }
+        return "Duke heard: " + ui.getOutput();
     }
-
-    public static void main(String[] args) {
-        new Duke(ROOT_DIRECTORY + "data/tasks.text").run();
-    }
-
-
-
 }

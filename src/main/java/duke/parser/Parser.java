@@ -1,7 +1,5 @@
 package duke.parser;
 
-import java.io.IOException;
-
 import java.util.ArrayList;
 
 import duke.datetime.DateTime;
@@ -62,7 +60,7 @@ public class Parser {
         }
     }
 
-    private static int parseDoneCommand(String[] newTaskSplit) {
+    public static int parseDoneCommand(String[] newTaskSplit) {
         int completedTaskNum = Integer.parseInt(newTaskSplit[1]) - 1;
         return completedTaskNum;
     }

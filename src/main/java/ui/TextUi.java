@@ -1,17 +1,11 @@
 package ui;
 
-import javafx.collections.ObservableList;
-import tasklist.Task;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-
 /**
  * Contains all the text ui used in the program.
  */
 
 public class TextUi {
-    private static final String DIVIDER = "    ____________________________________________________________";
+    private static final String DIVIDER = "    ________________________________________________________________________";
 
     public TextUi() {
 
@@ -135,6 +129,31 @@ public class TextUi {
     public void printDescriptionError() {
         System.out.println(DIVIDER + "\n"
                 + "     OOPS!!! I'm sorry but Description should not be empty");
+        System.out.println(DIVIDER);
+    }
+
+    /**
+     * message for help.
+     */
+    public void printhelp() {
+        System.out.println(DIVIDER + "\n"
+                + "     add todo: `todo DESCRIPTION`\n"
+                + "     add deadline: `deadline DESCRIPTION /by DATE`\n"
+                + "     add event: `event DESCRIPTION /at DATE`\n"
+                + "     add notebook: `notebook DESCRIPTION`\n"
+                + "     find a task/notebook: `find KEYWORD(S)`\n"
+                + "     mark a task as done: `done [TASKINDEX]`\n"
+                + "     delete: `delete [TASKINDEX]`\n"
+                + "     add a note:\n"
+                + "          - `addnotes [TASKINDEX] CATEGORY | DESCRIPTION`\n"
+                + "          - `addnotes [TASKINDEX] CATEGORY | DESCRIPTION /by DATE`\n"
+                + "          - `addnotes [TASKINDEX] CATEGORY | DESCRIPTION /at DATE`\n"
+                + "     delete note: `deletenotes [TASKINDEX] {NOTEINDEX}`\n"
+                + "     find note: `findnotes KEYWORD(S)`\n"
+                + "     list task/notebook: `list`\n"
+                + "     list notes: `shownotes [TASKINDEX]`\n"
+                + "     list of commands: `help`\n"
+                + "     Please visit this website to view the full manual: https://lzw12345.github.io/duke/");
         System.out.println(DIVIDER);
     }
 

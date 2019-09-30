@@ -142,6 +142,9 @@ public class Parser {
                 scheduler.getTasks().get(taskindex).removeNote(noteIndex);
                 scheduler.shownotes(taskindex);
                 break;
+            case "help":
+                ui.printhelp();
+                break;
             default:
                 ui.printErrorMsg1();
                 scheduler.clearUI();

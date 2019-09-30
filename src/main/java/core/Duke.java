@@ -19,7 +19,7 @@ import java.io.PrintStream;
 public class Duke {
     private TaskList tasks;
     private JsonParser jsonParser;
-    private static String FILEPATH = "../SaveFile.json";
+    private static String FILEPATH = "./SaveFile.json";
 
 
     public Duke() throws IOException {

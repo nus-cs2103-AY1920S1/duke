@@ -15,13 +15,14 @@
     9. [Finding a note from a task/notebook](#39-deleting-a-note-from-a-tasknotebook)
     10. [Finding a note](#310-finding-a-note)
     11. [Listing all task/notebooks](#311-listing-all-tasksnotebooks)
-    12. [listing all notes from a task/notebook](#312-listing-all-notes-from-a-tasknotebook)
-    13. [sorting the columns](#313-sorting-the-columns)
-    14. [resizing the columns](#314-resizing-the-columns)
+    12. [Listing all notes from a task/notebook](#312-listing-all-notes-from-a-tasknotebook)
+    13. [Sorting the columns](#313-sorting-the-columns)
+    14. [Resizing the columns](#314-resizing-the-columns)
+    15. [List of commands](#315-list-of-commands)
  4. [FAQ](#4-faq)
  5. [Command summary](#5-command-summary)
 																																																																										 
-
+---
 ## 1.Introduction <a name="introduction"></a>
 Task Book is a simple scheduler with a built in note taking function. It features a command line interface and a helpful chatbot for those who like a more interactive experience. The table formatted data also provides an easy and intuitive way to sort and view the items.
 
@@ -37,6 +38,7 @@ Task Book is a simple scheduler with a built in note taking function. It feature
 	- ```list``` : lists all tasks and notebooks
 	- ```todo meet john``` adds a to do task to the task list
 	-  ```done [1] ``` marks the task with the index 1 as done
+	- `help` shows a list of all the commands
 
 ## 3. Features  <a name="Features"></a>
 
@@ -46,9 +48,9 @@ Command Format
  - numbers in curly brackets immediately after the task reference are used to indicate the note to be referenced. e.g. ```deletenotes [1] {2}``` deletes the note with index 2 in the task/notebook with index 1  
  - Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `todo DESCRIPTION`, `description` is a parameter which can be used as `todo meet with a friend`.
  - All DATE inputs should be input in this format: d/M/yyyy HHmm e.g. `2/2/2019 2345` or `02/02/2019 0945`
-
+ - **DO NOT** use / special character in the description or category fields when creating a new note or task/notebook
 ### 3.1 Adding  a Todo task <a name="Todo"></a>
-Adds a to do task to the task list (note **DO NOT** use / characters in description) 
+Adds a to do task to the task list 
 <br>Format: `todo DESCRIPTION`
 <br>Examples:
  - `todo check the weather`
@@ -56,22 +58,22 @@ Adds a to do task to the task list (note **DO NOT** use / characters in descript
  
  
 ### 3.2 Adding a deadline task <a name="Deadline"></a>
-Adds a deadline task to the task list (note **DO NOT** use / characters in description) 
+Adds a deadline task to the task list 
 <br>Format: `deadline DESCRIPTION /by DATE`
 <br>Examples: 
- - `deadline hand up homework for CS2103 /by 22/2/2019 `
- - `deadline finish eating cereal before expiry /by 1/12/2019`
+ - `deadline hand up homework for CS2103 /by 22/2/2019 1234`
+ - `deadline finish eating cereal before expiry /by 1/12/2019 1400`
 
 
 ### 3.3 Adding a event task <a name="Event"></a>
-Adds an event task to the task list (note **DO NOT** use / characters in description) 
+Adds an event task to the task list 
 <br>Format: `event DESCRIPTION /at DATE`
 <br>Examples:
- - `event john's birthday /at 22/12/2019`
+ - `event john's birthday /at 22/12/2019 2300`
  - `event 9.9 lazada sale /at 9/9/2019 0000`
 
 ### 3.4 Adding a notebook
-Adds a notebook to the list (note **DO NOT** use / characters in description) 
+Adds a notebook to the list 
 <br>Format: 'notebook DESCRIPTION'
 <br>Examples:
  - `notebook weight management`
@@ -84,7 +86,7 @@ Finds a task/notebook with a description matching a keyword or phrase exactly
  - `find test`
  - `find grocery list`
 
-### 3.6 mark a task/notebook as completed
+### 3.6 Mark a task/notebook as completed
 Marks a task/notebook as done 
 <br>Format: `done [TASKINDEX]`
 <br>Examples
@@ -114,12 +116,12 @@ Deletes a note from the indicated task/notebook (inputting NOTEINDEX as 0 will d
  - `deletenotes [1]{1}`
  
  
-### 3.10 finding a note
+### 3.10 Finding a note
 Finds a note from all tasks/notebooks with a description matching a keyword or phrase exactly
 <br> Format: `findnotes KEYWORD(S)`
 <br> Examples:
- - `find mitochondria`
- - `find power house`
+ - `findnotes mitochondria`
+ - `findnotes power house`
 
 ### 3.11 Listing all tasks/notebooks
 lists all the tasks/notebooks 
@@ -139,22 +141,42 @@ Sort the columns in ascending or descending order by clicking the right corner o
 ### 3.14 Resizing the columns
 Resize the columns by clicking and dragging the edges of the column headers
 
+### 3.15 List of commands
+To view a list of commands
+<br> Format: `help`
+
 
 ## 4 FAQ 
 Q: Where is the save file stored?
 <br>A: The save file is stored in the same folder as the program. It is called SaveFile.json
 
 ## 5 Command Summary
- - add todo `todo DESCRIPTION`
+ - add todo: `todo DESCRIPTION`
  <br> e.g. `todo check the fridge`
- - add deadline `deadline DESCRIPTION /by DATE`
+ - add deadline: `deadline DESCRIPTION /by DATE`
  <br> e.g. `deadline assignment 1 /by 22/2/2222 22222`
- - add event `event DESCRIPTION /at DATE`
- <br>`event jame's birthday /at 22/12/2019 1111`
- - add notebook `notebook DESCRIPTION`
+ - add event: `event DESCRIPTION /at DATE`
+ <br>e.g. `event jame's birthday /at 22/12/2019 1111`
+ - add notebook: `notebook DESCRIPTION`
  <br> `notebook lecture notes`
- - find a task/notebook `find KEYWORD(S)`
- <br> `find biology`
- - mark a task as done `done [TASKINDEX]`
- <br> `done [1]`
- - delete
+ - find a task/notebook: `find KEYWORD(S)`
+ <br>e.g. `find biology`
+ - mark a task as done: `done [TASKINDEX]`
+ <br> e.g. `done [1]`
+ - delete: `delete [TASKINDEX]`
+ <br>e.g. `delete [3]`
+ -  add a note:
+     - `addnotes [TASKINDEX] CATEGORY | DESCRIPTION`
+     - `addnotes [TASKINDEX] CATEGORY | DESCRIPTION /by DATE`
+     - `addnotes [TASKINDEX] CATEGORY | DESCRIPTION /at DATE`
+ <br> e.g.
+     - `addnotes [1] addition | a+x`
+     - `addnotes [2] new version was created /at 2/2/2019 2344`
+ - delete note: `deletenotes [TASKINDEX] {NOTEINDEX}`
+ <br> e.g. `deletenotes [1]{1}`
+ - find note: `findnotes KEYWORD(S)`
+ <br> e.g. `findnotes mitochondria`
+ - list task/notebook: `list`
+ - list notes: `shownotes [TASKINDEX]`
+ <br> e.g.`shownotes [1]`
+ - list of commands: `help`

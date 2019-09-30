@@ -38,12 +38,6 @@ public class NewGui extends VBox {
     }
 
     @FXML
-    public void initialize() {
-        systemOutput.setText("hi my name is duke");
-    }
-
-
-    @FXML
     private void handleUserInput() throws IOException {
         String input = userInput.getText();
         String response = duke.getResponse(input);

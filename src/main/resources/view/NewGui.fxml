@@ -21,7 +21,7 @@
             </ImageView>
             <ScrollPane HBox.hgrow="ALWAYS">
                <content>
-                  <Label fx:id="systemOutput" text="Hi, my name is duke , how can I help you today?" />
+                  <Label fx:id="systemOutput" text="Hi, my name is duke , what can I do for you today? You can type 'help' if you're unsure of the commands." />
                </content>
             </ScrollPane>
          </children>

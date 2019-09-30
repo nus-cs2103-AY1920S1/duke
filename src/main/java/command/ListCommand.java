@@ -10,7 +10,9 @@ import java.util.ArrayList;
  * A Command to print a list of all the Tasks in the TaskList.
  */
 public class ListCommand implements Command {
-    public ListCommand() { }
+    public ListCommand() {
+
+    }
 
     /**
      * Prints into the console all the Tasks in the TaskList.

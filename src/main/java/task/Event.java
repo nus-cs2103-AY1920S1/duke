@@ -5,9 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * A type of Task that includes a date attribute for the date in which the Task takes place.
- *
- * Also includes two SimpleDateFormatter.
+ * A type of Task that includes a date attribute for the date in which the Task takes place. Also includes two
+ * SimpleDateFormatter.
  */
 public class Event extends Task {
     private Date date;
@@ -23,6 +22,12 @@ public class Event extends Task {
     private SimpleDateFormat formatter = new SimpleDateFormat("d MMM yyyy, hhmma");
 
 
+    /**
+     * Constructor for an Event Task.
+     *
+     * @param name A String representing the name of the Task.
+     * @param dateString A String which represents the date and time of the Task.
+     */
     public Event(String name, String dateString) {
         this.name = name;
 

@@ -5,9 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * A type of Task that includes a date attribute for the Task to be completed by.
- *
- * Also includes two SimpleDateFormatter.
+ * A type of Task that includes a date attribute for the Task to be completed by. Also includes two SimpleDateFormatter.
  */
 public class Deadline extends Task {
     private Date date;
@@ -23,6 +21,12 @@ public class Deadline extends Task {
     private SimpleDateFormat formatter = new SimpleDateFormat("d MMM yyyy, hhmma");
 
 
+    /**
+     * Constructor for a Deadline Task.
+     *
+     * @param name A String which represents the name of the Task.
+     * @param dateString A String which represents the date and time of the Task.
+     */
     public Deadline(String name, String dateString) {
         this.name = name;
 

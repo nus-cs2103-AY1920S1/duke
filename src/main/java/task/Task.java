@@ -3,8 +3,8 @@ package task;
 /**
  * An Abstract Class extended by all the Task type classes.
  *
- * Each Task contains a name and an isDone attribute. Two abstract methods (toFile() and toString()) are meant to be
- * implemented by any classes that extend the Task abstract class.
+ * <p></p>Each Task contains a name and an isDone attribute. Two abstract methods (toFile() and toString()) are meant
+ * to be implemented by any classes that extend the Task abstract class.
  */
 public abstract class Task {
     /**
@@ -42,7 +42,7 @@ public abstract class Task {
     /**
      * Returns a String representing the Task in a format to be saved into the hard disk's storage file.
      *
-     * To be implemented by each individual Task class.
+     * <p></p>To be implemented by each individual Task class.
      *
      * @return A String representation of this Task formatted for the storage file.
      */
@@ -51,7 +51,7 @@ public abstract class Task {
     /**
      * Returns a String representing the Task in a format to be printed into the console.
      *
-     * To be implemented by each individual Task class.
+     * <p></p>To be implemented by each individual Task class.
      *
      * @return A String representation of this Task formatted for printing into the console.
      */

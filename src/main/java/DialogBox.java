@@ -57,6 +57,13 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns the DialogBox for Duke, which is flipped from the User's DialogBox.
+     *
+     * @param text String to be returned as Duke's reply to User input.
+     * @param img Duke's image.
+     * @return Duke's DialogBox.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

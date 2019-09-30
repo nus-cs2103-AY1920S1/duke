@@ -8,7 +8,9 @@ import main.UI;
  * A Command to handle "bye" inputs resulting in a termination of the Duke program.
  */
 public class ByeCommand implements Command {
-    public ByeCommand() { }
+    public ByeCommand() {
+
+    }
 
     /**
      * Prints the bye message via the UI method, UI.bye().

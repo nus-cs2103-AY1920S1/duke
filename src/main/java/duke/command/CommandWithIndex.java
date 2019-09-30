@@ -6,7 +6,7 @@ import duke.task.TaskList;
 /**
  * An abstract class for commands that requires the task index to execute.
  */
-public abstract class CommandWithIndex extends Command{
+public abstract class CommandWithIndex extends Command {
     protected int index;
 
     /**

@@ -81,8 +81,8 @@ public abstract class Task implements Comparable<Task> {
      * Compares two Task objects by their PriorityLevel.
      *
      * @return the int 0 if this Task has same PriorityLevel as the Task in argument;
-     * -1 if PriorityLevel of this Task is higher than the Task in argument;
-     * 1 if the PriorityLevel of this Task is lower than the Task in argument.
+     *      -1 if PriorityLevel of this Task is higher than the Task in argument;
+     *      1 if the PriorityLevel of this Task is lower than the Task in argument.
      */
     @Override
     public int compareTo(Task anotherTask) {
@@ -95,15 +95,15 @@ public abstract class Task implements Comparable<Task> {
                 return -1;
             }
         case MEDIUM:
-            if (otherPriority == PriorityLevel.MEDIUM ) {
+            if (otherPriority == PriorityLevel.MEDIUM) {
                 return 0;
-            } else if (otherPriority == PriorityLevel.LOW){
+            } else if (otherPriority == PriorityLevel.LOW) {
                 return -1;
             } else {
                 return 1;
             }
         case LOW:
-            if (otherPriority == PriorityLevel.LOW ) {
+            if (otherPriority == PriorityLevel.LOW) {
                 return 0;
             } else {
                 return 1;

@@ -1,6 +1,16 @@
 package duke.main;
 
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.PriorityCommand;
+import duke.command.TodoCommand;
 import duke.exception.EmptyDscDukeException;
 import duke.exception.InvalidPriorityDukeException;
 import duke.exception.NoDateDukeException;
@@ -108,7 +118,7 @@ public class Parser {
         }
     }
     
-    private int tryToParseIndex(String index) throws NumberFormatException{
+    private int tryToParseIndex(String index) throws NumberFormatException {
         return Integer.parseInt(index);
     }
 
@@ -164,7 +174,7 @@ public class Parser {
         return c;
     }
 
-    private void checkIfDateAfterKeyword(String keyword, String input, int index) throws NoDateDukeException{
+    private void checkIfDateAfterKeyword(String keyword, String input, int index) throws NoDateDukeException {
         int dateStartIndex = index + keyword.length() + 1;
         if (dateStartIndex > (input.length() - 1)) {
             throw new NoDateDukeException("Index is greater than the input last index");
@@ -194,7 +204,7 @@ public class Parser {
         return c;
     }
 
-    private int findDividerIndex(String input) throws NoDateDukeException{
+    private int findDividerIndex(String input) throws NoDateDukeException {
         int indexOfDivider = input.indexOf('/');
         if (indexOfDivider == -1) {
             throw new NoDateDukeException("Cannot find '/' divider");
@@ -202,21 +212,22 @@ public class Parser {
         return indexOfDivider;
     }
 
-    private String getDscFromRestOfInput(String input, int taskLength) throws EmptyDscDukeException{
+    private String getDscFromRestOfInput(String input, int taskLength) throws EmptyDscDukeException {
         if (input.length() == taskLength) {
             throw new EmptyDscDukeException("Description not provided");
         }
         return input.substring(taskLength + 1);
     }
 
-    private String getDscForEventAndDeadline(String input, int taskLength, int indexOfDivider) throws EmptyDscDukeException {
+    private String getDscForEventAndDeadline(String input, int taskLength, int indexOfDivider)
+            throws EmptyDscDukeException {
         String description = input.substring(taskLength + 1, indexOfDivider - 1);
         checkForEmptyDsc(description);
 
         return description;
     }
 
-    private void checkForEmptyDsc(String dsc) throws EmptyDscDukeException{
+    private void checkForEmptyDsc(String dsc) throws EmptyDscDukeException {
         if (dsc.trim().length() == 0) {
             throw new EmptyDscDukeException("Empty description");
         }
@@ -244,7 +255,7 @@ public class Parser {
         return c;
     }
 
-    private PriorityLevel parsePriorityLevel(String s) throws InvalidPriorityDukeException{
+    private PriorityLevel parsePriorityLevel(String s) throws InvalidPriorityDukeException {
         for (PriorityLevel p : PriorityLevel.values()) {
             if (s.equals(p.name())) {
                 return p;

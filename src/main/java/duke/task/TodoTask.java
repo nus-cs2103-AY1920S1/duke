@@ -35,9 +35,9 @@ public class TodoTask  extends Task {
     @Override
     public String toString() {
         if (this.completed) {
-            return "[T][\u2713] " + description + " " + priority.toString();
+            return "[T][✓] " + description + " " + priority.toString();
         } else {
-            return "[T][\u2717] " + description + " " + priority.toString();
+            return "[T][✗] " + description + " " + priority.toString();
         }
     }
 }

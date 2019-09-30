@@ -44,9 +44,9 @@ public class Deadline extends Task {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         if (this.completed) {
-            sb.append("[D][\u2713] ");
+            sb.append("[D][✓] ");
         } else {
-            sb.append("[D][\u2717] ");
+            sb.append("[D][✗] ");
         }
         sb.append(description);
         sb.append(" (");

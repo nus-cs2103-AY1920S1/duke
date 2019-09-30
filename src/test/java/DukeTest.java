@@ -1,6 +1,10 @@
 import duke.command.Command;
 import duke.main.Parser;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.PriorityLevel;
+import duke.task.TaskList;
+import duke.task.TodoTask;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;

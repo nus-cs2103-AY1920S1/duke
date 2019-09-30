@@ -44,9 +44,9 @@ public class Event extends Task {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         if (this.completed) {
-            sb.append("[E][\u2713] ");
+            sb.append("[E][✓] ");
         } else {
-            sb.append("[E][\u2717] ");
+            sb.append("[E][✗] ");
         }
         sb.append(description);
         sb.append(" (");

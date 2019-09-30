@@ -4,6 +4,8 @@ import softeng.tasks.Task;
 import softeng.tasks.Deadline;
 import softeng.tasks.toDo;
 import softeng.tasks.Event;
+
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -22,8 +24,12 @@ public class Statistics {
 
     public Statistics() {
         tasksDone = new LinkedList<>();
-        Path file = Paths.get("../../stats.txt");
+        Path path = Paths.get("../../stats.txt");
+        File file = new File("../../stats.txt");
         try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
             Scanner fileSc = new Scanner(file).useDelimiter("\\||\\n");
             while (fileSc.hasNext()) {
                 String line = fileSc.nextLine();

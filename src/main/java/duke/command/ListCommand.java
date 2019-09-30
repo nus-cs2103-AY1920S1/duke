@@ -1,15 +1,16 @@
 package duke.command;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Function;
-import java.util.function.IntFunction;
-import java.util.function.Predicate;
-
 import duke.DukeRuntimeException;
 import duke.task.Task;
 import duke.task.TaskList;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class ListCommand implements Command {
     private TaskList tasks;
@@ -42,16 +43,14 @@ public class ListCommand implements Command {
         } catch (DukeRuntimeException e) {
             return List.of(e.getMessage());
         }
-        List<String> messages = new ArrayList<>();
-        messages.add(getHeader.apply(words));
-        int count = 0;
-        for (int i = 0; i < tasks.size(); i++) {
-            if (shouldInclude.test(tasks.get(i))) {
-                count++;
-                messages.add(count + "." + tasks.get(i));
-            }
-        }
-        return messages;
+        List<Task> includedTasks = tasks.stream()
+                .filter(shouldInclude)
+                .collect(Collectors.toList());
+        return Stream.concat(
+                Stream.of(getHeader.apply(words)),
+                IntStream.range(0, includedTasks.size())
+                        .mapToObj(i -> i + 1 + "." + includedTasks.get(i))
+        ).collect(Collectors.toList());
     }
 
     static String extractArgument(String[] words) {

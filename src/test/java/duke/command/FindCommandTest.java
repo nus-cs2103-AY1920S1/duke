@@ -14,8 +14,9 @@ class FindCommandTest {
     @Test
     void run_validIndex_success() {
         List<String> expected = List.of("Here are the matching tasks in your list:",
-                "1." + new TaskImpl("get 3"));
-        List<String> actual = new FindCommand(taskListStub).run(new String[]{"find", "t 3"});
+                "1." + new TaskImpl("stream 1"),
+                "2." + new TaskImpl("stream 10"));
+        List<String> actual = new FindCommand(taskListStub).run(new String[]{"find", "m 1"});
         assertEquals(expected, actual);
     }
 }

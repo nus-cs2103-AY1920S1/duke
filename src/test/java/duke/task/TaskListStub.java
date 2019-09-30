@@ -1,6 +1,8 @@
 package duke.task;
 
 import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class TaskListStub extends TaskList {
     public Task lastAction;
@@ -22,7 +24,12 @@ public class TaskListStub extends TaskList {
 
     @Override
     public int size() {
-        return 5;
+        return 11;
+    }
+
+    @Override
+    public Stream<Task> stream() {
+        return IntStream.range(0, size()).mapToObj(i -> new TaskImpl("stream " + i));
     }
 
     @Override

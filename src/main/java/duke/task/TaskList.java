@@ -1,11 +1,14 @@
 package duke.task;
 
 import duke.DukeException;
+import duke.DukeRuntimeException;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.StringJoiner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TaskList {
     private List<Task> tasks = new ArrayList<>();
@@ -22,8 +25,10 @@ public class TaskList {
      * @param lines List of lines to parse tasks.
      */
     public TaskList(List<String> lines) throws DukeException {
-        for (String line : lines) {
-            tasks.add(parseTask(line));
+        try {
+            lines.stream().map(this::parseTask).forEach(tasks::add);
+        } catch (DukeRuntimeException e) {
+            throw new DukeException(e.getMessage());
         }
     }
 
@@ -66,16 +71,21 @@ public class TaskList {
     }
 
     /**
+     * Returns a stream containing the tasks in the list.
+     *
+     * @return Stream of tasks.
+     */
+    public Stream<Task> stream() {
+        return tasks.stream();
+    }
+
+    /**
      * Converts this task list into a list of lines to save.
      *
      * @return List of converted tasks.
      */
     public List<String> getAsLines() {
-        List<String> save = new ArrayList<>();
-        for (Task task : tasks) {
-            save.add(getSaveString(task));
-        }
-        return save;
+        return tasks.stream().map(this::getSaveString).collect(Collectors.toList());
     }
 
     /**
@@ -85,11 +95,7 @@ public class TaskList {
      * @return String for saving.
      */
     private String getSaveString(Task task) {
-        StringJoiner joiner = new StringJoiner("|");
-        for (String field : task.getSaveList()) {
-            joiner.add(toSaveString(field));
-        }
-        return joiner.toString();
+        return task.getSaveList().stream().map(this::toSaveString).collect(Collectors.joining("|"));
     }
 
     /**
@@ -98,7 +104,7 @@ public class TaskList {
      * @param line Line to parse.
      * @return Parsed task.
      */
-    private Task parseTask(String line) throws DukeException {
+    private Task parseTask(String line) {
         String[] data = line.split("\\|");
         Task task;
         try {
@@ -116,10 +122,10 @@ public class TaskList {
                 task = new Event(toOriginalString(data[2]), toOriginalString(data[3]));
                 break;
             default:
-                throw new DukeException("Error loading tasks: Unknown line in save file: " + line);
+                throw new DukeRuntimeException("Error loading tasks: Unknown line in save file: " + line);
             }
         } catch (DateTimeParseException e) {
-            throw new DukeException("Error loading tasks: Could not understand date in: " + line);
+            throw new DukeRuntimeException("Error loading tasks: Could not understand date in: " + line);
         }
         if (data[1].equals("1")) {
             task.markAsDone();
@@ -128,16 +134,16 @@ public class TaskList {
     }
 
     /**
-     * Throws a DukeException if the length of the data array is not equal to the provided expected length.
+     * Throws a DukeRuntimeException if the length of the data array is not equal to the provided expected length.
      *
      * @param data Data array to check length.
      * @param length Expected length of data array.
      * @param line Original line to include in exception message.
-     * @throws DukeException If the length of the data array is different from the expected length.
+     * @throws DukeRuntimeException If the length of the data array is different from the expected length.
      */
-    private void ensureLength(String[] data, int length, String line) throws DukeException {
+    private void ensureLength(String[] data, int length, String line) {
         if (data.length != length) {
-            throw new DukeException("Error loading tasks: Could not understand line in save file: " + line);
+            throw new DukeRuntimeException("Error loading tasks: Could not understand line in save file: " + line);
         }
     }
 
@@ -158,14 +164,10 @@ public class TaskList {
      * @return Original string.
      */
     private String toOriginalString(String str) {
-        // Split the array at double backslashes, keeping trailing empty strings
-        String[] parts = str.split("\\\\\\\\", -1);
-
-        // Join with single backslash after unescaping
-        StringJoiner joiner = new StringJoiner("\\");
-        for (String part : parts) {
-            joiner.add(part.replace("\\p", "|"));
-        }
-        return joiner.toString();
+        // Split the escaped string at double backslashes, keeping trailing empty strings
+        return Arrays.stream(str.split("\\\\\\\\", -1))
+                // Join with single backslash after unescaping
+                .map(part -> part.replace("\\p", "|"))
+                .collect(Collectors.joining("\\"));
     }
 }

@@ -38,10 +38,9 @@ public class MainWindow extends AnchorPane {
     }
 
     private void showWelcome() {
-        for (String message : guiDuke.getAndClearMessages()) {
-            DialogBox dialog = DialogBox.getDukeDialog(message, dukeImage);
-            dialogContainer.getChildren().add(dialog);
-        }
+        guiDuke.getAndClearMessages().stream()
+                .map(message -> DialogBox.getDukeDialog(message, dukeImage))
+                .forEach(dialogContainer.getChildren()::add);
     }
 
     /**

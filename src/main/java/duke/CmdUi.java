@@ -34,9 +34,9 @@ public class CmdUi implements Ui {
     @Override
     public void showMessage(List<String> message) {
         System.out.println(LINE);
-        for (String messageLine : message) {
-            System.out.println(INDENT + messageLine);
-        }
+        message.stream()
+                .map(line -> INDENT + line)
+                .forEach(System.out::println);
         System.out.println(LINE);
         System.out.println();
     }

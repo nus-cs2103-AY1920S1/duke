@@ -1,0 +1,11 @@
+todo teach junior how to skate
+deadline return book /by 2/12/2019 1800
+event project meeting /at 27/2/2019 0800
+find return
+done 1
+done 3
+list
+delete 3
+todo
+blah
+bye

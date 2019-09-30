@@ -1,0 +1,28 @@
+Hello! I'm Duke
+What can I do for you?
+You do not have any stored tasks
+Got it. I've added this task:
+[T][0] teach junior how to skate
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+[D][0] return book (by: 2019-12-02T18:00)
+Now you have 2 tasks in the list.
+Got it. I've added this task:
+[E][0] project meeting (at: 2019-02-27T08:00)
+Now you have 3 tasks in the list.
+Here are the matching tasks in your list:
+1.[D][0] return book (by: 2019-12-02T18:00)
+Nice! I've marked this task as done:
+[1] teach junior how to skate
+Nice! I've marked this task as done:
+[1] project meeting
+Here are the tasks in your list:
+1.[T][1] teach junior how to skate
+2.[D][0] return book (by: 2019-12-02T18:00)
+3.[E][1] project meeting (at: 2019-02-27T08:00)
+Noted. I've removed this task:
+[E][1] project meeting (at: 2019-02-27T08:00)
+Now you have 2 tasks in the list.
+☹ OOPS!!! The description of a todo cannot be empty.
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+Bye. Hope to see you again soon!

@@ -11,7 +11,7 @@
 
 ## 2. Getting Started:
 1. Ensure that you have **Java 11** or above on your computer
-1. Download the latest release of [duke.jar]() here
+1. Download the latest release of [duke.jar](https://github.com/cheeyou/duke/releases/tag/V1.0.0) here
 1. Copy and paste the file to the folder you would like to use as the home folder for your **DUKE** application
 1. Double click the file to start the application. The *GUI* should appear within a few seconds
 1. Type your command in the command box and press **Enter** on your keyboard or **Send** on the *GUI* to execute it

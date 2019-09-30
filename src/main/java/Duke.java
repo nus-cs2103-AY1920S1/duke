@@ -45,7 +45,6 @@ public class Duke {
         try {
             Command c = parser.parseInput(input);
             String output = c.execute(tasks, storage);
-            //String wrappedOutput = WordUtils.wrap(output, 70);
             return output;
         } catch (DukeException e) {
             return e.getMessage();

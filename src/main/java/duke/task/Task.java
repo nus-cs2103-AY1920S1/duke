@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,8 +9,8 @@ import java.util.Date;
  */
 public class Task {
 
-    protected String description;
-    protected boolean isDone;
+    String description;
+    private boolean isDone;
 
     /**
      * Initiates a Task object.
@@ -19,12 +21,24 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone(boolean flag) {
+        this.isDone = flag;
+    }
+
     /**
      * Initiates a Task object.
      * @param description content of a task
      * @param isDone mark if the task is already done
      */
-    public Task(String description, boolean isDone) {
+    Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
@@ -36,7 +50,7 @@ public class Task {
         return t;
     }
 
-    protected String formatDescription() throws ParseException {
+    String formatDescription() throws ParseException {
         String item = description.substring(0, description.indexOf("/"));
         String tag = description.substring(description.indexOf("/") + 1);
         String prep = tag.substring(0, tag.indexOf(" "));
@@ -45,7 +59,7 @@ public class Task {
         return item + "(" + prep + ": " + date + ")";
     }
 
-    protected String getStatusIcon() {
+    String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 

@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 import java.text.ParseException;
 
 /**
@@ -5,7 +12,7 @@ import java.text.ParseException;
  */
 public class Done extends Command {
 
-    public Integer[] numbers;
+    private Integer[] numbers;
     public String type;
 
     /**

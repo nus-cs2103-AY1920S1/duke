@@ -1,9 +1,19 @@
+package duke;
+
+import duke.command.Add;
+import duke.command.Bye;
+import duke.command.Command;
+import duke.command.Delete;
+import duke.command.Done;
+import duke.command.Find;
+import duke.command.PrintList;
+
 import java.util.ArrayList;
 
 /**
  * Represents a class for understanding the input.
  */
-public class Parser {
+class Parser {
 
     /**
      * Extracts a command from input.

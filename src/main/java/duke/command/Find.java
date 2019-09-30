@@ -1,9 +1,16 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 /**
  * Represents a find command.
  */
 public class Find extends Command {
 
-    public String target;
+    private String target;
 
     public Find(String target) {
         this.target = target;

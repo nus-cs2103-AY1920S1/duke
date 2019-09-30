@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +43,7 @@ public class TaskList {
                 throw new DukeException("Task number out of range.");
             }
             assert 0 < num && num <= tasks.size() : "invalid task number";
-            tasks.get(num - 1).isDone = true;
+            tasks.get(num - 1).setDone(true);
         }
     }
 
@@ -64,7 +71,7 @@ public class TaskList {
     public TaskList find(String target) {
         ArrayList<Task> targets = new ArrayList<>();
         for (Task t : tasks) {
-            if (t.description.contains(target)) {
+            if (t.getDescription().contains(target)) {
                 targets.add(t);
             }
         }

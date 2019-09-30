@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 
@@ -39,7 +43,7 @@ public class Ui {
     /**
      * Sends greetings to user.
      */
-    public String greet() {
+    String greet() {
         String response = "Hello! I'm Duke \n     What can I do for you?";
         formatPrint(response);
         return response;
@@ -97,23 +101,23 @@ public class Ui {
     }
 
     private String getResponse(ArrayList<String> sentences) {
-        String response = "";
+        StringBuilder response = new StringBuilder();
         for (int i = 0; i < sentences.size(); i++) {
-            response += sentences.get(i);
+            response.append(sentences.get(i));
             if (i == sentences.size() - 1) {
                 break;
             }
-            response += "\n";
+            response.append("\n");
         }
-        return response;
+        return response.toString();
     }
 
     private ArrayList<String> getSentences(TaskList list, Integer[] nums, String start) throws ParseException {
         ArrayList<Task> tasks = list.tasks;
         ArrayList<String> sentences = new ArrayList<>();
         sentences.add(start);
-        for (int i = 0; i < nums.length; i++) {
-            String description = tasks.get(nums[i] - 1).repr();
+        for (Integer num : nums) {
+            String description = tasks.get(num - 1).repr();
             sentences.add("  " + description);
         }
         return sentences;
@@ -221,7 +225,7 @@ public class Ui {
      * Tells user a DukeException has occurred.
      * @param ex the exception whose message is to be printed
      */
-    public String showDukeException(DukeException ex) { 
+    public String showDukeException(DukeException ex) {
         String response = ex.getMessage();
         formatPrint(response);
         return response;

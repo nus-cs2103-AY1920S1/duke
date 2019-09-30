@@ -1,3 +1,5 @@
+import duke.DukeException;
+import duke.Ui;
 import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -12,9 +14,9 @@ public class UiTest {
 
         Ui ui = new Ui();
         ui.showLoadingError();
-        String expectedOutput  = "    ____________________________________________________________\r\n" +
-                "     Cannot load files\r\n" +
-                "    ____________________________________________________________\r\n" ;
+        String expectedOutput  = "    ____________________________________________________________\r\n"
+                + "     Cannot load files\r\n"
+                + "    ____________________________________________________________\r\n";
 
         // Do the actual assertion.
         assertEquals(expectedOutput, outContent.toString());

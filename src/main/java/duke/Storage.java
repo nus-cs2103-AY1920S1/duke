@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
@@ -16,7 +23,7 @@ public class Storage {
      * Initiates a Storage object.
      * @param filePath path of the file where data is stored
      */
-    public Storage(String filePath) {
+    Storage(String filePath) {
         this.filePath = filePath;
 
         // create data file if it doesn't exist
@@ -47,8 +54,8 @@ public class Storage {
                     assert t instanceof Todo : "unknown type of task";
                     type = "T";
                 }
-                String isDone = t.isDone ? "1" : "0";
-                String taskData = type + "@" + isDone + "@" + t.description;
+                String isDone = t.isDone() ? "1" : "0";
+                String taskData = type + "@" + isDone + "@" + t.getDescription();
                 content.append(taskData).append("\n");
             }
             fileWriter.write(content.toString());
@@ -62,7 +69,7 @@ public class Storage {
      * @return an ArrayList of tasks that is stored in the file
      * @throws DukeException if IOException occurs
      */
-    public ArrayList<Task> load() throws DukeException {
+    ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<Task>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;

@@ -1,10 +1,17 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 /**
  * Represents an addition command.
  */
 public class Add extends Command {
 
-    public String type;
-    public String description;
+    private String type;
+    private String description;
 
     /**
      * Initiates an Add object.

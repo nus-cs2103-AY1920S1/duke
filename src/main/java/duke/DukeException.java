@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents an exception in project duke.
  */

@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -17,7 +19,7 @@ import javafx.scene.layout.HBox;
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
-public class DialogBox extends HBox {
+class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
@@ -47,7 +49,7 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
+    static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
@@ -57,7 +59,7 @@ public class DialogBox extends HBox {
      * @param img avatar of Duke
      * @return a dialog box of Duke
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

@@ -14,7 +14,7 @@ Put your tasks in Dose and never forget about them ever again!
 To add a todo, event or deadline to Dose, simply type the type of the task,
 followed by its description and deadline (if any). Dose will update your list of tasks accordingly.
 
-<img src="add_tasks.PNG" width="500">
+<img src="images/add_tasks.PNG" width="500">
 
 ### View tasks in task list
 Keep track of the tasks you've added. 

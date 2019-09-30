@@ -9,7 +9,7 @@
 <fx:root fx:id="messageBoxContainer" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <HBox fx:id="messageBox" style="-fx-background-color: #b2eee6; -fx-background-radius: 10;">
-      <Label fx:id="message" lineSpacing="0.25" maxWidth="400" text="Label" wrapText="true">
+      <Label fx:id="message" lineSpacing="0.25" prefWidth="400" text="Label" wrapText="true">
         <font>
           <Font name="Consolas" size="14.0" />
         </font>

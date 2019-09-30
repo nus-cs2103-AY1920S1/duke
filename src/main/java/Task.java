@@ -55,7 +55,6 @@ public class Task {
      * @throws ParseException if description cannot be parsed
      */
     public String repr() throws ParseException {
-        assert getStatusIcon().equals("\u2713") || getStatusIcon().equals("\u2718");
         return "[" + getStatusIcon() + "] " + description;
     }
 }

@@ -90,7 +90,7 @@ public class TaskList {
             newTask = new Deadline(description);
             break;
         default:
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("Sorry Mirana, but I don't know what that means :-(");
         }
         try {
             newTask.repr();

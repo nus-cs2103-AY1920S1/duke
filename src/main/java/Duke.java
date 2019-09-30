@@ -82,7 +82,7 @@ public class Duke extends Application {
                     Find find = (Find) command;
                     find.exec(storage, tasks, ui);
                 } else {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    throw new DukeException("Sorry Mirana, but I don't know what that means :-(");
                 }
             } catch (DukeException ex) {
                 ui.showDukeException(ex);
@@ -117,7 +117,7 @@ public class Duke extends Application {
                 Find find = (Find) command;
                 return find.exec(storage, tasks, ui);
             } else {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("Sorry Mirana, but I don't know what that means :-(");
             }
         } catch (DukeException ex) {
             return ui.showDukeException(ex);
@@ -201,7 +201,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.

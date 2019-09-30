@@ -28,7 +28,6 @@ public class Event extends Task {
      * @throws ParseException if description of event cannot be parsed
      */
     public String repr() throws ParseException {
-        assert getStatusIcon().equals("\u2713") || getStatusIcon().equals("\u2718");
         return "[E][" + getStatusIcon() + "] " + super.formatDescription();
     }
 }

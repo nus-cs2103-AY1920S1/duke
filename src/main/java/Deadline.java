@@ -28,7 +28,6 @@ public class Deadline extends Task {
      * @throws ParseException if description of deadline cannot be parsed
      */
     public String repr() throws ParseException {
-        assert getStatusIcon().equals("\u2713") || getStatusIcon().equals("\u2718");
         return "[D][" + getStatusIcon() + "] " + super.formatDescription();
     }
 }

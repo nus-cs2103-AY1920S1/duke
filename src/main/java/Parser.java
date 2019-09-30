@@ -40,13 +40,13 @@ public class Parser {
                 String type = input.split(" ")[0];
                 switch (type) {
                 case "todo":
-                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    throw new DukeException("Sorry Mirana, the description of a todo cannot be empty.");
                 case "event":
-                    throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                    throw new DukeException("Sorry Mirana, the description of an event cannot be empty.");
                 case "deadline":
-                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    throw new DukeException("Sorry Mirana, the description of a deadline cannot be empty.");
                 default:
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    throw new DukeException("Sorry Mirana, but I don't know what that means :-(");
                 }
             }
             String type = input.substring(0, input.indexOf(" "));
@@ -59,7 +59,7 @@ public class Parser {
             case "deadline":
                 return new Add("deadline", description);
             default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("Sorry Mirana, but I don't know what that means :-(");
             }
         }
     }

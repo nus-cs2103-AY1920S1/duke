@@ -51,6 +51,12 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a dialog box of Duke bot.
+     * @param text response from Duke
+     * @param img avatar of Duke
+     * @return a dialog box of Duke
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

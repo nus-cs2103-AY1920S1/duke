@@ -25,15 +25,7 @@ public class Todo extends Task {
      * @return string representation of a task
      */
     public String repr() {
-        assert getStatusIcon().equals("\u2713") || getStatusIcon().equals("\u2718");
         return "[T][" + super.getStatusIcon() + "] " + description;
     }
 
-    /**
-     * Expresses that a todo task is done.
-     * @return string representation of a done task
-     */
-    public String done() {
-        return "  [T][✓] " + description;
-    }
 }

@@ -45,6 +45,7 @@ public class Parser {
                 case "done":
                     int taskNum = Integer.parseInt(splited[1]) - 1;
                     tasks.markAsDone(taskNum);
+                    output = ui.doneString(tasks.get(taskNum));
                     break;
 
                 case "delete":

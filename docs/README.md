@@ -12,52 +12,52 @@
 
 ## Usage
 
-* ####Add a todo task
+### Add a todo task
 
-    `todo [task_description]`
-    * A todo task will be added to the user's task list. Duke will respond with successful adding message.
-    * Example of usage: `todo buy kiwi`
+>   `todo [task_description]`
+>   * A todo task will be added to the user's task list. Duke will respond with successful adding message.
+>   * Example of usage: `todo buy kiwi`
 
-* ####Add a deadline task
+### Add a deadline task
 
-    `deadline [description] /by [date/month/year hh:mm]`
-    * A deadline task will be added to the user's task list. Duke will respond with successful adding message.
-    * Example of usage: `deadline buy kiwi /by 31/05/2020 12:00`
+>   `deadline [description] /by [date/month/year hh:mm]`
+>   * A deadline task will be added to the user's task list. Duke will respond with successful adding message.
+>   * Example of usage: `deadline buy kiwi /by 31/05/2020 12:00`
    
-* ####Add a event task
+### Add a event task
 
-    `event [description] /at [date/month/year hh:mm-hh:mm]`
-    * An event task will be added to the user's task list. Duke will respond with successful adding message. 
-    * Example of usage: `event eat kiwi /at 31/05/2020 12:00-13:00`
+>    `event [description] /at [date/month/year hh:mm-hh:mm]`
+>    * An event task will be added to the user's task list. Duke will respond with successful adding message. 
+>    * Example of usage: `event eat kiwi /at 31/05/2020 12:00-13:00`
    
-* ####Mark a task done
+### Mark a task done
 
-    `done [task_number]`
-    * Mark an incomplete task as done. Duke will inform the user the change of status of that task.
-    * Example of usage: `done 1`
+>    `done [task_number]`
+>    * Mark an incomplete task as done. Duke will inform the user the change of status of that task.
+>    * Example of usage: `done 1`
     
-* ####Delete a task
+### Delete a task
 
-    `delete [task_number]`
-    * Delete a task from the task list. Duke will inform the user that task is deleted.
-    * Example of usage: `delete 1`
+>    `delete [task_number]`
+>    * Delete a task from the task list. Duke will inform the user that task is deleted.
+>    * Example of usage: `delete 1`
 
-* ####List all tasks
+### List all tasks
 
-    `list`
-    * Duke will show the user all the tasks in his task list.
-    * Example of usage: `list`
+>    `list`
+>    * Duke will show the user all the tasks in his task list.
+>    * Example of usage: `list`
     
-* ####Find tasks with a keyword
+### Find tasks with a keyword
 
-    `find [keyword]`
-    * Duke will show the user the filtered tasks which contain the keyword.
-    * Example of usage: `find buy`
+>    `find [keyword]`
+>    * Duke will show the user the filtered tasks which contain the keyword.
+>    * Example of usage: `find buy`
     
-* ####Exit the application
+### Exit the application
 
-    `bye`
-    * Duke will say goodbye to the user and exit the application.
-    * Example of usage: `bye`
+>    `bye`
+>    * Duke will say goodbye to the user and exit the application.
+>    * Example of usage: `bye`
 
    

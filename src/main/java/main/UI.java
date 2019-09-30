@@ -20,7 +20,6 @@ public interface UI {
                 + "     Hello! I'm Duke\n"
                 + "     What can I do for you?\n"
                 + "    ____________________________________________________________\n";
-
     }
 
     /**
@@ -46,7 +45,7 @@ public interface UI {
     }
 
     /**
-     * Prints the size of the TaskList (given as an argument) and the Task to be removed (also given as an argument)
+     * Returns the size of the TaskList (given as an argument) and the Task to be removed (also given as an argument)
      * of the TaskList whenever a Task is removed from the TaskList. Typically occurs when a RemoveCommand is executed.
      *
      * @param task The Task to be removed from the TaskList.

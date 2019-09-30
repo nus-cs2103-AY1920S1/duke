@@ -4,6 +4,7 @@ import command.Command;
 import main.Parser;
 import main.Storage;
 import main.TaskList;
+
 import task.Task;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class Duke {
      * Constructs an instance of Duke. Also instantiates an instance of Storage and TaskList for this instance of Duke.
      */
     public Duke() {
+
         storage = new Storage();
         ArrayList<Task> list = storage.readFromFile();
         this.taskList = new TaskList(list);
@@ -35,7 +37,6 @@ public class Duke {
      */
     private String run(String command) throws IOException {
         Parser parser = new Parser();
-        //Scanner sc = new Scanner(System.in);
 
         Command c = parser.parse(command);
         return c.execute(taskList, storage);

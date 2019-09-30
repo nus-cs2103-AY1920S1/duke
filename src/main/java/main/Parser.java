@@ -10,6 +10,9 @@ import command.FindCommand;
 import command.ListCommand;
 import command.TodoCommand;
 import command.UnknownCommand;
+
+import exception.DoneException;
+import exception.DukeException;
 import exception.TaskException;
 
 /**

@@ -13,7 +13,6 @@ public abstract class Task {
     protected boolean isDone;
     protected String name;
 
-
     public Task() {
 
     }

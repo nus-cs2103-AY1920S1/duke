@@ -12,3 +12,8 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# Files created while testing
+src/main/java/../*.class
+src/main/java/../../*.class
+data/duke.txt

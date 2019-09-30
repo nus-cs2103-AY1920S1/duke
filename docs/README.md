@@ -13,9 +13,8 @@ Milk & Mocha's (M&M) task manager serves as a personal chatbot assistant to help
 
 1. Ensure you have Java 11 or above installed on your computer. 
 2. Download the latest jar file [here](https://github.com/khiangleon/duke/releases). 
-3. In the same directory of your jar file, create a folder named "data". In this folder, create a text file named "duke".
-4. Double-click the jar file to start the app. The GUI should appear in a few seconds. 
-5. Type the command in the command box and press enter to execute it. Refer to the Features section for a list of all the commands you can try. 
+3. Double-click the jar file to start the app. The GUI should appear in a few seconds. 
+4. Type the command in the command box and press enter to execute it. Refer to the Features section for a list of all the commands you can try. 
 
 
 ## Features 

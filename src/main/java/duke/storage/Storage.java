@@ -95,6 +95,12 @@ public class Storage {
      * @throws IOException if unable to save file.
      */
     public void saveFile(TaskList tasklist) throws IOException {
+        File file = new File(filePath);
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+        }
+
         FileWriter save = new FileWriter(filePath);
         for (int i = 0; i < tasklist.size(); i++) {
             save.write(tasklist.get(i).saveTask());

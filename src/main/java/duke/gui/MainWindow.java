@@ -14,16 +14,14 @@ import javafx.scene.layout.VBox;
 
 import duke.ui.Response;
 
-import java.nio.file.Paths;
-
 /**
  * The main window of the JavaFX GUI for Duke.
  */
 public class MainWindow extends AnchorPane {
 
-    public static String MAIN_WINDOW_RESOURCE_PATH = Paths.get("/view", "MainWindow.fxml").toString();
-    public static String USER_IMAGE_RESOURCE_PATH = Paths.get("/images", "user_icon.png").toString();
-    public static String DUKE_IMAGE_RESOURCE_PATH = Paths.get("/images","duke_icon.png").toString();
+    public static String MAIN_WINDOW_RESOURCE_PATH = "/view/MainWindow.fxml";
+    public static String USER_IMAGE_RESOURCE_PATH = "/images/user_icon.png";
+    public static String DUKE_IMAGE_RESOURCE_PATH = "/images/duke_icon.png";
 
     @FXML
     private ScrollPane scrollPane;
@@ -49,7 +47,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         userImage = new Image(Gui.class.getResourceAsStream(USER_IMAGE_RESOURCE_PATH));
         dukeImage = new Image(Gui.class.getResourceAsStream(DUKE_IMAGE_RESOURCE_PATH));
-
+        dialogContainer.setPrefWidth(scrollPane.getPrefViewportWidth());
     }
 
 

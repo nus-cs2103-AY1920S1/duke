@@ -17,7 +17,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.IOException;
 import java.nio.file.Paths;
 
 /**
@@ -32,7 +31,9 @@ public class Gui extends Application {
         try {
             assert Paths.get("src", "main", "resources", MainWindow.MAIN_WINDOW_RESOURCE_PATH)
                     .toFile().exists() : "MainWindow.fxml does not exist";
-            FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource(MainWindow.MAIN_WINDOW_RESOURCE_PATH));
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            //FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource(MainWindow.MAIN_WINDOW_RESOURCE_PATH));
+            fxmlLoader.setLocation(Gui.class.getResource(MainWindow.MAIN_WINDOW_RESOURCE_PATH));
             AnchorPane mainWindow = fxmlLoader.load();
             Scene scene = new Scene(mainWindow);
             stage.setScene(scene);
@@ -57,7 +58,7 @@ public class Gui extends Application {
                 }
             });
 
-        } catch (IOException exception) {
+        } catch (Exception exception) {
             exception.printStackTrace();
         }
     }

@@ -71,6 +71,7 @@ public class Storage {
                 new FileWriter(saveFile).append("0").flush();
             }
         } catch (IOException exception) {
+            exception.printStackTrace();
             throw new DukeInvalidLoadFilePathException(saveFile.getAbsolutePath());
         }
     }

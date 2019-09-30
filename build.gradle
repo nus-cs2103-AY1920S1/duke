@@ -11,6 +11,11 @@ shadowJar {
     archiveVersion = "0.2.1"
     archiveClassifier = null
     archiveAppendix = null
+
+    manifest {
+        attributes 'Main-Class': 'duke.gui.DukeLauncher'
+    }
+
 }
 
 group 'seedu.duke'
@@ -37,6 +42,9 @@ application {
  }
 
 dependencies {
+    compile "org.openjfx:javafx-graphics:11:win"
+    compile "org.openjfx:javafx-graphics:11:linux"
+    compile "org.openjfx:javafx-graphics:11:mac"
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
 }
 

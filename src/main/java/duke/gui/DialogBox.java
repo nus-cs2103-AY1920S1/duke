@@ -32,7 +32,7 @@ class DialogBox extends HBox {
     @FXML
     private Circle icon;
 
-    public static String DIALOG_BOX_RESOURCE_PATH = Paths.get("/view", "DialogBox.fxml").toString();
+    public static String DIALOG_BOX_RESOURCE_PATH = "/view/DialogBox.fxml";
 
 
     private static final Insets DIALOGBOX_BACKGROUND_INSET = new Insets(5,37.5,5,37.5);

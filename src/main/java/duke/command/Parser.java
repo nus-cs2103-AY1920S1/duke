@@ -78,6 +78,8 @@ public class Parser {
             message = processFindWithStream(item, this.taskList, this.storage);
         } else if (firstWord.equals("sort")) {
             message = processSortList(this.taskList, this.storage);
+        } else if (firstWord.equals("help")) {
+            message = processHelp();
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but i don't know what that means :-(");
         }
@@ -113,7 +115,7 @@ public class Parser {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         } else {
             if (!input.contains("/by")) {
-                throw new DukeException("OOPS!!! Seems like your deadline command format is wrong :(");
+                throw new DukeException("OOPS!!! Seems like your deadline command format is wrong. Please type help for help");
             }
             String time = input.split("/by", 2)[1].substring(1);
             String description = input.split(" /by", 2)[0].substring(9);
@@ -134,7 +136,7 @@ public class Parser {
             throw new DukeException("OOPS!!! The description of an event cannot be empty");
         } else {
             if (!input.contains("/at")) {
-                throw new DukeException("OOPS!!! Seems like your event command format is wrong :(");
+                throw new DukeException("OOPS!!! Seems like your event command format is wrong. Please type help for help");
             }
             String time = input.split("/at", 2)[1].substring(1);
             String description = input.split(" /at", 2)[0].substring(6);
@@ -207,6 +209,20 @@ public class Parser {
         String message;
         message = "Here is your sorted List:\n";
         message = message + ui.printListUsingStream(this.taskList.getList()).split("\n", 2)[1];
+        return message;
+    }
+
+    public String processHelp() {
+        String message = "Here is the list of commands for Duke:\n";
+        message = message + "- todo <description>\n";
+        message = message + "- event <description> /at dd/mm/yyyy hh:mm\n";
+        message = message + "- deadline <description> /by dd/mm/yyyy h:mm\n";
+        message = message + "- done <Index> - mark the task at the given Index in the list as done\n";
+        message = message + "- delete <Index> - delete the task at the given index from list\n";
+        message = message + "- find <word that matches the task description>\n";
+        message = message + "- list - to list out the tasks that have been added\n";
+        message = message + "- sort - to sort the list of tasks\n";
+        message = message + "- bye - to exit the application";
         return message;
     }
 }

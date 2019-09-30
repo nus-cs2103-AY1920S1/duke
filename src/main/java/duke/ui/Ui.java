@@ -19,18 +19,15 @@ public class Ui {
         output = "Got it. I've added this task:\n"
                 + taskDescription
                 + "\nNow you have " + listSize + " tasks in the list.";
-        //System.out.println(output);
     }
 
     public void showDeleteTaskMessage(String taskDescription, int listSize) {
         output = "Noted. I've removed this task: \n"
                 + taskDescription
                 + "\nNow you have " + listSize + " tasks in the list.";
-        //System.out.println(output);
     }
 
     public void showDoneMessage(String taskDescription) {
-        //System.out.println("Nice! I've marked this task as done: \n" + taskDescription);
         output = "Nice! I've marked this task as done: \n" + taskDescription;
     }
 
@@ -44,21 +41,19 @@ public class Ui {
                 String taskDescription = taskDescriptionArray[i];
                 output += "\n" + (i + 1) + "." + taskDescription;
             }
-            //System.out.println(output);
         }
     }
 
     public void showSearchResult(String[] taskDescriptionArray) {
         int taskLen = taskDescriptionArray.length;
         if (taskLen == 0) {
-            System.out.println("There are no matching tasks in your list");
+            output = "There are no matching tasks in your list";
         } else {
             output = "Here are the matching tasks in your list: ";
             for (int i = 0; i < taskLen; i ++) {
                 String taskDescription = taskDescriptionArray[i];
                 output += "\n" + (i + 1) + "." + taskDescription;
             }
-            //System.out.println(output);
         }
     }
 
@@ -76,16 +71,11 @@ public class Ui {
         output += getLine();
     }
 
-    public void showLine() {
-        System.out.println("____________________________________________________________");
-    }
-
     private String getLine() {
         return "____________________________________________________________";
     }
 
     public void showLoadingError() {
-        //Consider making DukeLoadingError
         output = "No save file found... creating new save file";
     }
 

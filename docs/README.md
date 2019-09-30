@@ -1,5 +1,5 @@
 # Soviet Comrade User Guide
-![alt text](Ui.png.JPG)
+![alt text](Ui.png)
 ## Features 
 
 Have you ever wanted a personal assistant, 

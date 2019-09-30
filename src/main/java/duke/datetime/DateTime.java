@@ -43,8 +43,6 @@ public class DateTime {
         } else {
             String formattedDay = "" + day;
             String formattedMonth = " of ";
-            String formattedYear = " " + 20 + year + ", ";
-            String formattedTime = "";
             int rem = day % 10;
 
             switch (rem) {
@@ -105,22 +103,27 @@ public class DateTime {
             }
 
             int minutes = time % 100;
-            boolean isMorning = time >= 1200
-                    ? false
-                    : true;
             int hours = (time - minutes) / 100;
             if (hours > 12) {
                 hours -= 12;
             }
+
+            String formattedTime = "";
             formattedTime += hours;
             if (minutes != 0) {
                 formattedTime += "." + minutes;
             }
+
+            boolean isMorning = time >= 1200
+                    ? false
+                    : true;
             if (isMorning) {
                 formattedTime += "am";
             } else {
                 formattedTime += "pm";
             }
+
+            String formattedYear = " " + 20 + year + ", ";
             dateTimePrintFormat = formattedDay + formattedMonth + formattedYear + formattedTime;
             return dateTimePrintFormat;
         }

@@ -2,7 +2,7 @@
 
 Duke is an app to help you manage your tasks with command line.
 
-![Duke Preview](/Ui.png)
+![Duke Preview](docs/Ui.png)
 
 ## Features
 

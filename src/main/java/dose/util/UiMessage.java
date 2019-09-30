@@ -24,9 +24,18 @@ public enum UiMessage {
     TASK_LIST("Here are the tasks in your list: "),
     TASKS_STATUS_FRONT("Now you have "),
     TASKS_STATUS_BACK(" items in this list."),
-    HINT_LIST("Use list to see all your tasks!");
+    HINT_TODO("Use todo to add a new todo."),
+    HINT_DEADLINE("Use deadline /by [deadline] to add a new task with a deadline."),
+    HINT_EVENT("Use event /at [time] to add a new event at a time."),
+    HINT_DONE("Use done [taskId] to mark a task as done."),
+    HINT_DELETE("Use delete [taskId] to remove a task from the list."),
+    HINT_SAVE("Use save to save your tasks to disk."),
+    // todo: add tag, priority, find, snooze
+    HINT_LIST("Use list to see all your tasks!"),
+    HELP("Here are the things I can do...");
 
     private final String message;
+    //private ArrayList<UiMessage> helpMessages = new ArrayList<>();
 
     UiMessage(String message) {
         this.message = message;
@@ -38,5 +47,17 @@ public enum UiMessage {
      */
     public String getMessage() {
         return this.message;
+    }
+
+    public static String getHelpMessage() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(HELP.getMessage()).append("\n");
+        sb.append(HINT_TODO.getMessage()).append("\n");
+        sb.append(HINT_DEADLINE.getMessage()).append("\n");
+        sb.append(HINT_EVENT.getMessage()).append("\n");
+        sb.append(HINT_DONE.getMessage()).append("\n");
+        sb.append(HINT_DELETE.getMessage()).append("\n");
+        sb.append(HINT_SAVE.getMessage()).append("\n");
+        return sb.toString();
     }
 }

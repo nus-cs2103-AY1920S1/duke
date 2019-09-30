@@ -35,6 +35,8 @@ public class Parser {
             return new PriorityCommand(fullCommand);
         } else if (command.equals("save")) {
             return new SaveCommand(); // disregard any input after "save"
+        } else if (command.equals("help")) {
+            return new HelpCommand(); // disregard any input after "help" (for now)
         } else {
             throw new DoseException(ExceptionType.INVALID_COMMAND);
         }

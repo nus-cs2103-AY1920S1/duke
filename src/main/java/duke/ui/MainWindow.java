@@ -3,6 +3,7 @@ package duke.ui;
 import duke.Duke;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -20,6 +21,8 @@ public class MainWindow extends AnchorPane {
     private static final String DUKE_IMAGE_PATH = "/images/woman.png";
     private static final String USER_IMAGE_PATH = "/images/cat.png";
 
+    @FXML
+    private Button sendButton;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -59,8 +62,10 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        userInput.clear();
         if (response.equals("Bye. Hope to see you again soon!\nYou may close the application now.\n")) {
             userInput.setDisable(true);
+            sendButton.setDisable(true);
         }
     }
 }

@@ -13,26 +13,26 @@ Put your tasks in Dose and never forget about them ever again!
 ### Add todos, events and deadlines
 To add a todo, event or deadline to Dose, simply type the type of the task,
 followed by its description and deadline (if any). Dose will update your list of tasks accordingly.
-![Add tasks](add_tasks.PNG "Add tasks")
+<img src="docs/add_tasks.PNG" width="300">
 
 ### View tasks in task list
 Keep track of the tasks you've added. 
 See each task's description, deadline, priority and tags (if any) in a compact list view.
-![View tasks](list_tasks.PNG "View tasks")
+<img src="docs/list_tasks.PNG" width="300">
 
 ### Save task list to disk
 Dose is capable of saving your list of tasks to a small, portable text file. 
 Upon the next startup of Dose, your tasks will be instantly re-imported -- no sweat!
-![Save tasks](save_tasks.PNG "Save tasks")
+<img src="docs/save_tasks.PNG" width="300">
 
 ### Complete and delete tasks
 Done with a task? Mistakenly added a task you no longer need? Dose will take care of it. 
-![Complete and delete tasks](done_delete_tasks.PNG "Complete and delete tasks")
+<img src="done_delete_tasks.PNG" width="300">
 
 ### Tag and prioritise tasks
 Need some organisation for your tasks? Dose is here to help.
 (Sorting tasks by tag and priority is coming soon!)
-![Tag and prioritise tasks](tag_priority_tasks.PNG "Tag and prioritise tasks")
+<img src="tag_priority_tasks.PNG" width="500">
 
 
 ## Commands

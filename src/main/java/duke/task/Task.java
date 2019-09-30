@@ -88,9 +88,6 @@ public abstract class Task implements Serializable {
      */
     public void addPriority(TaskPriority priority) {
         this.priority = priority;
-        // todo: replace with proper UI implementation
-        System.out.println("Nice! I've added a priority to this task:");
-        System.out.println(this.toString());
     }
 
     private TaskPriority getPriority() {

@@ -11,7 +11,7 @@ import duke.util.exception.DukeException;
 public class GuiDuke implements Duke {
     Storage storage;
     TaskList tasks;
-    String filePath = "data/tasks.txt";
+    String filePath = "/data/tasks.txt";
 
     /** GUI implementation of Duke uses a Gui object to represent its UI. */
     Gui ui;

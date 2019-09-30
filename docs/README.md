@@ -11,7 +11,8 @@ try out Duke if you are interested!
    
 2. Download the latest Duke.jar [here](https://github.com/brebeek/duke/releases/download/v1.0.0/duke-1.0.0.jar).
    
-3. Copy the file to the folder you want to use as the home folder for Duke.
+3. Copy the file to the folder you want to use as the home folder for Duke. Please make sure that there is no prior
+ file  named `duke.txt` in the working directory or in `duke/data` .
    
 4. Double-click the file to start the app. The GUI should appear in a few seconds. If double-clicking does not 
 work, please try `java -jar duke-1.0.0.jar` in terminal under the home folder of the jar.

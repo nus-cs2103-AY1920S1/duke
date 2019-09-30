@@ -30,8 +30,8 @@ public enum UiMessage {
     HINT_DONE("Use done [taskId] to mark a task as done."),
     HINT_DELETE("Use delete [taskId] to remove a task from the list."),
     HINT_SAVE("Use save to save your tasks to disk."),
-    // todo: add tag, priority, find, snooze
     HINT_LIST("Use list to see all your tasks!"),
+    // todo: add tag, priority, find, snooze
     HELP("Here are the things I can do...");
 
     private final String message;
@@ -58,6 +58,7 @@ public enum UiMessage {
         sb.append(HINT_DONE.getMessage()).append("\n");
         sb.append(HINT_DELETE.getMessage()).append("\n");
         sb.append(HINT_SAVE.getMessage()).append("\n");
+        sb.append(HINT_LIST.getMessage()).append("\n");
         return sb.toString();
     }
 }

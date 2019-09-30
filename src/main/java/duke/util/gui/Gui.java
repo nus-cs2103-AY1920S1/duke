@@ -26,4 +26,8 @@ public class Gui implements Ui {
     public void showTasks(TaskList tasks) {
 
     }
+
+//    public void setColourScheme(ColourScheme colourScheme) {
+//        MainWindow.setColourScheme(colourScheme);
+//    }
 }

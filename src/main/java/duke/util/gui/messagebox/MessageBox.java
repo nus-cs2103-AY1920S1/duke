@@ -41,14 +41,14 @@ public class MessageBox extends HBox {
 //        setAlignment(Pos.TOP_LEFT);
 //    }
 
-    public static MessageBox getUserDialog(String text, ColourScheme colourScheme) {
+    public static MessageBox getUserMessageBox(String text, ColourScheme colourScheme) {
         MessageBox userDialogBox = new MessageBox(text);
         userDialogBox.setStyle("-fx-background-color: " + colourScheme.getUserLightColour());
         userDialogBox.message.setStyle("-fx-fill: "+ colourScheme.getTextColour());
         return userDialogBox;
     }
 
-    public static MessageBox getDukeDialog(String text, ColourScheme colourScheme) {
+    public static MessageBox getDukeMessageBox(String text, ColourScheme colourScheme) {
         MessageBox dukeDialogBox = new MessageBox(text);
         dukeDialogBox.setStyle("-fx-background-color: " + colourScheme.getDukeMediumColour());
         dukeDialogBox.message.setStyle("-fx-fill: "+ colourScheme.getTextColour());

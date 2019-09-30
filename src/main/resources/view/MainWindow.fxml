@@ -34,9 +34,9 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </HBox>
-    <ScrollPane fx:id="scrollPane" fitToHeight="true" hbarPolicy="NEVER" hvalue="1.0" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: F2F1F8;" vvalue="1.0" AnchorPane.bottomAnchor="62.4" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: F2F1F8;" vvalue="1.0" AnchorPane.bottomAnchor="62.4" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <content>
-        <VBox fx:id="dialogContainer" spacing="10.0">
+        <VBox fx:id="messageBoxContainer" spacing="10.0">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding></VBox>

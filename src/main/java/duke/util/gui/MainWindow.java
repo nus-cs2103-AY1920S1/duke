@@ -1,7 +1,7 @@
 package duke.util.gui;
 
-import static duke.util.gui.messagebox.MessageBox.getDukeDialog;
-import static duke.util.gui.messagebox.MessageBox.getUserDialog;
+import static duke.util.gui.messagebox.MessageBox.getDukeMessageBox;
+import static duke.util.gui.messagebox.MessageBox.getUserMessageBox;
 
 import duke.util.gui.messagebox.MessageBox;
 import javafx.fxml.FXML;
@@ -18,7 +18,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
     @FXML
-    private VBox dialogContainer;
+    private VBox messageBoxContainer;
     @FXML
     private TextField userInput;
     @FXML
@@ -34,9 +34,8 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        // todo: investigate why setting the scrollPane's background colour does not work
-        scrollPane.setStyle("-fx-background-color: " + colourScheme.getDukeLightColour());
+        scrollPane.vvalueProperty().bind(messageBoxContainer.heightProperty());
+        messageBoxContainer.setStyle("-fx-background-color: " + colourScheme.getDukeLightColour());
     }
 
     public void setDuke(GuiDuke d) {
@@ -51,19 +50,24 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         // get and display user input
         String input = userInput.getText();
-        MessageBox inputDialog = getUserDialog(input, this.colourScheme);
-        dialogContainer.getChildren().add(inputDialog);
+        MessageBox userMessageBox = getUserMessageBox(input, this.colourScheme);
+        messageBoxContainer.getChildren().add(userMessageBox);
 
         // clear user input field
         userInput.clear();
 
         // get and display output from Duke
         String response = duke.getResponse(input);
-        MessageBox outputDialog = getDukeDialog(response, this.colourScheme);
-        dialogContainer.getChildren().add(outputDialog);
+        MessageBox dukeMessageBox = getDukeMessageBox(response, this.colourScheme);
+        messageBoxContainer.getChildren().add(dukeMessageBox);
     }
 
-    public VBox getDialogContainer() {
-        return this.dialogContainer;
-    }
+//    /**
+//     * Changes the appearance of Duke's GUI to match the given colour scheme.
+//     * Not sure why this needs to be static. KIV implementation :(
+//     * @param colourScheme Colour scheme for Duke's GUI.
+//     */
+//    public static void setColourScheme(ColourScheme colourScheme) {
+//        this.colourScheme = colourScheme;
+//    }
 }

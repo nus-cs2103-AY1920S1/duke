@@ -61,7 +61,7 @@ A sample list with the Task Icon and Completion Status is show below
 
 ### `list` - List out all tasks 
 
-A list of all the To Do, Deadline and Events are shown to the you.
+A list of all the To Do, Deadline and Events are shown to you.
 
 Format: `list`
 

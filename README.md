@@ -1,4 +1,5 @@
 # Setting up
+**Download the JAR [here](https://github.com/timothyleong97/duke/raw/master/duke-0.2.jar)**
 
 **Prerequisites**
 

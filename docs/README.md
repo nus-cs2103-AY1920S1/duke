@@ -134,10 +134,10 @@ The editable attributes of a task are:
  
  Note that to edit the `date` of `event` and `deadline` tasks, the format is
         
-        | Task Type | Command |
-        | --------- | ------- |
-        | Event | `edit INDEX/date/DATE TIME to DATE TIME` |
-        | Deadline | `edit INDEX/date/DATE TIME` |
+| Task Type | Command |
+| --------- | ------- |
+| Event | `edit INDEX/date/DATE TIME to DATE TIME` |
+| Deadline | `edit INDEX/date/DATE TIME` |
  
  Examples:
  

@@ -32,6 +32,6 @@ public interface Ui {
      * Shows a welcome message.
      */
     default void showWelcome() {
-        showMessage("Hello! I'm Duke", "What can I do for you?");
+        showMessage("Hello! I'm Duke", "What can I do for you?", "Enter help for a list of commands.");
     }
 }

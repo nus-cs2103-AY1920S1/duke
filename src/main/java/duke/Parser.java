@@ -3,13 +3,7 @@ package duke;
 import java.util.HashMap;
 import java.util.Map;
 
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.ViewCommand;
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
@@ -60,6 +54,7 @@ class Parser {
         parser.register("view", new ViewCommand(tasks));
         parser.register("done", new DoneCommand(tasks, storage));
         parser.register("delete", new DeleteCommand(tasks, storage));
+        parser.register("help", new HelpCommand());
         parser.register("bye", new ByeCommand());
         return parser;
     }

@@ -1,5 +1,9 @@
 # User Guide
 
+This user guide contains instructions on how to enter commands to Duke. Duke provides both Command Line Interface (CLI) as well as Graphic User Interface (GUI). Command keywords and format are the same for both interfaces and introduced below.
+
+*Note: The current version of Duke only supports GUI input.*
+
 ## Features 
 
 ### Add and keep track of tasks 
@@ -23,13 +27,36 @@ Search for task by entering keyword in the task description.
 ### Snooze task
 Change the time associated with a task.
 
+## Startup
+
+Upon launching application, the program should print a welcome message in CLI and GUI. This should be followed by a message regarding local disk saving status (in CLI only):
+
+- if save file is found loaded without error:
+```
+>>Save file loaded successfully
+```
+- if save file doesn't exist and new file is safely created:
+```
+>>New save file created
+```
+- if there is error loading or finding save file (depending on error):
+```
+>>Directory search error. No save file loaded. Initialized with blank list. No commands will be saved to hard disk
+```
+```
+>>Bad datetime in saved file. List may be partially loaded. Editing not recommended
+```
+```
+>>Corrupted save file. Delete or edit then relaunch
+```
+
 ## Usage
 
 ### `todo`/`event`/`deadline` - creates and adds a task object
 
 Creates and adds task depending on keyword:
 
-####`todo (description)` - creates and adds a basic `todo` task with the given `(description)`.
+#### `todo (description)` - creates and adds a basic `todo` task with the given `(description)`.
 
 Example of usage:
 
@@ -42,7 +69,7 @@ Expected outcome:
      There are 2 tasks in the list.
 ```
 
-####`event (description) /at (event time)` - creates and adds an `event` type task.
+#### `event (description) /at (event time)` - creates and adds an `event` type task.
 `(event time)` must be given in the format `DD/MM/YYYY HHMM-HHMM`.
 
 Example of usage:
@@ -56,7 +83,7 @@ Expected outcome:
   There are 3 tasks in the list.
 ```
 
-####`deadline (description) /by (task deadline)` - creates and adds a `deadline` type task
+#### `deadline (description) /by (task deadline)` - creates and adds a `deadline` type task
 `(task deadline)` must be given in the format `DD/MM/YYYY HHMM`.
 
 Example of usage: 

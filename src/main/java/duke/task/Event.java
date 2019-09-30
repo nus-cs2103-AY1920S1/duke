@@ -47,11 +47,11 @@ public class Event extends Task {
     /**
      * Accessor to get date and time of Event.
      *
-     * @return
+     * @return String representation of at time.
      */
     public String getAtTime() {
-        DateFormat outputFormatter = new SimpleDateFormat("dd MMMM YYYY, hh.mmaa");
-        String output = outputFormatter.format(this.atTime);
+        DateFormat storageFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        String output = storageFormatter.format(this.atTime);
         return output;
     }
 

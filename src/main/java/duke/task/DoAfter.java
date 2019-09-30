@@ -48,8 +48,8 @@ public class DoAfter extends Task {
      * @return String representation of date after.
      */
     public String getAfterWhen() {
-        DateFormat outputFormatter = new SimpleDateFormat("dd MMMM YYYY, hh.mmaa");
-        String output = outputFormatter.format(this.afterWhen);
+        DateFormat storageFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        String output = storageFormatter.format(this.afterWhen);
         return output;
     }
 

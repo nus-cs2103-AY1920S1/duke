@@ -29,7 +29,7 @@ public class ExceptionHandler {
         } else if (e instanceof EmptyTaskDukeException) {
             return String.format("OOPS!!! The description of a %s cannot be empty.", e.getMessage());
         } else if (e instanceof InvalidTaskDukeException) {
-            return String.format("OOPS!!! Invalid input! Make sure your %s has a description and /at, /by or /after.",
+            return String.format("OOPS!!! Invalid input!\nMake sure your %s has a description and /at, /by or /after.",
                     e.getMessage());
         } else if (e instanceof EmptyIndexDukeException) {
             return String.format("OOPS!!! Done/Delete command cannot have an empty index!");

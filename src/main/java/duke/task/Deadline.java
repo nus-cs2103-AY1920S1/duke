@@ -51,8 +51,8 @@ public class Deadline extends Task {
      * @return String representation of due date.
      */
     public String getByWhen() {
-        DateFormat outputFormatter = new SimpleDateFormat("dd MMMM YYYY, hh.mmaa");
-        String output = outputFormatter.format(this.byWhen);
+        DateFormat storageFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        String output = storageFormatter.format(this.byWhen);
         return output;
     }
 

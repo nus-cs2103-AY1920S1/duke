@@ -44,7 +44,7 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Give instructions in the format: (instruction type) (details)");
         } catch (NumberFormatException e) {
-            throw new DukeException("'done' and 'delete' must be followed by an integer index.");
+            throw new DukeException("'done', 'delete', 'recur' and 'revert' must be followed by an integer index.");
         }
     }
 }

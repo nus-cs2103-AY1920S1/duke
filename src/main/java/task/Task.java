@@ -33,10 +33,31 @@ public abstract class Task {
      */
 
     public boolean findWord(String keyword) {
-        if (description.indexOf(keyword) == -1) {
-            return false;
+        if (keyword.toLowerCase().equals("recur")) {
+            if (this instanceof Recurrence) {
+                return ((Recurrence) this).isRecurring;
+            } else {
+                return ((Todo) this).isRecurring;
+            }
+        } else if (keyword.toLowerCase().equals("non_recurring")){
+            if (this instanceof Recurrence) {
+                return !((Recurrence) this).isRecurring;
+            } else {
+                return !((Todo) this).isRecurring;
+            }
+        } else if (keyword.toLowerCase().equals("done")) {
+            return this.isDone;
         } else {
-            return true;
+            switch (keyword.toLowerCase()) {
+            case "todo":
+                return this instanceof Todo;
+            case "event":
+                return this instanceof Event;
+            case "deadline":
+                return this instanceof Deadline;
+            default:
+                return (this.toString().indexOf(keyword) != -1);
+            }
         }
     }
 

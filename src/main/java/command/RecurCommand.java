@@ -61,22 +61,28 @@ public class RecurCommand extends Command {
      *                       or when index of Task to markAsComplete is not properly presented.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task task = tasks.getTask(index - 1);
-        if (task.getStatusIcon().equals("+")) {
-            throw new DukeException("Can only convert uncompleted Task to recurring tasks.");
-        }
-        if (task instanceof Todo) {
-            ((Todo) task).setAsRecurring();
-            ui.showRecurMessage(task);
-        } else {
-            if (unitTime == null | quantity == 0) {
-                throw new DukeException("Give instructions in the format:"
-                         + System.lineSeparator() + "Recur (index) (quantity) (unit time)"
-                         + System.lineSeparator() + " for Event and Deadline type tasks.)");
+        try {
+            Task task = tasks.getTask(index - 1);
+            if (task.getStatusIcon().equals("+")) {
+                throw new DukeException("Can only convert uncompleted Task to recurring tasks.");
             }
-            Recurrence recurrence = (Recurrence) task;
-            recurrence.setAsRecurring(unitTime, quantity);
-            ui.showRecurMessage(recurrence);
+            if (task instanceof Todo) {
+                ((Todo) task).setAsRecurring();
+                ui.showRecurMessage(task);
+            } else {
+                if (unitTime == null | quantity == 0) {
+                    throw new DukeException("Give instructions in the format:"
+                            + System.lineSeparator() + "Recur (index) (quantity) (unit time)"
+                            + System.lineSeparator() + " for Event and Deadline type tasks.)");
+                }
+                Recurrence recurrence = (Recurrence) task;
+                recurrence.setAsRecurring(unitTime, quantity);
+                ui.showRecurMessage(recurrence);
+            }
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
+            throw new DukeException("Index out of bounds.");
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please enter a single integer for index of task to recur.");
         }
     }
 }

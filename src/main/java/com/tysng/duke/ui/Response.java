@@ -103,7 +103,7 @@ public class Response {
      */
     public static Response newArchive(Task item) {
         return new Response(List.of(
-                "This task is archive:",
+                "This task is archived:",
                 Response.INDENT + item.toString()
         ));
     }

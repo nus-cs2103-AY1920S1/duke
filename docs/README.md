@@ -19,5 +19,28 @@ show the archived tasks.
 
 `done [number]` will mark the specified task to complete.
 
+### `archive` - archive a task
+
+`archive [number]` will send the task to archive list.
+### `unarchive` - unarchive a task
+
+In the `list archive` screen, calling `unarchive [number]` will move the task from archive to task list.
+
+### `todo`, `deadline`, `event` - creating a task
+* `todo [description]` will add a new todo item with the specified description.
+
+* `deadline [description] /by [dd/MM/YYYY hhmm]` will add a deadline with the specified details.
+
+    Example: 
+    ```
+    deadline return book /by 2/12/2019 1800
+    ```
+    
+* 
+    
+
+
+
+
 
 

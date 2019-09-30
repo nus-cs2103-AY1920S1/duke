@@ -1,6 +1,6 @@
 package com.tysng.duke.ui;
 
-import com.tysng.duke.service.Duke;
+import com.tysng.duke.service.DukeService;
 import com.tysng.duke.storage.Storage;
 import com.tysng.duke.ui.controller.MainWindow;
 import javafx.application.Application;
@@ -16,11 +16,11 @@ import java.io.IOException;
  */
 public class Gui extends Application {
 
-    private Duke duke;
+    private DukeService dukeService;
 
     @Override
     public void init() {
-        this.duke = new Duke(Storage.initialize());
+        this.dukeService = new DukeService(Storage.initialize());
     }
 
     @Override
@@ -30,7 +30,7 @@ public class Gui extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDukeService(dukeService);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

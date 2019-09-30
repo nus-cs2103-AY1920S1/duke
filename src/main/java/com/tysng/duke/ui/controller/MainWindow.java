@@ -1,9 +1,12 @@
 package com.tysng.duke.ui.controller;
 
 import com.tysng.duke.exception.CommandException;
-import com.tysng.duke.service.Command;
-import com.tysng.duke.service.Duke;
+import com.tysng.duke.service.DukeService;
+import com.tysng.duke.service.Parser;
+import com.tysng.duke.service.command.Command;
+import com.tysng.duke.service.command.ExitCommand;
 import com.tysng.duke.ui.Response;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -24,7 +27,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private DukeService dukeService;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -40,8 +43,8 @@ public class MainWindow extends AnchorPane {
         );
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDukeService(DukeService d) {
+        dukeService = d;
     }
 
     /**
@@ -58,8 +61,12 @@ public class MainWindow extends AnchorPane {
         // add response
         Response resp;
         try {
-            Command command = Command.newCommand(input);
-            resp = duke.handle(command);
+            Command command = Parser.newCommand(input);
+            if (command instanceof ExitCommand) {
+                Platform.exit();
+            }
+
+            resp = dukeService.handle(command);
 
         } catch (CommandException e) {
             resp = Response.newException(e);

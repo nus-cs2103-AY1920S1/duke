@@ -1,9 +1,6 @@
 package com.tysng.duke;
 
-import com.tysng.duke.service.Duke;
-import com.tysng.duke.storage.Storage;
 import com.tysng.duke.ui.Gui;
-import com.tysng.duke.ui.Cli;
 import javafx.application.Application;
 
 /**

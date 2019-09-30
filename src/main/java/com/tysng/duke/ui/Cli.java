@@ -1,8 +1,10 @@
 package com.tysng.duke.ui;
 
 import com.tysng.duke.exception.CommandException;
-import com.tysng.duke.service.Command;
-import com.tysng.duke.service.Duke;
+import com.tysng.duke.service.DukeService;
+import com.tysng.duke.service.Parser;
+import com.tysng.duke.service.command.Command;
+import com.tysng.duke.service.command.ExitCommand;
 
 import java.util.Scanner;
 
@@ -11,15 +13,15 @@ import java.util.Scanner;
  * and prints the response to stdout.
  */
 public class Cli {
-    private Duke duke;
+    private DukeService dukeService;
 
     /**
      * Constructs the UI object with Duke service layer object.
      *
-     * @param duke a Duke service layer object
+     * @param dukeService a Duke service layer object
      */
-    public Cli(Duke duke) {
-        this.duke = duke;
+    public Cli(DukeService dukeService) {
+        this.dukeService = dukeService;
     }
 
     /**
@@ -41,14 +43,14 @@ public class Cli {
         while (sc.hasNextLine()) {
             Command command;
             try {
-                command = Command.newCommand(sc.nextLine());
+                command = Parser.newCommand(sc.nextLine());
             } catch (CommandException e) {
                 Response.newException(e);
                 continue;
             }
 
-            this.duke.handle(command).print();
-            if (command.getType() == Command.CommandType.BYE) {
+            this.dukeService.handle(command).print();
+            if (command instanceof ExitCommand) {
                 break;
             }
         }

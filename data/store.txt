@@ -1,0 +1,5 @@
+1 ~ ToDo ~ X ~ LOL ~ None
+2 ~ ToDo ~ X ~ LOL ~ None
+3 ~ ToDo ~ X ~ # ~ None
+4 ~ ToDo ~ X ~ # ~ None
+5 ~ Event ~ X ~ LOL ~ 12th of June 1997, 9.52am ~ #LOL

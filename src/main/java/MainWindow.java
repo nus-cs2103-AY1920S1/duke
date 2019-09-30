@@ -68,10 +68,10 @@ public class MainWindow extends AnchorPane {
             }
         } catch (IndexOutOfBoundsException error) {
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
                     DialogBox.getKappaDialog(response, kappaImage)
             );
             userInput.clear();
+            return;
         }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

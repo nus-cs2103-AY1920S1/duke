@@ -18,6 +18,7 @@ import kappa.exception.KappaException;
 import kappa.exception.MissingDateException;
 import kappa.exception.MissingTaskException;
 import kappa.exception.MissingDescriptionException;
+import kappa.exception.ZeroInputException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,10 +37,14 @@ public class Parser {
      * @return Corresponding command based on user input.
      * @throws KappaException For invalid input.
      */
-    public static Command parse(String fullCommand) throws KappaException, AssertionError {
+    public static Command parse(String fullCommand) throws KappaException, ZeroInputException {
         String[] tokens = fullCommand.split(" ");
         String firstWord = tokens[0];
-        assert (!firstWord.isEmpty());
+        try {
+            assert (!firstWord.isEmpty());
+        } catch (AssertionError error) {
+            throw new ZeroInputException();
+        }
         switch (firstWord) {
         case "bye":
             return new ExitCommand();
@@ -91,7 +96,12 @@ public class Parser {
             return new Tags();
         } else {
             String[] splitByHash = command[1].trim().split("#");
-            String[] tagsArray = Arrays.copyOfRange(splitByHash,1,splitByHash.length);
+            String[] tagsArray;
+            try {
+                tagsArray = Arrays.copyOfRange(splitByHash, 1, splitByHash.length);
+            } catch (IllegalArgumentException error) {
+                throw new InvalidTagException();
+            }
             if (splitByHash.length == 0) {
                 throw new InvalidTagException();
             }

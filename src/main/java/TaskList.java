@@ -34,9 +34,11 @@ public class TaskList {
      * @param index The Index of the Task
      * @return
      */
-    public Task done (int index) {
+    public Task done (int index) throws DukeException {
+      
+      assert index >= 0 : "INDEX SHOULD BE GREATER THAN ZERO";
 
-        assert index >= 0 : "INDEX SHOULD BE GREATER THAN ZERO";
+        if (index < 0 || index > list.size()) throw DukeException.outOfBounds();
 
         Task task = list.get(index);
         task.markAsDone();
@@ -49,7 +51,9 @@ public class TaskList {
      * @param index The index of the task
      * @return The deleted task
      */
-    public Task delete (int index) {
+    public Task delete (int index) throws DukeException {
+
+        if (index < 0 || index > list.size()) throw DukeException.outOfBounds();
 
         assert index >= 0 : "INDEX SHOULD BE GREATER THAN ZERO";
 

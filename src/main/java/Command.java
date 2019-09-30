@@ -12,7 +12,7 @@ public abstract class Command {
      * @param storage
      * @throws IOException
      */
-    public abstract String execute (TaskList taskList, Ui ui, Storage storage) throws IOException;
+    public abstract String execute (TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Checks whether the command is to exit the program

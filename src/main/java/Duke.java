@@ -72,7 +72,7 @@ public class Duke {
             Command c = Parser.parse(fullCommand);
             this.isExit = c.isExit();
             return c.execute(tasks, ui, storage);
-        } catch (IOException | DukeException e) {
+        } catch (DukeException e) {
             return ui.showError(e.getMessage());
         }
 

@@ -96,19 +96,26 @@ public class Storage {
     /**
      * Saves the Tasks in a file
      * @param list The list of tasks to save
-     * @throws IOException
+     * @throws DukeException
      */
-    public void save (ArrayList<Task> list) throws IOException {
+    public void save (ArrayList<Task> list) throws DukeException {
+      
+      assert list.isEmpty() : "LIST SHOULD NOT BE EMPTY";
 
-        assert list.isEmpty() : "LIST SHOULD NOT BE EMPTY";
+        try {
 
-        String s = "";
+            String s = "";
 
-        for (Task t : list) {
-            s += t.saveFormat() + System.lineSeparator();
+            for (Task t : list) {
+                s += t.saveFormat() + System.lineSeparator();
+            }
+
+            this.writeToFile(filePath, s);
+
+        } catch (IOException e) {
+          throw DukeException.couldNotSave();
         }
 
-        this.writeToFile(filePath, s);
     }
 
 }

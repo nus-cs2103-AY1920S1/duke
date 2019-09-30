@@ -22,4 +22,8 @@ public class DukeException extends Exception {
     public static DukeException outOfBounds () {
         return new DukeException("☹ OOPS!!! The number you inputted is out of bounds \uD83D\uDE22");
     }
+
+    public static DukeException couldNotSave () {
+        return new DukeException("☹ OOPS!!! Your task could not be saved/updated/deleted \uD83D\uDE22");
+    }
 }

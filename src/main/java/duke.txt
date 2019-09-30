@@ -1,0 +1,5 @@
+[T][ ] poop
+[D][ ] swim (by: 02 Dec 2019, 18:00 PM)
+[E][ ] swim (at: 2-3pm)
+[E][ ] Eat lunch (at: 1pm-2pm)
+[D][ ] Wash dishes (by: 02 Dec 2019, 18:00 PM)

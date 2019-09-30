@@ -1,0 +1,10 @@
+Hello! I'm Duke
+What can I do for you?
+Here is the list of tasks from where you've left off: 
+../../../data/duke.txt (No such file or directory)
+file error
+Got it. I've added this task:
+  [T][ ] read book
+Now you have 1 tasks in the list.
+June 6th
+6th

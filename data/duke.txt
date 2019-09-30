@@ -1,0 +1,11 @@
+[T][ ] poop
+[D][+] wipe ass (by: 2pm)
+[D][+] read book (by: 02 Dec 2018, 18:00 PM)
+[T][ ] charge phone
+[D][+] unplug phone (by: 01 Sep 2018, 21:00 PM)
+[E][ ] sell pants (at: 3pm)
+[T][ ] sell bottle
+[D][+] eat lunch (by: 02 Dec 2019, 18:00 PM)
+[E][ ] poop lunch (at: 3pm)
+[T][ ] sell lunch
+[D][ ] clear lunch (by: 04 Jan 2020, 19:00 PM)

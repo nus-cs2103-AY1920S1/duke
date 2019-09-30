@@ -82,7 +82,7 @@ I've removed:
 ```
 
 ### 5. Find tasks using keywords
-Find a task or certain tasks using given keyword(s). Lists all tasks which contains that keyword in its _task name_.
+Find a task or certain tasks using given keyword(s). Lists all tasks which contains that keyword in its description.
 * format: find (keyword)
 * Example: find book
 * Expected Outcome:

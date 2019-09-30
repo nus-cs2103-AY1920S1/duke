@@ -1,7 +1,7 @@
 # User Guide
 [1. Introduction](#Introduction)  
-[2. Quick Start](#Quick Start)  
-[3. Features](#Features)
+[2. Quick Start](#Quick Start)    
+[3. Features](#Features)  
 [4. FAQ](#FAQ)   
 [5. Command Summary](#Command Summary) 
 

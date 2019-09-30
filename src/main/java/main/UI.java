@@ -54,7 +54,7 @@ public interface UI {
      *
      * @return The message explaining the deletion of a task.
      */
-    static String removedTask(Task task, int listSize){
+    static String removedTask(Task task, int listSize) {
         return " Noted. I've removed this task: \n"
                 + "    " + task + "\n"
                 + "Now you have " + listSize + " tasks in the list.\n";
@@ -88,9 +88,8 @@ public interface UI {
      *
      * @return The start message when a FindCommand is executed.
      */
-    static String findStart(){
-        return "    ____________________________________________________________\n"
-                + "     Here are the matching tasks in your list: \n";
+    static String findStart() {
+        return "     Here are the matching tasks in your list: \n";
     }
 
     /**

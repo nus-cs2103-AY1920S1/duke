@@ -5,9 +5,7 @@ import task.Task;
 import java.util.ArrayList;
 
 /**
- * Stores all the Tasks in an ArrayList.
- *
- * Contains methods to access and update the ArrayList of Tasks.
+ * Stores all the Tasks in an ArrayList. Contains methods to access and update the ArrayList of Tasks.
  */
 public class TaskList {
     private ArrayList<Task> list;

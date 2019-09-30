@@ -17,11 +17,9 @@ public class Duke {
     private TaskList taskList;
 
     /**
-     * Constructs an instance of Duke.
-     *
-     * Also instantiates an instance of Storage and TaskList for this instance of Duke.
+     * Constructs an instance of Duke. Also instantiates an instance of Storage and TaskList for this instance of Duke.
      */
-    public Duke(){
+    public Duke() {
         storage = new Storage();
         ArrayList<Task> list = storage.readFromFile();
         this.taskList = new TaskList(list);
@@ -30,8 +28,8 @@ public class Duke {
     /**
      * Handles the parsing of inputs and execution of parsed commands.
      *
-     * As long as a ByeCommand is not parsed, Duke will continue parsing for more commands. If a ByeCommand is parsed,
-     * the while loop is terminated and Duke terminates.
+     * <p></p>As long as a ByeCommand is not parsed, Duke will continue parsing for more commands. If a ByeCommand is
+     * parsed, the while loop is terminated and Duke terminates.
      *
      * @throws IOException When the Parser f
      */
@@ -54,7 +52,7 @@ public class Duke {
     @FXML
     public String getResponse(String input, Duke duke) {
         String toReturn = "";
-        try{
+        try {
             toReturn = duke.run(input);
         } catch (IOException io) {
             System.err.println(io);

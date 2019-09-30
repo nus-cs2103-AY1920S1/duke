@@ -9,9 +9,7 @@ import task.Todo;
 import java.util.ArrayList;
 
 /**
- * A Command to create an instance of a Todo Task.
- *
- * This will add the Todo Task to the TaskList and the Storage file.
+ * A Command to create an instance of a Todo Task. This will add the Todo Task to the TaskList and the Storage file.
  */
 public class TodoCommand implements Command {
     private String todoName;
@@ -23,7 +21,7 @@ public class TodoCommand implements Command {
     /**
      * Executes the Todo command which creates a Todo Task.
      *
-     * Taking the TaskList and Storage object of the main Duke class as arguments, this command will create a new
+     * <p></p>Taking the TaskList and Storage object of the main Duke class as arguments, this command will create a new
      * Deadline Task which will then be added to the TaskList and Storage objects. The UI will also be used to print
      * a newTask message into the console.
      *

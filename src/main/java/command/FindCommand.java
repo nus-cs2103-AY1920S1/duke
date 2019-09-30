@@ -22,7 +22,7 @@ public class FindCommand implements Command {
 
             for (String nameComponent : taskNameComponents) {
                 if (nameComponent.equalsIgnoreCase(searchTerm)) {
-                    toReturn.append("     " );
+                    toReturn.append("     ");
                     toReturn.append(counter);
                     toReturn.append(".");
                     toReturn.append(task);
@@ -32,8 +32,6 @@ public class FindCommand implements Command {
                 }
             }
         }
-        toReturn.append(UI.endLine());
-
         return toReturn.toString();
     }
 }

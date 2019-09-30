@@ -29,7 +29,7 @@ You may quit the application by simply typing `bye` or closing the window using 
 ## Usage
 
 ### `todo` - add a to-do task
-Command: `todo [task description]` 
+Command: `todo [task description]`  
 Example: `todo go to school`  
 Expected outcome:
 ```

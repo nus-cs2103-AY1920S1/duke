@@ -5,7 +5,6 @@ import duke.Ui;
 import exception.DukeException;
 import task.TaskList;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 

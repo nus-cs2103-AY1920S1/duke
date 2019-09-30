@@ -16,6 +16,13 @@ Table of contents
 ## 1.0 Introduction 
 Dis Duke is a Task tracker CLI app that gives you a to-do list. This app is optimised for those who prefer to work with a command line interface (CLI).
 
+## product
+
+<p style="text-align:center;"><img src="Ui.png" alt="Ui"></p>
+
+DIS Duke is a simple task tracker that helps DIS YOU to keep track of
+DIS todo tasks, events and deadlines.
+
 ## 2.0 Quick Start 
 1. Make sure you have Java 11.0 installed on your computer
 2. Download the latest Jar release @ https://github.com/EugeneTeu/duke/releases

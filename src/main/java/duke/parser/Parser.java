@@ -74,8 +74,7 @@ public class Parser {
             throw new DukeDeleteIllegalArgumentException("You have entered too many arguments for deletion");
         } else {
             try {
-                int deletionNum = Integer.parseInt(newTaskSplit[1]) - 1;
-                return deletionNum;
+                return Integer.parseInt(newTaskSplit[1]) - 1;
             } catch (NumberFormatException e) {
                 throw new DukeDeleteIllegalArgumentException("Please enter a valid number for deletion");
             } catch (IndexOutOfBoundsException e) {
@@ -225,13 +224,9 @@ public class Parser {
         default:
             throw new DukeSaveFileCorruptedError();
         }
-        if (newTask != null) {
-            if (taskIsDone) {
-                newTask.taskComplete();
-            }
-            return newTask;
-        } else  {
-            throw new DukeSaveFileCorruptedError();
+        if (taskIsDone) {
+            newTask.taskComplete();
         }
+        return newTask;
     }
 }

@@ -17,10 +17,10 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ArrayList<Task>searchResultTaskList = Parser.findTasksByKeyword(keyword, taskList.getTaskList());
+        ArrayList<Task> searchResultTaskList = Parser.findTasksByKeyword(keyword, taskList.getTaskList());
         int searchResultTaskListLen = searchResultTaskList.size();
         String[] taskDescriptionArray = new String[searchResultTaskListLen];
-        for (int i = 0; i < searchResultTaskListLen; i ++) {
+        for (int i = 0; i < searchResultTaskListLen; i++) {
             taskDescriptionArray[i] = searchResultTaskList.get(i).toString();
         }
         ui.showSearchResult(taskDescriptionArray);

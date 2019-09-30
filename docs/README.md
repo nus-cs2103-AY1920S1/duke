@@ -1,6 +1,6 @@
 # User Guide
 
-Duke is a personal chat bot that uses the CLI to manage daily tasks. It is a case insensitve CLI application. 
+Duke is a personal chat bot that uses the CLI to manage daily tasks. It is a case-insensitve CLI application. 
 
 ## Quick Start
 

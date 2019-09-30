@@ -17,6 +17,11 @@ which can be used as `todo borrow book`
 * In the examples, words in the diamond brackets (<>) are user inputs, and Duke 
 responses are have a '__________' preceding and succeeding it. 
 
+* The format for `DATE TIME` is
+      
+        dd/mm/yyyy <time in 24hr format>
+
+
 ### Add a task
 Duke can track three types of tasks:
 * *Todos*: tasks without any date/time attached to it
@@ -27,7 +32,7 @@ Duke can track three types of tasks:
     | --------- | ------- |
     | Todo | `todo TASK DES` |
     | Deadline | `deadline TASK DES /by DATE TIME` |
-    | Event | `event TASK DES /at DATE TIME` |
+    | Event | `event TASK DES /at DATE TIME to DATE TIME` |
 
 Examples:
     
@@ -42,6 +47,12 @@ Examples:
     Got it. I've added this task: 
            [D][✗] return book (by: 18/08/2019 2359hrs)
          Now you have 6 tasks in the list.
+    __________
+    <event birthday party /at 13/09/2019 1500 to 13/09/2019 2000
+    __________
+    Got it. I've added this task: 
+               [E][✗] birthday party (at: 13/09/2019 1500hrs to 13/09/2019 2000hrs)
+             Now you have 7 tasks in the list.
     
     
 ### List tasks
@@ -87,7 +98,7 @@ Example:
     Here are the tasks in your list:
          1.[T][✓] read book
          2.[D][✓] return book (by: 6/06/2019 1500hrs)
-         3.[E][✗] project meeting (at: 9/12/2020 1330hrs)
+         3.[E][✗] project meeting (at: 9/12/2020 1330hrs to 9/12/2020 1500hrs)
          4.[T][✓] join sports club
          5.[T][✗] borrow book
     __________
@@ -117,9 +128,16 @@ Example:
 ### Edit a task
 The editable attributes of a task are:
   1. `des` : the description of a task
-  2. `date` : the date of `event` and `deadline` tasks 
+  2. `date` : the date of `event` and `deadline` tasks.
 
     edit INDEX/ATTRIBUTE/NEW ATTRIBUTE
+ 
+ Note that to edit the `date` of `event` and `deadline` tasks, the format is
+        
+        | Task Type | Command |
+        | --------- | ------- |
+        | Event | `edit INDEX/date/DATE TIME to DATE TIME` |
+        | Deadline | `edit INDEX/date/DATE TIME` |
  
  Examples:
  
@@ -128,16 +146,16 @@ The editable attributes of a task are:
     Here are the tasks in your list:
              1.[T][✓] read book
              2.[D][✓] return book (by: 6/06/2019 1500hrs)
-             3.[E][✗] project meeting (at: 9/12/2020 1330hrs)
+             3.[E][✗] project meeting (at: 9/12/2020 1330hrs to 9/12/2020 1500hrs)
              4.[T][✓] join sports club
              5.[T][✗] borrow book
     __________
-    <edit 2/date/18/09/2019 1800>
+    <edit 3/date/18/09/2019 1800 to 18/09/2019 1900>
     __________
     Success! I've edited this task from this:
-    [D][✓] return book (by: 6/06/2019 1500hrs)
+    [E][✗] project meeting (at: 9/12/2020 1330hrs to 9/12/2020 1500hrs)
     to this:
-    [D][✓] return book (by: 18/09/2019 1800hrs)
+    [E][✗] project meeting (at: 18/09/2019 1800hrs to 18/09/2019 1900hrs)
      __________
      <edit 4/des/join arts club>
      __________
@@ -145,11 +163,6 @@ The editable attributes of a task are:
      [T][✓] join sports club
      to this:
      [T][✓] join arts club
-
-### Help
-To view a help page with a list of all commands:
-
-    help
 
 ### Exit Duke
 To exit Duke and close the programme:

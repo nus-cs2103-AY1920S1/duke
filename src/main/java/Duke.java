@@ -14,7 +14,7 @@ public class Duke {
 
     void DukeStart() {
         ui = new Ui();
-        Storage storage = new Storage("../duke.txt");
+        Storage storage = new Storage("data/savedTasks.txt");
         taskList = new TaskList(storage.load());
         parser = new Parser();
     }

@@ -1,0 +1,5 @@
+D | 1 | submit | 11/10/2019 1500
+T | 0 | finish work
+T | 1 | make project
+E | 0 | attend lec | 12/12/0012 1212
+T | 1 | Learn python

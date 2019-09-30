@@ -20,17 +20,17 @@ Duke is a GUI (Graphical User Interface) application that lets you set reminders
 
 Adds (and saves) a task to Duke. There are 3 kinds of tasks:
 
-#### 3.1.1 Todo 
+#### 3.1.2 Todo 
 
 Format: "todo {description}"
 
-#### 3.1.1 Deadline 
+#### 3.1.2 Deadline 
 
 Format: "deadline {description} /by {date}"
 
 Note: Slash used must be a forward slash
 
-#### 3.1.1 Event 
+#### 3.1.3 Event 
 
 Format: "event {description} /at {date)"
 

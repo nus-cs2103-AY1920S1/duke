@@ -12,8 +12,9 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private String filePath = "data/tasks.txt";
 
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList();
@@ -50,7 +51,23 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke("data/tasks.txt");
+        Duke duke = new Duke();
         duke.run();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui);
+            if (c.isExit()) {
+                System.exit(0);
+            }
+        } catch (DukeException e) {
+            ui.showError(e);
+        }
+
+        // dummy implementation
+        return "Duke heard: " + input;
+        //return ui.getResponse();
     }
 }

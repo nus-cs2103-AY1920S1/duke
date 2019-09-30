@@ -1,0 +1,21 @@
+.chatbox{
+    -fx-background-color: lightgray;
+    -fx-border-radius: 20 20 20 20;
+    -fx-background-radius: 20 20 20 20;
+}
+
+.chatbox *.text {
+    -fx-font-family: 'Verdana';
+}
+
+.anchor  > .viewport{
+    -fx-background-image:url('/images/DaBears.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    -fx-background-size: 250 400;
+
+}
+
+.image{
+    -fx-shape:Circle;
+}

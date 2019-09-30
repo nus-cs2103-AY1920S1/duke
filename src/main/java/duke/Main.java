@@ -14,19 +14,31 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    /** Image to be used as application icon for Duke.*/
     private Image dukeIcon = new Image(getClass().getResourceAsStream("/images/coffee.png"));
+
+    /** Underlying instance of Duke created when application runs.*/
     private Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {
         try {
+            // create new scene using MainWindow fxml
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+
+            // set the scene to display on the stage
             stage.setScene(scene);
+
+            // set underlying instance of Duke
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
+
+            // set title and icon for the window
             stage.setTitle("Duke");
             stage.getIcons().add(dukeIcon);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+
+            // display the window
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

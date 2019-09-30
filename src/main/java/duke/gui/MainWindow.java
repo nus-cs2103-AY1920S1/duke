@@ -1,5 +1,8 @@
 package duke.gui;
 
+import static duke.gui.DialogBox.getDukeDialog;
+import static duke.gui.DialogBox.getUserDialog;
+
 import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -41,12 +44,17 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        // get and display user input
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(input),
-            DialogBox.getDukeDialog(response)
-        );
+        DialogBox inputDialog = getUserDialog(input);
+        dialogContainer.getChildren().add(inputDialog);
+
+        // clear user input field
         userInput.clear();
+
+        // get and display output from Duke
+        String response = duke.getResponse(input);
+        DialogBox outputDialog = getDukeDialog(response);
+        dialogContainer.getChildren().add(outputDialog);
     }
 }

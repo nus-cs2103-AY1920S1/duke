@@ -4,6 +4,7 @@ import dose.util.gui.MainWindow;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -23,6 +24,9 @@ public abstract class MessageBox extends VBox {
     @FXML
     HBox messageBox;
 
+    @FXML
+    VBox messageBoxContainer;
+
     MessageBox(String text) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(
@@ -35,7 +39,7 @@ public abstract class MessageBox extends VBox {
         }
 
         // I give up :(
-        //messageBox.setAlignment(Pos.BOTTOM_LEFT);
+        messageBoxContainer.setAlignment(Pos.TOP_LEFT);
         message.setText(text);
     }
 

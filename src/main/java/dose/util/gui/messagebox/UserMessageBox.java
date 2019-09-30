@@ -13,7 +13,7 @@ public class UserMessageBox extends MessageBox {
         DropShadow dropShadow = new DropShadow(5.0, Color.web(colourScheme.getUserShadowColour()));
         messageBox.setEffect(dropShadow);
         //flip();
-        setAlignment(Pos.TOP_RIGHT);
+        messageBoxContainer.setAlignment(Pos.TOP_RIGHT);
     }
 
 //    /**

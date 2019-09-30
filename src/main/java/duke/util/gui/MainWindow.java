@@ -1,8 +1,7 @@
 package duke.util.gui;
 
-import static duke.util.gui.messagebox.MessageBox.getUserMessageBox;
-
 import duke.util.gui.messagebox.MessageBox;
+import duke.util.gui.messagebox.UserMessageBox;
 import java.util.Queue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -48,7 +47,7 @@ public class MainWindow extends AnchorPane {
         try {
             // get and display user input
             String input = userInput.getText();
-            MessageBox userMessageBox = getUserMessageBox(input, this.colourScheme);
+            MessageBox userMessageBox = new UserMessageBox(input, this.colourScheme);
             messageBoxContainer.getChildren().add(userMessageBox);
 
             duke.getResponse(input);

@@ -5,7 +5,10 @@ import duke.task.TaskList;
 import duke.util.Ui;
 import duke.util.UiMessage;
 import duke.util.exception.DukeException;
+import duke.util.gui.messagebox.DukeMessageBox;
+import duke.util.gui.messagebox.ExceptionMessageBox;
 import duke.util.gui.messagebox.MessageBox;
+import duke.util.gui.messagebox.TaskMessageBox;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -33,7 +36,7 @@ public class Gui implements Ui {
     @Override
     public void showMessage(UiMessage uiMessage) {
         try {
-            messageBoxQueue.add(MessageBox.getDukeMessageBox(uiMessage.getMessage(), this.colourScheme));
+            messageBoxQueue.add(new DukeMessageBox(uiMessage.getMessage(), this.colourScheme));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -42,7 +45,7 @@ public class Gui implements Ui {
     @Override
     public void showMessage(String message) {
         try {
-            messageBoxQueue.add(MessageBox.getDukeMessageBox(message, this.colourScheme));
+            messageBoxQueue.add(new DukeMessageBox(message, this.colourScheme));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -50,9 +53,8 @@ public class Gui implements Ui {
 
     @Override
     public void showError(DukeException exception) {
-        // todo: replace with custom exception message box once created
         try {
-            messageBoxQueue.add(MessageBox.getDukeMessageBox(exception.getMessage(), this.colourScheme));
+            messageBoxQueue.add(new ExceptionMessageBox(exception.getMessage(), this.colourScheme));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -71,7 +73,7 @@ public class Gui implements Ui {
         String taskString = task.toString();
         int taskIdString = tasks.getId(task);
         String toPrint = taskIdString + ". " + taskString;
-        messageBoxQueue.add(MessageBox.getDukeMessageBox(toPrint, this.colourScheme));
+        messageBoxQueue.add(new TaskMessageBox(toPrint, this.colourScheme));
     }
 
     public Queue<MessageBox> getMessageBoxQueue() {

@@ -8,9 +8,9 @@ public enum ColourScheme {
 
     private final String backgroundColour;
     private final String dukeMessageBoxColour;
-    private final String dukeShadowColour;
+    private final String dukeShadowColour; // also serves as the colour of the taskMessageBox
     private final String userMessageBoxColour;
-    private final String userShadowColour;
+    private final String userShadowColour; // also serves as the colour of the exceptionMessageBox
     private final String textColour;
 
     public String getBackgroundColour() {

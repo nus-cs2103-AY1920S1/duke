@@ -42,7 +42,6 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         Background bg = getMainBackground();
         dialogContainer.setBackground(bg);
-        //userInput.setStyle("-fx-text-inner-color: white;");
         greet();
     }
 

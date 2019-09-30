@@ -6,6 +6,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class DateValidatorTest {
+    @Test
+    void getAndValidateDates_invalidDates_failMessage() {
+        try {
+            DateValidator v = new DateValidator();
+            assertEquals("null", v.getAndValidateDates("false", true));
+            assertEquals("null", v.getAndValidateDates("false", false));
+            assertEquals("null", v.getAndValidateDates("11-01-2000 1500", true));
+        } catch (Exception e) {
+            assertEquals("Invalid date format! "
+                    + "Please ensure your date sticks to this format:\n"
+                    + "    Deadlines : \"DD/MM/YYYY HHMM\"\n"
+                    + "    Events : \"DD/MM/YYYY HHMM-HHMM\"", e.getMessage());
+        }
+    }
 
     /**
      * REDUNDANT

@@ -33,7 +33,8 @@
     
 - `help` - Provides user assistance by listing all available commands.
     - Expected outcome:
-    ```Hello, I'm Duke!
+    ```
+    Hello, I'm Duke!
         I can keep track of your to-dos, deadlines and events. Use these commands to control me:
          - todo [desc]
          - event [desc] /at [date time]
@@ -42,5 +43,5 @@
          - bye (exits duke)
          - find [keyword]
          * date format - DD/MM/YYYY
-         * time format - 0000"
+         * time format - 0000
     ```

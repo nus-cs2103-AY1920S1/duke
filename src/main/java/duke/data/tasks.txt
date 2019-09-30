@@ -6,3 +6,4 @@ todo shower | 1
 deadline buy groceries /by 10/10/2019 15:00:00 | 0
 todo water the plants | 0
 todo buy bread | 0
+event soccer match /at 10/10/2019 15:00:00 | 0

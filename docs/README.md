@@ -29,18 +29,21 @@ In the `list archive` screen, calling `unarchive [number]` will move the task fr
 ### `todo`, `deadline`, `event` - creating a task
 * `todo [description]` will add a new todo item with the specified description.
 
-* `deadline [description] /by [dd/MM/YYYY hhmm]` will add a deadline with the specified details.
+* `deadline [description] /by [dd/MM/yyyy hhmm]` will add a deadline with the specified details.
 
     Example: 
     ```
     deadline return book /by 2/12/2019 1800
     ```
     
-* 
-    
+* `event [description] /at [dd/MM/yyyy hhmm]` will add an event with the description happening at the specified time.
+    Example: 
+    ```
+    event nasdaq ipo /at 2/03/2019 1800
+    ```
 
 
 
+### `delete` - delete a task
 
-
-
+`delete [number]` will permanently delete a task from the task list.

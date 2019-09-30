@@ -1,7 +1,6 @@
-T | 1 | borrow book
 T | 0 | read book
-D | 0 | return book  |  2nd of December 2019, 6pm
-D | 0 | finish readings  |  23rd of July 2023, 12:59am
-T | 1 | finish project
-E | 0 | dinner  |  2nd of December 2019, 6pm
-D | 1 | finish project  |  3rd of January 2020, 6:10pm
+T | 0 | borrow book
+D | 0 | return book | Mon Sep 30 2019 17:00 PM
+E | 0 | project meeting | Tue Oct 01 2019 14:00 PM | 15:00 PM
+E | 0 | project meeting | Thu Jan 30 2020 14:00 PM | 15:00 PM
+E | 0 | project meeting | Wed Nov 01 1111 11:11 AM | 22:22 PM

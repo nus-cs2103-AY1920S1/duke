@@ -26,12 +26,12 @@ public class ParserTest {
         assertEquals(new AddTodoCommand("project increments").getClass(),
                 new Parser("todo project increments").parse("todo "
                         + "project increments").getClass());
-        assertEquals(new AddDeadlineCommand("return book ", " 15/09/2019 1700").getClass(),
+        assertEquals(new AddDeadlineCommand("return book", "15/09/2019 1700").getClass(),
                 new Parser("deadline return book /by 15/09/2019 1700").parse("deadline "
                         + "return book /by 15/09/2019 1700").getClass());
-        assertEquals(new AddEventCommand("project meeting ", " 17/12/2019 1500").getClass(),
-                new Parser("event project meeting /at 17/12/2019 1500").parse("event "
-                        + "project meeting /at 17/12/2019 1500").getClass());
+        assertEquals(new AddEventCommand("project meeting", "17/12/2019 1500", "1800").getClass(),
+                new Parser("event project meeting /at 17/12/2019 1500 /to "
+                        + "1800").parse("event project meeting /at 17/12/2019 1500 /to 1800").getClass());
         assertEquals(new DeleteTaskCommand("5").getClass(),
                 new Parser("delete 5").parse("delete 5").getClass());
         assertEquals(new FindCommand("book").getClass(),
@@ -63,7 +63,7 @@ public class ParserTest {
     @Test
     public void parse_missingDeadline_exceptionThrown() {
         try {
-            assertEquals(new AddDeadlineCommand("return book ", " 15/09/2019 1700"),
+            assertEquals(new AddDeadlineCommand("return book", "15/09/2019 1700"),
                     new Parser("deadline").parse("deadline"));
             fail(); // the test should not reach this line
         } catch (DukeException e) {
@@ -74,8 +74,8 @@ public class ParserTest {
     @Test
     public void parse_missingDateTime1_exceptionThrown() {
         try {
-            assertEquals(new AddDeadlineCommand("return book ", " 15/09/2019 1700"),
-                    new Parser("deadline return book ").parse("deadline return book "));
+            assertEquals(new AddDeadlineCommand("return book", "15/09/2019 1700"),
+                    new Parser("deadline return book").parse("deadline return book"));
             fail(); // the test should not reach this line
         } catch (DukeException e) {
             assertEquals("OOPS!!! Please provide a date and time.", e.toString());
@@ -85,9 +85,9 @@ public class ParserTest {
     @Test
     public void parse_missingDateTime2_exceptionThrown() {
         try {
-            assertEquals(new AddEventCommand("project meeting ", " 17/12/2019 1500"),
-                    new Parser("event project meeting /at ").parse("event "
-                            + "project meeting /at "));
+            assertEquals(new AddEventCommand("project meeting", "17/12/2019 1500", "1800"),
+                    new Parser("event project meeting /at").parse("event "
+                            + "project meeting /at"));
             fail(); // the test should not reach this line
         } catch (DukeException e) {
             assertEquals("OOPS!!! Please provide a date and time.", e.toString());
@@ -97,11 +97,35 @@ public class ParserTest {
     @Test
     public void parse_missingEvent_exceptionThrown() {
         try {
-            assertEquals(new AddEventCommand("project meeting ", " 17/12/2019 1500"),
+            assertEquals(new AddEventCommand("project meeting", "17/12/2019 1500", "1800"),
                     new Parser("event").parse("event"));
             fail(); // the test should not reach this line
         } catch (DukeException e) {
             assertEquals("OOPS!!! The description of an event cannot be empty.", e.toString());
+        }
+    }
+
+    @Test
+    public void parse_missingStart_exceptionThrown() {
+        try {
+            assertEquals(new AddEventCommand("project meeting", "17/12/2019 1500", "1800"),
+                    new Parser("event project meeting /at /to 1800").parse("event "
+                            + "project meeting /at /to 1800"));
+            fail(); // the test should not reach this line
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! Please provide a start date and time.", e.toString());
+        }
+    }
+
+    @Test
+    public void parse_missingEnd_exceptionThrown() {
+        try {
+            assertEquals(new AddEventCommand("project meeting", "17/12/2019 1500", "1800"),
+                    new Parser("event project meeting /at 17/12/2019 1500").parse("event "
+                            + "project meeting /at 17/12/2019 1500"));
+            fail(); // the test should not reach this line
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! Please provide an ending time.", e.toString());
         }
     }
 
@@ -135,4 +159,15 @@ public class ParserTest {
             assertEquals("OOPS!!! Please indicate keyword to be searched.", e.toString());
         }
     }
+
+    @Test
+    public void parse_missingCommand_exceptionThrown() {
+        try {
+            assertEquals(new ByeCommand(), new Parser("").parse(""));
+            fail(); // the test should not reach this line
+        } catch (DukeException e) {
+            assertEquals("Please talk to me, Mocha... =(", e.toString());
+        }
+    }
+
 }

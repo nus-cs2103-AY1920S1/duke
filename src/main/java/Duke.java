@@ -65,6 +65,7 @@ public class Duke {
     protected String getResponse(String input) {
         boolean isTerminated;
         String result;
+        input = input.trim();
         try {
             Command c = Parser.parse(input);
             result = c.execute(tasklist, ui, storage);

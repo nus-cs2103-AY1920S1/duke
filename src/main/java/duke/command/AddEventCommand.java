@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.exception.InvalidEventException;
 import duke.exception.ListFullException;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -9,23 +10,30 @@ import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.format.DateTime;
 
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.util.Date;
+
 /**
  * This command adds an Event to the list of tasks.
  */
 public class AddEventCommand extends Command {
 
     private String task;
-    private String time;
+    private String start;
+    private String end;
 
     /**
-     * Initialises the task and its time to be added.
+     * Initialises the task and its start and end times to be added.
      *
      * @param task name of task.
-     * @param time time of event.
+     * @param start start time of event.
+     * @param end end time of event.
      */
-    public AddEventCommand(String task, String time) {
+    public AddEventCommand(String task, String start, String end) {
         this.task = task;
-        this.time = time;
+        this.start = start;
+        this.end = end;
     }
 
     /**
@@ -41,7 +49,7 @@ public class AddEventCommand extends Command {
      * Executes the adding of Event to the list of tasks.
      * Firstly checks whether list of tasks is already full (maximum 100 tasks).
      * Then reformats date and time of the event provided and creates a new Event to be added to list of tasks.
-     * Finally outputs what has been added successfully to the list of tasks using the UI.
+     * Finally outputs to the user what has been added successfully to the list of tasks using the UI.
      *
      * @param tasklist existing list of tasks.
      * @param ui user interface to inform user what has been added.
@@ -52,8 +60,20 @@ public class AddEventCommand extends Command {
         if (tasklist.size() >= 100) {
             throw new ListFullException();
         } else {
-            DateTime dateTime = new DateTime(time);
-            tasklist.add(new Event(task, dateTime.toReformat()));
+            SimpleDateFormat rawStart = new SimpleDateFormat("dd/MM/yyyy HHmm");
+            SimpleDateFormat rawEnd = new SimpleDateFormat("HHmm");
+            Date properStart;
+            Date properEnd;
+            try {
+                properStart = rawStart.parse(start);
+                properEnd = rawEnd.parse(end);
+            } catch (ParseException e) {
+                throw new InvalidEventException();
+            }
+            DateTime dateTime = new DateTime();
+            String formattedStart = dateTime.getEventStart().format(properStart);
+            String formattedEnd = dateTime.getEventEnd().format((properEnd));
+            tasklist.add(new Event(task, formattedStart, formattedEnd));
             Task thing = tasklist.get(tasklist.size() - 1);
             return "Got it. I've added this task: \n"
                     + "  " + thing.toString() + "\n"

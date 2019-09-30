@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.exception.InvalidDateTimeException;
 import duke.exception.ListFullException;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -8,6 +9,10 @@ import duke.task.Deadline;
 import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.format.DateTime;
+
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.util.Date;
 
 /**
  * This command adds a Deadline to the list of tasks.
@@ -52,8 +57,16 @@ public class AddDeadlineCommand extends Command {
         if (tasklist.size() >= 100) {
             throw new ListFullException();
         } else {
-            DateTime dateTime = new DateTime(deadline);
-            tasklist.add(new Deadline(task, dateTime.toReformat()));
+            SimpleDateFormat raw = new SimpleDateFormat("dd/MM/yyyy HHmm");
+            Date properDeadline;
+            try {
+                properDeadline = raw.parse(deadline);
+            } catch (ParseException e) {
+                throw new InvalidDateTimeException();
+            }
+            DateTime dateTime = new DateTime();
+            String formattedDeadline = dateTime.getDeadline().format(properDeadline);
+            tasklist.add(new Deadline(task, formattedDeadline));
             Task thing = tasklist.get(tasklist.size() - 1);
             return "Got it. I've added this task: \n"
                     + "  " + thing.toString() + "\n"

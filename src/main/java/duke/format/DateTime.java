@@ -1,164 +1,31 @@
 package duke.format;
 
-import duke.exception.DukeException;
-import duke.exception.InvalidDateTimeException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 /**
  * Teaching Duke to understand dates and times.
+ * Converts original dateTime string to a different format.
+ * eg. Converts 2/12/2019 1800 -> 2nd of December 2019, 6pm.
  */
 public class DateTime {
 
-    private String dateTime;
-    private String day;
-    private String month;
-    private String year;
-    private String time;
+    private static SimpleDateFormat reformatDeadline
+            = new SimpleDateFormat("EEE MMM dd yyyy HH:mm a", Locale.ENGLISH);
+    private static SimpleDateFormat reformatEventStart
+            = new SimpleDateFormat("EEE MMM dd yyyy HH:mm a", Locale.ENGLISH);
+    private static SimpleDateFormat reformatEventEnd
+            = new SimpleDateFormat("HH:mm a", Locale.ENGLISH);
 
-    /**
-     * Initialises a DateTime.
-     * Ensures no white spaces at front and back of string before reformatting it.
-     *
-     * @param dateTime raw string extracted from original user input string.
-     */
-    public DateTime(String dateTime) {
-        this.dateTime = dateTime.strip();
+    public SimpleDateFormat getDeadline() {
+        return reformatDeadline;
     }
 
-    /**
-     * Converts original dateTime string to a different format.
-     * eg. Converts 2/12/2019 1800 -> 2nd of December 2019, 6pm.
-     *
-     * @return reformatted string.
-     * @throws DukeException if invalid dateTime given.
-     */
-    public String toReformat() throws DukeException {
-        reformat(dateTime);
-        return " " + day + " of " + month + " " + year + ", " + time;
+    public SimpleDateFormat getEventStart() {
+        return reformatEventStart;
     }
 
-    private void reformat(String dateTime) throws DukeException {
-        String[] splitStr = dateTime.split("/", 3);
-        if (splitStr.length < 3) {
-            throw new InvalidDateTimeException();
-        } else {
-            reformatDay(splitStr[0]);
-            reformatMonth(splitStr[1]);
-            String[] splitTime = splitStr[2].split(" ", 2);
-            if (splitTime.length < 2) {
-                throw new InvalidDateTimeException();
-            } else {
-                reformatYear(splitTime[0]);
-                reformatTime(splitTime[1]);
-            }
-        }
+    public SimpleDateFormat getEventEnd() {
+        return reformatEventEnd;
     }
-
-    private void reformatDay(String split) throws DukeException {
-        int i = Integer.parseInt(split);
-        if (i > 31 || i < 1) {
-            throw new InvalidDateTimeException();
-        } else if (i == 11 || i == 12 || i == 13) {
-            day = split + "th";
-        } else if (i % 10 == 1) {
-            day = split + "st";
-        } else if (i % 10 == 2) {
-            day = split + "nd";
-        } else if (i % 10 == 3) {
-            day = split + "rd";
-        } else {
-            day = split + "th";
-        }
-    }
-
-    private void reformatMonth(String split) throws DukeException {
-        int i = Integer.parseInt(split);
-        switch (i) {
-        case 1:
-            month = "January";
-            break;
-        case 2:
-            month = "February";
-            break;
-        case 3:
-            month = "March";
-            break;
-        case 4:
-            month = "April";
-            break;
-        case 5:
-            month = "May";
-            break;
-        case 6:
-            month = "June";
-            break;
-        case 7:
-            month = "July";
-            break;
-        case 8:
-            month = "August";
-            break;
-        case 9:
-            month = "September";
-            break;
-        case 10:
-            month = "October";
-            break;
-        case 11:
-            month = "November";
-            break;
-        case 12:
-            month = "December";
-            break;
-        default:
-            throw new InvalidDateTimeException();
-            // Fallthrough
-        }
-    }
-
-    private void reformatYear(String split) {
-        year = split;
-    }
-
-    private void reformatTime(String split) throws DukeException {
-        int t = Integer.parseInt(split);
-        int min = t % 100;
-        int hr = t / 100;
-        if (t > 2359 || t < 0) {
-            throw new InvalidDateTimeException();
-        } else if (hr == 0) {
-            if (min == 0) {
-                time = "12am";
-            } else if (min <= 9) {
-                time = "12:0" + min + "am";
-            } else {
-                time = "12:" + min + "am";
-            }
-        } else if (hr < 12) {
-            if (min == 0) {
-                time = hr + "am";
-            } else if (min <= 9) {
-                time = hr + ":0" + min + "am";
-            } else {
-                time = hr + ":" + min + "am";
-            }
-        } else if (hr == 12) {
-            if (min == 0) {
-                time = "12pm";
-            } else if (min <= 9) {
-                time = hr + ":0" + min + "pm";
-            } else {
-                time = hr + ":" + min + "pm";
-            }
-        } else {
-            hr = hr - 12;
-            if (min == 0) {
-                time = hr + "pm";
-            } else if (min <= 9) {
-                time = hr + ":0" + min + "pm";
-            } else {
-                time = hr + ":" + min + "pm";
-            }
-        }
-    }
-
 }

@@ -58,3 +58,4 @@ Format : 'bye'
 ## Additional Information
 1. Duke saves the list after every command.
 2. When typing commands with index number, make sure there is a task corresponding to that number in the list of tasks.
+3. The arhived data can be retrieved from DukeArchive.txt located in the data folder in the same directory as that of the application.

@@ -8,6 +8,8 @@ import java.util.Locale;
  * Converts original dateTime string to a different format.
  * eg. Converts 2/12/2019 1800 -> 2nd of December 2019, 6pm.
  */
+//@@Zhang Dongjun {Auxinnn}-reused
+//reused from his repo after adopting his suggestion to use Java library for SimpleDateFormat
 public class DateTime {
 
     private static SimpleDateFormat reformatDeadline
@@ -29,3 +31,4 @@ public class DateTime {
         return reformatEventEnd;
     }
 }
+//@@Zhang Dongjun

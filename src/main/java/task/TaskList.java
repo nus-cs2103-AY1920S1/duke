@@ -28,12 +28,12 @@ public class TaskList {
      *
      * @param task task
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         assert (task != null) : "A given task cannot be null";
         tasks.add(task);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("  " + task.toString());
-        System.out.println("Now you have " + tasks.size() + (tasks.size() == 1 ? " task" : " tasks") + " in the list");
+        return ("Got it. I've added this task: \n"
+                + "  " + task.toString() + "\n"
+                + "Now you have " + tasks.size() + (tasks.size() == 1 ? " task" : " tasks") + " in the list");
     }
 
     /**
@@ -53,14 +53,11 @@ public class TaskList {
      *
      * @param index index of task
      */
-    public void deleteTask(int index) {
-        System.out.println("Noted. I've removed this task: ");
-        printTask(index);
+    public String deleteTask(int index) {
+        Task target = tasks.get(index);
         tasks.remove(index);
-    }
-
-    private void printTask(int index) {
-        System.out.println(" " + tasks.get(index).toString());
+        return ("Noted. I've removed this task: \n"
+                + " " + target);
     }
 
 }

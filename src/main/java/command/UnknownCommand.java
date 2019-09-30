@@ -11,7 +11,7 @@ public class UnknownCommand extends Command {
     }
 
     @Override
-    public void executeCommand(TaskList taskList, Storage storage) {
-        Ui.unknownMsg();
+    public String executeCommand(TaskList taskList, Storage storage) {
+        return Ui.unknownMsg();
     }
 }

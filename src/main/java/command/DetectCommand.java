@@ -2,14 +2,10 @@ package command;
 
 import task.Task;
 import task.TaskList;
-import util.DukeException;
 import util.Storage;
 import util.Ui;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class DetectCommand extends Command {
@@ -19,9 +15,11 @@ public class DetectCommand extends Command {
     }
 
     @Override
-    public void executeCommand(TaskList taskList, Storage storage) {
+    public String executeCommand(TaskList taskList, Storage storage) {
         assert (!inputCommand.isEmpty()) : "Input inputCommand cannot be empty";
+        String msg;
         Set<Task> duplicatesSet = new HashSet<>();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < taskList.getTasks().size() - 1; i++) {
             for (int j = i + 1; j < taskList.getTasks().size(); j++) {
                 if (taskList.getTask(i).getDesc().equals(taskList.getTask(j).getDesc())) {
@@ -31,12 +29,16 @@ public class DetectCommand extends Command {
             }
         }
 
-        if (duplicatesSet.size() > 0) {
-            Ui.duplicateMsg();
-            duplicatesSet.stream().forEach(System.out::println);
+        if (duplicatesSet.size() <= 0) {
+            msg = Ui.duplicateEmptyMsg();
         } else {
-            Ui.duplicateEmptyMsg();
+            msg = Ui.duplicateMsg();
+            int index = 0;
+            for (Task task : duplicatesSet) {
+                index++;
+                sb.append(index + "." + task.toString() + "\n");
+            }
         }
-
+        return msg + sb.toString();
     }
 }

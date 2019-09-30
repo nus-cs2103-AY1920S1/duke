@@ -1,5 +1,7 @@
 package task;
 
+import util.Ui;
+
 public class Task {
 
     private String desc;
@@ -12,6 +14,7 @@ public class Task {
 
     /**
      * Get description.
+     *
      * @return the description of the task.
      */
     public String getDesc() {
@@ -20,6 +23,7 @@ public class Task {
 
     /**
      * Get status.
+     *
      * @return the status of a task ([✘] or [✓]).
      */
     private String getStatus() {
@@ -28,6 +32,7 @@ public class Task {
 
     /**
      * Get done status.
+     *
      * @return the status of a task(0 or 1).
      */
     public int getDone() {
@@ -37,8 +42,10 @@ public class Task {
     /**
      * mark a task as done.
      */
-    public void markAsDone() {
+    public String markAsDone() {
         isDone = true;
+        return Ui.doneMsg() + "\n"
+                + this.toString();
     }
 
     public String toString() {

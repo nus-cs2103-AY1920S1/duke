@@ -12,12 +12,13 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void executeCommand(TaskList taskList, Storage storage) {
+    public String executeCommand(TaskList taskList, Storage storage) {
         int index = 0;
-        Ui.listMsg();
+        StringBuilder sb = new StringBuilder();
         for (Task task : taskList.getTasks()) {
             index++;
-            System.out.println(index + "." + task.toString());
+            sb.append(index + "." + task.toString() + "\n");
         }
+        return Ui.listMsg() + sb.toString();
     }
 }

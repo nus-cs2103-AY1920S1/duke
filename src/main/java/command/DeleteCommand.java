@@ -1,7 +1,6 @@
 package command;
 
 import task.TaskList;
-import util.DukeException;
 import util.Storage;
 import util.Ui;
 
@@ -12,22 +11,24 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void executeCommand(TaskList taskList, Storage storage) {
+    public String executeCommand(TaskList taskList, Storage storage) {
         assert (!inputCommand.isEmpty()) : "Input inputCommand cannot empty";
+        String msg;
         if (inputCommand.substring(6).isEmpty()) {
-            Ui.deleteEmptyMsg();
+            msg = Ui.deleteEmptyMsg();
         } else {
             try {
                 String desc = inputCommand.substring(7);
                 int index = Integer.parseInt(desc);
                 if (index > taskList.getTasks().size()) {
-                    Ui.outOfBoundMsg();
+                    msg = Ui.outOfBoundMsg();
                 } else {
-                    taskList.deleteTask(index - 1);
+                    msg = taskList.deleteTask(index - 1);
                 }
             } catch (NumberFormatException e) {
-                Ui.invalidNumMsg();
+                msg = Ui.invalidNumMsg();
             }
         }
+        return msg;
     }
 }

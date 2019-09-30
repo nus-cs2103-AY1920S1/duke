@@ -1,98 +1,88 @@
 package util;
 
-import java.util.Scanner;
-
 public class Ui {
 
-    public String readInput() {
-        Scanner sc = new Scanner(System.in);
-        if (sc.hasNext()) {
-            return sc.nextLine();
-        }
-        return "";
+    /**
+     * Duke welcome message.
+     *
+     * @return logo and message
+     */
+    public static String welcomeMsg() {
+        String logoEra = " ____  ____       /\\ \n"
+                + "| ___||  _ \\     /  \\\n"
+                + "||___ | |_| |   / /\\ \\\n"
+                + "| ___||  __/   / /__\\ \\\n"
+                + "||___ | |\\ \\  / ______ \\\n"
+                + "|____||_| \\_\\/_/      \\_\\\n";
+        return ("Hello from\n" + logoEra + "What can I do for you?");
     }
 
-    public static void showLine() {
-        System.out.println("______________________________________________");
+    public static String byeMsg() {
+        return ("Bye. Hope to see you again soon!\n");
     }
 
-    public static void welcomeMsg() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+    public static String listMsg() {
+        return ("Here are the tasks in your list:\n");
     }
 
-    public static void byeMsg() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public static String doneMsg() {
+        return ("Nice! I've marked this task as done:\n");
     }
 
-    public static void listMsg() {
-        System.out.println("Here are the tasks in your list:");
+    public static String findMsg() {
+        return ("Here are the matching tasks in your list: \n");
     }
 
-    public static void doneMsg() {
-        System.out.println("Nice! I've marked this task as done: ");
+    public static String duplicateMsg() {
+        return ("I've found following duplicate tasks in your taskList:\n");
     }
 
-    public static void findMsg() {
-        System.out.println("Here are the matching tasks in your list");
+    public static String duplicateEmptyMsg() {
+        return ("Congrat! No duplicates found!\n");
     }
 
-    public static void duplicateMsg() {
-        System.out.println("I've found following duplicate tasks in your taskList: ");
+    public static String unknownMsg() {
+        return ("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
     }
 
-    public static void duplicateEmptyMsg() {
-        System.out.println("Congrat! No duplicates found!");
+    public static String emptyTaskMsg(String s) {
+        return ("☹ OOPS!!! The description of a " + s + " cannot be empty.\n");
     }
 
-    public static void unknownMsg() {
-        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    public static String invalidNumMsg() {
+        return ("☹ OOPS!!! You have entered an invalid number.\n");
     }
 
-    public static void emptyTaskMsg(String s) {
-        System.out.println("☹ OOPS!!! The description of a " + s + " cannot be empty.");
+    public static String outOfBoundMsg() {
+        return ("☹ OOPS!!! Out of range, the task does not exist.\n");
     }
 
-    public static void invalidNumMsg() {
-        System.out.println("☹ OOPS!!! You have entered an invalid number");
+    public static String missingDeadlineMsg() {
+        return ("☹ OOPS!!! You must specify a deadline date.\n");
     }
 
-    public static void outOfBoundMsg() {
-        System.out.println("☹ OOPS!!! Out of range, the task does not exist");
+    public static String missingEventMsg() {
+        return ("☹ OOPS!!! You must specify a event date.\n");
     }
 
-    public static void missingDeadlineMsg() {
-        System.out.println("☹ OOPS!!! You must specify a deadline date");
+    public static String deleteEmptyMsg() {
+        return ("☹ OOPS!!! You cannot delete an empty entry.\n");
     }
 
-    public static void missingEventMsg() {
-        System.out.println("☹ OOPS!!! You must specify a event date");
+    public static String doneErrorMsg() {
+        return ("☹ OOPS!!! This entry does not exist.\n");
     }
 
-    public static void deleteEmptyMsg() {
-        System.out.println("☹ OOPS!!! You cannot delete an empty entry.");
+    public static String findErrorMsg() {
+        return ("☹ OOPS!!! You must specify the description.\n");
     }
 
-    public static void doneErrorMsg() {
-        System.out.println("☹ OOPS!!! This entry does not exist.");
+    public static String findEmptyMsg() {
+        return ("☹ OOPS!!! No matching task is found.\n");
     }
 
-    public static void findErrorMsg() {
-        System.out.println("☹ OOPS!!! You must specify the description.");
-    }
-
-    public static void findEmptyMsg() {
-        System.out.println("☹ OOPS!!! No matching task is found.");
-    }
-
-    public static void showErrorMsg(Exception error) {
-        System.out.println("☹ OOPS!!!" + error.toString());
+    public static String showErrorMsg(Exception error) {
+        return ("☹ OOPS!!!" + error.toString() + "\n");
     }
 
 }

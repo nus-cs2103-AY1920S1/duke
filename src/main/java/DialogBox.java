@@ -1,5 +1,3 @@
-package controllers;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,47 +8,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.util.Collections;
-
-//public class DialogBox extends HBox {
-//
-//    private Label text;
-//    private ImageView displayPicture;
-//
-//    public DialogBox(Label l, ImageView iv) {
-//        text = l;
-//        displayPicture = iv;
-//
-//        text.setWrapText(true);
-//        displayPicture.setFitWidth(100.0);
-//        displayPicture.setFitHeight(100.0);
-//
-//        this.setAlignment(Pos.TOP_RIGHT);
-//        this.getChildren().addAll(text, displayPicture);
-//    }
-//
-//    /**
-//     * Flips the dialog box such that the ImageView is on the left and text on the right.
-//     */
-//    private void flip() {
-//        this.setAlignment(Pos.TOP_LEFT);
-//        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-//        FXCollections.reverse(tmp);
-//        this.getChildren().setAll(tmp);
-//    }
-//
-//    public static DialogBox getUserDialog(Label l, ImageView iv) {
-//        return new DialogBox(l, iv);
-//    }
-//
-//    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-//        var db = new DialogBox(l, iv);
-//        db.flip();
-//        return db;
-//    }
-//}
 
 /**
  * An example of a custom control using FXML.
@@ -66,18 +28,6 @@ public class DialogBox extends HBox {
 
     private Label text;
 
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
-
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
-    }
-
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -90,6 +40,9 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        dialog.setMinHeight(Label.USE_PREF_SIZE);
+        dialog.setTextFill(Color.STEELBLUE);
+        dialog.setFont(new Font("Courier Bold", 13));
     }
 
     /**
@@ -106,6 +59,13 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Get duke dialog.
+     *
+     * @param text text
+     * @param img  duke image
+     * @return the dialogBox
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

@@ -9,6 +9,12 @@ public class Event extends Task {
         this.date = date;
     }
 
+    /**
+     * Event constructor.
+     * @param status 0 or 1
+     * @param desc description
+     * @param date date
+     */
     public Event(int status, String desc, String date) {
         super(desc);
         this.date = date;

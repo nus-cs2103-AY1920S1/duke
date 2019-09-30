@@ -11,25 +11,25 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void executeCommand(TaskList taskList, Storage storage) {
+    public String executeCommand(TaskList taskList, Storage storage) {
         assert (!inputCommand.isEmpty()) : "Input inputCommand cannot be empty";
+        String msg;
         if (inputCommand.substring(4).isEmpty()) {
-            Ui.doneErrorMsg();
+            msg = Ui.doneErrorMsg();
         } else {
             try {
                 String desc = inputCommand.substring(5);
                 int index = Integer.parseInt(desc);
-                if (index < 0 || index >= taskList.getTasks().size()) {
-                    Ui.outOfBoundMsg();
-                    return;
+                if (index < 1 || index > taskList.getTasks().size()) {
+                    msg = Ui.outOfBoundMsg();
+                } else {
+                    msg = taskList.getTask(index - 1).markAsDone();
                 }
-                taskList.getTask(index - 1).markAsDone();
-                Ui.doneMsg();
-                System.out.println(taskList.getTask(index - 1).toString());
             } catch (NumberFormatException e) {
-                Ui.invalidNumMsg();
+                msg = Ui.invalidNumMsg();
             }
         }
+        return msg;
 
     }
 }

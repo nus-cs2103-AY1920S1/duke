@@ -10,6 +10,12 @@ public class Deadline extends Task {
         this.ddl = ddl;
     }
 
+    /**
+     * Deadline constructor.
+     * @param status 0 or 1
+     * @param desc description
+     * @param ddl deadline
+     */
     public Deadline(int status, String desc, String ddl) {
         super(desc);
         this.ddl = ddl;

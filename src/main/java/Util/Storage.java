@@ -58,29 +58,28 @@ public class Storage {
      * Save the current taskList to a file.
      *
      * @param tasks current taskList
-     * @throws DukeException dukeException
-     * @throws IOException IOException
      */
-    public void save(List<Task> tasks) throws DukeException, IOException {
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath));
-        for (Task task : tasks) {
-            if (task instanceof ToDo) {
-                bufferedWriter.append("T | ").append(String.valueOf(task.getDone()))
-                        .append(" | ").append(task.getDesc());
-                bufferedWriter.newLine();
-            } else if (task instanceof Event) {
-                bufferedWriter.append("E | ").append(String.valueOf(task.getDone()))
-                        .append(" | ").append(task.getDesc()).append(" | ").append(((Event) task).getDate());
-                bufferedWriter.newLine();
-            } else if (task instanceof Deadline) {
-                bufferedWriter.append("D | ").append(String.valueOf(task.getDone()))
-                        .append(" | ").append(task.getDesc()).append(" | ").append(((Deadline) task).getDdl());
-                bufferedWriter.newLine();
-            } else {
-                throw new DukeException("Error when saving data to taskList");
+    public void save(List<Task> tasks) {
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath));
+            for (Task task : tasks) {
+                if (task instanceof ToDo) {
+                    bufferedWriter.append("T | ").append(String.valueOf(task.getDone()))
+                            .append(" | ").append(task.getDesc());
+                    bufferedWriter.newLine();
+                } else if (task instanceof Event) {
+                    bufferedWriter.append("E | ").append(String.valueOf(task.getDone()))
+                            .append(" | ").append(task.getDesc()).append(" | ").append(((Event) task).getDate());
+                    bufferedWriter.newLine();
+                } else if (task instanceof Deadline) {
+                    bufferedWriter.append("D | ").append(String.valueOf(task.getDone()))
+                            .append(" | ").append(task.getDesc()).append(" | ").append(((Deadline) task).getDdl());
+                    bufferedWriter.newLine();
+                }
             }
+            bufferedWriter.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
         }
-        bufferedWriter.close();
-
     }
 }

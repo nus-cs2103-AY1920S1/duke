@@ -17,17 +17,19 @@ public class FindCommand extends Command {
     /**
      * Find a task by searching for a keyword.
      * Date and status not included in searching
+     *
      * @param taskList the list of tasks
      * @param storage  storage for saving and loading from file
      */
     @Override
-    public void executeCommand(TaskList taskList, Storage storage) {
+    public String executeCommand(TaskList taskList, Storage storage) {
         assert (!inputCommand.isEmpty()) : "Input inputCommand cannot be empty";
         String desc;
+        String msg;
+        StringBuilder sb = new StringBuilder();
         List<Task> searchList = new ArrayList<>();
         if (inputCommand.substring(4).isEmpty()) {
-            Ui.findErrorMsg();
-            return;
+            return Ui.findErrorMsg();
         } else {
             desc = inputCommand.substring(5);
             for (Task task : taskList.getTasks()) {
@@ -37,14 +39,15 @@ public class FindCommand extends Command {
             }
         }
         if (searchList.isEmpty()) {
-            Ui.findEmptyMsg();
+            msg = Ui.findEmptyMsg();
         } else {
-            Ui.findMsg();
+            msg = Ui.findMsg();
             int index = 0;
             for (Task task : searchList) {
                 index++;
-                System.out.println(index + "." + task.toString());
+                sb.append(index + "." + task.toString() + "\n");
             }
         }
+        return msg + sb.toString();
     }
 }

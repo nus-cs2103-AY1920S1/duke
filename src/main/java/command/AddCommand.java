@@ -18,42 +18,44 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void executeCommand(TaskList taskList, Storage storage) {
+    public String executeCommand(TaskList taskList, Storage storage) {
         String desc;
+        String msg;
         assert (!inputCommand.isEmpty()) : "Input inputCommand cannot empty";
         String op = inputCommand.split(" ")[0];
         if (op.equals("todo")) {
             if (inputCommand.substring(4).isEmpty()) {
-                Ui.emptyTaskMsg("todo");
+                msg = Ui.emptyTaskMsg("todo");
             } else {
                 desc = inputCommand.substring(5);
-                taskList.addTask(new ToDo(desc));
+                msg = taskList.addTask(new ToDo(desc));
             }
         } else if (op.equals("deadline")) {
             if (inputCommand.substring(8).isEmpty()) {
-                Ui.emptyTaskMsg("deadline");
+                msg = Ui.emptyTaskMsg("deadline");
             } else if (!inputCommand.contains("/by")) {
-                Ui.missingDeadlineMsg();
+                msg = Ui.missingDeadlineMsg();
             } else {
                 int dateStartIndex = inputCommand.lastIndexOf("/by");
                 desc = inputCommand.substring(9, dateStartIndex - 1);
                 String ddl = convertDate(inputCommand.substring(dateStartIndex + 4));
-                taskList.addTask(new Deadline(desc, ddl));
+                msg = taskList.addTask(new Deadline(desc, ddl));
             }
         } else if (op.equals("event")) {
             if (inputCommand.substring(5).isEmpty()) {
-                Ui.emptyTaskMsg("event");
+                msg = Ui.emptyTaskMsg("event");
             } else if (!inputCommand.contains("/at")) {
-                Ui.missingEventMsg();
+                msg = Ui.missingEventMsg();
             } else {
                 int dateStartIndex = inputCommand.indexOf("/at");
                 desc = inputCommand.substring(6, dateStartIndex - 1);
                 String date = convertDate(inputCommand.substring(dateStartIndex + 4));
-                taskList.addTask(new Event(desc, date));
+                msg = taskList.addTask(new Event(desc, date));
             }
         } else {
-            Ui.unknownMsg();
+            msg = Ui.unknownMsg();
         }
+        return msg;
     }
 
     /**

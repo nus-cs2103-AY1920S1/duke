@@ -112,6 +112,9 @@ public class Parser {
         if (input.length() == 8) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         } else {
+            if (!input.contains("/by")) {
+                throw new DukeException("OOPS!!! Seems like your deadline command format is wrong :(");
+            }
             String time = input.split("/by", 2)[1].substring(1);
             String description = input.split(" /by", 2)[0].substring(9);
             Task deadlineTask = new Deadline(description, time);
@@ -130,6 +133,9 @@ public class Parser {
         if (input.length() == 5) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty");
         } else {
+            if (!input.contains("/at")) {
+                throw new DukeException("OOPS!!! Seems like your event command format is wrong :(");
+            }
             String time = input.split("/at", 2)[1].substring(1);
             String description = input.split(" /at", 2)[0].substring(6);
             Task eventTask = new Event(description, time);

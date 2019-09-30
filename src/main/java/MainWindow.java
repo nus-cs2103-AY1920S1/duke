@@ -1,4 +1,3 @@
-import duke.command.SaveCommand;
 import javafx.fxml.FXML;
 
 import javafx.geometry.Insets;
@@ -9,10 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 
@@ -38,7 +33,6 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private Image backgroundImage = new Image(this.getClass().getResourceAsStream("/images/bg.png"));
 
     /**
      * Initializes the main window of the application.
@@ -46,18 +40,15 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        Background bg = getBackgroundImage();
+        Background bg = getMainBackground();
         dialogContainer.setBackground(bg);
-        userInput.setStyle("-fx-text-inner-color: white;");
-        userInput.setBackground(new Background(
-                new BackgroundFill(Color.BLACK, CornerRadii.EMPTY,
-                        new Insets(0, 0, 0, 0))));
+        //userInput.setStyle("-fx-text-inner-color: white;");
         greet();
     }
 
-    private Background getBackgroundImage() {
+    private Background getMainBackground() {
         return new Background(new BackgroundFill(
-                Color.BLACK, CornerRadii.EMPTY, new Insets(0, 0, 0, 0)));
+                Color.web("#212121"), CornerRadii.EMPTY, new Insets(0, 0, 0, 0)));
     }
 
     public void setDuke(Duke d) {

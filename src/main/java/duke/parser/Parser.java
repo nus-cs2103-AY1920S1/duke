@@ -32,7 +32,7 @@ public class Parser {
         } else if (isDoneCommand(cleanedInput)) {
             return new DoneCommand(cleanedInput);
         } else {
-            throw new InvalidCommandDukeException("Unrecognized Command!");
+            throw new InvalidCommandDukeException("Unrecognized Command! Please type 'help' for details.");
         }
     }
 

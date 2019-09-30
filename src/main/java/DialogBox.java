@@ -73,7 +73,7 @@ public class DialogBox extends HBox {
         String cssLayout = "-fx-border-color: white;\n"
                 + insets
                 + "-fx-border-width: 2;\n"
-                + "-fx-border-radius: 5;\n"
+                + "-fx-border-radius: 10;\n"
                 + "-fx-border-style: solid;\n"
                 + "-fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.9), 10, 0, 0, 0);\n";
 
@@ -87,9 +87,9 @@ public class DialogBox extends HBox {
 
     private void setBackground(boolean isDuke) {
         Color c = isDuke
-                ? Color.DARKSLATEBLUE
-                : Color.DARKORANGE;
-        CornerRadii r = new CornerRadii(5);
+                ? Color.web("#6200EE")
+                : Color.web("#a731d6");
+        CornerRadii r = new CornerRadii(10);
         Insets in = isDuke
                 ? new Insets(5, 40, 20, 20)
                 : new Insets(5, 20, 20, 40);

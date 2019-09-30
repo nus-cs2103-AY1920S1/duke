@@ -5,7 +5,7 @@ Duke is a chatbot to help you manage your tasks. Feel free to say hi!
 ## Getting Started
 1. Make sure that you have Java 11 (or later) installed on your computer.
 
-![Step 2](Step2.png)
+<img src="Step 2.png" alt="View on GitHub button">
 
 2. Click on the **_View on GitHub_** button at the top of this page
 3. Click on releases

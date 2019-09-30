@@ -165,7 +165,7 @@ public class TaskList {
      * Deletes nth task from the list of tasks.
      *
      * @param n the position of task in the list of tasks.
-     * @return the task deleted from the list.
+     * @return the task deleted from the lists.
      */
     public Task delete(int n) {
         Task task = this.tasks.get(n - 1);
@@ -202,6 +202,7 @@ public class TaskList {
                 taskFile += current;
             }
         }
+
         return taskFile;
     }
 }

@@ -9,7 +9,7 @@ public class Ui {
     /**
      * Greets the user
      */
-    public String greeting () {
+    public static String greeting () {
 
         return "Hello! I'm Duke\nWhat can I do for you?";
     }
@@ -17,7 +17,7 @@ public class Ui {
     /**
      * Bids farewell to the user
      */
-    public String bye() {
+    public static String bye() {
         return "Bye. Hope to see you again soon!";
     }
 
@@ -77,7 +77,7 @@ public class Ui {
     /**
      * Aborts the application
      */
-    public String abort() {
+    public static String abort() {
         return "SORRY SOMETHING WENT SERIOUSLY WRONG! \nGoodbye!";
     }
 

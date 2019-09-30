@@ -12,7 +12,7 @@ public class Duke {
     private TodoList tasks;
     private Storage storage;
     private Ui ui;
-    private static final String FILE_PATH = "/home/dingyuchen/cs2103/duke/src/main/data/duke.ser";
+    private static final String FILE_PATH = "src/main/data/duke.ser";
 
 
     private Duke(String s) {
@@ -31,11 +31,6 @@ public class Duke {
             c = Parser.parse(input);
             String response = c.run(tasks, storage);
 
-            if(c.isExit()) {
-                Platform.exit();
-            }
-
-            System.out.println(ui.encase(response));
             return ui.encase(response);
 
         } catch (DukeException e) {

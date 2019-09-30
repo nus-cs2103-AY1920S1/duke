@@ -10,11 +10,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 
 import java.io.IOException;
 import java.util.Collections;
 
-public class DialogBox extends HBox {
+class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
@@ -31,6 +32,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
         displayPicture.setImage(img);
     }
 

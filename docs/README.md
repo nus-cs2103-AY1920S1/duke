@@ -6,7 +6,7 @@ Duke is a personal chat bot that uses the CLI to manage daily tasks. It is a cas
 
 ### Computing Environment
 
-Duke GUI has been tested and possible to run on Windows and Linux given the following computing environment
+Duke GUI has been tested and possible to run on Windows, Mac and Linux given the following computing environment
 * openjdk 11.0.4
 * OpenJDK Runtime Environment Build 11.0.4
 

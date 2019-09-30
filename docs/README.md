@@ -117,11 +117,11 @@ Set a task to recur once every specified time period (Event and Deadline type Ta
 Note that only an imcomplete task can be set to be recurring.
 * format: recur (index) (unit time) (quantity)
 * Example: recur 2 2 days
-*Expected Outcome:
+* Expected Outcome:
 ```
 No rest for the wicked.
 Setting this event to recurssive:
-2.[E][-] CS2103_lecture (at: 20/09/2019 1200-1400) every: 2 day(s)
+[E][-] CS2103_lecture (at: 20/09/2019 1200-1400) every: 2 day(s)
 ```
 
 ### 8. Set recurssive task as non-recurssive.
@@ -133,7 +133,7 @@ Note that only an incomplete recurring task can be set to non-recurring.
 ```
 Setting this event to 
 non-recurring:
-2.[E][-] CS2103_lecture
+[E][-] CS2103_lecture
 20/09/2019 1200-1400
 ```
 ### 9. exit

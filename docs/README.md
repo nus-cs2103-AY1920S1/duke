@@ -2,7 +2,7 @@
 
 ## Brief Overview
 
-Kappa is a CLI-based application on your Desktop with GUI-like features to help you track your tasks. This application is for people who prefers keep tracking of tasks on their Desktop.
+Kappa is a CLI-based application on your Desktop with GUI-like features to help you track your tasks. This application is for people who prefers keep tracking of tasks on their Desktops using a Command-Line Interface.
 
 ![Overview of Kappa](./Ui.png)
 
@@ -18,7 +18,7 @@ Kappa can help you mark your tasks as Done through the Done Command so that you 
 
 #### 3. Tagging your tasks
 
-Your tasks can also be tagged which helps you to customise your own task categories which makes tracking and searching so much easier!
+Your tasks can also be tagged which helps you to customise your own task categories which makes tracking much easier!
 
 #### 4. View all your tasks
 

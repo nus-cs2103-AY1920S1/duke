@@ -56,7 +56,7 @@ application {
 
 shadowJar {
     archiveBaseName = "kappa"
-    archiveVersion = "v0.2"
+    archiveVersion = "v0.2.1"
     archiveClassifier = null
     archiveAppendix = null
 }

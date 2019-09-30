@@ -1,4 +1,4 @@
-T | 0 | read book
 T | 0 | borrow book
 E | 1 | project meeting | Tue Oct 01 2019 14:00 PM | 15:00 PM
-DA | 0 | return book | [T][x] borrow book
+D | 0 | return book | Sat Oct 05 2019 17:00 PM
+T | 0 | read book

@@ -100,4 +100,9 @@ public interface UI {
     static String endLine() {
         return "    ____________________________________________________________";
     }
+
+    static String undoStart(Task task) {
+        return "The last created task has been deleted: \n"
+                + task.toString();
+    }
 }

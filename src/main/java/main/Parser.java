@@ -1,15 +1,6 @@
 package main;
 
-import command.ByeCommand;
-import command.Command;
-import command.DeadlineCommand;
-import command.DeleteCommand;
-import command.DoneCommand;
-import command.EventCommand;
-import command.FindCommand;
-import command.ListCommand;
-import command.TodoCommand;
-import command.UnknownCommand;
+import command.*;
 import exception.TaskException;
 
 /**
@@ -121,6 +112,9 @@ public class Parser {
         case "find":
             commandHasTask(nextCommand);
             return new FindCommand(nextCommand[1]);
+
+        case "undo":
+            return new UndoCommand();
 
         default:
             break;

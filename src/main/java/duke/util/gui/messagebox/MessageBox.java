@@ -13,6 +13,8 @@ import javafx.scene.layout.HBox;
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
+// todo: replace Label with TextFlow to enable text to wrap multiple lines!
+// todo: still can't get user input to align right :(
 public class MessageBox extends HBox {
     @FXML
     private Label message;
@@ -31,27 +33,19 @@ public class MessageBox extends HBox {
         message.setText(text);
     }
 
-//    /**
-//     * Flips the dialog box such that the ImageView is on the left and text on the right.
-//     */
-//    private void flip() {
-//        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-//        Collections.reverse(tmp);
-//        getChildren().setAll(tmp);
-//        setAlignment(Pos.TOP_LEFT);
-//    }
-
     public static MessageBox getUserMessageBox(String text, ColourScheme colourScheme) {
-        MessageBox userDialogBox = new MessageBox(text);
-        userDialogBox.setStyle("-fx-background-color: " + colourScheme.getUserLightColour());
-        userDialogBox.message.setStyle("-fx-fill: "+ colourScheme.getTextColour());
-        return userDialogBox;
+        MessageBox userMessageBox = new MessageBox(text);
+        userMessageBox.setStyle("-fx-background-color: " + colourScheme.getUserLightColour());
+        userMessageBox.message.setStyle("-fx-fill: "+ colourScheme.getTextColour());
+//        userMessageBox.setAlignment(Pos.TOP_RIGHT);
+        return userMessageBox;
     }
 
     public static MessageBox getDukeMessageBox(String text, ColourScheme colourScheme) {
-        MessageBox dukeDialogBox = new MessageBox(text);
-        dukeDialogBox.setStyle("-fx-background-color: " + colourScheme.getDukeMediumColour());
-        dukeDialogBox.message.setStyle("-fx-fill: "+ colourScheme.getTextColour());
-        return dukeDialogBox;
+        MessageBox dukeMessageBox = new MessageBox(text);
+        dukeMessageBox.setStyle("-fx-background-color: " + colourScheme.getDukeMediumColour());
+        dukeMessageBox.message.setStyle("-fx-fill: "+ colourScheme.getTextColour());
+//        dukeMessageBox.setAlignment(Pos.TOP_LEFT);
+        return dukeMessageBox;
     }
 }

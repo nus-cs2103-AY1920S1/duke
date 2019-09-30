@@ -7,6 +7,13 @@ import duke.util.exception.DukeException;
 
 public class Gui implements Ui {
 
+    /** Represents the colour scheme in use for the GUI. Hardcoded as MINT for now. */
+//    private ColourScheme colourScheme = ColourScheme.MINT;
+
+    /**
+     * Not in use for Duke's GUI.
+     * @return Nothing.
+     */
     @Override
     public String readCommand() {
         return null;

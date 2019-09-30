@@ -27,7 +27,7 @@ public class MainWindow extends AnchorPane {
     private GuiDuke duke;
 
     /** Represents the colour scheme in use for the GUI. Hardcoded as MINT for now. */
-    private ColourScheme colourScheme = ColourScheme.MINT;
+    private ColourScheme colourScheme = ColourScheme.GREY;
 
     //private Image userImage = new Image(this.getClass().getResourceAsStream("/images/kawaii_robot.png"));
     //private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/kawaii_robot_power.png"));
@@ -35,7 +35,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(messageBoxContainer.heightProperty());
-        messageBoxContainer.setStyle("-fx-background-color: " + colourScheme.getDukeLightColour());
+        messageBoxContainer.setStyle("-fx-background-color: " + colourScheme.getBackgroundColour());
     }
 
     public void setDuke(GuiDuke d) {

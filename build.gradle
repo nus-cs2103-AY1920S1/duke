@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'seedu.duke'
-version '0.2.1'
+version '0.2.2'
 
 repositories {
     mavenCentral()
@@ -65,7 +65,7 @@ task runGui(type: JavaExec, dependsOn: classes) {
 
 shadowJar {
     archiveBaseName = 'duke'
-    archiveVersion = '0.2.1'
+    archiveVersion = '0.2.2'
     archiveClassifier = null
     archiveAppendix = null
 }

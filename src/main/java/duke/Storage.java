@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -34,7 +35,7 @@ public class Storage {
      *                 It can be either relative or absolute.
      */
     public Storage(String filePath) {
-        this.file = new File(System.getProperty("user.dir") + filePath);
+        this.file = Path.of(System.getProperty("user.dir")).resolve(filePath).toFile();
     }
 
     /**

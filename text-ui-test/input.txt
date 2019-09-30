@@ -1,0 +1,41 @@
+list
+todo borrow book
+deadline CS2103 assignment /by 5/8/2019 1800
+event CS2102 exam /at 25/11/2019 0900
+list
+todo
+event
+deadline
+list
+event career fair
+deadline individual project
+list
+deadline CS2103 assignment /by 1234567
+event CS2102 exam /at 1234567
+list
+deadline CS2103 assignment /at 25/11/2019 0900
+event CS2102 exam /by 5/8/2019 1800
+list
+deadline CS2103 assignment /ok 25/11/2019 0900
+event CS2102 exam /wow 5/8/2019 1800
+list
+done 2
+done 10000
+done *(&*%^jh
+list
+delete 1
+delete 20000
+delete qweiur
+list
+greatCommand
+nice command
+THIS IS /at A NICE /by COMMAND
+list
+find CS
+find assignment exam
+find
+find fluffy mod
+delete 1
+delete 1
+delete 1
+bye

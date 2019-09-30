@@ -1,3 +1,5 @@
+import javafx.application.Platform;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -52,6 +54,7 @@ public class Parser {
             break;
         case("bye"):
             reply = ui.showFarewell();
+            Platform.exit(); //closes the stage
             break;
         default:
             if (containsTask(commandType)) {

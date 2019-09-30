@@ -13,7 +13,6 @@ import java.io.File;
 
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.task.Task;
 import duke.ui.Ui;
 import duke.dukeexception.DukeException;
 import duke.command.Command;
@@ -25,10 +24,7 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    private static final String INDENT_SPACING = "    ";
     private static final String ROOT_DIRECTORY = "C:/Users/gbrls/OneDrive/Desktop/duke-master/src/main/java/duke/";
-    //private static final String SAVE_DIRECTORY = "/data";
-    //private static final String SAVE_FILE_NAME = "tasks.txt";
 
     public Duke(String filePath) {
         ui = new Ui();

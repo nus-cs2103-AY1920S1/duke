@@ -53,7 +53,6 @@ public class TaskList implements Serializable {
     /**
      * Prints the list of tasks to the UI.
      */
-    // todo: move to Ui class
     public void printList() {
         for (Task task : tasks) {
             int i = getId(task);
@@ -68,7 +67,7 @@ public class TaskList implements Serializable {
      * @param task Task whose ID is required.
      * @return ID of the given task.
      */
-    private int getId(Task task) {
+    public int getId(Task task) {
         return this.tasks.indexOf(task) + 1;
     }
 

@@ -33,7 +33,7 @@ public class GuiDuke implements Duke {
     public void getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            c.execute(tasks, ui);
+            c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             ui.showError(e);
         } catch (Exception e) {

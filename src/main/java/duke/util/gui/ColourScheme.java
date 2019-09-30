@@ -7,43 +7,43 @@ public enum ColourScheme {
             "#a9b1bc", "#646c77", "#424953");
 
     private final String backgroundColour;
-    private final String dukeMediumColour;
-    private final String dukeDarkColour;
-    private final String userLightColour;
-    private final String userDarkColour;
+    private final String dukeMessageBoxColour;
+    private final String dukeShadowColour;
+    private final String userMessageBoxColour;
+    private final String userShadowColour;
     private final String textColour;
 
     public String getBackgroundColour() {
         return backgroundColour;
     }
 
-    public String getDukeMediumColour() {
-        return dukeMediumColour;
+    public String getDukeMessageBoxColour() {
+        return dukeMessageBoxColour;
     }
 
-    public String getDukeDarkColour() {
-        return dukeDarkColour;
+    public String getDukeShadowColour() {
+        return dukeShadowColour;
     }
 
-    public String getUserLightColour() {
-        return userLightColour;
+    public String getUserMessageBoxColour() {
+        return userMessageBoxColour;
     }
 
-    public String getUserDarkColour() {
-        return userDarkColour;
+    public String getUserShadowColour() {
+        return userShadowColour;
     }
 
     public String getTextColour() {
         return textColour;
     }
 
-    ColourScheme(String backgroundColour, String dukeMediumColour, String dukeDarkColour,
-            String userLightColour, String userDarkColour, String textColour) {
+    ColourScheme(String backgroundColour, String dukeMessageBoxColour, String dukeShadowColour,
+            String userMessageBoxColour, String userShadowColour, String textColour) {
         this.backgroundColour = backgroundColour;
-        this.dukeMediumColour = dukeMediumColour;
-        this.dukeDarkColour = dukeDarkColour;
-        this.userLightColour = userLightColour;
-        this.userDarkColour = userDarkColour;
+        this.dukeMessageBoxColour = dukeMessageBoxColour;
+        this.dukeShadowColour = dukeShadowColour;
+        this.userMessageBoxColour = userMessageBoxColour;
+        this.userShadowColour = userShadowColour;
         this.textColour = textColour;
     }
 }

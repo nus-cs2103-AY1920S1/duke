@@ -37,9 +37,9 @@ public class MessageBox extends HBox {
 
     public static MessageBox getUserMessageBox(String text, ColourScheme colourScheme) {
         MessageBox userMessageBox = new MessageBox(text);
-        userMessageBox.setStyle("-fx-background-color: " + colourScheme.getUserLightColour());
+        userMessageBox.setStyle("-fx-background-color: " + colourScheme.getUserMessageBoxColour());
         userMessageBox.message.setStyle("-fx-fill: "+ colourScheme.getTextColour());
-        DropShadow dropShadow = new DropShadow(5.0, Color.web(colourScheme.getUserDarkColour()));
+        DropShadow dropShadow = new DropShadow(5.0, Color.web(colourScheme.getUserShadowColour()));
         userMessageBox.setEffect(dropShadow);
 //        userMessageBox.setAlignment(Pos.TOP_RIGHT);
         return userMessageBox;
@@ -47,11 +47,14 @@ public class MessageBox extends HBox {
 
     public static MessageBox getDukeMessageBox(String text, ColourScheme colourScheme) {
         MessageBox dukeMessageBox = new MessageBox(text);
-        dukeMessageBox.setStyle("-fx-background-color: " + colourScheme.getDukeMediumColour());
+        dukeMessageBox.setStyle("-fx-background-color: " + colourScheme.getDukeMessageBoxColour());
         dukeMessageBox.message.setStyle("-fx-fill: "+ colourScheme.getTextColour());
-        DropShadow dropShadow = new DropShadow(5.0, Color.web(colourScheme.getDukeDarkColour()));
+        DropShadow dropShadow = new DropShadow(5.0, Color.web(colourScheme.getDukeShadowColour()));
         dukeMessageBox.setEffect(dropShadow);
 //        dukeMessageBox.setAlignment(Pos.TOP_LEFT);
         return dukeMessageBox;
     }
+
+    // todo: getDukeExceptionMessageBox
+    // todo: getDukeTaskMessageBox
 }

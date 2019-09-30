@@ -20,6 +20,12 @@ public interface Ui {
     void showMessage(UiMessage uiMessage);
 
     /**
+     * Displays the required message in the UI, given the message required as a String.
+     * @param message String representing message to be displayed.
+     */
+    void showMessage(String message);
+
+    /**
      * Displays the required error message in the UI, given the type of exception thrown.
      * @param exception Exception thrown by the application.
      */

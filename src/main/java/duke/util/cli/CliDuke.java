@@ -38,7 +38,7 @@ public class CliDuke implements Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui);
+                c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e);
@@ -46,7 +46,6 @@ public class CliDuke implements Duke {
                 ui.showLine();
             }
         }
-        storage.save(tasks);
     }
 
     /**

@@ -40,6 +40,15 @@ public class Gui implements Ui {
     }
 
     @Override
+    public void showMessage(String message) {
+        try {
+            messageBoxQueue.add(MessageBox.getDukeMessageBox(message, this.colourScheme));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void showError(DukeException exception) {
         // todo: replace with custom exception message box once created
         try {
@@ -54,12 +63,15 @@ public class Gui implements Ui {
         showMessage(UiMessage.MATCHING_TASKS);
         ArrayList<Task> listOfTasks = tasks.getTasks();
         for (Task task : listOfTasks) {
-            showTask(task);
+            showTask(task, tasks);
         }
     }
 
-    public void showTask(Task task) {
-        messageBoxQueue.add(MessageBox.getDukeMessageBox(task.toString(), this.colourScheme));
+    public void showTask(Task task, TaskList tasks) {
+        String taskString = task.toString();
+        int taskIdString = tasks.getId(task);
+        String toPrint = taskIdString + ". " + taskString;
+        messageBoxQueue.add(MessageBox.getDukeMessageBox(toPrint, this.colourScheme));
     }
 
     public Queue<MessageBox> getMessageBoxQueue() {

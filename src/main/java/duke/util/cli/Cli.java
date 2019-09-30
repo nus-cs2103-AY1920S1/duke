@@ -27,6 +27,11 @@ public class Cli implements Ui {
     }
 
     @Override
+    public void showMessage(String message) {
+        System.out.println(message);
+    }
+
+    @Override
     public void showError(DukeException exception) {
         System.out.println(exception.getMessage());
     }

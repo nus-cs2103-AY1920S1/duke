@@ -8,15 +8,17 @@ public enum UiMessage {
     WELCOME("Hello! What can I do for you?"),
     GOODBYE("Bye. Hope to see you again soon!"),
     // storage
-    TASKS_IMPORTED("Success! Your tasks have been imported from: " + "data/tasks.txt"),
-        // filePath is hardcoded for now, can't append to message :(
-    TASKS_SAVED("Success! Your tasks have been saved to: " + "data/tasks.txt"),
+    TASKS_IMPORTED("Success! Your tasks have been imported from:"),
+    TASKS_SAVED("Success! Your tasks have been saved to:"),
     TASKS_NOT_SAVED("Your task list is empty! Adios :)"),
     TASKS_NOT_FOUND("Existing tasks file not found! Starting duke afresh..."),
     // commands
     TASK_ADDED("Okay! I've added the task."),
+    TASK_DONE("Nice! I've marked this task as done:"),
     TASK_SNOOZED("Okay! The task has been snoozed by 1 day."),
     MATCHING_TASKS("Here are the matching tasks in your list..."),
+    TASK_TAGGED("Nice! I've added a tag to this task:"),
+    TASK_PRIORITISED("Sweet! I've added a priority to this task: "),
     // helpers
     HINT_LIST("Use list to see all your tasks!");
 

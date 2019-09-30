@@ -54,7 +54,8 @@ public class Storage {
             ois.close();
             fis.close();
 
-            ui.showMessage(UiMessage.TASKS_IMPORTED);
+            String message = UiMessage.TASKS_IMPORTED.getMessage() + " " + this.filePath;
+            ui.showMessage(message);
         } catch (Exception e) {
             // temporary haxx
             e.printStackTrace();
@@ -79,7 +80,8 @@ public class Storage {
             oos.close();
             fos.close();
 
-            ui.showMessage(UiMessage.TASKS_SAVED);
+            String message = UiMessage.TASKS_SAVED.getMessage() + " " + this.filePath;
+            ui.showMessage(message);
         } catch (Exception e) {
             // temporary haxx
             e.printStackTrace();

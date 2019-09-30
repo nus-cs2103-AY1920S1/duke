@@ -24,7 +24,6 @@ public abstract class Task implements Serializable {
      * Returns the String representation of a Task for display purposes.
      * @return String representation of a Task for display purposes.
      */
-    // todo: move to Ui class
     @Override
     public String toString() {
         String type = "[" + this.type.getTaskTypeInitial() + "] ";
@@ -54,9 +53,6 @@ public abstract class Task implements Serializable {
      */
     public void markAsDone() {
         this.isDone = true;
-        // todo: replace with proper UI implementation
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(this.toString());
     }
 
     /**

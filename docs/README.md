@@ -21,7 +21,7 @@ based on a particular keyword or even just parts of words.
   
 ## Usage
 
-###1. Todo Creation
+### 1. Todo Creation
 ### `todo [todo description]`
 
 Type and pass this command to Duke to create and store a new todo task. The todo's description
@@ -117,7 +117,11 @@ Noted. I've removed this task:
 Now you have 2 tasks in the list.
 ````
 Do note that, if you input more than one index for this command one after the other
-only the first index will be considered by Duke.
+only the first index will be considered by Duke. For example the command:
+
+`delete 1 2 3`
+
+will only delete the first task and will ignore index 2 and 3.
 
 ### 6. Mark task as Done
 Mark any task stored in Duke as done after you have completed it.
@@ -138,7 +142,12 @@ Nice! I've marked this task as done:
 ```
 
 Do note that, if you input more than one index for this command one after the other
-only the first index will be considered by Duke.
+only the first index will be considered by Duke. For example the command:
+
+`done 1 2 3`
+
+will only mark the first task as done and will ignore index 2 and 3.
+
 ### 7. Search
 Search Duke for any task based on a keyword.
 

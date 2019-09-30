@@ -1,35 +1,28 @@
 package duke;
 
-import java.util.Scanner;
-import java.util.ArrayList;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
-import java.io.File;
-
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.task.Task;
 import duke.ui.Ui;
 import duke.dukeexception.DukeException;
 import duke.command.Command;
 import duke.parser.Parser;
 
+/**
+ * Main driver class. Handles user input and communicates with Parser, Ui, TaskList and Storage. Uses Command object
+ * to implement underlying logic.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    private static final String INDENT_SPACING = "    ";
     private static final String ROOT_DIRECTORY = "C:/Users/gbrls/OneDrive/Desktop/duke-master/src/main/java/duke/";
-    //private static final String SAVE_DIRECTORY = "/data";
-    //private static final String SAVE_FILE_NAME = "tasks.txt";
 
+    /**
+     * Represents a new instance of Duke application, with associated Ui, Storage and TaskList instance variables.
+     * @param filePath File path of text file containing save data.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -62,7 +55,4 @@ public class Duke {
     public static void main(String[] args) {
         new Duke(ROOT_DIRECTORY + "data/tasks.text").run();
     }
-
-
-
 }

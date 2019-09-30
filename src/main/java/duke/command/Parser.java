@@ -207,24 +207,6 @@ public class Parser {
         return ui.printDeleteTask(deletedTask, this.taskList.getList());
     }
 
-
-    public String processFind(String input, TaskList taskList, Storage storage) throws DukeException {
-        String item = "(.*)" + input.split(" ", 2)[1] + "(.*)";
-        ArrayList<Task> list = taskList.getList();
-        String message = "";
-        for (int i = 0; i < list.size(); i++) {
-            String description = list.get(i).getDescription();
-            boolean isPresent = description.matches(item);
-            if (isPresent) {
-                message = message + list.get(i).toString() + "\n";
-            }
-        }
-        if (message.equals("")) {
-            throw new DukeException ("Sorry we cannot find the task :(");
-        }
-        return message;
-    }
-
     /**
      * Finds the task in the list that has substring that matches the given word.
      * @param input String that contains the word that is going to be found.

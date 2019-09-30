@@ -1,5 +1,5 @@
 D | 1 | submit assignment | 30/09/2019 2359
 D | 1 | submit project milestone | 02/10/2019 2359
-E | 0 | project meeting | 19/09/2019 1900
+E | 1 | project meeting | 19/09/2019 1900
 E | 0 | eat deck mala | 21/09/2019 1230
 E | 0 | team meeting | 25/09/2019 1300

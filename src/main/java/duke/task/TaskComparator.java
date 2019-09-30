@@ -3,6 +3,10 @@ package duke.task;
 import java.util.Comparator;
 import java.util.Date;
 
+/**
+ * Represents a comparator for Task class that sorts the list of task in the order of Deadline, Event and Todo.
+ * In each of Deadline and Event segments, the list of task is sorted in the order of earliest date.
+ */
 public class TaskComparator implements Comparator<Task> {
     public int compare(Task obj1, Task obj2) {
         if (obj1 instanceof Deadline && obj2 instanceof Todo) {

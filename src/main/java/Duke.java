@@ -1,5 +1,6 @@
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.exception.EmptyInstructionException;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
@@ -55,7 +56,7 @@ public class Duke {
             } else {
                 return ui.exit();
             }
-        } catch (DukeException | IOException e) {
+        } catch (DukeException | IOException | EmptyInstructionException e) {
             return ui.showError(e.getMessage());
         }
     }

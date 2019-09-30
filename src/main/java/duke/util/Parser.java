@@ -2,6 +2,7 @@ package duke.util;
 
 import duke.command.*;
 import duke.exception.DukeException;
+import duke.exception.EmptyInstructionException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -43,85 +44,97 @@ public class Parser {
      * @return Command object (e.g AddCommand, DoneCommand, DeleteCommand) based on the user command
      * @throws DukeException If user input is not recognised as a valid command.
      */
-    public static Command parse(String input) throws DukeException {
-            String arr[] = input.split(" ", 2);
+
+    public static Command parse(String input) throws EmptyInstructionException, DukeException {
+        String commandArr[] = input.split(" ", 2);
+        String command = commandArr[0];
+        if (command.equals("list")) {
+            return new ListCommand();
+        }
+        if (commandArr.length == 1) {
+            String message = Parser.parseException(commandArr[0]);
+            throw new EmptyInstructionException(message);
+        }
+        return Parser.processCommand(commandArr);
+    }
+
+    public static String parseException(String command) {
+        String message;
+        switch (command) {
+        case "done":
+            message = "OOPS!!! Please enter a task number to check as done e.g done 1";
+            break;
+        case "todo":
+            message = "OOPS!!! The description of a todo cannot be empty.";
+            break;
+        case "deadline":
+            message = "OOPS!!! The description of a deadline cannot be empty.";
+            break;
+        case "event":
+            message = "OOPS!!! The description of an event cannot be empty.";
+            break;
+        case "delete":
+            message = "OOPS!!! Please enter a task number to delete e.g delete 1";
+            break;
+        case "find":
+            message = "OOPS!!! Please enter a keyword to find!";
+            break;
+        case "priority":
+            message = "OOPS!!! Please enter the task number that I should set a priority for!";
+            break;
+        default:
+            message = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+        }
+        return message;
+    }
+
+    public static Command processCommand (String[] arr) throws DukeException {
             String command = arr[0];
             Command resultCommand;
             switch (command) {
-            case "list":
-                resultCommand = new ListCommand();
-                break;
             case "done":
-                if (arr.length == 1) {
-                    throw new DukeException("OOPS!!! Please enter a task number to check as done e.g done 1");
-                } else {
-                    int num = Integer.parseInt(arr[1]);
-                    resultCommand = new DoneCommand(num);
-                }
+                int num = Integer.parseInt(arr[1]);
+                resultCommand = new DoneCommand(num);
                 break;
             case "todo":
-                if (arr.length == 1) {
-                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-                } else {
-                    resultCommand = new AddCommand(new Task("T", arr[1]));
-                }
+                resultCommand = new AddCommand(new Task("T", arr[1]));
                 break;
             case "deadline":
-                if (arr.length == 1) {
-                    throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+                String[] deadline = arr[1].split(" /by ", 2);
+                if (deadline.length == 1) {
+                    throw new DukeException("OOPS!!! Please enter a due date. e.g complete homework /by 1 Jan");
                 } else {
-                    String[] deadline = arr[1].split(" /by ", 2);
-                    if (deadline.length == 1) {
-                        throw new DukeException("OOPS!!! Please enter a due date. e.g complete homework /by 1 Jan");
-                    } else {
-                        resultCommand = new AddCommand(new Deadline("D", deadline[0], formatDate(deadline[1])));
-                    }
+                    resultCommand = new AddCommand(new Deadline("D", deadline[0], formatDate(deadline[1])));
                 }
                 break;
             case "event":
-                if (arr.length == 1) {
-                    throw new DukeException("OOPS!!! The description of an event cannot be empty.");
+                String[] event = arr[1].split(" /at ", 2);
+                if (event.length == 1) {
+                    throw new DukeException("OOPS!!! Please enter an event date. e.g group meeting /at 1 Jan");
                 } else {
-                    String[] event = arr[1].split(" /at ", 2);
-                    if (event.length == 1) {
-                        throw new DukeException("OOPS!!! Please enter an event date. e.g group meeting /at 1 Jan");
-                    } else {
-                        resultCommand = new AddCommand(new Event("E", event[0], formatDate(event[1])));
-                    }
+                    resultCommand = new AddCommand(new Event("E", event[0], formatDate(event[1])));
                 }
                 break;
             case "delete":
-                if (arr.length == 1) {
-                    throw new DukeException("OOPS!!! Please enter a task number to delete e.g delete 1");
-                } else {
-                    int num = Integer.parseInt(arr[1]);
-                    resultCommand = new DeleteCommand(num);
-                }
+                int taskNum = Integer.parseInt(arr[1]);
+                resultCommand = new DeleteCommand(taskNum);
                 break;
             case "find":
-                if (arr.length == 1) {
-                    throw new DukeException("OOPS!!! Please enter a keyword to find!");
-                } else {
-                    String phraseToFind = arr[1];
-                    resultCommand = new FindCommand(phraseToFind);
-                }
+                String phraseToFind = arr[1];
+                resultCommand = new FindCommand(phraseToFind);
                 break;
             case "priority":
-                if (arr.length == 1) {
-                    throw new DukeException("OOPS!!! Please enter the task number that I should set a priority for!");
-                } else {
-                    String priority[] = arr[1].split(" ", 2);
-                    if (priority.length == 1) {
-                        throw new DukeException("OOPS!! Please enter priority as \"high\", \"medium\" or \"low\"");
-                    }
-                    boolean isValid = priority[1].equals("high")
-                            || priority[1].equals("medium")
-                            || priority[1].equals("low");
-                    if (!isValid) {
-                        throw new DukeException("OOPS!! Please enter priority as \"high\", \"medium\" or \"low\"");
-                    }
-                    resultCommand = new PriorityCommand(Integer.parseInt(priority[0]), priority[1]);
+                String priority[] = arr[1].split(" ", 2);
+                if (priority.length == 1) {
+                    throw new DukeException("OOPS!! Please enter priority as \"high\", \"medium\" or \"low\"");
                 }
+                boolean isValid = priority[1].equals("high")
+                        || priority[1].equals("medium")
+                        || priority[1].equals("low");
+                if (!isValid) {
+                    throw new DukeException("OOPS!! Please enter priority as \"high\", \"medium\" or \"low\"");
+                }
+                resultCommand = new PriorityCommand(Integer.parseInt(priority[0]), priority[1]);
                 break;
             default:
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");

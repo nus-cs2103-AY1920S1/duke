@@ -88,6 +88,8 @@ public class Storage {
             }
         }
 
+        assert list.isEmpty() : "LIST SHOULD NOT BE EMPTY";
+
         return list;
     }
 
@@ -97,6 +99,8 @@ public class Storage {
      * @throws DukeException
      */
     public void save (ArrayList<Task> list) throws DukeException {
+      
+      assert list.isEmpty() : "LIST SHOULD NOT BE EMPTY";
 
         try {
 
@@ -109,9 +113,7 @@ public class Storage {
             this.writeToFile(filePath, s);
 
         } catch (IOException e) {
-
-            throw DukeException.couldNotSave();
-
+          throw DukeException.couldNotSave();
         }
 
     }

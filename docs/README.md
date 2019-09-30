@@ -5,7 +5,7 @@ Furthermore, you can update these tasksto be marked as done once you have finish
 The chatbot also automatically stores these tasks on exit 
 and automatically loads them up again when you start it up the next time. Enjoy!
 
-[![Ui.png](https://i.postimg.cc/g2MqdD6p/Ui.png)](https://postimg.cc/VJCbWXRZ)
+![](Ui.png)
  
 ## Features 
 * Support for Todos, Events and Deadlines.

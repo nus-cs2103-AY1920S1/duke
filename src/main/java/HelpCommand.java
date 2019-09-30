@@ -9,7 +9,7 @@ public class HelpCommand extends Command {
         help.append("list : Displays all items in list.\n" + "Example - list\n");
         help.append("todo : A task with no specific date and time.\n" +
                 "Example - todo homework\n");
-        help.append("deadline : A task that id due by specific date and time.\n" +
+        help.append("deadline : A task that is due by specific date and time.\n" +
                 "Example - deadline return book /by 2/12/2019 1800\n");
         help.append("event : A task occurring at a specific date and time\n" +
                 "Example - event project meeting /at 12/12/2019 1800\n");

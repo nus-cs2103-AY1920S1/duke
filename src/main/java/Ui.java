@@ -13,19 +13,13 @@ public class Ui {
     }
 
     public String showWelcome() {
-        return DIVIDER + "\nWelcome to Duke!\n" + DIVIDER
-                + "\nIf you require any assistance," +
-                "\nplease type (help) to see a list of valid commands.";
+        return DIVIDER + "  \nWelcome to Duke!\n" + DIVIDER
+                + " \nIf you require any assistance," +
+                "   \nplease type (help) to see a list of valid commands.";
     }
 
     public String showLoadingError() {
-        return "No previous data found!";
-    }
-
-    public String readCommand() {
-        String command = sc.nextLine();
-
-        return command;
+        return "    No previous data found!\n";
     }
 
     public String printList(TaskList tasks) {
@@ -56,10 +50,6 @@ public class Ui {
         String output = printList(taskList);
 
         return "    Here are the matching tasks in your list:" + output;
-    }
-
-    public String showError(String message) {
-        return message;
     }
 
     public String byeMessage() {

@@ -1,9 +1,8 @@
+import misc.Parser;
 import org.junit.jupiter.api.Test;
 import task.Deadline;
 import task.Event;
 import task.ToDo;
-
-import misc.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

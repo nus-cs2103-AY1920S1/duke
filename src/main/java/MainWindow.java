@@ -97,17 +97,23 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Private static class that delays the closing of the application until the exit message has been loaded.
+     * Static class that delays the closing of the application until the exit message has been loaded.
      */
     static class ExitProgram {
 
         Timer timer;
 
+        /**
+         * Constructor which schedules the remind task.
+         */
         ExitProgram() {
             timer = new Timer();
             timer.schedule(new RemindTask(), 3000);
         }
 
+        /**
+         * Runs the task.
+         */
         private class RemindTask extends TimerTask {
             public void run() {
                 Platform.exit();

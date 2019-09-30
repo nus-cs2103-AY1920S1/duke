@@ -15,7 +15,7 @@ More importantly, DukeBot is optimized for those who prefer to work with a Comma
 ## 2. Quick Start 
 1. Ensure you have Java 11 or above installed in your Computer.  
 
-2. Download the latest duke-0.2.0.jar [here](https://github.com/qweiping31415/duke/releases)
+2. Download the latest duke-0.2.1.jar [here](https://github.com/qweiping31415/duke/releases)
 
 ![Ui.png](Ui.png)
 

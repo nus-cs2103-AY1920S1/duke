@@ -82,7 +82,7 @@ Got it. I've added this task:
 Now you have 5 tasks in the list
 ```
 
-### **done <index>**
+### **done [index]**
 `Marks the task at the given index as done.`
 
 Example of usage:
@@ -96,7 +96,7 @@ Nice! I've marked this task as done:
   [E][✓] project meeting (at: 19/09/2019 1300)
 ```
 
-### **delete <index>**
+### **delete [index]**
 `Delete the task at the given index from the list.`
 
 Example of usage:
@@ -111,7 +111,7 @@ Noted. I've removed this task:
 Now you have 4 taks in the list
 ```
 
-### **find <string>**
+### **find [string]**
 `Finds all the tasks in the list that partially/ fully matches the given string.`
 
 Example of usage:

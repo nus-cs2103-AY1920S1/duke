@@ -1,40 +1,44 @@
 public class Parser {
 
-    public static Command parse(String fullCommand) throws DukeException {
-        String command = getCommand(fullCommand);
-        String description;
-        DateTime dateTime;
-        int index;
+    public static Command parse(String fullCommand) {
+        try {
+            String command = getCommand(fullCommand);
+            String description;
+            DateTime dateTime;
+            int index;
 
-        switch (command) {
-            case "list":
-                return new ListCommand();
-            case "done":
-                description = getDescription(fullCommand, command);
-                index = Integer.parseInt(description) - 1;
-                return new DoneCommand(index);
-            case "todo":
-                description = getDescription(fullCommand, command);
-                return new AddCommand(new Todo(description));
-            case "deadline":
-                description = getDescription(fullCommand, command);
-                dateTime = getDateAndTime(fullCommand, command);
-                return new AddCommand(new Deadline(description, dateTime));
-            case "event":
-                description = getDescription(fullCommand, command);
-                dateTime = getDateAndTime(fullCommand, command);
-                return new AddCommand(new Event(description, dateTime));
-            case "delete":
-                description = getDescription(fullCommand, command);
-                index = Integer.parseInt(description) - 1;
-                return new DeleteCommand(index);
-            case "find":
-                description = getDescription(fullCommand, command);
-                return new FindCommand(description);
-            case "bye":
-                return new ByeCommand();
-            default:
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            switch (command) {
+                case "list":
+                    return new ListCommand();
+                case "done":
+                    description = getDescription(fullCommand, command);
+                    index = Integer.parseInt(description);
+                    return new DoneCommand(index);
+                case "todo":
+                    description = getDescription(fullCommand, command);
+                    return new AddCommand(new Todo(description));
+                case "deadline":
+                    description = getDescription(fullCommand, command);
+                    dateTime = getDateAndTime(fullCommand, command);
+                    return new AddCommand(new Deadline(description, dateTime));
+                case "event":
+                    description = getDescription(fullCommand, command);
+                    dateTime = getDateAndTime(fullCommand, command);
+                    return new AddCommand(new Event(description, dateTime));
+                case "delete":
+                    description = getDescription(fullCommand, command);
+                    index = Integer.parseInt(description);
+                    return new DeleteCommand(index);
+                case "find":
+                    description = getDescription(fullCommand, command);
+                    return new FindCommand(description);
+                case "bye":
+                    return new ByeCommand();
+                default:
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            }
+        } catch (DukeException e) {
+            return new ErrorCommand(e.getMessage());
         }
     }
 
@@ -65,7 +69,7 @@ public class Parser {
         }
 
         if (action.equals("")) {
-            throw new DukeException("OOPS!!! The description of a " + command + " cannot be empty.");
+            throw new DukeException("The description of a " + command + " cannot be empty.");
         }
 
         return action;
@@ -84,7 +88,7 @@ public class Parser {
         }
 
         if (detail.equals("")) {
-            throw new DukeException("OOPS!!! The time and date of a " + command + " cannot be empty.");
+            throw new DukeException("The time and date of a " + command + " cannot be empty.");
         } else {
             dateTime = new DateTime(detail);
             dateTime.setDateAndTime();

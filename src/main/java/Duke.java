@@ -17,25 +17,14 @@ public class Duke {
         }
     }
 
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
+    public static void main(String[] args) {
     }
 
-    public static void main(String[] args) {
-        //new Duke("./tasks.txt").run();
+    String getResponse(String input) throws DukeException {
+        if (input.equals("bye")) {
+            return ui.byeMessage();
+        } else {
+            return Parser.parse(input).execute(tasks, ui, storage);
+        }
     }
 }

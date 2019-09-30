@@ -1,6 +1,4 @@
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.function.DoubleToIntFunction;
 
 public class Ui {
     private static final String DIVIDER = "________________________________________";
@@ -10,18 +8,16 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
-    public void showLine() {
-        System.out.println("    " + DIVIDER);
+    public String showLine() {
+        return "    " + DIVIDER;
     }
 
-    public void showWelcome() {
-        System.out.println(DIVIDER);
-        System.out.println("Welcome to Duke!");
-        System.out.println(DIVIDER);
+    public String showWelcome() {
+        return DIVIDER + "\nWelcome to Duke!\n" + DIVIDER;
     }
 
-    public void showLoadingError() {
-        System.out.println("No previous data found!");
+    public String showLoadingError() {
+        return "No previous data found!";
     }
 
     public String readCommand() {
@@ -30,45 +26,41 @@ public class Ui {
         return command;
     }
 
-    public void printList(TaskList tasks) {
-        ArrayList<Task> taskList = tasks.getTaskList();
-
-        for (int i = 0; i < taskList.size(); i++) {
+    public String printList(TaskList tasks) {
+        StringBuilder output = new StringBuilder();
+        for (int i = 0; i < tasks.getSize(); i++) {
             int index = i + 1;
-            System.out.println("    " + index + "." + taskList.get(i));
+            output.append("\n    " + index + "." + tasks.getTask(i));
         }
+
+        return output.toString();
     }
 
-    public void doneTaskMessage(Task task) {
-        System.out.println("    Nice! I've marked this task as done:");
-        System.out.println("    " + task);
+    public String doneTaskMessage(Task task) {
+        return "    Nice! I've marked this task as done:\n" + "    " + task;
     }
 
-    public void addTaskMessage(TaskList taskList, Task task) {
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("    " + task);
-        System.out.println("    Now you have " + taskList.getSize() + " tasks in the list.");
+    public String addTaskMessage(TaskList taskList, Task task) {
+        return "    Got it. I've added this task:\n" + "    " + task +
+                "\n    Now you have " + taskList.getSize() + " tasks in the list.";
     }
 
-    public void removeTaskMessage(TaskList taskList, Task task) {
-        System.out.println("    Noted. I've removed this task:");
-        System.out.println("    " + task);
-        System.out.println("    Now you have " + taskList.getSize() + " tasks in the list.");
+    public String removeTaskMessage(TaskList taskList, Task task) {
+        return "    Noted. I've removed this task:\n" + "    " + task +
+                "\n    Now you have " + taskList.getSize() + " tasks in the list.";
     }
 
-    public void findTaskMessage(TaskList taskList) {
-        System.out.println("    Here are the matching tasks in your list:");
-        for (int i = 0; i < taskList.getSize(); i++) {
-            int index = i + 1;
-            System.out.println("    " + index + "." + taskList.getTask(i));
-        }
+    public String findTaskMessage(TaskList taskList) {
+        String output = printList(taskList);
+
+        return "    Here are the matching tasks in your list:" + output;
     }
 
-    public void showError(String message) {
-        System.out.println(message);
+    public String showError(String message) {
+        return message;
     }
 
-    public void byeMessage() {
-        System.out.println("    Bye. Hope to see you again soon!");
+    public String byeMessage() {
+        return "    Bye. Hope to see you again soon!";
     }
 }

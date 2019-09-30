@@ -6,9 +6,9 @@ public class InsertCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
-        ui.addTaskMessage(tasks, task);
         storage.writeToFile(tasks);
+        return ui.addTaskMessage(tasks, task);
     }
 }

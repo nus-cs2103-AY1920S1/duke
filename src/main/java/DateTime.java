@@ -23,7 +23,7 @@ public class DateTime {
         try {
             date = formatter.parse(input);
         } catch (ParseException e) {
-            throw new DukeException("OOPS!!! Invalid time and date format. Please enter in dd/MM/yyyy HHmm format");
+            throw new DukeException("Invalid time and date format. Please enter in dd/MM/yyyy HHmm format");
         }
     }
 

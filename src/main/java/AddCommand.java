@@ -10,9 +10,10 @@ public class AddCommand extends Command {
         this.task = task;
     }
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
         storage.writeToFile(tasks);
-        ui.addTaskMessage(tasks, task);
+
+        return ui.addTaskMessage(tasks, task);
     }
 }

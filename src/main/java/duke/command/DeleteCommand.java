@@ -23,7 +23,7 @@ public class DeleteCommand extends ModifyTaskCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = getTaskById(tasks);
-        String taskDeletedMessage = UiMessage.TASK_DELETED + task.toString();
+        String taskDeletedMessage = UiMessage.TASK_DELETED.getMessage() + task.toString();
 
         tasks.deleteTask(task);
 

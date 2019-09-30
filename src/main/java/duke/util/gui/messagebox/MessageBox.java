@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 /**
  * An example of a custom control using FXML.
@@ -14,10 +15,13 @@ import javafx.scene.layout.HBox;
  */
 // todo: replace Label with TextFlow to enable text to wrap multiple lines!
 // todo: still can't get user input to align right :(
-public abstract class MessageBox extends HBox {
+public abstract class MessageBox extends VBox {
 
     @FXML
     private Label message;
+
+    @FXML
+    HBox messageBox;
 
     MessageBox(String text) {
         try {
@@ -30,6 +34,8 @@ public abstract class MessageBox extends HBox {
             e.printStackTrace();
         }
 
+        // I give up :(
+        //messageBox.setAlignment(Pos.BOTTOM_LEFT);
         message.setText(text);
     }
 

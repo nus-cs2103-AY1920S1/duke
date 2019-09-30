@@ -31,6 +31,8 @@ public class Parser {
                 return delete(input, taskList, ui, NUM_OF_TASKS);
             case "find":
                 return find(input, taskList, ui);
+            case "help":
+                return help(ui);
             default:
                 throw new UnknownInputException("☹ OOPS!!! I'm sorry, " +
                         "but I don't know what that means :-(");
@@ -100,9 +102,17 @@ public class Parser {
         }
     }
 
-    private static String find(String input, TaskList taskList, Ui ui) {
-        String keyword = input.substring(5);
-        return ui.printFound(keyword, taskList);
+    private static String find(String input, TaskList taskList, Ui ui) throws DukeException {
+        if (input.equals("find")) {
+            throw new UnknownInputException("☹ OOPS!!! What keyword would you like to search for?");
+        } else {
+            String keyword = input.substring(5);
+            return ui.printFound(keyword, taskList);
+        }
+    }
+
+    private static String help(Ui ui) {
+        return ui.printHelp();
     }
 
 }

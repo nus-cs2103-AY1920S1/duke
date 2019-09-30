@@ -96,3 +96,19 @@ Example:
 
 Expected outcome:
 ![delete task 1](delete.png)
+
+### Feature 7
+Finding a task.
+
+## Usage
+
+### `find [keyword]` - Finds all tasks containing the 'keyword'.
+
+Format: 
+`find KEYWORD`
+
+Example: 
+`find book`
+
+Expected outcome:
+![find task](find.png)

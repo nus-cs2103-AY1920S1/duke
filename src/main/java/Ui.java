@@ -191,4 +191,31 @@ public class Ui {
         output.append("\n");
         return output.toString();
     }
+
+    public static String printHelp() {
+        StringBuilder output = new StringBuilder();
+        output.append(showLine());
+        output.append("\n");
+        output.append("     This is the list of commands:");
+        output.append("\n");
+        output.append("     1. list");
+        output.append("\n");
+        output.append("     2. todo [description]");
+        output.append("\n");
+        output.append("     3. event [description] /at DATE");
+        output.append("\n");
+        output.append("     4. deadline [description] /at DATE");
+        output.append("\n");
+        output.append("     5. done [task_index]");
+        output.append("\n");
+        output.append("     6. delete [task_index]");
+        output.append("\n");
+        output.append("     7. find [keyword]");
+        output.append("\n");
+        output.append("     8. bye");
+        output.append("\n");
+        output.append(showLine());
+        output.append("\n");
+        return output.toString();
+    }
 }

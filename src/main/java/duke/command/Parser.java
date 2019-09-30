@@ -96,6 +96,8 @@ public class Parser {
         Integer taskNum = Integer.valueOf(input.substring(5));
         if (taskList.getList().size() < taskNum || taskList.getList().size() == 0) {
             throw new DukeException("Sorry at the specified index doens't exist :(");
+        } else if (taskNum < 0) {
+            throw new DukeException("Sorry index cannot be a negative integer :(");
         }
         Task currTask = taskList.getTask(taskNum - 1);
         currTask.markAsDone();
@@ -201,6 +203,8 @@ public class Parser {
         Integer index = Integer.valueOf(input.substring(7));
         if (taskList.getList().size() < index || taskList.getList().size() == 0) {
             throw new DukeException("Sorry at the specified index doens't exist :(");
+        } else if (index < 0) {
+            throw new DukeException("Sorry index cannot be a negative integer :(");
         }
         Task deletedTask = taskList.getTask(index - 1);
         int sizeBeforeDeletion = taskList.getList().size();

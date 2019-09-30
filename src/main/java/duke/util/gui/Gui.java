@@ -19,7 +19,7 @@ public class Gui implements Ui {
     private ColourScheme colourScheme = ColourScheme.MINT;
 
     /** Represents the queue of messages to be displayed in the GUI. */
-    public Queue<MessageBox> messageBoxQueue = new LinkedList<>();
+    private Queue<MessageBox> messageBoxQueue = new LinkedList<>();
 
     /**
      * Not in use for Duke's GUI.
@@ -32,13 +32,21 @@ public class Gui implements Ui {
 
     @Override
     public void showMessage(UiMessage uiMessage) {
-        messageBoxQueue.add(MessageBox.getDukeMessageBox(uiMessage.getMessage(), this.colourScheme));
+        try {
+            messageBoxQueue.add(MessageBox.getDukeMessageBox(uiMessage.getMessage(), this.colourScheme));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void showError(DukeException exception) {
         // todo: replace with custom exception message box once created
-        messageBoxQueue.add(MessageBox.getDukeMessageBox(exception.getMessage(), this.colourScheme));
+        try {
+            messageBoxQueue.add(MessageBox.getDukeMessageBox(exception.getMessage(), this.colourScheme));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -54,7 +62,8 @@ public class Gui implements Ui {
         messageBoxQueue.add(MessageBox.getDukeMessageBox(task.toString(), this.colourScheme));
     }
 
-//    public void setColourScheme(ColourScheme colourScheme) {
-//        MainWindow.setColourScheme(colourScheme);
-//    }
+    public Queue<MessageBox> getMessageBoxQueue() {
+        return messageBoxQueue;
+        // todo: move clear() to here, makes more sense
+    }
 }

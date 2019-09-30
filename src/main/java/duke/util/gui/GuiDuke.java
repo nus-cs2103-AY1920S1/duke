@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Storage;
+import duke.util.UiMessage;
 import duke.util.exception.DukeException;
 
 public class GuiDuke implements Duke {
@@ -20,7 +21,7 @@ public class GuiDuke implements Duke {
      */
     public GuiDuke() {
         ui = new Gui();
-        storage = new Storage(filePath);
+        storage = new Storage(filePath, ui);
         tasks = new TaskList();
     }
 
@@ -35,6 +36,8 @@ public class GuiDuke implements Duke {
             c.execute(tasks, ui);
         } catch (DukeException e) {
             ui.showError(e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         // dummy implementation
@@ -44,6 +47,21 @@ public class GuiDuke implements Duke {
 
     @Override
     public void run() {
+        // todo: figure out why welcome message doesn't appear until user's first input
+        ui.showMessage(UiMessage.WELCOME);
+        initializeStorage();
+    }
 
+    /**
+     * Attempts to import an existing task list.
+     */
+    public void initializeStorage() {
+        try {
+            TaskList tasksFromFile = storage.load();
+            tasks = tasksFromFile;
+        } catch (Exception e) {
+            // temporary haxx
+            e.printStackTrace();
+        }
     }
 }

@@ -21,7 +21,7 @@ public class CliDuke implements Duke {
      */
     public CliDuke() {
         ui = new Cli();
-        storage = new Storage(filePath);
+        storage = new Storage(filePath, ui);
         tasks = new TaskList();
     }
 
@@ -61,7 +61,7 @@ public class CliDuke implements Duke {
     /**
      * Attempts to import an existing task list.
      */
-    private void initializeStorage() {
+    public void initializeStorage() {
         try {
             TaskList tasksFromFile = storage.load();
             tasks = tasksFromFile;

@@ -19,4 +19,6 @@ public interface Duke {
         Duke duke = new CliDuke();
         duke.run();
     }
+
+    void initializeStorage();
 }

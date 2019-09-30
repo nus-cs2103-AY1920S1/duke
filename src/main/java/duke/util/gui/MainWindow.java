@@ -29,9 +29,6 @@ public class MainWindow extends AnchorPane {
     /** Represents the colour scheme in use for the GUI. Hardcoded as MINT for now. */
     private ColourScheme colourScheme = ColourScheme.MINT;
 
-    //private Image userImage = new Image(this.getClass().getResourceAsStream("/images/kawaii_robot.png"));
-    //private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/kawaii_robot_power.png"));
-
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(messageBoxContainer.heightProperty());
@@ -48,18 +45,28 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        // get and display user input
-        String input = userInput.getText();
-        MessageBox userMessageBox = getUserMessageBox(input, this.colourScheme);
-        messageBoxContainer.getChildren().add(userMessageBox);
+        try {
+            // get and display user input
+            String input = userInput.getText();
+            MessageBox userMessageBox = getUserMessageBox(input, this.colourScheme);
+            messageBoxContainer.getChildren().add(userMessageBox);
 
-        // clear user input field
-        userInput.clear();
+            duke.getResponse(input);
 
-        // get and display output from Duke
-        Queue<MessageBox> messageBoxQueue = duke.ui.messageBoxQueue;
-        messageBoxContainer.getChildren().addAll(messageBoxQueue);
-        messageBoxQueue.clear();
+            // clear user input field
+            userInput.clear();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            // get and display output from Duke
+            Queue<MessageBox> messageBoxQueue = duke.ui.getMessageBoxQueue();
+            messageBoxContainer.getChildren().addAll(messageBoxQueue);
+            duke.ui.getMessageBoxQueue().clear();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 //    /**

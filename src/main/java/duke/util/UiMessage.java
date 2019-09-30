@@ -8,8 +8,9 @@ public enum UiMessage {
     WELCOME("Hello! What can I do for you?"),
     GOODBYE("Bye. Hope to see you again soon!"),
     // storage
-    TASKS_IMPORTED("Success! Your tasks have been imported from: "),
-    TASKS_SAVED("Success! Your tasks have been saved to: "),
+    TASKS_IMPORTED("Success! Your tasks have been imported from: " + "data/tasks.txt"),
+        // filePath is hardcoded for now, can't append to message :(
+    TASKS_SAVED("Success! Your tasks have been saved to: " + "data/tasks.txt"),
     TASKS_NOT_SAVED("Your task list is empty! Adios :)"),
     TASKS_NOT_FOUND("Existing tasks file not found! Starting duke afresh..."),
     // commands

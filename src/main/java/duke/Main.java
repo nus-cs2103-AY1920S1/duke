@@ -2,7 +2,6 @@ package duke;
 
 import duke.util.gui.GuiDuke;
 import duke.util.gui.MainWindow;
-import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -41,7 +40,10 @@ public class Main extends Application {
 
             // display the window
             stage.show();
-        } catch (IOException e) {
+
+            // initialize Duke
+            duke.run();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

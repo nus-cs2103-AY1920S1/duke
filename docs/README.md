@@ -1,6 +1,6 @@
 # Duke - User Guide
 
-__By Chen Anqi, Sept 2019__
+__By Chen Anqi, 2019__
 
 ## 1. Introduction
 Duke is a chat bot that help users track their tasks, deadlines and events. 
@@ -14,16 +14,12 @@ Interested? Read the "Quick Start" below to get started. Enjoy!
 - Download the latest `duke-{version}.jar` [here](https://github.com/anqichen9856/duke/releases).
 - Copy the file to the folder you want to use as the home folder for your Duke.
 - Double-click the file to start the app. The GUI should appear in a few seconds.
-![Ui image](https://github.com/anqichen9856/duke/docs/Ui.png)
-
 - Type the command in the command box and press `Enter` to execute it.
 e.g. typing `list` and pressing `Enter` will display a list of your tasks, deadlines and events.
 - Some example commands you can try:
-
-- `todo read books` : adds a normal task `read books` to Duke.
-- `delete 3` : deletes the 3rd task shown in the current list
-- `exit` : exits the app
-
+  - `todo read books` : adds a normal task `read books` to Duke.
+  - `delete 3` : deletes the 3rd task shown in the current list
+  - `exit` : exits the app
 - Refer to "Features" & "Usage" below for details of each command.
 
 ## 3. Features 

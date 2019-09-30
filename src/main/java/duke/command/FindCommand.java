@@ -9,7 +9,7 @@ import duke.task.Task;
 import duke.parser.Parser;
 
 public class FindCommand extends Command {
-    String keyword;
+    private String keyword;
 
     public FindCommand(String keyword) {
         this.keyword = keyword;

@@ -1,6 +1,5 @@
 package duke.main;
 
-//@Override
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -25,9 +24,10 @@ public class Main extends Application {
             scene.getStylesheets().add("/css/DialogBoxStyle.css");
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle("Duke");
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("IO exception when creating fxmlLoader");
         }
     }
 }

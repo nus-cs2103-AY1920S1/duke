@@ -5,7 +5,7 @@ import duke.task.TaskList;
 /**
  * A command that indicates that the user wants to exit application.
  */
-public class ByeCommand extends Command {
+public class ByeCommand extends Command implements ExitCommand {
 
     /**
      * Returns a string that says goodbye to the user.

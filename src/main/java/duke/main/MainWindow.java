@@ -1,14 +1,13 @@
 package duke.main;
 
 import duke.command.Command;
+import duke.command.ExitCommand;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -54,5 +53,13 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        checkIfDukeShouldExit(commandToBeExecuted);
+    }
+
+    private void checkIfDukeShouldExit(Command c) {
+        if (c instanceof ExitCommand) {
+            Stage stage = (Stage) dialogContainer.getScene().getWindow();
+            stage.close();
+        }
     }
 }

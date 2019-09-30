@@ -7,7 +7,6 @@ import duke.storage.Storage;
 import duke.task.InvalidTaskDukeException;
 import duke.task.Task;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -22,12 +21,11 @@ public class LoadCommand extends Command {
     /**
      * Executes the command and loads the tasks from the hard-disk.
      * @param tasks List of tasks
-     * @param ui User-Interface
      * @param storage Storage object
      * @return Duke's response.
      * @throws DukeException If tasks cannot be loaded from the hard-disk.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
             ArrayList<Task> taskList = loadAndDeserializeTasks(storage);
             tasks.addAllTasks(taskList);

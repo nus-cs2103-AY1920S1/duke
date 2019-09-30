@@ -5,10 +5,8 @@ import duke.storage.Storage;
 import duke.task.InvalidTaskDukeException;
 import duke.task.Task;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -22,12 +20,11 @@ public class SaveCommand extends Command {
     /**
      * Executes the command and saves tasks into a file on the hard-disk.
      * @param tasks List of tasks
-     * @param ui User-Interface
      * @param storage Storage object
      * @return Success or fail message.
      * @throws InvalidTaskDukeException If the tasks are stored incorrectly.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskDukeException {
+    public String execute(TaskList tasks, Storage storage) throws InvalidTaskDukeException {
         try {
             ArrayList<String> stringTasks = serializeAndSaveTasks(tasks);
             storage.saveTasks(stringTasks);

@@ -4,9 +4,7 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.InvalidTaskDukeException;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.regex.Matcher;
@@ -29,12 +27,11 @@ public class DoneCommand extends Command {
     /**
      * Marks the input task(s) as done.
      * @param tasks List of tasks
-     * @param ui User-Interface
      * @param storage Storage object
      * @return Duke's response to the done command.
      * @throws DukeException If the done command is invalid.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         String cleanedInput = cleanInput(input);
         String output = markAsDone(cleanedInput, tasks);
         return output;

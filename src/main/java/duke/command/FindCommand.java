@@ -3,7 +3,6 @@ package duke.command;
 import duke.command.exceptions.InvalidFindDukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a command that instructs Duke to search for a particular task description.
@@ -23,12 +22,11 @@ public class FindCommand extends Command {
     /**
      * Executes the find command and searches for tasks with matching descriptions.
      * @param tasks List of tasks
-     * @param ui User-Interface
      * @param storage Storage object
      * @return Duke's response to the find command.
      * @throws InvalidFindDukeException If the find command is invalid.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFindDukeException {
+    public String execute(TaskList tasks, Storage storage) throws InvalidFindDukeException {
         if (isInvalidFindCommand(cleanedInput)) {
             throw new InvalidFindDukeException("Invalid find command! Please enter a description after \"find\"");
         } else {

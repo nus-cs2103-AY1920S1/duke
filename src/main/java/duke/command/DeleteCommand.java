@@ -3,7 +3,6 @@ package duke.command;
 import duke.command.exceptions.InvalidDeleteDukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -27,12 +26,11 @@ public class DeleteCommand extends Command {
     /**
      * Deletes the required task.
      * @param tasks List of tasks
-     * @param ui User-Interface
      * @param storage Storage object
      * @return Duke's response to the command.
      * @throws InvalidDeleteDukeException If the task ID is invalid.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDeleteDukeException {
+    public String execute(TaskList tasks, Storage storage) throws InvalidDeleteDukeException {
         String cleanedInput = cleanInput(input);
         String output = deleteTask(cleanedInput, tasks);
         return output;

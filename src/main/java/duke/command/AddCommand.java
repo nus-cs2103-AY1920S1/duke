@@ -14,7 +14,6 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a command instructing Duke to add a task.
@@ -39,13 +38,12 @@ public class AddCommand extends Command {
     /**
      * Executes the add command.
      * @param tasks List of tasks
-     * @param ui User-Interface
      * @param storage Storage class
      * @return Duke's response.
      * @throws InvalidTaskDukeException If the task is invalid.
      * @throws InvalidDateDukeException If the date is invalid.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Storage storage)
             throws InvalidTaskDukeException, InvalidDateDukeException {
         String cleanedInput = cleanInput(input);
         Task t = makeTask(cleanedInput);

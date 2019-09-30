@@ -22,7 +22,7 @@ Jarvis is a Command Line Interface (CLI) task manager system that can be used to
 
 # 2. Quick Start
 Ensure that java 11 or above is installed in your computer. Otherwise, you can download Java 11 [here](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html).
-Download Jarvis [here](https://github.com/tuandingwei/main/releases)!.
+Download Jarvis [here](https://github.com/tuandingwei/duke/releases/tag/v0.2)!
 Double click of the .jar file to activate Jarvis. A pop-up window should appear soon. 
 
 # 3. Features
@@ -38,8 +38,9 @@ Done | any existing task | 'done 2' | done [index of task in the list]
 Delete | an existing task | 'delete 1' | delete [index of task in the list]
 Find | keyword | 'find book' | find [keyword]
 Clear | clears all tasks permanently | 'clear' | 
-Bye | | bye |
+Bye | | 'bye' |
 
 # Looking forward
 I hope to improve Jarvis with a better UI and provide support for more tasks in the future. 
-Feel free to send any recommendations to tuandingwei@u.nus.edu
+Feel free to send any recommendations to tuandingwei@u.nus.edu.
+

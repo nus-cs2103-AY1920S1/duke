@@ -92,8 +92,11 @@ public class Parser {
      * @return String to inform user if the task has been marked as done.
      * @throws IOException Occurs when there is a problem in updating the file.
      */
-    public String processTaskDone(String input, TaskList taskList, Storage storage) throws IOException {
+    public String processTaskDone(String input, TaskList taskList, Storage storage) throws IOException, DukeException {
         Integer taskNum = Integer.valueOf(input.substring(5));
+        if (taskList.getList().size() < taskNum || taskList.getList().size() == 0) {
+            throw new DukeException("Sorry at the specified index doens't exist :(");
+        }
         Task currTask = taskList.getTask(taskNum - 1);
         currTask.markAsDone();
         storage.updateFile();
@@ -194,8 +197,11 @@ public class Parser {
      * @return String to inform user if the task has been marked as done.
      * @throws IOException Occurs when there is a problem in updating the file.
      */
-    public String processDeleteTask(String input, TaskList taskList, Storage storage, HashSet<Task> set) throws IOException {
+    public String processDeleteTask(String input, TaskList taskList, Storage storage, HashSet<Task> set) throws IOException, DukeException {
         Integer index = Integer.valueOf(input.substring(7));
+        if (taskList.getList().size() < index || taskList.getList().size() == 0) {
+            throw new DukeException("Sorry at the specified index doens't exist :(");
+        }
         Task deletedTask = taskList.getTask(index - 1);
         int sizeBeforeDeletion = taskList.getList().size();
         taskList.deleteTask((int) index - 1);
@@ -219,6 +225,9 @@ public class Parser {
         String message = "";
         assert list != null : "List should not point to null pointer";
 
+        if (taskList.getList().size() == 0) {
+            throw new DukeException("Sorry there is nothing added yet in the list");
+        }
         for (int i = 0; i < list.size(); i++) {
             String[] description = list.get(i).getDescription().split(" ");
             Stream<String> stream = Arrays.stream(description);

@@ -1,5 +1,6 @@
 package duke;
 
+import duke.util.gui.GuiDuke;
 import duke.util.gui.MainWindow;
 import java.io.IOException;
 import javafx.application.Application;
@@ -18,7 +19,7 @@ public class Main extends Application {
     private Image dukeIcon = new Image(getClass().getResourceAsStream("/images/coffee.png"));
 
     /** Underlying instance of Duke created when application runs.*/
-    private Duke duke = new Duke();
+    private GuiDuke duke = new GuiDuke();
 
     @Override
     public void start(Stage stage) {

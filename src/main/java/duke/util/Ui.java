@@ -5,6 +5,12 @@ import duke.util.exception.DukeException;
 
 public interface Ui {
     /**
+     * Returns the command entered by the user.
+     * @return Command entered by the user.
+     */
+    String readCommand();
+
+    /**
      * Displays the required message in the UI, given the type of message required.
      * @param uiMessage Enum indicating type of message required to be displayed.
      */

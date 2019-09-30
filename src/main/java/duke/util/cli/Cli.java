@@ -13,20 +13,9 @@ public class Cli implements Ui {
         this.in = new Scanner(System.in);
     }
 
-    /**
-     * Returns the command entered by the user.
-     * @return Command entered by the user.
-     */
+    @Override
     public String readCommand() {
         return in.nextLine();
-    }
-
-    /**
-     * Displays a divider line in the UI.
-     */
-    public void showLine() {
-        String line = "____________________________________________________________";
-        System.out.println(line);
     }
 
     @Override
@@ -45,7 +34,11 @@ public class Cli implements Ui {
         tasks.printList();
     }
 
-//    public String getResponse() {
-//        // todo
-//    }
+    /**
+     * Displays a divider line in the UI.
+     */
+    public void showLine() {
+        String line = "____________________________________________________________";
+        System.out.println(line);
+    }
 }

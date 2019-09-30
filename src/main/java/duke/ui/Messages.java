@@ -38,12 +38,13 @@ public final class Messages {
     public static final String HELP_MESSAGE = String.join(
         System.lineSeparator(),
         List.of(
+            "list", "\t- list all tasks",
             "todo DESC", "\t- add a todo with the given description",
             "event DESC /at DATETIME", "\t- add an event that starts at DATETIME and have the given description",
             "deadline DESC /by DEADLINE", "\t- add deadline that ends at DEADLINE and have the given description",
             "delete TASK_NUMBER", "\t- delete the task with the given task number",
             "done TASK_NUMBER", "\t- mark the task with the given task number as done",
-            "find [KEYWORD [KEYWORD ...] ]", "\t- find all tasks that march at least one KEYWORD",
+            "find KEYWORD...", "\t- find all tasks that match at least one KEYWORD",
             "help", "\t- display this help message",
             "bye", "\t- exit Duke"));
 

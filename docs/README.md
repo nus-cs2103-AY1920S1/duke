@@ -74,23 +74,20 @@ __Format__: `help`
 ### Adding a todo: `todo`
 Adds a `todo` to Duke.  
 __Format__: `todo DESCRIPTION`  
-__Example__:
-- `todo Read book`
+__Example__: `todo Read book`
 
 ### Adding an event: `event`
 Adds an `event` to Duke. An `event` is something that happens at the specific time.  
 __Format__: `event DESCRIPTION /at dd/MM/yyyy HHmm`  
-__Example__:
-- `event job interview /at 1/9/2018 1330`
+__Example__: `event job interview /at 1/9/2018 1330`
 
 ### Adding a deadline: `deadline`
 Adds a `deadline` to Duke. A deadline is a task that should be done by a certain time.  
 __Format__: `deadline DESCRIPTION /by dd/MM/yyyy HHmm`  
-__Example__:
-- `deadline return book /by 18/2/2019 0900`
+__Example__: `deadline return book /by 18/2/2019 0900`
 
 ### Listing all tasks: `list`
-Shows a list of all tasks(`todo`s, `event`s, `deadline`s)in Duke.  
+Shows a list of all tasks(`todo`s, `event`s, `deadline`s) in Duke.  
 __Format__: `list`
 
 ### Locating tasks by keywords: `find`
@@ -98,15 +95,27 @@ Finds tasks whose descriptions contain any of the given keywords.
 __Format__: `find KEYWORD...`  
 __Example__: `find school project`
 
+### Marking a task as done: `done`
+Marks the specified task as done.  
+__Format__: `done TASK_NUMBER`  
+__Example__: `done 2`
+
 ### Deleting a task: `delete`
 Deletes the specified task from Duke.  
 __Format__: `delete TASK_NUMBER`  
-__Example__:
-```
-list
-delete 2
-```
+__Example__: `delete 2`
 
 ### Exiting Duke: `bye`
 Exits Duke.  
 __Format__: `bye`
+
+## Command Summary
+- List all tasks: `list`
+- Add a todo with the given description: `todo DESC`
+- Add an event that starts at DATETIME and have the given description: `event DESC /at DATETIME`,
+- Add deadline that ends at DEADLINE and have the given description: `deadline DESC /by DEADLINE`,
+- Delete the task with the given task number: `delete TASK_NUMBER`
+- Mark the task with the given task number as done: `done TASK_NUMBER`
+- Find all tasks that match at least one KEYWORD: `find KEYWORD...`
+- Display this help message: `help`
+- Exit Duke: `bye`

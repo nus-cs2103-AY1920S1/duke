@@ -14,6 +14,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.UnsupportedCharsetException;
 import java.nio.file.Paths;
 import java.util.regex.Pattern;
 
@@ -45,12 +48,24 @@ public class Storage {
             throw new DukeInvalidFileNameException(fileName);
         }
 
-        String parentDirectoryPath =
-                new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath()).getParent();
-        String saveFolderName = "DukeSaveFiles";
-        String storageName = fileName + ".txt";
+        String parentDirectoryPath = null;
+        String saveFolderName = null;
+        String storageName = null;
+        File saveFolder = new File("");
+        try {
+            parentDirectoryPath =
+                    URLDecoder.decode(
+                            new File(getClass().getProtectionDomain().getCodeSource()
+                                    .getLocation().getPath()).getParent(),
+                            "utf-8");
+            saveFolderName = "DukeSaveFiles";
+            storageName = fileName + ".txt";
+            saveFolder = Paths.get(parentDirectoryPath, saveFolderName).toFile();
+        } catch (UnsupportedEncodingException exception) {
+            exception.printStackTrace();
+            throw new DukeInvalidLoadFilePathException(saveFolder.getAbsolutePath());
+        }
 
-        File saveFolder = Paths.get(parentDirectoryPath, saveFolderName).toFile();
 
         if (saveFolder.exists() && !saveFolder.isDirectory()) {
             int count = 1;
@@ -72,7 +87,7 @@ public class Storage {
             }
         } catch (IOException exception) {
             exception.printStackTrace();
-            throw new DukeInvalidLoadFilePathException(saveFile.getAbsolutePath());
+            throw new DukeInvalidSaveFilePathException(saveFile.getAbsolutePath());
         }
     }
 

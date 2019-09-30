@@ -33,13 +33,13 @@ public class Parser {
         Task taskToAdd;
         switch (commands[0]) {
         case "T":
-            taskToAdd = new Todo(commands[2], (commands[1].equals("\u2713")));
+            taskToAdd = new Todo(commands[2], (commands[1].equals("✓")));
             break;
         case "D":
-            taskToAdd = new Deadline(commands[2], (commands[1].equals("\u2713")), commands[3]);
+            taskToAdd = new Deadline(commands[2], (commands[1].equals("✓")), commands[3]);
             break;
         case "E":
-            taskToAdd = new Event(commands[2], (commands[1].equals("\u2713")), commands[3]);
+            taskToAdd = new Event(commands[2], (commands[1].equals("✓")), commands[3]);
             break;
         default:
             assert false : "Task type " + commands[0] + " should not exist";

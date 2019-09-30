@@ -91,7 +91,7 @@ public abstract class Task {
      * @return A string representation of the isDone boolean
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "✓" : "✘");
     }
 
     /**

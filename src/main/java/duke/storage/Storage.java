@@ -18,9 +18,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    String filePath;
-    // keep track of number of tasks
-    private static int count = 0;
+    private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -53,31 +51,35 @@ public class Storage {
      * @param tasks new task list to be loaded with tasks.
      */
     private static void loadTask(String item, ArrayList<Task> tasks) {
-        if (item.startsWith("T")) {
-            // split command into 3 parts
-            String[] splitStr = item.split(" \\| ", 3);
+        String[] splitStr = item.split(" \\| ");
+        switch (splitStr[0]) {
+        case "T":
             tasks.add(new Todo(splitStr[2]));
-            if (splitStr[1].equals("1")) {
-                tasks.get(count).setDone();
-            }
-            count++;
-        } else if (item.startsWith("D")) {
-            // split command into 4 parts
-            String[] splitStr = item.split(" \\| ", 4);
+            checkDone(splitStr[1], tasks.get(tasks.size() - 1));
+            break;
+        case "D":
             tasks.add(new Deadline(splitStr[2], splitStr[3]));
-            if (splitStr[1].equals("1")) {
-                tasks.get(count).setDone();
-            }
-            count++;
-        } else {
-            assert item.startsWith("E") : "Task should start with T or D or E";
-            // split command into 4 parts
-            String[] splitStr = item.split(" \\| ", 4);
-            tasks.add(new Event(splitStr[2], splitStr[3]));
-            if (splitStr[1].equals("1")) {
-                tasks.get(count).setDone();
-            }
-            count++;
+            checkDone(splitStr[1], tasks.get(tasks.size() - 1));
+            break;
+        case "E":
+            tasks.add(new Event(splitStr[2], splitStr[3], splitStr[4]));
+            checkDone(splitStr[1], tasks.get(tasks.size() - 1));
+            break;
+        default:
+            assert false : splitStr[0];
+            break;
+        }
+    }
+
+    /**
+     * Mark any task loaded as done accordingly.
+     *
+     * @param splitStr saved as 1 to indicate done and 0 to indicate not done.
+     * @param task task to be marked.
+     */
+    private static void checkDone(String splitStr, Task task) {
+        if (splitStr.equals("1")) {
+            task.setDone();
         }
     }
 

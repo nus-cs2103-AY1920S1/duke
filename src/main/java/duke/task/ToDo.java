@@ -1,7 +1,6 @@
 package duke.task;
 
 public class ToDo extends Task {
-    private String by;
     private static final String ABBREV_TASK = "T";
 
     public ToDo(String description) {

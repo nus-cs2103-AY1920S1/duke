@@ -41,9 +41,9 @@ public abstract class Task {
     public String toString() {
         String output;
         if (taskIsDone == true) {
-            output = "[✓]";
+            output = "Complete";
         } else {
-            output = "[✗]";
+            output = "Incomplete";
         }
         output += " " + description;
         return output;

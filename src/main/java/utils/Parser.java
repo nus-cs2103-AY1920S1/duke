@@ -91,6 +91,13 @@ public class Parser {
                     output = tasks.find(keyword);
                     break;
 
+                case "clone":
+                    int taskNum3 = Integer.parseInt(splited[1]) - 1;
+                    Task duplicate = tasks.get(taskNum3);
+                    tasks.add(duplicate);
+                    output = ui.printMsg(duplicate, tasks.size());
+                    break;
+                    
                 default: //error handling
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 

@@ -17,7 +17,7 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
-    private final static String filePath = "/Users/elsa/Documents/2103/duke/src/main/java/data/duke.txt";
+    private final static String filePath = "src/main/java/data/duke.txt";
 
     /**
      * This is for the GUI, needs an empty constructor for it to work. 
@@ -69,7 +69,7 @@ public class Duke {
         sc.close();
     }
     
-    public static void main(String[] args) {
-        new Duke("/Users/elsa/Documents/2103/duke/src/main/java/data/duke.txt").run();
-    }
+    // public static void main(String[] args) {
+    //     new Duke("src/main/java/data/duke.txt").run();
+    // }d
 }

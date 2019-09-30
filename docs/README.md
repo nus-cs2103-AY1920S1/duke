@@ -157,7 +157,7 @@ Format: bye
 
 I do not own the below images used in the GUI:
 
-![milk.png](https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwi_2omdsfjkAhWFA3IKHU6UD_YQjRx6BAgBEAQ&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F847521223607434910%2F&psig=AOvVaw192gEcdS1P0WUpcOzgMk1q&ust=1569927264785686)
-![mocha.jpg](https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiW7cONtPjkAhW38HMBHVDABN8QjRx6BAgBEAQ&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F329748003963651491%2F&psig=AOvVaw301bzFVBbSvHHLicpDmO8X&ust=1569928107397874) 
-![background.jpg](https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiTjaGhtPjkAhV1ILcAHZ3UC1sQjRx6BAgBEAQ&url=https%3A%2F%2Ftwitter.com%2Fmilkmochabear%2Fstatus%2F1034453857961631744&psig=AOvVaw1VWNuf1e0gPT00n4ElEd6M&ust=1569928152359688)
+[milk.png](https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwi_2omdsfjkAhWFA3IKHU6UD_YQjRx6BAgBEAQ&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F847521223607434910%2F&psig=AOvVaw192gEcdS1P0WUpcOzgMk1q&ust=1569927264785686)
+[mocha.jpg](https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiW7cONtPjkAhW38HMBHVDABN8QjRx6BAgBEAQ&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F329748003963651491%2F&psig=AOvVaw301bzFVBbSvHHLicpDmO8X&ust=1569928107397874) 
+[background.jpg](https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiTjaGhtPjkAhV1ILcAHZ3UC1sQjRx6BAgBEAQ&url=https%3A%2F%2Ftwitter.com%2Fmilkmochabear%2Fstatus%2F1034453857961631744&psig=AOvVaw1VWNuf1e0gPT00n4ElEd6M&ust=1569928152359688)
 

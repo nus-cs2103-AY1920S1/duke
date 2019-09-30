@@ -1,5 +1,7 @@
 package task;
 
+import tool.DukeException;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -7,7 +9,7 @@ public class Task {
 
     /**
      * Constructor for Task
-     * @param description
+     * @param description task description
      */
     public Task(String description) {
         this.description = description;
@@ -15,9 +17,13 @@ public class Task {
         this.status = 0;
     }
 
-
-    protected String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    /**
+     * Retrieves the status of the task - tick for done, X for not done
+     * Default == X
+     * @return returns tick or X symbols
+     */
+    private String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     /**
@@ -33,7 +39,7 @@ public class Task {
      * @param attribute: done, des
      * @param update: true/false, new des
      */
-    public void edit(String attribute, String update) {
+    public void edit(String attribute, String update) throws DukeException {
         if (attribute.equals("done")) {
             assert update.equals("true") || update.equals("false") : "Must provide true or false only";
             this.isDone = update.equals("true");
@@ -41,7 +47,7 @@ public class Task {
         } else if (attribute.equals("des")) {
             this.description = update;
         } else {
-            System.out.println("Attribute does not exist");
+            throw new DukeException("Attribute does not exist");
         }
     }
 

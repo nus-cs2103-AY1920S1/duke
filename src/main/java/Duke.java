@@ -11,10 +11,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import task.Task;
-import tool.Parser;
-import tool.Storage;
-import tool.TaskList;
-import tool.Ui;
+import tool.*;
+
 import java.util.ArrayList;
 
 
@@ -31,10 +29,14 @@ public class Duke extends Application {
     private Parser p;
 
     public Duke() {
-        Ui ui = new Ui();
-        Storage storage = new Storage("./duke.txt");
-        TaskList commands = new TaskList(storage.load(new ArrayList<Task>()));
-        this.p = new Parser(commands, storage, ui);
+        try {
+            Ui ui = new Ui();
+            Storage storage = new Storage("./duke.txt");
+            TaskList commands = new TaskList(storage.load(new ArrayList<Task>()));
+            this.p = new Parser(commands, storage, ui);
+        } catch (DukeException d) {
+            d.getMessage();
+        }
     }
 
 

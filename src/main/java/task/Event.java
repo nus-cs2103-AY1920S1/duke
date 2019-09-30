@@ -1,18 +1,22 @@
 package task;
 
 import tool.DateTime;
+import tool.DukeException;
 
 public class Event extends Task {
-    protected DateTime at;
+    private DateTime start;
+    private DateTime end;
 
     /**
      * Constructor for Event task
      * @param description: Task description
-     * @param at: DateTime object for Event task
+     * @param start: starting DateTime object for Event task
+     * @param end: ending DateTime object for Event task
      */
-    public Event(String description, DateTime at) {
+    public Event(String description, DateTime start, DateTime end) {
         super(description);
-        this.at = at;
+        this.start = start;
+        this.end = end;
     }
 
     /**
@@ -21,7 +25,7 @@ public class Event extends Task {
      * @param update: New attribute: true/false, new des, date
      */
     @Override
-    public void edit(String attribute, String update) {
+    public void edit(String attribute, String update) throws DukeException {
         switch (attribute) {
             case "done":
                 assert update.equals("true") || update.equals("false") : "Must provide true or false only";
@@ -31,11 +35,12 @@ public class Event extends Task {
                 this.description = update;
                 break;
             case "date":
-                this.at = new DateTime(update);
+                String[] dates = update.split(" to ");
+                this.start = new DateTime(dates[0]);
+                this.end = new DateTime(dates[1]);
                 break;
             default:
-                System.out.println("Attribute does not exist");
-                break;
+                throw new DukeException("Attribute does not exist. Attributes are des and date only.");
         }
     }
 
@@ -45,11 +50,11 @@ public class Event extends Task {
      */
     @Override
     public String storageString() {
-        return "E/" + status + "/" + description + "/" + this.at;
+        return "E/" + status + "/" + description + "/" + this.start + "/" + this.end;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + this.start + " to " + this.end + ")";
     }
 }

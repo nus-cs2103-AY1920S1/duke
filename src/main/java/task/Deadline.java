@@ -1,9 +1,10 @@
 package task;
 
 import tool.DateTime;
+import tool.DukeException;
 
 public class Deadline extends Task {
-    protected DateTime by;
+    private DateTime by;
 
     /**
      * Constructor for Deadline Task
@@ -21,7 +22,7 @@ public class Deadline extends Task {
      * @param update: New attribute: true/false, new des, date
      */
     @Override
-    public void edit(String attribute, String update) {
+    public void edit(String attribute, String update) throws DukeException {
         switch (attribute) {
             case "done":
                 assert update.equals("true") || update.equals("false") : "Must provide true or false only";
@@ -34,8 +35,7 @@ public class Deadline extends Task {
                 this.by = new DateTime(update);
                 break;
             default:
-                System.out.println("Attribute does not exist");
-                break;
+                throw new DukeException("Attribute does not exist");
         }
     }
 

@@ -9,7 +9,7 @@ public class TaskList {
 
     /**
      * Constructor for TaskList object
-     * @param commands
+     * @param commands list of commands from user input
      */
     public TaskList(ArrayList<Task> commands) {
         this.commands = commands;
@@ -29,7 +29,7 @@ public class TaskList {
 
     /**
      * Marks the task specifies at index as done
-     * @param index
+     * @param index index of task in list
      * @return the task that has been marked as done
      */
     protected Task done(int index) {

@@ -21,7 +21,7 @@ public class Parser {
     /**
      * Parses the user's input to make sense of all the commands, and hands it over
      * to tool.TaskList
-     * @param command
+     * @param command: user input
      */
     public String parse(String command) {
             assert command.isEmpty() : "Input cannot be empty";
@@ -70,8 +70,8 @@ public class Parser {
 
     /**
      * Parses the task command
-     * @param command
-     * @param type
+     * @param command: user input
+     * @param type: type of task
      * @return String output for duke
      * @throws DukeException
      */
@@ -88,31 +88,35 @@ public class Parser {
                 tt = new Todo(taskString);
             }
             try {
-                String[] taskArr = taskString.split(delimiter);
-                String des = taskArr[0];
-                String dateTime = taskArr[1];
-                if (type.equals("e")) {
-                    tt = new Event(des, new DateTime(dateTime));
-                } else if (type.equals("d")) {
-                    tt = new Deadline(des, new DateTime(dateTime));
+                if (type.equals("e") || type.equals("d")) {
+                    String[] taskArr = taskString.split(delimiter);
+                    String des = taskArr[0];
+                    String dateTime = taskArr[1];
+                    if (type.equals("e")) {
+                        String[] dateArr = dateTime.split(" to ");
+                        tt = new Event(des, new DateTime(dateArr[0]), new DateTime(dateArr[1]));
+                    } else {
+                        tt = new Deadline(des, new DateTime(dateTime));
+                    }
                 }
                 this.commands.add(tt);
                 storage.save(this.commands);
                 return this.ui.addTask(tt, this.commands.size());
             } catch (ArrayIndexOutOfBoundsException e) {
-                String messageError = type.equals("d") ? "OOPS!!! The format for deadline is wrong. Please follow: <description> /by <time>"
-                                                       : type.equals("e") ? "OOPS!!! The format for event is wrong. Please follow: <description> /at <time>"
+                String messageError = type.equals("d") ? "OOPS!!! The format for deadline is wrong. Please follow: <description> /by <dd/mm/yyyy> <time in 24hr>"
+                                                       : type.equals("e") ? "OOPS!!! The format for event is wrong. Please follow: <description> /at <dd/mm/yyyy> <time in 24hr> to <dd/mm/yyyy> <time in 24hr>"
                                                                           : "OOPS!!! The description of a todo cannot be empty.";
                 throw new DukeException(messageError);
             }
         } catch (ArrayIndexOutOfBoundsException e){
+
             throw new DukeException("OOPS!! Description for the task cannot be empty.");
         }
     }
 
     /**
      * Parses the delete command
-     * @param inputArr
+     * @param inputArr user input split by " "
      * @return String output for duke
      * @throws DukeException
      */
@@ -134,7 +138,7 @@ public class Parser {
 
     /**
      * Parses find command
-     * @param inputArr
+     * @param inputArr user input split by " "
      * @return String output for duke
      */
     private String parseFind(String[] inputArr) {
@@ -145,7 +149,7 @@ public class Parser {
 
     /**
      * Parses done command
-     * @param inputArr
+     * @param inputArr user input split by " "
      * @return String output for duke
      * @throws DukeException
      */
@@ -167,7 +171,7 @@ public class Parser {
 
     /**
      * Parses edit command
-     * @param command
+     * @param command user input
      * @return String output for duke
      * @throws DukeException
      */
@@ -180,12 +184,11 @@ public class Parser {
             String oldTask = toEdit.toString();
             String attribute = splitInput[1];
             String newDes = splitInput[2];
-            System.out.println("newDes: " + newDes);
             toEdit.edit(attribute, newDes);
             this.storage.save(this.commands);
             return this.ui.edit(oldTask, toEdit);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Format for edit command is wrong. Try: edit index/attribute/updated info instead.");
+            throw new DukeException("Format for edit command is wrong. Try: edit index/attribute/updated info instead. Attributes are des and date only.");
         }
     }
 }

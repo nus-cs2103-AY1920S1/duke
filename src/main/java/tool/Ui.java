@@ -24,13 +24,17 @@ public class Ui {
      * Handles the UI for "list" command
      */
     protected String list(TaskList tasks) {
-        int count = 1;
-        String str = "Here are the tasks in your list:\n";
-        for (Task t : tasks.getList()) {
-            str = str + count + ". " + t + "\n";
-            count++;
+        if (tasks.size() == 0) {
+            return "You have no tasks in the list.";
+        } else {
+            int count = 1;
+            String str = "Here are the tasks in your list:\n";
+            for (Task t : tasks.getList()) {
+                str = str + count + ". " + t + "\n";
+                count++;
+            }
+            return str;
         }
-        return str;
     }
 
     /**

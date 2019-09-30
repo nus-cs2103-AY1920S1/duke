@@ -28,7 +28,7 @@ public class Duke {
             tasks = storage.load(parser);
         } catch (FileNotFoundException e) {
             storage.createNewDir("data");
-            storage.createNewSaveFile("savedList.txt");
+            storage.createNewSaveFile("data/savedList.txt");
             tasks = new TaskList();
         } catch (SaveFileWrongFormatDukeException e) {
             tasks = new TaskList();

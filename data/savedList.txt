@@ -1,9 +1,0 @@
-todo abc
-true
-HIGH
-deadline hw /by 29/08/2019 0000
-true
-MEDIUM
-event an_event /at 02/03/1997 1922
-false
-LOW

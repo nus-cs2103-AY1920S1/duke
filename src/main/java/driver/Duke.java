@@ -89,6 +89,8 @@ public class Duke {
                 ErrorCommand myError = new ErrorCommand(err);
                 return myError.executeCommand();
             } finally {
+                //Quits Window
+                //Maybe can consider including this in my bye command
                 exit();
             }
         }

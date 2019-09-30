@@ -1,3 +1,5 @@
+import javafx.application.Platform;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -132,10 +134,14 @@ public class Parser {
             cmdArgs = inputArray[1].split(" /at ", 2);
             String reminder = "Reminder for task no. " + cmdArgs[0];
             
-            Duration duration = Duration.between(LocalDateTime.now(), LocalDateTime.parse(cmdArgs[1], DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
+            Duration duration = Duration.between(LocalDateTime.now(), LocalDateTime.parse(cmdArgs[1], 
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
             long initalDelay = duration.getSeconds();
             
             result.add("Reminder added for task " + cmdArgs[0]);
+            break;
+        case "bye":
+            Platform.exit();
             break;
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -143,13 +149,16 @@ public class Parser {
         
         return result;
     }
-    
+
+    /**
+     * Checks if the input uses remind as a keyword.
+     * @param input input string from user
+     * @return true if input contains remind as first word, false otherwise
+     */
     public static boolean checkReminder(String input) {
         //Split input incase it has a command and argument
         String[] inputArray = input.split(" ", 2);
-
         
-
         switch (inputArray[0]) {
         case "remind":
             return true;
@@ -157,7 +166,12 @@ public class Parser {
             return false;
         }
     }
-    
+
+    /**
+     * Finds the length of delay in seconds from now based on date time given in input.
+     * @param input input string from user
+     * @return long of delay in seconds from now
+     */
     public static long getReminderDelay(String input) {
         Duration duration = Duration.of(0, TimeUnit.SECONDS.toChronoUnit());
         try {
@@ -165,14 +179,20 @@ public class Parser {
             String[] cmdArgs = new String[0];
             cmdArgs = inputArray[1].split(" /at ", 2);
             String reminder = "Reminder for " + cmdArgs[0];
-            duration = Duration.between(LocalDateTime.now(), LocalDateTime.parse(cmdArgs[1], DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
-        } finally {
-            
+            duration = Duration.between(LocalDateTime.now(), LocalDateTime.parse(cmdArgs[1], 
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
+        } catch (Exception e) {
+          //Won't enter here
         } 
         long initalDelay = duration.getSeconds();
         return initalDelay;
     }
-    
+
+    /**
+     * Generates reminder string based on input.
+     * @param input input string from user
+     * @return String for reminder
+     */
     public static String getReminder(String input) {
         String reminder = "";
         try {
@@ -180,8 +200,8 @@ public class Parser {
             String[] cmdArgs = new String[0];
             cmdArgs = inputArray[1].split(" /at ", 2);
             reminder = "Reminder for task " + cmdArgs[0];
-        } finally {
-            
+        } catch (Exception e) {
+            //Won't enter here
         }
         //Returns the reminder string
         return reminder;

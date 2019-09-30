@@ -37,7 +37,12 @@ public class Duke {
         
         return output;
     }
-    
+
+    /**
+     * Checks if the input uses remind as a keyword.
+     * @param input input string from user
+     * @return true if input contains remind as first word, false otherwise
+     */
     public boolean needReminder(String input) {
         return Parser.checkReminder(input);
     }

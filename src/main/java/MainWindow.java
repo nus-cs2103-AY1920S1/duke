@@ -48,8 +48,8 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
-    public void setLoader(FXMLLoader fLoader) {
-        fxmlLoader = fLoader;
+    public void setLoader(FXMLLoader fxLoader) {
+        fxmlLoader = fxLoader;
     }
 
     /**
@@ -66,20 +66,25 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         
-        if(duke.needReminder(input)){
+        if (duke.needReminder(input)) {
             this.showReminder(duke.getReminder(input), duke.getReminderDelay(input));
         }
         userInput.clear();
     }
-    
+
+    /**
+     * Schedules a reminder to occur using ScheduledExecutorService.
+     * @param reminder String that will be stated when reminder occurs
+     * @param delay Number of seconds it is delayed between time reminder is created and time the reminder is to occur
+     */
     public void showReminder(String reminder, long delay) {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
         scheduler.schedule(
-                new Runnable(){
+                new Runnable() {
                     public void run() {
                         Platform.runLater(
-                                new Runnable(){
+                                new Runnable() {
                                     public void run() {
                                         //new dialog box in main window to show
                                         dialogContainer.getChildren().addAll(
@@ -93,7 +98,11 @@ public class MainWindow extends AnchorPane {
                 delay,
                 TimeUnit.SECONDS);
     }
-    
+
+    /**
+     * Displays string from duke perspective.
+     * @param string String that is displayed by duke.
+     */
     public void dukeDisplay(String string) {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(string, dukeImage)

@@ -16,10 +16,10 @@ public interface UI {
      * @return The start message.
      */
     static String start() {
-        return "    ____________________________________________________________\n"
-                + "     Hello! I'm Duke\n"
+        return "    ________________________________________\n"
+                + "     Hello! I am BARELY FUNCTIONING, PLEASE KILL ME\n"
                 + "     What can I do for you?\n"
-                + "    ____________________________________________________________\n";
+                + "    ______________________________________\n";
 
     }
 

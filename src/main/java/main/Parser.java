@@ -116,6 +116,9 @@ public class Parser {
         case "undo":
             return new UndoCommand();
 
+        case "hello":
+            return new StartCommand();
+
         default:
             break;
         }

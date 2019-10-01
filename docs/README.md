@@ -3,7 +3,7 @@
 [2. Quick Start](#Quick Start)    
 [3. Features](#Features)  
 [4. FAQ](#FAQ)   
-[5. Command Summary](#Command Summary) << click here if you are reviewing the app :)
+[5. Command Summary](#Command Summary) << click HERE if you are reviewing the app :)
 
 ## 1. Introduction <a name="Introduction"></a>
 The DukeBot is for those who prefer to use a desktop app for managing tasks. 
@@ -79,8 +79,9 @@ Format: bye
 * None
 
 ## 5. Command Summary <a name="Command Summary"></a>
-* Add : `TASK_TYPE TASK_NAME DATE [TIME]`  
-e.g. `event party /at 01012011 0800 1900`   
+* Add : `TASK_TYPE TASK_NAME DATE [TIME]`  (TASK_TYPE can be the task or the initial letter of the task)
+e.g. `event party /at 01012011 0800 1900` 
+e.g. `d assignment1 /by 12122019`
 e.g. `t read book`
 
 * Delete : `delete INDEX`
@@ -93,7 +94,7 @@ e.g. `done 3`
 e.g. `postpone 3 0 4 0`
 
 * Note: `note NOTES`  
-e.g. `note blahblahblah`
+e.g. `note INDEX blahblahblah`
 
 * Find : `find KEYWORD`   
 e.g. `find D`

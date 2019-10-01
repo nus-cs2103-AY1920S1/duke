@@ -4,13 +4,19 @@
 ## 1. Introduction
 The Duke Chat Assistant is for users who prefer a chat-assistant desktop-based app for managing their daily errands and pending tasks in lieu of traditional GUIs. This simple-to-use chat app combines both Command Line Interface (CLI) style commands with a friendly chat-style GUI whose responses aim to mimick natural conversations with a personal assistant. Read on to find out how you can get started!
 
+#### NOTE: For Mac Users, an error may be encountered when double-clicking the `.jar` file. This is common to a lot of students in CS2103 and is yet unresolved. Please follow the alternative instructions under `2. Quick Start` to run the `.jar` file while we figure this one out. If you encounter any further errors, feel free to open an issue or contact e0174882 [at] nus.edu.sg
+
+
   ![image goes here](Ui.png)
 
 ## 2. Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
 2. Download the latest `.jar` for Duke [here](https://github.com/SendorasLeft/duke/releases).
 3. Copy the file to the folder you want to use as the home folder for Duke.
-4. Double-click the file to start the app. The GUI should appear in a few seconds.
+4. Double-click the file to start the app. The GUI should appear in a few seconds. 
+  
+    **NOTE: For Mac Users, if you encounter a problem when double-clicking the `.jar` file, try running it from the command line using `java -jar <name_of_duke_jar_file>.jar`.** 
+  
 5. Type a command message in the text box and press enter to send it to Duke
 
    eg. type `list` to preview all tasks in your task list.  

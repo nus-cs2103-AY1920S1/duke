@@ -10,7 +10,7 @@ A JavaFX application is like a play you are directing. Instead of creating props
 
 ## Setting up Java FX
 
-### If you are not using Gradle
+### If you are not using Gradl````e
 
 1. Download the [JavaFX 11 SDK](https://gluonhq.com/products/javafx/) and unzip it.
 

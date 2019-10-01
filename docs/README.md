@@ -18,7 +18,7 @@ Jarvis is a Command Line Interface (CLI) task manager system that can be used to
 
 ![Homepage of Jarvis](Home.png)
 
-![Working Jarvis](UI.png)
+![Working Jarvis](Ui.png)
 
 # 2. Quick Start
 Ensure that java 11 or above is installed in your computer. Otherwise, you can download Java 11 [here](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html).

@@ -196,6 +196,24 @@ public class Parser {
                     return "I've undo the previous command.";
                 }
             };
+        case "help":
+            return new Command() {
+                public String execute(TaskList tasks, Storage storage) {
+                    StringBuilder sb = new StringBuilder();
+
+                    sb.append("Here are some helpful instructions!\n");
+                    sb.append("  > todo <description> - Adds a todo task\n");
+                    sb.append("  > deadline <description> /by <datetime> - Adds a datetime task, datetime is in <dd/MM/YY HHmm> format\n");
+                    sb.append("  > event <description> /at <datetime> - Adds a event task, datetime is in <dd/MM/YY HHmm> format\n");
+                    sb.append("  > list - Lists all tasks\n");
+                    sb.append("  > find <keyword> - Finds tasks matching the keyword\n");
+                    sb.append("  > done <id> - Marks a task with the given id as done\n");
+                    sb.append("  > delete <id> - Deletes a task with the given id\n");
+                    sb.append("  > undo - Undos a previous todo/deadline/event/done/delete command\n");
+
+                    return sb.toString();
+                }
+            };
         default:
             return new Command() {
                 public String execute(TaskList tasks, Storage storage) throws DukeException {

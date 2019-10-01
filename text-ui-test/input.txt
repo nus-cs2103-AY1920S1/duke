@@ -1,0 +1,21 @@
+hello
+list
+todo
+todo Task 1
+list
+deadline
+deadline Task 2
+deadline Task 2 /by Sunday
+list
+event Task 3
+event Task 3 /at Monday
+list
+done
+done 4
+done 1
+list
+delete
+delete 5
+delete 2
+list
+bye

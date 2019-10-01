@@ -1,3 +1,5 @@
+//@author Oscar-B-Liang - reused for cross platform jar file
+
 plugins {
     id 'java'
     id 'application'

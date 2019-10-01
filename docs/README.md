@@ -79,10 +79,10 @@ Format: bye
 * None
 
 ## 5. Command Summary <a name="Command Summary"></a>
-* Add : `TASK_TYPE TASK_NAME DATE [TIME]`  (TASK_TYPE can be the task or the initial letter of the task)
-e.g. `event party /at 01012011 0800 1900` 
-e.g. `d assignment1 /by 12122019`
-e.g. `t read book`
+* Add : `TASK_TYPE TASK_NAME DATE [TIME]`  (TASK_TYPE can be the task or the initial letter of the task)  
+e.g. `event party /at 01012011 0800 1900`  
+e.g. `d assignment1 /by 12122019`  
+e.g. `t read book`  
 
 * Delete : `delete INDEX`
 e.g. `delete 3`

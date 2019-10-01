@@ -9,10 +9,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 
 /**
  * An example of a custom control using FXML. This control represents a dialog
@@ -21,7 +21,7 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private Text dialog;
     @FXML
     private ImageView displayPicture;
 
@@ -54,7 +54,7 @@ public class DialogBox extends HBox {
      * Returns a dialog box related to the user.
      * 
      * @param text the text that the user has inputted
-     * @param img the display picture of the user
+     * @param img  the display picture of the user
      * @return DialogBox related to the user
      */
     public static DialogBox getUserDialog(String text, Image img) {
@@ -65,7 +65,7 @@ public class DialogBox extends HBox {
      * Returns a dialog box related to Duke.
      * 
      * @param text the text returned by Duke
-     * @param img the display picture of Duke
+     * @param img  the display picture of Duke
      * @return DialogBox related to Duke
      */
     public static DialogBox getDukeDialog(String text, Image img) {

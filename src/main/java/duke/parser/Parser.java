@@ -37,7 +37,7 @@ public class Parser {
                         storage.saveTasks(tasks);
                         return createAddedMessage(task, tasks);
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new DukeException("Oops! Todo task description cannot be blank.");
+                        throw new DukeException("I'm afraid I can't do that. Todo task description cannot be blank.");
                     }
                 }
             };
@@ -57,7 +57,7 @@ public class Parser {
                         storage.saveTasks(tasks);
                         return createAddedMessage(task, tasks);
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new DukeException("Oops! Deadline task description or deadline cannot be blank.");
+                        throw new DukeException("I'm afraid I can't do that. Deadline task description or deadline cannot be blank.");
                     }
                 }
             };
@@ -77,7 +77,7 @@ public class Parser {
                         storage.saveTasks(tasks);
                         return createAddedMessage(task, tasks);
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new DukeException("Oops! Event task description or start time cannot be blank.");
+                        throw new DukeException("I'm afraid I can't do that. Event task description or start time cannot be blank.");
                     }
                 }
             };
@@ -85,7 +85,7 @@ public class Parser {
             return new Command() {
                 public String execute(TaskList tasks, Storage storage) throws DukeException {
                     if (tasks.isEmpty()) {
-                        throw new DukeException("Oops! You have no tasks yet.");
+                        throw new DukeException("I'm afraid I can't do that. You have no tasks yet.");
                     }
                     int index = 1;
                     String message = "";
@@ -112,7 +112,7 @@ public class Parser {
 
                         return String.format("Nice! I've marked this task as done:\n%s\n", taskDone);
                     } catch (IndexOutOfBoundsException e) {
-                        throw new DukeException("Oops! Your task cannot be found!");
+                        throw new DukeException("I'm afraid I can't do that. Your task cannot be found!");
                     }
                 }
             };
@@ -131,7 +131,7 @@ public class Parser {
                                 "Got it. I've removed this task:\n" + "%s\n" + "Now you have %d tasks in the list.\n",
                                 taskRemoved, tasks.size());
                     } catch (IndexOutOfBoundsException e) {
-                        throw new DukeException("Oops! Your task cannot be found!");
+                        throw new DukeException("I'm afraid I can't do that. Your task cannot be found!");
                     }
                 }
             };
@@ -149,7 +149,7 @@ public class Parser {
                         }
 
                         if (matchingTasks.size() == 0) {
-                            throw new DukeException("Oops! There is no matching task.");
+                            throw new DukeException("I'm afraid I can't do that. There is no matching task.");
                         }
 
                         String output = "Here are the matching tasks in your list:\n";
@@ -162,14 +162,14 @@ public class Parser {
 
                         return output;
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new DukeException("Oops! I don't know what to search for.");
+                        throw new DukeException("I'm afraid I can't do that. I don't know what to search for.");
                     }
                 }
             };
         case "bye":
             return new Command() {
                 public String execute(TaskList tasks, Storage storage) {
-                    return "Bye. Hope to see you again soon!";
+                    return "Goodbye, Dave.";
                 }
 
                 public boolean isExit() {
@@ -182,7 +182,7 @@ public class Parser {
                     TaskList prevTasks = TaskListHistory.getInstance().pop();
 
                     if (prevTasks == null) {
-                        throw new DukeException("Oops! There is nothing to undo.");
+                        throw new DukeException("I'm afraid I can't do that. There is nothing to undo.");
                     }
 
                     tasks.clear();
@@ -217,7 +217,7 @@ public class Parser {
         default:
             return new Command() {
                 public String execute(TaskList tasks, Storage storage) throws DukeException {
-                    throw new DukeException("Oops! You entered an invalid command.");
+                    throw new DukeException("I'm afraid I can't do that. You entered an invalid command.");
                 }
             };
         }

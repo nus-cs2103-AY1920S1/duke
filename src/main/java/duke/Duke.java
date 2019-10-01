@@ -52,18 +52,18 @@ public class Duke {
      * @param input a String from the user
      * @return a String as a response
      */
-    public String getResponse(String input) {
-        String output;
+    public Response getResponse(String input) {
+        Response response;
 
         try {
             Command c = Parser.parse(input);
-            output = c.execute(this.tasks, this.storage);
+            response = new Response(c.execute(this.tasks, this.storage), c.isExit());
         } catch (DukeException e) {
-            output = e.getMessage();
+            response = new Response(e.getMessage(), false);
         }
 
-        assert output != null : "Response string should not be null";
+        assert response.message != null : "Response string should not be null";
 
-        return output;
+        return response;
     }
 }

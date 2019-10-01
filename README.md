@@ -1,6 +1,6 @@
 # Setting up
 
-**Prerequisites**
+**Prerequisites**  
 
 * JDK 11
 * Recommended: IntelliJ IDE

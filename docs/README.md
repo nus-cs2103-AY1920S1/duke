@@ -1,7 +1,7 @@
 # User Guide
 Duke is a **task manager chatbot** which helps you to manage and track your to-dos, deadlines and events.
  
-![Ui.PNG](Ui.PNG)
+![Ui.png](Ui.png)
 
 ## 1. Features 
 

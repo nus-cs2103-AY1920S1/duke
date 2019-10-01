@@ -3,7 +3,7 @@
 [2. Quick Start](#Quick Start)    
 [3. Features](#Features)  
 [4. FAQ](#FAQ)   
-[5. Command Summary](#Command Summary) 
+[5. Command Summary](#Command Summary) << click here if you are reviewing the app :)
 
 ## 1. Introduction <a name="Introduction"></a>
 The DukeBot is for those who prefer to use a desktop app for managing tasks. 

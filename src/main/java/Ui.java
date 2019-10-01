@@ -83,7 +83,7 @@ public class Ui {
         }
         return result;
     }
-    
+
     public String announceNoneMatchingTask() {
         return "Sorry, there are no matching tasks found.";
     }

@@ -1,7 +1,6 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.7'
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
@@ -52,10 +51,6 @@ run {
     standardInput = System.in
 }
 
-javafx {
-    version = "11.0.2"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
-}
 
 checkstyle {
     toolVersion = '8.23'

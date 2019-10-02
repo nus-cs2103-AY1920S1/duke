@@ -14,7 +14,14 @@ When you finish your tasks, you can mark them as completed in Duke.
 
 My implementation of Duke allows you to open different lists of tasks at different file paths when you first start up the Duke program. **Note: when first starting up Duke, you MUST specify a file path to load from, if file path does not exist, a new file will be created** 
 
+### Keeping Track of the Last Opened List of Tasks
+You will be able to see your latest opened file (in a previous session of Duke) when you start Duke.
+
 ## Usage
+
+### **Note 1:** When first starting up Duke, you **MUST** specify a file path to load from (ie. `data/duke.txt`), if file path does not exist, a new file will be created with the given file name. 
+
+### **Note 2:** When starting Duke for the _first time_ on your computer, expect to see `metadata corrupted` in the UI. This is normal behaivour as the `.metadata` file does not exist in your directory. Duke will create and update the `.metadata` file automatically upon exit. 
 
 ### `list` - Shows the current list of tasks
 

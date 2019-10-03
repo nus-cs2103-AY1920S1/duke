@@ -1,5 +1,5 @@
 # Bipolar DIO
-![Representative picture](Ui.PNG)
+![Representative picture](Ui.png)
 
 ## Introduction
 To all JoJo fans out there, DIO needs no introduction, but for all the confused users out there, have you always wanted

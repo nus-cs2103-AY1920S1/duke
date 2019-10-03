@@ -1,5 +1,7 @@
 # Duke Task Manager User Guide
 
+To execute the program, please ensure you have a duke.txt text file and the duke-0.2.jar jar executable file are in the same directory.
+
 ## ___Features___ 
 
 ### `Add`

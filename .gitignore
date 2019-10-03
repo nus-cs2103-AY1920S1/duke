@@ -2,6 +2,7 @@
 /.idea/
 /out/
 /*.iml
+/src/main/.idea/
 
 # Gradle build files
 /.gradle/
@@ -12,3 +13,9 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# Junit test
+src/test/java/DukeTest.java
+
+.gitignore
+data

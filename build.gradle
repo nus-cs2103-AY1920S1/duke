@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'application'
+    //id 'checkstyle'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
+}
+
+group 'seedu.duke'
+version '0.1.0'
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    mainClassName = "Launcher"
+    //Not Main
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+run {
+    standardInput = System.in
+}
+
+javafx {
+    version = "11.0.2"
+
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}

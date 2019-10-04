@@ -60,9 +60,9 @@ public class Deadline extends Task {
      */
     public String toString() {
         if (isDone) {
-            return "[D][✓] " + name + " (by: " + formatter.format(date) + ")";
+            return "[D][\u2713] " + name + " (by: " + formatter.format(date) + ")";
         } else {
-            return "[D][✗] " + name + " (by: " + formatter.format(date) + ")";
+            return "[D][\u2717] " + name + " (by: " + formatter.format(date) + ")";
         }
     }
 }

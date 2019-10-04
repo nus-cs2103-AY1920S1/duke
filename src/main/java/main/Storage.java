@@ -95,8 +95,7 @@ public class Storage {
      */
     public void writeToFile(ArrayList<Task> list) {
         try {
-            Path path = Paths.get(System.getProperty("user.dir"));
-            File data = new File(path + "/data/duke.txt");
+            File data = new File("duke.txt");
             FileWriter fw = new FileWriter(data);
 
             StringBuilder toWrite = new StringBuilder("");

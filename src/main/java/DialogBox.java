@@ -1,7 +1,4 @@
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collections;
 
 import javafx.collections.FXCollections;
@@ -28,10 +25,8 @@ public class DialogBox extends HBox {
 
     private DialogBox(String text, Image img) {
         try {
-            Path path = Paths.get(System.getProperty("user.dir"));
-            File file = new File(path + "/src/main/resources/view/DialogBox.fxml");
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/DialogBox.fxml"));
 
-            FXMLLoader fxmlLoader = new FXMLLoader(file.toURI().toURL());
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();

@@ -6,9 +6,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -25,12 +24,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Path path = Paths.get(System.getProperty("user.dir"));
-    private File userImg = new File(path + "/src/main/resources/images/User.png");
-    private File dukeImg = new File(path + "/src/main/resources/images/Duke.png");
-
-    private Image userImage = new Image(userImg.toURI().toString());
-    private Image dukeImage = new Image(dukeImg.toURI().toString());
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
     @FXML
     public void initialize() {
@@ -54,5 +49,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (input.equals("bye")) {
+            CompletableFuture.delayedExecutor(1, TimeUnit.SECONDS).execute(() -> {
+                System.exit(0);
+            });
+        }
     }
 }

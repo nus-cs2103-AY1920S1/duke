@@ -30,9 +30,9 @@ public class Todo extends Task {
      */
     public String toString() {
         if (isDone) {
-            return "[T][✓] " + name;
+            return "[T][\u2713] " + name;
         } else {
-            return "[T][✗] " + name;
+            return "[T][\u2717] " + name;
         }
     }
 }

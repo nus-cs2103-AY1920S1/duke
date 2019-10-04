@@ -61,9 +61,9 @@ public class Event extends Task {
      */
     public String toString() {
         if (isDone) {
-            return "[E][✓] " + name + " (at: " + formatter.format(date) + ")";
+            return "[E][\u2713] " + name + " (at: " + formatter.format(date) + ")";
         } else {
-            return "[E][✗] " + name + " (at: " + formatter.format(date) + ")";
+            return "[E][\u2717] " + name + " (at: " + formatter.format(date) + ")";
         }
     }
 }

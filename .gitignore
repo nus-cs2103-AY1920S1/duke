@@ -12,3 +12,5 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+src/test/java/dukeTest.txt
+data/duke.txt

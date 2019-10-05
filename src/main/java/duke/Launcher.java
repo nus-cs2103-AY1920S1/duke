@@ -1,0 +1,14 @@
+package duke;
+
+import javafx.application.Application;
+
+/**
+ * Driver class for Duke.
+ *
+ * @author JXKENG
+ */
+public class Launcher {
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
+    }
+}

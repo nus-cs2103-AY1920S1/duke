@@ -65,6 +65,9 @@ public class Executor {
                 ArrayList<Task> matchingTasks = tasks.findMatching(((FindCommand) userCommand).getSearchParams());
                 reply = ui.displayList(matchingTasks);
                 break;
+            case HELP:
+                reply = ui.renderHelp();
+                break;
             default:
                 // TODO: have this string be based on enum values
                 String commands = "BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, FIND";

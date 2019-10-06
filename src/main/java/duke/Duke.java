@@ -35,12 +35,16 @@ public class Duke extends Application {
             TaskList tasks = new TaskList(storageHandler.load());
             Parser parser = new Parser();
             this.executor = new Executor(ui, storageHandler, tasks, parser);
-            ui.greet();
         } catch (InvalidTaskException e) {
             System.err.println(e.getMessage());
         } finally {
             return this;
         }
+    }
+
+    public void hello() {
+        Ui ui = new Ui();
+        ui.greet();
     }
 
     public Executor getExecutor() {

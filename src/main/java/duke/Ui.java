@@ -54,6 +54,30 @@ public class Ui {
         return dukeReply("Till next time, goodbye!");
     }
 
+    public String renderHelp() {
+        String helpMessage = "Hello and Welcome to Duke! I am a task managing tool for you to keep track of your" +
+                "todos, deadlines and events.\n\n Here are a list of available commands: \n\n" +
+                "Exit Duke:\n" +
+                "`Bye`\n\n" +
+                "View your List of tasks:\n" +
+                "`List`\n\n" +
+                "Mark a task as Done:\n" +
+                "`Done task_number`\n\n" +
+                "Add a new Todo task:\n" +
+                "`Todo task_name`\n\n" +
+                "Add a new Deadline:\n" +
+                "`Deadline task_name /by dueDate` DateTimeFormat: dd/MM/yyyy HHmm\n\n" +
+                "Add a new Event:\n" +
+                "`Event event_name /at startDateTime - endDatetime` DateTimeFormat: dd/MM/yyyy HHmm\n\n" +
+                "Delete a task:\n" +
+                "`Delete task_number`\n\n" +
+                "Find a task based on keywords:\n" +
+                "`Find keywords`\n\n" +
+                "Display the help page (Hey you know this one already!)\n" +
+                "`Help`";
+        return dukeReply(helpMessage);
+    }
+
     /**
      * Sends the input reply string to the user after formatting it.
      *

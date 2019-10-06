@@ -77,6 +77,9 @@ public class Parser {
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new InvalidTaskException("Invalid input! Find has the following format: `find search_params`");
                 }
+            // `help`
+            case HELP:
+                return new HelpCommand();
             default:
                 // TODO: have this string be based on enum values
                 String commands = "BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, FIND";

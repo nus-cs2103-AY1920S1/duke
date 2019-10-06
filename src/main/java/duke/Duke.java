@@ -26,18 +26,25 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Executor executor;
 
-    public static void main(String[] args) {
+    public Duke setup() {
         try {
             Ui ui = new Ui();
             Storage storageHandler = new Storage();
             TaskList tasks = new TaskList(storageHandler.load());
             Parser parser = new Parser();
-            Executor executor = new Executor(ui, storageHandler, tasks, parser);
-            executor.start();
+            this.executor = new Executor(ui, storageHandler, tasks, parser);
+            ui.greet();
         } catch (InvalidTaskException e) {
             System.err.println(e.getMessage());
+        } finally {
+            return this;
         }
+    }
+
+    public Executor getExecutor() {
+        return executor;
     }
 
     @Override
@@ -132,6 +139,6 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
-        return "Duke heard: " + input;
+        return getExecutor().execute(input);
     }
 }

@@ -84,8 +84,6 @@ public class Ui {
      * @param reply input string to be formatted.
      */
     private String dukeReply(String reply) {
-        String enclosingLine = "    ____________________________________________________________";
-        String indentedReply = reply.replaceAll("\n", "\n     ");
-        return enclosingLine + "\n     " + indentedReply + "\n" + enclosingLine;
+        return reply;
     }
 }

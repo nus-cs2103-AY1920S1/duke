@@ -1,24 +1,16 @@
 package duke;
-
-import duke.Storage;
-
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Deadline;
-import duke.task.Event;
-
 import duke.exception.InvalidTaskException;
 
-import java.util.Scanner;
-import java.util.ArrayList;
-
-import java.time.LocalDateTime;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Main class for Duke chatbot.
  * Handles user input.
  */
-public class Duke {
+public class Duke extends Application {
     public static void main(String[] args) {
         try {
             Ui ui = new Ui();
@@ -30,6 +22,15 @@ public class Duke {
         } catch (InvalidTaskException e) {
             System.err.println(e.getMessage());
         }
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
 //

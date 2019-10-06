@@ -1,3 +1,5 @@
+package duke;
+
 import duke.Duke;
 import org.junit.jupiter.api.Test;
 

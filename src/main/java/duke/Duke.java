@@ -121,8 +121,8 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText.getText(), new ImageView(user).getImage()),
+                DialogBox.getDukeDialog(dukeText.getText(), new ImageView(duke).getImage())
         );
         userInput.clear();
     }
@@ -131,7 +131,7 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    protected String getResponse(String input) {
         return "Duke heard: " + input;
     }
 }

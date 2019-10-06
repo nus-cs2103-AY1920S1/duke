@@ -20,12 +20,16 @@ import java.time.LocalDateTime;
  */
 public class Duke {
     public static void main(String[] args) {
-        Ui ui = new Ui();
-        Storage storageHandler = new Storage();
-        TaskList tasks = new TaskList(storageHandler.load());
-        Parser parser = new Parser();
-        Executor executor = new Executor(ui, storageHandler, tasks, parser);
-        executor.start();
+        try {
+            Ui ui = new Ui();
+            Storage storageHandler = new Storage();
+            TaskList tasks = new TaskList(storageHandler.load());
+            Parser parser = new Parser();
+            Executor executor = new Executor(ui, storageHandler, tasks, parser);
+            executor.start();
+        } catch (InvalidTaskException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
 //

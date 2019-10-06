@@ -23,6 +23,7 @@ public class Executor {
      * Responds to user input by determining which subsequent methods to call.
      */
     public void start() {
+        ui.greet();
         Scanner sc = new Scanner(System.in);
         String userInput = sc.nextLine();
         while (!userInput.toLowerCase().equals("bye")) {
@@ -72,6 +73,7 @@ public class Executor {
             catch (InvalidTaskException e) {
                 ui.displayErrors(e);
             } finally {
+                storageHandler.save(tasks.getTasks());
                 userInput = sc.nextLine();
             }
         }

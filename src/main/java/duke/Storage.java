@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -27,32 +29,39 @@ public class Storage {
      * 
      * @return an arraylist containing the saved tasks.
      */
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws InvalidTaskException {
+        return load(SAVE_DIRECTORY);
+    }
+
+    public ArrayList<Task> load(String save_directory) throws InvalidTaskException {
         ArrayList<Task> tasks = new ArrayList<>(100);
         try {
-            File savedTasks = new File(SAVE_DIRECTORY);
+            System.out.println("Loading save file from: " + save_directory + " ...");
+            if (Files.notExists(Paths.get(save_directory))) {
+                System.out.println("Save file missing! Attempting to create new file...");
+            }
+            File savedTasks = new File(save_directory);
             Scanner sc = new Scanner(savedTasks);
             while (sc.hasNext()) {
                 try {
                     Task task = parseFileToDuke(sc.nextLine());
                     tasks.add(task);
                 }
-                // TODO: Should handle "corrupted" saves in a different way.
                 catch (InvalidTaskException e) {
-                    continue;
+                    throw new InvalidTaskException("Save file corrupted!");
                 }
             }
+            System.out.println("File load successful.");
             sc.close();
         }
         catch (FileNotFoundException e) {
             try {
-                FileWriter fw = new FileWriter(SAVE_DIRECTORY);
+                FileWriter fw = new FileWriter(save_directory);
                 fw.write("");
                 fw.close();
             }
             catch (IOException er) {
-                // TODO: make it actually abort
-                System.out.println("Unable to access save directory! Aborting!");
+                throw new InvalidTaskException("Unable to access save directory! Aborting!");
             }
         }
         return tasks;
@@ -64,8 +73,12 @@ public class Storage {
      * @param tasks input task list containing all the current tasks.
      */
     public void save(ArrayList<Task> tasks) {
+        save(tasks, SAVE_DIRECTORY);
+    }
+
+    public void save(ArrayList<Task> tasks, String save_directory) {
         try {
-            FileWriter fw = new FileWriter(SAVE_DIRECTORY);
+            FileWriter fw = new FileWriter(save_directory);
             String parsedTasks = parseDukeToFile(tasks);
             fw.write(parsedTasks);
             fw.close();
@@ -100,7 +113,7 @@ public class Storage {
             break;
         default:
             // TODO: Should change this to diff type of exception
-            throw new InvalidTaskException("Unrecognized task!");
+            throw new InvalidTaskException("Unrecognized task! Save file possibly corrupt!");
         }
         return task;
     }
@@ -125,7 +138,7 @@ public class Storage {
                         ((Event) task).getStringifiedStartDateTime() + "|" +
                                 ((Event) task).getStringifiedEndDateTime();
             }
-            parsedTasks += "\n" + parsedTask;
+            parsedTasks += parsedTask + "\n";
         }
         return parsedTasks;
     }

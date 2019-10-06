@@ -20,7 +20,7 @@ import java.util.Scanner;
 public class Storage {
     // Tasks saved in following format: taskType|isDone|description|otherFields
     /** Directory of saved tasks. */
-    private final String SAVE_DIRECTORY = "../../../data/duke.txt";
+    private final String SAVE_DIRECTORY = "./data/duke.txt";
 
     /**
      * Loads tasks from the save file into an arraylist and returns it.
@@ -45,7 +45,6 @@ public class Storage {
             sc.close();
         }
         catch (FileNotFoundException e) {
-            System.out.println("No save file found! Creating one!");
             try {
                 FileWriter fw = new FileWriter(SAVE_DIRECTORY);
                 fw.write("");

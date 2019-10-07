@@ -1,10 +1,40 @@
+import java.io.IOException;
+
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+
+    private static UI ui;
+    private GuiUI gui;
+    private Storage storage;
+    private Tasklist tasklist;
+    private GuiParser parse;
+
+    /**
+     * Constructor for Duke.
+     * Creates new Storage instance and Parser
+     */
+
+    public Duke() {
+        this.gui = new GuiUI();
+        this.storage = new Storage();
+        this.parse = new GuiParser(storage.getTasks(), gui, storage);
+
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        String out = "";
+        try {
+            out = parse.guiParserRead(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return out;
+    }
+
+    public String startList() {
+        return storage.getTasks().printlist();
     }
 }

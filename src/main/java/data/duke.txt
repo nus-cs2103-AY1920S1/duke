@@ -1,0 +1,6 @@
+1. [T][✓] krbff
+2. [T][✓] CS2103T
+3. [T][✘] 5
+4. [T][✘] 6
+5. [D][✓] fwoc (by: 6th aug)
+6. [E][✘] Tutorial (at: 6th of June 2019, 6.00AM)

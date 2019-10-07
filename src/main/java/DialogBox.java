@@ -35,8 +35,8 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         dialog.setMinSize(Label.USE_COMPUTED_SIZE, Label.USE_PREF_SIZE);
         displayPicture.setImage(img);
-        dialog.setStyle("-fx-background-color:" + backgroundColour + "; -fx-background-radius: 15; " +
-                "-fx-text-fill:" + textColour);
+        dialog.setStyle("-fx-background-color:" + backgroundColour + "; -fx-background-radius: 15; "
+                + "-fx-text-fill:" + textColour);
     }
 
     /**
@@ -49,10 +49,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates the text bubble for User.
+     *
+     * @param text User input.
+     * @param img User image.
+     * @return Text bubble of user.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img, "#4996f5", "#ffffff");
     }
 
+    /**
+     * Creates the text bubble for Chick.
+     *
+     * @param text System response.
+     * @param img Chick image.
+     * @return Text bubble of chick.
+     */
     public static DialogBox getTaskChickDialog(String text, Image img) {
         var db = new DialogBox(text, img, "#e5e5e9", "#000000");
         db.flip();

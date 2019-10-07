@@ -25,8 +25,7 @@ public class ScheduleCommand extends Command {
      *
      * @param fullCommand Full command split by whitespace.
      * @return ScheduleCommand object to be created.
-     * @throws TaskChickException If date given is not in number format (eg. 9/Sep/2019), or not in
-     * dd/mm/yyyy format.
+     * @throws TaskChickException If date given is not in number format (eg. 9/Sep/2019), or not in dd/mm/yyyy format.
      */
     public static ScheduleCommand process(String[] fullCommand) throws TaskChickException {
         try {

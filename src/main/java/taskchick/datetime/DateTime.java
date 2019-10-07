@@ -63,7 +63,7 @@ public class DateTime {
             return day + "nd";
         } else if (day == 3 || day == 23) {
             return day + "rd";
-        } else if (day <= 30){
+        } else if (day <= 30) {
             return day + "th";
         } else {
             throw new TaskChickException("OOPS!!! Please enter a valid date.");

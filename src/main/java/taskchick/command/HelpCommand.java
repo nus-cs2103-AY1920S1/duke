@@ -29,7 +29,7 @@ public class HelpCommand extends Command {
         print("🐥 event (or -e) )description] /at [DD/MM/YYYY HHMM]", "to add a task of type event");
         sb.append("\nMODIFYING TASKS\n\n");
         print("🐥 delete (or d) [task number]", "to delete the task of that specified index number from the task list");
-        print("🐥 complete (or c) [task number]", "to mark the task of that specified index number from the task list as completed");
+        print("🐥 complete (or c) [task number]", "to mark the task as completed");
         print("🐥 update [task number] [new description]", "to update the description of a task");
         print("🐥 undo (or u)", "to undo a modification to the task list");
         return sb.toString();

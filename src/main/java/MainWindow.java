@@ -66,9 +66,8 @@ public class MainWindow extends AnchorPane {
      */
     public void showWelcome() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getTaskChickDialog("Hello, I'm Task Chick!\n\nWhat can I do for you " +
-                        "today?\n\nEnter "
-                                + "'help' to see how you can use me ^_^", chickyImage)
+                DialogBox.getTaskChickDialog("Hello, I'm Task Chick!\n\nWhat can I do for you "
+                        + "today?\n\nEnter " + "'help' to see how you can use me ^_^", chickyImage)
         );
     }
 }

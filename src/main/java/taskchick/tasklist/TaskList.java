@@ -170,8 +170,8 @@ public class TaskList {
 
     /**
      * Saves tasks containing the search term into an ArrayList.
-     * @param searchTerm
-     * @return
+     * @param searchTerm Search term.
+     * @return Search results.
      */
     private ArrayList<Task> getFoundResults(String searchTerm) {
         ArrayList<Task> searchResults = new ArrayList<>();

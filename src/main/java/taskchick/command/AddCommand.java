@@ -30,7 +30,7 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks, Storage storage) {
         UndoCommand.saveVersion(storage.getSavedListString(tasks));
         String response = tasks.addTask(task);
-        assert(!response.isEmpty());
+        assert (!response.isEmpty());
         try {
             storage.store(tasks);
         } catch (IOException e) {

@@ -1,20 +1,41 @@
-# User Guide
+# Duke User Guide
 
-## Features 
+## Commands 
 
-### Feature 1 
-Description of feature.
+### `BYE`
+Exits the program  
+Format: `bye`
 
-## Usage
+### `LIST`
+Shows a list of the current tasks  
+Format: `list`
 
-### `Keyword` - Describe action
+### `DONE`
+Marks a task as done  
+Format: `done task_number`
 
-Describe action and its outcome.
+### `TODO`
+Adds a new todo task to the task list  
+Format: `todo task_name`
 
-Example of usage: 
+### `DEADLINE`
+Adds a new deadline task to the task list  
+Format: `deadline task_name /by dueDate`  
+DateTimeFormat: *dd/MM/yyyy HHmm*
 
-`keyword (optional arguments)`
+### `EVENT`
+Adds a new event task to the task list  
+Format: `event task_name /at startDateTime - endDateTime`  
+DateTimeFormat: *dd/MM/yyyy HHmm*
 
-Expected outcome:
+### `DELETE`
+Deletes a task from the task list  
+Format: `delete task_number`
 
-`outcome`
+### `FIND`
+Finds tasks based on keywords  
+Format: `find keywords`
+
+### `HELP`
+Displays a help page  
+Format: `help`

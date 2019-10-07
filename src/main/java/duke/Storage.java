@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -22,7 +23,7 @@ import java.util.Scanner;
 public class Storage {
     // Tasks saved in following format: taskType|isDone|description|otherFields
     /** Directory of saved tasks. */
-    private final String SAVE_DIRECTORY = "./data/duke.txt";
+    private final String SAVE_DIRECTORY = "./duke.txt";
 
     /**
      * Loads tasks from the save file into an arraylist and returns it.
@@ -59,6 +60,7 @@ public class Storage {
                 FileWriter fw = new FileWriter(save_directory);
                 fw.write("");
                 fw.close();
+                System.out.println("New save file created!");
             }
             catch (IOException er) {
                 throw new InvalidTaskException("Unable to access save directory! Aborting!");

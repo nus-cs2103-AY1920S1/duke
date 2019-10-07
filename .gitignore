@@ -2,6 +2,7 @@
 /.idea/
 /out/
 /*.iml
+local.properties
 
 # Gradle build files
 /.gradle/
@@ -12,3 +13,6 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# Doko
+tasks.doko

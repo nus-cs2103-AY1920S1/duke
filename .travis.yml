@@ -1,0 +1,12 @@
+language: java
+
+os:
+  - linux
+  - osx
+
+jdk:
+  - oraclejdk11
+  - openjdk11
+
+# Skip build if it is a tag
+if: tag IS blank

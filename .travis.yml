@@ -1,0 +1,7 @@
+language: java
+jdk:
+  -openjdk11
+
+after_success:
+  - ./gradlew test jacocoTestReport coveralls
+  - curl -F 'json_file=@build/coveralls/report.json' 'https://coveralls.io/api/v1/jobs'

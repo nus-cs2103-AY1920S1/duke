@@ -1,41 +1,167 @@
-# Setting up
+# DukeBot User Guide [![Status](https://travis-ci.org/jiayushe/duke.svg?branch=master)](https://travis-ci.org/jiayushe/duke)
 
-[![Status](https://travis-ci.org/jiayushe/duke.svg?branch=master)](https://travis-ci.org/jiayushe/duke)
+## User Interface
+![UI](docs/Ui.png)
 
-**Prerequisites**
+## Features 
 
-* JDK 11
-* Recommended: IntelliJ IDE
-* Fork this repo to your GitHub account and clone the fork to your computer
+### Task Manager
+DukeBot is a personal task manager. It allows users to add, delete, search and tag tasks.
 
-**Importing the project into IntelliJ**
+## Usage
 
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
-1. Set up the correct JDK version.
-   * Click `Configure` > `Structure for new Projects` (in older versions of Intellij:`Configure` > `Project Defaults` > `Project Structure`).
-   * If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11.
-   * Click `OK`.
-1. Click `Import Project`.
-1. Locate the project directory and click `OK`.
-1. Select `Create project from existing sources` and click `Next`.
-1. Rename the project if you want. Click `Next`.
-1. Ensure that your src folder is checked. Keep clicking `Next`.
-1. Click `Finish`.
+### 1. `bye` - Exits application
 
-# Tutorials 
+Exits DukeBot application.
 
-Duke Increment | Tutorial
----------------|---------------
-`A-Gradle` | [Gradle Tutorial](tutorials/gradleTutorial.md)
-`A-TextUiTesting` | [Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)
-`Level-10` | JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for Duke][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]
+Example of usage: 
 
-[fx1]: <tutorials/javaFxTutorialPart1.md>
-[fx2]: <tutorials/javaFxTutorialPart2.md>
-[fx3]: <tutorials/javaFxTutorialPart3.md>
-[fx4]: <tutorials/javaFxTutorialPart4.md>
+```
+bye
+```
 
-# Feedback, Bug Reports
+Expected outcome:
 
-* If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
-* We welcome pull requests too.
+```
+☀ Bye! Hope to see you again soon!
+```
+
+### 2. `deadline DESCRIPTION /by DATETIME` - Adds a deadline
+
+Adds a Deadline Task to task list.
+
+Example of usage: 
+
+```
+deadline hello world /by 01/01/2019 1800
+```
+
+Expected outcome:
+
+```
+Got it! I've added this task:
+[D][✘] hello world (by: 1 Jan 2019 18:00)
+Now you have 1 task in the list!
+```
+
+### 3. `delete TASKID` - Deletes a task
+
+Deletes a task from task list.
+
+Example of usage: 
+
+```
+delete 1
+```
+
+Expected outcome:
+
+```
+Noted! I've removed this task:
+[D][✘] hello world (by: 1 Jan 2019 18:00)
+Now you have 0 tasks in the list!
+```
+
+### 4. `done TASKID` - Marks a task as done
+
+Marks a task as done in task list.
+
+Example of usage: 
+
+```
+done 1
+```
+
+Expected outcome:
+
+```
+Nice! I've marked this task as done:
+[D][✓] hello world (by: 1 Jan 2019 18:00)
+```
+
+### 5. `event DESCRIPTION /at DATETIME` - Adds an event
+
+Adds an Event Task to task list.
+
+Example of usage: 
+
+```
+event hello world /at 01/01/2019 1800
+```
+
+Expected outcome:
+
+```
+Got it! I've added this task:
+[E][✘] hello world (at: 1 Jan 2019 18:00)
+Now you have 1 task in the list!
+```
+
+### 6. `find TASKID` - Searches tasks
+
+Searches tasks by keyword in the task list.
+
+Example of usage: 
+
+```
+find world
+```
+
+Expected outcome:
+
+```
+Here are the matching tasks in your list:
+1.[E][✘] hello world (at: 1 Jan 2019 18:00)
+```
+
+### 7. `list` - Lists tasks
+
+Lists all tasks in the task list.
+
+Example of usage: 
+
+```
+list
+```
+
+Expected outcome:
+
+```
+Here are the tasks in your list:
+1.[E][✘] hello world (at: 1 Jan 2019 18:00)
+```
+
+### 8. `tag TASKID /as TAGNAME` - Adds a tag to a task
+
+Adds a tag to a task in the task list.
+
+Example of usage: 
+
+```
+tag 1 /as life
+```
+
+Expected outcome:
+
+```
+Tag life added to this task:
+[E][✘][#life] hello world (at: 1 Jan 2019 18:00)
+```
+
+### 9. `todo DESCRIPTION` - Adds a Todo Task
+
+Adds a Todo Task to task list.
+
+Example of usage: 
+
+```
+todo hello world
+```
+
+Expected outcome:
+
+```
+Got it! I've added this task:
+[T][✘] hello world
+Now you have 2 tasks in the list!
+```

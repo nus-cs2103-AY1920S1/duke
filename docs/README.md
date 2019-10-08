@@ -26,7 +26,7 @@ Expected outcome:
 ☀ Bye! Hope to see you again soon!
 ```
 
-### 2. `deadline` - Adds a deadline
+### 2. `deadline DESCRIPTION /by DATETIME` - Adds a deadline
 
 Adds a Deadline Task to task list.
 
@@ -40,11 +40,11 @@ Expected outcome:
 
 ```
 Got it! I've added this task:
-[D][✘] hello world (by 1 Jan 2019 18:00)
+[D][✘] hello world (by: 1 Jan 2019 18:00)
 Now you have 1 task in the list!
 ```
 
-### 3. `delete` - Deletes a task
+### 3. `delete TASKID` - Deletes a task
 
 Deletes a task from task list.
 
@@ -58,11 +58,11 @@ Expected outcome:
 
 ```
 Noted! I've removed this task:
-[D][✘] hello world (by 1 Jan 2019 18:00)
+[D][✘] hello world (by: 1 Jan 2019 18:00)
 Now you have 0 tasks in the list!
 ```
 
-### 4. `done` - Marks a task as done
+### 4. `done TASKID` - Marks a task as done
 
 Marks a task as done in task list.
 
@@ -76,10 +76,10 @@ Expected outcome:
 
 ```
 Nice! I've marked this task as done:
-[D][✓] hello world (by 1 Jan 2019 18:00)
+[D][✓] hello world (by: 1 Jan 2019 18:00)
 ```
 
-### 5. `event` - Adds an event
+### 5. `event DESCRIPTION /at DATETIME` - Adds an event
 
 Adds an Event Task to task list.
 
@@ -93,11 +93,11 @@ Expected outcome:
 
 ```
 Got it! I've added this task:
-[E][✘] hello world (by 1 Jan 2019 18:00)
+[E][✘] hello world (at: 1 Jan 2019 18:00)
 Now you have 1 task in the list!
 ```
 
-### 6. `find` - Searches tasks
+### 6. `find TASKID` - Searches tasks
 
 Searches tasks by keyword in the task list.
 
@@ -111,7 +111,7 @@ Expected outcome:
 
 ```
 Here are the matching tasks in your list:
-1.[E][✘] hello world (by 1 Jan 2019 18:00)
+1.[E][✘] hello world (at: 1 Jan 2019 18:00)
 ```
 
 ### 7. `list` - Lists tasks
@@ -128,10 +128,10 @@ Expected outcome:
 
 ```
 Here are the tasks in your list:
-1.[E][✘] hello world (by 1 Jan 2019 18:00)
+1.[E][✘] hello world (at: 1 Jan 2019 18:00)
 ```
 
-### 8. `tag` - Adds a tag to a task
+### 8. `tag TASKID /as TAGNAME` - Adds a tag to a task
 
 Adds a tag to a task in the task list.
 
@@ -145,10 +145,10 @@ Expected outcome:
 
 ```
 Tag life added to this task:
-[E][✘][#life] hello world (by 1 Jan 2019 18:00)
+[E][✘][#life] hello world (at: 1 Jan 2019 18:00)
 ```
 
-### 9. `todo` - Adds a Todo Task
+### 9. `todo DESCRIPTION` - Adds a Todo Task
 
 Adds a Todo Task to task list.
 

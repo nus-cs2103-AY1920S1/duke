@@ -12,3 +12,12 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# JAVA class file
+*.class
+
+# Text UI Testing
+ACTUAL.TXT
+
+# Database
+data/

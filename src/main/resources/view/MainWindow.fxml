@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="duke.MainWindowController">
+    <children>
+        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+            <menus>
+                <Menu mnemonicParsing="false" text="Menu">
+                    <items>
+                        <MenuItem fx:id="fileNew" mnemonicParsing="false" onAction="#createNewTask" text="New"/>
+                        <MenuItem fx:id="fileOpen" mnemonicParsing="false" onAction="#openFile" text="Open…"/>
+                    </items>
+                </Menu>
+                <Menu fx:id="sortMenu" mnemonicParsing="false" text="Sort...">
+                    <items>
+                        <MenuItem fx:id="sortItemByNameAscend" mnemonicParsing="false" onAction="#sortByNameAscend"
+                                  text="by name (ascend)"/>
+                        <MenuItem fx:id="sortItemByNameDescend" mnemonicParsing="false" onAction="#sortByNameDescend"
+                                  text="by name (descend)"/>
+                        <MenuItem fx:id="sortItemByTimeAscend" mnemonicParsing="false" onAction="#sortByTimeAscend"
+                                  text="by time (ascend)"/>
+                        <MenuItem fx:id="sortItemByTimeDescend" mnemonicParsing="false" onAction="#sortByTimeDescend"
+                                  text="by time (descend)"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <SplitPane dividerPositions="0.18151447661469933, 0.5846325167037862" focusTraversable="true" prefHeight="-1.0"
+                   prefWidth="-1.0" VBox.vgrow="ALWAYS">
+            <items>
+                <AnchorPane fx:id="masterPane">
+                    <children>
+                        <ListView fx:id="masterListView" prefHeight="550.0" prefWidth="221.0"
+                                  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                  AnchorPane.topAnchor="0.0"/>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="detailPane">
+                    <children>
+                        <ListView fx:id="middleListView" prefHeight="200.0" prefWidth="341.0"
+                                  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                  AnchorPane.topAnchor="0.0"/>
+                    </children>
+                </AnchorPane>
+                <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
+                    <children>
+                        <Label fx:id="detailLabel" alignment="CENTER" layoutX="14.0" layoutY="14.0" style="&#10;"
+                               text="Details" textAlignment="CENTER" wrapText="false">
+                            <font>
+                                <Font size="18.0" fx:id="x1"/>
+                            </font>
+                            <textFill>
+                                <Color blue="0.624" green="0.624" red="0.624" fx:id="x2"/>
+                            </textFill>
+                        </Label>
+                        <Label fx:id="detailTypeLabel" layoutX="14.0" layoutY="54.0" text="Type"/>
+                        <Label fx:id="detailDescriptionLabel" layoutX="14.0" layoutY="82.0" text="Description"/>
+                        <Label fx:id="detailTimeLabel" layoutX="14.0" layoutY="295.0" prefHeight="17.0" prefWidth="26.0"
+                               text="by"/>
+                        <Text fx:id="detailTypeText" layoutX="102.0" layoutY="67.0" strokeType="OUTSIDE"
+                              strokeWidth="0.0" text="Text" wrappingWidth="251.0"/>
+                        <TextArea fx:id="detailDescriptionTextArea" editable="false" layoutX="102.0" layoutY="82.0"
+                                  prefHeight="201.0" prefWidth="251.0"/>
+                        <Text fx:id="detailTimeText" layoutX="102.0" layoutY="308.0" strokeType="OUTSIDE"
+                              strokeWidth="0.0" text="Text" wrappingWidth="251.0"/>
+                        <TextField fx:id="searchTextField" layoutX="14.0" layoutY="333.0" prefHeight="27.0"
+                                   prefWidth="272.0"/>
+                        <Button layoutX="294.0" layoutY="333.0" mnemonicParsing="false" onAction="#startSearch"
+                                text="Search"/>
+                        <Text layoutX="21.0" layoutY="461.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Result"/>
+                        <ListView fx:id="resultListView" layoutX="73.0" layoutY="379.0" prefHeight="165.0"
+                                  prefWidth="283.0"/>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
+            <children>
+                <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" HBox.hgrow="ALWAYS">
+                    <font>
+                        <Font size="11.0" fx:id="x3"/>
+                    </font>
+                    <textFill>
+                        <Color blue="0.625" green="0.625" red="0.625" fx:id="x4"/>
+                    </textFill>
+                </Label>
+                <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS"/>
+                <Label font="$x3" maxWidth="-1.0" textFill="$x4" HBox.hgrow="NEVER"/>
+            </children>
+            <padding>
+                <Insets bottom="3.0" left="3.0" right="3.0" top="3.0"/>
+            </padding>
+        </HBox>
+    </children>
+</VBox>

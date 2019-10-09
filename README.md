@@ -1,3 +1,9 @@
+# Duke
+
+User Guide: [please click here](/docs/README.md)
+
+[![Build Status](https://travis-ci.org/le0tan/duke.svg?branch=master)](https://travis-ci.org/le0tan/duke)
+
 # Setting up
 
 **Prerequisites**

@@ -12,3 +12,10 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# Temporary files
+*.swp
+*.swo
+
+# Data files
+data/

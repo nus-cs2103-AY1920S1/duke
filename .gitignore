@@ -12,3 +12,13 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+src/main/java/TaskList.txt
+*.class
+src/main/java/Duke.class
+*.class
+src/main/java/.idea/workspace.xml
+src/main/java/TaskList.txt
+src/main/java/Duke.class
+src/main/java/Parser.class
+src/main/java/TaskList.txt
+src/main/java/Tasks.class

@@ -13,10 +13,10 @@ Duke is the ultimate task tracker and manager.
  
 ## Feature 1: Add Tasks
 
-### Add any of the 3 type of Tasks:**
+### Add any of the 3 type of Tasks:
 
 1. **Event Tasks**
-  * Format: event {event task} /at dd/mm/yyyy hhmm (24Hour)
+  * Format: event {event task} /from dd/mm/yyyy hhmm (24Hour) - dd/mm/yyyy hhmm (24Hours)
   * Eg: use duke /at 31/12/2012 2359
   * For tasks which have to be done *at a certain time*
 
@@ -32,7 +32,7 @@ Duke is the ultimate task tracker and manager.
 
 ## Feature 2: List Tasks
 
-### List all your tasks**
+### List all your tasks
 
 1. **How to list?**
   * Format: list
@@ -42,7 +42,7 @@ Duke is the ultimate task tracker and manager.
 
 ## Feature 3: Delete Tasks
 
-### Delete tasks from your list**
+### Delete tasks from your list
 
 1. **How to delete?**
   * Format: delete {index}
@@ -51,7 +51,7 @@ Duke is the ultimate task tracker and manager.
 
 ## Feature 4: Do Tasks
 
-### Marks the indexed task as done**
+### Marks the indexed task as done
 
 1. **How to do?**
   * Format: do {index}
@@ -60,7 +60,7 @@ Duke is the ultimate task tracker and manager.
 
 ## Feature 5: Search Tasks
 
-### Shows you all the related to what you searched for**
+### Shows you all the related to what you searched for
 
 1. **How to search?**
   * Format: search {what are you looking for?}
@@ -88,9 +88,9 @@ Duke is the ultimate task tracker and manager.
   
     ## Feature 7: Refresh
 
-### Deletes all stored tasks**
+### Deletes all stored tasks
 
-1. **How to get refresh?**
+1. **How to get refresh?
   * Format: refresh
   * Eg: refresh
   * Deletes everything

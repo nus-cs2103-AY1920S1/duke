@@ -20,41 +20,43 @@ public class DukeStorage {
 
     private BufferedReader taskFileInputBuffer;
     private BufferedWriter taskFileOutputBuffer;
-    private File taskFilePath;
+    private File file;
+    private String taskFilePath;
 
     /**
      * This constructor takes in the path of the data file stored on the hard disk.
      *
-     * @param taskFilePath Relative/Full path to the data file.
+     * @param filePath Relative/Full path to the data file.
      */
-    public DukeStorage(String taskFilePath) throws NullPointerException {
-        this.taskFilePath = new File(taskFilePath);
+    public DukeStorage(String filePath) throws NullPointerException {
+        this.file = new File(filePath);
+        this.taskFilePath = filePath;
     }
 
     /**
-     * Initializes the BufferedReader object to prepare for reading from the specified file in {@link #taskFilePath}. If
+     * Initializes the BufferedReader object to prepare for reading from the specified file in {@link #file}. If
      * the data file does not exist, create it along with the necessary folders.
      *
      * @throws IOException File parsing error.
      */
     private void initializeFileInputStream() throws IOException {
-        if (!taskFilePath.exists()) {
-            taskFilePath.getParentFile().mkdirs();
+        if (!file.exists()) {
+            file.createNewFile();
         }
-        taskFileInputBuffer = new BufferedReader(new FileReader(taskFilePath));
+        taskFileInputBuffer = new BufferedReader(new FileReader(file));
     }
 
     /**
-     * Initializes the BufferedWriter object to prepare for writing to the specified file in {@link #taskFilePath}.
+     * Initializes the BufferedWriter object to prepare for writing to the specified file in {@link #file}.
      *
      * @throws IOException If there are any errors like insufficient permissions, file not found or other file errors.
      */
     private void initializeFileOutputStream() throws IOException {
-        taskFileOutputBuffer = new BufferedWriter(new FileWriter(taskFilePath, false));
+        taskFileOutputBuffer = new BufferedWriter(new FileWriter(file, false));
     }
 
     /**
-     * Reads the specified file in {@link #taskFilePath} and initializes a List&lt;duke.task.DukeTask&gt;
+     * Reads the specified file in {@link #file} and initializes a List&lt;duke.task.DukeTask&gt;
      * object to be returned.
      *
      * @param ui Instance of {@link DukeUiMessages} which will show output to the user.
@@ -164,7 +166,7 @@ public class DukeStorage {
     }
 
     /**
-     * Writes a specified List&lt;duke.task.DukeTask&gt; into the specified file in {@link #taskFilePath}.
+     * Writes a specified List&lt;duke.task.DukeTask&gt; into the specified file in {@link #file}.
      * Each task will be written on a new line.
      *
      * @param userTasks List&lt;duke.task.DukeTask&gt; to save tasks from, to the file.

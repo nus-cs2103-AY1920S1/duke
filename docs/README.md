@@ -55,10 +55,10 @@ Examples of usage:
 
 `find book` - Returns a list of tasks with the word 'book'.
 
-### Feature 4
+### Feature 5
 Mark a task as done.
 
-##Usage
+## Usage
 
 ### `done [index]` - Changes the cross beside the description to a tick of the task at the given index.
 
@@ -67,12 +67,12 @@ Examples of usage:
 
 `done 1` - Marks the first task in the current list of tasks as done.
 
-### Feature 5
+### Feature 6
 Update the description or date and time of a task. Dates and times are to be input as the following format:
 `DD/MM/YYYY HHMM`
 
 
-##Usage
+## Usage
 
 ### `update [description/date] of [task description] /to [new description/date time]`
 

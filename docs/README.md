@@ -17,8 +17,8 @@ Duke is the ultimate task tracker and manager.
 
 1. **Event Tasks**
   * Format: event {event task} /from dd/mm/yyyy hhmm (24Hour) - dd/mm/yyyy hhmm (24Hours)
-  * Eg: use duke /at 31/12/2012 2359
-  * For tasks which have to be done *at a certain time*
+  * Eg: use duke /from 31/12/2012 2300 - 31/12/2012 2359
+  * For tasks which have to be done *within a certain time*
 
 2. **Deadline Tasks**
   * Format: deadline {deadline task} /by dd/mm/yyyy hhmm (24Hour)

@@ -12,12 +12,12 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "duke.Launcher"
+    mainClassName = "Launcher"
 }
 
 
 dependencies {
-    String javaFxVersion = '11'
+    String javaFxVersion = '11.0.2'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'

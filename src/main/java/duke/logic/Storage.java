@@ -51,7 +51,7 @@ public class Storage {
     }
 
     /**
-     * Rewrites the file data with new data from an ArrayList<Task> </Task>.
+     * Rewrites the file data with new data from an ArrayList<Task> </Task>.gr
      *
      * @param taskList the ArrayList<Task> </Task> to be used.
      * @param expensesList the ArrayList<ExpenseCategory> </ExpenseCategory> to be used.

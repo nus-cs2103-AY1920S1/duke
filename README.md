@@ -1,4 +1,8 @@
-# Setting up
+# DUKE
+
+[![Build Status](https://travis-ci.com/sianghwee/duke.svg?branch=master)](https://travis-ci.com/sianghwee/duke)
+
+## Setting up
 
 **Prerequisites**
 
@@ -20,7 +24,7 @@
 1. Ensure that your src folder is checked. Keep clicking `Next`.
 1. Click `Finish`.
 
-# Tutorials 
+## Tutorials 
 
 Duke Increment | Tutorial
 ---------------|---------------
@@ -33,7 +37,7 @@ Duke Increment | Tutorial
 [fx3]: <tutorials/javaFxTutorialPart3.md>
 [fx4]: <tutorials/javaFxTutorialPart4.md>
 
-# Feedback, Bug Reports
+## Feedback, Bug Reports
 
 * If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
 * We welcome pull requests too.

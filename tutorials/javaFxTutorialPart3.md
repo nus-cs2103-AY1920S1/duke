@@ -19,6 +19,7 @@ public void start(Stage stage) {
     //Step 2 code here
 
     //Step 3. Add functionality to handle user input.
+
     sendButton.setOnMouseClicked((event) -> {
         dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
         userInput.clear();

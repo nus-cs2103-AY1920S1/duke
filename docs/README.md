@@ -42,7 +42,7 @@ track in this era of increasingly busy lifestyle.
 ## <a id="3">3. Getting Started</a>
 
 ### <a id="3.1"> 3.1 Install Duke</a>
-* Go to [Duke](https://github.com/honhaochen/duke/releases/tag/A-Release). 
+* Go to [Duke](https://github.com/honhaochen/duke/releases/tag/A-Release-v2). 
 
 * Download the `jar` file.
 

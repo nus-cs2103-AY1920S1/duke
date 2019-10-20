@@ -37,9 +37,11 @@ public class Storage {
      * @throws ParseException Invalid variable to parse.
      * @throws DukeException Invalid actions / missing values.
      */
-    ArrayList<Task> load() throws FileNotFoundException, ParseException, DukeException {
+    ArrayList<Task> load() throws IOException, ParseException, DukeException {
         // pass the path to the file as a parameter
         File file = new File(filepath);
+        file.getParentFile().mkdirs();
+        file.createNewFile();
         Scanner s = new Scanner(file);
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");

@@ -20,6 +20,8 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    Duke duke = new Duke("data/dukeData.txt");
+
     @Override
     public void start(Stage stage) {
         try {
@@ -28,7 +30,6 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
 
-            Duke duke = new Duke("data/dukeData.txt");
             String loadDukeMsg = duke.getFileFoundResponse("loading duke");
             if (loadDukeMsg.contains("Success")) {
                 fxmlLoader.<MainWindow>getController().setDuke(duke);
@@ -45,6 +46,10 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }
 

@@ -62,7 +62,7 @@ public class Duke {
             tasks = new TaskList(storage.load());
             isDataLoaded = true;
             isFileFound = true;
-        } catch (FileNotFoundException | ParseException e) {
+        } catch (IOException | ParseException e) {
             isFileFound = false;
         } catch (DukeException e) {
             isDataLoaded = false;

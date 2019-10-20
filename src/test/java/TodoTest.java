@@ -6,7 +6,7 @@ public class TodoTest {
     @Test
     public void TodoTest() {
         Todo todo = new Todo("make some money");
-        assertEquals("[T][X] make some money", todo.toString());
+        assertEquals("[ T ][ X ] make some money", todo.toString());
         assertEquals("todo", todo.getType());
     }
 

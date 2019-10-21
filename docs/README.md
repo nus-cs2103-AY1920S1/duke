@@ -25,7 +25,7 @@ Example of usage:
 
 Expected outcome:
 
-`read a book` added as a todo task
+`[T][✓]read a book` added as a todo task
 
 ### `event` - Add an event task 
 
@@ -51,7 +51,25 @@ Expected outcome:
 
 `read a book (by: 2nd Feb)`` added as a deadline task
 
-### `delete` - Add an event task 
+### `find` - Find a task from your list  
+
+Find a specific list entry, using keywords provided
+
+Example of usage: 
+
+`find book`
+
+Expected outcome:
+
+`Here are the matching tasks in your list:` 
+
+`1.[T][✓] read book` 
+
+`2.[T][X] return book (by: June 6th)` 
+
+`3.[T][X] read some books (by: 2nd Feb)` 
+
+### `delete` - Delete a specific task 
 
 Delete a list entry, using the index of the entries
 
@@ -62,4 +80,17 @@ Example of usage:
 Expected outcome:
 
 `2. read a book (at: 2nd Feb)` will be deleted from the task list.
+
+### `bye` - Exit from Duke App
+
+Duke will exit after 1 second, displaying exit message. 
+
+Example of usage: 
+
+`bye`
+
+Expected outcome:
+
+`Bye! Hope to see you soon!`
+
 

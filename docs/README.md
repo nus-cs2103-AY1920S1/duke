@@ -11,6 +11,8 @@ More importantly, DukeBot is optimized for those who prefer to work with a Comma
 Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).  
 Have fun!
 
+![Image of DukeBot](https://github.com/calvincxz/duke/blob/master/docs/Ui.png)
+
 ## 2. Quick Start <a name="Quick Start"></a>
 1. Ensure you have Java 11 or above installed in your Computer.  
 

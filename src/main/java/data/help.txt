@@ -1,0 +1,18 @@
+Duke arranges the tasks in chronological order, with Todo at the end.
+
+List of commands with format:
+1. add
+    todo TASK NAME
+    event TASK NAME  /at dd/mm/yyyy hhmm hhmm
+    deadline TASK NAME  /by dd/mm/yyyy *hhmm
+    e.g. event party /at 01/01/2011 0800 1900
+    e.g. deadline homework /by 01/01/2019
+    e.g. t read book
+2. delete [task number]   | E.g. delete 2
+3. done [task number]
+4. find [keyword]       | E.g. find D or find [D] for deadlines
+5. list
+6. postpone [task number] [hour] [minutes] [seconds]
+7. note [task number] [notes to add] *notes cannot be deleted!
+8. bye | Exits the app.
+

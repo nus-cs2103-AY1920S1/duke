@@ -1,0 +1,60 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0' //shadow
+}
+
+//group 'duke'
+//version '0.1.0'
+
+//Shadow set-up
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.2"
+    archiveClassifier = null
+    archiveAppendix = null
+}
+
+repositories {
+    mavenCentral()
+}
+
+//Gradle set-up
+application {
+    mainClassName = "ui.Launcher"
+}
+
+//Checkstyle setup
+checkstyle {
+    toolVersion = '8.23'
+}
+
+//JUnit set-up -------------
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+    String javaFxVersion = '11'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-media', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-media', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-media', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-web', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-web', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-web', version: javaFxVersion, classifier: 'linux'
+}
+
+test {
+    useJUnitPlatform()
+}
+//--------------------------

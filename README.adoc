@@ -3,7 +3,7 @@
 By: Dalson Tan
 ****
 
-[![Build Status](https://travis-ci.com/dalsontws/duke.svg?branch=master)](https://travis-ci.com/dalsontws/duke)
+image:https://travis-ci.com/dalsontws/duke.svg?branch=master["Build Status", link="https://travis-ci.com/dalsontws/duke"]
 
 ifdef::env-github[]
 image::docs/Ui.png[width="600"]

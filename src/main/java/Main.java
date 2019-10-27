@@ -1,6 +1,7 @@
 //@Override
 import java.io.IOException;
 
+import exception.DukeException;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,17 +27,6 @@ public class Main extends Application {
 
     private static VBox dialogContainer;
 
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
-    private static final String LOGO =
-            " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-
-    private static final String INTRODUCTION = "Hello from \n";
-
     private Duke duke = new Duke("list.txt");
 
 
@@ -57,7 +47,6 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
 
-//            showIntroduction();
         } catch (IOException e) {
             e.printStackTrace();
         }

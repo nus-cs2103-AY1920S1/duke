@@ -52,7 +52,7 @@ public class Storage {
      * @return ArrayList of Tasks from the file
      * @throws DukeException If file is empty.
      */
-    public ArrayList loadFile() throws DukeException {
+    public ArrayList<Task> loadFile() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
         try {
             if (!file.hasNext()) { // Check if file is empty

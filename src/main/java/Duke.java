@@ -16,11 +16,6 @@ public class Duke {
     private Ui ui = new Ui();
     private int size;
 
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     String getResponse(String input) {
         StringBuilder sb = new StringBuilder();
         try {
@@ -28,6 +23,11 @@ public class Duke {
             sb.append(c.execute(tasks, ui, storage) + "\n");
         } catch (DukeException err) {
             sb.append(err.getMessage());
+        }
+        try {
+            storage.saveFile(tasks, storage.getFilePath());
+        } catch (DukeException e) {
+            ui.saveError();
         }
         return sb.toString();
     }

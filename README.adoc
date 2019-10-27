@@ -2,12 +2,13 @@
 ****
 By: Dalson Tan
 ****
+
 [![Build Status](https://travis-ci.com/dalsontws/duke.svg?branch=master)](https://travis-ci.com/dalsontws/duke)
 
 ifdef::env-github[]
-image::docs/images/Ui.png[width="600"]
+image::docs/Ui.png[width="600"]
 endif::[]
 
 ifndef::env-github[]
-image::images/Ui.png[width="600"]
+image::docs/Ui.png[width="600"]
 endif::[]

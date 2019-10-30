@@ -12,3 +12,17 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# JavaDocs
+src/JavaDocs/*
+
+# Compiled Files
+*.class
+
+# Package Files
+*.jar
+
+# Data Files
+src/main/data/*
+*.txt
+**/DukeData

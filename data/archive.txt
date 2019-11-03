@@ -1,0 +1,18 @@
+Archive List of Tasks:
+
+T | 0 | task 8 (Date archived: 10/09/2019)
+E | 1 | completed event C | July 17 2019 11:59 PM (Date archived: 10/09/2019)
+E | 0 | expired event A | July 17 2014 11:59 PM (Date archived: 10/09/2019)
+T | 1 | eat dinner (Date archived: 10/09/2019)
+T | 0 | task 3 (Date archived: 10/09/2019)
+E | 1 | very very very long event name | February 11 2019 11:00 PM (Date archived: 10/09/2019)
+E | 0 | birthday old | August 20 2019 12:00 AM (Date archived: 10/09/2019)
+T | 0 | task 2 (Date archived: 10/09/2019)
+D | 0 | homework old | August 12 2019 11:59 PM (Date archived: 10/09/2019)
+T | 1 | homework (Date archived: 10/09/2019)
+T | 1 | Call Sarah (Date archived: 11/09/2019)
+E | 1 | Sarah's Birthday | September 25 2019 12:00 AM (Date archived: 11/09/2019)
+T | 0 | Buy a new T-shirt (Date archived: 17/09/2019)
+D | 1 | CS2103 Post-Lecture Quiz | September 12 2019 11:59 PM (Date archived: 17/09/2019)
+E | 1 | Dental | October 17 2019 04:00 PM (Date archived: 17/09/2019)
+T | 0 | eat (Date archived: 19/09/2019)

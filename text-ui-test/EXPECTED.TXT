@@ -1,0 +1,37 @@
+     Hello! I'm Duke
+     What can I do for you?
+     Got it. I've added this task: 
+       [T][✘] borrow book
+     Now you have 1 tasks in the list.
+     Got it. I've added this task: 
+       [D][✘] CS2103 iP (by: today)
+     Now you have 2 tasks in the list.
+     Got it. I've added this task: 
+       [E][✘] birthday party (at: tmr 6pm-8pm)
+     Now you have 3 tasks in the list.
+     Here are the tasks in your list:
+     1.[T][✘] borrow book
+     2.[D][✘] CS2103 iP (by: today)
+     3.[E][✘] birthday party (at: tmr 6pm-8pm)
+     Nice! I've marked this task as done: 
+       [D][✓] CS2103 iP (by: today)
+     Here are the tasks in your list:
+     1.[T][✘] borrow book
+     2.[D][✓] CS2103 iP (by: today)
+     3.[E][✘] birthday party (at: tmr 6pm-8pm)
+     Oops! I don't understand your command.
+     Oops! The task description cannot be empty.
+     Oops! The task deadline cannot be empty.
+     Oops! The task description cannot be empty.
+     Oops! The task dates/times cannot be empty.
+     Oops! The task description cannot be empty.
+     Oops! Please enter a valid task number.
+     Oops! Please enter a valid task number.
+     Noted. I've removed this task: 
+       [T][✘] borrow book
+     Now you have 2 tasks in the list.
+     Oops! Please enter a valid task number.
+     Here are the tasks in your list:
+     1.[D][✓] CS2103 iP (by: today)
+     2.[E][✘] birthday party (at: tmr 6pm-8pm)
+     Bye. Hope to see you again soon!

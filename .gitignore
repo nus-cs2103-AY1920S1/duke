@@ -12,3 +12,6 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# Third-party libraries
+/javafx-sdk-11.0.2

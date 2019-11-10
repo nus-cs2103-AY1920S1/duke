@@ -51,7 +51,7 @@ As a developer, you write a _build file_ that describes the project. A build fil
 1. If the above didn't happen, import the Gradle project by `Help > Find Action > Import Gradle Project`.
    ![Import Gradle](assets/ImportGradle.png)
 
-1. If the above didn't work either, close Intellij, delete the Intellij project files (i.e., `.idea` folder and `*.iml` files), and set up the project again, but instead of choosing `Create project from existing sources`, choose `Import project from external model` -> `Gradle`.
+1. If the above didn't work either, close Intellij, delete the Intellij project files (i.e., `.idea` folder and `*.iml` files), and set up the project again, but instead of choosing `Create project from existing sources`, choose `Import project from external commandBuilder` -> `Gradle`.
 
 After this, IntelliJ IDEA will identify your project as a Gradle project and you will gain access to the `Gradle Toolbar`. Through the toolbar, you run Gradle tasks and view your project's dependencies.
 

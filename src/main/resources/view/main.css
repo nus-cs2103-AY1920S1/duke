@@ -1,0 +1,20 @@
+#anchor-pane {
+    -fx-background-color: black;
+}
+
+#scroll-pane {
+    -fx-background-color: #393e41;
+}
+
+#dialog-box {
+    -fx-padding: 5, 30, 5, 30;
+}
+
+#dialog-container {
+    -fx-background-color: #ffd387;
+}
+
+#dialog-text {
+    -fx-text-fill: white;
+    -fx-padding: 10;
+}

@@ -1,0 +1,7 @@
+E|0|Test String|26/11/1996|1234|1234
+T|1|alright
+T|1|coolio
+T|0|hello
+T|0|ok
+T|0|well done
+T|0|long string of text that will go out of string if I continue typing very long sia

@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: duke.Launcher
+Class-Path: /Users/wilfredbradleytan/Documents/Uni_Material/2.1/CS2103/indiv_proj/duke/build/classes/java/main/
+

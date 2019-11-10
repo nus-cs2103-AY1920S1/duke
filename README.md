@@ -1,4 +1,4 @@
-# Setting up
+# Setting up [![Build Status](https://travis-ci.com/shaoyi1997/duke.svg?branch=master)](https://travis-ci.com/shaoyi1997/duke)
 
 **Prerequisites**
 

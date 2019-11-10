@@ -1,0 +1,6 @@
+T | Not Done | water plants
+D | Not Done | complete CS2101 OP | 12/12/2019 0900
+E | Not Done | formal dinner | 12/12/2000 0900
+T |     Done | ST assignment
+T |     Done | IEM assignment
+E | Not Done | career fest | 20/12/2019 1200

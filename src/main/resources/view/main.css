@@ -1,0 +1,30 @@
+.root {
+    -fx-font-family: "Lucida Handwriting";
+}
+
+#dialogContainer {
+    -fx-font-size: 14px;
+    -fx-padding: 5px 5px 0 5px;
+}
+
+RightDialogBox, LeftDialogBox {
+    -fx-padding: 3px 0 3px 5px;
+}
+
+RightDialogBox Label, LeftDialogBox Label {
+    -fx-border-color: #bbb;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 0 10px 5px 10px;
+    -fx-background-color: #d0e1f9;
+}
+
+RightDialogBox Label {
+    -fx-border-insets: 0 10px 0 50px;
+    -fx-background-insets: 0 10px 0 50px;
+}
+
+LeftDialogBox Label {
+    -fx-border-insets: 0 50px 0 10px;
+    -fx-background-insets: 0 50px 0 10px;
+}

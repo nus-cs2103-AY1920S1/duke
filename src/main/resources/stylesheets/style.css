@@ -1,0 +1,10 @@
+.message-text {
+    -fx-font-size: 14px;
+    -fx-background-insets: 5px 10px;
+    -fx-border-insets: 5px 10px;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-padding: 15px;
+    -fx-background-color: #D4FAFE;
+    -fx-border-color: #78B1FF;
+}

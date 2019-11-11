@@ -12,3 +12,13 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# Java class files
+*.class
+
+# Ignore data files
+data/
+
+# Ignore test output
+text-ui-test/ACTUAL.txt
+

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox stylesheets="@DarkMode.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.NewGui">
+   <children>
+      <TextField fx:id="userInput" alignment="CENTER" onAction="#handleUserInput" prefHeight="10.0" prefWidth="600.0" promptText="Please enter your commands here!" />
+      <HBox prefHeight="19.0" prefWidth="600.0" style="-fx-border-color: black;">
+         <children>
+            <ImageView fx:id="systemImage" fitHeight="78.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/DaDuke.png" />
+               </image>
+            </ImageView>
+            <ScrollPane HBox.hgrow="ALWAYS">
+               <content>
+                  <Label fx:id="systemOutput" text="Hi, my name is duke , what can I do for you today? You can type 'help' if you're unsure of the commands." />
+               </content>
+            </ScrollPane>
+         </children>
+      </HBox>
+      <StackPane fx:id="tableArea" VBox.vgrow="ALWAYS" />
+   </children>
+</VBox>

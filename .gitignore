@@ -12,3 +12,9 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+src/.idea/$PRODUCT_WORKSPACE_FILE$
+src/.idea/.gitignore
+src/.idea/misc.xml
+src/.idea/modules.xml
+src/.idea/vcs.xml
+src/out/production/main/Duke.class

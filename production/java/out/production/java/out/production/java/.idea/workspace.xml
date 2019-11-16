@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BuildServerSettings">
+    <option name="LOGIN" value="" />
+    <option name="SERVER_URL" value="http://buildserver" />
+    <option name="REMEMBER_ME" value="true" />
+    <option name="USE_IDEA_PROXY_SETTINGS" value="true" />
+    <option name="INSPECTIONS_BUILD_TYPE_IDS" />
+    <option name="DUPLICATES_BUILD_TYPE_IDS" />
+    <option name="COVERAGE_SETTINGS" />
+    <option name="TEST_STATUS_ENABLED" value="true" />
+    <option name="TEST_STATUS_SHOW_SUCCESSFUL" value="false" />
+    <option name="POSTPONE_SUITABLE_CONFIGURATIONS_SEARCH" value="false" />
+    <option name="ARTIFACTS_BUILD_TYPE_IDS" />
+    <option name="PERFORM_COMMIT_IF_SUCCESSFUL" value="true" />
+    <option name="PERFORM_COMMIT_IF_NO_NEW_FAILED_TESTS" value="false" />
+    <option name="REQUEST_CONFIRMATON" value="false" />
+    <option name="PRE_TESTED_COMMIT" value="true" />
+    <option name="FILTER_BY_STATUS" value="false" />
+    <option name="FILTER_MARKED_AS_FIXED" value="false" />
+    <option name="SHOW_CLOSE_PROMPT" value="true" />
+    <option name="TOOL_WINDOW_SELECTED_CONTENT_INDEX" value="0" />
+    <option name="FILTER_BY_CURRENT_PROJECT" value="true" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4e33aa0a-6ac4-414c-a1cf-f21c73d81322" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../data/duke.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../data/duke.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AddCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Command.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Deadline.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeadlineCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeleteCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DoneCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Duke.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DukeException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EmptyDescException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Event.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EventCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExitCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvalidArgumentException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ListCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ui.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/command/AddCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/command/Command.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/command/DeadlineCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/command/DeleteCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/command/DoneCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/command/EventCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/command/ExitCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/command/ListCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/command/TodoCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/component/Parser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/component/Storage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/component/TaskList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/component/Ui.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/exception/DukeException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/exception/EmptyDescException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/exception/InvalidArgumentException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/main/Duke.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/task/Deadline.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/task/Event.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/task/Task.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/task/Todo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/java/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../test/java/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/java/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../test/java/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/java/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../test/java/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/java/DeadlineCommandTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../test/java/DeadlineCommandTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/java/TodoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../test/java/TodoTest.java" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../../../../duke copy/src/test/java/DeadlineCommandTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../../test/java/DeadlineCommandTest.java">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/../../../../duke copy/src/main/java/duke/command/DeadlineCommand.java" />
+        <option value="$PROJECT_DIR$/../../../../duke copy/src/main/java/duke/component/Parser.java" />
+        <option value="$PROJECT_DIR$/duke/command/DeadlineCommand.java" />
+        <option value="$PROJECT_DIR$/duke/component/Parser.java" />
+        <option value="$PROJECT_DIR$/duke/command/AddCommand.java" />
+        <option value="$PROJECT_DIR$/../../../../duke copy/src/test/java/DeadlineCommandTest.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="288" />
+    <option name="y" value="23" />
+    <option name="width" value="908" />
+    <option name="height" value="802" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="true" />
+    <property name="Repository.Attach.JavaDocs" value="true" />
+    <property name="Repository.Attach.Sources" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1567410561359" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/../../test/src" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Duke" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="duke.main.Duke" />
+      <module name="java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="duke.main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Duke" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4e33aa0a-6ac4-414c-a1cf-f21c73d81322" name="Default Changelist" comment="" />
+      <created>1567327149099</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1567327149099</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="288" y="23" width="908" height="802" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" weight="0.2551963" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32957748" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TeamCity" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32957748" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Maven" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" weight="0.2551963" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32957748" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TeamCity" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32957748" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Maven" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+    </layout-to-restore>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/duke/command/Command.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../duke copy/src/main/java/duke/command/EventCommand.java" />
+    <entry file="file://$PROJECT_DIR$/duke/command/DeadlineCommand.java" />
+    <entry file="file://$PROJECT_DIR$/../../../../duke copy/src/main/java/duke/main/Duke.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../duke copy/src/main/java/duke/command/AddCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/duke/component/Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="114" column="48" lean-forward="true" selection-start-line="114" selection-start-column="48" selection-end-line="114" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../duke copy/src/main/java/duke/component/Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../duke copy/src/main/java/duke/command/Command.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="15" column="55" lean-forward="true" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/duke/command/AddCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="99" lean-forward="true" selection-start-line="99" selection-end-line="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../duke copy/src/main/java/duke/command/DeleteCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../duke copy/src/test/java/DeadlineCommandTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../test/java/DeadlineCommandTest.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>java</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>11</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>org.junit.jupiter:junit-jupiter-api:5.4.2</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

@@ -2,19 +2,40 @@
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### 1) Add task 
+    
+### 2) Delete task
+    
+### 3) Mark task as done
+    
+### 4) Display tasks
+    
+### 5) Search for task
+
 
 ## Usage
 
 ### `Keyword` - Describe action
 
-Describe action and its outcome.
+To add task, type:
 
-Example of usage: 
+    `todo` + 'name of task'
+    `deadline` + 'name of task' + 'DD/MM/YY hhmm'
+    `event` + 'name of event' + 'DD/MM/YY hhmm'
 
-`keyword (optional arguments)`
+To delete task, type:
 
-Expected outcome:
+    `delete` + 'task number'
+    
+To mark task as done, type:
 
-`outcome`
+    `done` + 'task number
+
+To display all tasks, type:
+
+    `list`
+    
+To search for tasks, type:
+
+    `find` + 'keyword'
+    

@@ -1,0 +1,9 @@
+T | 1 | buy coffee
+D | 1 | assignment 1 | 18/09/2019 2359
+D | 0 | post lecture quiz | 19/09/2019 2359
+E | 0 | project meeting | 18/09/2019 1000
+E | 0 | consultation session | 17/09/2019 1400
+E | 0 | midterms | 4/10/2019 1200
+T | 0 | shop for snacks 
+E | 0 | shop | 12/12/2019 1300
+D | 0 | meeting | 20/02/2019 1300

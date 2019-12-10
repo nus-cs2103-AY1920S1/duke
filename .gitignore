@@ -12,3 +12,9 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+src/main/.idea/$PRODUCT_WORKSPACE_FILE$
+src/main/.idea/checkstyle-idea.xml
+src/main/.idea/misc.xml
+src/main/.idea/modules.xml
+src/main/.idea/vcs.xml
+src/main/.idea/.gitignore

@@ -1,6 +1,6 @@
 # JavaFX Tutorial 3 – Interacting with the user
 
-Picking up from where we left off last tutorial, we have successfully achieved the desired layout. Now let’s make the application respond to user input. 
+Picking up from where we left off last tutorial, we have successfully achieved the desired layout. Now let’s make the application respond to user commands. 
 
 Rather than to do everything in one try, let’s iterate and build up towards our final goal. 
 
@@ -18,7 +18,7 @@ public void start(Stage stage) {
 
     //Step 2 code here
 
-    //Step 3. Add functionality to handle user input.
+    //Step 3. Add functionality to handle user commands.
     sendButton.setOnMouseClicked((event) -> {
         dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
         userInput.clear();
@@ -115,34 +115,34 @@ Image|Filename
 public class Duke extends Application {
     // ...
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image ui = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     // ...
 }
 ```
 
-Add a new method to handle user input:
+Add a new method to handle user commands:
 ```java
 /**
  * Iteration 2:
- * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
- * the dialog container. Clears the user input after processing.
+ * Creates two dialog boxes, one echoing user commands and the other containing Duke's reply and then appends them to
+ * the dialog container. Clears the user commands after processing.
  */
 private void handleUserInput() {
     Label userText = new Label(userInput.getText());
     Label dukeText = new Label(getResponse(userInput.getText()));
     dialogContainer.getChildren().addAll(
             new DialogBox(userText, new ImageView(user)),
-            new DialogBox(dukeText, new ImageView(duke))
+            new DialogBox(dukeText, new ImageView(ui))
     );
     userInput.clear();
 }
 
 /**
- * You should have your own function to generate a response to user input.
+ * You should have your own function to generate a response to user commands.
  * Replace this stub with your completed method.
  */
-private String getResponse(String input) {
-    return "Duke heard: " + input;
+private String getResponse(String commands) {
+    return "Duke heard: " + commands;
 }
 ```
 
@@ -153,7 +153,7 @@ Update the event handler code in the `start` method to use the new `handleUserIn
 public void start(Stage stage) {
     //...
 
-    //Part 3. Add functionality to handle user input.
+    //Part 3. Add functionality to handle user commands.
     sendButton.setOnMouseClicked((event) -> {
         handleUserInput();
     });
@@ -170,7 +170,7 @@ Run the program and see how it works.
 
 ## Iteration 3 – Adding custom behavior to DialogBox
 
-One additional benefit of defining a custom control is that we can add behavior specific to our `DialogBox`. Let’s add a method to flip a dialog box such that the image on the left to differentiate between user input and Duke’s output.
+One additional benefit of defining a custom control is that we can add behavior specific to our `DialogBox`. Let’s add a method to flip a dialog box such that the image on the left to differentiate between user commands and Duke’s output.
 
 ```java
 /**
@@ -213,7 +213,7 @@ private void handleUserInput() {
     Label dukeText = new Label(getResponse(userInput.getText()));
     dialogContainer.getChildren().addAll(
             DialogBox.getUserDialog(userText, new ImageView(user)),
-            DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+            DialogBox.getDukeDialog(dukeText, new ImageView(ui))
     );
     userInput.clear();
 }

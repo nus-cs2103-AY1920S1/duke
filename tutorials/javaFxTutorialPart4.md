@@ -9,7 +9,7 @@ While we have produced a fully functional prototype, there are a few major probl
    Every small change requires us to rebuild and run the application.  
 
 1. Components are heavily dependent on each other:
-   Why does `Main` need to know that `DialogBox` needs a `Label`? 
+   Why does `GUI.Main` need to know that `DialogBox` needs a `Label`? 
    What happens if we change the `Label` to a custom `ColoredLabel` in the future?  
     
     We need to minimize the amount of information each control needs to know about another.
@@ -18,7 +18,7 @@ While we have produced a fully functional prototype, there are a few major probl
 1. The code is untidy and long:
    Why is all the code in one place?
 
-   The `Main` class attempts to do it all. 
+   The `GUI.Main` class attempts to do it all. 
    Code for visual tweaks, listeners and even utility methods are all in one file.
    This makes it difficult to find and make changes to existing code.
 
@@ -168,9 +168,9 @@ Similarly, methods like private methods like `handleUserInput` can be used in FX
 
 ## Using FXML in our application
 
-Let's create a new `Main` class as the bridge between the existing logic in `Duke` and the UI in `MainWindow`.
+Let's create a new `GUI.Main` class as the bridge between the existing logic in `Duke` and the UI in `MainWindow`.
 
-**Main.java**
+**GUI.Main.java**
 ```java
 @Override
 import java.io.IOException;
@@ -184,14 +184,14 @@ import javafx.stage.Stage;
 /**
  * A GUI for Duke using FXML.
  */
-public class Main extends Application {
+public class GUI.Main extends Application {
 
     private Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(GUI.Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
@@ -274,11 +274,11 @@ public class DialogBox extends HBox {
 When we create a new instance of `DialogBox`, we set both the controller and root Node to `DialogBox`. 
 From this point onwards we can interact with `DialogBox` as we have in the previous tutorials.
 
-The last change that we have to make is to point our `Launcher` class in the right direction:
-In `Launcher.java`
+The last change that we have to make is to point our `GUI.Launcher` class in the right direction:
+In `GUI.Launcher.java`
 ```java
 //...    
-Application.launch(Main.class, args);
+Application.launch(GUI.Main.class, args);
 //...
 ```
 [todo]: # (Discussion on the fx:root pattern.)

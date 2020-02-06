@@ -1,0 +1,19 @@
+#dialogContainer {
+    -fx-background-color: #383838;
+}
+
+#scrollPane {
+    -fx-background-color: #383838;
+}
+
+#userInput {
+    -fx-prompt-text-fill: gray;
+}
+
+#dialog {
+    -fx-font-size: 11.5;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
+
+

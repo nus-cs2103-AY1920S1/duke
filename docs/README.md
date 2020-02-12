@@ -1,7 +1,10 @@
 # Duke User Guide
+Welcome to my Duke ChatBot! Duke is a Command Line Interface (CLI) ChatBot that helps you manage your todo list!
+
+
 ![Ui image](Ui.png)
 ## Features 
-
+Below is a summary of commands you could use with Duke.
 ### Update tasks 
 * Todo tasks
 * Event tasks

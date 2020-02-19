@@ -1,0 +1,2 @@
+T | 1 | borrow book
+D | 1 | cs2103t |  23rd of August 2019, 2.00 PM

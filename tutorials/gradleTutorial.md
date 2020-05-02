@@ -146,7 +146,7 @@ By convention, java tests belong in `src/test/java` folder. Create a new `test/j
 src
 ├─main
 │  └─java
-│     └─seedu/duke/Duke.java
+│     └─seedu/duke/seedu.duke.Duke.java
 └─test
     └─java
         └─seedu/duke/DukeTest.java

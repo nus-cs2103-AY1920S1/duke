@@ -1,0 +1,16 @@
+T : 1 : eat
+D : 0 : party out : 28/09/2019 0500
+T : 0 : something
+-----
+Food
+5.0 : rice
+5.0 : dump
+Transport
+Education
+Household
+Apparel
+80.0 : stuff
+Beauty
+Health
+Social
+Others

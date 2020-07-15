@@ -1,8 +1,11 @@
-# Smart Baby
+# My Duke is a Smart Baby
 
 This is an individual project created using Java as part of CS2103T Software Engineering module in NUS.
 It is a simple chatbot that has CRUD features and is able to keep track of to-do items for the user.
 
+User Guide is available at: https://yen-peng.github.io/duke/
+
+## Preview
 <img src="docs/Ui.png" width="60%">
 
 ## Setting up

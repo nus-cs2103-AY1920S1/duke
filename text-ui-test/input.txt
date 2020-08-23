@@ -1,0 +1,13 @@
+todo Eat
+todo Sleep
+event project meeting /at 29/11/2018 1900
+event second project meeting /at 29/11/2018 1900 
+event fake event
+list
+done 1
+list
+delete 5
+delete 2
+list
+find Ea
+bye

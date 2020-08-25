@@ -101,8 +101,8 @@ We will get to that later.
 
 ## Using Controllers
 
-As part of the effort to separate the code handling Duke's logic and UI, let's _refactor_ the UI-related code to its own class.
-We call these UI classes _controllers_. 
+As part of the effort to separate the code handling Duke's logic and seedu.duke.util.UI, let's _refactor_ the seedu.duke.util.UI-related code to its own class.
+We call these seedu.duke.util.UI classes _controllers_. 
 
 Let's implement the `MainWindow` controller class that we specified in `MainWindow.fxml`.
 
@@ -128,7 +128,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Duke seedu.duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -139,7 +139,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setDuke(Duke d) {
-        duke = d;
+        seedu.duke = d;
     }
 
     /**
@@ -149,7 +149,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = seedu.duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
@@ -160,7 +160,7 @@ public class MainWindow extends AnchorPane {
 ```
 
 The `@FXML` annotation marks a `private` or `protected` member and makes it accessible to FXML despite its modifier.
-Without the annotation, we will have to make everything `public` and expose our UI to unwanted changes.
+Without the annotation, we will have to make everything `public` and expose our seedu.duke.util.UI to unwanted changes.
 
 The `FXMLLoader` will map the a control with a `fx:id` defined in FXML to a variable with the same name in its controller.
 Notice how in `MainWindow`, we can invoke `TextField#clear()` on `userInput` and access its content just as we did in the previous example.
@@ -168,7 +168,7 @@ Similarly, methods like private methods like `handleUserInput` can be used in FX
 
 ## Using FXML in our application
 
-Let's create a new `Main` class as the bridge between the existing logic in `Duke` and the UI in `MainWindow`.
+Let's create a new `Main` class as the bridge between the existing logic in `Duke` and the seedu.duke.util.UI in `MainWindow`.
 
 **Main.java**
 ```java
@@ -186,7 +186,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Duke seedu.duke = new Duke();
 
     @Override
     public void start(Stage stage) {
@@ -195,7 +195,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke(seedu.duke);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,0 +1,3 @@
+[E][0] project meeting /at 02/12/2019 1800
+[D][0] return book /by 02/12/2019 1800
+[T][0] read book

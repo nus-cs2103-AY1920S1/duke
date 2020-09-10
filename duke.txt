@@ -1,0 +1,4 @@
+D | 0 | dinner | 11th of December 2019, 7pm
+T | 1 | homework
+T | 1 | work
+T | 0 | homework math

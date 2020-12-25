@@ -28,6 +28,8 @@ spaces between letters will be converted to '-'
 ## Introduction
 Obot Wan Kenobi is a chatbot based on the persona of Jedi Master Obi-Wan Kenobi. He can handle basic tasks such as recording to-do, deadline and event tasks; as well as output relevant statistics based on the user's history.
 
+This project is part of the coursework [CS 2103: Software Engineering](https://nusmods.com/modules/CS2103/software-engineering). 
+
 ![Image of Ui screenshot](https://raw.githubusercontent.com/AhmadHatziq/obot-wan-kenobi/master/docs/Ui.png)
 
 Fig. 1. Screenshot of Obot

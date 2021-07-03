@@ -1,20 +1,27 @@
-# User Guide
+# User Guide of DUKE
+
+
+### Your personal assistant
+Welcome to Duke! Here you can save todos, events and deadlines.
+
+![Image of Duke](Ui.png)
 
 ## Features 
 
-### Feature 1 
-Description of feature.
-
 ## Usage
 
-### `Keyword` - Describe action
+### `list` - Lists out the top 4 tasks
 
-Describe action and its outcome.
+### `todo  <my task>` - Adds a todo into your list
 
-Example of usage: 
+### `deadline  <my task> /by <DD/MM/YYYY HHmm>` - Adds a deadline into your list
 
-`keyword (optional arguments)`
+### `event  <my task> /at <DD/MM/YYYY HHmm>` - Adds an event into your list
 
-Expected outcome:
+### `find  <search>` - Gets tasks that match the search 
 
-`outcome`
+### `done  <task number>` - Checks task as done
+
+### `duplicates` - Lists all the possible duplicate values.
+
+### `bye` - Exit application

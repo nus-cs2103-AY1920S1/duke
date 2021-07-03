@@ -1,0 +1,16 @@
+language: java
+install: true
+os: linux
+dist: trusty
+jdk: oraclejdk11
+script:
+- "./gradlew shadowJar"
+deploy:
+  provider: releases
+  api_key:
+    secure: ZIn+f+K8Ig5AAo8M5m8XQfYAbKhIP8ImknmOK03t+kgFmc8ZWbrp7gf3nyfi2UHum2slKPeC5lF6WVCOwXMJ6rF+9B8QeQnpLHQXFMRUW7jTGMaFvBEE7FQuz/pchMCEn7VXBwZGcVogYUw/jlWwjyHtio2SQAOrOYrY1BZ2xxmpABC1s8PyKvuvCKlQ9E91M1L5KTGnQ6GagD4HP5dFpPzj2D+6me36cWH1dgDgeNlNGiNVFGoN7/Ip68cJpyhu0hdkQgoMc2SFFgUFfc+XIA4GHtpGCLI3c0EW179EPZ6rN/SCv2h73MGNtdfScefRdVIpsyFddj6Q7e2dp/d0+pL2CtmvWc+If5tO0HnFcJ22itaVV8jWWMiu/QQSFc3zqmGK3PpbASVB6ma8pZR4zqBNJHNtGDKbEDexMs1PFn6qfAMjiBKTH0cD/A7GV8CNlCTy6Xe+xWpw5agTKEr340pCzx//gBi7GaeAK/0+ZtN1xhTFGIV0TeLZhnMVI8zVSvp8EsYg5UezAmA/efgPUX7gOVLQgGY4VOo0Ru8HgLusUbcallaVJ3IImnIz92d6EnerjTvO0vzH34C0uvd+ntzimiTITurMgd+hhWnvkiMIz+bjg3LJCvXBxwm7VeNYj/dnGw1zsOkkIB4NezN+u642qScF2US6kXP5VCU2znU=
+  file: "build/libs/duke-0.4.0.jar"
+  skip_cleanup: true
+  on:
+    repo: sreesubbash/duke
+    tags: true

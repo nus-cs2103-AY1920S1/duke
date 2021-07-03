@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="distributions">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/build/distributions/duke-0.1.0.zip!/" />
+      <root url="jar://$PROJECT_DIR$/build/distributions/duke-shadow-0.1.0.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

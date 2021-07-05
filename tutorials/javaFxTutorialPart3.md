@@ -23,7 +23,7 @@ public void start(Stage stage) {
         dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
         userInput.clear();
     });
-    
+
     userInput.setOnAction((event) -> {
         dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
         userInput.clear();
@@ -56,7 +56,7 @@ Update the `start` method as shown below.
 ```java
 public void start(Stage stage) {
     // current code ...
- 
+
     //Scroll down to the end every time dialogContainer's height changes.
     dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 }
@@ -166,7 +166,7 @@ public void start(Stage stage) {
 
 Run the program and see how it works.
 
-![DialogBoxes Iteration 2](assets/DialogBoxesIteration2.png) 
+![DialogBoxes Iteration 2](assets/DialogBoxesIteration2.png)
 
 ## Iteration 3 – Adding custom behavior to DialogBox
 
@@ -205,7 +205,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 ```
 
-Now, we can go back to the `Main` class and change the event handler to use our new `DialogBox`. 
+Now, we can go back to the `Main` class and change the event handler to use our new `DialogBox`.
 
 ```java
 private void handleUserInput() {
@@ -219,12 +219,12 @@ private void handleUserInput() {
 }
 ```
 
-Run the application and play around with it. 
+Run the application and play around with it.
 
 ![DialogBoxes Iteration 3](assets/DialogBoxesIteration3.png)
 
-Congratulations! 
-You have successfully implemented a fully functional GUI for Duke!  
+Congratulations!
+You have successfully implemented a fully functional GUI for Duke!
 
 ## Exercises
 

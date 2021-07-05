@@ -1,5 +1,6 @@
-# Setting up
+# User Guide
 
+Useful Commands
 **Prerequisites**
 
 * JDK 11

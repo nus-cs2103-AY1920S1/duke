@@ -1,7 +1,8 @@
 # IDEA files
 /.idea/
-/out/
+#removed /out/ to push jar file into remote repo
 /*.iml
+/out/
 
 # Gradle build files
 /.gradle/

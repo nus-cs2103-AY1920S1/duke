@@ -1,0 +1,5 @@
+T/✓/sleep
+D/✓/CS2100 / Friday
+D/✓/CS2103 / tutorial
+T/✓/study
+E/✓/midterm / Oct 5

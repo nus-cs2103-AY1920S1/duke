@@ -1,0 +1,12 @@
+.anchor-pane {
+    -fx-background-color: rgba(50, 50, 50, 1);
+    background-color: rgba(50, 50, 50, 1);
+    -fx-border-color: rgba(50, 50, 50, 1);
+    border-color: rgba(50, 50, 50, 1);
+    -fx-focus-color: transparent;
+}
+
+.anchor-pane .viewport {
+    -fx-background-color: rgba(50, 50, 50, 1);
+    background-color: rgba(50, 50, 50, 1);
+}

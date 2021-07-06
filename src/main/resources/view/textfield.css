@@ -1,0 +1,6 @@
+.text-input {
+    -fx-text-fill: white;
+    -fx-background-color: rgba(50, 50, 50, 1);
+    background-color: rgba(50, 50, 50, 1);
+    -fx-accent: rgba(123, 55, 123, 1);
+}

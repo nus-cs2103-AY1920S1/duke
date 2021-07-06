@@ -1,0 +1,21 @@
+.button {
+    -fx-background-color: rgba(25, 25, 25, 1);
+    background-color: rgba(25, 25, 25, 1);
+    -fx-background-radius: 10;
+    -fx-border-color: transparent;
+    border-color: transparent;
+    -fx-focus-color: transparent;
+    
+    -fx-background-image: url("../images/RealArrow.png");
+    background-image: url("../images/RealArrow.png");
+}
+
+.button:hover {
+    -fx-background-color: rgba(35, 35, 35, 1);
+    background-color: rgba(25, 25, 25, 1);
+}
+
+.button .viewport {
+    -fx-background-color: transparent;
+    background-color: transparent;
+}

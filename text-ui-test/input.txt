@@ -1,0 +1,25 @@
+todo read book
+todo return book
+deadline book report /by Aug 4th
+event inter-college game /at Sep 2-4th 6pm
+todo call friend
+done 1
+list
+done 3
+delete 4
+list
+delete
+done
+hello
+todo
+todo
+deadline
+deadline /by Aug 4th
+deadline   /by Aug 4th
+deadline book report /by
+event
+event /at Sep 2-4th
+event game /at
+done 9
+delete 7
+bye

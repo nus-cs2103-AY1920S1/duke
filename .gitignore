@@ -12,3 +12,10 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# binary files
+*.class
+*.jar
+
+# user data
+data/

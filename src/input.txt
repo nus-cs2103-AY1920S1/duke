@@ -1,0 +1,11 @@
+list
+help
+event a /at tonight
+deadline b /at tonight
+todo hahahahahaha
+list
+done 1
+done 2
+done 2
+done 3
+bye

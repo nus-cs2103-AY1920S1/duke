@@ -1,10 +1,16 @@
-public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+import javafx.application.Application;
+import javafx.stage.Stage;
+import java.io.IOException;
+
+public class Duke extends Application {
+    //private static Ui uiManager = new Ui();
+    private static GUI gui = new GUI();
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        //Step 1. Setting up required components
+        gui.init(stage);
+
     }
+
 }

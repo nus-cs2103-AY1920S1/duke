@@ -1,0 +1,9 @@
+
+D | 0 | exampleDescription | 01/01/2019 1000 | 2
+E | 0 | exampleDescription | 01/01/2019 1000 - 01/01/2019 1100 | -1
+T | 0 | eay | -1
+T | 0 | fasdf | -1
+T | 0 | afasd | -1
+T | 0 | fasdfas | -1
+T | 0 | eat | -1
+T | 0 | eat | -1

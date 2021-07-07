@@ -1,0 +1,19 @@
+todo borrow book
+todo read book
+deadline return book /by 01122019 1500
+event project meeting /at 20122019 2200
+todo join sports club
+event project meeting /at 01092019 2100
+done 1
+done 4
+list
+find book
+random
+todo
+deadline no date given
+event no date given after /at
+done 20
+delete 100
+delete string
+find randomstring
+bye

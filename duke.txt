@@ -1,0 +1,5 @@
+T | 1 | watch a movie
+D | 0 | 2106 lab | 25 september 1400
+E | 1 | 2101 op1 | 16 september 1000 
+D | 0 | 4248 wa2 | 20th of September 2019, 9:00 AM
+T | 1 | watch w5 webcasts

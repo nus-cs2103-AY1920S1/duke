@@ -1,0 +1,8 @@
+.bodybg {
+    -fx-background-image: url("/images/background_image.jpeg");
+
+}
+
+.text-area {
+    -fx-background-color: transparent;
+}

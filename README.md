@@ -1,39 +1,46 @@
-# Setting up
+# Jarvis Taskbot
 
 **Prerequisites**
 
-* JDK 11
-* Recommended: IntelliJ IDE
-* Fork this repo to your GitHub account and clone the fork to your computer
+* CLI
+* MacOS, Windows, Linux operating systems.
 
-**Importing the project into IntelliJ**
+# 1. Introduction
 
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
-1. Set up the correct JDK version.
-   * Click `Configure` > `Structure for new Projects` (in older versions of Intellij:`Configure` > `Project Defaults` > `Project Structure`).
-   * If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11.
-   * Click `OK`.
-1. Click `Import Project`.
-1. Locate the project directory and click `OK`.
-1. Select `Create project from existing sources` and click `Next`.
-1. Rename the project if you want. Click `Next`.
-1. Ensure that your src folder is checked. Keep clicking `Next`.
-1. Click `Finish`.
+Jarvis is a Command Line Interface (CLI) task manager system that can be used to track various tasks. Jarvis aims to increase the productivity of its user. The tasks are saved in a local file that can be actively retrived (unless deleted) once Jarvis is activated. Jarvis has the ability to read time and dates so feel free to include due dates for your task. 
 
-# Tutorials 
+**Types of supported tasks**
+1.) ToDo 
+2.) Deadline
+3.) Event
 
-Duke Increment | Tutorial
----------------|---------------
-`A-Gradle` | [Gradle Tutorial](tutorials/gradleTutorial.md)
-`A-TextUiTesting` | [Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)
-`Level-10` | JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for Duke][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]
+# Snapshot of Jarvis
 
-[fx1]: <tutorials/javaFxTutorialPart1.md>
-[fx2]: <tutorials/javaFxTutorialPart2.md>
-[fx3]: <tutorials/javaFxTutorialPart3.md>
-[fx4]: <tutorials/javaFxTutorialPart4.md>
+![Homepage of Jarvis](docs/Home.png)
 
-# Feedback, Bug Reports
+![Working Jarvis](docs/Ui.png)
 
-* If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
-* We welcome pull requests too.
+# 2. Quick Start
+Ensure that java 11 or above is installed in your computer. Otherwise, you can download Java 11 [here](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html).
+Download Jarvis [here](https://github.com/tuandingwei/duke/releases/tag/v0.2)!
+Double click of the .jar file to activate Jarvis. A pop-up window should appear soon. 
+
+# 3. Features
+
+Function | Subject | Example | Syntax | 
+---------------|---------------|---------------|---------------
+Hi | | 'hi' | 
+Add Todo | a Todo task | 'todo read book' | todo [description]
+Add Deadline | a task with deadline |'deadline return book /by 2/12/2019 1800' | deadline [description] /by [dd/mm/yyyy hh:mm]
+Add Event | an event | 'event party /at 2/12/2019 2000-0300' | event [description] /at [dd/mm/yyyy hh:mm - hh:mm]
+List | all task | 'list' |
+Done | any existing task | 'done 2' | done [index of task in the list]
+Delete | an existing task | 'delete 1' | delete [index of task in the list]
+Find | keyword | 'find book' | find [keyword]
+Clear | clears all tasks permanently | 'clear' | 
+Bye | | 'bye' |
+
+# Looking forward
+I hope to improve Jarvis with a better UI and provide support for more tasks in the future. 
+Feel free to send any recommendations to tuandingwei@u.nus.edu.
+

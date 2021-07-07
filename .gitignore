@@ -8,7 +8,15 @@
 /build/
 src/main/resources/docs/
 
+# Hard disk data
+duke.txt
+
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml
 bin/
+
+*.class
+
+# Testing result data
+ACTUAL.TXT

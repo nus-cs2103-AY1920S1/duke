@@ -1,0 +1,11 @@
+** INPUT FORMAT **
+deadline return book /by 2019-03-21T20:50:00
+event project meeting /at 2019-01-20T06:30:00 2019-01-20T07:30:00
+todo borrow book
+
+
+** STORAGE FORMAT **
+T|1|read book
+D|0|return book|2019-03-21T20:50:00
+E|0|project meeting|2019-01-20T06:30:00|2019-01-20T07:30:00
+T|1|join sports club

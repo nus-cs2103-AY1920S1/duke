@@ -1,0 +1,53 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
+}
+
+group 'seedu.duke'
+version '0.1.0'
+
+shadowJar {
+    archiveBaseName = "ERA"
+    archiveVersion = "1.0"
+    archiveClassifier = null
+    archiveAppendix = null
+}
+
+checkstyle {
+    toolVersion = '8.23'
+}
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = "11.0.2"
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
+application {
+    mainClassName = "Launcher"
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+    testCompile 'org.mockito:mockito-core:2.7.22'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'Duke'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+run {
+    standardInput = System.in
+}

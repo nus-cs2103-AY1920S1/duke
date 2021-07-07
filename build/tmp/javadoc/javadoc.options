@@ -1,0 +1,11 @@
+-classpath '/Users/teojunhong/JavaProject/2103T/duke/build/classes/java/main:/Users/teojunhong/JavaProject/2103T/duke/build/resources/main'
+-d '/Users/teojunhong/JavaProject/2103T/duke/build/docs/javadoc'
+-doctitle 'duke 0.1.0 API'
+-quiet 
+-windowtitle 'duke 0.1.0 API'
+'/Users/teojunhong/JavaProject/2103T/duke/src/main/java/Ui.java'
+'/Users/teojunhong/JavaProject/2103T/duke/src/main/java/Event.java'
+'/Users/teojunhong/JavaProject/2103T/duke/src/main/java/Task.java'
+'/Users/teojunhong/JavaProject/2103T/duke/src/main/java/Duke.java'
+'/Users/teojunhong/JavaProject/2103T/duke/src/main/java/Deadline.java'
+'/Users/teojunhong/JavaProject/2103T/duke/src/main/java/Todo.java'

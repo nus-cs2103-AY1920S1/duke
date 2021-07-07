@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="DeadlineTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-08-24T06:17:24" hostname="Teos-MacBook-Pro-3.local" time="0.025">
+  <properties/>
+  <testcase name="testDeadline()" classname="DeadlineTest" time="0.025"/>
+  <system-out><![CDATA[-------------------------------------
+Got it. I've added this task: 
+[D][?] test  (by: 12/12/1212 18:00)
+Now you have 1 tasks in the list.
+-------------------------------------
+
+-------------------------------------
+Invalid Deadline's arguments 
+-------------------------------------
+
+-------------------------------------
+Invalid Deadline's arguments 
+-------------------------------------
+
+-------------------------------------
+Invalid Deadline's arguments 
+-------------------------------------
+
+-------------------------------------
+Invalid Deadline's arguments 
+-------------------------------------
+
+-------------------------------------
+Invalid Deadline's arguments 
+-------------------------------------
+
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

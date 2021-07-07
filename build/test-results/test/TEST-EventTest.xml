@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="EventTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-08-24T06:17:24" hostname="Teos-MacBook-Pro-3.local" time="0.106">
+  <properties/>
+  <testcase name="testEvent()" classname="EventTest" time="0.106"/>
+  <system-out><![CDATA[-------------------------------------
+Got it. I've added this task: 
+[E][?] test  (at: 12/12/1212 18:00 - 19:00)
+Now you have 1 tasks in the list.
+-------------------------------------
+
+-------------------------------------
+Invalid Event's arguments 
+-------------------------------------
+
+-------------------------------------
+Invalid Event's arguments 
+-------------------------------------
+
+-------------------------------------
+Invalid Event's arguments 
+-------------------------------------
+
+-------------------------------------
+Invalid Event's arguments 
+-------------------------------------
+
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

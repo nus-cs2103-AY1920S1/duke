@@ -1,0 +1,10 @@
+language: java
+
+jdk:
+  - oraclejdk11
+  - openjdk11
+
+script: 
+  - ./gradlew checkstyleMain checkstyleTest
+  - ./gradlew javadoc
+  - ./gradlew shadowJar

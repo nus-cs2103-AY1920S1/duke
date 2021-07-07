@@ -1,0 +1,221 @@
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+Hello! I'm seedu.duke.model.Duke
+What can I do for you?
+____________________________________________________________
+1.[T][ ] buy milk
+2.[D][+] return book (by: 15/12/2019 2359)
+3.[D][ ] return book (by: 15/12/2019 0000)
+4.[D][+] return book (by: 15/12/2019)
+5.[D][ ] buy cake (by: 14/12/2019)
+6.[E][+] project meeting (at: 31/12/2019 2015-2359)
+7.[D][+] project meeting (by: 12/08/2019 1400)
+8.[T][+] hello
+9.[T][ ] hello world
+10.[T][+] hello
+11.[E][+] hello world (at: 12/12/2019 1400-2300)
+____________________________________________________________
+____________________________________________________________
+OOPS!!! I'm sorry, but I don't know what that means :-(
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [T][ ] buy bread
+Now you have 12 tasks in the list
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [T][ ] buy milk
+Now you have 13 tasks in the list
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Please separate deadline description and date/time by " /at ". 
+Note that date/time of an event cannot be empty.
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Please separate deadline description and date/time by " /by ". 
+Note that date/time of a deadline cannot be empty.
+____________________________________________________________
+____________________________________________________________
+OOPS!!! There cannot be more than 12 months in a year.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [D][ ] return book (by: 15/12/2019 2345)
+Now you have 14 tasks in the list
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [D][ ] return book (by: 15/12/2019 2359)
+Now you have 15 tasks in the list
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [D][ ] return book (by: 15/12/2019 0000)
+Now you have 16 tasks in the list
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Please check that minutes is not more than 59.
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Please check that hours is not more than 23.
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Calendar day must start from 1
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Please ensure date format is in DD/MM/YYYY
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Please ensure date format is in DD/MM/YYYY
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [D][ ] return book (by: 15/12/2019)
+Now you have 17 tasks in the list
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [D][ ] buy cake (by: 14/12/2019)
+Now you have 18 tasks in the list
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [E][ ] project meeting (at: 31/12/2019 2015-2359)
+Now you have 19 tasks in the list
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [D][ ] project meeting (by: 12/08/2019 1400)
+Now you have 20 tasks in the list
+____________________________________________________________
+____________________________________________________________
+OOPS!!! The description of an deadline cannot be empty.
+____________________________________________________________
+____________________________________________________________
+OOPS!!! The description of an event cannot be empty.
+____________________________________________________________
+____________________________________________________________
+OOPS!!! The description of a deadline cannot be empty.
+____________________________________________________________
+____________________________________________________________
+OOPS!!! The description of an event cannot be empty.
+____________________________________________________________
+____________________________________________________________
+OOPS!!! The description of a todo cannot be empty.
+____________________________________________________________
+____________________________________________________________
+1.[T][ ] buy milk
+2.[D][+] return book (by: 15/12/2019 2359)
+3.[D][ ] return book (by: 15/12/2019 0000)
+4.[D][+] return book (by: 15/12/2019)
+5.[D][ ] buy cake (by: 14/12/2019)
+6.[E][+] project meeting (at: 31/12/2019 2015-2359)
+7.[D][+] project meeting (by: 12/08/2019 1400)
+8.[T][+] hello
+9.[T][ ] hello world
+10.[T][+] hello
+11.[E][+] hello world (at: 12/12/2019 1400-2300)
+12.[T][ ] buy bread
+13.[T][ ] buy milk
+14.[D][ ] return book (by: 15/12/2019 2345)
+15.[D][ ] return book (by: 15/12/2019 2359)
+16.[D][ ] return book (by: 15/12/2019 0000)
+17.[D][ ] return book (by: 15/12/2019)
+18.[D][ ] buy cake (by: 14/12/2019)
+19.[E][ ] project meeting (at: 31/12/2019 2015-2359)
+20.[D][ ] project meeting (by: 12/08/2019 1400)
+____________________________________________________________
+____________________________________________________________
+OOPS!!! There cannot be any additional characters after the "list" command (other than trailing spaces).
+____________________________________________________________
+____________________________________________________________
+Nice! I've marked this task as done:
+  [D][+] return book (by: 15/12/2019 0000)
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Please enter a valid numerical value from 1 to the taskList's size after the intended command (separated by a space).
+There are currently 20 tasks in the list.
+Try entering "list" to view the full list of tasks.
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Please enter a valid numerical value from 1 to the taskList's size after the intended command (separated by a space).
+There are currently 20 tasks in the list.
+Try entering "list" to view the full list of tasks.
+____________________________________________________________
+____________________________________________________________
+Nice! I've marked this task as done:
+  [D][+] project meeting (by: 12/08/2019 1400)
+____________________________________________________________
+____________________________________________________________
+Noted. I've removed this task:
+[T][ ] buy milk
+Now you have 19 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Noted. I've removed this task:
+[D][+] return book (by: 15/12/2019 0000)
+Now you have 18 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Please enter a valid numerical value from 1 to the taskList's size after the intended command (separated by a space).
+There are currently 18 tasks in the list.
+Try entering "list" to view the full list of tasks.
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Please enter a valid numerical value from 1 to the taskList's size after the intended command (separated by a space).
+There are currently 18 tasks in the list.
+Try entering "list" to view the full list of tasks.
+____________________________________________________________
+____________________________________________________________
+1.[D][+] return book (by: 15/12/2019 2359)
+2.[D][+] return book (by: 15/12/2019)
+3.[D][ ] buy cake (by: 14/12/2019)
+4.[E][+] project meeting (at: 31/12/2019 2015-2359)
+5.[D][+] project meeting (by: 12/08/2019 1400)
+6.[T][+] hello
+7.[T][ ] hello world
+8.[T][+] hello
+9.[E][+] hello world (at: 12/12/2019 1400-2300)
+10.[T][ ] buy bread
+11.[T][ ] buy milk
+12.[D][ ] return book (by: 15/12/2019 2345)
+13.[D][ ] return book (by: 15/12/2019 2359)
+14.[D][ ] return book (by: 15/12/2019 0000)
+15.[D][ ] return book (by: 15/12/2019)
+16.[D][ ] buy cake (by: 14/12/2019)
+17.[E][ ] project meeting (at: 31/12/2019 2015-2359)
+18.[D][+] project meeting (by: 12/08/2019 1400)
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [T][ ] hello
+Now you have 19 tasks in the list
+____________________________________________________________
+____________________________________________________________
+1.[D][+] return book (by: 15/12/2019 2359)
+2.[D][+] return book (by: 15/12/2019)
+3.[D][ ] buy cake (by: 14/12/2019)
+4.[E][+] project meeting (at: 31/12/2019 2015-2359)
+5.[D][+] project meeting (by: 12/08/2019 1400)
+6.[T][+] hello
+7.[T][ ] hello world
+8.[T][+] hello
+9.[E][+] hello world (at: 12/12/2019 1400-2300)
+10.[T][ ] buy bread
+11.[T][ ] buy milk
+12.[D][ ] return book (by: 15/12/2019 2345)
+13.[D][ ] return book (by: 15/12/2019 2359)
+14.[D][ ] return book (by: 15/12/2019 0000)
+15.[D][ ] return book (by: 15/12/2019)
+16.[D][ ] buy cake (by: 14/12/2019)
+17.[E][ ] project meeting (at: 31/12/2019 2015-2359)
+18.[D][+] project meeting (by: 12/08/2019 1400)
+19.[T][ ] hello
+____________________________________________________________
+____________________________________________________________
+____________________________________________________________

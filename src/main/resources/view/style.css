@@ -1,0 +1,70 @@
+/* Background photo by Andy Holmes via https://unsplash.com/photos/LUpDjlJv4_c (with minor edits) */
+
+#anchorPane{
+    -fx-background-image: url("../images/SpaceModified.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+/*Font by Andreas Larsen via: https://github.com/larsenwork/Gidole
+*/
+/*Credits to Ong Bing Jue (https://github.com/bjhoohaha) for helping to spot and resolve bug that caused font compatibility issues across platforms.*/
+#dialog{
+    -fx-font-family: "Gidole Regular";
+    -fx-font-size: 15px;
+    -fx-text-fill: rgb(255, 255, 255);    
+}
+
+#scrollPane{
+    -fx-background-color: transparent;
+    -fx-border-color: rgb(255, 255, 255);
+    -fx-border-width: 0 0 0.5 0;
+    -fx-border-radius: 1;
+}
+
+#userInput{
+    -fx-background-color: transparent;
+    -fx-text-fill: rgb(255, 255, 255);
+}
+
+#dialogContainer{
+    -fx-background-color: transparent;
+}
+
+#sendButton{
+    -fx-background-color: rgba(255,255,255,0.15)
+}
+
+.scrollables{
+    -fx-border-color: transparent;
+}
+
+.scrollables .scroll-bar: horizontal ,
+.scrollables  .scroll-bar: vertical{
+    -fx-background-color: transparent;
+    -fx-pref-width: 17;
+    -fx-padding: 3;
+}
+ 
+.scrollables .increment-button ,.scrollables .decrement-button {
+    -fx-background-color:transparent;
+}
+ 
+.scrollables .scroll-bar: horizontal .track ,
+.scrollables .scroll-bar: vertical .track{
+     -fx-background-color: transparent;
+}
+ 
+.scrollables .scroll-bar: horizontal .thumb,
+.scrollables .scroll-bar: vertical .thumb {
+    -fx-background-color:derive(black,50%);
+ 
+}
+ 
+.scrollables .scroll-bar .thumb: hover {
+    -fx-background-color: derive(black,70%);
+}
+
+.scrollables .scroll-bar .thumb: pressed{
+    -fx-background-color: derive(black,85%);
+}

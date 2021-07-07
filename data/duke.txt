@@ -1,0 +1,4 @@
+D | 1 | return book | 6/6/2019 1800
+E | 0 | project meeting | 10/8/2019 2000-2200
+T | 1 | join sports club
+T | 0 | borrow book

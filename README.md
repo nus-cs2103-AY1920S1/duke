@@ -1,4 +1,4 @@
-# Setting up
+# GOD
 
 **Prerequisites**
 
@@ -22,11 +22,11 @@
 
 # Tutorials 
 
-Duke Increment | Tutorial
----------------|---------------
-`A-Gradle` | [Gradle Tutorial](tutorials/gradleTutorial.md)
-`A-TextUiTesting` | [Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)
-`Level-10` | JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for Duke][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]
+|Tutorial|
+|---------------|
+|[Gradle Tutorial](tutorials/gradleTutorial.md)|
+|[Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)|
+|JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for Duke][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]|
 
 [fx1]: <tutorials/javaFxTutorialPart1.md>
 [fx2]: <tutorials/javaFxTutorialPart2.md>

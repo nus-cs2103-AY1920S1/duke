@@ -12,3 +12,14 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# All class files
+*.class
+
+# duke.txt file
+data/duke.txt
+.vscode/settings.json
+.vscode/launch.json
+data/trivia.txt
+trivia.txt
+duke.txt
